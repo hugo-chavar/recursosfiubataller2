@@ -31,7 +31,7 @@
 		<tr>
 			<td>Hugo</td>
 			<td>Chavar</td>
-			<td>A completar</td>
+			<td>hechavar@gmail.com</td>
 		</tr>
 		<tr>
 			<td>Andr&eacute;s</td>
