@@ -1,4 +1,4 @@
-package Archivos;
+package Recursos.Archivos;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
-
+import Recursos.*;
 /**
  * Servlet implementation class Archivo
  */
 @WebServlet("/Archivo")
-public class Archivo implements Serializable {
+public class Archivo extends Recurso implements Serializable {
 	private static final long serialVersionUID = 1L;
     private String link;
     

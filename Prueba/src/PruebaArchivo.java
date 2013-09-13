@@ -1,7 +1,8 @@
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import Archivos.*;
+
+import Recursos.Archivos.*;
 
 public class PruebaArchivo {
 
