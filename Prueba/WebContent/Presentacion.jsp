@@ -36,7 +36,7 @@
 		<tr>
 			<td>Andr&eacute;s</td>
 			<td>Sanabria</td>
-			<td>A completar</td>
+			<td>andresg.sanabria@gmail.com</td>
 		</tr>
 		<tr>
 			<td>Dami&aacute;n</td>
