@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="Archivos.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,10 +16,12 @@
 	
 	Somos el grupo de Taller 2 que nos toc&oacute; hacer la capa de Recursos.
 	<br>
+	Hoy es <%= new java.util.Date() %>
 	<br/>
 	Los integrantes somos
 	<table align="center" id="tabla">
 		<tr>
+			
 			<td>Nombre</td>
 			<td>Apellido</td>
 			<td>Mail</td>
