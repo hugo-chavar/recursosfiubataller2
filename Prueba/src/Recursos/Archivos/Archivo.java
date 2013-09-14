@@ -15,6 +15,8 @@ import Recursos.*;
 public class Archivo extends Recurso implements Serializable {
 	private static final long serialVersionUID = 1L;
     private String link;
+    private int tamanio; // En Bytes
+    private String tipo;
     
     
     /**
@@ -45,6 +47,22 @@ public class Archivo extends Recurso implements Serializable {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	public int getTamanio() {
+		return tamanio;
+	}
+
+	public void setTamanio(int tamanio) {
+		this.tamanio = tamanio;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }
