@@ -14,6 +14,7 @@
 \usepackage{url}
 \usepackage{enumitem}
 \usepackage{multicol}
+\usepackage{pifont}
 \let\verbatiminput=\verbatimtabinput
 \usepackage[nottoc,numbib]{tocbibind}
 \setcounter{tocdepth}{4}
@@ -52,17 +53,18 @@
 % If you don't want a supervisor, uncomment the two lines below and remove the section above
 \Large \emph{Integrantes:}\\
 
-Hugo \textsc{Chavar} - 99999\\ % Your name
+Hugo \textsc{Chavar} - 90541\\ % Your name
 Dami\'an \textsc{Manoff} - 93169\\ % Your name
-Yamila \textsc{Glinsek} - 99999\\ % Your name
-Andr\'es \textsc{Sanabria} - 99999\\[5cm] % Your name
+Yamila \textsc{Glinsek} - 93219\\ % Your name
+Andr\'es \textsc{Sanabria} - 93403\\[5cm] % Your name
 
 
 %----------------------------------------------------------------------------------------
 %	DATE SECTION
 %----------------------------------------------------------------------------------------
 
-{\large \text \em {10 de Septiembre de 2013}}\\[3cm] % Date, change the \today to a set date if you want to be precise
+{\large \text \em \today }\\[3cm] % Date, change the \today to a set date if you want to be precise
+%{10 de Septiembre de 2013}
  
 %----------------------------------------------------------------------------------------
 
@@ -75,9 +77,28 @@ Recursos da referencia a lo que podemos traducir como Archivos, Links y Encuesta
 Los servicios que brindamos son:
 \begin{enumerate}
 	\item Posibilitar la subida y descarga de archivos al sistema.
-	\item Crear y Responder encuestas.
-	\item Linkear paginas externas y/o internas de la web
+	\item Crear encuestas, que pueden ser o no \emph{Evaluadas}.
+	\item Permitir el acceso a responder encuestas y realizar su evaluaci\'on seg\'un el criterio establecido por el creador de la misma.
+	\item Linkear p\'aginas externas y/o internas de la web.
 \end{enumerate}
+
+\section{Abstracto}
+\begin{description}
+\item[Definiciones] Cosas que ya se han definido hasta el momento por la interacci\'on con los grupos:
+\renewcommand{\labelitemi}{\ding{85}} 
+\begin{itemize}
+\item Se utilizar\'a como IDE \emph{Eclipse} y plataforma \emph{Java 7}.
+\item La comunicaci\'on entre capas se realiza por Web Services.
+\item Los archivos van a ser pasados entre capas como multi-part (o similar) a trav\'es de dichos Web Services.
+\item Tanto con la capa de arriba (Presentaci\'on) como la de abajo (Integraci\'on) implementar\'an la interfaz en XML.
+\item Los archivos ser\'an pasados de nuestra capa a la  \emph{capa de Integraci\'on}  para que \'esta trate con el FileSystem o con la \emph{capa de Acceso a datos} como ha de ser almacenado. Queda por definirse si es necesario una conversaci\'on previa entre capas antes de la transferencia del archivo.
+\item 
+
+\end{itemize}
+
+
+\end{description}
+
 
 \section{Diagrama de Clases}
 	\includegraphics[scale=0.5]{Diagramadeclase2.png}
