@@ -82,24 +82,84 @@ Los servicios que brindamos son:
 	\item Linkear p\'aginas externas y/o internas de la web.
 \end{enumerate}
 
-\section{Abstracto}
+\section{Definiciones}
 \begin{description}
-\item[Definiciones] Cosas que ya se han definido hasta el momento por la interacci\'on con los grupos:
-\renewcommand{\labelitemi}{\ding{85}} 
-\begin{itemize}
-\item Se utilizar\'a como IDE \emph{Eclipse} y plataforma \emph{Java 7}.
-\item La comunicaci\'on entre capas se realiza por Web Services.
-\item Los archivos van a ser pasados entre capas como multi-part (o similar) a trav\'es de dichos Web Services.
-\item Tanto con la capa de arriba (Presentaci\'on) como la de abajo (Integraci\'on) implementar\'an la interfaz en XML.
-\item Los archivos ser\'an pasados de nuestra capa a la  \emph{capa de Integraci\'on}  para que \'esta trate con el FileSystem o con la \emph{capa de Acceso a datos} como ha de ser almacenado. Queda por definirse si es necesario una conversaci\'on previa entre capas antes de la transferencia del archivo.
-\item 
+	\item Cosas que ya se han definido hasta el momento por la interacci\'on con los grupos y docentes:
+	\renewcommand{\labelitemi}{\ding{85}} 
+	\begin{itemize}
+		\item Se utilizar\'a como IDE \emph{Eclipse} y plataforma \emph{Java 7}.
+		\item La comunicaci\'on entre capas se realiza por Web Services.
+		\item Los archivos van a ser pasados entre capas como multi-part (o similar) a trav\'es de dichos Web Services.
+		\item Tanto con la capa de arriba (Presentaci\'on) como la de abajo (Integraci\'on) implementar\'an la interfaz en XML.
+		\item Los archivos ser\'an pasados de nuestra capa a la  \emph{capa de Integraci\'on}  para que \'esta trate con el FileSystem o con la \emph{capa de Acceso a datos} como ha de ser almacenado. Queda por definirse si es necesario una conversaci\'on previa entre capas antes de la transferencia del archivo.
+%\item 
 
-\end{itemize}
+	\end{itemize}
 
 
 \end{description}
 
 
 \section{Diagrama de Clases}
-	\includegraphics[scale=0.5]{Diagramadeclase2.png}
+	\includegraphics[scale=0.7]{Diagramadeclase2copia.png}
+\pagebreak
+	
+
+\section{Interfaces}
+	\begin{description}
+		\item[Provistas a la capa de Presentaci\'on] \
+		\renewcommand{\labelitemi}{\ding{105}} 
+		\begin{itemize}
+			\item \emph{CARGAR LISTA RECURSOS}
+			\begin{description}
+				\item[INPUT] ID-AMBIENTE
+				\item[OUTPUT] LISTA-DE [ID-RECURSO, DESCRIPCION, TIPO]
+			\end{description}
+			\item \emph{OBTENER RECURSO}
+			\begin{description}
+				\item[INPUT] ID-AMBIENTE, ID-RECURSO
+				\item[OUTPUT] LINK-AL-RECURSO \'o ARCHIVO \'o ACCESO-A-ENCUESTA
+			\end{description}
+			\item \emph{AGREGAR RECURSO}
+			\begin{description}
+				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, DATOS (\emph{Difiere seg\'un tipo de recurso})
+				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON
+			\end{description}
+			\item \emph{BORRAR RECURSO}
+			\begin{description}
+				\item[INPUT] ID-AMBIENTE, ID-RECURSO
+				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON
+			\end{description}
+		\end{itemize}
+		\renewcommand{\labelitemi}{\ding{118}} 
+		\item[Requeridas a la capa de Integraci\'on] \
+		\emph{Nota: En un principio, no necesitaremos que la capa de integraci\'on haga joins de tablas de Base de Datos, ya que todo va a ser requerido por ID.}
+		\begin{itemize}
+			\item \emph{OBTENER LISTA RECURSOS}
+			\begin{description}
+				\item[INPUT] ID-AMBIENTE
+				\item[OUTPUT] LISTA-DE [ID-RECURSO, DESCRIPCION, TIPO]
+			\end{description}
+			\item \emph{OBTENER RECURSO}
+			\begin{description}
+				\item[INPUT] ID-AMBIENTE, ID-RECURSO
+				\item[OUTPUT] LINK-AL-RECURSO
+			\end{description}
+			\item \emph{OBTENER ARCHIVO}
+			\begin{description}
+				\item[INPUT] LINK-AL-ARCHIVO
+				\item[OUTPUT] ARCHIVO
+			\end{description}
+			\item \emph{AGREGAR RECURSO}
+			\begin{description}
+				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, TIPO, DATOS (\emph{Difiere seg\'un tipo de recurso})
+				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \'o LINK-AL-RECURSO
+			\end{description}
+			\item \emph{BORRAR RECURSO}
+			\begin{description}
+				\item[INPUT] ID-AMBIENTE, ID-RECURSO
+				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON
+			\end{description}
+		\end{itemize}
+	\end{description}
 \end{document}
