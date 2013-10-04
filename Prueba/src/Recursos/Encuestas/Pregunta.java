@@ -1,9 +1,14 @@
 package Recursos.Encuestas;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 
-public class Pregunta {
+public class Pregunta implements Serializable {
+
+	public Pregunta() {
+		super();
+	}
 
 	protected  Vector<Respuesta> respuestas;
 	private String pregunta;
