@@ -7,6 +7,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{float}
+\usepackage{fancyhdr}
 \setlength{\skip\footins}{5cm}
 \usepackage{lscape}
 \usepackage{verbatim}
@@ -21,7 +22,8 @@
 \setcounter{secnumdepth}{4}
 
 \marginsize{2cm}{2cm}{.5cm}{3cm} 
-
+\pagestyle{myheadings}
+\renewcommand{\headrulewidth}{0.5pt}
 \begin{document}
 
 \begin{titlepage}
@@ -58,7 +60,7 @@ Dami\'an \textsc{Manoff} - 93169\\ % Your name
 Yamila \textsc{Glinsek} - 93219\\ % Your name
 Andr\'es \textsc{Sanabria} - 93403\\[5cm] % Your name
 
-
+\textit{capanegocio.recursos@yahoo.com.ar}
 %----------------------------------------------------------------------------------------
 %	DATE SECTION
 %----------------------------------------------------------------------------------------
@@ -71,7 +73,8 @@ Andr\'es \textsc{Sanabria} - 93403\\[5cm] % Your name
 \vfill % Fill the rest of the page with whitespace
 
 \end{titlepage}
-
+\tableofcontents
+\newpage
 \section{Introducci\'on}
 Recursos da referencia a lo que podemos traducir como Archivos, Links y Encuestas.\\
 Los servicios que brindamos son:
@@ -81,7 +84,7 @@ Los servicios que brindamos son:
 	\item Permitir el acceso a responder encuestas y realizar su evaluaci\'on seg\'un el criterio establecido por el creador de la misma.
 	\item Linkear p\'aginas externas y/o internas de la web.
 \end{enumerate}
-
+\markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.0}	
 \section{Definiciones}
 \begin{description}
 	\item Cosas que ya se han definido hasta el momento por la interacci\'on con los grupos y docentes:
@@ -99,9 +102,10 @@ Los servicios que brindamos son:
 
 \end{description}
 
-
+\markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.0}	
 \section{Diagrama de Clases}
 	\includegraphics[scale=0.7]{Diagramadeclase2copia.png}
+\markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.0}	
 \pagebreak
 	
 
@@ -163,4 +167,5 @@ Los servicios que brindamos son:
 			\end{description}
 		\end{itemize}
 	\end{description}
+	\markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.0}
 \end{document}
