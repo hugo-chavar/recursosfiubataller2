@@ -104,68 +104,88 @@ Los servicios que brindamos son:
 
 \markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.1}	
 \section{Diagrama de Clases}
-	\includegraphics[scale=0.5]{nuevoDiagrama.jpg}
+	\includegraphics[scale=0.4]{Diagramadeclase4.png}
 \markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.1}	
 \pagebreak
 	
 
 \section{Interfaces}
 	\begin{description}
-		\item[Provistas a la capa de Presentaci\'on  \emph{( incompleto)}] \
+		\item[Provistas a la capa de Presentaci\'on ] \
 		\renewcommand{\labelitemi}{\ding{105}} 
-		\begin{itemize}
-			\item \emph{CARGAR LISTA RECURSOS}
-			\begin{description}
-				\item[INPUT] ID-AMBIENTE
-				\item[OUTPUT] LISTA-DE [ID-RECURSO, DESCRIPCION, TIPO]
-			\end{description}
-			\item \emph{OBTENER RECURSO}
-			\begin{description}
-				\item[INPUT] ID-AMBIENTE, ID-RECURSO
-				\item[OUTPUT] LINK-AL-RECURSO \'o ARCHIVO \'o ACCESO-A-ENCUESTA
-			\end{description}
-			\item \emph{AGREGAR RECURSO}
-			\begin{description}
-				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, DATOS (\emph{Difiere seg\'un tipo de recurso})
-				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON
-			\end{description}
-			\item \emph{BORRAR RECURSO}
-			\begin{description}
-				\item[INPUT] ID-AMBIENTE, ID-RECURSO
-				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON
-			\end{description}
-		\end{itemize}
-		\renewcommand{\labelitemi}{\ding{118}} 
-		\item[Requeridas a la capa de Integraci\'on \emph{( incompleto)}] \
-		\\Nota:
-		\emph{ En un principio, no necesitaremos que la capa de integraci\'on haga joins de tablas de Base de Datos, ya que todo va a ser requerido por ID.}
 		\begin{itemize}
 			\item \emph{OBTENER LISTA RECURSOS}
 			\begin{description}
 				\item[INPUT] ID-AMBIENTE
 				\item[OUTPUT] LISTA-DE [ID-RECURSO, DESCRIPCION, TIPO]
-			\end{description}
+			\end{description}\\
 			\item \emph{OBTENER RECURSO}
 			\begin{description}
-				\item[INPUT] ID-AMBIENTE, ID-RECURSO
-				\item[OUTPUT] LINK-AL-RECURSO
-			\end{description}
-			\item \emph{OBTENER ARCHIVO}
+				\item[INPUT] ID-AMBIENTE, ID-RECURSO, ID-USUARIO
+				\item[OUTPUT] LINK-AL-RECURSO \'o ARCHIVO \'o ACCESO-A-ENCUESTA
+			\end{description}\\
+			\item \emph{AGREGAR ARCHIVO}
 			\begin{description}
-				\item[INPUT] LINK-AL-ARCHIVO
-				\item[OUTPUT] ARCHIVO
-			\end{description}
-			\item \emph{AGREGAR RECURSO}
+				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, ARCHIVO
+				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON
+			\end{description}\\
+			\item \emph{AGREGAR LINK}
 			\begin{description}
-				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, TIPO, DATOS (\emph{Difiere seg\'un tipo de recurso})
-				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \'o LINK-AL-RECURSO
-			\end{description}
+				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, LINK
+				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON (\emph{Coordinar con presentaci\'on que se requiere})
+			\end{description}\\
+			\item \emph{AGREGAR ENCUESTA}
+			\begin{description}
+				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, ENCUESTA (\emph{Coordinar con presentaci\'on forma de pasarlo})
+				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON
+			\end{description}\\
+			\item \emph{GUARDAR ENCUESTA RESPONDIDA}
+			\begin{description}
+				\item[INPUT] ID-ENCUESTA, ID-USUARIO, LISTA-RESPUESTAS
+				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON (\emph{Coordinar con presentaci\'on})
+			\end{description}\\
+			\item \emph{OBTENER ENCUESTA RESPONDIDA}
+			\begin{description}
+				\item[INPUT] ID-ENCUESTA, ID-USUARIO
+				\item[OUTPUT] LISTA-RESPUESTAS
+			\end{description}\\
 			\item \emph{BORRAR RECURSO}
 			\begin{description}
 				\item[INPUT] ID-AMBIENTE, ID-RECURSO
-				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON
-			\end{description}
+				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON(\emph{Coordinar con presentaci\'on si requieren algun dato})
+			\end{description}\\
 		\end{itemize}
+%		\renewcommand{\labelitemi}{\ding{118}} 
+%		\item[Requeridas a la capa de Integraci\'on \emph{( incompleto)}] \
+%		\\Nota:
+%		\emph{ En un principio, no necesitaremos que la capa de integraci\'on haga joins de tablas de Base de Datos, ya que todo va a ser requerido por ID.}
+%		\begin{itemize}
+%			\item \emph{OBTENER LISTA RECURSOS}
+%			\begin{description}
+%				\item[INPUT] ID-AMBIENTE
+%				\item[OUTPUT] LISTA-DE [ID-RECURSO, DESCRIPCION, TIPO]
+%			\end{description}
+%			\item \emph{OBTENER RECURSO}
+%			\begin{description}
+%				\item[INPUT] ID-AMBIENTE, ID-RECURSO
+%				\item[OUTPUT] LINK-AL-RECURSO
+%			\end{description}
+%			\item \emph{OBTENER ARCHIVO}
+%			\begin{description}
+%				\item[INPUT] LINK-AL-ARCHIVO
+%				\item[OUTPUT] ARCHIVO
+%			\end{description}
+%			\item \emph{AGREGAR RECURSO}
+%			\begin{description}
+%				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, TIPO, DATOS (\emph{Difiere seg\'un tipo de recurso})
+%				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \'o LINK-AL-RECURSO
+%			\end{description}
+%			\item \emph{BORRAR RECURSO}
+%			\begin{description}
+%				\item[INPUT] ID-AMBIENTE, ID-RECURSO
+%				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON
+%			\end{description}
+%		\end{itemize}
 	\end{description}
 	\markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.1}
 \end{document}
