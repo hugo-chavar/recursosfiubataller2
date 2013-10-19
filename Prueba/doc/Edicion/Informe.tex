@@ -99,7 +99,39 @@ Los servicios que brindamos son:
 
 	\end{itemize}
 
+\subsection{Archivos}
+	Para el manejo de archivos se tendr\'a la siguiente clase:\\
+	
+	\includegraphics[scale=0.7]{Archivo.png}	
+	
+	La cual tiene como atributo:\\
+	\begin{itemize}
+		\item Path: que es una cadena que cuenta con la direccion en la cual se encuentra guardado en el file system el archivo. En principio se define una longitud maxima de 100 caracteres para este campo.\textit{Este campo es fundamental para la capa de Persistencia}.\\
+		\item Tamaño: es el peso del archivo en Bytes, por lo tanto es solo num\'erico. Consideraremos un maximo de 100 MB para cada archivo. Por lo tanto la longitud maxima del campo ser\'a 10 caracteres.\\
+		\item Tipo se refiere a la extensi\'on del Archivo. Considerando un video mpeg4, la longitud de la cadena ser\'a de 5 caracteres.\\
+		\item Nombre es la identificaci\'on del archivo que ser\'a una cadena de 40 caracteres como m\'aximo.\\
+	\end{itemize}
 
+\subsection{Encuentas}
+La idea de encuesta es algo del siguiente tipo:
+
+\includegraphics[scale=0.4]{EncuestaFoto.png}	
+
+En donde claramente se pueden distinguir 3 tipos diferentes de preguntas:
+\begin{enumerate}
+\item Preguntas que solo admiten una opci\'on como respuesta.
+\item Preguntas que admiten multiples opciones como respuesta.
+\item Preguntas cuya respuesta es a completar.
+\end{enumerate}
+
+Adem\'as existir\'an dos tipos de encuestas:
+\begin{enumerate}
+\item Encuestas Evaluadas
+\item Encuestas No Evaluadas.
+\end{enumerate}
+
+Con respecto al primer tipo de encuestas solo podremos admitir preguntas del tipo 1 y 2 ya que se dificulta la tarea de evaluar respuestas a completar.\\
+Las encuestas del segundo tipo admitir\'an todo tipo de preguntas.
 \end{description}
 
 \markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.1}	
