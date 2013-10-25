@@ -107,9 +107,25 @@ Los servicios que brindamos son:
 	La cual tiene como atributo:\\
 	\begin{itemize}
 		\item Path: que es una cadena que cuenta con la direccion en la cual se encuentra guardado en el file system el archivo. En principio se define una longitud maxima de 100 caracteres para este campo.\textit{Este campo es fundamental para la capa de Persistencia}.\\
+		\begin{itemize}
+\item Tipo De Datos : String
+\item Longitud : 100
+\end{itemize}
 		\item Tamaño: es el peso del archivo en Bytes, por lo tanto es solo num\'erico. Consideraremos un maximo de 100 MB para cada archivo. Por lo tanto la longitud maxima del campo ser\'a 10 caracteres.\\
+		\begin{itemize}
+\item Tipo De Datos : int
+\item Longitud : 10
+\end{itemize}
 		\item Tipo se refiere a la extensi\'on del Archivo. Considerando un video mpeg4, la longitud de la cadena ser\'a de 5 caracteres.\\
+		\begin{itemize}
+\item Tipo De Datos : String
+\item Longitud : 5
+\end{itemize}
 		\item Nombre es la identificaci\'on del archivo que ser\'a una cadena de 40 caracteres como m\'aximo.\\
+		\begin{itemize}
+\item Tipo De Datos : String
+\item Longitud : 40
+\end{itemize}
 	\end{itemize}
 
 \subsection{Encuentas}
@@ -140,7 +156,15 @@ Las encuestas se manejar\'an del siguiente modo:\\
 La cual se compone de los siguientes elementos:
 \begin{itemize}
 \item Evaluada: atributo de tipo booleano que se define en el constructor, es decir, \textit{new Encuesta(evaluada=true)}, por defecto las encuesta son no evaluadas.
+\begin{itemize}
+\item Tipo De Datos : bool
+\item Longitud : 1
+\end{itemize}
 \item Preguntas: es una lista de preguntas. Como m\'aximo se aceptaran \textbf{30 preguntas por encuesta}. El id de cada pregunta estar\'a relacionado con la posici\'on que ocupen en la lista m\'as uno, es decir \textit{preguntas[0]} ser\'a la pregunta n\'umero 1 asociada a esa encuesta. 
+\begin{itemize}
+\item Tipo De Datos : list
+\item Longitud : 30
+\end{itemize}
 \end{itemize}
 
 Dicho esto tendremos que definir las preguntas que tendremos. En nuestro caso habr\'a dos tipos de preguntas
@@ -156,10 +180,19 @@ Estas preguntas tendr\'an el siguiente formato:\\
 \includegraphics[scale=0.75]{RespuestaFija.png}
 
 \begin{itemize}
-\item M\'ultiplesRespuestas : es un atributo booleano que define si la pregunta aceptar\'a mas de una respuesta. Por defencto las m\'ultiples respuestas estan desabilitadas.
+\item M\'ultiplesRespuestas : es un atributo booleano que define si la pregunta aceptar\'a mas de una respuesta. Por defencto las m\'ultiples respuestas estan desabilitadas.\\
+\begin{itemize}
+\item Tipo De Datos : bool
+\item Longitud : 1
+\end{itemize}
 \item RespuestasPosibles : es una lista de tamaño m\'aximo 6, es decir una pregunta a lo sumo podr\'a tener 6 respuestas correctas. Las respuestas se distinguen seg\'un la posici\'on que ocupan dentro de la lista, es decir si respuestaPosible[0] = Fiuba , la respuesta fiuba estar\'a asociada a la primera posici\'on de la lista.\\
 Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr\'a si y solo si una respuesta, y no permitir\'a agregar m\'as.\\
-\item A la vez, como este tipo de preguntas es posible evaluar habr\'a una clase \textbf{PreguntaRespuestaFijaEvaluada} la cual tendr\'a las opciones correctas que se esperan. 
+\begin{itemize}
+\item Tipo De Datos : list
+\item Longitud : 6
+\end{itemize} 
+\item A la vez, como este tipo de preguntas es posible evaluar habr\'a una clase \textbf{PreguntaRespuestaFijaEvaluada} la cual tendr\'a las opciones correctas que se esperan.\\
+
 \begin{itemize}
 	\item RespuestasCorrectas : esta lista contendr\'a los/el id de las respuestas que se consideran correctas. Es decir el tamaño ser\'a desde 0 a la cantidad de Respuestas agregadas en la instancia anterior. Como valor m\'aximo se especificar\'a el valor 6 en el caso de que todas las respuestas sean correctas.
 \end{itemize}

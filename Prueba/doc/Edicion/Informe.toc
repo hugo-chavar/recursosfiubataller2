@@ -3,5 +3,5 @@
 \contentsline {section}{\numberline {2}Definiciones}{2}
 \contentsline {subsection}{\numberline {2.1}Archivos}{2}
 \contentsline {subsection}{\numberline {2.2}Encuentas}{3}
-\contentsline {section}{\numberline {3}Diagrama de Clases}{5}
-\contentsline {section}{\numberline {4}Interfaces}{6}
+\contentsline {section}{\numberline {3}Diagrama de Clases}{6}
+\contentsline {section}{\numberline {4}Interfaces}{7}
