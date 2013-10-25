@@ -20,7 +20,9 @@
 \usepackage[nottoc,numbib]{tocbibind}
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
-
+\newcommand{\mayor}{\char60 }
+\newcommand{\desc}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 2.0 }
+\newcommand{\menor}{\char62 }
 \marginsize{2cm}{2cm}{.5cm}{3cm} 
 \pagestyle{myheadings}
 \renewcommand{\headrulewidth}{0.5pt}
@@ -84,7 +86,7 @@ Los servicios que brindamos son:
 	\item Permitir el acceso a responder encuestas y realizar su evaluaci\'on seg\'un el criterio establecido por el creador de la misma.
 	\item Linkear p\'aginas externas y/o internas de la web.
 \end{enumerate}
-\markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.1}	
+\markboth{Capa Negocio}{\desc}	
 \section{Definiciones}
 \begin{description}
 	\item Cosas que ya se han definido hasta el momento por la interacci\'on con los grupos y docentes:
@@ -162,17 +164,37 @@ La cual se compone de los siguientes elementos:
 \end{itemize}
 \item Preguntas: es una lista de preguntas. Como m\'aximo se aceptaran \textbf{30 preguntas por encuesta}. El id de cada pregunta estar\'a relacionado con la posici\'on que ocupen en la lista m\'as uno, es decir \textit{preguntas[0]} ser\'a la pregunta n\'umero 1 asociada a esa encuesta. 
 \begin{itemize}
-\item Tipo De Datos : list
+\item Tipo De Datos : list  <Pregunta>
 \item Longitud : 30
 \end{itemize}
 \end{itemize}
 
 Dicho esto tendremos que definir las preguntas que tendremos. En nuestro caso habr\'a dos tipos de preguntas
 \begin{enumerate}
+\item Pregunta : Es la clase padre donde la respuesta esperada podria ser m\'ultiple o bien una descripci\'on.
 \item PreguntaRespuestaFija : son aquellas preguntas en donde el que la crea define las respuestas posibles, y el que las responde tiene la posibilidad de elegir una o mas respuestas, seg\'un lo defina el creador.En el prototipo son las preguntas 1 y 2.
-\item PreguntaRespuestaACompletar : Son preguntas donde la respuesta esperada es una descripci\'on.En el prototipo corresponde a la pregunta 3.
 \end{enumerate}
+\textsc{Pregunta}\\
 
+\includegraphics[scale=0.75]{Pregunta.png}
+
+\begin{itemize}
+\item Enunciado : ser\'a la pregunta en si. Es una cadena cuya longitud m\'axima ser\'a 200 caracteres.
+\begin{itemize}
+\item Tipo De Datos : String
+\item Longitud : 200
+\end{itemize}
+\item idPregunta :  el id de la pregunta corresponde a un entero que identifique cada pregunta dentro de una encuesta
+\begin{itemize}
+\item Tipo De Datos : Int
+\item Longitud : 2
+\end{itemize}
+\item RespuestaACompletar : es un booleano que muestra si una respuesta es a completar o es de opcion m\'ultiple. Por defecto todas las preguntas son a completar. En caso contrario se deber\'a crear una \textit{PreguntaRespuestaFija}
+\begin{itemize}
+\item Tipo De Datos : Bool
+\item Longitud : 1
+\end{itemize}
+\end{itemize}
 \textsc{PreguntaRespuestaFija}:\\
 
 Estas preguntas tendr\'an el siguiente formato:\\
@@ -188,21 +210,40 @@ Estas preguntas tendr\'an el siguiente formato:\\
 \item RespuestasPosibles : es una lista de tamaño m\'aximo 6, es decir una pregunta a lo sumo podr\'a tener 6 respuestas correctas. Las respuestas se distinguen seg\'un la posici\'on que ocupan dentro de la lista, es decir si respuestaPosible[0] = Fiuba , la respuesta fiuba estar\'a asociada a la primera posici\'on de la lista.\\
 Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr\'a si y solo si una respuesta, y no permitir\'a agregar m\'as.\\
 \begin{itemize}
-\item Tipo De Datos : list
+\item Tipo De Datos : list<String>
 \item Longitud : 6
 \end{itemize} 
 \item A la vez, como este tipo de preguntas es posible evaluar habr\'a una clase \textbf{PreguntaRespuestaFijaEvaluada} la cual tendr\'a las opciones correctas que se esperan.\\
 
 \begin{itemize}
 	\item RespuestasCorrectas : esta lista contendr\'a los/el id de las respuestas que se consideran correctas. Es decir el tamaño ser\'a desde 0 a la cantidad de Respuestas agregadas en la instancia anterior. Como valor m\'aximo se especificar\'a el valor 6 en el caso de que todas las respuestas sean correctas.
+	\begin{itemize}
+\item Tipo De Datos : list<Int>
+\item Longitud : 6
+\end{itemize} 
 \end{itemize}
+\end{itemize}
+
+
+\subsection{Links}
+
+Los links ser\'an las referencias a otros sitios webs o referencias a articulos dentro de este mismo sitio.
+
+\includegraphics[scale=0.75]{Links.png}
+
+\begin{itemize}
+\item Nombre: es el path adonde apunta el hiperv\'inculo. Definiremos como tamaño m\'aximo 200 carateres.
+\begin{itemize}
+\item Tipo De Datos : String
+\item Longitud : 200
+	\end{itemize}
 \end{itemize}
 \end{description}
 
-\markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.1}	
+\markboth{Capa Negocio}{\desc}	
 \section{Diagrama de Clases}
-	\includegraphics[scale=0.4]{Diagramadeclase4.png}
-\markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.1}	
+	\includegraphics[scale=0.4]{Diagramadeclase5.png}
+\markboth{Capa Negocio}{\desc}	
 \pagebreak
 	
 
@@ -284,5 +325,5 @@ Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr
 %			\end{description}
 %		\end{itemize}
 	\end{description}
-	\markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.1}
+	\markboth{Capa Negocio}{\desc}
 \end{document}
