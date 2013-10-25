@@ -100,35 +100,43 @@ Los servicios que brindamos son:
 %\item 
 
 	\end{itemize}
+\end{description}
 
 \subsection{Archivos}
-	Para el manejo de archivos se tendr\'a la siguiente clase:\\
+	Para el manejo de archivos se tendr\'a la siguiente clase:
 	
-	\includegraphics[scale=0.7]{Archivo.png}	
+%\includegraphics[scale=0.7]{Archivo.png}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.8]{Archivo}
+
+\caption{Clase PreguntaRespuestaFija}
+\end{figure}
 	
-	La cual tiene como atributo:\\
-	\begin{itemize}
-		\item Path: que es una cadena que cuenta con la direccion en la cual se encuentra guardado en el file system el archivo. En principio se define una longitud maxima de 100 caracteres para este campo.\textit{Este campo es fundamental para la capa de Persistencia}.\\
+\paragraph{\large{Atributos}}
+	%La cual tiene como atributo:\
+\begin{description}
+		\item[path] que es una cadena que cuenta con la direccion en la cual se encuentra guardado en el file system el archivo.
 		\begin{itemize}
-\item Tipo De Datos : String
-\item Longitud : 100
-\end{itemize}
-		\item Tamaño: es el peso del archivo en Bytes, por lo tanto es solo num\'erico. Consideraremos un maximo de 100 MB para cada archivo. Por lo tanto la longitud maxima del campo ser\'a 10 caracteres.\\
+			\item Tipo De Datos : String
+			\item Longitud : 100
+		\end{itemize}
+		\item[tamanio] es el peso del archivo en Megabytes, por lo tanto es solo num\'erico. Consideraremos un maximo de 100 MB para cada archivo. Por lo tanto la longitud maxima del campo ser\'a 4 caracteres.
 		\begin{itemize}
-\item Tipo De Datos : int
-\item Longitud : 10
-\end{itemize}
-		\item Tipo se refiere a la extensi\'on del Archivo. Considerando un video mpeg4, la longitud de la cadena ser\'a de 5 caracteres.\\
+			\item Tipo De Datos : Integer
+			\item Longitud : 10
+		\end{itemize}
+		\item[tipo] se refiere a la extensi\'on del Archivo (por ejemplo: mp3, mpeg4, doc).
 		\begin{itemize}
-\item Tipo De Datos : String
-\item Longitud : 5
-\end{itemize}
-		\item Nombre es la identificaci\'on del archivo que ser\'a una cadena de 40 caracteres como m\'aximo.\\
+			\item Tipo De Datos : String
+			\item Longitud : 5
+		\end{itemize}
+		\item[nombre] es la identificaci\'on del archivo.
 		\begin{itemize}
-\item Tipo De Datos : String
-\item Longitud : 40
-\end{itemize}
-	\end{itemize}
+			\item Tipo De Datos : String
+			\item Longitud : 40
+		\end{itemize}
+\end{description}
 
 \subsection{Recurso}
 \begin{figure}[H]
@@ -140,17 +148,17 @@ Los servicios que brindamos son:
 \end{figure}
 \paragraph{\large{Atributos}}
 \begin{description} 
-\item[descripcion]\
+\item[descripcion] Es el texto que ver\'a el usuario, sobre el cual puede hacer clic. \
 \begin{itemize}
 \item Tipo De Datos : String
 \item Longitud : 100
 \end{itemize}
-\item[idAmbiente]\
+\item[idAmbiente] Ambiente al cual pertenece el recurso.\
 \begin{itemize}
 \item Tipo De Datos : Integer
 \item Longitud : 10
 \end{itemize}
-\item[idRecurso]\
+\item[idRecurso] Identificador del recurso.\
 \begin{itemize}
 \item Tipo De Datos : Integer
 \item Longitud : 10
@@ -188,19 +196,20 @@ Las encuestas del segundo tipo admitir\'an todo tipo de preguntas.
 \caption{Clase Encuesta}
 \end{figure}
 
-La cual se compone de los siguientes elementos:
-\begin{itemize}
-\item Evaluada: atributo de tipo booleano que se define en el constructor, es decir, \textit{new Encuesta(evaluada=true)}, por defecto las encuesta son no evaluadas.
+%La cual se compone de los siguientes elementos:
+\paragraph{\large{Atributos}}
+\begin{description}
+\item[evaluada] atributo de tipo booleano que se define en el constructor, es decir, \textit{new Encuesta(evaluada=true)}, por defecto las encuesta son no evaluadas.
 \begin{itemize}
 \item Tipo De Datos : bool
 \item Longitud : 1
 \end{itemize}
-\item Preguntas: es una lista de preguntas. Como m\'aximo se aceptaran \textbf{30 preguntas por encuesta}. El id de cada pregunta estar\'a relacionado con la posici\'on que ocupen en la lista m\'as uno, es decir \textit{preguntas[0]} ser\'a la pregunta n\'umero 1 asociada a esa encuesta. 
+\item[preguntas] es una lista de preguntas. Como m\'aximo se aceptaran \textbf{30 preguntas por encuesta}. El id de cada pregunta estar\'a relacionado con la posici\'on que ocupen en la lista m\'as uno, es decir \textit{preguntas[0]} ser\'a la pregunta n\'umero 1 asociada a esa encuesta. 
 \begin{itemize}
 \item Tipo De Datos : List $<$ String $>$
 \item Longitud : 30
 \end{itemize}
-\end{itemize}
+\end{description}
 
 Dicho esto tendremos que definir las preguntas que tendremos. En nuestro caso habr\'a dos tipos de preguntas
 \begin{enumerate}
@@ -219,23 +228,26 @@ Dicho esto tendremos que definir las preguntas que tendremos. En nuestro caso ha
 \caption{Clase Pregunta}
 \end{figure}
 
-\begin{itemize}
-\item Enunciado : ser\'a la pregunta en s\'i.
+\paragraph{\large{Atributos}}
+\begin{description}
+
+
+\item[enunciado] ser\'a la pregunta en s\'i.
 \begin{itemize}
 \item Tipo De Datos : String
 \item Longitud : 200
 \end{itemize}
-\item idPregunta :  el id de la pregunta corresponde a un entero que identifique cada pregunta dentro de una encuesta
+\item[idPregunta]  el id de la pregunta corresponde a un entero que identifique cada pregunta dentro de una encuesta
 \begin{itemize}
-\item Tipo De Datos : Int
+\item Tipo De Datos : Integer
 \item Longitud : 2
 \end{itemize}
-\item RespuestaACompletar : es un booleano que muestra si una respuesta es a completar o es de opcion m\'ultiple. Por defecto todas las preguntas son a completar. En caso contrario se deber\'a crear una \textit{PreguntaRespuestaFija}
+\item[respuestaACompletar] es un booleano que muestra si una respuesta es a completar o es de opcion m\'ultiple. Por defecto todas las preguntas son a completar. En caso contrario se deber\'a crear una \textit{PreguntaRespuestaFija}
 \begin{itemize}
-\item Tipo De Datos : Bool
+\item Tipo De Datos : Boolean
 \item Longitud : 1
 \end{itemize}
-\end{itemize}
+\end{description}
 %\textsc{PreguntaRespuestaFija}:\\
 \paragraph{PreguntaRespuestaFija} \
 
@@ -253,7 +265,7 @@ Dicho esto tendremos que definir las preguntas que tendremos. En nuestro caso ha
 \begin{itemize}
 \item M\'ultiplesRespuestas : es un atributo booleano que define si la pregunta aceptar\'a mas de una respuesta. Por defencto las m\'ultiples respuestas estan desabilitadas.\\
 \begin{itemize}
-\item Tipo De Datos : bool
+\item Tipo De Datos : Boolean
 \item Longitud : 1
 \end{itemize}
 \item RespuestasPosibles : es una lista de tamaño m\'aximo 6, es decir una pregunta a lo sumo podr\'a tener 6 respuestas correctas. Las respuestas se distinguen seg\'un la posici\'on que ocupan dentro de la lista, es decir si respuestaPosible[0] = Fiuba , la respuesta fiuba estar\'a asociada a la primera posici\'on de la lista.\\
@@ -267,7 +279,7 @@ Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr
 \begin{itemize}
 	\item RespuestasCorrectas : esta lista contendr\'a los/el id de las respuestas que se consideran correctas. Es decir el tamaño ser\'a desde 0 a la cantidad de Respuestas agregadas en la instancia anterior. Como valor m\'aximo se especificar\'a el valor 6 en el caso de que todas las respuestas sean correctas.
 	\begin{itemize}
-\item Tipo De Datos : list$<$Int$>$
+\item Tipo De Datos : List$<$Integer$>$
 \item Longitud : 6
 \end{itemize} 
 \end{itemize}
@@ -287,14 +299,15 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 
 %\includegraphics[scale=0.75]{Links.png}
 
+\paragraph{\large{Atributos}}
+\begin{description}
+\item[nombre] es el path adonde apunta el hiperv\'inculo.% Definiremos como tamaño m\'aximo 200 carateres.
 \begin{itemize}
-\item Nombre: es el path adonde apunta el hiperv\'inculo.% Definiremos como tamaño m\'aximo 200 carateres.
-\begin{itemize}
-\item Tipo De Datos : String
-\item Longitud : 200
-	\end{itemize}
+	\item Tipo De Datos : String
+	\item Longitud : 200
 \end{itemize}
 \end{description}
+
 
 \markboth{Capa Negocio}{\desc}	
 \section{Diagrama de Clases}
