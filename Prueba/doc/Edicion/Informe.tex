@@ -18,8 +18,8 @@
 \usepackage{pifont}
 \let\verbatiminput=\verbatimtabinput
 \usepackage[nottoc,numbib]{tocbibind}
-\setcounter{tocdepth}{4}
-\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
 \newcommand{\mayor}{\char60 }
 \newcommand{\desc}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 2.0 }
 \newcommand{\menor}{\char62 }
@@ -130,7 +130,33 @@ Los servicios que brindamos son:
 \end{itemize}
 	\end{itemize}
 
-\subsection{Encuentas}
+\subsection{Recurso}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.9]{recurso}
+%\includegraphics[scale=0.45]{organ}\\ %, angle=90
+
+\caption{Clase Recurso}
+\end{figure}
+\paragraph{\large{Atributos}}
+\begin{description} 
+\item[descripcion]\
+\begin{itemize}
+\item Tipo De Datos : String
+\item Longitud : 100
+\end{itemize}
+\item[idAmbiente]\
+\begin{itemize}
+\item Tipo De Datos : Integer
+\item Longitud : 10
+\end{itemize}
+\item[idRecurso]\
+\begin{itemize}
+\item Tipo De Datos : Integer
+\item Longitud : 10
+\end{itemize}
+\end{description}
+\subsection{Encuestas}
 La idea de encuesta es algo del siguiente tipo:
 
 \includegraphics[scale=0.4]{EncuestaFoto.png}	
@@ -151,9 +177,16 @@ Adem\'as existir\'an dos tipos de encuestas:
 Con respecto al primer tipo de encuestas solo podremos admitir preguntas del tipo 1 y 2 ya que se dificulta la tarea de evaluar respuestas a completar.\\
 Las encuestas del segundo tipo admitir\'an todo tipo de preguntas.
 
-Las encuestas se manejar\'an del siguiente modo:\\
+%Las encuestas se manejar\'an del siguiente modo:\\
 
-\includegraphics[scale=0.75]{Encuesta.png}
+%\includegraphics[scale=0.75]{Encuesta.png}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.8]{Encuesta}
+
+\caption{Clase Encuesta}
+\end{figure}
 
 La cual se compone de los siguientes elementos:
 \begin{itemize}
@@ -164,7 +197,7 @@ La cual se compone de los siguientes elementos:
 \end{itemize}
 \item Preguntas: es una lista de preguntas. Como m\'aximo se aceptaran \textbf{30 preguntas por encuesta}. El id de cada pregunta estar\'a relacionado con la posici\'on que ocupen en la lista m\'as uno, es decir \textit{preguntas[0]} ser\'a la pregunta n\'umero 1 asociada a esa encuesta. 
 \begin{itemize}
-\item Tipo De Datos : list  <Pregunta>
+\item Tipo De Datos : List $<$ String $>$
 \item Longitud : 30
 \end{itemize}
 \end{itemize}
@@ -174,12 +207,20 @@ Dicho esto tendremos que definir las preguntas que tendremos. En nuestro caso ha
 \item Pregunta : Es la clase padre donde la respuesta esperada podria ser m\'ultiple o bien una descripci\'on.
 \item PreguntaRespuestaFija : son aquellas preguntas en donde el que la crea define las respuestas posibles, y el que las responde tiene la posibilidad de elegir una o mas respuestas, seg\'un lo defina el creador.En el prototipo son las preguntas 1 y 2.
 \end{enumerate}
-\textsc{Pregunta}\\
+%\textsc{Pregunta}\\
+\paragraph{Pregunta} \
 
-\includegraphics[scale=0.75]{Pregunta.png}
+%\includegraphics[scale=0.75]{Pregunta.png}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.8]{Pregunta}
+
+\caption{Clase Pregunta}
+\end{figure}
 
 \begin{itemize}
-\item Enunciado : ser\'a la pregunta en si. Es una cadena cuya longitud m\'axima ser\'a 200 caracteres.
+\item Enunciado : ser\'a la pregunta en s\'i.
 \begin{itemize}
 \item Tipo De Datos : String
 \item Longitud : 200
@@ -195,11 +236,19 @@ Dicho esto tendremos que definir las preguntas que tendremos. En nuestro caso ha
 \item Longitud : 1
 \end{itemize}
 \end{itemize}
-\textsc{PreguntaRespuestaFija}:\\
+%\textsc{PreguntaRespuestaFija}:\\
+\paragraph{PreguntaRespuestaFija} \
 
-Estas preguntas tendr\'an el siguiente formato:\\
+%Estas preguntas tendr\'an el siguiente formato:\\
 
-\includegraphics[scale=0.75]{RespuestaFija.png}
+%\includegraphics[scale=0.75]{RespuestaFija.png}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.9]{RespuestaFija}
+
+\caption{Clase PreguntaRespuestaFija}
+\end{figure}
 
 \begin{itemize}
 \item M\'ultiplesRespuestas : es un atributo booleano que define si la pregunta aceptar\'a mas de una respuesta. Por defencto las m\'ultiples respuestas estan desabilitadas.\\
@@ -210,7 +259,7 @@ Estas preguntas tendr\'an el siguiente formato:\\
 \item RespuestasPosibles : es una lista de tamaño m\'aximo 6, es decir una pregunta a lo sumo podr\'a tener 6 respuestas correctas. Las respuestas se distinguen seg\'un la posici\'on que ocupan dentro de la lista, es decir si respuestaPosible[0] = Fiuba , la respuesta fiuba estar\'a asociada a la primera posici\'on de la lista.\\
 Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr\'a si y solo si una respuesta, y no permitir\'a agregar m\'as.\\
 \begin{itemize}
-\item Tipo De Datos : list<String>
+\item Tipo De Datos : List $<$String$>$
 \item Longitud : 6
 \end{itemize} 
 \item A la vez, como este tipo de preguntas es posible evaluar habr\'a una clase \textbf{PreguntaRespuestaFijaEvaluada} la cual tendr\'a las opciones correctas que se esperan.\\
@@ -218,7 +267,7 @@ Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr
 \begin{itemize}
 	\item RespuestasCorrectas : esta lista contendr\'a los/el id de las respuestas que se consideran correctas. Es decir el tamaño ser\'a desde 0 a la cantidad de Respuestas agregadas en la instancia anterior. Como valor m\'aximo se especificar\'a el valor 6 en el caso de que todas las respuestas sean correctas.
 	\begin{itemize}
-\item Tipo De Datos : list<Int>
+\item Tipo De Datos : list$<$Int$>$
 \item Longitud : 6
 \end{itemize} 
 \end{itemize}
@@ -229,10 +278,17 @@ Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr
 
 Los links ser\'an las referencias a otros sitios webs o referencias a articulos dentro de este mismo sitio.
 
-\includegraphics[scale=0.75]{Links.png}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.9]{Links}
+
+\caption{Clase Link}
+\end{figure}
+
+%\includegraphics[scale=0.75]{Links.png}
 
 \begin{itemize}
-\item Nombre: es el path adonde apunta el hiperv\'inculo. Definiremos como tamaño m\'aximo 200 carateres.
+\item Nombre: es el path adonde apunta el hiperv\'inculo.% Definiremos como tamaño m\'aximo 200 carateres.
 \begin{itemize}
 \item Tipo De Datos : String
 \item Longitud : 200
