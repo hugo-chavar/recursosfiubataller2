@@ -285,6 +285,74 @@ Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr
 \end{itemize}
 \end{itemize}
 
+% andy
+\paragraph{Encuesta Respondida} \
+
+%Estas preguntas tendr\'an el siguiente formato:\\
+
+%\includegraphics[scale=0.75]{RespuestaFija.png}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.9]{EncuestaRespondida}
+
+\caption{Clase EncuestaRespondida}
+\end{figure}
+
+\begin{itemize}
+\item idUsuario: es un atributo entero que permite relacionar la encuesta respondida con el usuario que se encargo de completarla.\\
+\begin{itemize}
+\item Tipo De Datos : Integer
+\item Longitud : 20
+\end{itemize}
+
+\item idRecurso : Identificador del recurso perteneciente a la encuesta que responde la EncuestaRespondida.\\
+\begin{itemize}
+\item Tipo De Datos : Integer
+\item Longitud : 10
+\end{itemize} 
+\end{itemize}
+
+\paragraph{Pregunta Respondida} \
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.9]{PreguntaRespondida}
+
+\caption{Clase PreguntaRespondida}
+\end{figure}
+
+\begin{itemize}
+\item idPregunta: identificador de la pregunta dentro de la encuesta.\\
+\begin{itemize}
+\item Tipo De Datos : Integer
+\item Longitud : 10
+\end{itemize} 
+\item A su vez, las preguntas respondidas podr\'an ser fijas o a completar, siendo la forma de responderlas en ambos casos distintas. 
+\end{itemize}
+
+\subparagraph{Pregunta Respuesta Fija Respondida} \
+
+\begin{itemize}
+\item respuestas: por tratarse de posibles respuestas a las preguntas de respuesta fija de una Encuesta, este atributo es tambi\'en una lista de tamaño m\'aximo 6, es decir, se podr\'a responder como m\'aximo 6 respuestas. Las respuestas se distinguen seg\'un la posici\'on que ocupan dentro de la lista de la Encuesta original.\\
+\begin{itemize}
+\item Tipo De Datos : List $<$Integer$>$
+\item Longitud : 6
+\end{itemize}
+
+\subparagraph{Pregunta Respuesta a Completar Respondida} \
+
+\begin{itemize}
+\item respuesta: Atributo que guarda la respuesta proporcionada por el usuario respondente. Al ser una respuesta a completar, se admite un \'unico texto.\\
+\begin{itemize}
+\item Tipo De Datos : String
+\item Longitud : 100
+\end{itemize} 
+\end{itemize}
+\end{itemize}
+% andy
+
+
 
 \subsection{Links}
 
