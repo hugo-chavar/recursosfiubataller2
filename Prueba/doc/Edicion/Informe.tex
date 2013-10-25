@@ -132,6 +132,38 @@ Adem\'as existir\'an dos tipos de encuestas:
 
 Con respecto al primer tipo de encuestas solo podremos admitir preguntas del tipo 1 y 2 ya que se dificulta la tarea de evaluar respuestas a completar.\\
 Las encuestas del segundo tipo admitir\'an todo tipo de preguntas.
+
+Las encuestas se manejar\'an del siguiente modo:\\
+
+\includegraphics[scale=0.75]{Encuesta.png}
+
+La cual se compone de los siguientes elementos:
+\begin{itemize}
+\item Evaluada: atributo de tipo booleano que se define en el constructor, es decir, \textit{new Encuesta(evaluada=true)}, por defecto las encuesta son no evaluadas.
+\item Preguntas: es una lista de preguntas. Como m\'aximo se aceptaran \textbf{30 preguntas por encuesta}. El id de cada pregunta estar\'a relacionado con la posici\'on que ocupen en la lista m\'as uno, es decir \textit{preguntas[0]} ser\'a la pregunta n\'umero 1 asociada a esa encuesta. 
+\end{itemize}
+
+Dicho esto tendremos que definir las preguntas que tendremos. En nuestro caso habr\'a dos tipos de preguntas
+\begin{enumerate}
+\item PreguntaRespuestaFija : son aquellas preguntas en donde el que la crea define las respuestas posibles, y el que las responde tiene la posibilidad de elegir una o mas respuestas, seg\'un lo defina el creador.En el prototipo son las preguntas 1 y 2.
+\item PreguntaRespuestaACompletar : Son preguntas donde la respuesta esperada es una descripci\'on.En el prototipo corresponde a la pregunta 3.
+\end{enumerate}
+
+\textsc{PreguntaRespuestaFija}:\\
+
+Estas preguntas tendr\'an el siguiente formato:\\
+
+\includegraphics[scale=0.75]{RespuestaFija.png}
+
+\begin{itemize}
+\item M\'ultiplesRespuestas : es un atributo booleano que define si la pregunta aceptar\'a mas de una respuesta. Por defencto las m\'ultiples respuestas estan desabilitadas.
+\item RespuestasPosibles : es una lista de tamaño m\'aximo 6, es decir una pregunta a lo sumo podr\'a tener 6 respuestas correctas. Las respuestas se distinguen seg\'un la posici\'on que ocupan dentro de la lista, es decir si respuestaPosible[0] = Fiuba , la respuesta fiuba estar\'a asociada a la primera posici\'on de la lista.\\
+Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr\'a si y solo si una respuesta, y no permitir\'a agregar m\'as.\\
+\item A la vez, como este tipo de preguntas es posible evaluar habr\'a una clase \textbf{PreguntaRespuestaFijaEvaluada} la cual tendr\'a las opciones correctas que se esperan. 
+\begin{itemize}
+	\item RespuestasCorrectas : esta lista contendr\'a los/el id de las respuestas que se consideran correctas. Es decir el tamaño ser\'a desde 0 a la cantidad de Respuestas agregadas en la instancia anterior. Como valor m\'aximo se especificar\'a el valor 6 en el caso de que todas las respuestas sean correctas.
+\end{itemize}
+\end{itemize}
 \end{description}
 
 \markboth{Capa Negocio}{Capa Negocio- Recursos/Materiales - Grupo 2 - Tp Taller II - v 1.1}	
