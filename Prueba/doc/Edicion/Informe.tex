@@ -26,6 +26,12 @@
 \marginsize{2cm}{2cm}{.5cm}{3cm} 
 \pagestyle{myheadings}
 \renewcommand{\headrulewidth}{0.5pt}
+
+\usepackage{sectsty}
+\sectionfont{\LARGE}
+\subsectionfont{\Large}
+\subsubsectionfont{\large}
+\paragraphfont{\large}
 \begin{document}
 
 \begin{titlepage}
@@ -102,6 +108,7 @@ Los servicios que brindamos son:
 	\end{itemize}
 \end{description}
 
+\section{Clases}
 \subsection{Archivos}
 	Para el manejo de archivos se tendr\'a la siguiente clase:
 	
@@ -217,7 +224,7 @@ Dicho esto tendremos que definir las preguntas que tendremos. En nuestro caso ha
 \item PreguntaRespuestaFija : son aquellas preguntas en donde el que la crea define las respuestas posibles, y el que las responde tiene la posibilidad de elegir una o mas respuestas, seg\'un lo defina el creador.En el prototipo son las preguntas 1 y 2.
 \end{enumerate}
 %\textsc{Pregunta}\\
-\paragraph{Pregunta} \
+\subsection{Pregunta} \
 
 %\includegraphics[scale=0.75]{Pregunta.png}
 
@@ -249,7 +256,7 @@ Dicho esto tendremos que definir las preguntas que tendremos. En nuestro caso ha
 \end{itemize}
 \end{description}
 %\textsc{PreguntaRespuestaFija}:\\
-\paragraph{PreguntaRespuestaFija} \
+\subsection{PreguntaRespuestaFija} \
 
 %Estas preguntas tendr\'an el siguiente formato:\\
 
@@ -262,13 +269,16 @@ Dicho esto tendremos que definir las preguntas que tendremos. En nuestro caso ha
 \caption{Clase PreguntaRespuestaFija}
 \end{figure}
 
-\begin{itemize}
-\item M\'ultiplesRespuestas : es un atributo booleano que define si la pregunta aceptar\'a mas de una respuesta. Por defencto las m\'ultiples respuestas estan desabilitadas.\\
+\paragraph{\large{Atributos}}
+
+\begin{description}
+
+\item[m\'ultiplesRespuestas] define si la pregunta aceptar\'a mas de una respuesta. Por defecto las m\'ultiples respuestas est\'an desabilitadas.
 \begin{itemize}
 \item Tipo De Datos : Boolean
 \item Longitud : 1
 \end{itemize}
-\item RespuestasPosibles : es una lista de tamaño m\'aximo 6, es decir una pregunta a lo sumo podr\'a tener 6 respuestas correctas. Las respuestas se distinguen seg\'un la posici\'on que ocupan dentro de la lista, es decir si respuestaPosible[0] = Fiuba , la respuesta fiuba estar\'a asociada a la primera posici\'on de la lista.\\
+\item[respuestasPosibles] es una lista de tamaño m\'aximo 6, es decir una pregunta a lo sumo podr\'a tener 6 respuestas correctas. Las respuestas se distinguen seg\'un la posici\'on que ocupan dentro de la lista, es decir si respuestaPosible[0] = Fiuba , la respuesta fiuba estar\'a asociada a la primera posici\'on de la lista.\\
 Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr\'a si y solo si una respuesta, y no permitir\'a agregar m\'as.\\
 \begin{itemize}
 \item Tipo De Datos : List $<$String$>$
@@ -283,10 +293,11 @@ Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr
 \item Longitud : 6
 \end{itemize} 
 \end{itemize}
-\end{itemize}
+
+\end{description}
 
 % andy
-\paragraph{Encuesta Respondida} \
+\subsection{Encuesta Respondida} 
 
 %Estas preguntas tendr\'an el siguiente formato:\\
 
@@ -299,21 +310,23 @@ Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr
 \caption{Clase EncuestaRespondida}
 \end{figure}
 
-\begin{itemize}
-\item idUsuario: es un atributo entero que permite relacionar la encuesta respondida con el usuario que se encargo de completarla.\\
+\paragraph{\large{Atributos}}
+
+\begin{description}
+\item[idUsuario] permite relacionar la encuesta respondida con el usuario que se encargo de completarla.
 \begin{itemize}
 \item Tipo De Datos : Integer
 \item Longitud : 20
 \end{itemize}
 
-\item idRecurso : Identificador del recurso perteneciente a la encuesta que responde la EncuestaRespondida.\\
+\item[idRecurso] Identificador del recurso perteneciente a la encuesta que responde la EncuestaRespondida.
 \begin{itemize}
 \item Tipo De Datos : Integer
 \item Longitud : 10
 \end{itemize} 
-\end{itemize}
+\end{description}
 
-\paragraph{Pregunta Respondida} \
+\subsection{Pregunta Respondida} 
 
 \begin{figure}[h]
 \centering
@@ -322,34 +335,36 @@ Vale aclarar que si las multiples respuestas est\'an apagadas, la lista contendr
 \caption{Clase PreguntaRespondida}
 \end{figure}
 
-\begin{itemize}
-\item idPregunta: identificador de la pregunta dentro de la encuesta.\\
+\paragraph{\large{Atributos}}
+
+\begin{description}
+\item[idPregunta] identificador de la pregunta dentro de la encuesta.
 \begin{itemize}
 \item Tipo De Datos : Integer
 \item Longitud : 10
 \end{itemize} 
 \item A su vez, las preguntas respondidas podr\'an ser fijas o a completar, siendo la forma de responderlas en ambos casos distintas. 
-\end{itemize}
+\end{description}
 
-\subparagraph{Pregunta Respuesta Fija Respondida} \
+\subsubsection{Respuesta Fija Respondida}
 
-\begin{itemize}
-\item respuestas: por tratarse de posibles respuestas a las preguntas de respuesta fija de una Encuesta, este atributo es tambi\'en una lista de tamaño m\'aximo 6, es decir, se podr\'a responder como m\'aximo 6 respuestas. Las respuestas se distinguen seg\'un la posici\'on que ocupan dentro de la lista de la Encuesta original.\\
+\begin{description}
+\item[respuestas] por tratarse de posibles respuestas a las preguntas de respuesta fija de una Encuesta, este atributo es tambi\'en una lista de tamaño m\'aximo 6, es decir, se podr\'a responder como m\'aximo 6 respuestas. Las respuestas se distinguen seg\'un la posici\'on que ocupan dentro de la lista de la Encuesta original.
 \begin{itemize}
 \item Tipo De Datos : List $<$Integer$>$
 \item Longitud : 6
 \end{itemize}
-\end{itemize}
+\end{description}
 
-\subparagraph{Pregunta Respuesta a Completar Respondida} \
+\subsubsection{Pregunta Respuesta a Completar Respondida}
 
-\begin{itemize}
-\item respuesta: Atributo que guarda la respuesta proporcionada por el usuario respondente. Al ser una respuesta a completar, se admite un \'unico texto.\\
+\begin{description}
+\item[respuesta] Atributo que guarda la respuesta proporcionada por el usuario respondente. Al ser una respuesta a completar, se admite un \'unico texto.
 \begin{itemize}
 \item Tipo De Datos : String
 \item Longitud : 100
 \end{itemize} 
-\end{itemize}
+\end{description}
 % andy
 
 
@@ -379,7 +394,7 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 
 \markboth{Capa Negocio}{\desc}	
 \section{Diagrama de Clases}
-	\includegraphics[scale=0.4]{Diagramadeclase5.png}
+	\includegraphics[scale=0.55]{Diagramadeclase6.png}
 \markboth{Capa Negocio}{\desc}	
 \pagebreak
 	
