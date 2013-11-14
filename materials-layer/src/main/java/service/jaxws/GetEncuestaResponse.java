@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import model.Encuesta;
+import model.Encuesta2;
 
 @XmlRootElement(name = "getEncuestaResponse", namespace = "http://materials/")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -15,14 +15,14 @@ import model.Encuesta;
 public class GetEncuestaResponse {
 
     @XmlElement(name = "return", namespace = "")
-    private Encuesta _return;
+    private Encuesta2 _return;
 
     /**
      * 
      * @return
      *     returns Encuesta
      */
-    public Encuesta getReturn() {
+    public Encuesta2 getReturn() {
         return this._return;
     }
 
@@ -31,7 +31,7 @@ public class GetEncuestaResponse {
      * @param _return
      *     the value for the _return property
      */
-    public void setReturn(Encuesta _return) {
+    public void setReturn(Encuesta2 _return) {
         this._return = _return;
     }
 

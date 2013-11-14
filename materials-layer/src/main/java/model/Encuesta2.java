@@ -3,25 +3,25 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Encuesta {
+public class Encuesta2 {
 	private String titulo;
-	private List<Pregunta> preguntas = new ArrayList<Pregunta>();
+	private List<Pregunta2> preguntas = new ArrayList<Pregunta2>();
 	public String getTitulo() {
 		return titulo;
 	}
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	public List<Pregunta> getPreguntas() {
+	public List<Pregunta2> getPreguntas() {
 		return preguntas;
 	}
-	public void setPreguntas(List<Pregunta> preguntas) {
+	public void setPreguntas(List<Pregunta2> preguntas) {
 		this.preguntas = preguntas;
 	}
 	
 	public void rellenar() {
 		titulo = "Encuesta general de no se que";
-		Pregunta p1 = new Pregunta();
+		Pregunta2 p1 = new Pregunta2();
 		p1.setEnunciado("de que color es el caballo blanco de san martin?");
 		p1.getOpciones().add("rojo");
 		p1.getOpciones().add("verde");
@@ -30,7 +30,7 @@ public class Encuesta {
 		
 		getPreguntas().add(p1);
 		
-		Pregunta p2 = new Pregunta();
+		Pregunta2 p2 = new Pregunta2();
 		p2.setEnunciado("a que equipo del futbol argentino le denominan Millo");
 		p2.getOpciones().add("velez");
 		p2.getOpciones().add("River Plate");
@@ -39,7 +39,7 @@ public class Encuesta {
 		
 		getPreguntas().add(p2);
 		
-		Pregunta p3 = new Pregunta();
+		Pregunta2 p3 = new Pregunta2();
 		p3.setEnunciado("cual es un patron de dise�o creacional");
 		p3.getOpciones().add("command");
 		p3.getOpciones().add("mediator");

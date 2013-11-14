@@ -6,7 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Pregunta {
+public class Pregunta2 {
 	private String enunciado;
 	private List<String> opciones = new ArrayList<String>();
 	public String getEnunciado() {
