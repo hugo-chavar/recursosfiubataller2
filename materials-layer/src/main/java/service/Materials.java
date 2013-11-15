@@ -16,6 +16,6 @@ public interface Materials {
 	//@WebMethod Node getTree();
 	@WebMethod Encuesta2 getEncuesta();
 	@WebMethod ListaDeRecursos obtenerRecursos(int idAmbiente,int idUsuario);
-	@WebMethod void setArchivo();
+	//@WebMethod void setArchivo();
 	
 }
