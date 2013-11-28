@@ -12,7 +12,7 @@ public class Recurso {
 		// TODO Auto-generated constructor stub
 	}
 
-	private Integer idRecurso;
+	protected Integer idRecurso;
 	
 	protected String tipo;
 
@@ -20,7 +20,7 @@ public class Recurso {
 		return tipo;
 	}
 
-	private Integer idAmbiente;
+	protected Integer idAmbiente;
 
 	protected String descripcion;
 
