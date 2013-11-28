@@ -1,5 +1,7 @@
 package connection;
 
+import java.util.List;
+
 public class Parser {
 
 	public String addTag(String xml, String tag) {

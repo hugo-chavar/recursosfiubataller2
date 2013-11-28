@@ -1,5 +1,7 @@
 package connection;
 
+import model.Encuesta;
+
 
 public enum Requester {
 	

@@ -48,4 +48,11 @@ public class EncuestaParser extends Parser {
 		return xml;
 	}
 	
+//	public List<Pregunta> deserializePreguntas(String xml) {
+//		List<Pregunta> preguntas;
+//		
+//		
+//		return preguntas;
+//	}
+	
 }
