@@ -2,9 +2,15 @@ package model;
 
 public class Link extends Recurso {
 
-  public Link(	String nombre) {
-		this.descripcion = nombre;
-	}
+public Link(Integer idRecurso, Integer idAmbiente, String descripcion) {
+		super(idRecurso, idAmbiente, descripcion);
+		this.tipo="Link";
+		// TODO Auto-generated constructor stub
+		}
+
+public Link(){
+	this.tipo="Link";
+}
 
 public String nombre;
 

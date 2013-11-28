@@ -4,10 +4,12 @@ public class Archivo extends Recurso {
 
 	public Archivo(Integer idRecurso, Integer idAmbiente, String descripcion) {
 		super(idRecurso, idAmbiente, descripcion);
+		this.tipo="Archivo";
 		// TODO Auto-generated constructor stub
 	}
 
 	public Archivo() {
+		this.tipo="Archivo";
 		// TODO Auto-generated constructor stub
 	}
 

@@ -32,23 +32,22 @@ public class MaterialsImpl implements Materials {
 		List<Recurso> recursos = new ArrayList<Recurso>();
 		List<Recurso> recursosPermitidos = new ArrayList<Recurso>();
 
-		Recurso r = new Recurso(4, 3, "DescriboRecurso");
-		recursosPermitidos.add(r);
+		//Recurso r = new Recurso(4, 3, "DescriboRecurso");
+		//recursosPermitidos.add(r);
 
-//		// obtengo los recursos
-//		recursos = solicitarBdRecursosAmbiente(idAmbiente);
-//		for (int i = 0; i < recursos.size(); i++) {
-//			if (consultarPermisoUsuario(recursos.get(i).getIdRecurso(),
-//					idUsuario)) {
-//
-//				recursosPermitidos.add(recursos.get(i));
-//				String tipo = recursos.get(i).getClass().getName();
-//				System.out.println(tipo);
-//				// TODO:Ver como devolvemos el tipo de cada recurso y si
-//				// devolvemos
-//				// vector de recursos
-//			}
-//		}
+		// obtengo los recursos
+		recursos = solicitarBdRecursosAmbiente(idAmbiente);
+		for (int i = 0; i < recursos.size(); i++) {
+			if (consultarPermisoUsuario(recursos.get(i).getIdRecurso(),
+					idUsuario)) {
+				recursosPermitidos.add(recursos.get(i));
+				//String tipo = recursos.get(i).getClass().getName();
+				//System.out.println(tipo);
+				// TODO:Ver como devolvemos el tipo de cada recurso y si
+				// devolvemos
+				// vector de recursos
+			}
+		}
 		ListaDeRecursos lista = new ListaDeRecursos(recursosPermitidos);
 		return lista;
 	}
@@ -70,7 +69,7 @@ public class MaterialsImpl implements Materials {
 			recurso = new Archivo();
 			recurso.setDescripcion("Archivo resumen del Tp");
 		} else if (idRecurso > 2 && idRecurso <= 4) {
-			recurso = new Link("");
+			recurso = new Link();
 			recurso.setDescripcion("Link a pagina web");
 		} else {
 			recurso = new Encuesta();
@@ -88,7 +87,7 @@ public class MaterialsImpl implements Materials {
 		recurso.setDescripcion("Archivo resumen del Tp");
 		recurso.setIdRecurso(1);
 		recursos.add(recurso);
-		recurso = new Link("");
+		recurso = new Link();
 		recurso.setDescripcion("Link a pagina web");
 		recurso.setIdRecurso(3);
 		recursos.add(recurso);

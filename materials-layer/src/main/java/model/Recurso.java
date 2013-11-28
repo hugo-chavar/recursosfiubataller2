@@ -13,6 +13,12 @@ public class Recurso {
 	}
 
 	private Integer idRecurso;
+	
+	protected String tipo;
+
+	public String getTipo() {
+		return tipo;
+	}
 
 	private Integer idAmbiente;
 

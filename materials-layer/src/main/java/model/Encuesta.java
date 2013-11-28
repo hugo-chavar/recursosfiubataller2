@@ -6,11 +6,13 @@ public class Encuesta extends Recurso {
 
   public Encuesta(Integer idRecurso, Integer idAmbiente, String descripcion) {
 		super(idRecurso, idAmbiente, descripcion);
+		this.tipo="Encuesta";
 		// TODO Auto-generated constructor stub
 	}
 
 public Encuesta() {
 	super();
+	this.tipo="Archivo";
 	// TODO Auto-generated constructor stub
 }
 
