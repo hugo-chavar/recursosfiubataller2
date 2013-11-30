@@ -3,11 +3,15 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
+
+import connection.Requester;
 
 import model.Archivo;
 import model.Encuesta;
 import model.Encuesta2;
+import model.EncuestaRespondida;
 import model.Link;
 import model.ListaDeRecursos;
 import model.Recurso;
@@ -28,6 +32,41 @@ public class MaterialsImpl implements Materials {
 	}
 
 	@Override
+	public void agregarEncuesta(Encuesta encuesta){
+		Requester.INSTANCE.saveEncuesta(encuesta);
+		//TODO:encuesta.setIdEncuesta(pedirIdEncuestaBd());
+		//TODO:CHEQUEAR PERMISO PARA AGREGAR
+				
+	}
+	@Override
+	public void agregarLink(Link link){
+		//Requester.INSTANCE.saveLink(link);
+		//TODO:link.setId(pedirIdLinkBd());
+		//TODO:CHEQUEAR PERMISO PARA AGREGAR
+	}
+	
+	@Override 
+	public Encuesta getEncuesta(int idAmbiente, int idRecurso){
+		Encuesta encuesta= Requester.INSTANCE.getEncuesta(idAmbiente,idRecurso);
+		return encuesta;
+	}
+	
+	@Override
+	public void agregarEncuestaRespondida(EncuestaRespondida respondida,int idAmbiente){
+		Encuesta encuesta= Requester.INSTANCE.getEncuesta(idAmbiente,respondida.getIdRecurso());
+		if(encuesta.esEvaluada()){
+			respondida.evaluar(encuesta);
+		}
+		 Requester.INSTANCE.saveEncuestaRespondida(respondida);
+	}
+	
+	@Override
+	public EncuestaRespondida getEncuestaRespondida(int IdAmbiente, int idRecurso, int idUsuario){
+		EncuestaRespondida respondida= Requester.INSTANCE.getEncuestaRespondida(IdAmbiente,idRecurso,idUsuario);
+		return respondida;
+	}
+	
+	@Override
 	public ListaDeRecursos obtenerRecursos(int idAmbiente, int idUsuario) {
 		List<Recurso> recursos = new ArrayList<Recurso>();
 		List<Recurso> recursosPermitidos = new ArrayList<Recurso>();
@@ -41,18 +80,13 @@ public class MaterialsImpl implements Materials {
 			if (consultarPermisoUsuario(recursos.get(i).getIdRecurso(),
 					idUsuario)) {
 				recursosPermitidos.add(recursos.get(i));
-				//String tipo = recursos.get(i).getClass().getName();
-				//System.out.println(tipo);
-				// TODO:Ver como devolvemos el tipo de cada recurso y si
-				// devolvemos
-				// vector de recursos
 			}
 		}
 		ListaDeRecursos lista = new ListaDeRecursos(recursosPermitidos);
 		return lista;
 	}
 
-	// TODO:METODOS QUE DEBEN COMPLETARSE CON LLAMADOS A SEGURIDAD
+	// TODO:METODOS QUE DEBEN COMPLETARSE CON LLAMADOS A PARTICIPACION
 	private boolean consultarPermisoUsuario(int idRecurso, int idUsuario) {
 		// Harcodeo
 		if (idRecurso < idUsuario)
