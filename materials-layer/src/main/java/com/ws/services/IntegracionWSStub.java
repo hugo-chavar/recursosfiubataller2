@@ -148,7 +148,7 @@ public class IntegracionWSStub extends org.apache.axis2.client.Stub {
 			throws org.apache.axis2.AxisFault {
 
 		this(configurationContext,
-				"http://localhost/Integracion2/services/IntegracionWS.IntegracionWSHttpSoap12Endpoint/");
+				"http://localhost:8080/Integracion2/services/IntegracionWS.IntegracionWSHttpSoap12Endpoint/");
 
 	}
 
@@ -157,7 +157,7 @@ public class IntegracionWSStub extends org.apache.axis2.client.Stub {
 	 */
 	public IntegracionWSStub() throws org.apache.axis2.AxisFault {
 
-		this("http://localhost/Integracion2/services/IntegracionWS.IntegracionWSHttpSoap12Endpoint/");
+		this("http://localhost:8080/Integracion2/services/IntegracionWS.IntegracionWSHttpSoap12Endpoint/");
 
 	}
 

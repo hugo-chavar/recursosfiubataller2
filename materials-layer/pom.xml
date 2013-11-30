@@ -39,7 +39,6 @@
       <version>1.2.14</version>
     </dependency>
     <dependency>
-
       <groupId>wsdl4j</groupId>
       <artifactId>wsdl4j</artifactId>
       <version>1.6.2</version>
@@ -54,65 +53,11 @@
       <artifactId>axis2-transport-http</artifactId>
       <version>1.6.2</version>
     </dependency>
-
     <dependency>
       <groupId>org.apache.ws.commons.axiom</groupId>
       <artifactId>axiom-impl</artifactId>
       <version>1.2.14</version>
     </dependency>
-<!--
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-    </dependency>
-
-
-
-    <dependency>
-      <groupId>org.apache.ws.commons.axiom</groupId>
-      <artifactId>axiom-impl</artifactId>
-      <version>1.2.14</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.neethi</groupId>
-      <artifactId>neethi</artifactId>
-      <version>3.0.2</version>
-    </dependency>
-
-
-
-
-    <dependency>
-      <groupId>org.apache.xmlbeans</groupId>
-      <artifactId>xmlbeans</artifactId>
-      <version>2.4.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.ws.commons.schema</groupId>
-      <artifactId>XmlSchema</artifactId>
-      <version>1.4.7</version>
-    </dependency>
-
-
-    <dependency>
-      <groupId>org.apache.geronimo.specs</groupId>
-      <artifactId>geronimo-stax-api_1.2_spec</artifactId>
-      <version>1.1</version>
-    </dependency>
-
-
-
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
-    </dependency>
-
--->
-
     <dependency>
       <groupId>com.sun.xml.ws</groupId>
       <artifactId>jaxws-rt</artifactId>
@@ -143,11 +88,9 @@
       <artifactId>gmbal-api-only</artifactId>
       <version>3.0.0-b023</version>
     </dependency>
-
-
-
        
-
+<!--
+EN CASO DE QUE NO CORRA BIEN.. DESCOMENTAR HASTA LA FRASE "HASTA ACA" ..
     <dependency>
       <groupId>org.apache.zookeeper</groupId>
       <artifactId>zookeeper</artifactId>
@@ -167,28 +110,30 @@
         </exclusion>
       </exclusions>
     </dependency>
-<!--
+HASTA ACA (BORRAR ESTO..)
     <dependency>
         <groupId>ws-commons</groupId>
         <artifactId>axiom-api</artifactId>
         <version>1.1</version>
       </dependency>
+
     <dependency>
       <groupId>javax.jms</groupId>
       <artifactId>jms</artifactId>
       <version>1.1</version>
     </dependency>
+
     <dependency>
       <groupId>com.sun.jdmk</groupId>
       <artifactId>jmxtools</artifactId>
       <version>1.2.1</version>
     </dependency>
+
     <dependency>
       <groupId>com.sun.jmx</groupId>
       <artifactId>jmxri</artifactId>
       <version>1.2.1</version>
     </dependency> 
-
 
     <dependency>
       <groupId>org.apache.woden</groupId>
@@ -198,6 +143,45 @@
 
 -->
 
+
+<!--
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ws.commons.axiom</groupId>
+      <artifactId>axiom-impl</artifactId>
+      <version>1.2.14</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.neethi</groupId>
+      <artifactId>neethi</artifactId>
+      <version>3.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.xmlbeans</groupId>
+      <artifactId>xmlbeans</artifactId>
+      <version>2.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ws.commons.schema</groupId>
+      <artifactId>XmlSchema</artifactId>
+      <version>1.4.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.geronimo.specs</groupId>
+      <artifactId>geronimo-stax-api_1.2_spec</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
+-->
   </dependencies>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
