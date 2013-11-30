@@ -26,7 +26,12 @@
 \item Ejecutar: % \newline
 \begin{verbatim}
 mvn clean package
-\end{verbatim}
+\end{verbatim}30/11/2013 14:13:03 org.apache.axis2.deployment.ModuleDeployer deploy
+INFO: Deploying module: addressing-1.6.2 - file:/home/damian/.m2/repository/org/apache/axis2/axis2/1.6.2/axis2-1.6.2.jar
+Respuesta recibida de Integracion:
+com.ws.handler.holaHandlerXML: <WS><hola><id>IdAmbiente</id><id>IdRecurso</id></hola></WS>
+Todo anda OK!
+
 \begin{minipage}[t]{\linewidth}
           \raggedright
           \adjustbox{valign=t}{%
@@ -110,7 +115,19 @@ sudo /etc/init.d/tomcat7 stop
           \medskip
           \textbf{As\'i deber\'ia verse, tiene q decir \emph{Apache Axis2}!} \ \newline
           si no dice.. clic y seleccionar Axis2
+          
     \end{minipage}
+   \item
+          En caso de que aparezca algo asi:
+            \raggedright
+          \adjustbox{valign=t}{%
+            \includegraphics[width=.9\linewidth]{ws2}%
+          }
+
+          \medskip
+          
+          Se deber\'an seguir los siguientes pasos:
+          Click derecho sobre el projecto de Integracion2 $\rightarrow$ properties $\rightarrow$  project facets$\rightarrow$ dinamic web module y se reemplaza por 2.5
 \item dejar el resto como est\'a y darle siguiente.. siguiente..
 \item probarlo... \ \newline
 \textit{\href{http://localhost:8080/Integracion2/services/IntegracionWS?wsdl} {http://localhost:8080/Integracion2/services/IntegracionWS?wsdl}}
