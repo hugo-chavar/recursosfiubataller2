@@ -13,7 +13,7 @@ public class EncuestaParser extends Parser {
 		xml = this.addField(xml, "IDAmbiente", String.valueOf(encuesta.getIdAmbiente()));
 		xml = this.addField(xml, "IDEncuesta", String.valueOf(encuesta.getIdRecurso()));
 		xml = this.addField(xml, "Descripcion", encuesta.getDescripcion());
-		xml = this.addField(xml, "Evaluada", String.valueOf(encuesta.getEvaluada()));
+		//xml = this.addField(xml, "Evaluada", String.valueOf(encuesta.getEvaluada()));
 		xml = this.addTag(xml, "Encuesta");
 		xml = this.addTag(xml, "WS");
 		return xml;

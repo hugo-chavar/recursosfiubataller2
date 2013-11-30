@@ -29,27 +29,20 @@
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <groupId>org.apache.axis2</groupId>
+      <artifactId>axis2</artifactId>
+      <version>1.6.2</version>
     </dependency>
-
     <dependency>
       <groupId>org.apache.ws.commons.axiom</groupId>
       <artifactId>axiom-api</artifactId>
       <version>1.2.14</version>
     </dependency>
-
     <dependency>
-      <groupId>org.apache.ws.commons.axiom</groupId>
-      <artifactId>axiom-impl</artifactId>
-      <version>1.2.14</version>
-    </dependency>
 
-    <dependency>
-      <groupId>org.apache.neethi</groupId>
-      <artifactId>neethi</artifactId>
-      <version>3.0.2</version>
+      <groupId>wsdl4j</groupId>
+      <artifactId>wsdl4j</artifactId>
+      <version>1.6.2</version>
     </dependency>
     <dependency>
       <groupId>org.apache.axis2</groupId>
@@ -62,12 +55,35 @@
       <version>1.6.2</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.ws.commons.axiom</groupId>
+      <artifactId>axiom-impl</artifactId>
+      <version>1.2.14</version>
+    </dependency>
+<!--
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+    </dependency>
+
+
 
     <dependency>
-      <groupId>org.apache.axis2</groupId>
-      <artifactId>axis2</artifactId>
-      <version>1.6.2</version>
+      <groupId>org.apache.ws.commons.axiom</groupId>
+      <artifactId>axiom-impl</artifactId>
+      <version>1.2.14</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.neethi</groupId>
+      <artifactId>neethi</artifactId>
+      <version>3.0.2</version>
+    </dependency>
+
+
+
+
     <dependency>
       <groupId>org.apache.xmlbeans</groupId>
       <artifactId>xmlbeans</artifactId>
@@ -82,10 +98,21 @@
 
 
     <dependency>
+      <groupId>org.apache.geronimo.specs</groupId>
+      <artifactId>geronimo-stax-api_1.2_spec</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+
+
+    <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>1.2.17</version>
     </dependency>
+
+-->
+
     <dependency>
       <groupId>com.sun.xml.ws</groupId>
       <artifactId>jaxws-rt</artifactId>
@@ -118,18 +145,8 @@
     </dependency>
 
 
-    <dependency>
-      <groupId>org.apache.geronimo.specs</groupId>
-      <artifactId>geronimo-stax-api_1.2_spec</artifactId>
-      <version>1.1</version>
-    </dependency>
-    <dependency>
-      <groupId>wsdl4j</groupId>
-      <artifactId>wsdl4j</artifactId>
-      <version>1.6.2</version>
-    </dependency>
 
-    <!--   
+       
 
     <dependency>
       <groupId>org.apache.zookeeper</groupId>
@@ -150,14 +167,12 @@
         </exclusion>
       </exclusions>
     </dependency>
-
+<!--
     <dependency>
         <groupId>ws-commons</groupId>
         <artifactId>axiom-api</artifactId>
         <version>1.1</version>
       </dependency>
-
-
     <dependency>
       <groupId>javax.jms</groupId>
       <artifactId>jms</artifactId>
@@ -180,7 +195,9 @@
       <artifactId>woden</artifactId>
       <version>1.0M9</version>
     </dependency> 
+
 -->
+
   </dependencies>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
@@ -197,5 +214,10 @@
       </plugin>
     </plugins>
   </build>
-
+<repositories>
+    <repository>
+      <id>java.net</id>
+      <url>https://maven.java.net/content/repositories/public/</url>
+    </repository>
+ </repositories>
 </project>
