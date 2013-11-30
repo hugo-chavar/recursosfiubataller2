@@ -1,4 +1,3 @@
-
 /**
  * IntegracionWSParserConfigurationExceptionException.java
  *
@@ -8,36 +7,33 @@
 
 package com.ws.services;
 
-public class IntegracionWSParserConfigurationExceptionException extends java.lang.Exception{
+public class IntegracionWSParserConfigurationExceptionException extends java.lang.Exception {
 
-    private static final long serialVersionUID = 1384816774764L;
-    
-    private com.ws.services.IntegracionWSStub.IntegracionWSParserConfigurationException faultMessage;
+	private static final long serialVersionUID = 1384816774764L;
 
-    
-        public IntegracionWSParserConfigurationExceptionException() {
-            super("IntegracionWSParserConfigurationExceptionException");
-        }
+	private com.ws.services.IntegracionWSStub.IntegracionWSParserConfigurationException faultMessage;
 
-        public IntegracionWSParserConfigurationExceptionException(java.lang.String s) {
-           super(s);
-        }
+	public IntegracionWSParserConfigurationExceptionException() {
+		super("IntegracionWSParserConfigurationExceptionException");
+	}
 
-        public IntegracionWSParserConfigurationExceptionException(java.lang.String s, java.lang.Throwable ex) {
-          super(s, ex);
-        }
+	public IntegracionWSParserConfigurationExceptionException(java.lang.String s) {
+		super(s);
+	}
 
-        public IntegracionWSParserConfigurationExceptionException(java.lang.Throwable cause) {
-            super(cause);
-        }
-    
+	public IntegracionWSParserConfigurationExceptionException(java.lang.String s, java.lang.Throwable ex) {
+		super(s, ex);
+	}
 
-    public void setFaultMessage(com.ws.services.IntegracionWSStub.IntegracionWSParserConfigurationException msg){
-       faultMessage = msg;
-    }
-    
-    public com.ws.services.IntegracionWSStub.IntegracionWSParserConfigurationException getFaultMessage(){
-       return faultMessage;
-    }
+	public IntegracionWSParserConfigurationExceptionException(java.lang.Throwable cause) {
+		super(cause);
+	}
+
+	public void setFaultMessage(com.ws.services.IntegracionWSStub.IntegracionWSParserConfigurationException msg) {
+		faultMessage = msg;
+	}
+
+	public com.ws.services.IntegracionWSStub.IntegracionWSParserConfigurationException getFaultMessage() {
+		return faultMessage;
+	}
 }
-    

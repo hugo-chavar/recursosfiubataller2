@@ -1,4 +1,3 @@
-
 /**
  * IntegracionWSIOExceptionException.java
  *
@@ -8,36 +7,33 @@
 
 package com.ws.services;
 
-public class IntegracionWSIOExceptionException extends java.lang.Exception{
+public class IntegracionWSIOExceptionException extends java.lang.Exception {
 
-    private static final long serialVersionUID = 1384816774741L;
-    
-    private com.ws.services.IntegracionWSStub.IntegracionWSIOException faultMessage;
+	private static final long serialVersionUID = 1384816774741L;
 
-    
-        public IntegracionWSIOExceptionException() {
-            super("IntegracionWSIOExceptionException");
-        }
+	private com.ws.services.IntegracionWSStub.IntegracionWSIOException faultMessage;
 
-        public IntegracionWSIOExceptionException(java.lang.String s) {
-           super(s);
-        }
+	public IntegracionWSIOExceptionException() {
+		super("IntegracionWSIOExceptionException");
+	}
 
-        public IntegracionWSIOExceptionException(java.lang.String s, java.lang.Throwable ex) {
-          super(s, ex);
-        }
+	public IntegracionWSIOExceptionException(java.lang.String s) {
+		super(s);
+	}
 
-        public IntegracionWSIOExceptionException(java.lang.Throwable cause) {
-            super(cause);
-        }
-    
+	public IntegracionWSIOExceptionException(java.lang.String s, java.lang.Throwable ex) {
+		super(s, ex);
+	}
 
-    public void setFaultMessage(com.ws.services.IntegracionWSStub.IntegracionWSIOException msg){
-       faultMessage = msg;
-    }
-    
-    public com.ws.services.IntegracionWSStub.IntegracionWSIOException getFaultMessage(){
-       return faultMessage;
-    }
+	public IntegracionWSIOExceptionException(java.lang.Throwable cause) {
+		super(cause);
+	}
+
+	public void setFaultMessage(com.ws.services.IntegracionWSStub.IntegracionWSIOException msg) {
+		faultMessage = msg;
+	}
+
+	public com.ws.services.IntegracionWSStub.IntegracionWSIOException getFaultMessage() {
+		return faultMessage;
+	}
 }
-    

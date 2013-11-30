@@ -1,4 +1,3 @@
-
 /**
  * IntegracionWSSAXExceptionException.java
  *
@@ -8,36 +7,33 @@
 
 package com.ws.services;
 
-public class IntegracionWSSAXExceptionException extends java.lang.Exception{
+public class IntegracionWSSAXExceptionException extends java.lang.Exception {
 
-    private static final long serialVersionUID = 1384816774717L;
-    
-    private com.ws.services.IntegracionWSStub.IntegracionWSSAXException faultMessage;
+	private static final long serialVersionUID = 1384816774717L;
 
-    
-        public IntegracionWSSAXExceptionException() {
-            super("IntegracionWSSAXExceptionException");
-        }
+	private com.ws.services.IntegracionWSStub.IntegracionWSSAXException faultMessage;
 
-        public IntegracionWSSAXExceptionException(java.lang.String s) {
-           super(s);
-        }
+	public IntegracionWSSAXExceptionException() {
+		super("IntegracionWSSAXExceptionException");
+	}
 
-        public IntegracionWSSAXExceptionException(java.lang.String s, java.lang.Throwable ex) {
-          super(s, ex);
-        }
+	public IntegracionWSSAXExceptionException(java.lang.String s) {
+		super(s);
+	}
 
-        public IntegracionWSSAXExceptionException(java.lang.Throwable cause) {
-            super(cause);
-        }
-    
+	public IntegracionWSSAXExceptionException(java.lang.String s, java.lang.Throwable ex) {
+		super(s, ex);
+	}
 
-    public void setFaultMessage(com.ws.services.IntegracionWSStub.IntegracionWSSAXException msg){
-       faultMessage = msg;
-    }
-    
-    public com.ws.services.IntegracionWSStub.IntegracionWSSAXException getFaultMessage(){
-       return faultMessage;
-    }
+	public IntegracionWSSAXExceptionException(java.lang.Throwable cause) {
+		super(cause);
+	}
+
+	public void setFaultMessage(com.ws.services.IntegracionWSStub.IntegracionWSSAXException msg) {
+		faultMessage = msg;
+	}
+
+	public com.ws.services.IntegracionWSStub.IntegracionWSSAXException getFaultMessage() {
+		return faultMessage;
+	}
 }
-    
