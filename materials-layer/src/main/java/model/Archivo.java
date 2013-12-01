@@ -1,5 +1,7 @@
 package model;
 
+import javax.activation.DataHandler;
+
 public class Archivo extends Recurso {
 
 	public Archivo(Integer idRecurso, Integer idAmbiente, String descripcion) {
@@ -13,14 +15,36 @@ public class Archivo extends Recurso {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String path;
+	private String path;
 
-	public Integer tamanio;
+	private Integer tamanio;
 
-	public String tipo;
+	private String tipo;
 
-	public String nombre;
-
+	private String nombre;
+	
+	private DataHandler archivo;
+	
+	
+	public void setFileName(String fileName) {
+        this.nombre = fileName;
+    }
+ 
+    public String getFileType() {
+        return nombre;
+    }
+ 
+    public void setFileType(String fileType) {
+        this.tipo = fileType;
+    }
+ 
+    public DataHandler getFile() {
+        return archivo;
+    }
+ 
+    public void setFile(DataHandler file) {
+        this.archivo = file;
+    }
 	public void Guardar() {
 		// Guardar en la base de Datos
 	}

@@ -1,8 +1,11 @@
 package service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
@@ -30,7 +33,12 @@ public class MaterialsImpl implements Materials {
 		e.rellenar();
 		return e;
 	}
-
+	@Override
+	public Archivo getArchivo(int idAmbiente, int idRecurso){
+		Archivo file = new Archivo();
+		//TODO: llamar al web service de persistencia que me devuelva los datos de los archivos
+		return file;
+	}
 	@Override
 	public void agregarEncuesta(Encuesta encuesta){
 		Requester.INSTANCE.saveEncuesta(encuesta);
@@ -38,6 +46,15 @@ public class MaterialsImpl implements Materials {
 		//TODO:CHEQUEAR PERMISO PARA AGREGAR
 				
 	}
+	@Override
+	public void setArchivo(int idAmbiente, String name,String ext, File file){
+		Archivo File = new Archivo();
+		File.setFileName(name);
+		File.setFileType(ext);
+		File.setFile(new DataHandler(new FileDataSource(file)));
+        //TODO: llamar a la capa de integracion para que guarde el archivo
+	}
+	
 	@Override
 	public void agregarLink(Link link){
 		//Requester.INSTANCE.saveLink(link);

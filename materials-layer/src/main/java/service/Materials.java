@@ -2,9 +2,12 @@ package service;
 
 
 
+import java.io.File;
+
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import model.Archivo;
 import model.Encuesta;
 import model.Encuesta2;
 import model.EncuestaRespondida;
@@ -24,6 +27,6 @@ public interface Materials {
 	@WebMethod void agregarEncuestaRespondida(EncuestaRespondida respondida,int idAmbiente);
 	@WebMethod void agregarLink(Link link);
 	@WebMethod void agregarEncuesta(Encuesta encuesta);
-	//@WebMethod void setArchivo();
-	
+	@WebMethod void setArchivo(int idAmbiente,String name,String ext, File file );
+	@WebMethod Archivo getArchivo(int idAmbiente,int idRecurso );
 }
