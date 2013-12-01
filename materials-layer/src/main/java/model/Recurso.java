@@ -9,7 +9,6 @@ public class Recurso {
 	}
 
 	public Recurso() {
-		// TODO Auto-generated constructor stub
 	}
 
 	protected Integer idRecurso;

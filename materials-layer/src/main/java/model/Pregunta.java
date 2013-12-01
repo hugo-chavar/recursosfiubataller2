@@ -2,36 +2,30 @@ package model;
 
 public abstract class Pregunta {
 
-  private String enunciado;
+	private String enunciado;
 
-  private Integer idPregunta;
+	private Integer idPregunta;
 
-    
- public Pregunta(String enunciado, Integer idPregunta) {
-	  this.setEnunciado(enunciado);
-	  this.setIdPregunta(idPregunta);
-}
- 
+	public Pregunta(String enunciado, Integer idPregunta) {
+		this.setEnunciado(enunciado);
+		this.setIdPregunta(idPregunta);
+	}
 
-public abstract Integer evaluar(PreguntaRespondida respondida);
+	public abstract Integer evaluar(PreguntaRespondida respondida);
 
+	public String getEnunciado() {
+		return enunciado;
+	}
 
-public String getEnunciado() {
-	return enunciado;
-}
+	public Integer getIdPregunta() {
+		return idPregunta;
+	}
 
+	public void setIdPregunta(Integer idPregunta) {
+		this.idPregunta = idPregunta;
+	}
 
-public Integer getIdPregunta() {
-	return idPregunta;
-}
-
-
-public void setIdPregunta(Integer idPregunta) {
-	this.idPregunta = idPregunta;
-}
-
-
-public void setEnunciado(String enunciado) {
-	this.enunciado = enunciado;
-}
+	public void setEnunciado(String enunciado) {
+		this.enunciado = enunciado;
+	}
 }
