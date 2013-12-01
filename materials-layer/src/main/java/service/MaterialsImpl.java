@@ -13,7 +13,6 @@ import connection.Requester;
 
 import model.Archivo;
 import model.Encuesta;
-import model.Encuesta2;
 import model.EncuestaRespondida;
 import model.Link;
 import model.ListaDeRecursos;
@@ -27,12 +26,12 @@ public class MaterialsImpl implements Materials {
 		return "Hello, Welcom to jax-ws " + name;
 	}
 
-	@Override
-	public Encuesta2 getEncuesta() {
-		Encuesta2 e = new Encuesta2();
-		e.rellenar();
-		return e;
-	}
+//	@Override
+//	public Encuesta2 getEncuesta() {
+//		Encuesta2 e = new Encuesta2();
+//		e.rellenar();
+//		return e;
+//	}
 	@Override
 	public Archivo getArchivo(int idAmbiente, int idRecurso){
 		Archivo file = new Archivo();

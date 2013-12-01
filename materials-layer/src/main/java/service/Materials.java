@@ -9,7 +9,6 @@ import javax.jws.WebService;
 
 import model.Archivo;
 import model.Encuesta;
-import model.Encuesta2;
 import model.EncuestaRespondida;
 import model.Link;
 import model.ListaDeRecursos;
@@ -20,7 +19,7 @@ public interface Materials {
 
 	@WebMethod String sayHello(String name);
 	//@WebMethod Node getTree();
-	@WebMethod Encuesta2 getEncuesta();
+	//@WebMethod Encuesta2 getEncuesta();
 	@WebMethod ListaDeRecursos obtenerRecursos(int idAmbiente,int idUsuario);
 	@WebMethod Encuesta getEncuesta(int idAmbiente, int idRecurso);
 	@WebMethod EncuestaRespondida getEncuestaRespondida(int IdAmbiente, int idRecurso, int idUsuario);
