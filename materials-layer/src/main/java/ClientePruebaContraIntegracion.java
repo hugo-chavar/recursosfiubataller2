@@ -1,4 +1,7 @@
+//import model.Encuesta;
+//import model.PreguntaRespuestaACompletar;
 
+//import connection.Requester;
 
 import java.rmi.RemoteException;
 
@@ -14,6 +17,14 @@ public class ClientePruebaContraIntegracion {
 
 	public static void main(String[] args) {
 
+//		Encuesta encuesta = new Encuesta(0, 1, "Encuesta de prueba", false);
+//		PreguntaRespuestaACompletar pregunta1 = new PreguntaRespuestaACompletar("De que color es el caballo blanco de San Martin?", 0);
+//		encuesta.agregarPregunta(pregunta1);
+//		PreguntaRespuestaACompletar pregunta2 = new PreguntaRespuestaACompletar("A cuantos km se encuentra Bariloche de Buenos Aires?", 1);
+//		encuesta.agregarPregunta(pregunta2);
+//		Requester.INSTANCE.saveEncuesta(encuesta);
+//		encuesta = Requester.INSTANCE.getEncuesta(1, 0);
+		
 		IntegracionWSStub stub;
 
 		try {

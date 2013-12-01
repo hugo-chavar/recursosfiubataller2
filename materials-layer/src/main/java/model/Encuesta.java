@@ -28,6 +28,10 @@ public class Encuesta extends Recurso {
 	public ArrayList<Pregunta> getPreguntas() {
 		return preguntas;
 	}
+	
+	public void setPreguntas(ArrayList<Pregunta> preguntas) {
+		this.preguntas = preguntas;
+	}
 
 	private ArrayList<EncuestaRespondida> encuestasRespondidas;
 
