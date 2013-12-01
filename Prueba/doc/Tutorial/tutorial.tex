@@ -149,6 +149,118 @@ sudo /etc/init.d/tomcat7 stop
     \end{minipage}
 \end{itemize}
 
+\clearpage
+\section{Generaci\'on de un cliente de nuestro Web Service}
+Se va a hacer un cliente simple en un \emph{main} y se muestran algunas invocaciones de ejemplo.
+\begin{itemize}
+\item En \emph{eclipse} se crea un proyecto com\'un de Java y llamenlo "ClienteNuestro": \newline
+\emph{File $\rightarrow$ New $\rightarrow$  Other..$\rightarrow$ Java Project} \newline
+    \begin{minipage}[t]{\linewidth}
+          \raggedright
+          \adjustbox{valign=t}{%
+            \includegraphics[width=.6\linewidth]{eclipseclient}%
+          }
+
+          \medskip
+    \end{minipage}
+\item Ir a nuestro proyecto y ejecutar como \emph{Java application} la clase \textbf{WSPublisher} y tomar nota de la url en la cual se est\'a publicando el servicio. En la consola se va a ver esto: 
+\begin{verbatim}
+Ingrese "hola" para salir : 
+\end{verbatim}
+    \begin{minipage}[t]{\linewidth}
+          \raggedright
+          \adjustbox{valign=t}{%
+            \includegraphics[width=.6\linewidth]{wspubl}%
+          }
+
+          \medskip
+          \scriptsize En caso de que d\'e alg\'un error: puede ser que el puerto est\'e ocupado y haya que detener eso, aunque ac\'a se puede poner manualmente cualquier puerto cambiando el par\'ametro del m\'etodo \textsc{Endpoint.publish}.
+    \end{minipage}
+\item Dentro del workspace ir a la carpeta del proyecto y abrir un terminal ah\'i
+    \begin{minipage}[t]{\linewidth}
+          \raggedright
+          \adjustbox{valign=t}{%
+            \includegraphics[width=.6\linewidth]{commandline}%
+          }
+
+          \medskip
+    \end{minipage}
+\item Ejecutar el siguiente comando para generar el c\'odigo cliente (la url contiene parte de lo que dice el par\'ametro del m\'etodo \textsc{Endpoint.publish} ):
+\begin{verbatim}
+wsimport -s src -keep -verbose http://localhost:8081/WS2/Greeting2?wsdl
+\end{verbatim}
+\item En la pantalla se debe ver algo as\'i
+\begin{verbatim}
+parsing WSDL...
+Generating code...
+
+service\AgregarEncuesta.java
+service\AgregarEncuestaRespondida.java
+service\AgregarEncuestaRespondidaResponse.java
+service\AgregarEncuestaResponse.java
+service\AgregarLink.java
+service\AgregarLinkResponse.java
+.... (todas las clases deben aparecer)
+
+Compiling code...
+
+javac -d ...
+\end{verbatim}
+{
+ \scriptsize En caso de que d\'e alg\'un error: puede ser que est\'a mal la url o el servicio no est\'a levantado }
+\item En \emph{eclipse} clic derecho sobre el proyecto "ClienteNuestro"  $\rightarrow$ Refresh
+\item Crear una clase Client con este c\'odigo (dejo la clase creada en la carpeta turorial):
+\scriptsize
+\begin{verbatim}
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+
+import service.Encuesta;
+import service.Materials;
+import service.MaterialsImplService;
+import service.Pregunta;
+
+public class Client {
+
+	public static void main(String[] args) {
+		MaterialsImplService service = new MaterialsImplService();
+		Materials port = service.getMaterialsImplPort();
+		System.out.println("------->>  Probando el servicio");
+		System.out.println(port.sayHello("Programador"));
+		System.out.println("------->>  ESTA TODO OK!");
+
+		System.out.println("Ingrese algo para continuar y probar las encuestas : ");
+
+		try {
+			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+			bufferRead.readLine();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		try {
+		Encuesta enc = port.getEncuesta(0, 0);
+
+		System.out.println("TITULO ENCUESTA: " + enc.getDescripcion());
+
+		List<Pregunta> preguntas = enc.getPreguntas();
+		for (Pregunta p : preguntas) {
+			System.out.println("\t" + p.getEnunciado());
+		}
+		} catch (Exception e) {
+			System.out.println("Encuesta inexistente!");
+		}
+
+	}
+
+}
+\end{verbatim}
+\end{itemize}
+
 %\label{sect:A}
 %\subsection{a}
 %\subsection{b}
