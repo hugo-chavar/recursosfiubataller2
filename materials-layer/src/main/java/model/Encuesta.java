@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class Encuesta extends Recurso {
 
@@ -23,17 +22,17 @@ public class Encuesta extends Recurso {
 		return evaluada;
 	}
 
-	private ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
+	private List<Pregunta> preguntas = new ArrayList<Pregunta>();
 
-	public ArrayList<Pregunta> getPreguntas() {
+	public List<Pregunta> getPreguntas() {
 		return preguntas;
 	}
 	
-	public void setPreguntas(ArrayList<Pregunta> preguntas) {
+	public void setPreguntas(List<Pregunta> preguntas) {
 		this.preguntas = preguntas;
 	}
 
-	private ArrayList<EncuestaRespondida> encuestasRespondidas;
+	private List<EncuestaRespondida> encuestasRespondidas;
 
 	public void guardar() {
 		// TODO:Escribir en la base de datos la info actualizada de la encuesta
@@ -49,7 +48,7 @@ public class Encuesta extends Recurso {
 		preguntas.remove(nPregunta);
 	}
 
-	private ArrayList<EncuestaRespondida> getEncuestaRespondida(Integer idAmbiente, int idUsuario, Integer idRecurso) {
+	private List<EncuestaRespondida> getEncuestaRespondida(Integer idAmbiente, int idUsuario, Integer idRecurso) {
 		// TODO Auto-generated method stub
 		return null;
 	}
