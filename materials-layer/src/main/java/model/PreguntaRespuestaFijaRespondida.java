@@ -29,7 +29,7 @@ public Integer evaluar(PreguntaRespuestaFija preguntaFija) {
 		return 0;
 	for(int i=0;i<preguntaFija.getRespuestasCorrectas().size();i++){
 		//Chequeo una por una que las respuestas sean las mismas
-		if(preguntaFija.getRespuestasCorrectas().elementAt(i).compareTo(this.getRespuestas().elementAt(i))!=0){
+		if(preguntaFija.getRespuestasCorrectas().get(i).compareTo(this.getRespuestas().elementAt(i))!=0){
 			return 0;
 		}
 	}
