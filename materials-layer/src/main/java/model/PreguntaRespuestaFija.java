@@ -49,7 +49,7 @@ public boolean isMultiplesRespuestas() {
 @Override
 public String marshall() {
 	
-	return "";
+	return super.marshall();
 }
 
 }

@@ -2,13 +2,12 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class EncuestaRespondida {
 
   private Integer evaluacion;
   
-  private ArrayList<Integer> preguntasCorrectas;
+  private List<Integer> preguntasCorrectas;
 	
   private Integer idUsuario;
 

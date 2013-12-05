@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
-import javax.jws.WebMethod;
+//import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import connection.Requester;
