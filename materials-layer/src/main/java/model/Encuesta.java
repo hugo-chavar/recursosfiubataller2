@@ -53,16 +53,6 @@ public class Encuesta extends Recurso {
 		return null;
 	}
 
-	@Override
-	public void Guardar() {
-		// Guardar en la base de Datos
-	}
-
-	@Override
-	public void Crear() {
-
-	}
-	
 	public String marshalRespuestas() {
 		StringBuilder sb = new StringBuilder("");
 		for (Pregunta p: preguntas) {

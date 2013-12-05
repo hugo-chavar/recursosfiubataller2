@@ -4,6 +4,7 @@ public class PreguntaRespuestaACompletar extends Pregunta{
 
   public PreguntaRespuestaACompletar(String enunciado, Integer idPregunta) {
 		super(enunciado, idPregunta);
+		type = ANSWER_TO_COMPLETE_TYPE;
 
 	}
 
@@ -25,7 +26,7 @@ public Integer evaluar(PreguntaRespondida respondida) {
 
 @Override
 public String marshall() {
-	return null;
+	return super.marshall() + respuesta;
 }
 
 }

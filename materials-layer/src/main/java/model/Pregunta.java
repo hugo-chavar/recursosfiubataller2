@@ -1,10 +1,13 @@
 package model;
 
 public abstract class Pregunta {
+	
+	protected static String FIXED_ANSWER_TYPE = "F";
+	protected static String ANSWER_TO_COMPLETE_TYPE = "C";
 
-	private String enunciado;
-
-	private Integer idPregunta;
+	protected String enunciado;
+	protected String type;
+	protected Integer idPregunta;
 
 	public Pregunta(String enunciado, Integer idPregunta) {
 		this.setEnunciado(enunciado);
@@ -30,6 +33,13 @@ public abstract class Pregunta {
 	}
 
 	public String marshall() {
-		return null;
+		StringBuilder sb = new StringBuilder("");
+		sb.append(idPregunta);
+		sb.append(";");
+		sb.append(type);
+		sb.append(";");
+		sb.append(enunciado);
+		sb.append(";");
+		return sb.toString();
 	}
 }

@@ -43,14 +43,5 @@ public class Recurso {
 		this.descripcion = descripcion;
 	}
 
-	public void Guardar() {
-	}
-
-	// TODO:ver si es necesario
-	// public Recurso Obtener() {
-	// }
-
-	public void Crear() {
-	}
 
 }

@@ -2,6 +2,7 @@ package connection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -100,8 +101,9 @@ public class EncuestaParser extends Parser {
 		return xml;
 	}
 	
-	public String serializePreguntas(Encuesta encuesta) { // 	TODO: para todo tipo de preguntas.
-		ArrayList<Pregunta> preguntas = encuesta.getPreguntas();
+	public String serializePreguntas(Encuesta encuesta) { 
+		//TODO: para todo tipo de preguntas.
+		List<Pregunta> preguntas = encuesta.getPreguntas();
 		
 		Document doc = this.buildXMLDocument();
 		Element rootElement = doc.createElement(Parser.INITIAL_TAG);

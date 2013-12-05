@@ -45,14 +45,5 @@ public class Archivo extends Recurso {
     public void setFile(DataHandler file) {
         this.archivo = file;
     }
-	public void Guardar() {
-		// Guardar en la base de Datos
-	}
-
-	@Override
-	public void Crear() {
-		// TODO Auto-generated method stub
-
-	}
 
 }

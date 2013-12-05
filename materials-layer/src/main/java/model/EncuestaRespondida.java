@@ -42,7 +42,7 @@ public void setPreguntasRespondidas(ArrayList<PreguntaRespondida> preguntasRespo
 
 public void evaluar(Encuesta encuesta) {
 		Integer resultado=0;
-		ArrayList<Pregunta> preguntas=encuesta.getPreguntas();
+		List<Pregunta> preguntas=encuesta.getPreguntas();
 		if(preguntas.size()==this.getPreguntasRespondidas().size()){
 			for(int i=0;i<preguntas.size();i++){
 				Integer respuesta=preguntas.get(i).evaluar(this.getPreguntasRespondidas().get(i));

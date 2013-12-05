@@ -13,6 +13,7 @@ public class PreguntaRespuestaFija extends Pregunta{
   public PreguntaRespuestaFija(boolean multiplesRespuestas,String enunciado,Integer idPregunta){
   	super(enunciado,idPregunta);
   	this.multiplesRespuestas=multiplesRespuestas;
+  	type = FIXED_ANSWER_TYPE;
 }
 
 public List<String> getRespuestasPosibles() {
@@ -28,6 +29,7 @@ public List<Integer> getRespuestasCorrectas() {
 }
 
 //retorna false si no puede agregar esas respuestas
+//Andy: en los setters no se debe validar nada y deben ser void siempre. Hugo
 public boolean setRespuestasCorrectas(List<Integer> respuestasCorrectas) {
 	if(!this.isMultiplesRespuestas() && respuestasCorrectas.size()!=1)
 		return false;
@@ -46,7 +48,8 @@ public boolean isMultiplesRespuestas() {
 
 @Override
 public String marshall() {
-	return null;
+	
+	return "";
 }
 
 }
