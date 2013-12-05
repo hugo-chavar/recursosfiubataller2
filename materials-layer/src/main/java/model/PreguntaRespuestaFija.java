@@ -1,34 +1,34 @@
 package model;
 
-import java.util.Vector;
+import java.util.List;
 
 public class PreguntaRespuestaFija extends Pregunta{
 
-  private Vector<String> respuestasPosibles;
+  private List<String> respuestasPosibles;
 
   private boolean multiplesRespuestas;
 
-  private Vector<Integer>  respuestasCorrectas;
+  private List<Integer>  respuestasCorrectas;
   
   public PreguntaRespuestaFija(boolean multiplesRespuestas,String enunciado,Integer idPregunta){
   	super(enunciado,idPregunta);
   	this.multiplesRespuestas=multiplesRespuestas;
 }
 
-public Vector<String> getRespuestasPosibles() {
+public List<String> getRespuestasPosibles() {
 	return respuestasPosibles;
 }
 
-public void setRespuestasPosibles(Vector<String> respuestasPosibles) {
+public void setRespuestasPosibles(List<String> respuestasPosibles) {
 	this.respuestasPosibles = respuestasPosibles;
 }
 
-public Vector<Integer> getRespuestasCorrectas() {
+public List<Integer> getRespuestasCorrectas() {
 	return respuestasCorrectas;
 }
 
 //retorna false si no puede agregar esas respuestas
-public boolean setRespuestasCorrectas(Vector<Integer> respuestasCorrectas) {
+public boolean setRespuestasCorrectas(List<Integer> respuestasCorrectas) {
 	if(!this.isMultiplesRespuestas() && respuestasCorrectas.size()!=1)
 		return false;
 	this.respuestasCorrectas = respuestasCorrectas;
@@ -42,6 +42,11 @@ public Integer evaluar(PreguntaRespondida respondida) {
 
 public boolean isMultiplesRespuestas() {
 	return multiplesRespuestas;
+}
+
+@Override
+public String marshall() {
+	return null;
 }
 
 }

@@ -23,4 +23,9 @@ public Integer evaluar(PreguntaRespondida respondida) {
 	return respondida.evaluar(this);
 }
 
+@Override
+public String marshall() {
+	return null;
+}
+
 }

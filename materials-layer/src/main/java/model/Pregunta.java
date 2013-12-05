@@ -28,4 +28,8 @@ public abstract class Pregunta {
 	public void setEnunciado(String enunciado) {
 		this.enunciado = enunciado;
 	}
+
+	public String marshall() {
+		return null;
+	}
 }

@@ -63,5 +63,14 @@ public class Encuesta extends Recurso {
 	public void Crear() {
 
 	}
+	
+	public String marshalRespuestas() {
+		StringBuilder sb = new StringBuilder("");
+		for (Pregunta p: preguntas) {
+			sb.append(p.marshall());
+			sb.append("|");
+		}
+		return sb.toString();
+	}
 
 }
