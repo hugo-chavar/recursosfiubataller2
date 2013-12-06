@@ -4,6 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+//Estos import los agrega Dami para utilizar en los archivos
+
+
+//
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 //import javax.jws.WebMethod;
@@ -17,7 +21,9 @@ import model.EncuestaRespondida;
 import model.Link;
 import model.ListaDeRecursos;
 import model.Recurso;
+import javax.xml.ws.soap.MTOM;
 
+@MTOM
 @WebService(endpointInterface = "service.Materials")
 public class MaterialsImpl implements Materials {
 
@@ -46,12 +52,19 @@ public class MaterialsImpl implements Materials {
 				
 	}
 	@Override
-	public void setArchivo(int idAmbiente, String name,String ext, File file){
-		Archivo File = new Archivo();
-		File.setFileName(name);
-		File.setFileType(ext);
-		File.setFile(new DataHandler(new FileDataSource(file)));
-        //TODO: llamar a la capa de integracion para que guarde el archivo
+	public String setArchivo(int idAmbiente, String name,String ext, File file){
+		if(file != null){
+			Archivo File = new Archivo();
+			File.setFileName(name);
+			File.setFileType(ext);
+			File.setFile(new DataHandler(new FileDataSource(file)));
+	        //TODO: llamar a la capa de integracion para que guarde el archivo
+			return "Archivo subido Correctamente";
+			
+		}
+		else{
+			return "ERROR al subir el archivo";
+		}
 	}
 	
 	@Override

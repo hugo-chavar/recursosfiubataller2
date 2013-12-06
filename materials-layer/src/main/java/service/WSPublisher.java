@@ -11,9 +11,14 @@ import service.MaterialsImpl;
 public class WSPublisher {
 
 	public static void main(String[] args) {
-		Endpoint ep = Endpoint.publish("http://localhost:8081/WS2/Greeting2",
+		Endpoint ep = Endpoint.publish("http://localhost:8095/WS2/Greeting2",
 				new MaterialsImpl());
-
+		System.out.println("Capa de Negocio --- Materiales--- Web Services : ");
+		
+	
+		
+	
+		
 		System.out.println("Ingrese \"hola\" para salir : ");
 
 		try {
