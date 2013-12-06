@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Encuesta extends Recurso {
+	
+	private int countOptions = 0;
 
 	public Encuesta(Integer idRecurso, Integer idAmbiente, String descripcion, boolean evaluada) {
 		super(idRecurso, idAmbiente, descripcion);
@@ -39,6 +41,8 @@ public class Encuesta extends Recurso {
 //	}
 
 	public void agregarPregunta(Pregunta pregunta) {
+		countOptions++;
+		pregunta.setIdPregunta(countOptions);
 		preguntas.add(pregunta);
 	}
 

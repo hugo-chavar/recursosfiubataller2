@@ -5,13 +5,20 @@ public class PreguntaRespuestaACompletar extends Pregunta{
 
   public PreguntaRespuestaACompletar() {
 		super();
-	}
-
-public PreguntaRespuestaACompletar(String enunciado, Integer idPregunta) {
-		super(enunciado, idPregunta);
 		type = ANSWER_TO_COMPLETE_TYPE;
-
 	}
+  
+  public PreguntaRespuestaACompletar(String s) {
+		unmarshall(s);
+		type = ANSWER_TO_COMPLETE_TYPE;
+	}
+
+  
+//public PreguntaRespuestaACompletar(String enunciado, Integer idPregunta) {
+//		super(enunciado, idPregunta);
+//		type = ANSWER_TO_COMPLETE_TYPE;
+//
+//	}
 
 public String respuesta;
 
@@ -38,6 +45,11 @@ public void unmarshall(String s) {
 	super.unmarshall(s);
 	String[] splited = s.split(";");
 	respuesta = splited[3];
+}
+
+@Override
+public void addRespuestaCorrecta(String string) {
+	respuesta = string;
 }
 
 }

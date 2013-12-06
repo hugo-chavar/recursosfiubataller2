@@ -5,23 +5,34 @@ import java.util.List;
 
 public class PreguntaRespuestaFija extends Pregunta{
 
-  private List<String> respuestasPosibles;
+  private List<String> respuestasPosibles = new ArrayList<String>();
+  private List<Integer>  respuestasCorrectas = new ArrayList<Integer>();
+  private boolean multiplesRespuestasCorrectas;
 
-  private boolean multiplesRespuestas;
+  public boolean isMultiplesRespuestasCorrectas() {
+	return respuestasCorrectas.size() > 1;
+}
 
-  private List<Integer>  respuestasCorrectas;
+//public void setMultiplesRespuestasCorrectas(boolean multiplesRespuestasCorrectas) {
+//	this.multiplesRespuestasCorrectas = multiplesRespuestasCorrectas;
+//}
+
+
   
+  public PreguntaRespuestaFija() {
+	  type = FIXED_ANSWER_TYPE;
+  }
   
   public PreguntaRespuestaFija(String s) {
 	  unmarshall(s);
-	  
+	  type = FIXED_ANSWER_TYPE;
   }
 
-public PreguntaRespuestaFija(boolean multiplesRespuestas,String enunciado,Integer idPregunta){
-  	super(enunciado,idPregunta);
-  	this.multiplesRespuestas=multiplesRespuestas;
-  	type = FIXED_ANSWER_TYPE;
-}
+//public PreguntaRespuestaFija(boolean multiplesRespuestas,String enunciado,Integer idPregunta){
+//  	super(enunciado,idPregunta);
+//  	this.multiplesRespuestasCorrectas=multiplesRespuestas;
+//  	type = FIXED_ANSWER_TYPE;
+//}
 
 public List<String> getRespuestasPosibles() {
 	return respuestasPosibles;
@@ -37,26 +48,22 @@ public List<Integer> getRespuestasCorrectas() {
 
 //retorna false si no puede agregar esas respuestas
 //Andy: en los setters no se debe validar nada y deben ser void siempre. Hugo
-public boolean setRespuestasCorrectas(List<Integer> respuestasCorrectas) {
-	if(!this.isMultiplesRespuestas() && respuestasCorrectas.size()!=1)
-		return false;
-	this.respuestasCorrectas = respuestasCorrectas;
-	return true;
-}
+//public boolean setRespuestasCorrectas(List<Integer> respuestasCorrectas) {
+//	if(!this.isMultiplesRespuestasCorrectas() && respuestasCorrectas.size()!=1)
+//		return false;
+//	this.respuestasCorrectas = respuestasCorrectas;
+//	return true;
+//}
 
 @Override
 public Integer evaluar(PreguntaRespondida respondida) {
 	return respondida.evaluar(this);
 }
 
-public boolean isMultiplesRespuestas() {
-	return multiplesRespuestas;
-}
-
 @Override
 public String marshall() {
 	StringBuilder sb = new StringBuilder("");
-	sb.append(multiplesRespuestas);
+	sb.append(multiplesRespuestasCorrectas);
 	sb.append(";");
 	sb.append(marshallRespuestasPosibles());
 	sb.append(marshallRespuestasCorrectas());
@@ -108,6 +115,25 @@ private void unmarshallRespuestasCorrectas(String rtas) {
 	for (String s: splited) {
 		respuestasCorrectas.add(Integer.valueOf(s));
 	}
+}
+
+@Override
+public void addRespuestaCorrecta(String string) {
+	int i = 0;
+	for (String s: respuestasPosibles) {
+		if (s.equals(string)){
+			addRespuestaCorrecta(new Integer(i));
+			return;
+		}
+		i++;
+	}
+	
+}
+
+
+private void addRespuestaCorrecta(Integer integer) {
+	respuestasCorrectas.add(integer);
+	
 }
 
 }

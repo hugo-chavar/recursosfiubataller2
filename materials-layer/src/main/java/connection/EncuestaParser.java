@@ -138,22 +138,22 @@ public class EncuestaParser extends Parser {
 	public ArrayList<Pregunta> deserializePreguntas(String xml) {
 		ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
 		
-		Document doc = this.convertToXMLDocument(xml);
-		NodeList nodes = doc.getElementsByTagName(EncuestaParser.PREGUNTA_TAG);
-		for (int i=0; i<nodes.getLength(); i++) {
-			NodeList childNodes = nodes.item(i).getChildNodes(); 
-			HashMap<String, String> fields = new HashMap<String, String>();
-		    if (childNodes != null) {
-		        for (int j = 0; j < childNodes.getLength(); j++) {
-	        	   Element element = (Element) childNodes.item(j);
-	        	   fields.put(element.getNodeName(), element.getTextContent());
-		        }
-		    }
-			int IDPregunta = Integer.parseInt(fields.get(EncuestaParser.IDPREGUNTA_TAG));
-			String enunciado = fields.get(EncuestaParser.ENUNCIADO_TAG);
-			Pregunta pregunta = new PreguntaRespuestaACompletar(enunciado, IDPregunta); // 	TODO: para todo tipo de preguntas.
-			preguntas.add(pregunta);
-		}
+//		Document doc = this.convertToXMLDocument(xml);
+//		NodeList nodes = doc.getElementsByTagName(EncuestaParser.PREGUNTA_TAG);
+//		for (int i=0; i<nodes.getLength(); i++) {
+//			NodeList childNodes = nodes.item(i).getChildNodes(); 
+//			HashMap<String, String> fields = new HashMap<String, String>();
+//		    if (childNodes != null) {
+//		        for (int j = 0; j < childNodes.getLength(); j++) {
+//	        	   Element element = (Element) childNodes.item(j);
+//	        	   fields.put(element.getNodeName(), element.getTextContent());
+//		        }
+//		    }
+//			int IDPregunta = Integer.parseInt(fields.get(EncuestaParser.IDPREGUNTA_TAG));
+//			String enunciado = fields.get(EncuestaParser.ENUNCIADO_TAG);
+//			Pregunta pregunta = new PreguntaRespuestaACompletar(enunciado, IDPregunta); // 	TODO: para todo tipo de preguntas.
+//			preguntas.add(pregunta);
+//		}
 		
 		return preguntas;
 	}

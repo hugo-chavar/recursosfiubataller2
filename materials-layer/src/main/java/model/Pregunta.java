@@ -14,9 +14,9 @@ public abstract class Pregunta {
 
 		for (String s : splited) {
 			if (unmarshallType(s).equals(FIXED_ANSWER_TYPE)) {
-				result.add(new PreguntaRespuestaFija().unmarshall(s));
+				result.add(new PreguntaRespuestaFija(s));
 			} else {
-				result.add(new PreguntaRespuestaACompletar().unmarshall(s));
+				result.add(new PreguntaRespuestaACompletar(s));
 			}
 		}
 		return result;
@@ -27,7 +27,7 @@ public abstract class Pregunta {
 	}
 
 	protected String enunciado;
-	protected Integer idPregunta;
+	protected Integer idPregunta = 0;
 	protected String type;
 
 	public Pregunta() {
@@ -36,10 +36,10 @@ public abstract class Pregunta {
 //		//unmarshall(s);
 //	}
 
-	public Pregunta(String enunciado, Integer idPregunta) {
-		this.setEnunciado(enunciado);
-		this.setIdPregunta(idPregunta);
-	}
+//	public Pregunta(String enunciado, Integer idPregunta) {
+//		this.setEnunciado(enunciado);
+//		this.setIdPregunta(idPregunta);
+//	}
 
 	public abstract Integer evaluar(PreguntaRespondida respondida);
 
@@ -57,6 +57,10 @@ public abstract class Pregunta {
 
 	public void setEnunciado(String enunciado) {
 		this.enunciado = enunciado;
+	}
+	
+	protected void addRespuestaCorrecta(String rta) {
+		
 	}
 
 	protected String marshall() {
