@@ -5,6 +5,9 @@ import java.util.List;
 
 public abstract class Pregunta {
 
+	protected static String FIXED_ANSWER_TYPE = "F";
+	protected static String ANSWER_TO_COMPLETE_TYPE = "C";
+
 	public static List<Pregunta> unmarshallAll(String field) {
 		String[] splited = field.split("|");
 		List<Pregunta> result = new ArrayList<Pregunta>();
@@ -23,15 +26,15 @@ public abstract class Pregunta {
 		return marshalledPregunta.substring(0, marshalledPregunta.indexOf(";") - 1);
 	}
 
-	protected static String FIXED_ANSWER_TYPE = "F";
-	protected static String ANSWER_TO_COMPLETE_TYPE = "C";
-
 	protected String enunciado;
 	protected Integer idPregunta;
 	protected String type;
 
 	public Pregunta() {
 	}
+//	public Pregunta(String s) {
+//		//unmarshall(s);
+//	}
 
 	public Pregunta(String enunciado, Integer idPregunta) {
 		this.setEnunciado(enunciado);
@@ -65,6 +68,13 @@ public abstract class Pregunta {
 		sb.append(enunciado);
 		sb.append(";");
 		return sb.toString();
+	}
+
+	protected void unmarshall(String s) {
+		String[] splited = s.split(";");
+		type = splited[0];
+		idPregunta = Integer.valueOf(splited[1]);
+		enunciado = splited[2];
 	}
 
 }

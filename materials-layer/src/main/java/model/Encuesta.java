@@ -13,12 +13,12 @@ public class Encuesta extends Recurso {
 
 	public Encuesta() {
 		super();
-		this.tipo = "Archivo";
+		this.tipo = "Encuesta";
 	}
 
-	private Boolean evaluada;
+	private boolean evaluada;
 
-	public Boolean esEvaluada() {
+	public boolean esEvaluada() {
 		return evaluada;
 	}
 
@@ -32,26 +32,20 @@ public class Encuesta extends Recurso {
 		this.preguntas = preguntas;
 	}
 
-	private List<EncuestaRespondida> encuestasRespondidas;
+//	private List<EncuestaRespondida> encuestasRespondidas;
 
-	public void guardar() {
-		// TODO:Escribir en la base de datos la info actualizada de la encuesta
-	}
+//	public void guardar() {
+//		// TODO:Escribir en la base de datos la info actualizada de la encuesta
+//	}
 
 	public void agregarPregunta(Pregunta pregunta) {
 		preguntas.add(pregunta);
-		// TODO: Escribir cambio en la base de datos
 	}
 
-	public void eliminarPregunta(int nPregunta) {
-		// TODO: Escribir cambio en la base de datos
-		preguntas.remove(nPregunta);
-	}
-
-	private List<EncuestaRespondida> getEncuestaRespondida(Integer idAmbiente, int idUsuario, Integer idRecurso) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	private List<EncuestaRespondida> getEncuestaRespondida(Integer idAmbiente, int idUsuario, Integer idRecurso) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	public String marshallRespuestas() {
 		StringBuilder sb = new StringBuilder("");
@@ -59,6 +53,7 @@ public class Encuesta extends Recurso {
 			sb.append(p.marshall());
 			sb.append("|");
 		}
+		sb.setLength(sb.length() - 1);
 		return sb.toString();
 	}
 	

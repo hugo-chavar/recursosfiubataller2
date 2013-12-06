@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PreguntaRespuestaFija extends Pregunta{
@@ -11,7 +12,8 @@ public class PreguntaRespuestaFija extends Pregunta{
   private List<Integer>  respuestasCorrectas;
   
   
-  public PreguntaRespuestaFija() { 
+  public PreguntaRespuestaFija(String s) {
+	  unmarshall(s);
 	  
   }
 
@@ -68,6 +70,7 @@ private String marshallRespuestasPosibles() {
 		sb.append(rta);
 		sb.append(",");
 	}
+	sb.setLength(sb.length() - 1);
 	sb.append(";");
 	return sb.toString();
 }
@@ -78,13 +81,33 @@ private String marshallRespuestasCorrectas() {
 		sb.append(rta);
 		sb.append(",");
 	}
-	//sb.append(";");
+	sb.setLength(sb.length() - 1);
 	return sb.toString();
 }
 
-public Pregunta unmarshall(String s) {
-	// TODO Auto-generated method stub
-	return null;
+public void unmarshall(String s) {
+	super.unmarshall(s);
+	String[] splited = s.split(";");
+	unmarshallRespuestasPosibles(splited[3]);
+	unmarshallRespuestasCorrectas(splited[4]);
+	
+}
+
+private void unmarshallRespuestasPosibles(String rtas) {
+	String[] splited = rtas.split(",");
+	respuestasPosibles = new ArrayList<String>();
+	for (String s: splited) {
+		respuestasPosibles.add(s);
+	}
+	
+}
+
+private void unmarshallRespuestasCorrectas(String rtas) {
+	String[] splited = rtas.split(",");
+	respuestasCorrectas = new ArrayList<Integer>();
+	for (String s: splited) {
+		respuestasCorrectas.add(Integer.valueOf(s));
+	}
 }
 
 }

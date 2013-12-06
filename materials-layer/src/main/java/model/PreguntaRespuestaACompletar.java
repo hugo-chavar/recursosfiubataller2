@@ -34,8 +34,10 @@ public String marshall() {
 	return super.marshall() + respuesta;
 }
 
-public Pregunta unmarshall(String s) {
-	return null;
+public void unmarshall(String s) {
+	super.unmarshall(s);
+	String[] splited = s.split(";");
+	respuesta = splited[3];
 }
 
 }
