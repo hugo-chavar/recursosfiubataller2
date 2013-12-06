@@ -39,6 +39,7 @@ public class EncuestaTest {
 		encuesta.agregarPregunta(p2);
 
 		p3 = new PreguntaRespuestaFija();
+		opciones = new ArrayList<String>();
 		p3.setEnunciado("cual es un patron de diseno creacional");
 		opciones.add("command");
 		opciones.add("mediator");
@@ -51,6 +52,7 @@ public class EncuestaTest {
 		encuesta.agregarPregunta(p3);
 		
 		p4 = new PreguntaRespuestaFija();
+		opciones = new ArrayList<String>();
 		p4.setEnunciado("Un test unitario debe presentar las siguientes características");
 		opciones.add("Rapido");
 		opciones.add("Moldeable");
@@ -85,6 +87,11 @@ public class EncuestaTest {
 	@Test
 	public void marshallPreguntaRespuestaACompletarWorksAsExpected() {
 		Assert.assertEquals("C;0;cuantas patas tiene un gato?;5", p5.marshall());
+	}
+	
+	@Test
+	public void marshallPreguntaRespuestaFijaWorksAsExpected() {
+		Assert.assertEquals("F;3;cual es un patron de diseno creacional;false;command,mediator,builder,facade;2", p3.marshall());
 	}
 
 }
