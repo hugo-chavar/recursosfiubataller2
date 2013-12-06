@@ -25,7 +25,7 @@ public class EncuestaTest {
 		opciones.add("blanco");
 		((PreguntaRespuestaFija) p1).setRespuestasPosibles(opciones);
 
-		encuesta.agregarPregunta(p1);
+		encuesta.addPregunta(p1);
 
 		p2 = new PreguntaRespuestaFija();
 		opciones = new ArrayList<String>();
@@ -36,7 +36,7 @@ public class EncuestaTest {
 		opciones.add("estudiantes");
 		((PreguntaRespuestaFija) p2).setRespuestasPosibles(opciones);
 
-		encuesta.agregarPregunta(p2);
+		encuesta.addPregunta(p2);
 
 		p3 = new PreguntaRespuestaFija();
 		opciones = new ArrayList<String>();
@@ -49,7 +49,7 @@ public class EncuestaTest {
 		((PreguntaRespuestaFija) p3).setRespuestasPosibles(opciones);
 		((PreguntaRespuestaFija) p3).addRespuestaCorrecta("builder");
 
-		encuesta.agregarPregunta(p3);
+		encuesta.addPregunta(p3);
 		
 		p4 = new PreguntaRespuestaFija();
 		opciones = new ArrayList<String>();
@@ -77,7 +77,7 @@ public class EncuestaTest {
 		p4.addRespuestaCorrecta("Automatizable");
 		p4.addRespuestaCorrecta("Repetible");
 
-		encuesta.agregarPregunta(p4);
+		encuesta.addPregunta(p4);
 		
 		p5 = new PreguntaRespuestaACompletar();
 		p5.setEnunciado("cuantas patas tiene un gato?");
@@ -92,6 +92,20 @@ public class EncuestaTest {
 	@Test
 	public void marshallPreguntaRespuestaFijaWorksAsExpected() {
 		Assert.assertEquals("F;3;cual es un patron de diseno creacional;false;command,mediator,builder,facade;2", p3.marshall());
+	}
+	
+	@Test
+	public void idPreguntaIsCorrect() {
+		Integer expected = 4;
+		Assert.assertEquals(expected, p4.getIdPregunta());
+	}
+	
+	@Test
+	public void unmarshallPreguntaRespuestaACompletarSetEnunciadoCorrectly() {
+		String marshalledPregunta = p5.marshall();
+		PreguntaRespuestaACompletar pregunta = new PreguntaRespuestaACompletar();
+		pregunta.unmarshall(marshalledPregunta);
+		Assert.assertEquals(pregunta.getEnunciado(), p5.getEnunciado());
 	}
 
 }

@@ -40,7 +40,7 @@ public class Encuesta extends Recurso {
 //		// TODO:Escribir en la base de datos la info actualizada de la encuesta
 //	}
 
-	public void agregarPregunta(Pregunta pregunta) {
+	public void addPregunta(Pregunta pregunta) {
 		countOptions++;
 		pregunta.setIdPregunta(countOptions);
 		preguntas.add(pregunta);

@@ -1,32 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-	
+
   <groupId>com.group2.materials</groupId>
   <artifactId>materials-layer</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>materials-layer-service</name>
-  <developers>
-    <developer>
-      <name>Glinsek Yamila</name>
-      <email>yamila.glinsek@gmail.com</email>
-      <organization>fiuba</organization>
-    </developer>
-    <developer>
-      <name>Sanabria Andres</name>
-      <email>andysanabria_2e@hotmail.com</email>
-      <organization>fiuba</organization>
-    </developer>
-    <developer>
-      <name>Manoff Damian</name>
-      <email>damianmanoff@gmail.com</email>
-      <organization>fiuba</organization>
-    </developer>
-  </developers>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jvm>${java.home}../bin/java.exe</jvm>
+    <!--<jvm>${java.home}../bin/java.exe</jvm> -->
   </properties>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -90,8 +73,14 @@
       <artifactId>gmbal-api-only</artifactId>
       <version>3.0.0-b023</version>
     </dependency>
-       
-<!--
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+    </dependency>
+
+    <!--
+
 EN CASO DE QUE NO CORRA BIEN.. DESCOMENTAR HASTA LA FRASE "HASTA ACA" ..
     <dependency>
       <groupId>org.apache.zookeeper</groupId>
@@ -146,7 +135,7 @@ HASTA ACA (BORRAR ESTO..)
 -->
 
 
-<!--
+    <!--
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -200,10 +189,10 @@ HASTA ACA (BORRAR ESTO..)
       </plugin>
     </plugins>
   </build>
-<repositories>
+  <repositories>
     <repository>
       <id>java.net</id>
       <url>https://maven.java.net/content/repositories/public/</url>
     </repository>
- </repositories>
+  </repositories>
 </project>
