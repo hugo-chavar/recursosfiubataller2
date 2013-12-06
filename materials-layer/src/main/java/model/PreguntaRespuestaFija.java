@@ -10,7 +10,12 @@ public class PreguntaRespuestaFija extends Pregunta{
 
   private List<Integer>  respuestasCorrectas;
   
-  public PreguntaRespuestaFija(boolean multiplesRespuestas,String enunciado,Integer idPregunta){
+  
+  public PreguntaRespuestaFija() { 
+	  
+  }
+
+public PreguntaRespuestaFija(boolean multiplesRespuestas,String enunciado,Integer idPregunta){
   	super(enunciado,idPregunta);
   	this.multiplesRespuestas=multiplesRespuestas;
   	type = FIXED_ANSWER_TYPE;
@@ -48,8 +53,38 @@ public boolean isMultiplesRespuestas() {
 
 @Override
 public String marshall() {
+	StringBuilder sb = new StringBuilder("");
+	sb.append(multiplesRespuestas);
+	sb.append(";");
+	sb.append(marshallRespuestasPosibles());
+	sb.append(marshallRespuestasCorrectas());
+	return super.marshall() + sb.toString();
 	
-	return super.marshall();
+}
+
+private String marshallRespuestasPosibles() {
+	StringBuilder sb = new StringBuilder("");
+	for (String rta: respuestasPosibles) {
+		sb.append(rta);
+		sb.append(",");
+	}
+	sb.append(";");
+	return sb.toString();
+}
+
+private String marshallRespuestasCorrectas() {
+	StringBuilder sb = new StringBuilder("");
+	for (Integer rta: respuestasCorrectas) {
+		sb.append(rta);
+		sb.append(",");
+	}
+	//sb.append(";");
+	return sb.toString();
+}
+
+public Pregunta unmarshall(String s) {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 }

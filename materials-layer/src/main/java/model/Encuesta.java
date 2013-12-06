@@ -53,13 +53,17 @@ public class Encuesta extends Recurso {
 		return null;
 	}
 
-	public String marshalRespuestas() {
+	public String marshallRespuestas() {
 		StringBuilder sb = new StringBuilder("");
 		for (Pregunta p: preguntas) {
 			sb.append(p.marshall());
 			sb.append("|");
 		}
 		return sb.toString();
+	}
+	
+	public void unmarshallRespuestas(String field) {
+		preguntas = Pregunta.unmarshallAll(field);
 	}
 
 }

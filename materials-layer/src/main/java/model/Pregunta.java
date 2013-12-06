@@ -1,13 +1,37 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Pregunta {
-	
+
+	public static List<Pregunta> unmarshallAll(String field) {
+		String[] splited = field.split("|");
+		List<Pregunta> result = new ArrayList<Pregunta>();
+
+		for (String s : splited) {
+			if (unmarshallType(s).equals(FIXED_ANSWER_TYPE)) {
+				result.add(new PreguntaRespuestaFija().unmarshall(s));
+			} else {
+				result.add(new PreguntaRespuestaACompletar().unmarshall(s));
+			}
+		}
+		return result;
+	}
+
+	private static String unmarshallType(String marshalledPregunta) {
+		return marshalledPregunta.substring(0, marshalledPregunta.indexOf(";") - 1);
+	}
+
 	protected static String FIXED_ANSWER_TYPE = "F";
 	protected static String ANSWER_TO_COMPLETE_TYPE = "C";
 
 	protected String enunciado;
-	protected String type;
 	protected Integer idPregunta;
+	protected String type;
+
+	public Pregunta() {
+	}
 
 	public Pregunta(String enunciado, Integer idPregunta) {
 		this.setEnunciado(enunciado);
@@ -32,14 +56,15 @@ public abstract class Pregunta {
 		this.enunciado = enunciado;
 	}
 
-	public String marshall() {
+	protected String marshall() {
 		StringBuilder sb = new StringBuilder("");
-		sb.append(idPregunta);
-		sb.append(";");
 		sb.append(type);
+		sb.append(";");
+		sb.append(idPregunta);
 		sb.append(";");
 		sb.append(enunciado);
 		sb.append(";");
 		return sb.toString();
 	}
+
 }

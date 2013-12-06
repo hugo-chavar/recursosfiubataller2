@@ -1,8 +1,13 @@
 package model;
 
 public class PreguntaRespuestaACompletar extends Pregunta{
+	
 
-  public PreguntaRespuestaACompletar(String enunciado, Integer idPregunta) {
+  public PreguntaRespuestaACompletar() {
+		super();
+	}
+
+public PreguntaRespuestaACompletar(String enunciado, Integer idPregunta) {
 		super(enunciado, idPregunta);
 		type = ANSWER_TO_COMPLETE_TYPE;
 
@@ -27,6 +32,10 @@ public Integer evaluar(PreguntaRespondida respondida) {
 @Override
 public String marshall() {
 	return super.marshall() + respuesta;
+}
+
+public Pregunta unmarshall(String s) {
+	return null;
 }
 
 }
