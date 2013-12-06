@@ -47,7 +47,7 @@ public class EncuestaTest {
 		opciones.add("facade");
 
 		((PreguntaRespuestaFija) p3).setRespuestasPosibles(opciones);
-		((PreguntaRespuestaFija) p3).addRespuestaCorrecta("builder");
+		p3.addRespuestaCorrecta("builder");
 
 		encuesta.addPregunta(p3);
 		
@@ -81,12 +81,12 @@ public class EncuestaTest {
 		
 		p5 = new PreguntaRespuestaACompletar();
 		p5.setEnunciado("cuantas patas tiene un gato?");
-		p5.addRespuestaCorrecta("5");
+		p5.addRespuestaCorrecta("4");
 	}
 
 	@Test
 	public void marshallPreguntaRespuestaACompletarWorksAsExpected() {
-		Assert.assertEquals("C;0;cuantas patas tiene un gato?;5", p5.marshall());
+		Assert.assertEquals("C;0;cuantas patas tiene un gato?;4", p5.marshall());
 	}
 	
 	@Test
@@ -107,5 +107,38 @@ public class EncuestaTest {
 		pregunta.unmarshall(marshalledPregunta);
 		Assert.assertEquals(pregunta.getEnunciado(), p5.getEnunciado());
 	}
+	
+	@Test
+	public void unmarshallPreguntaRespuestaACompletarSetIdCorrectly() {
+		String marshalledPregunta = p5.marshall();
+		PreguntaRespuestaACompletar pregunta = new PreguntaRespuestaACompletar();
+		pregunta.unmarshall(marshalledPregunta);
+		Assert.assertEquals(pregunta.getIdPregunta(), p5.getIdPregunta());
+	}
+	
+	@Test
+	public void unmarshallPreguntaRespuestaACompletarSetRespuestaCorrectly() {
+		String marshalledPregunta = p5.marshall();
+		PreguntaRespuestaACompletar pregunta = new PreguntaRespuestaACompletar();
+		pregunta.unmarshall(marshalledPregunta);
+		Assert.assertEquals(pregunta.getRespuesta(), ((PreguntaRespuestaACompletar)p5).getRespuesta());
+	}
 
+	@Test
+	public void answeredPreguntaRespuestaACompletarReturns0WhenWrong() {
+		PreguntaRespuestaACompletarRespondida response = new PreguntaRespuestaACompletarRespondida(p5.getIdPregunta());
+		response.responder("8");
+		Integer expected = 0;
+
+		Assert.assertEquals(expected, response.evaluar(p5));
+	}
+	
+	@Test
+	public void answeredPreguntaRespuestaACompletarReturns1WhenCorrect() {
+		//TODO: andy.. crea tests parecidos pero con multiples respuestas
+		PreguntaRespuestaACompletarRespondida response = new PreguntaRespuestaACompletarRespondida(p5.getIdPregunta());
+		response.responder("4");
+		Integer expected = 1;
+		Assert.assertEquals(expected, response.evaluar(p5));
+	}
 }

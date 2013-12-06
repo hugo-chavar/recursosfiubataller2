@@ -52,4 +52,8 @@ public void addRespuestaCorrecta(String string) {
 	respuesta = string;
 }
 
+public boolean isCorrect(String respuesta) {
+	return this.respuesta.equalsIgnoreCase(respuesta);
+}
+
 }

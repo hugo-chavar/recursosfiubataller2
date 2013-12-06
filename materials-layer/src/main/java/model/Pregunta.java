@@ -81,4 +81,13 @@ public abstract class Pregunta {
 		enunciado = splited[2];
 	}
 
+	public boolean isCorrect(Integer respuesta) {
+		// TODO Andy.. completá este metodo
+		return false;
+	}
+
+	public boolean isCorrect(String respuesta) {
+		return false;
+	}
+
 }
