@@ -141,4 +141,72 @@ public class EncuestaTest {
 		Integer expected = 1;
 		Assert.assertEquals(expected, response.evaluar(p5));
 	}
+	
+	@Test
+	public void answeredPreguntaRespuestaFijaReturns1WhenAllTheAnswersCorrect(){
+		PreguntaRespuestaFijaRespondida response = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
+		List<Integer> respuestas = new ArrayList<Integer>();
+		respuestas.add(1);
+		respuestas.add(8);
+		respuestas.add(11);
+		respuestas.add(12);
+		respuestas.add(13);
+		respuestas.add(7);
+		response.responder(respuestas);
+		Integer expected = 1;
+		Assert.assertEquals(expected, response.evaluar(p4));
+	}	
+		
+	@Test
+	public void answeredPreguntaRespuestaFijaReturns0WhenThereIsOneMoreAnsweredThanTheCorrects(){
+		PreguntaRespuestaFijaRespondida response = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
+		List<Integer> respuestas = new ArrayList<Integer>();
+		respuestas.add(1);
+		respuestas.add(8);
+		respuestas.add(11);
+		respuestas.add(12);
+		respuestas.add(13);
+		respuestas.add(7);
+		respuestas.add(9);
+		response.responder(respuestas);
+		Integer expected = 0;
+		Assert.assertEquals(expected, response.evaluar(p4));
+		}
+	
+	@Test
+	public void answeredPreguntaRespuestaFijaReturns0WhenThereIsOneLessAnsweredThanTheCorrects(){
+		PreguntaRespuestaFijaRespondida response = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
+		List<Integer> respuestas = new ArrayList<Integer>();
+		respuestas.add(1);
+		respuestas.add(8);
+		respuestas.add(11);
+		respuestas.add(12);
+		respuestas.add(13);
+		response.responder(respuestas);
+		Integer expected = 0;
+		Assert.assertEquals(expected, response.evaluar(p4));
+		}
+	
+//	opciones.add("Rapido");0
+//	opciones.add("Moldeable");1
+//	opciones.add("Configurable");2
+//	opciones.add("Acoplable");3
+//	opciones.add("Lento");4
+//	opciones.add("Extensible");5
+//	opciones.add("Repetible");6
+//	opciones.add("Profesional");7
+//	opciones.add("Maduro");8
+//	opciones.add("Amplio");9
+//	opciones.add("Simple");10
+//	opciones.add("Independiente");11
+//	opciones.add("Automatizable");12
+//	
+//	p4.addRespuestaCorrecta("Rapido");0
+//	p4.addRespuestaCorrecta("Profesional");7
+//	p4.addRespuestaCorrecta("Simple");10
+//	p4.addRespuestaCorrecta("Independiente");11
+//	p4.addRespuestaCorrecta("Automatizable");12
+//	p4.addRespuestaCorrecta("Repetible");6
+//	
+		
 }
