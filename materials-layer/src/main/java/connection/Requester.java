@@ -2,6 +2,7 @@ package connection;
 
 import model.Encuesta;
 import model.EncuestaRespondida;
+import model.Link;
 
 
 public enum Requester {
@@ -9,6 +10,8 @@ public enum Requester {
 	INSTANCE;
 	
 	private EncuestaRequester encuestaReq;
+	private LinkRequester linkReq;
+	
 	
 	private Requester() {
 		this.encuestaReq = new EncuestaRequester();
@@ -23,13 +26,20 @@ public enum Requester {
 	}
 
 	public void saveEncuestaRespondida(EncuestaRespondida respondida) {
-		// TODO Auto-generated method stub
-		
+		this.encuestaReq.saveRespondida(respondida);
 	}
 
 	public EncuestaRespondida getEncuestaRespondida(int idAmbiente,int idRecurso, int idUsuario) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void saveLink(Link link) {
+		this.linkReq.save(link);
+	}
+	
+	public Link getLink(int IDAmbiente, int IDLink) {
+		return this.linkReq.get(IDAmbiente, IDLink);
 	}
 	
 }

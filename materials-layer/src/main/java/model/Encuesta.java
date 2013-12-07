@@ -40,7 +40,7 @@ public class Encuesta extends Recurso {
 		preguntas.add(pregunta);
 	}
 
-	public String marshallRespuestas() {
+	public String marshallPreguntas() {
 		StringBuilder sb = new StringBuilder("");
 		for (Pregunta p: preguntas) {
 			sb.append(p.marshall());
@@ -50,7 +50,7 @@ public class Encuesta extends Recurso {
 		return sb.toString();
 	}
 	
-	public void unmarshallRespuestas(String field) {
+	public void unmarshallPreguntas(String field) {
 		preguntas = Pregunta.unmarshallAll(field);
 	}
 

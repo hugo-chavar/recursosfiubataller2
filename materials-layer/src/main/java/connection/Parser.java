@@ -11,10 +11,10 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-public class Parser {
+
+public class Parser {	
 
 	public static String INITIAL_TAG = "WS";
-	
 	
 	public Document buildXMLDocument() {
 		Document document = null;
@@ -28,12 +28,7 @@ public class Parser {
 		return document;
 	}
 	
-	public Document convertToXMLDocument(String xml) {
-		// TODO: Pedir a Integracion sacar el texto previo al xml.
-		int index = xml.indexOf(":")+2;
-		xml = xml.substring(index);
-		// Eliminar lo anterior una vez que Integracion haga lo pedido.
-		
+	public Document convertToXMLDocument(String xml) {		
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder;
 		try {
@@ -47,41 +42,6 @@ public class Parser {
 			e.printStackTrace();
 		}
 		return null;
-	}
-	
-	public String addTag(String xml, String tag) {
-		xml = "<" + tag + ">" + xml;
-		xml += "</" + tag + ">";
-		return xml;
-	}
-	
-	public String addField(String xml, String field, String value) {
-		xml += "<" + field + ">" + value + "</" + field + ">";
-		return xml;
-	}
-	
-	public String removeTag(String xml) {
-		int index = xml.indexOf(">") + 1;
-		xml = xml.substring(index);
-		index = xml.lastIndexOf("<");
-		xml = xml.substring(0, index);
-		return xml;
-	}
-	
-	public String getFieldValue(String xml) {
-		int index = xml.indexOf(">") + 1;
-		xml = xml.substring(index);
-		index = xml.indexOf("<");
-		String field = xml.substring(0, index);
-		return field;
-	}
-	
-	public String removeField(String xml) {
-		int index = xml.indexOf(">") + 1;
-		xml = xml.substring(index);
-		index = xml.indexOf(">") + 1;
-		xml = xml.substring(index);
-		return xml;
 	}
 	
 }

@@ -9,7 +9,7 @@ public abstract class Pregunta {
 	protected static String ANSWER_TO_COMPLETE_TYPE = "C";
 
 	public static List<Pregunta> unmarshallAll(String field) {
-		String[] splited = field.split("|");
+		String[] splited = field.split("\\|");
 		List<Pregunta> result = new ArrayList<Pregunta>();
 
 		for (String s : splited) {
