@@ -138,7 +138,6 @@ public class EncuestaTest {
 	
 	@Test
 	public void answeredPreguntaRespuestaACompletarEvaluationReturns1WhenCorrect() {
-		//TODO: andy.. crea tests parecidos pero con multiples respuestas
 		PreguntaRespuestaACompletarRespondida response = new PreguntaRespuestaACompletarRespondida(p5.getIdPregunta());
 		response.responder("4");
 		Integer expected = CORRECT;

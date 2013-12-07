@@ -1,6 +1,8 @@
 package model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida{
 
@@ -49,6 +51,14 @@ public Integer evaluar(Pregunta pregunta) {
 			return 0;
 		}
 	}
+	if(this.areAnsweredRepeated()){
+		return 0;
+	}
 	return 1;
 }
+
+private boolean areAnsweredRepeated() {
+	Set<Integer> set = new HashSet<Integer>(this.respuestas);
+	return respuestas.size() == set.size();
+	}
 }
