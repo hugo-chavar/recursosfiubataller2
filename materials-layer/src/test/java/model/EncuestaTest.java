@@ -8,6 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class EncuestaTest {
+	
+	private static Integer INCORRECT = 0;
+	private static Integer CORRECT = 1;
 
 	Encuesta encuesta;
 	Pregunta p1, p2, p3, p4, p5;
@@ -128,7 +131,7 @@ public class EncuestaTest {
 	public void answeredPreguntaRespuestaACompletarEvaluationReturns0WhenWrong() {
 		PreguntaRespuestaACompletarRespondida response = new PreguntaRespuestaACompletarRespondida(p5.getIdPregunta());
 		response.responder("8");
-		Integer expected = 0;
+		Integer expected = INCORRECT;
 
 		Assert.assertEquals(expected, response.evaluar(p5));
 	}
@@ -138,7 +141,7 @@ public class EncuestaTest {
 		//TODO: andy.. crea tests parecidos pero con multiples respuestas
 		PreguntaRespuestaACompletarRespondida response = new PreguntaRespuestaACompletarRespondida(p5.getIdPregunta());
 		response.responder("4");
-		Integer expected = 1;
+		Integer expected = CORRECT;
 		Assert.assertEquals(expected, response.evaluar(p5));
 	}
 	
@@ -153,7 +156,7 @@ public class EncuestaTest {
 		respuestas.add(12);
 		respuestas.add(6);
 		response.responder(respuestas);
-		Integer expected = 1;
+		Integer expected = CORRECT;
 		Assert.assertEquals(expected, response.evaluar(p4));
 	}	
 		
@@ -169,7 +172,7 @@ public class EncuestaTest {
 		respuestas.add(6);
 		respuestas.add(9);
 		response.responder(respuestas);
-		Integer expected = 0;
+		Integer expected = INCORRECT;
 		Assert.assertEquals(expected, response.evaluar(p4));
 		}
 	
@@ -183,7 +186,7 @@ public class EncuestaTest {
 		respuestas.add(11);
 		respuestas.add(12);
 		response.responder(respuestas);
-		Integer expected = 0;
+		Integer expected = INCORRECT;
 		Assert.assertEquals(expected, response.evaluar(p4));
 		}
 	
@@ -198,7 +201,7 @@ public class EncuestaTest {
 		respuestas.add(12);
 		respuestas.add(6);
 		response.responder(respuestas);
-		Integer expected = 0;
+		Integer expected = INCORRECT;
 		Assert.assertEquals(expected, response.evaluar(p4));
 	}
 }
