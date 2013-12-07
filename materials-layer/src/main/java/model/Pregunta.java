@@ -81,13 +81,14 @@ public abstract class Pregunta {
 		enunciado = splited[2];
 	}
 
-	public boolean isCorrect(Integer respuesta) {
+	public abstract boolean isCorrect(Integer respuesta);
 		// TODO Andy.. completá este metodo
-		return false;
-	}
+		//return false;
+	
 
-	public boolean isCorrect(String respuesta) {
-		return false;
-	}
+	public abstract boolean isCorrect(String respuesta);
+		//return false;
+	
+	public abstract Integer getNroCorrectas();
 
 }

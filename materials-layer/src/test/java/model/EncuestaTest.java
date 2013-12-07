@@ -125,7 +125,7 @@ public class EncuestaTest {
 	}
 
 	@Test
-	public void answeredPreguntaRespuestaACompletarReturns0WhenWrong() {
+	public void answeredPreguntaRespuestaACompletarEvaluationReturns0WhenWrong() {
 		PreguntaRespuestaACompletarRespondida response = new PreguntaRespuestaACompletarRespondida(p5.getIdPregunta());
 		response.responder("8");
 		Integer expected = 0;
@@ -134,7 +134,7 @@ public class EncuestaTest {
 	}
 	
 	@Test
-	public void answeredPreguntaRespuestaACompletarReturns1WhenCorrect() {
+	public void answeredPreguntaRespuestaACompletarEvaluationReturns1WhenCorrect() {
 		//TODO: andy.. crea tests parecidos pero con multiples respuestas
 		PreguntaRespuestaACompletarRespondida response = new PreguntaRespuestaACompletarRespondida(p5.getIdPregunta());
 		response.responder("4");
@@ -143,30 +143,30 @@ public class EncuestaTest {
 	}
 	
 	@Test
-	public void answeredPreguntaRespuestaFijaReturns1WhenAllTheAnswersCorrect(){
+	public void answeredPreguntaRespuestaFijaEvaluationReturns1WhenAllTheAnswersCorrect(){
 		PreguntaRespuestaFijaRespondida response = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
 		List<Integer> respuestas = new ArrayList<Integer>();
-		respuestas.add(1);
-		respuestas.add(8);
+		respuestas.add(0);
+		respuestas.add(7);
+		respuestas.add(10);
 		respuestas.add(11);
 		respuestas.add(12);
-		respuestas.add(13);
-		respuestas.add(7);
+		respuestas.add(6);
 		response.responder(respuestas);
 		Integer expected = 1;
 		Assert.assertEquals(expected, response.evaluar(p4));
 	}	
 		
 	@Test
-	public void answeredPreguntaRespuestaFijaReturns0WhenThereIsOneMoreAnsweredThanTheCorrects(){
+	public void answeredPreguntaRespuestaFijaEvaluationReturns0WhenThereIsOneMoreAnsweredThanTheCorrects(){
 		PreguntaRespuestaFijaRespondida response = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
 		List<Integer> respuestas = new ArrayList<Integer>();
-		respuestas.add(1);
-		respuestas.add(8);
+		respuestas.add(0);
+		respuestas.add(7);
+		respuestas.add(10);
 		respuestas.add(11);
 		respuestas.add(12);
-		respuestas.add(13);
-		respuestas.add(7);
+		respuestas.add(6);
 		respuestas.add(9);
 		response.responder(respuestas);
 		Integer expected = 0;
@@ -174,39 +174,31 @@ public class EncuestaTest {
 		}
 	
 	@Test
-	public void answeredPreguntaRespuestaFijaReturns0WhenThereIsOneLessAnsweredThanTheCorrects(){
+	public void answeredPreguntaRespuestaFijaEvaluationReturns0WhenThereIsOneLessAnsweredThanTheCorrects(){
 		PreguntaRespuestaFijaRespondida response = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
 		List<Integer> respuestas = new ArrayList<Integer>();
-		respuestas.add(1);
-		respuestas.add(8);
+		respuestas.add(0);
+		respuestas.add(7);
+		respuestas.add(10);
 		respuestas.add(11);
 		respuestas.add(12);
-		respuestas.add(13);
 		response.responder(respuestas);
 		Integer expected = 0;
 		Assert.assertEquals(expected, response.evaluar(p4));
 		}
 	
-//	opciones.add("Rapido");0
-//	opciones.add("Moldeable");1
-//	opciones.add("Configurable");2
-//	opciones.add("Acoplable");3
-//	opciones.add("Lento");4
-//	opciones.add("Extensible");5
-//	opciones.add("Repetible");6
-//	opciones.add("Profesional");7
-//	opciones.add("Maduro");8
-//	opciones.add("Amplio");9
-//	opciones.add("Simple");10
-//	opciones.add("Independiente");11
-//	opciones.add("Automatizable");12
-//	
-//	p4.addRespuestaCorrecta("Rapido");0
-//	p4.addRespuestaCorrecta("Profesional");7
-//	p4.addRespuestaCorrecta("Simple");10
-//	p4.addRespuestaCorrecta("Independiente");11
-//	p4.addRespuestaCorrecta("Automatizable");12
-//	p4.addRespuestaCorrecta("Repetible");6
-//	
-		
+	@Test
+	public void answeredPreguntaRespuestaFijaEvaluationReturns0WhenAnswersAreRepeteadAndCorrect(){
+		PreguntaRespuestaFijaRespondida response = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
+		List<Integer> respuestas = new ArrayList<Integer>();
+		respuestas.add(0);
+		respuestas.add(7);
+		respuestas.add(7);
+		respuestas.add(11);
+		respuestas.add(12);
+		respuestas.add(6);
+		response.responder(respuestas);
+		Integer expected = 0;
+		Assert.assertEquals(expected, response.evaluar(p4));
+	}
 }

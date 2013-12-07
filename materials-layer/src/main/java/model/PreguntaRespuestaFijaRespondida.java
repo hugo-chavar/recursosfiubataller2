@@ -40,6 +40,10 @@ public List<Integer> getRespuestas() {
 @Override
 public Integer evaluar(Pregunta pregunta) {
 	//andy.. simplificate la vida...
+	//Chequeo que coincida  cantidad de respuestas
+	if(!pregunta.getNroCorrectas().equals(this.respuestas.size()))
+		return 0;
+	//Chequeo cada una de las respuestas
 	for (Integer respuesta: respuestas) {
 		if (! pregunta.isCorrect(respuesta)){
 			return 0;

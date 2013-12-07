@@ -52,8 +52,19 @@ public void addRespuestaCorrecta(String string) {
 	respuesta = string;
 }
 
+@Override
 public boolean isCorrect(String respuesta) {
 	return this.respuesta.equalsIgnoreCase(respuesta);
+}
+
+@Override
+public boolean isCorrect(Integer respuesta) {
+	return false;
+}
+
+@Override
+public Integer getNroCorrectas() {
+	return 1;
 }
 
 }

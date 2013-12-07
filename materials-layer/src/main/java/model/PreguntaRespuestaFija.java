@@ -136,4 +136,26 @@ private void addRespuestaCorrecta(Integer integer) {
 	
 }
 
+@Override
+public boolean isCorrect(Integer respuesta) {
+	
+	for (Integer res:this.respuestasCorrectas)
+	{
+		if(res.equals(respuesta))
+			return true;
+	}
+	return false;
+}
+
+@Override
+public boolean isCorrect(String respuesta) {
+	return false;
+}
+
+@Override
+public Integer getNroCorrectas() {
+	return this.respuestasCorrectas.size();
+}
+
+
 }
