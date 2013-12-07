@@ -27,7 +27,8 @@ public class EncuestaTest {
 		opciones.add("azul");
 		opciones.add("blanco");
 		((PreguntaRespuestaFija) p1).setRespuestasPosibles(opciones);
-
+		p1.addRespuestaCorrecta("blanco");
+		
 		encuesta.addPregunta(p1);
 
 		p2 = new PreguntaRespuestaFija();
@@ -40,6 +41,7 @@ public class EncuestaTest {
 		((PreguntaRespuestaFija) p2).setRespuestasPosibles(opciones);
 
 		encuesta.addPregunta(p2);
+		p2.addRespuestaCorrecta("River Plate");
 
 		p3 = new PreguntaRespuestaFija();
 		opciones = new ArrayList<String>();
@@ -85,6 +87,8 @@ public class EncuestaTest {
 		p5 = new PreguntaRespuestaACompletar();
 		p5.setEnunciado("cuantas patas tiene un gato?");
 		p5.addRespuestaCorrecta("4");
+		
+		encuesta.addPregunta(p5);
 	}
 
 	@Test
@@ -189,18 +193,111 @@ public class EncuestaTest {
 		Assert.assertEquals(expected, response.evaluar(p4));
 		}
 	
+//	@Test
+//	public void answeredPreguntaRespuestaFijaEvaluationReturns0WhenAnswersAreRepeteadAndCorrect(){
+//		PreguntaRespuestaFijaRespondida response = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
+//		List<Integer> respuestas = new ArrayList<Integer>();
+//		respuestas.add(0);
+//		respuestas.add(7);
+//		respuestas.add(7);
+//		respuestas.add(11);
+//		respuestas.add(12);
+//		respuestas.add(6);
+//		response.responder(respuestas);
+//		Integer expected = INCORRECT;
+//		Assert.assertEquals(expected, response.evaluar(p4));
+//	}
+	
 	@Test
-	public void answeredPreguntaRespuestaFijaEvaluationReturns0WhenAnswersAreRepeteadAndCorrect(){
-		PreguntaRespuestaFijaRespondida response = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
-		List<Integer> respuestas = new ArrayList<Integer>();
-		respuestas.add(0);
-		respuestas.add(7);
-		respuestas.add(7);
-		respuestas.add(11);
-		respuestas.add(12);
-		respuestas.add(6);
-		response.responder(respuestas);
-		Integer expected = INCORRECT;
-		Assert.assertEquals(expected, response.evaluar(p4));
+	public void answered5AnswersCorrectlyAndEvaluationReturns100(){
+		
+		EncuestaRespondida encuestaRes = new EncuestaRespondida();
+		ArrayList<PreguntaRespondida> responses = new ArrayList<PreguntaRespondida>();
+		
+		PreguntaRespuestaFijaRespondida response1 = new PreguntaRespuestaFijaRespondida(p1.getIdPregunta());
+		List<Integer> respuestas1 = new ArrayList<Integer>();
+		respuestas1.add(3);
+		response1.responder(respuestas1);
+		responses.add(response1);
+		
+		PreguntaRespuestaFijaRespondida response2 = new PreguntaRespuestaFijaRespondida(p2.getIdPregunta());
+		List<Integer> respuestas2 = new ArrayList<Integer>();
+		respuestas2.add(1);
+		response2.responder(respuestas2);
+		responses.add(response2);
+		
+		PreguntaRespuestaFijaRespondida response3 = new PreguntaRespuestaFijaRespondida(p3.getIdPregunta());
+		List<Integer> respuestas3 = new ArrayList<Integer>();
+		respuestas3.add(2);
+		response3.responder(respuestas3);
+		responses.add(response3);
+		
+		PreguntaRespuestaFijaRespondida response4 = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
+		List<Integer> respuestas4 = new ArrayList<Integer>();
+		respuestas4.add(0);
+		respuestas4.add(7);
+		respuestas4.add(10);
+		respuestas4.add(11);
+		respuestas4.add(12);
+		respuestas4.add(6);
+		response4.responder(respuestas4);
+		responses.add(response4);
+		
+		PreguntaRespuestaACompletarRespondida response5 = new PreguntaRespuestaACompletarRespondida(p5.getIdPregunta());
+		response5.responder("4");
+		responses.add(response5);
+		
+		encuestaRes.setPreguntasRespondidas(responses);	
+		
+		encuestaRes.evaluar(encuesta);
+		Integer expected =100;
+		Assert.assertEquals(expected,encuestaRes.getEvaluacion());
 	}
+	
+	@Test
+	public void answered4AnswersCorrectlyAndEvaluationReturns80(){
+		
+		EncuestaRespondida encuestaRes = new EncuestaRespondida();
+		ArrayList<PreguntaRespondida> responses = new ArrayList<PreguntaRespondida>();
+		
+		PreguntaRespuestaFijaRespondida response1 = new PreguntaRespuestaFijaRespondida(p1.getIdPregunta());
+		List<Integer> respuestas1 = new ArrayList<Integer>();
+		respuestas1.add(3);
+		response1.responder(respuestas1);
+		responses.add(response1);
+		
+		PreguntaRespuestaFijaRespondida response2 = new PreguntaRespuestaFijaRespondida(p2.getIdPregunta());
+		List<Integer> respuestas2 = new ArrayList<Integer>();
+		respuestas2.add(1);
+		response2.responder(respuestas2);
+		responses.add(response2);
+		
+		PreguntaRespuestaFijaRespondida response3 = new PreguntaRespuestaFijaRespondida(p3.getIdPregunta());
+		List<Integer> respuestas3 = new ArrayList<Integer>();
+		respuestas3.add(2);
+		response3.responder(respuestas3);
+		responses.add(response3);
+		
+		PreguntaRespuestaFijaRespondida response4 = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
+		List<Integer> respuestas4 = new ArrayList<Integer>();
+		respuestas4.add(0);
+		respuestas4.add(7);
+		respuestas4.add(10);
+		respuestas4.add(11);
+		respuestas4.add(12);
+		respuestas4.add(6);
+		response4.responder(respuestas4);
+		responses.add(response4);
+		
+		PreguntaRespuestaACompletarRespondida response5 = new PreguntaRespuestaACompletarRespondida(p5.getIdPregunta());
+		response5.responder("5");
+		responses.add(response5);
+		
+		encuestaRes.setPreguntasRespondidas(responses);	
+		
+		encuestaRes.evaluar(encuesta);
+		Integer expected = 80;
+		Assert.assertEquals(expected,encuestaRes.getEvaluacion());
+	}
+	
 }

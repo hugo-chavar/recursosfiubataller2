@@ -34,22 +34,11 @@ public class Encuesta extends Recurso {
 		this.preguntas = preguntas;
 	}
 
-//	private List<EncuestaRespondida> encuestasRespondidas;
-
-//	public void guardar() {
-//		// TODO:Escribir en la base de datos la info actualizada de la encuesta
-//	}
-
 	public void addPregunta(Pregunta pregunta) {
 		countOptions++;
 		pregunta.setIdPregunta(countOptions);
 		preguntas.add(pregunta);
 	}
-
-//	private List<EncuestaRespondida> getEncuestaRespondida(Integer idAmbiente, int idUsuario, Integer idRecurso) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 	public String marshallRespuestas() {
 		StringBuilder sb = new StringBuilder("");

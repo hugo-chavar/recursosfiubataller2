@@ -5,61 +5,62 @@ import java.util.List;
 
 public class EncuestaRespondida {
 
-  private Integer evaluacion;
-  
-  private List<Integer> preguntasCorrectas;
-	
-  private Integer idUsuario;
+	private Integer evaluacion;
 
-  private Integer idRecurso;
+	private List<Integer> preguntasCorrectas = new ArrayList<Integer>();
 
-  private ArrayList<PreguntaRespondida> preguntasRespondidas;
-  
-public Integer getIdUsuario() {
-	return idUsuario;
-}
+	private Integer idUsuario;
 
-public void setIdUsuario(Integer idUsuario) {
-	this.idUsuario = idUsuario;
-}
+	private Integer idRecurso;
 
-public Integer getIdRecurso() {
-	return idRecurso;
-}
+	private ArrayList<PreguntaRespondida> preguntasRespondidas;
 
-public void setIdRecurso(Integer idRecurso) {
-	this.idRecurso = idRecurso;
-}
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
 
-public List<PreguntaRespondida> getPreguntasRespondidas() {
-	return preguntasRespondidas;
-}
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
-public void setPreguntasRespondidas(ArrayList<PreguntaRespondida> preguntasRespondidas) {
-	this.preguntasRespondidas = preguntasRespondidas;
-}
+	public Integer getIdRecurso() {
+		return idRecurso;
+	}
 
-public void evaluar(Encuesta encuesta) {
-		Integer resultado=0;
-		List<Pregunta> preguntas=encuesta.getPreguntas();
-		if(preguntas.size()==this.getPreguntasRespondidas().size()){
-			for(int i=0;i<preguntas.size();i++){
-				Integer respuesta=preguntas.get(i).evaluar(this.getPreguntasRespondidas().get(i));
-				if(respuesta>0){
-					this.preguntasCorrectas.add(i);	
-					resultado += 10 * preguntas.get(i).evaluar(this.getPreguntasRespondidas().get(i));
+	public void setIdRecurso(Integer idRecurso) {
+		this.idRecurso = idRecurso;
+	}
+
+	public List<PreguntaRespondida> getPreguntasRespondidas() {
+		return preguntasRespondidas;
+	}
+
+	public void setPreguntasRespondidas(
+			ArrayList<PreguntaRespondida> preguntasRespondidas) {
+		this.preguntasRespondidas = preguntasRespondidas;
+	}
+
+	public void evaluar(Encuesta encuesta) {
+		Integer resultado = 0;
+		List<Pregunta> preguntas = encuesta.getPreguntas();
+		if (preguntas.size() == this.getPreguntasRespondidas().size()) {
+			for (int i = 0; i < preguntas.size(); i++) {
+				Integer respuesta = this.getPreguntasRespondidas().get(i)
+						.evaluar(preguntas.get(i));
+				if (respuesta > 0) {
+					this.preguntasCorrectas.add(i);
+					resultado += 100 * respuesta;
 				}
 			}
 			resultado = resultado / preguntas.size();
-			this.evaluacion=resultado;
-		}
-		else 
-			this.evaluacion=-1;
-}
+			this.evaluacion = resultado;
+		} else
+			this.evaluacion = -1;
+	}
 
-public Integer getEvaluacion() {
-	return evaluacion;
-}
+	public Integer getEvaluacion() {
+		return evaluacion;
+	}
 
 }
 
