@@ -12,38 +12,47 @@ public class Archivo extends Recurso {
 
 	public Archivo() {
 		this.tipo="Archivo";
-		// TODO Auto-generated constructor stub
 	}
 
-	private String path;
+	//private String path;
 
-	private Integer tamanio;
+	private Integer size;
 
-	private String tipo;
+	private String tipoArchivo;
 
-	private String nombre;
+	private String nombreArchivo;
 	
-	private DataHandler archivo;
+	private DataHandler rawFile;
 	
-	
-	public void setFileName(String fileName) {
-        this.nombre = fileName;
+    public String getNombreArchivo() {
+		return nombreArchivo;
+	}
+
+	public void setNombreArchivo(String nombreArchivo) {
+		this.nombreArchivo = nombreArchivo;
+	}
+
+	public String getTipoArchivo() {
+        return tipoArchivo;
     }
  
-    public String getFileType() {
-        return nombre;
-    }
- 
-    public void setFileType(String fileType) {
-        this.tipo = fileType;
+    public void setTipoArchivo(String fileType) {
+        this.tipoArchivo = fileType;
     }
  
     public DataHandler getFile() {
-        return archivo;
+        return rawFile;
     }
  
-    public void setFile(DataHandler file) {
-        this.archivo = file;
+    public void setRawFile(DataHandler file) {
+        this.rawFile = file;
     }
 
+	public Integer getSize() {
+		return size;
+	}
+
+	public void setSize(Integer size) {
+		this.size = size;
+	}
 }

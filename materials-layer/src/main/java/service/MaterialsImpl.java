@@ -56,8 +56,8 @@ public class MaterialsImpl implements Materials {
 		if(file != null){
 			Archivo File = new Archivo();
 			File.setFileName(name);
-			File.setFileType(ext);
-			File.setFile(new DataHandler(new FileDataSource(file)));
+			File.setTipoArchivo(ext);
+			File.setRawFile(new DataHandler(new FileDataSource(file)));
 	        //TODO: llamar a la capa de integracion para que guarde el archivo
 			return "Archivo subido Correctamente";
 			

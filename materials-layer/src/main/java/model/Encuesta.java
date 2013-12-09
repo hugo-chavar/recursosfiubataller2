@@ -6,6 +6,8 @@ import java.util.List;
 public class Encuesta extends Recurso {
 	
 	private int countOptions = 0;
+	private boolean evaluada;
+	private List<Pregunta> preguntas = new ArrayList<Pregunta>();
 
 	public Encuesta(Integer idRecurso, Integer idAmbiente, String descripcion, boolean evaluada) {
 		super(idRecurso, idAmbiente, descripcion);
@@ -18,13 +20,9 @@ public class Encuesta extends Recurso {
 		this.tipo = "Encuesta";
 	}
 
-	private boolean evaluada;
-
 	public boolean esEvaluada() {
 		return evaluada;
 	}
-
-	private List<Pregunta> preguntas = new ArrayList<Pregunta>();
 
 	public List<Pregunta> getPreguntas() {
 		return preguntas;
