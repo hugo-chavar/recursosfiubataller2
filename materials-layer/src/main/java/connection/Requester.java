@@ -30,7 +30,6 @@ public enum Requester {
 	}
 
 	public EncuestaRespondida getEncuestaRespondida(int idAmbiente,int idRecurso, int idUsuario) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

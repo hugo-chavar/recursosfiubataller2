@@ -93,7 +93,7 @@ public class EncuestaTest {
 
 	@Test
 	public void marshallPreguntaRespuestaACompletarWorksAsExpected() {
-		Assert.assertEquals("C;0;cuantas patas tiene un gato?;4", p5.marshall());
+		Assert.assertEquals("C;5;cuantas patas tiene un gato?;4", p5.marshall());
 	}
 	
 	@Test

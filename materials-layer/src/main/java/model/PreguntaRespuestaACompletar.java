@@ -1,70 +1,61 @@
 package model;
 
-public class PreguntaRespuestaACompletar extends Pregunta{
-	
+public class PreguntaRespuestaACompletar extends Pregunta {
 
-  public PreguntaRespuestaACompletar() {
+	public String respuesta;
+	
+	public PreguntaRespuestaACompletar() {
 		super();
 		type = ANSWER_TO_COMPLETE_TYPE;
 	}
-  
-  public PreguntaRespuestaACompletar(String s) {
+
+	public PreguntaRespuestaACompletar(String s) {
 		unmarshall(s);
 		type = ANSWER_TO_COMPLETE_TYPE;
 	}
 
-  
-//public PreguntaRespuestaACompletar(String enunciado, Integer idPregunta) {
-//		super(enunciado, idPregunta);
-//		type = ANSWER_TO_COMPLETE_TYPE;
-//
-//	}
+	public void setRespuesta(String respuesta) {
+		this.respuesta = respuesta;
+	}
 
-public String respuesta;
+	public String getRespuesta() {
+		return respuesta;
+	}
 
-  public void setRespuesta( String respuesta) {
-	  this.respuesta=respuesta;
-  }
+	@Override
+	public Integer evaluar(PreguntaRespondida respondida) {
+		return respondida.evaluar(this);
+	}
 
-  public String getRespuesta() {
-	  return respuesta;
-  }
+	@Override
+	public String marshall() {
+		return super.marshall() + respuesta;
+	}
 
-@Override
-public Integer evaluar(PreguntaRespondida respondida) {
-	
-	return respondida.evaluar(this);
-}
+	public void unmarshall(String s) {
+		super.unmarshall(s);
+		String[] splited = s.split(";");
+		respuesta = splited[3];
+	}
 
-@Override
-public String marshall() {
-	return super.marshall() + respuesta;
-}
+	@Override
+	public void addRespuestaCorrecta(String string) {
+		respuesta = string;
+	}
 
-public void unmarshall(String s) {
-	super.unmarshall(s);
-	String[] splited = s.split(";");
-	respuesta = splited[3];
-}
+	@Override
+	public boolean isCorrect(String respuesta) {
+		return this.respuesta.equalsIgnoreCase(respuesta);
+	}
 
-@Override
-public void addRespuestaCorrecta(String string) {
-	respuesta = string;
-}
+	@Override
+	public boolean isCorrect(Integer respuesta) {
+		return false;
+	}
 
-@Override
-public boolean isCorrect(String respuesta) {
-	return this.respuesta.equalsIgnoreCase(respuesta);
-}
-
-@Override
-public boolean isCorrect(Integer respuesta) {
-	return false;
-}
-
-@Override
-public Integer getNroCorrectas() {
-	return 1;
-}
+	@Override
+	public Integer getNroCorrectas() {
+		return 1;
+	}
 
 }
