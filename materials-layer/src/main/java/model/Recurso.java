@@ -2,6 +2,11 @@ package model;
 
 public class Recurso {
 
+	protected Integer idRecurso;
+	protected String tipo;
+	protected Integer idAmbiente;
+	protected String descripcion;
+
 	public Recurso(Integer idRecurso, Integer idAmbiente, String descripcion) {
 		this.idRecurso = idRecurso;
 		this.idAmbiente = idAmbiente;
@@ -11,17 +16,9 @@ public class Recurso {
 	public Recurso() {
 	}
 
-	protected Integer idRecurso;
-	
-	protected String tipo;
-
 	public String getTipo() {
 		return tipo;
 	}
-
-	protected Integer idAmbiente;
-
-	protected String descripcion;
 
 	public Integer getIdRecurso() {
 		return idRecurso;
@@ -42,6 +39,4 @@ public class Recurso {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
-
 }

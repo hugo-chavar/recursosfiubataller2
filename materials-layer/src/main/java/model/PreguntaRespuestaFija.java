@@ -3,138 +3,135 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PreguntaRespuestaFija extends Pregunta{
+public class PreguntaRespuestaFija extends Pregunta {
 
-  private List<String> respuestasPosibles = new ArrayList<String>();
-  private List<Integer>  respuestasCorrectas = new ArrayList<Integer>();
-  private boolean multiplesRespuestasCorrectas;
+	private List<String> respuestasPosibles = new ArrayList<String>();
+	private List<Integer> respuestasCorrectas = new ArrayList<Integer>();
+	private boolean multiplesRespuestasCorrectas;
 
-  public boolean isMultiplesRespuestasCorrectas() {
-	return respuestasCorrectas.size() > 1;
-  }
-  
-  public PreguntaRespuestaFija() {
-	  type = FIXED_ANSWER_TYPE;
-  }
-  
-  public PreguntaRespuestaFija(String s) {
-	  unmarshall(s);
-	  type = FIXED_ANSWER_TYPE;
-  }
-
-public List<String> getRespuestasPosibles() {
-	return respuestasPosibles;
-}
-
-public void setRespuestasPosibles(List<String> respuestasPosibles) {
-	this.respuestasPosibles = respuestasPosibles;
-}
-
-public List<Integer> getRespuestasCorrectas() {
-	return respuestasCorrectas;
-}
-
-@Override
-public Integer evaluar(PreguntaRespondida respondida) {
-	return respondida.evaluar(this);
-}
-
-@Override
-public String marshall() {
-	StringBuilder sb = new StringBuilder("");
-	sb.append(multiplesRespuestasCorrectas);
-	sb.append(";");
-	sb.append(marshallRespuestasPosibles());
-	sb.append(marshallRespuestasCorrectas());
-	return super.marshall() + sb.toString();
-	
-}
-
-private String marshallRespuestasPosibles() {
-	StringBuilder sb = new StringBuilder("");
-	for (String rta: respuestasPosibles) {
-		sb.append(rta);
-		sb.append(",");
+	public boolean isMultiplesRespuestasCorrectas() {
+		return respuestasCorrectas.size() > 1;
 	}
-	sb.setLength(sb.length() - 1);
-	sb.append(";");
-	return sb.toString();
-}
 
-private String marshallRespuestasCorrectas() {
-	StringBuilder sb = new StringBuilder("");
-	for (Integer rta: respuestasCorrectas) {
-		sb.append(rta);
-		sb.append(",");
+	public PreguntaRespuestaFija() {
+		type = FIXED_ANSWER_TYPE;
 	}
-	sb.setLength(sb.length() - 1);
-	return sb.toString();
-}
 
-public void unmarshall(String s) {
-	super.unmarshall(s);
-	String[] splited = s.split(";");
-	unmarshallRespuestasPosibles(splited[3]);
-	unmarshallRespuestasCorrectas(splited[4]);
-	
-}
-
-private void unmarshallRespuestasPosibles(String rtas) {
-	String[] splited = rtas.split(",");
-	respuestasPosibles = new ArrayList<String>();
-	for (String s: splited) {
-		respuestasPosibles.add(s);
+	public PreguntaRespuestaFija(String s) {
+		unmarshall(s);
+		type = FIXED_ANSWER_TYPE;
 	}
-	
-}
 
-private void unmarshallRespuestasCorrectas(String rtas) {
-	String[] splited = rtas.split(",");
-	respuestasCorrectas = new ArrayList<Integer>();
-	for (String s: splited) {
-		respuestasCorrectas.add(Integer.valueOf(s));
+	public List<String> getRespuestasPosibles() {
+		return respuestasPosibles;
 	}
-}
 
-@Override
-public void addRespuestaCorrecta(String string) {
-	int i = 0;
-	for (String s: respuestasPosibles) {
-		if (s.equals(string)){
-			addRespuestaCorrecta(new Integer(i));
-			return;
+	public void setRespuestasPosibles(List<String> respuestasPosibles) {
+		this.respuestasPosibles = respuestasPosibles;
+	}
+
+	public List<Integer> getRespuestasCorrectas() {
+		return respuestasCorrectas;
+	}
+
+	@Override
+	public Integer evaluar(PreguntaRespondida respondida) {
+		return respondida.evaluar(this);
+	}
+
+	@Override
+	public String marshall() {
+		StringBuilder sb = new StringBuilder("");
+		sb.append(multiplesRespuestasCorrectas);
+		sb.append(";");
+		sb.append(marshallRespuestasPosibles());
+		sb.append(marshallRespuestasCorrectas());
+		return super.marshall() + sb.toString();
+
+	}
+
+	private String marshallRespuestasPosibles() {
+		StringBuilder sb = new StringBuilder("");
+		for (String rta : respuestasPosibles) {
+			sb.append(rta);
+			sb.append(",");
 		}
-		i++;
+		sb.setLength(sb.length() - 1);
+		sb.append(";");
+		return sb.toString();
 	}
-	
-}
 
-
-private void addRespuestaCorrecta(Integer integer) {
-	respuestasCorrectas.add(integer);
-	
-}
-
-@Override
-public boolean isCorrect(Integer respuesta) {
-	
-	for (Integer res:this.respuestasCorrectas)
-	{
-		if(res.equals(respuesta))
-			return true;
+	private String marshallRespuestasCorrectas() {
+		StringBuilder sb = new StringBuilder("");
+		for (Integer rta : respuestasCorrectas) {
+			sb.append(rta);
+			sb.append(",");
+		}
+		sb.setLength(sb.length() - 1);
+		return sb.toString();
 	}
-	return false;
-}
 
-@Override
-public boolean isCorrect(String respuesta) {
-	return false;
-}
+	public void unmarshall(String s) {
+		super.unmarshall(s);
+		String[] splited = s.split(";");
+		unmarshallRespuestasPosibles(splited[3]);
+		unmarshallRespuestasCorrectas(splited[4]);
 
-@Override
-public Integer getNroCorrectas() {
-	return this.respuestasCorrectas.size();
-}
+	}
 
+	private void unmarshallRespuestasPosibles(String rtas) {
+		String[] splited = rtas.split(",");
+		respuestasPosibles = new ArrayList<String>();
+		for (String s : splited) {
+			respuestasPosibles.add(s);
+		}
+
+	}
+
+	private void unmarshallRespuestasCorrectas(String rtas) {
+		String[] splited = rtas.split(",");
+		respuestasCorrectas = new ArrayList<Integer>();
+		for (String s : splited) {
+			respuestasCorrectas.add(Integer.valueOf(s));
+		}
+	}
+
+	@Override
+	public void addRespuestaCorrecta(String string) {
+		int i = 0;
+		for (String s : respuestasPosibles) {
+			if (s.equals(string)) {
+				addRespuestaCorrecta(new Integer(i));
+				return;
+			}
+			i++;
+		}
+
+	}
+
+	private void addRespuestaCorrecta(Integer integer) {
+		respuestasCorrectas.add(integer);
+
+	}
+
+	@Override
+	public boolean isCorrect(Integer respuesta) {
+
+		for (Integer res : this.respuestasCorrectas) {
+			if (res.equals(respuesta))
+				return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isCorrect(String respuesta) {
+		return false;
+	}
+
+	@Override
+	public Integer getNroCorrectas() {
+		return this.respuestasCorrectas.size();
+	}
 
 }

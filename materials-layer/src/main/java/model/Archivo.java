@@ -14,7 +14,7 @@ public class Archivo extends Recurso {
 		this.tipo="Archivo";
 	}
 
-	//private String path;
+//	private String path;
 
 	private Integer size;
 

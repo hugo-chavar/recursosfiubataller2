@@ -4,16 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-//Estos import los agrega Dami para utilizar en los archivos
-
-
-//
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
-//import javax.jws.WebMethod;
 import javax.jws.WebService;
-
-import connection.Requester;
+import javax.xml.ws.soap.MTOM;
 
 import model.Archivo;
 import model.Encuesta;
@@ -21,7 +15,7 @@ import model.EncuestaRespondida;
 import model.Link;
 import model.ListaDeRecursos;
 import model.Recurso;
-import javax.xml.ws.soap.MTOM;
+import connection.Requester;
 
 @MTOM
 @WebService(endpointInterface = "service.Materials")
@@ -32,12 +26,6 @@ public class MaterialsImpl implements Materials {
 		return "Hello, Welcom to jax-ws " + name;
 	}
 
-//	@Override
-//	public Encuesta2 getEncuesta() {
-//		Encuesta2 e = new Encuesta2();
-//		e.rellenar();
-//		return e;
-//	}
 	@Override
 	public Archivo getArchivo(int idAmbiente, int idRecurso){
 		Archivo file = new Archivo();
@@ -55,7 +43,7 @@ public class MaterialsImpl implements Materials {
 	public String setArchivo(int idAmbiente, String name,String ext, File file){
 		if(file != null){
 			Archivo File = new Archivo();
-			File.setFileName(name);
+			File.setNombreArchivo(name);
 			File.setTipoArchivo(ext);
 			File.setRawFile(new DataHandler(new FileDataSource(file)));
 	        //TODO: llamar a la capa de integracion para que guarde el archivo
@@ -104,6 +92,8 @@ public class MaterialsImpl implements Materials {
 		//recursosPermitidos.add(r);
 
 		// obtengo los recursos
+		// TODO: solicitarBdRecursosAmbiente NO DEBE EXISTIR, SE USA EL REQUESTER
+		// PARA TRAER LOS RECURSOS
 		recursos = solicitarBdRecursosAmbiente(idAmbiente);
 		for (int i = 0; i < recursos.size(); i++) {
 			if (consultarPermisoUsuario(recursos.get(i).getIdRecurso(),
@@ -115,6 +105,8 @@ public class MaterialsImpl implements Materials {
 		return lista;
 	}
 
+	// TODO: consultarPermisoUsuario NO DEBE EXISTIR, SE USA EL REQUESTER
+	// PARA CONSULTAR LOS PERMISOS
 	// TODO:METODOS QUE DEBEN COMPLETARSE CON LLAMADOS A PARTICIPACION
 	private boolean consultarPermisoUsuario(int idRecurso, int idUsuario) {
 		// Harcodeo
@@ -125,6 +117,8 @@ public class MaterialsImpl implements Materials {
 
 	// TODO:METODOS QUE DEBEN COMPLETARSE CON LLAMADAS A BASE DE DATOS
 	// Aca va la logica de la solicitud de un Recurso a la base de datos
+	// TODO: obtenerRecursoBd NO DEBE EXISTIR, SE USA EL REQUESTER
+	// PARA OBTENER LOS RECURSOS
 	private Recurso obtenerRecursoBd(int idAmbiente, int idRecurso) {
 		// Harcodeo segun id de Recurso el recurso a crear para prueba
 		Recurso recurso;
@@ -143,6 +137,7 @@ public class MaterialsImpl implements Materials {
 		return recurso;
 	}
 
+	// TODO: solicitarBdRecursosAmbiente NO DEBE EXISTIR, SE USA EL REQUESTER
 	private List<Recurso> solicitarBdRecursosAmbiente(int idAmbiente) {
 		// Harcodeo recursos del ambiente.
 		List<Recurso> recursos = new ArrayList<Recurso>();
@@ -162,18 +157,20 @@ public class MaterialsImpl implements Materials {
 		return recursos;
 	}
 
-	private boolean agregarRecursoBD(int idAmbiente, Recurso recurso, int idUsuario) {
-		// Harcodeo
-		if (idUsuario > 5)
-			return false;
-		return true;
-	}
+	// TODO: agregarRecursoBD NO DEBE EXISTIR, SE USA EL REQUESTER
+//	private boolean agregarRecursoBD(int idAmbiente, Recurso recurso, int idUsuario) {
+//		// Harcodeo
+//		if (idUsuario > 5)
+//			return false;
+//		return true;
+//	}
 
-	private boolean eliminarRecursoBD(int idAmbiente, int idRecurso, int idUsuario) {
-		// Harcodeo
-		if (idUsuario > 5)
-			return false;
-		return true;
-	}
+	// TODO: eliminarRecursoBD NO DEBE EXISTIR, SE USA EL REQUESTER
+//	private boolean eliminarRecursoBD(int idAmbiente, int idRecurso, int idUsuario) {
+//		// Harcodeo
+//		if (idUsuario > 5)
+//			return false;
+//		return true;
+//	}
 
 }
