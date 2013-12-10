@@ -2,6 +2,7 @@ package connection;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Encuesta;
 import model.EncuestaRespondida;
@@ -21,9 +22,9 @@ public class EncuestaRequester {
 	
 	private IntegracionWSStub stub;
 	private EncuestaParser parser;
-	private ArrayList<Encuesta> cacheEncuestas;
+	private List<Encuesta> cacheEncuestas;
 	private int indexToReplace;
-	private ArrayList<EncuestaRespondida> cacheEncuestasRespondidas;
+	private List<EncuestaRespondida> cacheEncuestasRespondidas;
 	private int indexToReplaceRespondidas;
 	
 	
@@ -142,6 +143,14 @@ public class EncuestaRequester {
 			i++;
 		}
 		return encuesta;
+		
+//		reemplazar por este codigo es "mas orientado a objetos y mas orientado a java"
+//		Yami, los this. en java solo se usan para desambiguar .. en general no se ponen
+//		for (Encuesta e : cacheEncuestas) {
+//			if (e.equals(new Encuesta(IDEncuesta, IDAmbiente,"" , false))) {
+//				return e;
+//			}
+//		}
 	}
 	
 }

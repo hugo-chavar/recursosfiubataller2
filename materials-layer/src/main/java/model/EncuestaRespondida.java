@@ -13,7 +13,7 @@ public class EncuestaRespondida {
 
 	private Integer idRecurso;
 
-	private ArrayList<PreguntaRespondida> preguntasRespondidas;
+	private List<PreguntaRespondida> preguntasRespondidas;
 
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -36,7 +36,7 @@ public class EncuestaRespondida {
 	}
 
 	public void setPreguntasRespondidas(
-			ArrayList<PreguntaRespondida> preguntasRespondidas) {
+			List<PreguntaRespondida> preguntasRespondidas) {
 		this.preguntasRespondidas = preguntasRespondidas;
 	}
 
