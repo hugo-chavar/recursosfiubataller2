@@ -146,11 +146,13 @@ public class EncuestaRequester {
 		
 //		reemplazar por este codigo es "mas orientado a objetos y mas orientado a java"
 //		Yami, los this. en java solo se usan para desambiguar .. en general no se ponen
+//		Encuesta target = new Encuesta(IDEncuesta, IDAmbiente,"" , false);
 //		for (Encuesta e : cacheEncuestas) {
-//			if (e.equals(new Encuesta(IDEncuesta, IDAmbiente,"" , false))) {
+//			if (e.equals(target)) {
 //				return e;
 //			}
 //		}
+//		return null;
 	}
 	
 }
