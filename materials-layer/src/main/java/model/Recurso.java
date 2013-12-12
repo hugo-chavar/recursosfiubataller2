@@ -39,4 +39,14 @@ public class Recurso {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o.getClass().equals(this.getClass())) {
+			Recurso r = (Recurso) o;
+			return r.getIdRecurso().equals(getIdRecurso()) 
+				   && r.getIdAmbiente().equals(getIdAmbiente());
+		}
+		return false;
+	}
 }

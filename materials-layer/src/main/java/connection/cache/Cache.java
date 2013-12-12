@@ -3,6 +3,9 @@ package connection.cache;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+/*
+ * Class type T MUST implement equals() method
+ */
 public class Cache<T> {
 
 	public static int MAX_ITEMS_LIST = 10;

@@ -13,6 +13,8 @@ import com.ws.services.IntegracionWSStub.GuardarDatosResponse;
 import com.ws.services.IntegracionWSStub.SeleccionarDatos;
 import com.ws.services.IntegracionWSStub.SeleccionarDatosResponse;
 
+import connection.cache.Cache;
+
 
 public class LinkRequester {
 
@@ -22,9 +24,11 @@ public class LinkRequester {
 	private LinkParser parser;
 	private ArrayList<Link> cacheLinks;
 	private int indexToReplace;
+	private Cache<Link> cache;
 	
 	
 	public LinkRequester() {
+		cache = new Cache<Link>();
     	try {
 	    	this.stub = new IntegracionWSStub();
     	} catch (AxisFault e) {
@@ -48,13 +52,16 @@ public class LinkRequester {
     	
     	// Agrego al cache de links
     	this.addToCacheLinks(link);
+    	//Modificado por Hugo
+    	cache.add(link);
 	}
 	
 	public Link get(int IDAmbiente, int IDLink) {
 		// Busco en el cache de links
 		Link link = this.searchCachedLink(IDAmbiente, IDLink);
-		if (link != null) {
-			return link;
+		//Link target = new Link(IDAmbiente, IDLink,"");
+		if (link != null) { //if (cache.contains(target))
+			return link; //return cache.get(target);
 		} else {
 	    	try {
 				// Consulto el link guardado
@@ -67,6 +74,8 @@ public class LinkRequester {
 		    	
 		    	// Agrego al cache de links
 		    	this.addToCacheLinks(link);
+		    	//Modificado por Hugo
+		    	cache.add(link);
 		    	
 		    	return link;
 	    	} catch (AxisFault e) {
@@ -78,6 +87,10 @@ public class LinkRequester {
     	return null;
 	}
 	
+	//Modificado por Hugo .. este metodo y el siguiente no se usarían
+	// al usar la clase Cache 
+	//se evita codigo repetido.. solo hay q corregir en un lugar si hay cambios
+	// queda mas claro lo que hace el requester
 	private void addToCacheLinks(Link link) {
 		if (this.cacheLinks.size() < LinkRequester.MAX_ITEMS_LIST) {
 			this.cacheLinks.add(link);

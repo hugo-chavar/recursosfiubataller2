@@ -52,13 +52,4 @@ public class Encuesta extends Recurso {
 		preguntas = Pregunta.unmarshallAll(field);
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (o.getClass().equals(this.getClass())) {
-			Encuesta e = (Encuesta) o;
-			return e.getIdRecurso() == getIdRecurso() && e.getIdAmbiente() == getIdAmbiente();
-		}
-		return false;
-	}
-
 }
