@@ -32,7 +32,8 @@ public class LinkRequester {
     	try {
 	    	this.stub = new IntegracionWSStub();
     	} catch (AxisFault e) {
-            e.printStackTrace();
+			// e.printStackTrace();
+			System.out.println("Error al intentar contectarse con Integracion");
     	}
 	}
 	
@@ -45,10 +46,13 @@ public class LinkRequester {
 	    	GuardarDatosResponse g_resp = this.stub.guardarDatos(guardar);
 	    	System.out.println(g_resp.get_return());
     	} catch (AxisFault e) {
-            e.printStackTrace();
-    	} catch (RemoteException e) {
-            e.printStackTrace();
-    	}
+//			 e.printStackTrace();
+			System.out.println("Error al intentar guardar la siguiente Link:");
+			System.out.println(link.getDescripcion());
+		} catch (RemoteException e) {
+//			 e.printStackTrace();
+			System.out.println("Error de conexion remota");
+		}
     	
     	// Agrego al cache de links
     	this.addToCacheLinks(link);
@@ -79,10 +83,13 @@ public class LinkRequester {
 		    	
 		    	return link;
 	    	} catch (AxisFault e) {
-	            e.printStackTrace();
-	    	} catch (RemoteException e) {
-	            e.printStackTrace();
-	    	}
+//				e.printStackTrace();
+				System.out.println("Error al intentar obtener el siguiente Link:");
+				System.out.println("IDLink: " + IDLink);
+			} catch (RemoteException e) {
+//				 e.printStackTrace();
+				System.out.println("Error de conexion remota");
+			}
 		}
     	return null;
 	}

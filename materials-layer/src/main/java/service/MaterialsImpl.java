@@ -13,7 +13,6 @@ import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
-import model.ListaDeRecursos;
 import model.Recurso;
 import connection.Requester;
 
@@ -34,8 +33,9 @@ public class MaterialsImpl implements Materials {
 //	}
 	
 	@Override
-	public void agregarEncuesta(Encuesta encuesta){
+	public void agregarEncuesta(Encuesta encuesta) {
 		Requester.INSTANCE.saveEncuesta(encuesta);
+		System.out.println("Guardando encuesta: " + encuesta.getDescripcion());
 		//TODO:encuesta.setIdEncuesta(pedirIdEncuestaBd());
 		//TODO:CHEQUEAR PERMISO PARA AGREGAR
 				
@@ -85,13 +85,35 @@ public class MaterialsImpl implements Materials {
 		return respondida;
 	}
 	
+//	@Override
+//	public ListaDeRecursos obtenerRecursos(int idAmbiente, int idUsuario) {
+//		List<Recurso> recursos = new ArrayList<Recurso>();
+//		List<Recurso> recursosPermitidos = new ArrayList<Recurso>();
+//
+//		//Recurso r = new Recurso(4, 3, "DescriboRecurso");
+//		//recursosPermitidos.add(r);
+//
+//		// obtengo los recursos
+//		// TODO: solicitarBdRecursosAmbiente NO DEBE EXISTIR, SE USA EL REQUESTER
+//		// PARA TRAER LOS RECURSOS
+//		recursos = solicitarBdRecursosAmbiente(idAmbiente);
+//		for (int i = 0; i < recursos.size(); i++) {
+//			if (consultarPermisoUsuario(recursos.get(i).getIdRecurso(),
+//					idUsuario)) {
+//				recursosPermitidos.add(recursos.get(i));
+//			}
+//		}
+//		ListaDeRecursos lista = new ListaDeRecursos(recursosPermitidos);
+//		return lista;
+//	}
+	
 	@Override
-	public ListaDeRecursos obtenerRecursos(int idAmbiente, int idUsuario) {
+	public List<Recurso> obtenerRecursos(int idAmbiente, int idUsuario) {
 		List<Recurso> recursos = new ArrayList<Recurso>();
 		List<Recurso> recursosPermitidos = new ArrayList<Recurso>();
 
-		//Recurso r = new Recurso(4, 3, "DescriboRecurso");
-		//recursosPermitidos.add(r);
+//		Recurso r = new Link(4, 3, "DescriboRecurso");
+//		recursosPermitidos.add(r);
 
 		// obtengo los recursos
 		// TODO: solicitarBdRecursosAmbiente NO DEBE EXISTIR, SE USA EL REQUESTER
@@ -103,8 +125,9 @@ public class MaterialsImpl implements Materials {
 				recursosPermitidos.add(recursos.get(i));
 			}
 		}
-		ListaDeRecursos lista = new ListaDeRecursos(recursosPermitidos);
-		return lista;
+//		ListaDeRecursos lista = new ListaDeRecursos(recursosPermitidos);
+//		return recursosPermitidos;
+		return recursos;
 	}
 
 	// TODO: consultarPermisoUsuario NO DEBE EXISTIR, SE USA EL REQUESTER

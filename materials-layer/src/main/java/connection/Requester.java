@@ -14,11 +14,15 @@ public enum Requester {
 	
 	
 	private Requester() {
+		System.out.println("Creando EncuestaRequester");
 		this.encuestaReq = new EncuestaRequester();
+		System.out.println("EncuestaRequester listo");
 	}
 	
 	public void saveEncuesta(Encuesta encuesta) {
+		System.out.println("Guardando una encuesta..");
 		this.encuestaReq.save(encuesta);
+		System.out.println("Fin del proceso Grabar Encuesta..");
 	}
 	
 	public Encuesta getEncuesta(int IDAmbiente, int IDEncuesta) {

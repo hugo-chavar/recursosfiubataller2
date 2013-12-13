@@ -3,10 +3,32 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Pregunta {
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+public class Pregunta {
 
 	protected static String FIXED_ANSWER_TYPE = "F";
 	protected static String ANSWER_TO_COMPLETE_TYPE = "C";
+	
+	@XmlTransient
+	protected Integer idPregunta = 0;
+	@XmlTransient
+	protected String type;
+	
+	@XmlAttribute
+	protected String enunciado;
+	@XmlAttribute(required=false)
+	private List<String> opciones;
+	@XmlAttribute(required=true)
+	private List<String> correctas;
+	
+	
 
 	public static List<Pregunta> unmarshallAll(String field) {
 		String[] splited = field.split("\\|");
@@ -26,22 +48,12 @@ public abstract class Pregunta {
 		return marshalledPregunta.substring(0, marshalledPregunta.indexOf(";") - 1);
 	}
 
-	protected String enunciado;
-	protected Integer idPregunta = 0;
-	protected String type;
+
 
 	public Pregunta() {
 	}
-//	public Pregunta(String s) {
-//		//unmarshall(s);
-//	}
 
-//	public Pregunta(String enunciado, Integer idPregunta) {
-//		this.setEnunciado(enunciado);
-//		this.setIdPregunta(idPregunta);
-//	}
 
-	public abstract Integer evaluar(PreguntaRespondida respondida);
 
 	public String getEnunciado() {
 		return enunciado;
@@ -80,11 +92,23 @@ public abstract class Pregunta {
 		idPregunta = Integer.valueOf(splited[1]);
 		enunciado = splited[2];
 	}
-
-	public abstract boolean isCorrect(Integer respuesta);	
-
-	public abstract boolean isCorrect(String respuesta);
 	
-	public abstract Integer getNroCorrectas();
+	// --------------------- metodos "abstractos" -------------
+
+	public boolean isCorrect(Integer respuesta) {
+		return false;
+	}
+
+	public boolean isCorrect(String respuesta) {
+		return false;
+	}
+	
+	public Integer getNroCorrectas() {
+		return -1;
+	}
+	
+	public Integer evaluar(PreguntaRespondida respondida) {
+		return -1;
+	}
 
 }
