@@ -2,13 +2,14 @@ package connection.cache;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Iterator;
 
 /*
  * Class type T MUST implement equals() method
  */
 public class Cache<T> {
 
-	public static int MAX_ITEMS_LIST = 10;
+	public static final int MAX_ITEMS_LIST = 10;
 	private Deque<T> elements;
 
 	public Cache() {
@@ -16,10 +17,10 @@ public class Cache<T> {
 	}
 
 	public void add(T element) {
-		if (elements.offerLast(element)) {
-			elements.remove();
-			elements.offerLast(element);
-		}
+        if (elements.size() >= MAX_ITEMS_LIST) {                 
+        	elements.poll();
+        }
+        elements.addLast(element); 
 	}
 
 	public boolean contains(T element) {
@@ -27,14 +28,16 @@ public class Cache<T> {
 	}
 
 	public T get(T element) {
-		if (contains(element)) {
-			for (T cached : elements) {
-				if (cached.equals(element)) {
-					return cached;
-				}
-			}
-		}
-		return null;
+		Iterator<T> it = elements.iterator();
+        while (it.hasNext()) {
+            T current = it.next();
+            if (current.equals(element)) {
+            	elements.remove(current);
+            	elements.addLast(current);
+                return current;
+            }
+        }
+        return null;
 	}
 
 }
