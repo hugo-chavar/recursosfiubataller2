@@ -17,7 +17,7 @@ import model.ListaDeRecursos;
 import model.Recurso;
 import connection.Requester;
 
-@MTOM
+// @MTOM
 @WebService(endpointInterface = "service.Materials")
 public class MaterialsImpl implements Materials {
 
@@ -26,12 +26,13 @@ public class MaterialsImpl implements Materials {
 		return "Hello, Welcom to jax-ws " + name;
 	}
 
-	@Override
-	public Archivo getArchivo(int idAmbiente, int idRecurso){
-		Archivo file = new Archivo();
-		//TODO: llamar al web service de persistencia que me devuelva los datos de los archivos
-		return file;
-	}
+//	@Override
+//	public Archivo getArchivo(int idAmbiente, int idRecurso){
+//		Archivo file = new Archivo();
+//		//TODO: llamar al web service de persistencia que me devuelva los datos de los archivos
+//		return file;
+//	}
+	
 	@Override
 	public void agregarEncuesta(Encuesta encuesta){
 		Requester.INSTANCE.saveEncuesta(encuesta);
@@ -39,21 +40,22 @@ public class MaterialsImpl implements Materials {
 		//TODO:CHEQUEAR PERMISO PARA AGREGAR
 				
 	}
-	@Override
-	public String setArchivo(int idAmbiente, String name,String ext, File file){
-		if(file != null){
-			Archivo File = new Archivo();
-			File.setNombreArchivo(name);
-			File.setTipoArchivo(ext);
-			File.setRawFile(new DataHandler(new FileDataSource(file)));
-	        //TODO: llamar a la capa de integracion para que guarde el archivo
-			return "Archivo subido Correctamente";
-			
-		}
-		else{
-			return "ERROR al subir el archivo";
-		}
-	}
+	
+//	@Override
+//	public String setArchivo(int idAmbiente, String name,String ext, File file){
+//		if(file != null){
+//			Archivo File = new Archivo();
+//			File.setNombreArchivo(name);
+//			File.setTipoArchivo(ext);
+//			File.setRawFile(new DataHandler(new FileDataSource(file)));
+//	        //TODO: llamar a la capa de integracion para que guarde el archivo
+//			return "Archivo subido Correctamente";
+//			
+//		}
+//		else{
+//			return "ERROR al subir el archivo";
+//		}
+//	}
 	
 	@Override
 	public void agregarLink(Link link){

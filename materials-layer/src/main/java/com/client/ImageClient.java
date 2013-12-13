@@ -41,14 +41,14 @@ public class ImageClient{
         		String path = bufferRead.readLine();
         		
         		
-        File file = new File(path);
-        //enable MTOM in client
-        BindingProvider bp = (BindingProvider) imageServer;
-        SOAPBinding binding = (SOAPBinding) bp.getBinding();
-        binding.setMTOMEnabled(true);
+//        File file = new File(path);
+//        //enable MTOM in client
+//        BindingProvider bp = (BindingProvider) imageServer;
+//        SOAPBinding binding = (SOAPBinding) bp.getBinding();
+//        binding.setMTOMEnabled(true);
    
-        String status = imageServer.setArchivo(0,"aca iria su nombre" ,"aca su extension", file);
-        System.out.println("imageServer.uploadImage() : " + status);
+//        String status = imageServer.setArchivo(0,"aca iria su nombre" ,"aca su extension", file);
+//        System.out.println("imageServer.uploadImage() : " + status);
         
         }catch (IOException e) {
 			e.printStackTrace();
