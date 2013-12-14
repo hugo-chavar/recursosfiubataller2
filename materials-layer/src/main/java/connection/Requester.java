@@ -1,8 +1,11 @@
 package connection;
 
+import java.util.List;
+
 import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
+import model.Recurso;
 
 
 public enum Requester {
@@ -43,6 +46,16 @@ public enum Requester {
 	
 	public Link getLink(int IDAmbiente, int IDLink) {
 		return this.linkReq.get(IDAmbiente, IDLink);
+	}
+
+	public List<Recurso> getRecursosAmbiente(int idAmbiente) {
+		// TODO:Yami, falta implementar este metodo
+		return null;
+	}
+
+	public boolean getPermisoUsuario(Integer idRecurso, int idUsuario) {
+		// TODO:Yami, falta implementar este metodo
+		return true;
 	}
 	
 }

@@ -24,13 +24,12 @@ import javax.jws.soap.SOAPBinding.Style;
 public interface Materials {
 
 	@WebMethod String sayHello(String name);
-	//@WebMethod ListaDeRecursos obtenerRecursos(int idAmbiente,int idUsuario);
 	@WebMethod @WebResult(name="recursos") List<Recurso> obtenerRecursos(int idAmbiente,int idUsuario);
 	@WebMethod Encuesta getEncuesta(int idAmbiente, int idRecurso);
 	@WebMethod EncuestaRespondida getEncuestaRespondida(int IdAmbiente, int idRecurso, int idUsuario);
 	@WebMethod void agregarEncuestaRespondida(EncuestaRespondida respondida,int idAmbiente);
-	@WebMethod void agregarLink(Link link);
-	@WebMethod void agregarEncuesta(Encuesta encuesta);
+	@WebMethod void agregarLink(Link link,int idUsuario);
+	@WebMethod void agregarEncuesta(Encuesta encuesta,int idUsuario);
 	//@WebMethod String setArchivo(int idAmbiente,String name,String ext, File file );
 	//@WebMethod Archivo getArchivo(int idAmbiente,int idRecurso );
 }
