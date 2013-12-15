@@ -13,9 +13,6 @@ import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
-import model.Pregunta;
-import model.PreguntaRespuestaACompletar;
-import model.PreguntaRespuestaFija;
 import model.Recurso;
 import connection.Requester;
 
@@ -36,27 +33,12 @@ public class MaterialsImpl implements Materials {
 //	}
 	
 	@Override
-	public void agregarEncuesta(Encuesta encuesta,int idUsuario) {
-		if(Requester.INSTANCE.getPermisoUsuario(encuesta.getIdRecurso(),idUsuario)){
+	public void agregarEncuesta(Encuesta encuesta, int idUsuario) {
+		if (Requester.INSTANCE.getPermisoUsuario(encuesta.getIdRecurso(), idUsuario)) {
 			encuesta.recuperarDatosVisibles();
-//			for(Pregunta pregunta : encuesta.getPreguntas()){
-//				if (pregunta.getOpciones().isEmpty()){
-//					PreguntaRespuestaACompletar pregunta2=new PreguntaRespuestaACompletar();
-//					if(!pregunta.getCorrectas().isEmpty())
-//						pregunta2.setRespuesta(pregunta.getCorrectas().get(0));
-//					pregunta=pregunta2;
-//				}
-//				else{
-//					PreguntaRespuestaFija pregunta2=new PreguntaRespuestaFija();
-//					pregunta2.setRespuestasPosibles(pregunta.getOpciones());
-//					for(String res : pregunta.getCorrectas())
-//						pregunta2.addRespuestaCorrecta(res);
-//					pregunta=pregunta2;	
-//				}
-//			}
 			Requester.INSTANCE.saveEncuesta(encuesta);
 			System.out.println("Guardando encuesta: " + encuesta.getDescripcion());
-		}		
+		}
 	}
 	
 //	@Override
@@ -76,32 +58,31 @@ public class MaterialsImpl implements Materials {
 //	}
 	
 	@Override
-	public void agregarLink(Link link,int idUsuario){
-		if(Requester.INSTANCE.getPermisoUsuario(link.getIdRecurso(),idUsuario)){
+	public void agregarLink(Link link, int idUsuario) {
+		if (Requester.INSTANCE.getPermisoUsuario(link.getIdRecurso(), idUsuario)) {
 			Requester.INSTANCE.saveLink(link);
 		}
-		//TODO:link.setId(pedirIdLinkBd());
 	}
 	
-	@Override 
-	public Encuesta getEncuesta(int idAmbiente, int idRecurso){
-		Encuesta encuesta= Requester.INSTANCE.getEncuesta(idAmbiente,idRecurso);
+	@Override
+	public Encuesta getEncuesta(int idAmbiente, int idRecurso) {
+		Encuesta encuesta = Requester.INSTANCE.getEncuesta(idAmbiente, idRecurso);
 		encuesta.completarDatosVisibles();
 		return encuesta;
 	}
 	
 	@Override
-	public void agregarEncuestaRespondida(EncuestaRespondida respondida,int idAmbiente){
-		Encuesta encuesta= Requester.INSTANCE.getEncuesta(idAmbiente,respondida.getIdRecurso());
-		if(encuesta.esEvaluada()){
+	public void agregarEncuestaRespondida(EncuestaRespondida respondida, int idAmbiente) {
+		Encuesta encuesta = Requester.INSTANCE.getEncuesta(idAmbiente, respondida.getIdRecurso());
+		if (encuesta.esEvaluada()) {
 			respondida.evaluar(encuesta);
 		}
-		 Requester.INSTANCE.saveEncuestaRespondida(respondida);
+		Requester.INSTANCE.saveEncuestaRespondida(respondida);
 	}
 	
 	@Override
-	public EncuestaRespondida getEncuestaRespondida(int IdAmbiente, int idRecurso, int idUsuario){
-		EncuestaRespondida respondida= Requester.INSTANCE.getEncuestaRespondida(IdAmbiente,idRecurso,idUsuario);
+	public EncuestaRespondida getEncuestaRespondida(int IdAmbiente, int idRecurso, int idUsuario) {
+		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida(IdAmbiente, idRecurso, idUsuario);
 		return respondida;
 	}
 	
@@ -111,12 +92,11 @@ public class MaterialsImpl implements Materials {
 		List<Recurso> recursosPermitidos = new ArrayList<Recurso>();
 
 		// Obtengo los recursos
-		recursos=Requester.INSTANCE.getRecursosAmbiente(idAmbiente);
+		recursos = Requester.INSTANCE.getRecursosAmbiente(idAmbiente);
 		// Chequeo Recursos permitidos
-		for (int i = 0; i < recursos.size(); i++) {
-			if (Requester.INSTANCE.getPermisoUsuario(recursos.get(i).getIdRecurso(),
-					idUsuario)) {
-				recursosPermitidos.add(recursos.get(i));
+		for (Recurso r:  recursos) {
+			if (Requester.INSTANCE.getPermisoUsuario(r.getIdRecurso(), idUsuario)) {
+				recursosPermitidos.add(r);
 			}
 		}
 		return recursosPermitidos;
