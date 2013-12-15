@@ -38,21 +38,22 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public void agregarEncuesta(Encuesta encuesta,int idUsuario) {
 		if(Requester.INSTANCE.getPermisoUsuario(encuesta.getIdRecurso(),idUsuario)){
-			for(Pregunta pregunta : encuesta.getPreguntas()){
-				if (pregunta.getOpciones().isEmpty()){
-					PreguntaRespuestaACompletar pregunta2=new PreguntaRespuestaACompletar();
-					if(!pregunta.getCorrectas().isEmpty())
-						pregunta2.setRespuesta(pregunta.getCorrectas().get(0));
-					pregunta=pregunta2;
-				}
-				else{
-					PreguntaRespuestaFija pregunta2=new PreguntaRespuestaFija();
-					pregunta2.setRespuestasPosibles(pregunta.getOpciones());
-					for(String res : pregunta.getCorrectas())
-						pregunta2.addRespuestaCorrecta(res);
-					pregunta=pregunta2;	
-				}
-			}
+			encuesta.recuperarDatosVisibles();
+//			for(Pregunta pregunta : encuesta.getPreguntas()){
+//				if (pregunta.getOpciones().isEmpty()){
+//					PreguntaRespuestaACompletar pregunta2=new PreguntaRespuestaACompletar();
+//					if(!pregunta.getCorrectas().isEmpty())
+//						pregunta2.setRespuesta(pregunta.getCorrectas().get(0));
+//					pregunta=pregunta2;
+//				}
+//				else{
+//					PreguntaRespuestaFija pregunta2=new PreguntaRespuestaFija();
+//					pregunta2.setRespuestasPosibles(pregunta.getOpciones());
+//					for(String res : pregunta.getCorrectas())
+//						pregunta2.addRespuestaCorrecta(res);
+//					pregunta=pregunta2;	
+//				}
+//			}
 			Requester.INSTANCE.saveEncuesta(encuesta);
 			System.out.println("Guardando encuesta: " + encuesta.getDescripcion());
 		}		
@@ -85,9 +86,7 @@ public class MaterialsImpl implements Materials {
 	@Override 
 	public Encuesta getEncuesta(int idAmbiente, int idRecurso){
 		Encuesta encuesta= Requester.INSTANCE.getEncuesta(idAmbiente,idRecurso);
-		for(Pregunta pregunta : encuesta.getPreguntas()){
-			pregunta.completarDatosVisibles();
-		}
+		encuesta.completarDatosVisibles();
 		return encuesta;
 	}
 	
