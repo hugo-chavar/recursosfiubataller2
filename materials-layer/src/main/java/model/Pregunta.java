@@ -24,9 +24,9 @@ public class Pregunta {
 	@XmlAttribute
 	protected String enunciado;
 	@XmlAttribute(required=false)
-	private List<String> opciones;
+	protected List<String> opciones=new ArrayList<String>();
 	@XmlAttribute(required=true)
-	private List<String> correctas;
+	protected List<String> correctas=new ArrayList<String>();
 	
 	
 
@@ -109,6 +109,17 @@ public class Pregunta {
 	
 	public Integer evaluar(PreguntaRespondida respondida) {
 		return -1;
+	}
+
+	public List<String> getOpciones() {
+		return this.opciones;
+	}
+	
+	public List<String> getCorrectas() {
+		return this.correctas;
+	}
+
+	public void completarDatosVisibles() {
 	}
 
 }

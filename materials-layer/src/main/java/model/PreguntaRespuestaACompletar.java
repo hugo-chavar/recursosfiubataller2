@@ -1,8 +1,10 @@
 package model;
 
+import java.util.ArrayList;
+
 public class PreguntaRespuestaACompletar extends Pregunta {
 
-	public String respuesta;
+	public String respuesta=null;
 	
 	public PreguntaRespuestaACompletar() {
 		super();
@@ -56,6 +58,14 @@ public class PreguntaRespuestaACompletar extends Pregunta {
 	@Override
 	public Integer getNroCorrectas() {
 		return 1;
+	}
+	
+	@Override
+	public void completarDatosVisibles() {
+		this.opciones=new ArrayList<String>();
+		this.correctas=new ArrayList<String>();
+		if(this.respuesta!=null)
+			this.correctas.add(this.respuesta);
 	}
 
 }

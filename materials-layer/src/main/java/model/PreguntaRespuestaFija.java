@@ -134,4 +134,11 @@ public class PreguntaRespuestaFija extends Pregunta {
 		return this.respuestasCorrectas.size();
 	}
 
+	@Override
+	public void completarDatosVisibles() {
+		opciones=respuestasPosibles;
+		for(Integer n : this.respuestasCorrectas)
+			correctas.add(respuestasPosibles.get(n));
+	}
+	
 }
