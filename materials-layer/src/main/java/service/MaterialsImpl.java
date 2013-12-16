@@ -15,9 +15,9 @@ import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
 import connection.Requester;
-
-// @MTOM
+@MTOM 
 @WebService(endpointInterface = "service.Materials")
+
 public class MaterialsImpl implements Materials {
 
 	@Override
@@ -41,21 +41,22 @@ public class MaterialsImpl implements Materials {
 		}
 	}
 	
-//	@Override
-//	public String setArchivo(int idAmbiente, String name,String ext, File file){
-//		if(file != null){
-//			Archivo File = new Archivo();
-//			File.setNombreArchivo(name);
-//			File.setTipoArchivo(ext);
-//			File.setRawFile(new DataHandler(new FileDataSource(file)));
-//	        //TODO: llamar a la capa de integracion para que guarde el archivo
-//			return "Archivo subido Correctamente";
-//			
-//		}
-//		else{
-//			return "ERROR al subir el archivo";
-//		}
-//	}
+	@Override
+	public String setArchivo(int idAmbiente, String name,String ext, File file){
+		if(file != null){
+			Archivo File = new Archivo();
+			File.setNombreArchivo(name);
+			File.setTipoArchivo(ext);
+			File.setRawFile(new DataHandler(new FileDataSource(file)));
+	        //TODO: llamar a la capa de integracion para que guarde el archivo
+			return "Archivo subido Correctamente";
+			
+		}
+		else{
+			return "ERROR al subir el archivo";
+		}
+		//return "hola";
+	}
 	
 	@Override
 	public void agregarLink(Link link, int idUsuario) {

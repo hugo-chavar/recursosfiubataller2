@@ -17,9 +17,11 @@ import model.Recurso;
 
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
+import javax.xml.ws.BindingType;
 
 
 //@SOAPBinding(style = Style.RPC)
+@BindingType(value = javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
 @WebService
 public interface Materials {
 
@@ -30,6 +32,6 @@ public interface Materials {
 	@WebMethod void agregarEncuestaRespondida(EncuestaRespondida respondida,int idAmbiente);
 	@WebMethod void agregarLink(Link link,int idUsuario);
 	@WebMethod void agregarEncuesta(Encuesta encuesta,int idUsuario);
-	//@WebMethod String setArchivo(int idAmbiente,String name,String ext, File file );
+	@WebMethod String setArchivo(int idAmbiente,String name,String ext, File file);
 	//@WebMethod Archivo getArchivo(int idAmbiente,int idRecurso );
 }

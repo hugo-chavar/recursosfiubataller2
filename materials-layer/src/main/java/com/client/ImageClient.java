@@ -43,8 +43,8 @@ public class ImageClient{
         		
 //        File file = new File(path);
 //        //enable MTOM in client
-//        BindingProvider bp = (BindingProvider) imageServer;
-//        SOAPBinding binding = (SOAPBinding) bp.getBinding();
+        BindingProvider bp = (BindingProvider) imageServer;
+        SOAPBinding binding = (SOAPBinding) bp.getBinding();
 //        binding.setMTOMEnabled(true);
    
 //        String status = imageServer.setArchivo(0,"aca iria su nombre" ,"aca su extension", file);
