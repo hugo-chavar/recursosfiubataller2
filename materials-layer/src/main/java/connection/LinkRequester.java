@@ -1,7 +1,6 @@
 package connection;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 import model.Link;
 
@@ -18,12 +17,12 @@ import connection.cache.Cache;
 
 public class LinkRequester {
 
-	public static int MAX_ITEMS_LIST = 10;
+//	public static int MAX_ITEMS_LIST = 10;
 	
 	private IntegracionWSStub stub;
 	private LinkParser parser;
-	private ArrayList<Link> cacheLinks;
-	private int indexToReplace;
+//	private ArrayList<Link> cacheLinks;
+//	private int indexToReplace;
 	private Cache<Link> cache;
 	
 	
@@ -55,17 +54,15 @@ public class LinkRequester {
 		}
     	
     	// Agrego al cache de links
-    	this.addToCacheLinks(link);
-    	//Modificado por Hugo
-    	cache.add(link);
+//    	this.addToCacheLinks(link); no guardar en cache porque falta el id
 	}
 	
 	public Link get(int IDAmbiente, int IDLink) {
 		// Busco en el cache de links
-		Link link = this.searchCachedLink(IDAmbiente, IDLink);
-		//Link target = new Link(IDAmbiente, IDLink,"");
-		if (link != null) { //if (cache.contains(target))
-			return link; //return cache.get(target);
+//		Link link = this.searchCachedLink(IDAmbiente, IDLink);
+		Link target = new Link(IDAmbiente, IDLink,"");
+		if (cache.contains(target)) { //if (link != null) { //
+			return cache.get(target); //return link; //
 		} else {
 	    	try {
 				// Consulto el link guardado
@@ -74,10 +71,10 @@ public class LinkRequester {
 		    	seleccionar_e.setXml(xml);
 		    	SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
 		    	String xml_resp_e = s_resp_e.get_return();
-		    	link = this.parser.deserializeLink(xml_resp_e);
+		    	Link link = this.parser.deserializeLink(xml_resp_e);
 		    	
 		    	// Agrego al cache de links
-		    	this.addToCacheLinks(link);
+//		    	this.addToCacheLinks(link);
 		    	//Modificado por Hugo
 		    	cache.add(link);
 		    	
@@ -98,31 +95,31 @@ public class LinkRequester {
 	// al usar la clase Cache 
 	//se evita codigo repetido.. solo hay q corregir en un lugar si hay cambios
 	// queda mas claro lo que hace el requester
-	private void addToCacheLinks(Link link) {
-		if (this.cacheLinks.size() < LinkRequester.MAX_ITEMS_LIST) {
-			this.cacheLinks.add(link);
-		} else {
-			this.cacheLinks.set(this.indexToReplace, link);
-			if (this.indexToReplace < (LinkRequester.MAX_ITEMS_LIST - 1)) {
-				this.indexToReplace++;
-			} else {
-				this.indexToReplace = 0;
-			}
-		}
-	}
-	
-	private Link searchCachedLink(int IDAmbiente, int IDLink) {
-		Link link = null;
-		int i = 0;
-		Boolean found = false;
-		while ((!found) && (i<this.cacheLinks.size())) {
-			if ((this.cacheLinks.get(i).getIdAmbiente() == IDAmbiente) && (this.cacheLinks.get(i).getIdRecurso() == IDLink)) {
-				link = this.cacheLinks.get(i);
-				found = true;
-			}
-			i++;
-		}
-		return link;
-	}
+//	private void addToCacheLinks(Link link) {
+//		if (this.cacheLinks.size() < LinkRequester.MAX_ITEMS_LIST) {
+//			this.cacheLinks.add(link);
+//		} else {
+//			this.cacheLinks.set(this.indexToReplace, link);
+//			if (this.indexToReplace < (LinkRequester.MAX_ITEMS_LIST - 1)) {
+//				this.indexToReplace++;
+//			} else {
+//				this.indexToReplace = 0;
+//			}
+//		}
+//	}
+//	
+//	private Link searchCachedLink(int IDAmbiente, int IDLink) {
+//		Link link = null;
+//		int i = 0;
+//		Boolean found = false;
+//		while ((!found) && (i<this.cacheLinks.size())) {
+//			if ((this.cacheLinks.get(i).getIdAmbiente() == IDAmbiente) && (this.cacheLinks.get(i).getIdRecurso() == IDLink)) {
+//				link = this.cacheLinks.get(i);
+//				found = true;
+//			}
+//			i++;
+//		}
+//		return link;
+//	}
 	
 }

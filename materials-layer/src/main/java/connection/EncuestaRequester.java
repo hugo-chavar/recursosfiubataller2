@@ -17,7 +17,7 @@ import com.ws.services.IntegracionWSStub.SeleccionarDatosResponse;
 
 public class EncuestaRequester {
 
-	public static int MAX_ITEMS_LIST = 10;
+//	public static int MAX_ITEMS_LIST = 10;
 
 	private IntegracionWSStub stub;
 	private EncuestaParser parser;
