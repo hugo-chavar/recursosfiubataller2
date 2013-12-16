@@ -35,7 +35,9 @@ public class Recurso {
 	public String getDescripcion() {
 		return descripcion;
 	}
-
+	public void setIdAmbiente(int id){
+		this.idAmbiente = id;
+	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}

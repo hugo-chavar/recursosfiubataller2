@@ -19,6 +19,7 @@ public enum Requester {
 	private Requester() {
 		System.out.println("Creando EncuestaRequester");
 		encuestaReq = new EncuestaRequester();
+		//archivoReq = new Ar
 		System.out.println("EncuestaRequester listo");
 	}
 	
