@@ -13,7 +13,7 @@ import service.MaterialsImpl;
 public class WSPublisher {
 
 	public static void main(String[] args) {
-		Endpoint ep = Endpoint.publish("http://localhost:8082/WS2/Greeting2",
+		Endpoint ep = Endpoint.publish("http://localhost:8084/WS2/Greeting2",
 				new MaterialsImpl());
 		SOAPBinding binding = (SOAPBinding) ep.getBinding();
 

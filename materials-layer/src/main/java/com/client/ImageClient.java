@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -24,15 +26,16 @@ import service.Materials;
 public class ImageClient{
 	
 	public static void main(String[] args) throws Exception {
+		//y esta prueba funciono en algun momento?. SI mira
 	   
-		URL url = new URL("http://localhost:8095/WS2/Greeting2?wsdl");
+		URL url = new URL("http://localhost:8083/WS2/Greeting2?wsdl");
         QName qname = new QName("http://service/", "MaterialsImplService");
 
         Service service = Service.create(url, qname);
         Materials imageServer = service.getPort(Materials.class);
 
         /************  test upload ****************/
-       // Image imgUpload = ImageIO.read(new File("/home/damian/multa2.pdf"));
+        Image imgUpload = ImageIO.read(new File("/home/damian/multa2.pdf"));
 		
         try{
         	System.out.println("ingrese el path de su archivo");
@@ -40,15 +43,16 @@ public class ImageClient{
         					new InputStreamReader(System.in));
         		String path = bufferRead.readLine();
         		
-        		
-//        File file = new File(path);
-//        //enable MTOM in client
+        
+        		File arch = new File(path);
+        DataHandler file = new DataHandler(new FileDataSource(arch));
+       //enable MTOM in client
         BindingProvider bp = (BindingProvider) imageServer;
         SOAPBinding binding = (SOAPBinding) bp.getBinding();
-//        binding.setMTOMEnabled(true);
+        binding.setMTOMEnabled(true);
    
-//        String status = imageServer.setArchivo(0,"aca iria su nombre" ,"aca su extension", file);
-//        System.out.println("imageServer.uploadImage() : " + status);
+       String status = imageServer.setArchivo(0,"aca iria su nombre" ,"aca su extension", file);
+        System.out.println("imageServer.uploadImage() : " + status);
         
         }catch (IOException e) {
 			e.printStackTrace();

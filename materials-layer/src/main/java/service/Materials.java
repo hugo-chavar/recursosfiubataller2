@@ -5,6 +5,7 @@ package service;
 import java.io.File;
 import java.util.List;
 
+import javax.activation.DataHandler;
 import javax.jws.WebMethod;
 import javax.jws.WebResult;
 import javax.jws.WebService;
@@ -17,6 +18,7 @@ import model.Recurso;
 
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
+import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.BindingType;
 
 
@@ -32,6 +34,6 @@ public interface Materials {
 	@WebMethod void agregarEncuestaRespondida(EncuestaRespondida respondida,int idAmbiente);
 	@WebMethod void agregarLink(Link link,int idUsuario);
 	@WebMethod void agregarEncuesta(Encuesta encuesta,int idUsuario);
-	@WebMethod String setArchivo(int idAmbiente,String name,String ext, File file);
-	//@WebMethod Archivo getArchivo(int idAmbiente,int idRecurso );
+	@WebMethod String setArchivo(int idAmbiente,String name,String ext,  @XmlMimeType("application/octet-stream") DataHandler data);
+	//@WebMethod Archivo getArchivo(int idAmbiente,int idRecurso ); esto no 
 }

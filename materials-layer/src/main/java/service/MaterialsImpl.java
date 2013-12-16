@@ -7,6 +7,7 @@ import java.util.List;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.jws.WebService;
+import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.soap.MTOM;
 
 import model.Archivo;
@@ -42,12 +43,12 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	@Override
-	public String setArchivo(int idAmbiente, String name,String ext, File file){
-		if(file != null){
+	public String setArchivo(int idAmbiente, String name,String ext, @XmlMimeType("application/octet-stream") DataHandler data){
+		if(data != null){
 			Archivo File = new Archivo();
 			File.setNombreArchivo(name);
 			File.setTipoArchivo(ext);
-			File.setRawFile(new DataHandler(new FileDataSource(file)));
+			File.setRawFile(data);
 	        //TODO: llamar a la capa de integracion para que guarde el archivo
 			return "Archivo subido Correctamente";
 			
