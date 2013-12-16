@@ -34,11 +34,12 @@ public enum Requester {
 	}
 
 	public void saveEncuestaRespondida(EncuestaRespondida respondida) {
+		// TODO: IDAmbiente no se utiliza para guardar en la BD?
 		encuestaReq.saveRespondida(respondida);
 	}
 
-	public EncuestaRespondida getEncuestaRespondida(int idAmbiente,int idRecurso, int idUsuario) {
-		return null;
+	public EncuestaRespondida getEncuestaRespondida(int IDAmbiente, int IDEncuesta, int IDUsuario) {
+		return encuestaReq.getRespondida(IDUsuario, IDEncuesta);
 	}
 	
 	public void saveLink(Link link) {

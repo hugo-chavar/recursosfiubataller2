@@ -1,17 +1,21 @@
 package model;
 
-public abstract class PreguntaRespondida {
 
-  public Integer idPregunta;
+public class PreguntaRespondida {
 
-  public PreguntaRespondida(Integer idPregunta){
-	  this.idPregunta=idPregunta;
-  }
+	public Integer idPregunta;
 
-public Integer getIdPregunta() {
-	return idPregunta;
-}
+	public PreguntaRespondida(Integer idPregunta) {
+		this.idPregunta = idPregunta;
+	}
 
-public abstract Integer evaluar(Pregunta pregunta);
-  
+	public Integer getIdPregunta() {
+		return idPregunta;
+	}
+	
+	public Integer evaluar(Pregunta pregunta) {
+		// TODO: Implementar
+		return -1;
+	}
+
 }

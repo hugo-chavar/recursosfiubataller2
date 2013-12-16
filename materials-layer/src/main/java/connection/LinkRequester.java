@@ -16,13 +16,9 @@ import connection.cache.Cache;
 
 
 public class LinkRequester {
-
-//	public static int MAX_ITEMS_LIST = 10;
 	
 	private IntegracionWSStub stub;
 	private LinkParser parser;
-//	private ArrayList<Link> cacheLinks;
-//	private int indexToReplace;
 	private Cache<Link> cache;
 	
 	
@@ -31,7 +27,6 @@ public class LinkRequester {
     	try {
 	    	this.stub = new IntegracionWSStub();
     	} catch (AxisFault e) {
-			// e.printStackTrace();
 			System.out.println("Error al intentar contectarse con Integracion");
     	}
 	}
@@ -45,24 +40,18 @@ public class LinkRequester {
 	    	GuardarDatosResponse g_resp = this.stub.guardarDatos(guardar);
 	    	System.out.println(g_resp.get_return());
     	} catch (AxisFault e) {
-//			 e.printStackTrace();
 			System.out.println("Error al intentar guardar la siguiente Link:");
 			System.out.println(link.getDescripcion());
 		} catch (RemoteException e) {
-//			 e.printStackTrace();
 			System.out.println("Error de conexion remota");
 		}
-    	
-    	// Agrego al cache de links
-//    	this.addToCacheLinks(link); no guardar en cache porque falta el id
 	}
 	
 	public Link get(int IDAmbiente, int IDLink) {
 		// Busco en el cache de links
-//		Link link = this.searchCachedLink(IDAmbiente, IDLink);
 		Link target = new Link(IDAmbiente, IDLink,"");
-		if (cache.contains(target)) { //if (link != null) { //
-			return cache.get(target); //return link; //
+		if (cache.contains(target)) {
+			return cache.get(target);
 		} else {
 	    	try {
 				// Consulto el link guardado
@@ -74,52 +63,17 @@ public class LinkRequester {
 		    	Link link = this.parser.deserializeLink(xml_resp_e);
 		    	
 		    	// Agrego al cache de links
-//		    	this.addToCacheLinks(link);
-		    	//Modificado por Hugo
 		    	cache.add(link);
 		    	
 		    	return link;
 	    	} catch (AxisFault e) {
-//				e.printStackTrace();
 				System.out.println("Error al intentar obtener el siguiente Link:");
 				System.out.println("IDLink: " + IDLink);
 			} catch (RemoteException e) {
-//				 e.printStackTrace();
 				System.out.println("Error de conexion remota");
 			}
 		}
     	return null;
 	}
-	
-	//Modificado por Hugo .. este metodo y el siguiente no se usarían
-	// al usar la clase Cache 
-	//se evita codigo repetido.. solo hay q corregir en un lugar si hay cambios
-	// queda mas claro lo que hace el requester
-//	private void addToCacheLinks(Link link) {
-//		if (this.cacheLinks.size() < LinkRequester.MAX_ITEMS_LIST) {
-//			this.cacheLinks.add(link);
-//		} else {
-//			this.cacheLinks.set(this.indexToReplace, link);
-//			if (this.indexToReplace < (LinkRequester.MAX_ITEMS_LIST - 1)) {
-//				this.indexToReplace++;
-//			} else {
-//				this.indexToReplace = 0;
-//			}
-//		}
-//	}
-//	
-//	private Link searchCachedLink(int IDAmbiente, int IDLink) {
-//		Link link = null;
-//		int i = 0;
-//		Boolean found = false;
-//		while ((!found) && (i<this.cacheLinks.size())) {
-//			if ((this.cacheLinks.get(i).getIdAmbiente() == IDAmbiente) && (this.cacheLinks.get(i).getIdRecurso() == IDLink)) {
-//				link = this.cacheLinks.get(i);
-//				found = true;
-//			}
-//			i++;
-//		}
-//		return link;
-//	}
 	
 }

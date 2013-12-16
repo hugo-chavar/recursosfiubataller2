@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class EncuestaRespondida {
 
 	private Integer evaluacion;
@@ -15,6 +16,14 @@ public class EncuestaRespondida {
 
 	private List<PreguntaRespondida> preguntasRespondidas;
 
+	public EncuestaRespondida() { }
+	
+	public EncuestaRespondida(Integer idRecurso, Integer idUsuario, int evaluacion) {
+		this.idRecurso = idRecurso;
+		this.idUsuario = idUsuario;
+		this.evaluacion = evaluacion;
+	}
+	
 	public Integer getIdUsuario() {
 		return idUsuario;
 	}
@@ -61,6 +70,48 @@ public class EncuestaRespondida {
 	public Integer getEvaluacion() {
 		return evaluacion;
 	}
+	
+	public String marshallPreguntasRespondidas() {
+		StringBuilder sb = new StringBuilder("");
+		for (PreguntaRespondida p : preguntasRespondidas) {
+			sb.append(p.getIdPregunta());
+			sb.append("|");
+		}
+		sb.setLength(sb.length() - 1);
+		return sb.toString();
+	}
 
+	public void unmarshallPreguntasRespondidas(String field) {
+		String[] splited = field.split("\\|");
+		List<PreguntaRespondida> result = new ArrayList<PreguntaRespondida>();
+
+		for (String s : splited) {
+			result.add(new PreguntaRespondida(Integer.valueOf(s)));
+		}
+		
+		preguntasRespondidas = result;
+	}
+	
+	public String marshallPreguntasCorrectas() {
+		StringBuilder sb = new StringBuilder("");
+		for (int p : preguntasCorrectas) {
+			sb.append(p);
+			sb.append("|");
+		}
+		sb.setLength(sb.length() - 1);
+		return sb.toString();
+	}
+
+	public void unmarshallPreguntasCorrectas(String field) {
+		String[] splited = field.split("\\|");
+		List<Integer> result = new ArrayList<Integer>();
+
+		for (String s : splited) {
+			result.add(Integer.valueOf(s));
+		}
+		
+		preguntasCorrectas = result;
+	}
+	
 }
 
