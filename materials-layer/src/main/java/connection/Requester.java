@@ -2,6 +2,7 @@ package connection;
 
 import java.util.List;
 
+import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
@@ -13,13 +14,14 @@ public enum Requester {
 	INSTANCE;
 	
 	private EncuestaRequester encuestaReq;
+	private ArchivoRequester archivoReq;
 	private LinkRequester linkReq;
 	
 	
 	private Requester() {
 		System.out.println("Creando EncuestaRequester");
 		encuestaReq = new EncuestaRequester();
-		//archivoReq = new Ar
+		archivoReq = new ArchivoRequester();
 		System.out.println("EncuestaRequester listo");
 	}
 	
@@ -28,7 +30,11 @@ public enum Requester {
 		encuestaReq.save(encuesta);
 		System.out.println("Fin del proceso Grabar Encuesta..");
 	}
-	
+	public void saveArchivo(Archivo archivo){
+		System.out.println("Guardando un archivo..");
+		archivoReq.save(archivo);
+		System.out.println("Fin del proceso Grabar archivo..");
+	}
 	public Encuesta getEncuesta(int IDAmbiente, int IDEncuesta) {
 		return encuestaReq.get(IDAmbiente, IDEncuesta);
 	}

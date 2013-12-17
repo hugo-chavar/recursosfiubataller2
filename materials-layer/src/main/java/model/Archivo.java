@@ -57,11 +57,12 @@ public class Archivo extends Recurso {
         this.rawFile = file;
     }
     
-    public String getStringFile() throws IOException{
+    public byte[] getByteArray() throws IOException{
     	 ByteArrayOutputStream output = new ByteArrayOutputStream();
     	 this.rawFile.writeTo(output);
     	 this.fileBinary = output.toByteArray();
-    	return new String(this.fileBinary, "UTF-8");
+    	//return new String(this.fileBinary, "UTF-8");
+    	 return this.fileBinary;
     }
 	public Integer getSize() {
 		return size;
@@ -71,13 +72,8 @@ public class Archivo extends Recurso {
 		this.size = size;
 	}
 
-	public void setStringFile(String file) {
-		try {
-			this.rawFile = new DataHandler(file.getBytes("UTF-8"),"application/octet-stream");;
-		} catch (UnsupportedEncodingException e) {
-			
-			e.printStackTrace();
-		}
+	public void setByteArray(byte[] byteArray) {
+		this.fileBinary =byteArray;
 		
 	}
 }

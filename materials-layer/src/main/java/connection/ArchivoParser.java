@@ -51,7 +51,7 @@ public class ArchivoParser extends Parser {
 		nodeElement.appendChild(extension);
 		
 	
-		Element file = doc.createElement(ArchivoParser.FILE_TAG);
+	/*	Element file = doc.createElement(ArchivoParser.FILE_TAG);
 		try {
 			file.appendChild(doc.createTextNode(String.valueOf(archivo.getStringFile())));
 		} catch (DOMException e) {
@@ -61,7 +61,7 @@ public class ArchivoParser extends Parser {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		nodeElement.appendChild(file);
+		nodeElement.appendChild(file);*/
 		
 		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
 		LSSerializer serializer = domImplLS.createLSSerializer();
@@ -96,7 +96,7 @@ public class ArchivoParser extends Parser {
 		archivo.setIdRecurso(IDArchivo);
 		archivo.setNombreArchivo(nombre);
 		archivo.setTipoArchivo(extension);
-		archivo.setStringFile(file);
+		//archivo.setStringFile(file);
 		
 		return archivo;
 	}

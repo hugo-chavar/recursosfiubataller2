@@ -27,25 +27,26 @@ public class ArchivoRequester {
 		}
 	}
 
-	public void save(Archivo encuesta) {
-	/*	String encuesta_str = parser.serializeArchivo(encuesta);
-		try {
-			GuardarDatos guardar = new GuardarArchivo();
-			guardar.setXml(encuesta_str);
-			GuardarDatosResponse g_resp = stub.guardarDatos(guardar);
-			System.out.println(g_resp.get_return());
-		} catch (AxisFault e) {
+	public void save(Archivo archivo) {
+		String archivo_str = parser.serializeArchivo(archivo);
+		//IntegracionStub.GuardarArchivoResponse responseArchivo = null;
+	//	try {
+			
+		//	requestArchivo = new IntegracionStub.GuardarArchivo();
+			
+		//OP1	requestArchivo.setArchivo(archivo.getByteArray()); asi me dijeron por mail
+		//OP2	requestArchivo.setArchivo(archivo.getFile()); asi lo hacen por el ejemplo q me mandaron
+		//	requestArchivo.setXml(archivo_str);
+			
+		//	responseArchivo = this.stub.guardarArchivo(requestArchivo);
+		//	System.out.println("La salida es : " + responseArchivo.get_return());		
+	//	} catch (AxisFault e) {
 			// e.printStackTrace();
 			System.out.println("Error al intentar guardar la siguiente Archivo:");
-			System.out.println(encuesta.getDescripcion());
-		} catch (RemoteException e) {
+			System.out.println(archivo.getDescripcion());
+	//	} catch (RemoteException e) {
 			// e.printStackTrace();
 			System.out.println("Error de conexion remota");
-		}
-*/
-		// Agrego al cache de encuestas
-		// Yami, la primera vez que viene no tiene el Id, no podes grabarlo aca
-		// solo ponelo en el cache cuando lo recuperas de integracion
-		// this.addToCacheArchivos(encuesta);
+	//	}
 	}
 }
