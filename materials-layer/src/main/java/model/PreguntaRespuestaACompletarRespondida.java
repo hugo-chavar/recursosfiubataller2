@@ -21,8 +21,10 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
   @Override
   public Integer evaluar(Pregunta pregunta) {
 	  if (pregunta.isCorrect(respuesta)) {
+		  esCorrecta=true;
 		  return 1;
 	  }
+	  esCorrecta=false;
 	  return 0;
   }
 

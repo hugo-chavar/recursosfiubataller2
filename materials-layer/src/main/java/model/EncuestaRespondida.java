@@ -8,8 +8,6 @@ public class EncuestaRespondida {
 
 	private Integer evaluacion;
 
-	private List<Integer> preguntasCorrectas = new ArrayList<Integer>();
-
 	private Integer idUsuario;
 
 	private Integer idRecurso;
@@ -57,7 +55,6 @@ public class EncuestaRespondida {
 				Integer respuesta = this.getPreguntasRespondidas().get(i)
 						.evaluar(preguntas.get(i));
 				if (respuesta > 0) {
-					this.preguntasCorrectas.add(i);
 					resultado += 100 * respuesta;
 				}
 			}
@@ -92,26 +89,26 @@ public class EncuestaRespondida {
 		preguntasRespondidas = result;
 	}
 	
-	public String marshallPreguntasCorrectas() {
-		StringBuilder sb = new StringBuilder("");
-		for (int p : preguntasCorrectas) {
-			sb.append(p);
-			sb.append("|");
-		}
-		sb.setLength(sb.length() - 1);
-		return sb.toString();
-	}
-
-	public void unmarshallPreguntasCorrectas(String field) {
-		String[] splited = field.split("\\|");
-		List<Integer> result = new ArrayList<Integer>();
-
-		for (String s : splited) {
-			result.add(Integer.valueOf(s));
-		}
-		
-		preguntasCorrectas = result;
-	}
+//	public String marshallPreguntasCorrectas() {
+//		StringBuilder sb = new StringBuilder("");
+//		for (int p : preguntasCorrectas) {
+//			sb.append(p);
+//			sb.append("|");
+//		}
+//		sb.setLength(sb.length() - 1);
+//		return sb.toString();
+//	}
+//
+//	public void unmarshallPreguntasCorrectas(String field) {
+//		String[] splited = field.split("\\|");
+//		List<Integer> result = new ArrayList<Integer>();
+//
+//		for (String s : splited) {
+//			result.add(Integer.valueOf(s));
+//		}
+//		
+//		preguntasCorrectas = result;
+//	}
 	
 }
 

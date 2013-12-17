@@ -3,8 +3,11 @@ package model;
 
 public class PreguntaRespondida {
 
-	public Integer idPregunta;
-
+	private Integer idPregunta;
+	
+	//Si no es evaluado siempre estara en false este atributo
+	protected boolean esCorrecta=false;
+	
 	public PreguntaRespondida(Integer idPregunta) {
 		this.idPregunta = idPregunta;
 	}
@@ -14,7 +17,6 @@ public class PreguntaRespondida {
 	}
 	
 	public Integer evaluar(Pregunta pregunta) {
-		// TODO: Implementar
 		return -1;
 	}
 

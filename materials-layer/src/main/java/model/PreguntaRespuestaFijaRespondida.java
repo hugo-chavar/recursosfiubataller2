@@ -21,23 +21,18 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 	@Override
 	public Integer evaluar(Pregunta pregunta) {
 		// Chequeo que coincida cantidad de respuestas
-		if (!pregunta.getNroCorrectas().equals(this.respuestas.size()))
+		if (!pregunta.getNroCorrectas().equals(this.respuestas.size())){
+			esCorrecta=false;
 			return 0;
+		}
 		// Chequeo cada una de las respuestas
 		for (Integer respuesta : respuestas) {
 			if (!pregunta.isCorrect(respuesta)) {
+				esCorrecta=false;
 				return 0;
 			}
 		}
-		// if(this.areAnsweredRepeated()){
-		// return 0;
-		// }
+		esCorrecta=true;
 		return 1;
 	}
-
-	// No deberia pasar
-	// private boolean areAnsweredRepeated() {
-	// Set<Integer> set = new HashSet<Integer>(this.respuestas);
-	// return respuestas.size() != set.size();
-	// }
 }

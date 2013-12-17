@@ -85,10 +85,10 @@ public class EncuestaParser extends Parser {
 		preguntas_resp.appendChild(doc.createTextNode(preguntas_resp_str));
 		nodeElement.appendChild(preguntas_resp);
 		
-		String preguntas_corr_str = respondida.marshallPreguntasCorrectas();
-		Element preguntas_corr = doc.createElement(EncuestaParser.PREGUNTAS_CORRECTAS_TAG);
-		preguntas_corr.appendChild(doc.createTextNode(preguntas_corr_str));
-		nodeElement.appendChild(preguntas_corr);
+//		String preguntas_corr_str = respondida.marshallPreguntasCorrectas();
+//		Element preguntas_corr = doc.createElement(EncuestaParser.PREGUNTAS_CORRECTAS_TAG);
+//		preguntas_corr.appendChild(doc.createTextNode(preguntas_corr_str));
+//		nodeElement.appendChild(preguntas_corr);
 		
 		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
 		LSSerializer serializer = domImplLS.createLSSerializer();
@@ -141,7 +141,7 @@ public class EncuestaParser extends Parser {
 		EncuestaRespondida respondida = new EncuestaRespondida(IDEncuesta, IDUsuario, evaluacion);
 		
 		respondida.unmarshallPreguntasRespondidas(fields.get(EncuestaParser.PREGUNTAS_RESPONDIDAS_TAG));
-		respondida.unmarshallPreguntasCorrectas(fields.get(EncuestaParser.PREGUNTAS_CORRECTAS_TAG));
+		//respondida.unmarshallPreguntasCorrectas(fields.get(EncuestaParser.PREGUNTAS_CORRECTAS_TAG));
 		
 		return respondida;
 	}
