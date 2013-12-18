@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class PreguntaRespondida {
+public abstract class PreguntaRespondida {
 
 	@XmlTransient
 	private Integer idPregunta;

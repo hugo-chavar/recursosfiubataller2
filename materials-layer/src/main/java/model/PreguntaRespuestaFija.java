@@ -7,7 +7,6 @@ public class PreguntaRespuestaFija extends Pregunta {
 
 	private List<String> respuestasPosibles = new ArrayList<String>();
 	private List<Integer> respuestasCorrectas = new ArrayList<Integer>();
-	private boolean multiplesRespuestasCorrectas;
 
 	public boolean isMultiplesRespuestasCorrectas() {
 		return respuestasCorrectas.size() > 1;
@@ -42,8 +41,6 @@ public class PreguntaRespuestaFija extends Pregunta {
 	@Override
 	public String marshall() {
 		StringBuilder sb = new StringBuilder("");
-		sb.append(multiplesRespuestasCorrectas);
-		sb.append(";");
 		sb.append(marshallRespuestasPosibles());
 		sb.append(marshallRespuestasCorrectas());
 		return super.marshall() + sb.toString();

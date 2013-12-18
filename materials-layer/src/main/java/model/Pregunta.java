@@ -45,7 +45,7 @@ public class Pregunta {
 	}
 
 	private static String unmarshallType(String marshalledPregunta) {
-		return marshalledPregunta.substring(0, marshalledPregunta.indexOf(";") - 1);
+		return marshalledPregunta.substring(0, marshalledPregunta.indexOf(";"));
 	}
 
 

@@ -11,15 +11,22 @@ public class EncuestaRespondida {
 	private Integer idUsuario;
 
 	private Integer idRecurso;
+	
+	private Integer idAmbiente;
 
 	private List<PreguntaRespondida> preguntasRespondidas;
 
 	public EncuestaRespondida() { }
 	
-	public EncuestaRespondida(Integer idRecurso, Integer idUsuario, int evaluacion) {
+	public EncuestaRespondida(Integer idAmbiente, Integer idRecurso, Integer idUsuario, int evaluacion) {
+		this.idAmbiente = idAmbiente;
 		this.idRecurso = idRecurso;
 		this.idUsuario = idUsuario;
 		this.evaluacion = evaluacion;
+	}
+	
+	public Integer getIdAmbiente() {
+		return this.idAmbiente;
 	}
 	
 	public Integer getIdUsuario() {
@@ -71,7 +78,7 @@ public class EncuestaRespondida {
 	public String marshallPreguntasRespondidas() {
 		StringBuilder sb = new StringBuilder("");
 		for (PreguntaRespondida p : preguntasRespondidas) {
-			sb.append(p.getIdPregunta());
+			// TODO: Hacer un marshal de PreguntaRespondida por cada tipo
 			sb.append("|");
 		}
 		sb.setLength(sb.length() - 1);
@@ -83,7 +90,7 @@ public class EncuestaRespondida {
 		List<PreguntaRespondida> result = new ArrayList<PreguntaRespondida>();
 
 		for (String s : splited) {
-			result.add(new PreguntaRespondida(Integer.valueOf(s)));
+			// TODO: Hacer un unmarshal de PreguntaRespondida por cada tipo
 		}
 		
 		preguntasRespondidas = result;
@@ -115,26 +122,16 @@ public class EncuestaRespondida {
 		}	
 	}
 	
-//	public String marshallPreguntasCorrectas() {
-//		StringBuilder sb = new StringBuilder("");
-//		for (int p : preguntasCorrectas) {
-//			sb.append(p);
-//			sb.append("|");
-//		}
-//		sb.setLength(sb.length() - 1);
-//		return sb.toString();
-//	}
-//
-//	public void unmarshallPreguntasCorrectas(String field) {
-//		String[] splited = field.split("\\|");
-//		List<Integer> result = new ArrayList<Integer>();
-//
-//		for (String s : splited) {
-//			result.add(Integer.valueOf(s));
-//		}
-//		
-//		preguntasCorrectas = result;
-//	}
+	@Override
+	public boolean equals(Object o) {
+		if (o.getClass().equals(this.getClass())) {
+			EncuestaRespondida r = (EncuestaRespondida) o;
+			return r.getIdRecurso().equals(getIdRecurso()) 
+				   && r.getIdAmbiente().equals(getIdAmbiente())
+						   && r.getIdUsuario().equals(getIdUsuario());
+		}
+		return false;
+	}
 	
 }
 

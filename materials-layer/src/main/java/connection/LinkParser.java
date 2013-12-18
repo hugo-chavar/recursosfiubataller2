@@ -1,6 +1,8 @@
 package connection;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import model.Link;
 
@@ -49,26 +51,32 @@ public class LinkParser extends Parser {
 		return xml;
 	}
 	
-	public Link deserializeLink(String xml) {
+	public List<Link> deserializeLink(String xml) {
+		List<Link> links = new ArrayList<Link>();
 		Document doc = this.convertToXMLDocument(xml);
 		NodeList nodes = doc.getElementsByTagName(LinkParser.LINK_TAG);
-		NodeList childNodes = nodes.item(0).getChildNodes(); 
-		HashMap<String, String> fields = new HashMap<String, String>();
-	    if (childNodes != null) {
-	        for (int i = 0; i < childNodes.getLength(); i++) {
-        	   Element element = (Element) childNodes.item(i);
-        	   fields.put(element.getNodeName(), element.getTextContent());
-	        }
-	    }
-	    
-		int IDAmbiente = Integer.parseInt(fields.get(LinkParser.IDAMBIENTE_TAG));
-		int IDLink = Integer.parseInt(fields.get(LinkParser.IDLINK_TAG));
-		String nombre = fields.get(LinkParser.NOMBRE_TAG);
-		String descripcion = fields.get(LinkParser.DESCRIPCION_TAG);		
 		
-		Link link = new Link(IDLink, IDAmbiente, descripcion);
-		link.setNombre(nombre);
-		return link;
+		for (int i = 0; i < nodes.getLength(); i++) {
+			NodeList childNodes = nodes.item(0).getChildNodes(); 
+			HashMap<String, String> fields = new HashMap<String, String>();
+		    if (childNodes != null) {
+		        for (int j = 0; j < childNodes.getLength(); j++) {
+	        	   Element element = (Element) childNodes.item(j);
+	        	   fields.put(element.getNodeName(), element.getTextContent());
+		        }
+		    }
+		    
+			int IDAmbiente = Integer.parseInt(fields.get(LinkParser.IDAMBIENTE_TAG));
+			int IDLink = Integer.parseInt(fields.get(LinkParser.IDLINK_TAG));
+			String nombre = fields.get(LinkParser.NOMBRE_TAG);
+			String descripcion = fields.get(LinkParser.DESCRIPCION_TAG);		
+			
+			Link link = new Link(IDLink, IDAmbiente, descripcion);
+			link.setNombre(nombre);
+			links.add(link);
+		}
+		
+		return links;
 	}
 	
 	public String serializeLinkQuery(int IDAmbiente, int IDLink) {
@@ -82,9 +90,13 @@ public class LinkParser extends Parser {
 		Element IDAmbiente_el = doc.createElement(LinkParser.IDAMBIENTE_TAG);
 		IDAmbiente_el.appendChild(doc.createTextNode(String.valueOf(IDAmbiente)));
 		nodeElement.appendChild(IDAmbiente_el);
-		Element IDLink_el = doc.createElement(LinkParser.IDLINK_TAG);
-		IDLink_el.appendChild(doc.createTextNode(String.valueOf(IDLink)));
-		nodeElement.appendChild(IDLink_el);
+		
+		// Si IDLink es -1 se buscan todas los links de un IDAmbiente.
+		if (IDLink >= 0) {
+			Element IDLink_el = doc.createElement(LinkParser.IDLINK_TAG);
+			IDLink_el.appendChild(doc.createTextNode(String.valueOf(IDLink)));
+			nodeElement.appendChild(IDLink_el);
+		}
 		
 		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
 		LSSerializer serializer = domImplLS.createLSSerializer();
