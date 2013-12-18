@@ -88,6 +88,32 @@ public class EncuestaRespondida {
 		
 		preguntasRespondidas = result;
 	}
+
+	public void completarDatosVisibles(List<Pregunta> preguntas) {
+		for(int i=0;i<preguntas.size();i++){
+			this.preguntasRespondidas.get(i).completarDatosVisibles(preguntas.get(i));
+		}
+	}
+
+	public void recuperarDatosVisibles(List<Pregunta> preguntas) {
+		List<PreguntaRespondida> preguntasRespondidasAux = this.preguntasRespondidas;
+		this.preguntasRespondidas = new ArrayList<PreguntaRespondida>();
+		for (Integer i=0;i<preguntas.size();i++){
+			Pregunta pregunta = preguntas.get(i);
+			if(pregunta.getOpciones().isEmpty()){
+				PreguntaRespuestaACompletarRespondida respondida = new PreguntaRespuestaACompletarRespondida(pregunta.getIdPregunta());
+				respondida.responder(preguntasRespondidasAux.get(i).respuestasVisibles.get(0));
+				this.preguntasRespondidas.add(respondida);
+			}
+			else{
+				PreguntaRespuestaFijaRespondida respondida = new PreguntaRespuestaFijaRespondida(pregunta.getIdPregunta());
+				for(String res : preguntasRespondidasAux.get(i).respuestasVisibles){
+					respondida.addRespuesta(pregunta.getIndiceRespuesta(res));
+				}
+				this.preguntasRespondidas.add(respondida);
+			}
+		}	
+	}
 	
 //	public String marshallPreguntasCorrectas() {
 //		StringBuilder sb = new StringBuilder("");

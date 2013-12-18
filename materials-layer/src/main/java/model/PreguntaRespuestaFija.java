@@ -133,6 +133,17 @@ public class PreguntaRespuestaFija extends Pregunta {
 	public Integer getNroCorrectas() {
 		return this.respuestasCorrectas.size();
 	}
+	
+	@Override
+	public Integer getIndiceRespuesta(String respuesta){
+		Integer i=0;
+		for(String res : respuestasPosibles ){
+			if(res==respuesta)
+				return i;
+			i++;
+		}
+		return -1;
+	}
 
 	@Override
 	public void completarDatosVisibles() {

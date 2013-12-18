@@ -27,5 +27,10 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 	  esCorrecta=false;
 	  return 0;
   }
+  
+  @Override
+  public void completarDatosVisibles(Pregunta pregunta) {
+	  respuestasVisibles.add(this.getRespuesta());
+  }
 
 }

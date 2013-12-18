@@ -76,6 +76,8 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public void agregarEncuestaRespondida(EncuestaRespondida respondida, int idAmbiente) {
 		Encuesta encuesta = Requester.INSTANCE.getEncuesta(idAmbiente, respondida.getIdRecurso());
+		encuesta.completarDatosVisibles();
+		respondida.recuperarDatosVisibles(encuesta.getPreguntas());
 		if (encuesta.esEvaluada()) {
 			respondida.evaluar(encuesta);
 		}
@@ -85,6 +87,8 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public EncuestaRespondida getEncuestaRespondida(int IdAmbiente, int idRecurso, int idUsuario) {
 		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida(IdAmbiente, idRecurso, idUsuario);
+		Encuesta encuesta= Requester.INSTANCE.getEncuesta(IdAmbiente, idRecurso);
+		respondida.completarDatosVisibles(encuesta.getPreguntas());
 		return respondida;
 	}
 	
@@ -103,73 +107,5 @@ public class MaterialsImpl implements Materials {
 		}
 		return recursosPermitidos;
 	}
-
-	// TODO: consultarPermisoUsuario NO DEBE EXISTIR, SE USA EL REQUESTER
-	// PARA CONSULTAR LOS PERMISOS
-	// TODO:METODOS QUE DEBEN COMPLETARSE CON LLAMADOS A PARTICIPACION
-//	private boolean consultarPermisoUsuario(int idRecurso, int idUsuario) {
-//		// Harcodeo
-//		if (idRecurso < idUsuario)
-//			return true;
-//		return false;
-//	}
-
-	// TODO:METODOS QUE DEBEN COMPLETARSE CON LLAMADAS A BASE DE DATOS
-	// Aca va la logica de la solicitud de un Recurso a la base de datos
-	// TODO: obtenerRecursoBd NO DEBE EXISTIR, SE USA EL REQUESTER
-	// PARA OBTENER LOS RECURSOS
-//	private Recurso obtenerRecursoBd(int idAmbiente, int idRecurso) {
-//		// Harcodeo segun id de Recurso el recurso a crear para prueba
-//		Recurso recurso;
-//		if (idRecurso <= 2) {
-//			recurso = new Archivo();
-//			recurso.setDescripcion("Archivo resumen del Tp");
-//		} else if (idRecurso > 2 && idRecurso <= 4) {
-//			recurso = new Link();
-//			recurso.setDescripcion("Link a pagina web");
-//		} else {
-//			recurso = new Encuesta();
-//			recurso.setDescripcion("Encuesta a pagina web");
-//		}
-//		recurso.setIdRecurso(idRecurso);
-//
-//		return recurso;
-//	}
-//
-//	// TODO: solicitarBdRecursosAmbiente NO DEBE EXISTIR, SE USA EL REQUESTER
-//	private List<Recurso> solicitarBdRecursosAmbiente(int idAmbiente) {
-//		// Harcodeo recursos del ambiente.
-//		List<Recurso> recursos = new ArrayList<Recurso>();
-//		Recurso recurso = new Archivo();
-//		recurso.setDescripcion("Archivo resumen del Tp");
-//		recurso.setIdRecurso(1);
-//		recursos.add(recurso);
-//		recurso = new Link();
-//		recurso.setDescripcion("Link a pagina web");
-//		recurso.setIdRecurso(3);
-//		recursos.add(recurso);
-//		recurso = new Encuesta();
-//		recurso.setDescripcion("Encuesta a pagina web");
-//		recurso.setIdRecurso(6);
-//		recursos.add(recurso);
-//
-//		return recursos;
-//	}
-
-	// TODO: agregarRecursoBD NO DEBE EXISTIR, SE USA EL REQUESTER
-//	private boolean agregarRecursoBD(int idAmbiente, Recurso recurso, int idUsuario) {
-//		// Harcodeo
-//		if (idUsuario > 5)
-//			return false;
-//		return true;
-//	}
-
-	// TODO: eliminarRecursoBD NO DEBE EXISTIR, SE USA EL REQUESTER
-//	private boolean eliminarRecursoBD(int idAmbiente, int idRecurso, int idUsuario) {
-//		// Harcodeo
-//		if (idUsuario > 5)
-//			return false;
-//		return true;
-//	}
 
 }

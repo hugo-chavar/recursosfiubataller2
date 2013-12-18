@@ -108,7 +108,7 @@ public class Pregunta {
 	}
 	
 	public Integer evaluar(PreguntaRespondida respondida) {
-		return -1;
+		return null;
 	}
 
 	public List<String> getOpciones() {
@@ -120,6 +120,10 @@ public class Pregunta {
 	}
 
 	public void completarDatosVisibles() {
+	}
+
+	public Integer getIndiceRespuesta(String Respuesta){
+		return 0;
 	}
 
 }

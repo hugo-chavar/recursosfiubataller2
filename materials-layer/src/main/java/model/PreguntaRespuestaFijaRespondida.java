@@ -35,4 +35,18 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 		esCorrecta=true;
 		return 1;
 	}
+	
+	@Override
+	public void completarDatosVisibles(Pregunta pregunta) {
+		pregunta.completarDatosVisibles();
+		List<String> posibles=pregunta.getOpciones();
+		for(Integer indice : respuestas){
+			this.respuestasVisibles.add(posibles.get(indice));
+		}
+	}
+
+	public void addRespuesta(Integer indiceRespuesta) {
+		this.respuestas.add(indiceRespuesta);
+		
+	}
 }
