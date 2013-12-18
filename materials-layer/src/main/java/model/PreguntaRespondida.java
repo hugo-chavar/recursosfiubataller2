@@ -23,6 +23,9 @@ public abstract class PreguntaRespondida {
 	@XmlAttribute(required=true)
 	protected List<String> respuestasVisibles = new ArrayList<String>();
 	
+	public PreguntaRespondida() {
+	}
+	
 	public PreguntaRespondida(Integer idPregunta) {
 		this.idPregunta = idPregunta;
 	}
