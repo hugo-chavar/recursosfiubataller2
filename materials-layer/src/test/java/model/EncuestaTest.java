@@ -98,7 +98,7 @@ public class EncuestaTest {
 	
 	@Test
 	public void marshallPreguntaRespuestaFijaWorksAsExpected() {
-		Assert.assertEquals("F;3;cual es un patron de diseno creacional;false;command,mediator,builder,facade;2", p3.marshall());
+		Assert.assertEquals("F;3;cual es un patron de diseno creacional;command,mediator,builder,facade;2", p3.marshall());
 	}
 	
 	@Test
