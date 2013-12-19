@@ -35,7 +35,7 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 
 	@Override
 	public void completarDatosVisibles(Pregunta pregunta) {
-		respuestasVisibles.add(this.getRespuesta());
+		respuestas.add(this.getRespuesta());
 	}
 	
 	@Override

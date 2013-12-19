@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 
-	public List<Integer> respuestas = new ArrayList<Integer>();
+	private List<Integer> respuestasfijas = new ArrayList<Integer>();
 
 	public PreguntaRespuestaFijaRespondida(Integer idPregunta) {
 		super(idPregunta);
@@ -25,22 +25,22 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 	}
 
 	public void responder(List<Integer> respuestas) {
-		this.respuestas = respuestas;
+		this.respuestasfijas = respuestas;
 	}
 
-	public List<Integer> getRespuestas() {
-		return respuestas;
+	public List<Integer> getRespuestasFijas() {
+		return respuestasfijas;
 	}
 
 	@Override
 	public Integer evaluar(Pregunta pregunta) {
 		// Chequeo que coincida cantidad de respuestas
-		if (!pregunta.getNroCorrectas().equals(this.respuestas.size())) {
+		if (!pregunta.getNroCorrectas().equals(this.respuestasfijas.size())) {
 			esCorrecta = false;
 			return 0;
 		}
 		// Chequeo cada una de las respuestas
-		for (Integer respuesta : respuestas) {
+		for (Integer respuesta : respuestasfijas) {
 			if (!pregunta.isCorrect(respuesta)) {
 				esCorrecta = false;
 				return 0;
@@ -54,13 +54,13 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 	public void completarDatosVisibles(Pregunta pregunta) {
 		pregunta.completarDatosVisibles();
 		List<String> posibles = pregunta.getOpciones();
-		for (Integer indice : respuestas) {
-			this.respuestasVisibles.add(posibles.get(indice));
+		for (Integer indice : respuestasfijas) {
+			this.respuestas.add(posibles.get(indice));
 		}
 	}
 
 	public void addRespuesta(Integer indiceRespuesta) {
-		this.respuestas.add(indiceRespuesta);
+		this.respuestasfijas.add(indiceRespuesta);
 	}
 	
 	@Override
@@ -72,11 +72,11 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 	}
 
 	private String marshallRespuestas() {
-		if (respuestas.isEmpty()) {
+		if (respuestasfijas.isEmpty()) {
 			return "null";
 		}
 		StringBuilder sb = new StringBuilder("");
-		for (Integer rta : respuestas) {
+		for (Integer rta : respuestasfijas) {
 			sb.append(rta);
 			sb.append(",");
 		}
@@ -86,9 +86,9 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 	
 	private void unmarshallRespuestas(String rtas) {
 		String[] splited = rtas.split(",");
-		respuestas = new ArrayList<Integer>();
+		respuestasfijas = new ArrayList<Integer>();
 		for (String s : splited) {
-			respuestas.add(Integer.valueOf(s));
+			respuestasfijas.add(Integer.valueOf(s));
 		}
 
 	}

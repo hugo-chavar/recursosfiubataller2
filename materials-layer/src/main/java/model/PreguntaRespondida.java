@@ -27,7 +27,11 @@ public class PreguntaRespondida {
 	protected Boolean esCorrecta = null;
 
 	@XmlAttribute(required = true)
-	protected List<String> respuestasVisibles = new ArrayList<String>();
+	protected List<String> respuestas = new ArrayList<String>();
+
+	public List<String> getRespuestas() {
+		return respuestas;
+	}
 
 	public static List<PreguntaRespondida> unmarshallAll(String field) {
 		String[] splited = field.split("\\|");
