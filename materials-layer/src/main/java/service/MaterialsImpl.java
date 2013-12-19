@@ -77,7 +77,7 @@ public class MaterialsImpl implements Materials {
 	public void agregarEncuestaRespondida(EncuestaRespondida respondida, int idAmbiente) {
 		Encuesta encuesta = Requester.INSTANCE.getEncuesta(idAmbiente, respondida.getIdRecurso());
 		encuesta.completarDatosVisibles();
-		respondida.recuperarDatosVisibles(encuesta.getPreguntas());
+		respondida.recuperarDatosVisibles(encuesta);
 		if (encuesta.esEvaluada()) {
 			respondida.evaluar(encuesta);
 		}
