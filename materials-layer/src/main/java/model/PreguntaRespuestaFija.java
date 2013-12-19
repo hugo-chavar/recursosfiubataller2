@@ -83,6 +83,9 @@ public class PreguntaRespuestaFija extends Pregunta {
 	}
 
 	private void unmarshallRespuestasPosibles(String rtas) {
+		if ("null".equals(rtas)) {
+			return;
+		}
 		String[] splited = rtas.split(",");
 		respuestasPosibles = new ArrayList<String>();
 		for (String s : splited) {
@@ -92,6 +95,9 @@ public class PreguntaRespuestaFija extends Pregunta {
 	}
 
 	private void unmarshallRespuestasCorrectas(String rtas) {
+		if ("null".equals(rtas)) {
+			return;
+		}
 		String[] splited = rtas.split(",");
 		respuestasCorrectas = new ArrayList<Integer>();
 		for (String s : splited) {
@@ -138,10 +144,10 @@ public class PreguntaRespuestaFija extends Pregunta {
 	}
 	
 	@Override
-	public Integer getIndiceRespuesta(String respuesta){
-		Integer i=0;
-		for(String res : respuestasPosibles ){
-			if(res==respuesta)
+	public Integer getIndiceRespuesta(String respuesta) {
+		Integer i = 0;
+		for (String res : respuestasPosibles) {
+			if (res == respuesta)
 				return i;
 			i++;
 		}

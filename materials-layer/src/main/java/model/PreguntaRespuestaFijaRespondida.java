@@ -17,6 +17,10 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 		type = ANSWERED_QUESTION_FIXED_TYPE;
 	}
 
+	public PreguntaRespuestaFijaRespondida() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void unmarshall(String s) {
 		super.unmarshall(s);
 		String[] splited = s.split(";");
@@ -85,6 +89,9 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 	}
 	
 	private void unmarshallRespuestas(String rtas) {
+		if ("null".equals(rtas)) {
+			return;
+		}
 		String[] splited = rtas.split(",");
 		respuestasfijas = new ArrayList<Integer>();
 		for (String s : splited) {

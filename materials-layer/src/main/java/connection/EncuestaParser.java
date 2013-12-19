@@ -17,16 +17,16 @@ import model.EncuestaRespondida;
 public class EncuestaParser extends Parser {
 
 	public static String ENCUESTA_TAG = "Encuesta";
-	public static String IDENCUESTA_TAG = "IDEncuesta";
-	public static String IDAMBIENTE_TAG = "IDAmbiente";
-	public static String DESCRIPCION_TAG = "Descripcion";
-	public static String EVALUADA_TAG = "Evaluada";
-	public static String PREGUNTAS_TAG = "Preguntas";
+	public static String IDENCUESTA_TAG = "idRecurso";
+	public static String IDAMBIENTE_TAG = "idAmbiente";
+	public static String DESCRIPCION_TAG = "descripcion";
+	public static String EVALUADA_TAG = "evaluada";
+	public static String PREGUNTAS_TAG = "preguntas";
 	
-	public static String ENCUESTA_RESPONDIDA_TAG = "EncuestaRespondida";
-	public static String IDUSUARIO_TAG = "IDUsuario";
+	public static String ENCUESTA_RESPONDIDA_TAG = "encuestaRespondida";
+	public static String IDUSUARIO_TAG = "idUsuario";
 	public static String EVALUACION_TAG = "Evaluacion";
-	public static String PREGUNTAS_RESPONDIDAS_TAG = "PreguntasRespondidas";
+	public static String PREGUNTAS_RESPONDIDAS_TAG = "preguntasRespondidas";
 	
 	
 	public String serializeEncuesta(Encuesta encuesta) {
@@ -47,7 +47,7 @@ public class EncuestaParser extends Parser {
 		descripcion.appendChild(doc.createTextNode(encuesta.getDescripcion()));
 		nodeElement.appendChild(descripcion);
 		Element evaluada = doc.createElement(EncuestaParser.EVALUADA_TAG);
-		evaluada.appendChild(doc.createTextNode(String.valueOf(encuesta.esEvaluada())));
+		evaluada.appendChild(doc.createTextNode(String.valueOf(encuesta.isEvaluada())));
 		nodeElement.appendChild(evaluada);
 		
 		String preguntas_str = encuesta.marshallPreguntas();

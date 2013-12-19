@@ -3,9 +3,17 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlValue;
+
+@XmlRootElement
 public class Encuesta extends Recurso {
 
 	private int countOptions = 0;
+
+	@XmlAttribute
 	private boolean evaluada;
 	private List<Pregunta> preguntas = new ArrayList<Pregunta>();
 
@@ -20,7 +28,7 @@ public class Encuesta extends Recurso {
 		this.tipo = "Encuesta";
 	}
 
-	public boolean esEvaluada() {
+	public boolean isEvaluada() {
 		return evaluada;
 	}
 
