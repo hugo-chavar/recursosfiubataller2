@@ -13,7 +13,7 @@ public class EncuestaTest {
 	private static Integer CORRECT = 1;
 
 	Encuesta encuesta;
-	Pregunta p1, p2, p3, p4, p5;
+	Pregunta p1, p2, p3, p4, p5, p6, p7;
 
 	@Before
 	public void setUp() throws Exception {
@@ -89,6 +89,9 @@ public class EncuestaTest {
 		p5.addRespuestaCorrecta("4");
 		
 		encuesta.addPregunta(p5);
+		
+		p6 = new PreguntaRespuestaFija();
+		p7 = new PreguntaRespuestaACompletar();
 	}
 
 	@Test
@@ -193,45 +196,30 @@ public class EncuestaTest {
 		Assert.assertEquals(expected, response.evaluar(p4));
 		}
 	
-//	@Test
-//	public void answeredPreguntaRespuestaFijaEvaluationReturns0WhenAnswersAreRepeteadAndCorrect(){
-//		PreguntaRespuestaFijaRespondida response = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
-//		List<Integer> respuestas = new ArrayList<Integer>();
-//		respuestas.add(0);
-//		respuestas.add(7);
-//		respuestas.add(7);
-//		respuestas.add(11);
-//		respuestas.add(12);
-//		respuestas.add(6);
-//		response.responder(respuestas);
-//		Integer expected = INCORRECT;
-//		Assert.assertEquals(expected, response.evaluar(p4));
-//	}
-	
 	@Test
-	public void answered5AnswersCorrectlyAndEvaluationReturns100(){
-		
+	public void answered5AnswersCorrectlyAndEvaluationReturns100() {
+
 		EncuestaRespondida encuestaRes = new EncuestaRespondida();
 		ArrayList<PreguntaRespondida> responses = new ArrayList<PreguntaRespondida>();
-		
+
 		PreguntaRespuestaFijaRespondida response1 = new PreguntaRespuestaFijaRespondida(p1.getIdPregunta());
 		List<Integer> respuestas1 = new ArrayList<Integer>();
 		respuestas1.add(3);
 		response1.responder(respuestas1);
 		responses.add(response1);
-		
+
 		PreguntaRespuestaFijaRespondida response2 = new PreguntaRespuestaFijaRespondida(p2.getIdPregunta());
 		List<Integer> respuestas2 = new ArrayList<Integer>();
 		respuestas2.add(1);
 		response2.responder(respuestas2);
 		responses.add(response2);
-		
+
 		PreguntaRespuestaFijaRespondida response3 = new PreguntaRespuestaFijaRespondida(p3.getIdPregunta());
 		List<Integer> respuestas3 = new ArrayList<Integer>();
 		respuestas3.add(2);
 		response3.responder(respuestas3);
 		responses.add(response3);
-		
+
 		PreguntaRespuestaFijaRespondida response4 = new PreguntaRespuestaFijaRespondida(p4.getIdPregunta());
 		List<Integer> respuestas4 = new ArrayList<Integer>();
 		respuestas4.add(0);
@@ -242,16 +230,16 @@ public class EncuestaTest {
 		respuestas4.add(6);
 		response4.responder(respuestas4);
 		responses.add(response4);
-		
+
 		PreguntaRespuestaACompletarRespondida response5 = new PreguntaRespuestaACompletarRespondida(p5.getIdPregunta());
 		response5.responder("4");
 		responses.add(response5);
-		
-		encuestaRes.setPreguntasRespondidas(responses);	
-		
+
+		encuestaRes.setPreguntasRespondidas(responses);
+
 		encuestaRes.evaluar(encuesta);
-		Integer expected =100;
-		Assert.assertEquals(expected,encuestaRes.getEvaluacion());
+		Integer expected = 100;
+		Assert.assertEquals(expected, encuestaRes.getEvaluacion());
 	}
 	
 	@Test
@@ -300,4 +288,13 @@ public class EncuestaTest {
 		Assert.assertEquals(expected,encuestaRes.getEvaluacion());
 	}
 	
+	@Test
+	public void marshalingEmptyPreguntaRespuestaFijaDoesntThrowExceptions() {
+		Assert.assertEquals("F;0;null;null;null", p6.marshall());
+	}
+	
+	@Test
+	public void marshalingEmptyPreguntaRespuestaACompletarDoesntThrowExceptions() {
+		Assert.assertEquals("C;0;null;null", p7.marshall());
+	}
 }

@@ -5,10 +5,11 @@ import java.util.List;
 
 public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 
-	public List<Integer> respuestas;
+	public List<Integer> respuestas = new ArrayList<Integer>();
 
 	public PreguntaRespuestaFijaRespondida(Integer idPregunta) {
 		super(idPregunta);
+		type = ANSWERED_QUESTION_FIXED_TYPE;
 	}
 
 	public PreguntaRespuestaFijaRespondida(String s) {
@@ -60,7 +61,6 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 
 	public void addRespuesta(Integer indiceRespuesta) {
 		this.respuestas.add(indiceRespuesta);
-
 	}
 	
 	@Override
@@ -72,14 +72,16 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 	}
 
 	private String marshallRespuestas() {
-			StringBuilder sb = new StringBuilder("");
-			for (Integer rta : respuestas) {
-				sb.append(rta);
-				sb.append(",");
-			}
-			sb.setLength(sb.length() - 1);
-			sb.append(";");
-			return sb.toString();
+		if (respuestas.isEmpty()) {
+			return "null";
+		}
+		StringBuilder sb = new StringBuilder("");
+		for (Integer rta : respuestas) {
+			sb.append(rta);
+			sb.append(",");
+		}
+		sb.setLength(sb.length() - 1);
+		return sb.toString();
 	}
 	
 	private void unmarshallRespuestas(String rtas) {

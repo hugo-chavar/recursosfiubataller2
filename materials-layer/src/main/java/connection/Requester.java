@@ -48,6 +48,7 @@ public enum Requester {
 
 	public List<Recurso> getRecursosAmbiente(int IDAmbiente) {
 		List<Recurso> recursos = new ArrayList<Recurso>();
+		// TODO Yami.. tiene q ser solo de recursos
 		recursos.addAll(encuestaReq.getAll(IDAmbiente));
 		recursos.addAll(linkReq.getAll(IDAmbiente));
 		// TODO: Falta agregar archivos.

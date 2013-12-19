@@ -48,6 +48,9 @@ public class PreguntaRespuestaFija extends Pregunta {
 	}
 
 	private String marshallRespuestasPosibles() {
+		if (respuestasPosibles.isEmpty()) {
+			return "null;";
+		}
 		StringBuilder sb = new StringBuilder("");
 		for (String rta : respuestasPosibles) {
 			sb.append(rta);
@@ -59,6 +62,9 @@ public class PreguntaRespuestaFija extends Pregunta {
 	}
 
 	private String marshallRespuestasCorrectas() {
+		if (respuestasCorrectas.isEmpty()) {
+			return "null";
+		}
 		StringBuilder sb = new StringBuilder("");
 		for (Integer rta : respuestasCorrectas) {
 			sb.append(rta);

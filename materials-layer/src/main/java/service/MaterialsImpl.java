@@ -1,12 +1,10 @@
 package service;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
-import javax.jws.WebMethod;
+//import javax.activation.FileDataSource;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.soap.MTOM;
@@ -36,6 +34,7 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public void agregarEncuesta(Encuesta encuesta, int idUsuario) {
+		//TODO esto esta mal.. tiene q preguntar los permisos en el Ambiente y no en el recurso
 		if (Requester.INSTANCE.getPermisoUsuario(encuesta.getIdRecurso(), idUsuario)) {
 			encuesta.recuperarDatosVisibles();
 			Requester.INSTANCE.saveEncuesta(encuesta);
@@ -50,13 +49,13 @@ public class MaterialsImpl implements Materials {
 			File.setNombreArchivo(name);
 			File.setTipoArchivo(ext);
 			File.setRawFile(data);
-		//	Requester.INSTANCE.saveArchivo(File); TODO: ACA DEBERÏA ANDAR EL SAVE ARCHIVO
+		//	Requester.INSTANCE.saveArchivo(File); TODO: ACA DEBERIA ANDAR EL SAVE ARCHIVO
 			return "Archivo subido Correctamente";
 			
 		}
-		else{
+//		else{
 			return "ERROR al subir el archivo";
-		}
+//		}
 		//return "hola";
 	}
 	

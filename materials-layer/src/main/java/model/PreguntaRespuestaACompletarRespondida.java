@@ -2,7 +2,7 @@ package model;
 
 public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 
-	public String respuesta;
+	private String respuesta;
 
 	public PreguntaRespuestaACompletarRespondida(Integer idPregunta) {
 		super(idPregunta);
