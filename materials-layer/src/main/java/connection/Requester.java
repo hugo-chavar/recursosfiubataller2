@@ -3,6 +3,7 @@ package connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
@@ -14,18 +15,26 @@ public enum Requester {
 	INSTANCE;
 	
 	private EncuestaRequester encuestaReq;
+	private ArchivoRequester archivoReq;
 	private LinkRequester linkReq;
 	
 	
 	private Requester() {
 		encuestaReq = new EncuestaRequester();
-		//archivoReq = new Ar
+		archivoReq = new ArchivoRequester();
 	}
+	
 	
 	public void saveEncuesta(Encuesta encuesta) {
 		encuestaReq.save(encuesta);
 	}
 	
+	public void saveFile(Archivo archivo){
+		archivoReq.save(archivo);
+	}
+	public Archivo getArchivo(int IDAmbiente, int IDArchivo){
+		return archivoReq.getArchivo(IDAmbiente, IDArchivo);
+	}
 	public Encuesta getEncuesta(int IDAmbiente, int IDEncuesta) {
 		return encuestaReq.get(IDAmbiente, IDEncuesta);
 	}

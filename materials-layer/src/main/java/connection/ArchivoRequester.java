@@ -1,6 +1,10 @@
 package connection;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.rmi.RemoteException;
+
+import javax.activation.DataHandler;
 
 import model.Archivo;
 
@@ -48,5 +52,36 @@ public class ArchivoRequester {
 			// e.printStackTrace();
 			System.out.println("Error de conexion remota");
 	//	}
+	}
+	public Archivo getArchivo(int idAmbiente, int idRecurso){
+		//Archivo archivoAdevolver =  new Archivo();
+		String archivoXml="asc";
+		byte[] archivoRecuperado;
+		//IntegracionStub.ObtenerArchivoResponse responseArchivo = null;
+		//	try {
+				
+			//	requestArchivo = new IntegracionStub.ObtenerArchivo();
+				
+			//OP1 	archivoRecuperado = requestArchivo.getArchivo(idAmbiente,idRecurso); asi me dijeron por mail
+			//OP2	requestArchivo.setArchivo(archivo.getFile()); asi lo hacen por el ejemplo q me mandaron
+			//	String archivoXml = requestArchivo.getXml(archivo_str);
+				
+				Archivo adevolver = parser.deserializeArchivo(archivoXml);
+			//	adevolver.setByteArray(archivoRecuperado);
+			//	responseArchivo = this.stub.guardarArchivo(requestArchivo);
+			//	System.out.println("La salida es : " + responseArchivo.get_return());		
+		//	} catch (AxisFault e) {
+				// e.printStackTrace();
+		
+		try {
+			DataHandler arch = new DataHandler(new URL("/home/damian/aux"));
+			adevolver.setRawFile(arch);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return adevolver;
+		
 	}
 }

@@ -25,12 +25,12 @@ public class MaterialsImpl implements Materials {
 		return "Hello, Welcom to jax-ws " + name;
 	}
 
-//	@Override
-//	public Archivo getArchivo(int idAmbiente, int idRecurso){
-//		Archivo file = new Archivo();
-//		//TODO: llamar al web service de persistencia que me devuelva los datos de los archivos
-//		return file;
-//	}
+	@Override
+	public Archivo getArchivo(int idAmbiente, int idRecurso){
+	
+		Archivo file =Requester.INSTANCE.getArchivo(idAmbiente, idRecurso);
+		return file;
+	}
 	
 	@Override
 	public void agregarEncuesta(Encuesta encuesta, int idUsuario) {

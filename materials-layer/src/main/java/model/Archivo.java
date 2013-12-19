@@ -48,24 +48,30 @@ public class Archivo extends Recurso {
         this.tipoArchivo = fileType;
     }
  
-    public DataHandler getFile() {
+    public DataHandler getRawFile() {
         return rawFile;
     }
  
     public void setRawFile(DataHandler file)  {
     	
         this.rawFile = file;
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+   	 	try {
+			this.rawFile.writeTo(output);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+   	 	this.fileBinary = output.toByteArray();
     }
     
     public byte[] getByteArray() throws IOException{
-    	 ByteArrayOutputStream output = new ByteArrayOutputStream();
-    	 this.rawFile.writeTo(output);
-    	 this.fileBinary = output.toByteArray();
+    	
     	//return new String(this.fileBinary, "UTF-8");
     	 return this.fileBinary;
     }
 	public Integer getSize() {
-		return size;
+		return this.fileBinary.length;
 	}
 
 	public void setSize(Integer size) {
@@ -76,4 +82,5 @@ public class Archivo extends Recurso {
 		this.fileBinary =byteArray;
 		
 	}
+
 }
