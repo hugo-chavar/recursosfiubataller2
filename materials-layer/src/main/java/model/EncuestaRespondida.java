@@ -74,6 +74,9 @@ public class EncuestaRespondida {
 	}
 	
 	public String marshallPreguntasRespondidas() {
+		if (preguntasRespondidas.isEmpty()) {
+			return "null";
+		}
 		StringBuilder sb = new StringBuilder("");
 		for (PreguntaRespondida p : preguntasRespondidas) {
 			sb.append(p.marshall());

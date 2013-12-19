@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlValue;
 
 @XmlRootElement
 public class Encuesta extends Recurso {
@@ -47,6 +45,9 @@ public class Encuesta extends Recurso {
 	}
 
 	public String marshallPreguntas() {
+		if (preguntas.isEmpty()) {
+			return "null";
+		}
 		StringBuilder sb = new StringBuilder("");
 		for (Pregunta p : preguntas) {
 			sb.append(p.marshall());
