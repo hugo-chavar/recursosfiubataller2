@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.soap.MTOM;
@@ -106,6 +107,16 @@ public class MaterialsImpl implements Materials {
 			}
 		}
 		return recursosPermitidos;
+	}
+	
+	@Override 
+	public boolean borrarRecurso(int idAmbiente, int idRecurso,int idUsuario){
+		if (Requester.INSTANCE.getPermisoUsuario(idRecurso, idUsuario)){
+			Requester.INSTANCE.borrarRecurso(idAmbiente,idRecurso);
+			//En el caso de las encuestas habria que elimnar las respondidas tambien
+			return true;
+		}
+		return false;
 	}
 
 }

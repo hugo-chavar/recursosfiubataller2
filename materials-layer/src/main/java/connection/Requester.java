@@ -58,5 +58,9 @@ public enum Requester {
 		// TODO: Yami, falta implementar este metodo
 		return true;
 	}
+
+	public void borrarRecurso(int idAmbiente, int idRecurso) {
+		// TODO: Yami, falta implementar este metodo
+	}
 	
 }

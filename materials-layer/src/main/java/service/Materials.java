@@ -34,5 +34,6 @@ public interface Materials {
 	@WebMethod void agregarLink(Link link,int idUsuario);
 	@WebMethod void agregarEncuesta(Encuesta encuesta,int idUsuario);
 	@WebMethod String setArchivo(int idAmbiente,String name,String ext,  @XmlMimeType("application/octet-stream") DataHandler data);
+	@WebMethod boolean borrarRecurso(int idAmbiente, int idRecurso,int idUsuario);
 	//@WebMethod Archivo getArchivo(int idAmbiente,int idRecurso ); esto no 
 }
