@@ -59,8 +59,7 @@ public class EncuestaRespondida {
 		List<Pregunta> preguntas = encuesta.getPreguntas();
 		if (preguntas.size() == this.getPreguntasRespondidas().size()) {
 			for (int i = 0; i < preguntas.size(); i++) {
-				Integer respuesta = this.getPreguntasRespondidas().get(i)
-						.evaluar(preguntas.get(i));
+				Integer respuesta = this.getPreguntasRespondidas().get(i).evaluar(preguntas.get(i));
 				if (respuesta > 0) {
 					resultado += 100 * respuesta;
 				}
@@ -78,7 +77,7 @@ public class EncuestaRespondida {
 	public String marshallPreguntasRespondidas() {
 		StringBuilder sb = new StringBuilder("");
 		for (PreguntaRespondida p : preguntasRespondidas) {
-			// TODO: Hacer un marshal de PreguntaRespondida por cada tipo
+			sb.append(p.marshall());
 			sb.append("|");
 		}
 		sb.setLength(sb.length() - 1);
@@ -86,14 +85,7 @@ public class EncuestaRespondida {
 	}
 
 	public void unmarshallPreguntasRespondidas(String field) {
-		String[] splited = field.split("\\|");
-		List<PreguntaRespondida> result = new ArrayList<PreguntaRespondida>();
-
-		for (String s : splited) {
-			// TODO: Hacer un unmarshal de PreguntaRespondida por cada tipo
-		}
-		
-		preguntasRespondidas = result;
+		preguntasRespondidas =  PreguntaRespondida.unmarshallAll(field);;
 	}
 
 	public void completarDatosVisibles(List<Pregunta> preguntas) {

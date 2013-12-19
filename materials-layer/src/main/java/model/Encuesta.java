@@ -68,7 +68,7 @@ public class Encuesta extends Recurso {
 				if (!pregunta.getCorrectas().isEmpty()) {
 					pregunta2.setRespuesta(pregunta.getCorrectas().get(0));
 				}
-				this.preguntas.add(pregunta2);
+				addPregunta(pregunta2);
 			} else {
 				PreguntaRespuestaFija pregunta2 = new PreguntaRespuestaFija();
 				pregunta2.setEnunciado(pregunta.getEnunciado());
@@ -76,7 +76,7 @@ public class Encuesta extends Recurso {
 				for (String res : pregunta.getCorrectas()) {
 					pregunta2.addRespuestaCorrecta(res);
 				}
-				this.preguntas.add(pregunta2);
+				addPregunta(pregunta2);
 			}
 		}
 	}

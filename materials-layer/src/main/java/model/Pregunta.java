@@ -15,20 +15,18 @@ public class Pregunta {
 
 	protected static String FIXED_ANSWER_TYPE = "F";
 	protected static String ANSWER_TO_COMPLETE_TYPE = "C";
-	
+
 	@XmlTransient
 	protected Integer idPregunta = 0;
 	@XmlTransient
 	protected String type;
-	
+
 	@XmlAttribute
 	protected String enunciado;
-	@XmlAttribute(required=false)
-	protected List<String> opciones=new ArrayList<String>();
-	@XmlAttribute(required=true)
-	protected List<String> correctas=new ArrayList<String>();
-	
-	
+	@XmlAttribute(required = false)
+	protected List<String> opciones = new ArrayList<String>();
+	@XmlAttribute(required = true)
+	protected List<String> correctas = new ArrayList<String>();
 
 	public static List<Pregunta> unmarshallAll(String field) {
 		String[] splited = field.split("\\|");
@@ -48,12 +46,8 @@ public class Pregunta {
 		return marshalledPregunta.substring(0, marshalledPregunta.indexOf(";"));
 	}
 
-
-
 	public Pregunta() {
 	}
-
-
 
 	public String getEnunciado() {
 		return enunciado;
@@ -70,9 +64,9 @@ public class Pregunta {
 	public void setEnunciado(String enunciado) {
 		this.enunciado = enunciado;
 	}
-	
+
 	protected void addRespuestaCorrecta(String rta) {
-		
+
 	}
 
 	protected String marshall() {
@@ -92,7 +86,7 @@ public class Pregunta {
 		idPregunta = Integer.valueOf(splited[1]);
 		enunciado = splited[2];
 	}
-	
+
 	// --------------------- metodos "abstractos" -------------
 
 	public boolean isCorrect(Integer respuesta) {
@@ -102,11 +96,11 @@ public class Pregunta {
 	public boolean isCorrect(String respuesta) {
 		return false;
 	}
-	
+
 	public Integer getNroCorrectas() {
 		return -1;
 	}
-	
+
 	public Integer evaluar(PreguntaRespondida respondida) {
 		return null;
 	}
@@ -114,7 +108,7 @@ public class Pregunta {
 	public List<String> getOpciones() {
 		return this.opciones;
 	}
-	
+
 	public List<String> getCorrectas() {
 		return this.correctas;
 	}
@@ -122,7 +116,7 @@ public class Pregunta {
 	public void completarDatosVisibles() {
 	}
 
-	public Integer getIndiceRespuesta(String Respuesta){
+	public Integer getIndiceRespuesta(String Respuesta) {
 		return 0;
 	}
 
