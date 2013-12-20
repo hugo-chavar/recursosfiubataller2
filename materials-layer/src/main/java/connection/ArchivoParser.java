@@ -17,11 +17,10 @@ import org.w3c.dom.ls.LSSerializer;
 public class ArchivoParser extends Parser {
 	public static String ARCHIVO_TAG = "archivo";
 	public static String IDARCHIVO_TAG = "archivoId";
-	public static String IDAMBIENTE_TAG = "ambitoId";
 	public static String DESCRIPCION_TAG = "descripcion";
 	public static String NOMBRE_TAG = "nombre";
 	public static String EXTENSION_TAG = "tipo";
-	public static String FILE_TAG = "File";
+	public static String FILE_TAG = "file";
 	
 	public String serializeArchivo(Archivo archivo) {
 		
@@ -32,7 +31,7 @@ public class ArchivoParser extends Parser {
 		Element nodeElement = doc.createElement(ArchivoParser.ARCHIVO_TAG);
 		rootElement.appendChild(nodeElement);
 		
-		Element IDAmbiente = doc.createElement(ArchivoParser.IDAMBIENTE_TAG);
+		Element IDAmbiente = doc.createElement(Parser.AMBITOID_TAG);
 		IDAmbiente.appendChild(doc.createTextNode(String.valueOf(archivo.getIdAmbiente())));
 		nodeElement.appendChild(IDAmbiente);
 		Element IDArchivo = doc.createElement(ArchivoParser.IDARCHIVO_TAG);
@@ -83,7 +82,7 @@ public class ArchivoParser extends Parser {
 	        }
 	    }
 	    
-		int IDAmbiente = Integer.parseInt(fields.get(ArchivoParser.IDAMBIENTE_TAG));
+		int IDAmbiente = Integer.parseInt(fields.get(ArchivoParser.AMBITOID_TAG));
 		int IDArchivo = Integer.parseInt(fields.get(ArchivoParser.IDARCHIVO_TAG));
 		String descripcion = fields.get(ArchivoParser.DESCRIPCION_TAG);
 		String nombre = fields.get(ArchivoParser.NOMBRE_TAG);		

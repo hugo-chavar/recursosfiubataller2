@@ -15,6 +15,9 @@ import org.xml.sax.SAXException;
 public class Parser {	
 
 	public static String INITIAL_TAG = "WS";
+	public static String RECURSO_TAG = "recurso";
+	public static String RECURSOID_TAG = "recursoId";
+	public static String AMBITOID_TAG = "ambitoId";
 	
 	public Document buildXMLDocument() {
 		Document document = null;

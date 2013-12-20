@@ -16,8 +16,6 @@ import org.w3c.dom.ls.LSSerializer;
 public class LinkParser extends Parser {
 
 	public static String LINK_TAG = "link";
-	public static String IDLINK_TAG = "recursoId";
-	public static String IDAMBIENTE_TAG = "ambitoId";
 	public static String DESCRIPCION_TAG = "descripcion";
 	public static String NOMBRE_TAG = "nombre";
 	
@@ -30,10 +28,10 @@ public class LinkParser extends Parser {
 		Element nodeElement = doc.createElement(LinkParser.LINK_TAG);
 		rootElement.appendChild(nodeElement);
 		
-		Element IDAmbiente = doc.createElement(LinkParser.IDAMBIENTE_TAG);
+		Element IDAmbiente = doc.createElement(Parser.AMBITOID_TAG);
 		IDAmbiente.appendChild(doc.createTextNode(String.valueOf(link.getIdAmbiente())));
 		nodeElement.appendChild(IDAmbiente);
-		Element IDLink = doc.createElement(LinkParser.IDLINK_TAG);
+		Element IDLink = doc.createElement(Parser.RECURSOID_TAG);
 		IDLink.appendChild(doc.createTextNode(String.valueOf(link.getIdRecurso())));
 		nodeElement.appendChild(IDLink);
 		Element nombre = doc.createElement(LinkParser.NOMBRE_TAG);
@@ -66,8 +64,8 @@ public class LinkParser extends Parser {
 		        }
 		    }
 		    
-			int IDAmbiente = Integer.parseInt(fields.get(LinkParser.IDAMBIENTE_TAG));
-			int IDLink = Integer.parseInt(fields.get(LinkParser.IDLINK_TAG));
+			int IDAmbiente = Integer.parseInt(fields.get(LinkParser.AMBITOID_TAG));
+			int IDLink = Integer.parseInt(fields.get(LinkParser.RECURSOID_TAG));
 			String nombre = fields.get(LinkParser.NOMBRE_TAG);
 			String descripcion = fields.get(LinkParser.DESCRIPCION_TAG);		
 			
@@ -87,13 +85,13 @@ public class LinkParser extends Parser {
 		Element nodeElement = doc.createElement(LinkParser.LINK_TAG);
 		rootElement.appendChild(nodeElement);
 		
-		Element IDAmbiente_el = doc.createElement(LinkParser.IDAMBIENTE_TAG);
+		Element IDAmbiente_el = doc.createElement(LinkParser.AMBITOID_TAG);
 		IDAmbiente_el.appendChild(doc.createTextNode(String.valueOf(IDAmbiente)));
 		nodeElement.appendChild(IDAmbiente_el);
 		
 		// Si IDLink es -1 se buscan todas los links de un IDAmbiente.
 		if (IDLink >= 0) {
-			Element IDLink_el = doc.createElement(LinkParser.IDLINK_TAG);
+			Element IDLink_el = doc.createElement(LinkParser.RECURSOID_TAG);
 			IDLink_el.appendChild(doc.createTextNode(String.valueOf(IDLink)));
 			nodeElement.appendChild(IDLink_el);
 		}
