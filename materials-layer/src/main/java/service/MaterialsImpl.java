@@ -27,8 +27,8 @@ public class MaterialsImpl implements Materials {
 
 	@Override
 	public Archivo getArchivo(int idAmbiente, int idRecurso){
-	
-		Archivo file =Requester.INSTANCE.getArchivo(idAmbiente, idRecurso);
+		//Archivo file = new Archivo();
+		Archivo file = Requester.INSTANCE.getArchivo(idAmbiente, idRecurso);
 		return file;
 	}
 	

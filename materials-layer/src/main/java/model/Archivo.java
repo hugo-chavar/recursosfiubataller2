@@ -4,7 +4,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.activation.DataHandler;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 
+@XmlAccessorType(XmlAccessType.NONE)
 public class Archivo extends Recurso {
 
 	public Archivo(Integer idRecurso, Integer idAmbiente, String descripcion) {
@@ -18,15 +23,15 @@ public class Archivo extends Recurso {
 	}
 
 //	private String path;
-
+	@XmlTransient
 	private Integer tamanio;
-
+	@XmlElement
 	private String tipoArchivo;
-
+	@XmlElement
 	private String nombreArchivo;
-	
+	@XmlElement
 	private DataHandler rawFile;
-
+	@XmlElement
 	private byte[] fileBinary;
 	
     public String getNombreArchivo() {

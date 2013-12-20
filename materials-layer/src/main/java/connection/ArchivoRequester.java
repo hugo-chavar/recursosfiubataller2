@@ -54,7 +54,7 @@ public class ArchivoRequester {
 	//	}
 	}
 	public Archivo getArchivo(int idAmbiente, int idRecurso){
-		//Archivo archivoAdevolver =  new Archivo();
+		Archivo adevolver =  new Archivo();
 		String archivoXml="asc";
 		byte[] archivoRecuperado;
 		//IntegracionStub.ObtenerArchivoResponse responseArchivo = null;
@@ -66,7 +66,7 @@ public class ArchivoRequester {
 			//OP2	requestArchivo.setArchivo(archivo.getFile()); asi lo hacen por el ejemplo q me mandaron
 			//	String archivoXml = requestArchivo.getXml(archivo_str);
 				
-				Archivo adevolver = parser.deserializeArchivo(archivoXml);
+			//	Archivo adevolver = parser.deserializeArchivo(archivoXml);
 			//	adevolver.setByteArray(archivoRecuperado);
 			//	responseArchivo = this.stub.guardarArchivo(requestArchivo);
 			//	System.out.println("La salida es : " + responseArchivo.get_return());		
@@ -74,6 +74,7 @@ public class ArchivoRequester {
 				// e.printStackTrace();
 		
 		try {
+			System.out.println("Entra a pedir el archivo");
 			DataHandler arch = new DataHandler(new URL("/home/damian/aux"));
 			adevolver.setRawFile(arch);
 		} catch (MalformedURLException e) {
