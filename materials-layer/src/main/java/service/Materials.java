@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.activation.DataHandler;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
@@ -25,13 +26,13 @@ import javax.xml.ws.BindingType;
 public interface Materials {
 
 	@WebMethod String sayHello(String name);
-	@WebMethod @WebResult(name="recursos") List<Recurso> obtenerRecursos(int idAmbiente,int idUsuario);
-	@WebMethod Encuesta getEncuesta(int idAmbiente, int idRecurso);
-	@WebMethod EncuestaRespondida getEncuestaRespondida(int IdAmbiente, int idRecurso, int idUsuario);
-	@WebMethod void agregarEncuestaRespondida(EncuestaRespondida respondida,int idAmbiente);
-	@WebMethod void agregarLink(Link link,int idUsuario);
-	@WebMethod void agregarEncuesta(Encuesta encuesta,int idUsuario);
-	@WebMethod String setArchivo(int idAmbiente,String name,String ext,  @XmlMimeType("application/octet-stream") DataHandler data);
-	@WebMethod boolean borrarRecurso(int idAmbiente, int idRecurso,int idUsuario);
-	@WebMethod Archivo getArchivo(int idAmbiente,int idRecurso ); 
+	@WebMethod @WebResult(name="recursos") List<Recurso> obtenerRecursos(@WebParam(name="idAmbiente") int idAmbiente,@WebParam(name="idRecurso")int idUsuario);
+	@WebMethod Encuesta getEncuesta(@WebParam(name="idAmbiente")int idAmbiente, @WebParam(name="idRecurso")int idRecurso);
+	@WebMethod EncuestaRespondida getEncuestaRespondida(@WebParam(name="idAmbiente")int IdAmbiente,@WebParam(name="idRecurso") int idRecurso,@WebParam(name="idUsuario") int idUsuario);
+	@WebMethod void agregarEncuestaRespondida(@WebParam(name="EncuestaRespondida")EncuestaRespondida respondida,@WebParam(name="idAmbiente")int idAmbiente);
+	@WebMethod void agregarLink(@WebParam(name="Link")Link link,@WebParam(name="idUsuario")int idUsuario);
+	@WebMethod void agregarEncuesta(@WebParam(name="Encuesta")Encuesta encuesta,@WebParam(name="idUsuario")int idUsuario);
+	@WebMethod String setArchivo(@WebParam(name="idAmbiente")int idAmbiente,@WebParam(name="Nombre")String name,@WebParam(name="Extension")String ext, @WebParam(name="Archivo") @XmlMimeType("application/octet-stream") DataHandler data);
+	@WebMethod boolean borrarRecurso(@WebParam(name="idAmbiente")int idAmbiente, @WebParam(name="idRecurso")int idRecurso,@WebParam(name="idUsuario")int idUsuario);
+	@WebMethod Archivo getArchivo(@WebParam(name="idAmbiente")int idAmbiente,@WebParam(name="idRecurso")int idRecurso ); 
 }
