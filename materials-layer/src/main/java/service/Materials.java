@@ -15,8 +15,6 @@ import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
 
-import javax.jws.soap.SOAPBinding;
-import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.BindingType;
 

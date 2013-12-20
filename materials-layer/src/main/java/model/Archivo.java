@@ -2,11 +2,8 @@ package model;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import javax.activation.DataHandler;
-
-import org.omg.CORBA.portable.InputStream;
 
 public class Archivo extends Recurso {
 

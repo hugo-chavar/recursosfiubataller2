@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import model.Archivo;
-import model.Archivo;
-import model.Encuesta;
 
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
