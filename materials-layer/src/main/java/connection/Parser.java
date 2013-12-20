@@ -18,6 +18,11 @@ public class Parser {
 	public static String RECURSO_TAG = "recurso";
 	public static String RECURSOID_TAG = "recursoId";
 	public static String AMBITOID_TAG = "ambitoId";
+	public static String DESCRIPCION_TAG = "descripcion";
+	public static String TIPO_TAG = "tipo";
+	public static String RECURSOS_TAG = "recursos";
+	public static String JOIN_TAG = "join";
+	
 	
 	public Document buildXMLDocument() {
 		Document document = null;

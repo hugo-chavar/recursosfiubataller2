@@ -1,8 +1,6 @@
 package connection;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.Link;
 
@@ -25,15 +23,20 @@ public class LinkRequester {
 	
 	
 	public LinkRequester() {
+		
+		parser = new LinkParser();
 		cache = new Cache<Link>();
+		
     	try {
 	    	this.stub = new IntegracionWSStub();
     	} catch (AxisFault e) {
 			System.out.println("Error al intentar contectarse con Integracion");
     	}
+    	
 	}
 	
 	public void save(Link link) {
+		
 		// Guardo el link
 		String link_str = this.parser.serializeLink(link);
     	try {
@@ -47,48 +50,41 @@ public class LinkRequester {
 		} catch (RemoteException e) {
 			System.out.println("Error de conexion remota");
 		}
+    	
 	}
 	
-	public List<Link> requestLinks(int IDAmbiente, int IDLink) {
-		List<Link> links = new ArrayList<Link>();
-    	try {
-			// Consulto el link guardado
-    		String xml = this.parser.serializeLinkQuery(IDAmbiente, IDLink);
-	    	SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-	    	seleccionar_e.setXml(xml);
-	    	SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
-	    	String xml_resp_e = s_resp_e.get_return();
-	    	links = this.parser.deserializeLink(xml_resp_e);
-	    	return links;
-    	} catch (AxisFault e) {
-			System.out.println("Error al intentar obtener el siguiente Link:");
-			System.out.println("IDLink: " + IDLink);
-		} catch (RemoteException e) {
-			System.out.println("Error de conexion remota");
-		}
-    	return null;
-	}
-	
-	public Link get(int IDAmbiente, int IDLink) {
+	public Link get(int IDAmbiente, int IDRecurso) {
+		
 		// Busco en el cache de links
-		Link target = new Link(IDAmbiente, IDLink, "");
+		Link target = new Link(IDAmbiente, IDRecurso, "");
 		if (cache.contains(target)) {
 			return cache.get(target);
 		} else {
-			Link link = this.requestLinks(IDAmbiente, IDLink).get(0);
+	    	try {
+	    		
+				// Consulto el link guardado
+	    		String xml = this.parser.serializeLinkQuery(IDRecurso);
+		    	SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+		    	seleccionar_e.setXml(xml);
+		    	SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
+		    	String xml_resp_e = s_resp_e.get_return();
+		    	Link link = this.parser.deserializeLink(xml_resp_e);
 
-			// Agrego al cache de links
-			cache.add(link);
+				// Agrego al cache de links
+				cache.add(link);
+		    	
+		    	return link;
+		    	
+	    	} catch (AxisFault e) {
+				System.out.println("Error al intentar obtener el siguiente Link:");
+				System.out.println("IDLink: " + IDRecurso);
+			} catch (RemoteException e) {
+				System.out.println("Error de conexion remota");
+			}
 
-			return link;
+			return null;
 		}
-	}
-	
-	public List<Link> getAll(int IDAmbiente) {
-		List<Link> links = new ArrayList<Link>();
-		links = this.requestLinks(IDAmbiente, -1);
 		
-		return links;
 	}
 	
 }

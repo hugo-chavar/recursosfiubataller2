@@ -13,6 +13,13 @@ public class Recurso {
 		this.descripcion = descripcion;
 	}
 
+	public Recurso(Integer idRecurso, Integer idAmbiente, String descripcion, String tipo) {
+		this.idRecurso = idRecurso;
+		this.idAmbiente = idAmbiente;
+		this.descripcion = descripcion;
+		this.tipo = tipo;
+	}
+	
 	public Recurso() {
 	}
 

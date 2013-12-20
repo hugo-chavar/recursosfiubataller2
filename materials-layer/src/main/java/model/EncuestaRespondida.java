@@ -19,24 +19,16 @@ public class EncuestaRespondida {
 
 	@XmlTransient
 	private Integer idRecurso;
-	
-	@XmlTransient
-	private Integer idAmbiente;
 
 	@XmlElement
 	private List<PreguntaRespondida> preguntasRespondidas;
 
 	public EncuestaRespondida() { }
 	
-	public EncuestaRespondida(Integer idAmbiente, Integer idRecurso, Integer idUsuario, int evaluacion) {
-		this.idAmbiente = idAmbiente;
+	public EncuestaRespondida(Integer idRecurso, Integer idUsuario, int evaluacion) {
 		this.idRecurso = idRecurso;
 		this.idUsuario = idUsuario;
 		this.evaluacion = evaluacion;
-	}
-	
-	public Integer getIdAmbiente() {
-		return this.idAmbiente;
 	}
 	
 	public Integer getIdUsuario() {
@@ -131,9 +123,8 @@ public class EncuestaRespondida {
 	public boolean equals(Object o) {
 		if (o.getClass().equals(this.getClass())) {
 			EncuestaRespondida r = (EncuestaRespondida) o;
-			return r.getIdRecurso().equals(getIdRecurso()) 
-				   && r.getIdAmbiente().equals(getIdAmbiente())
-						   && r.getIdUsuario().equals(getIdUsuario());
+			return r.getIdRecurso().equals(getIdRecurso())
+					&& r.getIdUsuario().equals(getIdUsuario());
 		}
 		return false;
 	}

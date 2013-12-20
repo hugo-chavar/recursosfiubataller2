@@ -111,7 +111,7 @@ public class MaterialsImpl implements Materials {
 	@Override 
 	public boolean borrarRecurso(int idAmbiente, int idRecurso,int idUsuario){
 		if (Requester.INSTANCE.getPermisoUsuario(idRecurso, idUsuario)){
-			Requester.INSTANCE.borrarRecurso(idAmbiente,idRecurso);
+			Requester.INSTANCE.deleteRecurso(idRecurso);
 			//En el caso de las encuestas habria que elimnar las respondidas tambien
 			return true;
 		}
