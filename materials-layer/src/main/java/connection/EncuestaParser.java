@@ -17,15 +17,15 @@ import model.EncuestaRespondida;
 public class EncuestaParser extends Parser {
 
 	public static String ENCUESTA_TAG = "Encuesta";
-	public static String IDENCUESTA_TAG = "idRecurso";
-	public static String IDAMBIENTE_TAG = "idAmbiente";
+	public static String IDENCUESTA_TAG = "recursoId";
+	public static String IDAMBIENTE_TAG = "ambitoId";
 	public static String DESCRIPCION_TAG = "descripcion";
 	public static String EVALUADA_TAG = "evaluada";
 	public static String PREGUNTAS_TAG = "preguntas";
 	
 	public static String ENCUESTA_RESPONDIDA_TAG = "encuestaRespondida";
-	public static String IDUSUARIO_TAG = "idUsuario";
-	public static String EVALUACION_TAG = "Evaluacion";
+	public static String IDUSUARIO_TAG = "usuarioId";
+	public static String EVALUACION_TAG = "evaluacion";
 	public static String PREGUNTAS_RESPONDIDAS_TAG = "preguntasRespondidas";
 	
 	

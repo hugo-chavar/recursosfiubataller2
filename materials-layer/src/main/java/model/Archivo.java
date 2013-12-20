@@ -22,7 +22,7 @@ public class Archivo extends Recurso {
 
 //	private String path;
 
-	private Integer size;
+	private Integer tamanio;
 
 	private String tipoArchivo;
 
@@ -75,7 +75,7 @@ public class Archivo extends Recurso {
 	}
 
 	public void setSize(Integer size) {
-		this.size = size;
+		this.tamanio = size;
 	}
 
 	public void setByteArray(byte[] byteArray) {

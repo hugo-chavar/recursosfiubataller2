@@ -15,11 +15,11 @@ import org.w3c.dom.ls.LSSerializer;
 
 public class LinkParser extends Parser {
 
-	public static String LINK_TAG = "Link";
-	public static String IDLINK_TAG = "IDLink";
-	public static String IDAMBIENTE_TAG = "IDAmbiente";
-	public static String DESCRIPCION_TAG = "Descripcion";
-	public static String NOMBRE_TAG = "Nombre";
+	public static String LINK_TAG = "link";
+	public static String IDLINK_TAG = "recursoId";
+	public static String IDAMBIENTE_TAG = "ambitoId";
+	public static String DESCRIPCION_TAG = "descripcion";
+	public static String NOMBRE_TAG = "nombre";
 	
 	
 	public String serializeLink(Link link) {

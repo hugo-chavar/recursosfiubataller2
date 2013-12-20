@@ -15,12 +15,12 @@ import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSSerializer;
 
 public class ArchivoParser extends Parser {
-	public static String ARCHIVO_TAG = "Archivo";
-	public static String IDARCHIVO_TAG = "IDArchivo";
-	public static String IDAMBIENTE_TAG = "IDAmbiente";
-	public static String DESCRIPCION_TAG = "Descripcion";
-	public static String NOMBRE_TAG = "Nombre";
-	public static String EXTENSION_TAG = "Extension";
+	public static String ARCHIVO_TAG = "archivo";
+	public static String IDARCHIVO_TAG = "archivoId";
+	public static String IDAMBIENTE_TAG = "ambitoId";
+	public static String DESCRIPCION_TAG = "descripcion";
+	public static String NOMBRE_TAG = "nombre";
+	public static String EXTENSION_TAG = "tipo";
 	public static String FILE_TAG = "File";
 	
 	public String serializeArchivo(Archivo archivo) {
