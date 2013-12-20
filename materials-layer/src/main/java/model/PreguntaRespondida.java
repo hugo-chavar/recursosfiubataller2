@@ -24,7 +24,7 @@ public class PreguntaRespondida {
 
 	// Si no es evaluado siempre estara en null este atributo
 	@XmlAttribute(required = false)
-	protected Boolean esCorrecta = null;
+	protected Boolean isCorrecta = null;
 
 	@XmlAttribute(required = true)
 	protected List<String> respuestas = new ArrayList<String>();
@@ -77,7 +77,7 @@ public class PreguntaRespondida {
 		sb.append(";");
 		sb.append(idPregunta);
 		sb.append(";");
-		sb.append(esCorrecta);
+		sb.append(isCorrecta);
 		sb.append(";");
 		return sb.toString();
 	}
@@ -86,7 +86,7 @@ public class PreguntaRespondida {
 		String[] splited = s.split(";");
 		type = splited[0];
 		idPregunta = Integer.valueOf(splited[1]);
-		esCorrecta = splited[2] != "null" ? Boolean.valueOf(splited[2]) : null;
+		isCorrecta = splited[2] != "null" ? Boolean.valueOf(splited[2]) : null;
 	}
 
 }

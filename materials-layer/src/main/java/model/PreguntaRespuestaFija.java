@@ -156,9 +156,11 @@ public class PreguntaRespuestaFija extends Pregunta {
 
 	@Override
 	public void completarDatosVisibles() {
-		opciones=respuestasPosibles;
-		for(Integer n : this.respuestasCorrectas)
-			correctas.add(respuestasPosibles.get(n));
+		if (this.opciones.isEmpty()) {
+			opciones = respuestasPosibles;
+			for (Integer n : this.respuestasCorrectas)
+				correctas.add(respuestasPosibles.get(n));
+		}
 	}
 	
 }

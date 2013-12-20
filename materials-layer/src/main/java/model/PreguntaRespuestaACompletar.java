@@ -62,10 +62,10 @@ public class PreguntaRespuestaACompletar extends Pregunta {
 	
 	@Override
 	public void completarDatosVisibles() {
-		this.opciones=new ArrayList<String>();
-		this.correctas=new ArrayList<String>();
-		if(this.respuesta!=null)
-			this.correctas.add(this.respuesta);
+		if (this.correctas.isEmpty()) {
+			if (this.respuesta != null)
+				this.correctas.add(this.respuesta);
+		}
 	}
 
 }

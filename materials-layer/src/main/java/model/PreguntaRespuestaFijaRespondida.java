@@ -40,26 +40,28 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 	public Integer evaluar(Pregunta pregunta) {
 		// Chequeo que coincida cantidad de respuestas
 		if (!pregunta.getNroCorrectas().equals(this.respuestasfijas.size())) {
-			esCorrecta = false;
+			isCorrecta = false;
 			return 0;
 		}
 		// Chequeo cada una de las respuestas
 		for (Integer respuesta : respuestasfijas) {
 			if (!pregunta.isCorrect(respuesta)) {
-				esCorrecta = false;
+				isCorrecta = false;
 				return 0;
 			}
 		}
-		esCorrecta = true;
+		isCorrecta = true;
 		return 1;
 	}
 
 	@Override
 	public void completarDatosVisibles(Pregunta pregunta) {
-		pregunta.completarDatosVisibles();
-		List<String> posibles = pregunta.getOpciones();
-		for (Integer indice : respuestasfijas) {
-			this.respuestas.add(posibles.get(indice));
+		if (this.respuestas.isEmpty()) {
+			pregunta.completarDatosVisibles();
+			List<String> posibles = pregunta.getOpciones();
+			for (Integer indice : respuestasfijas) {
+				this.respuestas.add(posibles.get(indice));
+			}
 		}
 	}
 

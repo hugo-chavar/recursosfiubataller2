@@ -26,16 +26,18 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 	@Override
 	public Integer evaluar(Pregunta pregunta) {
 		if (pregunta.isCorrect(respuesta)) {
-			esCorrecta = true;
+			isCorrecta = true;
 			return 1;
 		}
-		esCorrecta = false;
+		isCorrecta = false;
 		return 0;
 	}
 
 	@Override
 	public void completarDatosVisibles(Pregunta pregunta) {
-		respuestas.add(this.getRespuesta());
+		if (this.respuestas.isEmpty()) {
+			respuestas.add(this.getRespuesta());
+		}
 	}
 	
 	@Override

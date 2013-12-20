@@ -3,16 +3,23 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
-@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class Encuesta extends Recurso {
 
+	@XmlTransient
 	private int countOptions = 0;
 
-	@XmlAttribute
+	@XmlElement
 	private boolean evaluada;
+	
+	@XmlElement
 	private List<Pregunta> preguntas = new ArrayList<Pregunta>();
 
 	public Encuesta(Integer idRecurso, Integer idAmbiente, String descripcion, boolean evaluada) {

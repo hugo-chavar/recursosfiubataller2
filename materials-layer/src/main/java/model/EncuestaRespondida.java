@@ -3,16 +3,27 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+@XmlAccessorType(XmlAccessType.NONE)
 public class EncuestaRespondida {
 
+	@XmlElement
 	private Integer evaluacion;
 
+	@XmlTransient
 	private Integer idUsuario;
 
+	@XmlTransient
 	private Integer idRecurso;
 	
+	@XmlTransient
 	private Integer idAmbiente;
 
+	@XmlElement
 	private List<PreguntaRespondida> preguntasRespondidas;
 
 	public EncuestaRespondida() { }
