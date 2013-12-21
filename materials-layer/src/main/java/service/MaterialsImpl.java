@@ -20,16 +20,19 @@ import connection.Requester;
 
 public class MaterialsImpl implements Materials {
 
+	private XmlUtil xmlutil = new XmlUtil();
+	
 	@Override
 	public String sayHello(String name) {
 		return "Hello, Welcom to jax-ws " + name;
 	}
 
 	@Override
-	public Archivo getArchivo(int idAmbiente, int idRecurso){
+	public String getArchivo(int idAmbiente, int idRecurso){
 		//Archivo file = new Archivo();
 		Archivo file = Requester.INSTANCE.getArchivo(idAmbiente, idRecurso);
-		return file;
+		String xmlArchivo = xmlutil.convertToXml(file, Archivo.class);
+		return xmlArchivo;
 	}
 	
 	@Override
@@ -67,10 +70,11 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	@Override
-	public Encuesta getEncuesta(int idAmbiente, int idRecurso) {
+	public String getEncuesta(int idAmbiente, int idRecurso) {
 		Encuesta encuesta = Requester.INSTANCE.getEncuesta(idAmbiente, idRecurso);
 		encuesta.completarDatosVisibles();
-		return encuesta;
+		String xmlEncuesta = xmlutil.convertToXml(encuesta, Encuesta.class);
+		return xmlEncuesta;
 	}
 	
 	@Override
@@ -85,11 +89,12 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	@Override
-	public EncuestaRespondida getEncuestaRespondida(int IdAmbiente, int idRecurso, int idUsuario) {
+	public String  getEncuestaRespondida(int IdAmbiente, int idRecurso, int idUsuario) {
 		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida(IdAmbiente, idRecurso, idUsuario);
 		Encuesta encuesta= Requester.INSTANCE.getEncuesta(IdAmbiente, idRecurso);
 		respondida.completarDatosVisibles(encuesta.getPreguntas());
-		return respondida;
+		String xmlRespondida = xmlutil.convertToXml(respondida, EncuestaRespondida.class);
+		return xmlRespondida;
 	}
 	
 	@Override
