@@ -5,9 +5,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @XmlAccessorType(XmlAccessType.NONE)
@@ -22,8 +20,8 @@ public class Encuesta extends Recurso {
 	@XmlElement
 	private List<Pregunta> preguntas = new ArrayList<Pregunta>();
 
-	public Encuesta(Integer idRecurso, Integer idAmbiente, String descripcion, boolean evaluada) {
-		super(idRecurso, idAmbiente, descripcion);
+	public Encuesta(Integer idRecurso, Integer idAmbito, String descripcion, boolean evaluada) {
+		super(idRecurso, idAmbito, descripcion);
 		this.tipo = "Encuesta";
 		this.evaluada = evaluada;
 	}

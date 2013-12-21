@@ -19,7 +19,6 @@ import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.BindingType;
 
 
-//@SOAPBinding(style = Style.RPC)
 @BindingType(value = javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
 @WebService
 public interface Materials {
@@ -28,23 +27,19 @@ public interface Materials {
 	String sayHello(String name);
 	
 	@WebMethod 
-	@WebResult(name="recursos")
-	List<Recurso> obtenerRecursos(@WebParam(name="ambitoId") int ambitoId,@WebParam(name="recursoId")int usuarioId);
-	//@WebMethod Encuesta getEncuesta(@WebParam(name="ambitoId")int ambitoId, @WebParam(name="recursoId")int recursoId);
-	
+	@WebResult(name = "recursos")
+	List<Recurso> obtenerRecursos(@WebParam(name = "ambitoId") int ambitoId,@WebParam(name = "recursoId")int usuarioId);
+		
 	@WebMethod 
-	@WebResult(name="encuesta")
-	String getEncuesta(@WebParam(name="ambitoId")int ambitoId, @WebParam(name="recursoId")int recursoId);
-	
-	//@WebMethod @WebResult(name="EncuestaRespondida")EncuestaRespondida getEncuestaRespondida(@WebParam(name="idAmbiente")int IdAmbiente,@WebParam(name="recursoId") int idRecurso,@WebParam(name="usuarioId") int usuarioId);
+	@WebResult(name = "encuesta")
+	String getEncuesta(@WebParam(name = "ambitoId")int ambitoId, @WebParam(name = "recursoId")int recursoId);
 	
 	@WebMethod
-	@WebResult(name="encuestaRespondida")
-	String getEncuestaRespondida(@WebParam(name="ambitoId")int ambitoId,@WebParam(name="recursoId") int recursoId,@WebParam(name="usuarioId") int usuarioId);
+	@WebResult(name = "encuestaRespondida")
+	String getEncuestaRespondida(@WebParam(name = "ambitoId")int ambitoId,@WebParam(name = "recursoId") int recursoId,@WebParam(name="usuarioId") int usuarioId);
 
 	@WebMethod
-	void agregarEncuestaRespondida(@WebParam(name = "encuestaRespondida") EncuestaRespondida respondida,
-			@WebParam(name = "ambitoId") int ambitoId);
+	void agregarEncuestaRespondida(@WebParam(name = "encuestaRespondida") EncuestaRespondida respondida, @WebParam(name = "ambitoId") int ambitoId);
 
 	@WebMethod
 	void agregarLink(@WebParam(name = "link") Link link, @WebParam(name = "usuarioId") int usuarioId);
@@ -53,8 +48,8 @@ public interface Materials {
 	void agregarEncuesta(@WebParam(name = "encuesta") Encuesta encuesta, @WebParam(name = "usuarioId") int usuarioId);
 	
 	@WebMethod
-	@WebResult(name="successString")
-	String setArchivo(@WebParam(name = "ambitoId")int ambitoId, @WebParam(name="nombre")String name, @WebParam(name = "extension")String ext, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") DataHandler data);
+	@WebResult(name = "successString")
+	String setArchivo(@WebParam(name = "ambitoId")int ambitoId, @WebParam(name = "nombre")String name, @WebParam(name = "extension")String ext, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") DataHandler data);
 
 	@WebMethod
 	@WebResult(name = "borrado")

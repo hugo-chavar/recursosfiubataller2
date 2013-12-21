@@ -7,15 +7,15 @@ public class Recurso {
 	protected Integer ambitoId;
 	protected String descripcion;
 
-	public Recurso(Integer idRecurso, Integer idAmbiente, String descripcion) {
+	public Recurso(Integer idRecurso, Integer idAmbito, String descripcion) {
 		this.recursoId = idRecurso;
-		this.ambitoId = idAmbiente;
+		this.ambitoId = idAmbito;
 		this.descripcion = descripcion;
 	}
 
-	public Recurso(Integer idRecurso, Integer idAmbiente, String descripcion, String tipo) {
+	public Recurso(Integer idRecurso, Integer idAmbito, String descripcion, String tipo) {
 		this.recursoId = idRecurso;
-		this.ambitoId = idAmbiente;
+		this.ambitoId = idAmbito;
 		this.descripcion = descripcion;
 		this.tipo = tipo;
 	}

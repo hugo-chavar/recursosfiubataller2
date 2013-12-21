@@ -16,9 +16,9 @@ import model.Link;
 import model.Recurso;
 import model.XmlUtil;
 import connection.Requester;
+
 @MTOM 
 @WebService(endpointInterface = "service.Materials")
-
 public class MaterialsImpl implements Materials {
 
 	private XmlUtil xmlutil = new XmlUtil();
@@ -30,7 +30,6 @@ public class MaterialsImpl implements Materials {
 
 	@Override
 	public String getArchivo(int ambitoId, int recursoId){
-		//Archivo file = new Archivo();
 		Archivo file = Requester.INSTANCE.getArchivo(ambitoId, recursoId);
 		String xmlArchivo = xmlutil.convertToXml(file, Archivo.class);
 		return xmlArchivo;
@@ -48,8 +47,7 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	@Override
-	public String setArchivo(int ambitoId, String name, String ext,
-			@XmlMimeType("application/octet-stream") DataHandler data) {
+	public String setArchivo(int ambitoId, String name, String ext,	@XmlMimeType("application/octet-stream") DataHandler data) {
 		if (data != null) {
 			Archivo File = new Archivo();
 			File.setNombreArchivo(name);
@@ -123,6 +121,7 @@ public class MaterialsImpl implements Materials {
 			Requester.INSTANCE.deleteRecurso(recursoId);
 			return true;
 		}
+	//  TODO retornar confirmaciones en xml, no booleanos, hablar con presentacion para ver como lo quieren
 		return false;
 	}
 
