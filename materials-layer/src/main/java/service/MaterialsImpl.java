@@ -14,6 +14,7 @@ import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
+import model.XmlUtil;
 import connection.Requester;
 @MTOM 
 @WebService(endpointInterface = "service.Materials")
