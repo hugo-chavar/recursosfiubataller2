@@ -27,13 +27,13 @@ public class LinkParser extends Parser {
 		Element recursoNode = doc.createElement(Parser.RECURSO_TAG);
 		rootElement.appendChild(recursoNode);
 
-		if ((link.getIdRecurso() != null) && (!link.getIdRecurso().equals(0))) {
+		if ((link.getRecursoId() != null) && (!link.getRecursoId().equals(0))) {
 			Element recursoId = doc.createElement(Parser.RECURSOID_TAG);
-			recursoId.appendChild(doc.createTextNode(String.valueOf(link.getIdRecurso())));
+			recursoId.appendChild(doc.createTextNode(String.valueOf(link.getRecursoId())));
 			recursoNode.appendChild(recursoId);
 		}
 		Element ambitoId = doc.createElement(Parser.AMBITOID_TAG);
-		ambitoId.appendChild(doc.createTextNode(String.valueOf(link.getIdAmbiente())));
+		ambitoId.appendChild(doc.createTextNode(String.valueOf(link.getAmbitoId())));
 		recursoNode.appendChild(ambitoId);		
 		Element descripcion = doc.createElement(Parser.DESCRIPCION_TAG);
 		descripcion.appendChild(doc.createTextNode(link.getDescripcion()));
@@ -50,9 +50,9 @@ public class LinkParser extends Parser {
 		Element linkNode = doc.createElement(LinkParser.LINK_TAG);
 		recursos.appendChild(linkNode);
 
-		if ((link.getIdRecurso() != null) && (!link.getIdRecurso().equals(0))) {
+		if ((link.getRecursoId() != null) && (!link.getRecursoId().equals(0))) {
 			Element recursoId = doc.createElement(Parser.RECURSOID_TAG);
-			recursoId.appendChild(doc.createTextNode(String.valueOf(link.getIdRecurso())));
+			recursoId.appendChild(doc.createTextNode(String.valueOf(link.getRecursoId())));
 			linkNode.appendChild(recursoId);
 		}
 		Element nombre = doc.createElement(LinkParser.NOMBRE_TAG);

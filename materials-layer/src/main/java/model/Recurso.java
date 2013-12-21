@@ -2,20 +2,20 @@ package model;
 
 public class Recurso {
 
-	protected Integer idRecurso;
+	protected Integer recursoId;
 	protected String tipo;
-	protected Integer idAmbiente;
+	protected Integer ambitoId;
 	protected String descripcion;
 
 	public Recurso(Integer idRecurso, Integer idAmbiente, String descripcion) {
-		this.idRecurso = idRecurso;
-		this.idAmbiente = idAmbiente;
+		this.recursoId = idRecurso;
+		this.ambitoId = idAmbiente;
 		this.descripcion = descripcion;
 	}
 
 	public Recurso(Integer idRecurso, Integer idAmbiente, String descripcion, String tipo) {
-		this.idRecurso = idRecurso;
-		this.idAmbiente = idAmbiente;
+		this.recursoId = idRecurso;
+		this.ambitoId = idAmbiente;
 		this.descripcion = descripcion;
 		this.tipo = tipo;
 	}
@@ -27,23 +27,23 @@ public class Recurso {
 		return tipo;
 	}
 
-	public Integer getIdRecurso() {
-		return idRecurso;
+	public Integer getRecursoId() {
+		return recursoId;
 	}
 
-	public Integer getIdAmbiente() {
-		return idAmbiente;
+	public Integer getAmbitoId() {
+		return ambitoId;
 	}
 
-	public void setIdRecurso(Integer idRecurso) {
-		this.idRecurso = idRecurso;
+	public void setRecursoId(Integer idRecurso) {
+		this.recursoId = idRecurso;
 	}
 
 	public String getDescripcion() {
 		return descripcion;
 	}
-	public void setIdAmbiente(int id){
-		this.idAmbiente = id;
+	public void setAmbitoId(int id){
+		this.ambitoId = id;
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
@@ -53,8 +53,8 @@ public class Recurso {
 	public boolean equals(Object o) {
 		if (o.getClass().equals(this.getClass())) {
 			Recurso r = (Recurso) o;
-			return r.getIdRecurso().equals(getIdRecurso()) 
-				   && r.getIdAmbiente().equals(getIdAmbiente());
+			return r.getRecursoId().equals(getRecursoId()) ;
+//				   && r.getIdAmbiente().equals(getIdAmbiente());
 		}
 		return false;
 	}

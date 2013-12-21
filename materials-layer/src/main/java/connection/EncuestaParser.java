@@ -33,13 +33,13 @@ public class EncuestaParser extends Parser {
 		Element nodeElement = doc.createElement(Parser.RECURSO_TAG);
 		rootElement.appendChild(nodeElement);
 		
-		if ((encuesta.getIdRecurso() != null) && (!encuesta.getIdRecurso().equals(0))) {
+		if ((encuesta.getRecursoId() != null) && (!encuesta.getRecursoId().equals(0))) {
 			Element IDRecurso = doc.createElement(Parser.RECURSOID_TAG);
-			IDRecurso.appendChild(doc.createTextNode(String.valueOf(encuesta.getIdRecurso())));
+			IDRecurso.appendChild(doc.createTextNode(String.valueOf(encuesta.getRecursoId())));
 			nodeElement.appendChild(IDRecurso);
 		}
 		Element IDAmbito = doc.createElement(Parser.AMBITOID_TAG);
-		IDAmbito.appendChild(doc.createTextNode(String.valueOf(encuesta.getIdAmbiente())));
+		IDAmbito.appendChild(doc.createTextNode(String.valueOf(encuesta.getAmbitoId())));
 		nodeElement.appendChild(IDAmbito);
 		Element descripcion = doc.createElement(Parser.DESCRIPCION_TAG);
 		descripcion.appendChild(doc.createTextNode(encuesta.getDescripcion()));
@@ -54,9 +54,9 @@ public class EncuestaParser extends Parser {
 		Element encuesta_el = doc.createElement(EncuestaParser.ENCUESTA_TAG);
 		recursos.appendChild(encuesta_el);
 		
-		if ((encuesta.getIdRecurso() != null) && (!encuesta.getIdRecurso().equals(0))) {
+		if ((encuesta.getRecursoId() != null) && (!encuesta.getRecursoId().equals(0))) {
 			Element IDRecurso = doc.createElement(Parser.RECURSOID_TAG);
-			IDRecurso.appendChild(doc.createTextNode(String.valueOf(encuesta.getIdRecurso())));
+			IDRecurso.appendChild(doc.createTextNode(String.valueOf(encuesta.getRecursoId())));
 			encuesta_el.appendChild(IDRecurso);
 		}
 		Element evaluada = doc.createElement(EncuestaParser.EVALUADA_TAG);

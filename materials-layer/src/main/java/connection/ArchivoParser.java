@@ -1,11 +1,9 @@
 package connection;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import model.Archivo;
 
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -30,10 +28,10 @@ public class ArchivoParser extends Parser {
 		rootElement.appendChild(nodeElement);
 		
 		Element IDAmbiente = doc.createElement(Parser.AMBITOID_TAG);
-		IDAmbiente.appendChild(doc.createTextNode(String.valueOf(archivo.getIdAmbiente())));
+		IDAmbiente.appendChild(doc.createTextNode(String.valueOf(archivo.getAmbitoId())));
 		nodeElement.appendChild(IDAmbiente);
 		Element IDArchivo = doc.createElement(ArchivoParser.IDARCHIVO_TAG);
-		IDArchivo.appendChild(doc.createTextNode(String.valueOf(archivo.getIdRecurso())));
+		IDArchivo.appendChild(doc.createTextNode(String.valueOf(archivo.getRecursoId())));
 		nodeElement.appendChild(IDArchivo);
 		Element descripcion = doc.createElement(ArchivoParser.DESCRIPCION_TAG);
 		descripcion.appendChild(doc.createTextNode(archivo.getDescripcion()));
@@ -88,9 +86,9 @@ public class ArchivoParser extends Parser {
 		String file = fields.get(ArchivoParser.FILE_TAG);
 		
 		Archivo archivo = new Archivo();
-		archivo.setIdAmbiente(IDAmbiente);
+		archivo.setAmbitoId(IDAmbiente);
 		archivo.setDescripcion(descripcion);
-		archivo.setIdRecurso(IDArchivo);
+		archivo.setRecursoId(IDArchivo);
 		archivo.setNombreArchivo(nombre);
 		archivo.setTipoArchivo(extension);
 		//archivo.setStringFile(file);

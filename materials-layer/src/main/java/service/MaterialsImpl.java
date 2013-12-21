@@ -38,8 +38,7 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public void agregarEncuesta(Encuesta encuesta, int idUsuario) {
-		//TODO esto esta mal.. tiene q preguntar los permisos en el Ambiente y no en el recurso
-		if (Requester.INSTANCE.getPermisoUsuario(encuesta.getIdRecurso(), idUsuario)) {
+		if (Requester.INSTANCE.getPermisoUsuario(encuesta.getAmbitoId(), idUsuario)) {
 			encuesta.recuperarDatosVisibles();
 			Requester.INSTANCE.saveEncuesta(encuesta);
 			System.out.println("Guardando encuesta: " + encuesta.getDescripcion());
@@ -47,27 +46,28 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	@Override
-	public String setArchivo(int idAmbiente, String name,String ext, @XmlMimeType("application/octet-stream") DataHandler data){
-		if(data != null){
+	public String setArchivo(int idAmbiente, String name, String ext,
+			@XmlMimeType("application/octet-stream") DataHandler data) {
+		if (data != null) {
 			Archivo File = new Archivo();
 			File.setNombreArchivo(name);
 			File.setTipoArchivo(ext);
 			File.setRawFile(data);
-		//	Requester.INSTANCE.saveArchivo(File); TODO: ACA DEBERIA ANDAR EL SAVE ARCHIVO
+			// Requester.INSTANCE.saveArchivo(File); TODO: ACA DEBERIA ANDAR EL
+			// SAVE ARCHIVO
 			return "Archivo subido Correctamente";
-			
+
 		}
-//		else{
-			return "ERROR al subir el archivo";
-//		}
-		//return "hola";
+		//  TODO retornar confirmaciones en xml, hablar con presentacion para ver como lo quieren
+		return "ERROR al subir el archivo";
 	}
 	
 	@Override
 	public void agregarLink(Link link, int idUsuario) {
-		if (Requester.INSTANCE.getPermisoUsuario(link.getIdRecurso(), idUsuario)) {
+		if (Requester.INSTANCE.getPermisoUsuario(link.getRecursoId(), idUsuario)) {
 			Requester.INSTANCE.saveLink(link);
 		}
+		//  TODO retornar confirmaciones en xml, hablar con presentacion para ver como lo quieren
 	}
 	
 	@Override
@@ -87,6 +87,7 @@ public class MaterialsImpl implements Materials {
 			respondida.evaluar(encuesta);
 		}
 		Requester.INSTANCE.saveEncuestaRespondida(respondida);
+		//  TODO retornar confirmaciones en xml, hablar con presentacion para ver como lo quieren
 	}
 	
 	@Override
@@ -107,18 +108,17 @@ public class MaterialsImpl implements Materials {
 		recursos = Requester.INSTANCE.getRecursosAmbiente(idAmbiente);
 		// Chequeo Recursos permitidos
 		for (Recurso r:  recursos) {
-			if (Requester.INSTANCE.getPermisoUsuario(r.getIdRecurso(), idUsuario)) {
+			if (Requester.INSTANCE.getPermisoUsuario(r.getRecursoId(), idUsuario)) {
 				recursosPermitidos.add(r);
 			}
 		}
 		return recursosPermitidos;
 	}
 	
-	@Override 
-	public boolean borrarRecurso(int idAmbiente, int idRecurso,int idUsuario){
-		if (Requester.INSTANCE.getPermisoUsuario(idRecurso, idUsuario)){
+	@Override
+	public boolean borrarRecurso(int idAmbiente, int idRecurso, int idUsuario) {
+		if (Requester.INSTANCE.getPermisoUsuario(idRecurso, idUsuario)) {
 			Requester.INSTANCE.deleteRecurso(idRecurso);
-			//En el caso de las encuestas habria que elimnar las respondidas tambien
 			return true;
 		}
 		return false;

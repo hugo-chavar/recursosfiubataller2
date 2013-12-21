@@ -10,7 +10,6 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
-import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
@@ -25,16 +24,43 @@ import javax.xml.ws.BindingType;
 @WebService
 public interface Materials {
 
-	@WebMethod String sayHello(String name);
-	@WebMethod @WebResult(name="recursos") List<Recurso> obtenerRecursos(@WebParam(name="idAmbiente") int idAmbiente,@WebParam(name="idRecurso")int idUsuario);
-	//@WebMethod Encuesta getEncuesta(@WebParam(name="idAmbiente")int idAmbiente, @WebParam(name="idRecurso")int idRecurso);
-	@WebMethod @WebResult(name="Encuesta") String getEncuesta(@WebParam(name="idAmbiente")int idAmbiente, @WebParam(name="idRecurso")int idRecurso);
-	//@WebMethod @WebResult(name="EncuestaRespondida")EncuestaRespondida getEncuestaRespondida(@WebParam(name="idAmbiente")int IdAmbiente,@WebParam(name="idRecurso") int idRecurso,@WebParam(name="idUsuario") int idUsuario);
-	@WebMethod @WebResult(name="EncuestaRespondida")String getEncuestaRespondida(@WebParam(name="idAmbiente")int IdAmbiente,@WebParam(name="idRecurso") int idRecurso,@WebParam(name="idUsuario") int idUsuario);
-	@WebMethod void agregarEncuestaRespondida(@WebParam(name="EncuestaRespondida")EncuestaRespondida respondida,@WebParam(name="idAmbiente")int idAmbiente);
-	@WebMethod void agregarLink(@WebParam(name="Link")Link link,@WebParam(name="idUsuario")int idUsuario);
-	@WebMethod void agregarEncuesta(@WebParam(name="Encuesta")Encuesta encuesta,@WebParam(name="idUsuario")int idUsuario);
-	@WebMethod @WebResult(name="SuccessString")String setArchivo(@WebParam(name="idAmbiente")int idAmbiente,@WebParam(name="Nombre")String name,@WebParam(name="Extension")String ext, @WebParam(name="Archivo") @XmlMimeType("application/octet-stream") DataHandler data);
-	@WebMethod @WebResult(name="Borrado")boolean borrarRecurso(@WebParam(name="idAmbiente")int idAmbiente, @WebParam(name="idRecurso")int idRecurso,@WebParam(name="idUsuario")int idUsuario);
-	@WebMethod @WebResult(name="Archivo")String getArchivo(@WebParam(name="idAmbiente")int idAmbiente,@WebParam(name="idRecurso")int idRecurso ); 
+	@WebMethod
+	String sayHello(String name);
+	
+	@WebMethod 
+	@WebResult(name="recursos")
+	List<Recurso> obtenerRecursos(@WebParam(name="ambitoId") int ambitoId,@WebParam(name="recursoId")int usuarioId);
+	//@WebMethod Encuesta getEncuesta(@WebParam(name="ambitoId")int ambitoId, @WebParam(name="recursoId")int recursoId);
+	
+	@WebMethod 
+	@WebResult(name="encuesta")
+	String getEncuesta(@WebParam(name="ambitoId")int ambitoId, @WebParam(name="recursoId")int recursoId);
+	
+	//@WebMethod @WebResult(name="EncuestaRespondida")EncuestaRespondida getEncuestaRespondida(@WebParam(name="idAmbiente")int IdAmbiente,@WebParam(name="recursoId") int idRecurso,@WebParam(name="usuarioId") int usuarioId);
+	
+	@WebMethod
+	@WebResult(name="encuestaRespondida")
+	String getEncuestaRespondida(@WebParam(name="ambitoId")int ambitoId,@WebParam(name="recursoId") int recursoId,@WebParam(name="usuarioId") int usuarioId);
+
+	@WebMethod
+	void agregarEncuestaRespondida(@WebParam(name = "encuestaRespondida") EncuestaRespondida respondida,
+			@WebParam(name = "ambitoId") int ambitoId);
+
+	@WebMethod
+	void agregarLink(@WebParam(name = "link") Link link, @WebParam(name = "usuarioId") int usuarioId);
+
+	@WebMethod
+	void agregarEncuesta(@WebParam(name = "encuesta") Encuesta encuesta, @WebParam(name = "usuarioId") int usuarioId);
+	
+	@WebMethod
+	@WebResult(name="successString")
+	String setArchivo(@WebParam(name = "ambitoId")int ambitoId, @WebParam(name="nombre")String name, @WebParam(name = "extension")String ext, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") DataHandler data);
+
+	@WebMethod
+	@WebResult(name = "borrado")
+	boolean borrarRecurso(@WebParam(name = "ambitoId") int ambitoId, @WebParam(name = "recursoId") int recursoId, @WebParam(name = "usuarioId") int usuarioId);
+
+	@WebMethod
+	@WebResult(name = "archivo")
+	String getArchivo(@WebParam(name = "ambitoId") int ambitoId, @WebParam(name = "recursoId") int recursoId);
 }

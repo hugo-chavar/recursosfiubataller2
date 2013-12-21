@@ -14,7 +14,6 @@ import com.ws.services.IntegracionWSStub;
 import com.ws.services.IntegracionWSStub.GuardarDatos;
 import com.ws.services.IntegracionWSStub.GuardarDatosResponse;
 
-import connection.cache.Cache;
 
 public class ArchivoRequester {
 	private IntegracionWSStub stub;
@@ -54,8 +53,8 @@ public class ArchivoRequester {
 	//	}
 	}
 	public Archivo getArchivo(int idAmbiente, int idRecurso){
-		Archivo adevolver =  new Archivo();
-		String archivoXml="asc";
+		Archivo adevolver = new Archivo();
+		String archivoXml = "asc";
 		byte[] archivoRecuperado;
 		//IntegracionStub.ObtenerArchivoResponse responseArchivo = null;
 		//	try {
