@@ -20,10 +20,10 @@ public class RecursoTest {
 	}
 
 	@Test
-	public void sameRecursoDifferentObjectWithDifferentIdAmbienteArentEqual() {
+	public void sameRecursoDifferentObjectWithDifferentIdAmbienteAreEqual() {
 		Encuesta e = new Encuesta(1, 5, "", false);
 		Encuesta e2 = new Encuesta(1, 6, "otra encuesta", true);
-		Assert.assertFalse(e2.equals(e));
+		Assert.assertTrue(e2.equals(e));
 	}
 	
 	@Test

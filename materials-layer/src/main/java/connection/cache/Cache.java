@@ -1,8 +1,10 @@
 package connection.cache;
 
 import java.util.ArrayDeque;
+import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
+import java.util.List;
 
 /*
  * Class type T MUST implement equals() method
@@ -11,13 +13,29 @@ public class Cache<T> {
 
 	public static final int MAX_ITEMS_LIST = 10;
 	private Deque<T> elements;
+	private int maxSize;
 
 	public Cache() {
-		elements = new ArrayDeque<T>(MAX_ITEMS_LIST);
+		maxSize = MAX_ITEMS_LIST;
+		elements = new ArrayDeque<T>(maxSize);
+	}
+	
+	public void changeSize(int newSize) {
+		Collection<T> aux = elements;
+		elements = new ArrayDeque<T>(newSize);
+		addAll(aux);
+	}
+	
+	public void addAll(Collection<T> elemnts) {
+		for (T e : elemnts) {
+			if (! contains(e)) {
+				add(e);
+			}
+		}
 	}
 
 	public void add(T element) {
-        if (elements.size() >= MAX_ITEMS_LIST) {                 
+        if (elements.size() >= maxSize) {                 
         	elements.poll();
         }
         elements.addLast(element); 
