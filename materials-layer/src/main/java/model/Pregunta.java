@@ -6,24 +6,30 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class Pregunta {
 
 	protected static String FIXED_ANSWER_TYPE = "F";
 	protected static String ANSWER_TO_COMPLETE_TYPE = "C";
 
-	@XmlTransient
+	@XmlAttribute
 	protected Integer idPregunta = 0;
+	
 	@XmlTransient
 	protected String type;
 
 	@XmlAttribute
 	protected String enunciado;
-	@XmlAttribute(required = false)
+	
+	//@XmlElement(required = false)
 	protected List<String> opciones = new ArrayList<String>();
-	@XmlAttribute(required = true)
+	
+	//@XmlAttribute(required = true) 
+	//esto tiene q ser una lista de ints, segun lo requerido x presentacion
 	protected List<String> correctas = new ArrayList<String>();
 
 	public static List<Pregunta> unmarshallAll(String field) {
@@ -117,5 +123,6 @@ public class Pregunta {
 	public Integer getIndiceRespuesta(String Respuesta) {
 		return 0;
 	}
+	
 
 }

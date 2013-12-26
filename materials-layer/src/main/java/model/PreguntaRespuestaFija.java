@@ -3,9 +3,18 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+@XmlRootElement(name = "pregunta")
 public class PreguntaRespuestaFija extends Pregunta {
 
+	@XmlTransient
 	private List<String> respuestasPosibles = new ArrayList<String>();
+	
+	@XmlTransient
 	private List<Integer> respuestasCorrectas = new ArrayList<Integer>();
 
 	public boolean isMultiplesRespuestasCorrectas() {
@@ -161,6 +170,16 @@ public class PreguntaRespuestaFija extends Pregunta {
 			for (Integer n : this.respuestasCorrectas)
 				correctas.add(respuestasPosibles.get(n));
 		}
+	}
+	
+	@XmlAttribute(name = "correctas")
+	public String getRtasCorrectas() {
+		return marshallRespuestasCorrectas();
+	}
+	
+	@XmlElement(name = "respuestas")
+	public String getRespuestas() {
+		return marshallRespuestasPosibles();
 	}
 	
 }

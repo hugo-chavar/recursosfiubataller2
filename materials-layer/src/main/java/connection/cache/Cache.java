@@ -4,7 +4,6 @@ import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
-import java.util.List;
 
 /*
  * Class type T MUST implement equals() method
@@ -56,6 +55,10 @@ public class Cache<T> {
             }
         }
         return null;
+	}
+	
+	public void remove(T element) {
+		elements.remove(element);
 	}
 
 }

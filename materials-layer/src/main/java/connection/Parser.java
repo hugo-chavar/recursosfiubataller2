@@ -8,6 +8,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.ls.DOMImplementationLS;
+import org.w3c.dom.ls.LSSerializer;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -36,7 +38,7 @@ public class Parser {
 		return document;
 	}
 	
-	public Document convertToXMLDocument(String xml) {		
+	public Document convertXmlToDocument(String xml) {		
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder;
 		try {
@@ -50,6 +52,13 @@ public class Parser {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public String convertDocumentToXml(Document doc) {
+		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
+		LSSerializer serializer = domImplLS.createLSSerializer();
+		serializer.getDomConfig().setParameter("xml-declaration", false);
+		return serializer.writeToString(doc);
 	}
 	
 }

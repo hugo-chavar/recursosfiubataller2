@@ -15,6 +15,7 @@ import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
 import model.XmlUtil;
+import connection.OperationResponse;
 import connection.Requester;
 
 @MTOM 
@@ -63,11 +64,16 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	@Override
-	public void agregarLink(Link link, int usuarioId) {
+	public String agregarLink(Link link, int usuarioId) {
+		OperationResponse response;
 		if (Requester.INSTANCE.getPermisoUsuario(link.getRecursoId(), usuarioId)) {
-			Requester.INSTANCE.saveLink(link);
+			response = Requester.INSTANCE.saveLink(link);
+		} else {
+			response = new OperationResponse();
+			response.setReason("Permisos insuficientes");
 		}
-		//  TODO retornar confirmaciones en xml, hablar con presentacion para ver como lo quieren
+	//  TODO dejo este ejemplo hagan igual en todos los demas
+		return xmlutil.convertToXml(response, OperationResponse.class);
 	}
 	
 	@Override

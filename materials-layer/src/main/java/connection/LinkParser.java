@@ -8,14 +8,12 @@ import model.Recurso;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.ls.DOMImplementationLS;
-import org.w3c.dom.ls.LSSerializer;
 
 public class LinkParser extends Parser {
 
 	public static String LINK_TAG = "link";
 	public static String NOMBRE_TAG = "nombre";
-
+	
 	public String serializeLink(Link link) {
 
 		Document doc = this.buildXMLDocument();
@@ -58,12 +56,14 @@ public class LinkParser extends Parser {
 		nombre.appendChild(doc.createTextNode(String.valueOf(link.getNombre())));
 		linkNode.appendChild(nombre);
 
-		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-		LSSerializer serializer = domImplLS.createLSSerializer();
-		serializer.getDomConfig().setParameter("xml-declaration", false);
-		String xml = serializer.writeToString(doc);
-
-		return xml;
+//		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
+//		LSSerializer serializer = domImplLS.createLSSerializer();
+//		serializer.getDomConfig().setParameter("xml-declaration", false);
+//		String xml = serializer.writeToString(doc);
+//
+//		return xml;
+		
+		return convertDocumentToXml(doc);
 
 	}
 
@@ -71,7 +71,7 @@ public class LinkParser extends Parser {
 
 		Link link = null;
 
-		Document doc = this.convertToXMLDocument(xml);
+		Document doc = this.convertXmlToDocument(xml);
 		NodeList nodes = doc.getElementsByTagName(Parser.RECURSO_TAG);
 		NodeList childNodes = nodes.item(0).getChildNodes();
 		HashMap<String, String> fields = new HashMap<String, String>();
@@ -88,7 +88,7 @@ public class LinkParser extends Parser {
 			String descripcion = fields.get(Parser.DESCRIPCION_TAG);
 
 			String recursos = fields.get(Parser.RECURSOS_TAG);
-			Document subdoc = this.convertToXMLDocument(recursos);
+			Document subdoc = this.convertXmlToDocument(recursos);
 			NodeList subnodes = subdoc.getElementsByTagName(LinkParser.LINK_TAG);
 			NodeList subchildNodes = subnodes.item(0).getChildNodes();
 			HashMap<String, String> subfields = new HashMap<String, String>();
@@ -128,12 +128,14 @@ public class LinkParser extends Parser {
 		link.appendChild(doc.createTextNode(String.valueOf(IDRecurso)));
 		joinElement.appendChild(link);
 
-		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-		LSSerializer serializer = domImplLS.createLSSerializer();
-		serializer.getDomConfig().setParameter("xml-declaration", false);
-		String xml = serializer.writeToString(doc);
-
-		return xml;
+//		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
+//		LSSerializer serializer = domImplLS.createLSSerializer();
+//		serializer.getDomConfig().setParameter("xml-declaration", false);
+//		String xml = serializer.writeToString(doc);
+//
+//		return xml;
+		
+		return convertDocumentToXml(doc);
 
 	}
 
@@ -151,15 +153,38 @@ public class LinkParser extends Parser {
 
 		Element link = doc.createElement(LinkParser.LINK_TAG);
 		//TODO agregar el tag de recursoId
+		Element recursoId = doc.createElement(Parser.RECURSOID_TAG);
+		recursoId.appendChild(doc.createTextNode(String.valueOf(recurso.getRecursoId())));
+		recursoId.appendChild(recursoId);
 		link.appendChild(doc.createTextNode(String.valueOf(recurso.getRecursoId())));
 		rootElement.appendChild(link);
 
-		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-		LSSerializer serializer = domImplLS.createLSSerializer();
-		serializer.getDomConfig().setParameter("xml-declaration", false);
-		String xml = serializer.writeToString(doc);
+		return convertDocumentToXml(doc);
 
-		return xml;
+	}
+	
+	public Link deserializeLink(String xml, Recurso recurso) {
+
+		Link link = null;
+
+		Document subdoc = this.convertXmlToDocument(xml);
+		NodeList subnodes = subdoc.getElementsByTagName(LinkParser.LINK_TAG);
+		NodeList subchildNodes = subnodes.item(0).getChildNodes();
+		HashMap<String, String> subfields = new HashMap<String, String>();
+
+		if (subchildNodes != null) {
+
+			for (int i = 0; i < subchildNodes.getLength(); i++) {
+				Element element = (Element) subchildNodes.item(i);
+				subfields.put(element.getNodeName(), element.getTextContent());
+			}
+
+			String nombre = subfields.get(LinkParser.NOMBRE_TAG);
+			link = new Link(recurso.getRecursoId(), recurso.getAmbitoId(), recurso.getDescripcion());
+			link.setNombre(nombre);
+
+		}
+		return link;
 
 	}
 

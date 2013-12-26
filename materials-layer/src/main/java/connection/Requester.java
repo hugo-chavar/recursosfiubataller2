@@ -49,16 +49,29 @@ public enum Requester {
 		return archivoReq.getArchivo(IDAmbito, IDArchivo);
 	}
 	
-	public void saveLink(Link link) {
-		linkReq.save(link);
+	public OperationResponse saveLink(Link link) {
+		return linkReq.save(link);
 	}
 	
 	public Link getLink(int IDAmbito, int IDLink) {
-		return linkReq.get(IDAmbito, IDLink);
+		Recurso recurso = recursosReq.getCached(IDLink);
+		return linkReq.get(recurso);
+//		return linkReq.get(IDAmbito, IDLink);
 	}
 	
 	public void deleteRecurso(int IDRecurso) {
+		Recurso recurso = recursosReq.getCached(IDRecurso);
 		recursosReq.delete(IDRecurso);
+		
+		// borro el recurso de todos los caches
+		if ("Link".equals(recurso.getTipo())) {
+			linkReq.delete(IDRecurso);
+		} else if ("Encuesta".equals(recurso.getTipo())) {
+			// encuestaReq.delete(IDRecurso);
+		} else {
+			// archivoReq.delete(IDRecurso);
+		}
+
 	}
 
 	public List<Recurso> getRecursosAmbiente(int IDAmbito) {

@@ -1,11 +1,14 @@
 package model;
 
-import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "pregunta")
 public class PreguntaRespuestaACompletar extends Pregunta {
 
-	public String respuesta=null;
-	
+	public String respuesta = null;
+
 	public PreguntaRespuestaACompletar() {
 		super();
 		type = ANSWER_TO_COMPLETE_TYPE;
@@ -59,13 +62,24 @@ public class PreguntaRespuestaACompletar extends Pregunta {
 	public Integer getNroCorrectas() {
 		return 1;
 	}
-	
+
 	@Override
 	public void completarDatosVisibles() {
 		if (this.correctas.isEmpty()) {
 			if (this.respuesta != null)
 				this.correctas.add(this.respuesta);
 		}
+	}
+	
+	
+	@XmlAttribute(name = "correctas")
+	public String getRtasCorrectas() {
+		return respuesta;
+	}
+	
+	@XmlElement(name = "respuestas")
+	public String getRespuestas() {
+		return null;
 	}
 
 }

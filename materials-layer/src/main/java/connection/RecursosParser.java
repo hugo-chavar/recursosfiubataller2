@@ -9,8 +9,6 @@ import model.Recurso;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.ls.DOMImplementationLS;
-import org.w3c.dom.ls.LSSerializer;
 
 
 public class RecursosParser extends Parser {
@@ -19,7 +17,7 @@ public class RecursosParser extends Parser {
 		
 		List<Recurso> recursos = new ArrayList<Recurso>();
 		
-		Document doc = this.convertToXMLDocument(xml);
+		Document doc = this.convertXmlToDocument(xml);
 		NodeList nodes = doc.getElementsByTagName(Parser.RECURSO_TAG);
 		
 		for (int i = 0; i < nodes.getLength(); i++) {
@@ -63,12 +61,14 @@ public class RecursosParser extends Parser {
 		IDAmbito_el.appendChild(doc.createTextNode(String.valueOf(IDAmbito)));
 		nodeElement.appendChild(IDAmbito_el);
 		
-		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-		LSSerializer serializer = domImplLS.createLSSerializer();
-		serializer.getDomConfig().setParameter("xml-declaration", false);
-		String xml = serializer.writeToString(doc);		
+//		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
+//		LSSerializer serializer = domImplLS.createLSSerializer();
+//		serializer.getDomConfig().setParameter("xml-declaration", false);
+//		String xml = serializer.writeToString(doc);		
+//		
+//		return xml;
 		
-		return xml;
+		return convertDocumentToXml(doc);
 		
 	}
 	
@@ -85,12 +85,14 @@ public class RecursosParser extends Parser {
 		IDRecurso_el.appendChild(doc.createTextNode(String.valueOf(IDRecurso)));
 		nodeElement.appendChild(IDRecurso_el);
 		
-		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-		LSSerializer serializer = domImplLS.createLSSerializer();
-		serializer.getDomConfig().setParameter("xml-declaration", false);
-		String xml = serializer.writeToString(doc);		
+//		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
+//		LSSerializer serializer = domImplLS.createLSSerializer();
+//		serializer.getDomConfig().setParameter("xml-declaration", false);
+//		String xml = serializer.writeToString(doc);		
+//		
+//		return xml;
 		
-		return xml;
+		return convertDocumentToXml(doc);
 		
 	}
 	

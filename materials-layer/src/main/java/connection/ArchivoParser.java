@@ -58,16 +58,18 @@ public class ArchivoParser extends Parser {
 		}
 		nodeElement.appendChild(file);*/
 		
-		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-		LSSerializer serializer = domImplLS.createLSSerializer();
-		serializer.getDomConfig().setParameter("xml-declaration", false);
-		String xml = serializer.writeToString(doc);		
+//		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
+//		LSSerializer serializer = domImplLS.createLSSerializer();
+//		serializer.getDomConfig().setParameter("xml-declaration", false);
+//		String xml = serializer.writeToString(doc);		
+//		
+//		return xml;
 		
-		return xml;
+		return convertDocumentToXml(doc);
 	}
 
 	public Archivo deserializeArchivo(String xml) {
-		Document doc = this.convertToXMLDocument(xml);
+		Document doc = this.convertXmlToDocument(xml);
 		NodeList nodes = doc.getElementsByTagName(ArchivoParser.ARCHIVO_TAG);
 		NodeList childNodes = nodes.item(0).getChildNodes(); 
 		HashMap<String, String> fields = new HashMap<String, String>();

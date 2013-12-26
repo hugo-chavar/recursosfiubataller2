@@ -14,6 +14,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 public class XmlUtil {
+	@SuppressWarnings("rawtypes")
 	public String convertToXml(Object source, Class... type ) {
 		String result;
         StringWriter sw = new StringWriter();

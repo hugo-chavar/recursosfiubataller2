@@ -1,10 +1,24 @@
 package model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Recurso {
 
+	@XmlElement(nillable = false, required = true)
 	protected Integer recursoId;
+
+	@XmlElement(nillable = false, required = true)
 	protected String tipo;
+
+	@XmlElement(nillable = false, required = true)
 	protected Integer ambitoId;
+
+	@XmlElement(nillable = false, required = true)
 	protected String descripcion;
 
 	public Recurso(Integer idRecurso, Integer idAmbito, String descripcion) {
@@ -19,7 +33,7 @@ public class Recurso {
 		this.descripcion = descripcion;
 		this.tipo = tipo;
 	}
-	
+
 	public Recurso() {
 	}
 
@@ -42,9 +56,11 @@ public class Recurso {
 	public String getDescripcion() {
 		return descripcion;
 	}
-	public void setAmbitoId(int id){
+
+	public void setAmbitoId(int id) {
 		this.ambitoId = id;
 	}
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
@@ -53,8 +69,7 @@ public class Recurso {
 	public boolean equals(Object o) {
 		if (o.getClass().equals(this.getClass())) {
 			Recurso r = (Recurso) o;
-			return r.getRecursoId().equals(getRecursoId()) ;
-//				   && r.getIdAmbiente().equals(getIdAmbiente());
+			return r.getRecursoId().equals(getRecursoId());
 		}
 		return false;
 	}

@@ -42,7 +42,8 @@ public interface Materials {
 	void agregarEncuestaRespondida(@WebParam(name = "encuestaRespondida") EncuestaRespondida respondida, @WebParam(name = "ambitoId") int ambitoId);
 
 	@WebMethod
-	void agregarLink(@WebParam(name = "link") Link link, @WebParam(name = "usuarioId") int usuarioId);
+	@WebResult(name = "agregarLink")
+	String agregarLink(@WebParam(name = "link") Link link, @WebParam(name = "usuarioId") int usuarioId);
 
 	@WebMethod
 	void agregarEncuesta(@WebParam(name = "encuesta") Encuesta encuesta, @WebParam(name = "usuarioId") int usuarioId);

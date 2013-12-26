@@ -70,7 +70,7 @@ public class RecursosRequester {
 		try {
 			EliminarDatos eliminar = new EliminarDatos();
 			eliminar.setXml(xml);
-			EliminarDatosResponse e_resp = this.stub.eliminarDatos(eliminar);
+			EliminarDatosResponse e_resp = stub.eliminarDatos(eliminar);
 			System.out.println(e_resp.get_return());
 		} catch (AxisFault e) {
 			System.out.println("Error al intentar eliminar el siguiente Recurso:");
@@ -81,4 +81,11 @@ public class RecursosRequester {
 
 	}
 
+	public Recurso get(Recurso target) {
+		return cache.get(target);
+	}
+
+	public Recurso getCached(int recursoId) {
+		return get(new Recurso(recursoId, 0, ""));
+	}
 }
