@@ -14,6 +14,7 @@ import com.ws.services.IntegracionWSStub.SeleccionarDatos;
 import com.ws.services.IntegracionWSStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
+import connection.responses.OperationResponse;
 
 public class LinkRequester {
 
@@ -53,7 +54,7 @@ public class LinkRequester {
 		} catch (AxisFault e) {
 			String reason = "Error al intentar guardar la siguiente Link: " + link.getDescripcion();
 			System.out.println(reason);
-			response.setReason(link_str);
+			response.setReason(reason);
 		} catch (RemoteException e) {
 			String reason = "Error de conexion remota";
 			System.out.println(reason);

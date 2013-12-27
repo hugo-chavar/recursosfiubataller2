@@ -15,8 +15,9 @@ import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
 import model.XmlUtil;
-import connection.OperationResponse;
 import connection.Requester;
+import connection.responses.OperationResponse;
+import connection.responses.RecursosResponse;
 
 @MTOM 
 @WebService(endpointInterface = "service.Materials")
@@ -66,7 +67,7 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String agregarLink(Link link, int usuarioId) {
 		OperationResponse response;
-		if (Requester.INSTANCE.getPermisoUsuario(link.getRecursoId(), usuarioId)) {
+		if (Requester.INSTANCE.getPermisoUsuario(link.getAmbitoId(), usuarioId)) {
 			response = Requester.INSTANCE.saveLink(link);
 		} else {
 			response = new OperationResponse();
@@ -86,6 +87,7 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public void agregarEncuestaRespondida(EncuestaRespondida respondida, int ambitoId) {
+		OperationResponse response;
 		Encuesta encuesta = Requester.INSTANCE.getEncuesta(ambitoId, respondida.getIdRecurso());
 		encuesta.completarDatosVisibles();
 		respondida.recuperarDatosVisibles(encuesta);
@@ -97,38 +99,44 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	@Override
-	public String  getEncuestaRespondida(int IdAmbiente, int recursoId, int usuarioId) {
+	public String getEncuestaRespondida(int IdAmbiente, int recursoId, int usuarioId) {
 		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida(IdAmbiente, recursoId, usuarioId);
-		Encuesta encuesta= Requester.INSTANCE.getEncuesta(IdAmbiente, recursoId);
+		Encuesta encuesta = Requester.INSTANCE.getEncuesta(IdAmbiente, recursoId);
 		respondida.completarDatosVisibles(encuesta.getPreguntas());
 		String xmlRespondida = xmlutil.convertToXml(respondida, EncuestaRespondida.class);
 		return xmlRespondida;
 	}
 	
 	@Override
-	public List<Recurso> obtenerRecursos(int ambitoId, int usuarioId) {
+	public String obtenerRecursos(int ambitoId, int usuarioId) {
 		List<Recurso> recursos = new ArrayList<Recurso>();
-		List<Recurso> recursosPermitidos = new ArrayList<Recurso>();
+		RecursosResponse recursosPermitidos = new RecursosResponse();
+		recursosPermitidos.setSuccess(true);
 
 		// Obtengo los recursos
 		recursos = Requester.INSTANCE.getRecursosAmbiente(ambitoId);
 		// Chequeo Recursos permitidos
+		// TODO el chequeo tiene q ser a nivel ambito.. no recurso por recurso
 		for (Recurso r:  recursos) {
 			if (Requester.INSTANCE.getPermisoUsuario(r.getRecursoId(), usuarioId)) {
 				recursosPermitidos.add(r);
 			}
 		}
-		return recursosPermitidos;
+//		return recursosPermitidos;
+		return xmlutil.convertToXml(recursosPermitidos, recursosPermitidos.getClass());
 	}
 	
 	@Override
-	public boolean borrarRecurso(int ambitoId, int recursoId, int usuarioId) {
+	public String borrarRecurso(int ambitoId, int recursoId, int usuarioId) {
+		OperationResponse response;
 		if (Requester.INSTANCE.getPermisoUsuario(recursoId, usuarioId)) {
-			Requester.INSTANCE.deleteRecurso(recursoId);
-			return true;
+			response = Requester.INSTANCE.deleteRecurso(recursoId);
+		} else {
+			response = new OperationResponse();
+			response.setSuccess(false);
+			response.setReason("Permisos insuficientes");
 		}
-	//  TODO retornar confirmaciones en xml, no booleanos, hablar con presentacion para ver como lo quieren
-		return false;
+		return xmlutil.convertToXml(response, response.getClass());
 	}
 
 }

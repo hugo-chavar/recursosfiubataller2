@@ -15,6 +15,7 @@ import com.ws.services.IntegracionWSStub.SeleccionarDatos;
 import com.ws.services.IntegracionWSStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
+import connection.responses.OperationResponse;
 
 public class RecursosRequester {
 
@@ -63,7 +64,9 @@ public class RecursosRequester {
 
 	}
 
-	public void delete(int IDRecurso) {
+	public OperationResponse delete(int IDRecurso) {
+		OperationResponse response = new OperationResponse();
+		response.setSuccess(false);
 
 		// Borro la encuesta respondida
 		String xml = parser.serializeDeleteQuery(IDRecurso);
@@ -72,12 +75,23 @@ public class RecursosRequester {
 			eliminar.setXml(xml);
 			EliminarDatosResponse e_resp = stub.eliminarDatos(eliminar);
 			System.out.println(e_resp.get_return());
+			
+			// TODO implementar método que chequee las respuestas
+			// if (xmlUtil.isResponseOk(g_resp.get_return())) {
+			// or.setSuccess(true);
+			// or.setReason("algo");
+			// }
+			response.setSuccess(true);
 		} catch (AxisFault e) {
-			System.out.println("Error al intentar eliminar el siguiente Recurso:");
-			System.out.println("IDRecurso: " + IDRecurso);
+			String reason = "Error al intentar eliminar el siguiente Recurso con Id "  + IDRecurso;
+			System.out.println(reason);
+			response.setReason(reason);
 		} catch (RemoteException e) {
-			System.out.println("Error de conexion remota");
+			String reason = "Error de conexion remota";
+			System.out.println(reason);
+			response.setReason(reason);
 		}
+		return response;
 
 	}
 

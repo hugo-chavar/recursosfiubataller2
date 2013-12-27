@@ -28,7 +28,7 @@ public interface Materials {
 	
 	@WebMethod 
 	@WebResult(name = "recursos")
-	List<Recurso> obtenerRecursos(@WebParam(name = "ambitoId") int ambitoId,@WebParam(name = "recursoId")int usuarioId);
+	String obtenerRecursos(@WebParam(name = "ambitoId") int ambitoId,@WebParam(name = "recursoId")int usuarioId);
 		
 	@WebMethod 
 	@WebResult(name = "encuesta")
@@ -54,7 +54,7 @@ public interface Materials {
 
 	@WebMethod
 	@WebResult(name = "borrado")
-	boolean borrarRecurso(@WebParam(name = "ambitoId") int ambitoId, @WebParam(name = "recursoId") int recursoId, @WebParam(name = "usuarioId") int usuarioId);
+	String borrarRecurso(@WebParam(name = "ambitoId") int ambitoId, @WebParam(name = "recursoId") int recursoId, @WebParam(name = "usuarioId") int usuarioId);
 
 	@WebMethod
 	@WebResult(name = "archivo")
