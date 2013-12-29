@@ -28,7 +28,7 @@ public interface Materials {
 	
 	@WebMethod 
 	@WebResult(name = "recursos")
-	String obtenerRecursos(@WebParam(name = "ambitoId") int ambitoId,@WebParam(name = "recursoId")int usuarioId);
+	String getRecursos(@WebParam(name = "ambitoId") int ambitoId,@WebParam(name = "recursoId")int usuarioId);
 		
 	@WebMethod 
 	@WebResult(name = "encuesta")

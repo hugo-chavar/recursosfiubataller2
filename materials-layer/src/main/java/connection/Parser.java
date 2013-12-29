@@ -2,7 +2,11 @@ package connection;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -53,6 +57,15 @@ public class Parser {
 		}
 		return null;
 	}
+//	
+//	public static Document loadXMLFromString(String xml) throws Exception
+//	{
+//	    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//	    DocumentBuilder builder = factory.newDocumentBuilder();
+//	    InputSource is = new InputSource(new StringReader(xml));
+//	    return builder.parse(is);
+//	}
+	
 	
 	public String convertDocumentToXml(Document doc) {
 		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
@@ -60,5 +73,23 @@ public class Parser {
 		serializer.getDomConfig().setParameter("xml-declaration", false);
 		return serializer.writeToString(doc);
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public String convertToXml(Object source, Class... type ) {
+		String result;
+        StringWriter sw = new StringWriter();
+        try {
+            JAXBContext carContext = JAXBContext.newInstance(type);
+            Marshaller carMarshaller = carContext.createMarshaller();
+            carMarshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+            carMarshaller.marshal(source, sw);
+            result = sw.toString();
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
+	}
+	
 	
 }

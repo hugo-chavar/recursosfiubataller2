@@ -1,13 +1,15 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
-import service.Encuesta;
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.xml.ws.BindingProvider;
+import javax.xml.ws.soap.SOAPBinding;
+
 import service.Materials;
 import service.MaterialsImplService;
-import service.Pregunta;
-import service.Recurso;
 
 public class Client {
 
@@ -28,74 +30,74 @@ public class Client {
 			e.printStackTrace();
 		}
 
-		// A partir de aca se pueden descomentar los try-catch que se quieren testear
-    
-    try {
-			System.out.println("ingrese el path de su archivo");
-			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-			String path = bufferRead.readLine();
+		// A partir de aca se pueden descomentar los try-catch que se quieren
+		// testear
 
-			File arch = new File(path);
-			DataHandler file = new DataHandler(new FileDataSource(arch));
-			// enable MTOM in client
-			BindingProvider bp = (BindingProvider) port;
-			SOAPBinding binding = (SOAPBinding) bp.getBinding();
-			binding.setMTOMEnabled(true);
-
-			String status = port.setArchivo(0, "aca iria su nombre", "aca su extension", file);
-			System.out.println("imageServer.uploadImage() : " + status);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			System.out.println("ingrese el path de su archivo");
+//			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+//			String path = bufferRead.readLine();
+//
+//			File arch = new File(path);
+//			DataHandler file = new DataHandler(new FileDataSource(arch));
+//			// enable MTOM in client
+//			BindingProvider bp = (BindingProvider) port;
+//			SOAPBinding binding = (SOAPBinding) bp.getBinding();
+//			binding.setMTOMEnabled(true);
+//
+//			String status = port.setArchivo(0, "aca iria su nombre", "aca su extension", file);
+//			System.out.println("imageServer.uploadImage() : " + status);
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		try {
-			List<Recurso> l = port.obtenerRecursos(0, 0);
-			for (Recurso r : l) {
-				System.out.println("Un recurso: " + r.getDescripcion());
-			}
+			String xmlRecursos = port.getRecursos(0, 0);
+			System.out.println(xmlRecursos);
+
 			System.out.println("Ok, recursos obtenidos.");
 		} catch (Exception e) {
 			System.out.println("Error al traer recursos!");
 		}
-//		try {
-//			Encuesta enc = port.getEncuesta(0, 0);
-//			System.out.println("TITULO ENCUESTA: " + enc.getDescripcion());
-//
-//			List<Pregunta> preguntas = enc.getPreguntas();
-//			for (Pregunta p : preguntas) {
-//				System.out.println("\t" + p.getEnunciado());
-//			}
-//		} catch (Exception e) {
-//			System.out.println("Encuesta inexistente!");
-//		}
+		// try {
+		// Encuesta enc = port.getEncuesta(0, 0);
+		// System.out.println("TITULO ENCUESTA: " + enc.getDescripcion());
+		//
+		// List<Pregunta> preguntas = enc.getPreguntas();
+		// for (Pregunta p : preguntas) {
+		// System.out.println("\t" + p.getEnunciado());
+		// }
+		// } catch (Exception e) {
+		// System.out.println("Encuesta inexistente!");
+		// }
 
-		try {
-			Encuesta enc2 = new Encuesta();
-			enc2.setDescripcion("Esto es un ejemplo");
-			Pregunta p1 = new Pregunta();
-			p1.setEnunciado("Cual es un color primario?");
-			p1.getOpciones().add("azul");
-			p1.getOpciones().add("verde");
-			p1.getOpciones().add("magenta");
-			p1.getCorrectas().add("azul");
-
-			Pregunta p2 = new Pregunta();
-			p1.setEnunciado("Campeon copa sudamericana 2013?");
-			p1.getOpciones().add("River");
-			p1.getOpciones().add("Boca");
-			p1.getOpciones().add("Lanus");
-			p1.getCorrectas().add("Lanus");
-
-			enc2.getPreguntas().add(p1);
-			enc2.getPreguntas().add(p2);
-
-			System.out.println("Creando una encuesta..");
-			
-			port.agregarEncuesta(enc2);
-
-		} catch (Exception e) {
-			System.out.println("Error al crear una encuesta");
-		}
+		// try {
+		// Encuesta enc2 = new Encuesta();
+		// enc2.setDescripcion("Esto es un ejemplo");
+		// Pregunta p1 = new Pregunta();
+		// p1.setEnunciado("Cual es un color primario?");
+		// p1.getOpciones().add("azul");
+		// p1.getOpciones().add("verde");
+		// p1.getOpciones().add("magenta");
+		// p1.getCorrectas().add("azul");
+		//
+		// Pregunta p2 = new Pregunta();
+		// p1.setEnunciado("Campeon copa sudamericana 2013?");
+		// p1.getOpciones().add("River");
+		// p1.getOpciones().add("Boca");
+		// p1.getOpciones().add("Lanus");
+		// p1.getCorrectas().add("Lanus");
+		//
+		// enc2.getPreguntas().add(p1);
+		// enc2.getPreguntas().add(p2);
+		//
+		// System.out.println("Creando una encuesta..");
+		//
+		// port.agregarEncuesta(enc2, 0);
+		//
+		// } catch (Exception e) {
+		// System.out.println("Error al crear una encuesta");
+		// }
 
 	}
 

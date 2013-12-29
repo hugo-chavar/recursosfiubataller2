@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.activation.DataHandler;
-//import javax.activation.FileDataSource;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.soap.MTOM;
@@ -14,7 +13,7 @@ import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
-import model.XmlUtil;
+import connection.Parser;
 import connection.Requester;
 import connection.responses.OperationResponse;
 import connection.responses.RecursosResponse;
@@ -23,7 +22,7 @@ import connection.responses.RecursosResponse;
 @WebService(endpointInterface = "service.Materials")
 public class MaterialsImpl implements Materials {
 
-	private XmlUtil xmlutil = new XmlUtil();
+	private Parser parser = new Parser();
 	
 	@Override
 	public String sayHello(String name) {
@@ -33,7 +32,7 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String getArchivo(int ambitoId, int recursoId){
 		Archivo file = Requester.INSTANCE.getArchivo(ambitoId, recursoId);
-		String xmlArchivo = xmlutil.convertToXml(file, Archivo.class);
+		String xmlArchivo = parser.convertToXml(file, Archivo.class);
 		return xmlArchivo;
 	}
 	
@@ -74,15 +73,18 @@ public class MaterialsImpl implements Materials {
 			response.setReason("Permisos insuficientes");
 		}
 	//  TODO dejo este ejemplo hagan igual en todos los demas
-		return xmlutil.convertToXml(response, OperationResponse.class);
+		return parser.convertToXml(response, OperationResponse.class);
 	}
 	
 	@Override
 	public String getEncuesta(int ambitoId, int recursoId) {
 		Encuesta encuesta = Requester.INSTANCE.getEncuesta(ambitoId, recursoId);
 		encuesta.completarDatosVisibles();
-		String xmlEncuesta = xmlutil.convertToXml(encuesta, Encuesta.class);
+		//usar algo que herede de OperationResponse, ver RecursosResponse
+		String xmlEncuesta = parser.convertToXml(encuesta, Encuesta.class);
 		return xmlEncuesta;
+	//  TODO retornar una response, en lugar del objeto en xml
+//		copiar de 
 	}
 	
 	@Override
@@ -95,7 +97,7 @@ public class MaterialsImpl implements Materials {
 			respondida.evaluar(encuesta);
 		}
 		Requester.INSTANCE.saveEncuestaRespondida(respondida);
-		//  TODO retornar confirmaciones en xml, hablar con presentacion para ver como lo quieren
+		//  TODO retornar confirmaciones en xml, copiar de borrarRecurso
 	}
 	
 	@Override
@@ -103,12 +105,12 @@ public class MaterialsImpl implements Materials {
 		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida(IdAmbiente, recursoId, usuarioId);
 		Encuesta encuesta = Requester.INSTANCE.getEncuesta(IdAmbiente, recursoId);
 		respondida.completarDatosVisibles(encuesta.getPreguntas());
-		String xmlRespondida = xmlutil.convertToXml(respondida, EncuestaRespondida.class);
+		String xmlRespondida = parser.convertToXml(respondida, EncuestaRespondida.class);
 		return xmlRespondida;
 	}
 	
 	@Override
-	public String obtenerRecursos(int ambitoId, int usuarioId) {
+	public String getRecursos(int ambitoId, int usuarioId) {
 		List<Recurso> recursos = new ArrayList<Recurso>();
 		RecursosResponse recursosPermitidos = new RecursosResponse();
 		recursosPermitidos.setSuccess(true);
@@ -123,7 +125,7 @@ public class MaterialsImpl implements Materials {
 			}
 		}
 //		return recursosPermitidos;
-		return xmlutil.convertToXml(recursosPermitidos, recursosPermitidos.getClass());
+		return parser.convertToXml(recursosPermitidos, recursosPermitidos.getClass());
 	}
 	
 	@Override
@@ -136,7 +138,7 @@ public class MaterialsImpl implements Materials {
 			response.setSuccess(false);
 			response.setReason("Permisos insuficientes");
 		}
-		return xmlutil.convertToXml(response, response.getClass());
+		return parser.convertToXml(response, response.getClass());
 	}
 
 }
