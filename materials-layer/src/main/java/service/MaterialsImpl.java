@@ -44,7 +44,7 @@ public class MaterialsImpl implements Materials {
 			System.out.println("Guardando encuesta: " + encuesta.getDescripcion());
 		}
 		
-	//  TODO retornar confirmaciones en xml, hablar con presentacion para ver como lo quieren
+	//  TODO retornar confirmaciones en xml, copiar de borrarRecurso
 	}
 	
 	@Override
@@ -84,12 +84,11 @@ public class MaterialsImpl implements Materials {
 		String xmlEncuesta = parser.convertToXml(encuesta, Encuesta.class);
 		return xmlEncuesta;
 	//  TODO retornar una response, en lugar del objeto en xml
-//		copiar de 
+//		copiar de getRecursos
 	}
 	
 	@Override
 	public void agregarEncuestaRespondida(EncuestaRespondida respondida, int ambitoId) {
-		OperationResponse response;
 		Encuesta encuesta = Requester.INSTANCE.getEncuesta(ambitoId, respondida.getIdRecurso());
 		encuesta.completarDatosVisibles();
 		respondida.recuperarDatosVisibles(encuesta);
@@ -116,7 +115,7 @@ public class MaterialsImpl implements Materials {
 		recursosPermitidos.setSuccess(true);
 
 		// Obtengo los recursos
-		recursos = Requester.INSTANCE.getRecursosAmbiente(ambitoId);
+		recursos = Requester.INSTANCE.getRecursosAmbito(ambitoId);
 		// Chequeo Recursos permitidos
 		// TODO el chequeo tiene q ser a nivel ambito.. no recurso por recurso
 		for (Recurso r:  recursos) {

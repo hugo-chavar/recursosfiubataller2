@@ -14,6 +14,7 @@ import com.ws.services.IntegracionWSStub.SeleccionarDatos;
 import com.ws.services.IntegracionWSStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
+import connection.responses.LinkResponse;
 import connection.responses.OperationResponse;
 
 public class LinkRequester {
@@ -63,12 +64,16 @@ public class LinkRequester {
 		return response;
 	}
 
-	public Link get(int IDAmbiente, int IDRecurso) {
+	public OperationResponse get(int IDAmbiente, int IDRecurso) {
 
+		LinkResponse response;
+		String reason;
 		// Busco en el cache de links
 		Link target = new Link(IDAmbiente, IDRecurso, "");
 		if (cache.contains(target)) {
-			return cache.get(target);
+			response = new LinkResponse(cache.get(target));
+			response.setSuccess(true);
+			return response ;
 		} else {
 			try {
 
@@ -83,16 +88,22 @@ public class LinkRequester {
 				// Agrego al cache de links
 				cache.add(link);
 
-				return link;
+				response = new LinkResponse(link);
+				response.setSuccess(true);
+				return response ;
+//				return link;
 
 			} catch (AxisFault e) {
-				System.out.println("Error al intentar obtener el siguiente Link:");
-				System.out.println("IDLink: " + IDRecurso);
+				reason = "Error al intentar obtener el Link, Id =" + IDRecurso;
 			} catch (RemoteException e) {
-				System.out.println("Error de conexion remota");
+				reason = "Error de conexion remota";
 			}
 
-			return null;
+			System.out.println(reason);
+			response = new LinkResponse();
+			response.setReason(reason);
+			
+			return response;
 		}
 
 	}
@@ -101,11 +112,16 @@ public class LinkRequester {
 		cache.remove(new Link(recursoId, 0, ""));
 	}
 
-	public Link get(Recurso recurso) {
+	public OperationResponse get(Recurso recurso) {
+		LinkResponse response;
+		String reason;
 		Link target = new Link(recurso);
 		if (cache.contains(target)) {
-			return cache.get(target);
+			response = new LinkResponse(cache.get(target));
+			response.setSuccess(true);
+			return response;
 		} else {
+			
 			try {
 				String xml = parser.serializeLinkQuery(recurso);
 				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
@@ -115,17 +131,21 @@ public class LinkRequester {
 				Link link = this.parser.deserializeLink(xml_resp_e, recurso);
 
 				cache.add(link);
-
-				return link;
+				response = new LinkResponse(link);
+				response.setSuccess(true);
+				return response ;
 
 			} catch (AxisFault e) {
-				System.out.println("Error al intentar obtener el siguiente Link:");
-				System.out.println("IDLink: " + recurso.getRecursoId());
+				reason = "Error al intentar obtener el Link, Id =" + recurso.getRecursoId();
 			} catch (RemoteException e) {
-				System.out.println("Error de conexion remota");
+				reason = "Error de conexion remota";
 			}
 
-			return null;
+			System.out.println(reason);
+			response = new LinkResponse();
+			response.setReason(reason);
+			
+			return response;
 		}
 
 	}

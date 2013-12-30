@@ -54,7 +54,7 @@ public enum Requester {
 		return linkReq.save(link);
 	}
 	
-	public Link getLink(int idAmbito, int IDLink) {
+	public OperationResponse getLink(int idAmbito, int IDLink) {
 		Recurso recurso = recursosReq.getCached(IDLink);
 		return linkReq.get(recurso);
 //		return linkReq.get(idAmbito, IDLink);
@@ -62,7 +62,6 @@ public enum Requester {
 	
 	public OperationResponse deleteRecurso(int idRecurso) {
 		Recurso recurso = recursosReq.getCached(idRecurso);
-		
 		
 		// borro el recurso de todos los caches
 		if ("Link".equals(recurso.getTipo())) {
@@ -76,7 +75,7 @@ public enum Requester {
 
 	}
 
-	public List<Recurso> getRecursosAmbiente(int idAmbito) {
+	public List<Recurso> getRecursosAmbito(int idAmbito) {
 		return recursosReq.get(idAmbito);
 	}
 
