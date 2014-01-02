@@ -142,13 +142,13 @@ public class MaterialsImpl implements Materials {
 	}
 
 	@Override
-	public String getEncuestaRespondida(String parametros) {
+	public String getEncuestaRespondida2(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
 		return getEncuestaRespondida(parameter.getAmbitoId(), parameter.getRecursoId(), parameter.getUsuarioId());
 	}
 
 	@Override
-	public String getRecursos(String parametros) {
+	public String getRecursos2(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
 		return getRecursos(parameter.getAmbitoId(),parameter.getUsuarioId());
 	}

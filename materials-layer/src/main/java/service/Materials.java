@@ -26,7 +26,7 @@ public interface Materials {
 	
 	@WebMethod 
 	@WebResult(name = "recursos")
-	String getRecursos(@WebParam(name = "parametros")String parametros);
+	String getRecursos2(@WebParam(name = "parametros")String parametros);
 		
 	@WebMethod 
 	@WebResult(name = "encuesta")
@@ -38,7 +38,7 @@ public interface Materials {
 	
 	@WebMethod
 	@WebResult(name = "encuestaRespondida")
-	String getEncuestaRespondida(@WebParam(name = "parametros")String parametros);
+	String getEncuestaRespondida2(@WebParam(name = "parametros")String parametros);
 
 	@WebMethod
 	void agregarEncuestaRespondida(@WebParam(name = "encuestaRespondida") EncuestaRespondida respondida, @WebParam(name = "ambitoId") int ambitoId);
