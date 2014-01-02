@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import javax.xml.ws.Endpoint;
-
 import javax.xml.ws.soap.SOAPBinding;
+
+import connection.Parameter;
+import connection.Parser;
 import service.MaterialsImpl;
 
 public class WSPublisher {
@@ -29,6 +31,20 @@ public class WSPublisher {
 		}
 
 		ep.stop();
+		
+		System.out.println("Prueba marshal de parametros: ");
+		Parameter p = new Parameter();
+		p.setAmbitoId(15);
+		p.setUsuarioId(23);
+		Parser parser = new Parser();
+		String xml = parser.convertToXml(p, p.getClass());
+		System.out.println(xml);
+		
+		Parameter p2 = (Parameter)parser.unmarshal(xml, Parameter.class);
+		System.out.println("Ambito: " + p2.getAmbitoId());
+		System.out.println("Usuario: " + p2.getUsuarioId());
+		System.out.println("Recurso: " + p2.getRecursoId());
+		
 		System.out.println("Programa terminado. ");
 
 	}

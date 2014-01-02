@@ -40,5 +40,18 @@ public class Parameter {
 		return recursoId;
 	}
 
+	public void setAmbitoId(Integer ambitoId) {
+		this.ambitoId = ambitoId;
+	}
+
+	public void setUsuarioId(Integer usuarioId) {
+		this.usuarioId = usuarioId;
+	}
+
+	public void setRecursoId(Integer recursoId) {
+		this.recursoId = recursoId;
+	}
+
+	
 	
 }
