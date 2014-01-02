@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-@XmlRootElement
+@XmlRootElement(name = "pregunta")
 @XmlAccessorType(XmlAccessType.NONE)
 public class Pregunta {
 

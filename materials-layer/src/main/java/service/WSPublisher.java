@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.soap.SOAPBinding;
 
+import model.Encuesta;
+import model.Pregunta;
 import connection.Parameter;
 import connection.Parser;
 import service.MaterialsImpl;
@@ -31,7 +33,7 @@ public class WSPublisher {
 		}
 
 		ep.stop();
-		
+
 		System.out.println("Prueba marshal de parametros: ");
 		Parameter p = new Parameter();
 		p.setAmbitoId(15);
@@ -39,12 +41,48 @@ public class WSPublisher {
 		Parser parser = new Parser();
 		String xml = parser.convertToXml(p, p.getClass());
 		System.out.println(xml);
-		
-		Parameter p2 = (Parameter)parser.unmarshal(xml, Parameter.class);
+
+		Parameter p2 = (Parameter) parser.unmarshal(xml, Parameter.class);
+		System.out.println("Ambito: " + p2.getAmbitoId());
+		System.out.println("Usuario: " + p2.getUsuarioId());
+		System.out.println("Recurso: " + p2.getRecursoId());
+
+		xml = "<parametro><ambitoId>15</ambitoId><usuarioId>23</usuarioId></parametro>";
+		p2 = (Parameter) parser.unmarshal(xml, Parameter.class);
 		System.out.println("Ambito: " + p2.getAmbitoId());
 		System.out.println("Usuario: " + p2.getUsuarioId());
 		System.out.println("Recurso: " + p2.getRecursoId());
 		
+		System.out.println("Prueba marshal de encuesta: ");
+
+		Encuesta encuesta = new Encuesta();
+		encuesta.setDescripcion("Esto es un ejemplo");
+		Pregunta pr1 = new Pregunta();
+		pr1.setEnunciado("Cual es un color primario?");
+		pr1.getOpciones().add("azul");
+		pr1.getOpciones().add("verde");
+		pr1.getOpciones().add("magenta");
+		pr1.getCorrectas().add("azul");
+
+		Pregunta pr2 = new Pregunta();
+		pr2.setEnunciado("Campeon copa sudamericana 2013?");
+		pr2.getOpciones().add("River");
+		pr2.getOpciones().add("Boca");
+		pr2.getOpciones().add("Lanus");
+		pr2.getCorrectas().add("Lanus");
+
+		encuesta.getPreguntas().add(pr1);
+		encuesta.getPreguntas().add(pr2);
+		
+		xml = parser.convertToXml(encuesta, Encuesta.class);
+		
+		System.out.println(xml);
+		
+		Encuesta enc2 = (Encuesta)parser.unmarshal(xml, Encuesta.class);
+		
+		System.out.println(enc2.getDescripcion());
+		
+
 		System.out.println("Programa terminado. ");
 
 	}
