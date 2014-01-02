@@ -13,6 +13,7 @@ import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
+import connection.Parameter;
 import connection.Parser;
 import connection.Requester;
 import connection.responses.OperationResponse;
@@ -138,6 +139,12 @@ public class MaterialsImpl implements Materials {
 			response.setReason("Permisos insuficientes");
 		}
 		return parser.convertToXml(response, response.getClass());
+	}
+
+	@Override
+	public String getEncuestaRespondida(String parametros) {
+		Parameter parameter = Parameter.createParameter(parametros);
+		return getEncuestaRespondida(parameter.getAmbitoId(), parameter.getRecursoId(), parameter.getUsuarioId());
 	}
 
 }

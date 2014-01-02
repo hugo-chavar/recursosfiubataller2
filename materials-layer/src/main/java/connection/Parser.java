@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -91,5 +92,19 @@ public class Parser {
         return result;
 	}
 	
+	@SuppressWarnings("rawtypes")
+	public Object unmarshal(String xml, Class... type ) {
+		JAXBContext jaxbContext;
+		try {
+			jaxbContext = JAXBContext.newInstance(type);
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+			StringReader reader = new StringReader(xml);
+			return unmarshaller.unmarshal(reader);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }

@@ -1,22 +1,16 @@
 package service;
 
-
-
-import java.util.List;
-
 import javax.activation.DataHandler;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import javax.xml.bind.annotation.XmlMimeType;
+import javax.xml.ws.BindingType;
 
 import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
-import model.Recurso;
-
-import javax.xml.bind.annotation.XmlMimeType;
-import javax.xml.ws.BindingType;
 
 
 @BindingType(value = javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
@@ -28,7 +22,7 @@ public interface Materials {
 	
 	@WebMethod 
 	@WebResult(name = "recursos")
-	String getRecursos(@WebParam(name = "ambitoId") int ambitoId,@WebParam(name = "recursoId")int usuarioId);
+	String getRecursos(@WebParam(name = "ambitoId") int ambitoId, @WebParam(name = "recursoId")int usuarioId);
 		
 	@WebMethod 
 	@WebResult(name = "encuesta")
@@ -36,7 +30,11 @@ public interface Materials {
 	
 	@WebMethod
 	@WebResult(name = "encuestaRespondida")
-	String getEncuestaRespondida(@WebParam(name = "ambitoId")int ambitoId,@WebParam(name = "recursoId") int recursoId,@WebParam(name="usuarioId") int usuarioId);
+	String getEncuestaRespondida(@WebParam(name = "ambitoId")int ambitoId, @WebParam(name = "recursoId") int recursoId,@WebParam(name="usuarioId") int usuarioId);
+	
+	@WebMethod
+	@WebResult(name = "encuestaRespondida")
+	String getEncuestaRespondida(@WebParam(name = "parametros")String parametros);
 
 	@WebMethod
 	void agregarEncuestaRespondida(@WebParam(name = "encuestaRespondida") EncuestaRespondida respondida, @WebParam(name = "ambitoId") int ambitoId);
