@@ -147,4 +147,10 @@ public class MaterialsImpl implements Materials {
 		return getEncuestaRespondida(parameter.getAmbitoId(), parameter.getRecursoId(), parameter.getUsuarioId());
 	}
 
+	@Override
+	public String getRecursos(String parametros) {
+		Parameter parameter = Parameter.createParameter(parametros);
+		return getRecursos(parameter.getAmbitoId(),parameter.getUsuarioId());
+	}
+
 }
