@@ -150,6 +150,9 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String getEncuestaRespondida2(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
+		if (parameter.getAmbitoId() == null || parameter.getUsuarioId() == null || parameter.getRecursoId() == null){
+			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
+		}
 		return getEncuestaRespondida(parameter.getAmbitoId(), parameter.getRecursoId(), parameter.getUsuarioId());
 	}
 
