@@ -15,6 +15,7 @@ import com.ws.services.IntegracionWSStub.SeleccionarDatos;
 import com.ws.services.IntegracionWSStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
+import connection.exceptions.GetException;
 import connection.responses.OperationResponse;
 
 public class RecursosRequester {
@@ -37,7 +38,7 @@ public class RecursosRequester {
 
 	}
 
-	public List<Recurso> get(int IDAmbito) {
+	public List<Recurso> get(int IDAmbito) throws GetException {
 
 		List<Recurso> recursos = new ArrayList<Recurso>();
 
@@ -54,13 +55,16 @@ public class RecursosRequester {
 			return recursos;
 
 		} catch (AxisFault e) {
-			System.out.println("Error al intentar obtener los recursos del");
-			System.out.println("IDAmbito: " + IDAmbito);
+			String message = "Error al intentar obtener los recursos del IDAmbito: " + IDAmbito;
+			System.out.println(message);
+			throw new GetException(message);
 		} catch (RemoteException e) {
-			System.out.println("Error de conexion remota");
+			String message = "Error de conexion remota";
+			System.out.println(message);
+			throw new GetException(message);
 		}
 
-		return null;
+//		return null;
 
 	}
 

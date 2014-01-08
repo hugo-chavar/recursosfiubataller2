@@ -16,6 +16,7 @@ import model.Recurso;
 import connection.Parameter;
 import connection.Parser;
 import connection.Requester;
+import connection.exceptions.GetException;
 import connection.responses.OperationResponse;
 import connection.responses.RecursosResponse;
 
@@ -116,7 +117,11 @@ public class MaterialsImpl implements Materials {
 		recursosPermitidos.setSuccess(true);
 
 		// Obtengo los recursos
-		recursos = Requester.INSTANCE.getRecursosAmbito(ambitoId);
+		try {
+			recursos = Requester.INSTANCE.getRecursosAmbito(ambitoId);
+		} catch (GetException e) {
+			return parser.convertToXml(createFailedResponse(e.getMessage()), OperationResponse.class);
+		}
 		// Chequeo Recursos permitidos
 		// TODO el chequeo tiene q ser a nivel ambito.. no recurso por recurso
 		for (Recurso r:  recursos) {

@@ -2,6 +2,7 @@ package connection;
 
 import java.util.List;
 
+import connection.exceptions.GetException;
 import connection.responses.OperationResponse;
 import model.Archivo;
 import model.Encuesta;
@@ -75,7 +76,7 @@ public enum Requester {
 
 	}
 
-	public List<Recurso> getRecursosAmbito(int idAmbito) {
+	public List<Recurso> getRecursosAmbito(int idAmbito) throws GetException {
 		return recursosReq.get(idAmbito);
 	}
 
