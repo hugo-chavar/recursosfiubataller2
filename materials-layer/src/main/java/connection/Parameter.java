@@ -12,7 +12,11 @@ public class Parameter {
 	public static Parameter createParameter(String xml) {
 		Parser parser = new Parser();
 		Parameter p = (Parameter)parser.unmarshal(xml, Parameter.class);
-		return p;
+		if (p != null) {
+			return p;
+		}
+		return new Parameter();
+		
 	}
 	
 	public Parameter() {

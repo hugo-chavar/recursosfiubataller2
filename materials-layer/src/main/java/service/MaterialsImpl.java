@@ -134,11 +134,17 @@ public class MaterialsImpl implements Materials {
 		if (Requester.INSTANCE.getPermisoUsuario(recursoId, usuarioId)) {
 			response = Requester.INSTANCE.deleteRecurso(recursoId);
 		} else {
-			response = new OperationResponse();
-			response.setSuccess(false);
-			response.setReason("Permisos insuficientes");
+			response = createFailedResponse("Permisos insuficientes");
 		}
 		return parser.convertToXml(response, response.getClass());
+	}
+
+	private OperationResponse createFailedResponse(String reason) {
+		OperationResponse response;
+		response = new OperationResponse();
+		response.setSuccess(false);
+		response.setReason(reason);
+		return response;
 	}
 
 	@Override
@@ -150,6 +156,9 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String getRecursos2(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
+		if (parameter.getAmbitoId() == null || parameter.getUsuarioId() == null){
+			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
+		}
 		return getRecursos(parameter.getAmbitoId(),parameter.getUsuarioId());
 	}
 

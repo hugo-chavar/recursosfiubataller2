@@ -53,6 +53,9 @@ public class WSPublisher {
 		System.out.println("Usuario: " + p2.getUsuarioId());
 		System.out.println("Recurso: " + p2.getRecursoId());
 		
+		Parameter p3 = (Parameter) parser.unmarshal("hola", Parameter.class);
+		System.out.println("Parameter: " + p3);
+		
 		System.out.println("Prueba marshal de encuesta: ");
 
 		Encuesta encuesta = new Encuesta();
