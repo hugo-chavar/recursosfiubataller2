@@ -1,5 +1,5 @@
 /**
- * IntegracionWSCallbackHandler.java
+ * IntegracionCallbackHandler.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST)
@@ -8,10 +8,10 @@
 package com.ws.services;
 
 /**
- * IntegracionWSCallbackHandler Callback class, Users can extend this class and
+ * IntegracionCallbackHandler Callback class, Users can extend this class and
  * implement their own receiveResult and receiveError methods.
  */
-public abstract class IntegracionWSCallbackHandler {
+public abstract class IntegracionCallbackHandler {
 
 	protected Object clientData;
 
@@ -24,14 +24,14 @@ public abstract class IntegracionWSCallbackHandler {
 	 *            Object mechanism by which the user can pass in user data that
 	 *            will be avilable at the time this callback is called.
 	 */
-	public IntegracionWSCallbackHandler(Object clientData) {
+	public IntegracionCallbackHandler(Object clientData) {
 		this.clientData = clientData;
 	}
 
 	/**
 	 * Please use this constructor if you don't want to set any clientData
 	 */
-	public IntegracionWSCallbackHandler() {
+	public IntegracionCallbackHandler() {
 		this.clientData = null;
 	}
 
@@ -47,7 +47,7 @@ public abstract class IntegracionWSCallbackHandler {
 	 * auto generated Axis2 call back method for eliminarDatos method override
 	 * this method for handling normal response from eliminarDatos operation
 	 */
-	public void receiveResulteliminarDatos(com.ws.services.IntegracionWSStub.EliminarDatosResponse result) {
+	public void receiveResulteliminarDatos(com.ws.services.IntegracionStub.EliminarDatosResponse result) {
 	}
 
 	/**
@@ -61,7 +61,7 @@ public abstract class IntegracionWSCallbackHandler {
 	 * auto generated Axis2 call back method for actualizarDatos method override
 	 * this method for handling normal response from actualizarDatos operation
 	 */
-	public void receiveResultactualizarDatos(com.ws.services.IntegracionWSStub.ActualizarDatosResponse result) {
+	public void receiveResultactualizarDatos(com.ws.services.IntegracionStub.ActualizarDatosResponse result) {
 	}
 
 	/**
@@ -76,7 +76,7 @@ public abstract class IntegracionWSCallbackHandler {
 	 * override this method for handling normal response from seleccionarDatos
 	 * operation
 	 */
-	public void receiveResultseleccionarDatos(com.ws.services.IntegracionWSStub.SeleccionarDatosResponse result) {
+	public void receiveResultseleccionarDatos(com.ws.services.IntegracionStub.SeleccionarDatosResponse result) {
 	}
 
 	/**
@@ -90,7 +90,7 @@ public abstract class IntegracionWSCallbackHandler {
 	 * auto generated Axis2 call back method for guardarDatos method override
 	 * this method for handling normal response from guardarDatos operation
 	 */
-	public void receiveResultguardarDatos(com.ws.services.IntegracionWSStub.GuardarDatosResponse result) {
+	public void receiveResultguardarDatos(com.ws.services.IntegracionStub.GuardarDatosResponse result) {
 	}
 
 	/**
@@ -104,7 +104,7 @@ public abstract class IntegracionWSCallbackHandler {
 	 * auto generated Axis2 call back method for getXMLDocument method override
 	 * this method for handling normal response from getXMLDocument operation
 	 */
-	public void receiveResultgetXMLDocument(com.ws.services.IntegracionWSStub.GetXMLDocumentResponse result) {
+	public void receiveResultgetXMLDocument(com.ws.services.IntegracionStub.GetXMLDocumentResponse result) {
 	}
 
 	/**
