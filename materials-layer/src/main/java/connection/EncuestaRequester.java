@@ -7,17 +7,17 @@ import model.EncuestaRespondida;
 
 import org.apache.axis2.AxisFault;
 
-import com.ws.services.IntegracionWSStub;
-import com.ws.services.IntegracionWSStub.GuardarDatos;
-import com.ws.services.IntegracionWSStub.GuardarDatosResponse;
-import com.ws.services.IntegracionWSStub.SeleccionarDatos;
-import com.ws.services.IntegracionWSStub.SeleccionarDatosResponse;
+import com.ws.services.IntegracionStub;
+import com.ws.services.IntegracionStub.GuardarDatos;
+import com.ws.services.IntegracionStub.GuardarDatosResponse;
+import com.ws.services.IntegracionStub.SeleccionarDatos;
+import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
 
 public class EncuestaRequester {
 
-	private IntegracionWSStub stub;
+	private IntegracionStub stub;
 	private EncuestaParser parser;
 	private Cache<Encuesta> cacheEncuestas;
 	private Cache<EncuestaRespondida> cacheEncuestasRespondidas;
@@ -29,7 +29,7 @@ public class EncuestaRequester {
 		cacheEncuestasRespondidas = new Cache<EncuestaRespondida>();
 		
 		try {
-			stub = new IntegracionWSStub();
+			stub = new IntegracionStub();
 		} catch (AxisFault e) {
 			System.out.println("Error al intentar contectarse con Integracion");
 		}

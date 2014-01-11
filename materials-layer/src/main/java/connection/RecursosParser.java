@@ -18,6 +18,9 @@ public class RecursosParser extends Parser {
 		List<Recurso> recursos = new ArrayList<Recurso>();
 		
 		Document doc = this.convertXmlToDocument(xml);
+		if (doc == null) {
+			return null;
+		}
 		NodeList nodes = doc.getElementsByTagName(Parser.RECURSO_TAG);
 		
 		for (int i = 0; i < nodes.getLength(); i++) {

@@ -7,19 +7,19 @@ import model.Recurso;
 
 import org.apache.axis2.AxisFault;
 
-import com.ws.services.IntegracionWSStub;
-import com.ws.services.IntegracionWSStub.GuardarDatos;
-import com.ws.services.IntegracionWSStub.GuardarDatosResponse;
-import com.ws.services.IntegracionWSStub.SeleccionarDatos;
-import com.ws.services.IntegracionWSStub.SeleccionarDatosResponse;
-
 import connection.cache.Cache;
 import connection.responses.LinkResponse;
 import connection.responses.OperationResponse;
 
+import com.ws.services.IntegracionStub;
+import com.ws.services.IntegracionStub.GuardarDatos;
+import com.ws.services.IntegracionStub.GuardarDatosResponse;
+import com.ws.services.IntegracionStub.SeleccionarDatos;
+import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
+
 public class LinkRequester {
 
-	private IntegracionWSStub stub;
+	private IntegracionStub stub;
 	private LinkParser parser;
 	private Cache<Link> cache;
 
@@ -29,7 +29,7 @@ public class LinkRequester {
 		cache = new Cache<Link>();
 
 		try {
-			this.stub = new IntegracionWSStub();
+			this.stub = new IntegracionStub();
 		} catch (AxisFault e) {
 			System.out.println("Error al intentar contectarse con Integracion");
 		}

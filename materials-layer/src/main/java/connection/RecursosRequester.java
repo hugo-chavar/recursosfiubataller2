@@ -8,11 +8,11 @@ import model.Recurso;
 
 import org.apache.axis2.AxisFault;
 
-import com.ws.services.IntegracionWSStub;
-import com.ws.services.IntegracionWSStub.EliminarDatos;
-import com.ws.services.IntegracionWSStub.EliminarDatosResponse;
-import com.ws.services.IntegracionWSStub.SeleccionarDatos;
-import com.ws.services.IntegracionWSStub.SeleccionarDatosResponse;
+import com.ws.services.IntegracionStub;
+import com.ws.services.IntegracionStub.EliminarDatos;
+import com.ws.services.IntegracionStub.EliminarDatosResponse;
+import com.ws.services.IntegracionStub.SeleccionarDatos;
+import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
 import connection.exceptions.GetException;
@@ -20,9 +20,11 @@ import connection.responses.OperationResponse;
 
 public class RecursosRequester {
 
-	private IntegracionWSStub stub;
+	private IntegracionStub stub;
 	private RecursosParser parser;
 	private Cache<Recurso> cache;
+	private Boolean statusOk;
+	private String statusMessage; 
 
 	public RecursosRequester() {
 
@@ -31,9 +33,12 @@ public class RecursosRequester {
 		cache.changeSize(1000);
 
 		try {
-			stub = new IntegracionWSStub();
+			stub = new IntegracionStub();
+			statusOk = true;
 		} catch (AxisFault e) {
-			System.out.println("Error al intentar contectarse con Integracion");
+			statusMessage = "Error al intentar contectarse con Integracion";
+			System.out.println(statusMessage);
+			System.out.println(e.toString());
 		}
 
 	}
@@ -50,7 +55,13 @@ public class RecursosRequester {
 			seleccionar_e.setXml(xml);
 			SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
 			String xml_resp_e = s_resp_e.get_return();
+			System.out.println(xml_resp_e);
 			recursos = parser.deserializeRecursos(xml_resp_e);
+			if (recursos == null) {
+				String message = "Integracion dice: " + xml_resp_e.substring(0, xml_resp_e.lastIndexOf(':'));
+				System.out.println(message);
+				throw new GetException(message);
+			}
 			cache.addAll(recursos);
 			return recursos;
 

@@ -7,11 +7,11 @@ import java.rmi.RemoteException;
 
 import org.apache.axis2.AxisFault;
 
-import com.ws.services.IntegracionWSStub.GuardarDatos;
-import com.ws.services.IntegracionWSStub.GuardarDatosResponse;
+import com.ws.services.IntegracionStub.GuardarDatos;
+import com.ws.services.IntegracionStub.GuardarDatosResponse;
 //import com.ws.services.IntegracionWSStub.SeleccionarDatos;
 //import com.ws.services.IntegracionWSStub.SeleccionarDatosResponse;
-import com.ws.services.IntegracionWSStub;
+import com.ws.services.IntegracionStub;
 
 public class ClientePruebaContraIntegracion {
 
@@ -25,10 +25,10 @@ public class ClientePruebaContraIntegracion {
 //		Requester.INSTANCE.saveEncuesta(encuesta);
 //		encuesta = Requester.INSTANCE.getEncuesta(1, 0);
 		
-		IntegracionWSStub stub;
+		IntegracionStub stub;
 
 		try {
-			stub = new IntegracionWSStub();
+			stub = new IntegracionStub();
 			
 	    	GuardarDatos guardar = new GuardarDatos();
 	    	guardar.setXml("<WS><hola><id>IdAmbiente</id><id>IdRecurso</id></hola></WS>");

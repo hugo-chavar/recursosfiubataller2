@@ -10,20 +10,18 @@ import model.Archivo;
 
 import org.apache.axis2.AxisFault;
 
-import com.ws.services.IntegracionWSStub;
-import com.ws.services.IntegracionWSStub.GuardarDatos;
-import com.ws.services.IntegracionWSStub.GuardarDatosResponse;
+import com.ws.services.IntegracionStub;
 
 
 public class ArchivoRequester {
-	private IntegracionWSStub stub;
+	private IntegracionStub stub;
 	private ArchivoParser parser;
 
 	public ArchivoRequester() {
 		parser = new ArchivoParser();
 		
 		try {
-			stub = new IntegracionWSStub();
+			stub = new IntegracionStub();
 		} catch (AxisFault e) {
 			// e.printStackTrace();
 			System.out.println("Error al intentar contectarse con Integracion");
