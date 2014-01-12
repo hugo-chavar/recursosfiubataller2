@@ -87,6 +87,14 @@ public class Client {
 			System.out.println("Error al traer la encuesta!");
 			System.out.println(e.toString());
 		}
+		
+		try {
+			String l = port.getEncuesta(-1, 1004);
+			System.out.println(l);
+		} catch (Exception e) {
+			System.out.println("Error al traer la encuesta!");
+			System.out.println(e.toString());
+		}
 		// try {
 		// Encuesta enc = port.getEncuesta(0, 0);
 		// System.out.println("TITULO ENCUESTA: " + enc.getDescripcion());
