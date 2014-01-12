@@ -8,8 +8,6 @@ import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.BindingType;
 
-import model.Encuesta;
-import model.EncuestaRespondida;
 import model.Link;
 
 
@@ -41,14 +39,14 @@ public interface Materials {
 	String getEncuestaRespondida2(@WebParam(name = "parametros")String parametros);
 
 	@WebMethod
-	String agregarEncuestaRespondida(@WebParam(name = "encuestaRespondida") EncuestaRespondida respondida, @WebParam(name = "ambitoId") int ambitoId);
+	String agregarEncuestaRespondida(@WebParam(name = "parametros")String respondidaParam);
 
 	@WebMethod
 	@WebResult(name = "agregarLink")
 	String agregarLink(@WebParam(name = "link") Link link, @WebParam(name = "usuarioId") int usuarioId);
 
 	@WebMethod
-	String agregarEncuesta(@WebParam(name = "encuesta") Encuesta encuesta, @WebParam(name = "usuarioId") int usuarioId);
+	String agregarEncuesta(@WebParam(name = "parametros")String encuestaParam);
 	
 	@WebMethod
 	@WebResult(name = "successString")

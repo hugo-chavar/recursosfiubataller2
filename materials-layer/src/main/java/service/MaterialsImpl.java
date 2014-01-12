@@ -13,9 +13,11 @@ import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
+import connection.EncuestaParameter;
 import connection.Parameter;
 import connection.Parser;
 import connection.Requester;
+import connection.RespondidaParameter;
 import connection.exceptions.GetException;
 import connection.responses.EncuestaRespondidaResponse;
 import connection.responses.EncuestaResponse;
@@ -41,10 +43,14 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	@Override
-	public String agregarEncuesta(Encuesta encuesta, int usuarioId) {
+	public String agregarEncuesta(String encuestaParam) {
+		EncuestaParameter parameter = EncuestaParameter.createParameter(encuestaParam);
+		if (parameter.getEncuesta() == null || parameter.getUsuarioId() == null){
+			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
+		}
 		OperationResponse response;		
-		if (Requester.INSTANCE.getPermisoUsuario(encuesta.getAmbitoId(), usuarioId)) {
-			response= Requester.INSTANCE.saveEncuesta(encuesta);
+		if (Requester.INSTANCE.getPermisoUsuario(parameter.getEncuesta().getAmbitoId(), parameter.getUsuarioId())) {
+			response= Requester.INSTANCE.saveEncuesta(parameter.getEncuesta());
 		}
 		else{
 			response=new OperationResponse();
@@ -98,9 +104,14 @@ public class MaterialsImpl implements Materials {
 	
 	
 	@Override
-	public String agregarEncuestaRespondida(EncuestaRespondida respondida, int ambitoId) {
+	public String agregarEncuestaRespondida(String respondidaParam) {	
+		RespondidaParameter parameter = RespondidaParameter.createParameter(respondidaParam);
+		if (parameter.getRespondida() == null || parameter.getAmbitoId() == null){
+			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
+		}
+		EncuestaRespondida respondida = parameter.getRespondida();
 		OperationResponse response;
-		Encuesta encuesta = Requester.INSTANCE.getEncuesta(ambitoId, respondida.getIdRecurso());
+		Encuesta encuesta = Requester.INSTANCE.getEncuesta(parameter.getAmbitoId(), respondida.getIdRecurso());
 		if (encuesta.isEvaluada()) {
 			respondida.evaluar(encuesta);
 		}
