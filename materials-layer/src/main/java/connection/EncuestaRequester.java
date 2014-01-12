@@ -19,6 +19,7 @@ import com.ws.services.IntegracionStub.SeleccionarDatos;
 import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
+import connection.responses.OperationResponse;
 
 public class EncuestaRequester {
 
@@ -139,44 +140,51 @@ public class EncuestaRequester {
 
 	}
 
-	public void save(Encuesta encuesta) {
-
-		if (encuesta != null) {
-			// Guardo la encuesta
-			String encuesta_str = parser.serializeEncuesta(encuesta);
-			try {
-				GuardarDatos guardar = new GuardarDatos();
-				guardar.setXml(encuesta_str);
-				GuardarDatosResponse g_resp = stub.guardarDatos(guardar);
-				System.out.println(g_resp.get_return());
-			} catch (AxisFault e) {
-				System.out.println("Error al intentar guardar la siguiente Encuesta:");
-				System.out.println(encuesta.getDescripcion());
-			} catch (RemoteException e) {
-				System.out.println("Error de conexion remota");
-			}
+	public OperationResponse save(Encuesta encuesta) {
+		OperationResponse response = new OperationResponse();
+		response.setSuccess(false);
+		// Guardo la encuesta
+		String encuesta_str = parser.serializeEncuesta(encuesta);
+		try {
+			GuardarDatos guardar = new GuardarDatos();
+			guardar.setXml(encuesta_str);
+			GuardarDatosResponse g_resp = stub.guardarDatos(guardar);
+			response.setSuccess(true);
+			System.out.println(g_resp.get_return());
+		} catch (AxisFault e) {
+			String reason = "Error al intentar guardar la siguiente Encuesta:" + encuesta.getDescripcion();
+			System.out.println(reason);
+			response.setReason(reason);
+		} catch (RemoteException e) {
+			String reason = "Error de conexion remota";
+			System.out.println(reason);
+			response.setReason(reason);
 		}
-
+		return response;
 	}
 
-	public void saveRespondida(EncuestaRespondida respondida) {
+	public OperationResponse saveRespondida(EncuestaRespondida respondida) {
 
-		if (respondida != null) {
-			// Guardo la encuesta respondida
-			String encuesta_str = parser.serializeEncuestaRespondida(respondida);
-			try {
-				GuardarDatos guardar = new GuardarDatos();
-				guardar.setXml(encuesta_str);
-				GuardarDatosResponse g_resp = this.stub.guardarDatos(guardar);
-				System.out.println(g_resp.get_return());
-			} catch (AxisFault e) {
-				System.out.println("Error al intentar guardar la siguiente Encuesta Respondida:");
-				System.out.println("Usuario: " + respondida.getIdUsuario());
-			} catch (RemoteException e) {
-				System.out.println("Error de conexion remota");
-			}
+		OperationResponse response = new OperationResponse();
+		response.setSuccess(false);
+		// Guardo la encuesta respondida
+		String encuesta_str = parser.serializeEncuestaRespondida(respondida);
+		try {
+			GuardarDatos guardar = new GuardarDatos();
+			guardar.setXml(encuesta_str);
+			GuardarDatosResponse g_resp = this.stub.guardarDatos(guardar);
+			response.setSuccess(true);
+			System.out.println(g_resp.get_return());
+		} catch (AxisFault e) {
+			String reason = "Error al intentar guardar EncuestaRespondida";
+			System.out.println(reason);
+			response.setReason(reason);
+		} catch (RemoteException e) {
+			String reason = "Error de conexion remota";
+			System.out.println(reason);
+			response.setReason(reason);
 		}
-
+		return response;
 	}
 
 	public Encuesta get(int IDAmbiente, int IDEncuesta) {

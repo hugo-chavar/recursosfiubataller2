@@ -27,16 +27,16 @@ public enum Requester {
 		recursosReq = new RecursosRequester();
 	}
 	
-	public void saveEncuesta(Encuesta encuesta) {
-		encuestaReq.save(encuesta);
+	public OperationResponse saveEncuesta(Encuesta encuesta) {
+		return encuestaReq.save(encuesta);
 	}
 	
 	public Encuesta getEncuesta(int idAmbito, int idEncuesta) {
 		return encuestaReq.get(idAmbito, idEncuesta);
 	}
 
-	public void saveEncuestaRespondida(EncuestaRespondida respondida) {
-		encuestaReq.saveRespondida(respondida);
+	public OperationResponse saveEncuestaRespondida(EncuestaRespondida respondida) {
+		return encuestaReq.saveRespondida(respondida);
 	}
 
 	public EncuestaRespondida getEncuestaRespondida(int idAmbito, int idEncuesta, int idUsuario) {

@@ -41,14 +41,14 @@ public interface Materials {
 	String getEncuestaRespondida2(@WebParam(name = "parametros")String parametros);
 
 	@WebMethod
-	void agregarEncuestaRespondida(@WebParam(name = "encuestaRespondida") EncuestaRespondida respondida, @WebParam(name = "ambitoId") int ambitoId);
+	String agregarEncuestaRespondida(@WebParam(name = "encuestaRespondida") EncuestaRespondida respondida, @WebParam(name = "ambitoId") int ambitoId);
 
 	@WebMethod
 	@WebResult(name = "agregarLink")
 	String agregarLink(@WebParam(name = "link") Link link, @WebParam(name = "usuarioId") int usuarioId);
 
 	@WebMethod
-	void agregarEncuesta(@WebParam(name = "encuesta") Encuesta encuesta, @WebParam(name = "usuarioId") int usuarioId);
+	String agregarEncuesta(@WebParam(name = "encuesta") Encuesta encuesta, @WebParam(name = "usuarioId") int usuarioId);
 	
 	@WebMethod
 	@WebResult(name = "successString")
@@ -61,4 +61,8 @@ public interface Materials {
 	@WebMethod
 	@WebResult(name = "archivo")
 	String getArchivo(@WebParam(name = "ambitoId") int ambitoId, @WebParam(name = "recursoId") int recursoId);
+
+	@WebMethod 
+	@WebResult(name = "encuesta")
+	String getEncuesta2(@WebParam(name = "parametros")String parametros);
 }

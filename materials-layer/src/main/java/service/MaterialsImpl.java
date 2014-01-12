@@ -17,6 +17,8 @@ import connection.Parameter;
 import connection.Parser;
 import connection.Requester;
 import connection.exceptions.GetException;
+import connection.responses.EncuestaRespondidaResponse;
+import connection.responses.EncuestaResponse;
 import connection.responses.OperationResponse;
 import connection.responses.RecursosResponse;
 
@@ -39,14 +41,16 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	@Override
-	public void agregarEncuesta(Encuesta encuesta, int usuarioId) {
+	public String agregarEncuesta(Encuesta encuesta, int usuarioId) {
+		OperationResponse response;		
 		if (Requester.INSTANCE.getPermisoUsuario(encuesta.getAmbitoId(), usuarioId)) {
-			encuesta.recuperarDatosVisibles();
-			Requester.INSTANCE.saveEncuesta(encuesta);
-			System.out.println("Guardando encuesta: " + encuesta.getDescripcion());
+			response= Requester.INSTANCE.saveEncuesta(encuesta);
 		}
-		
-	//  TODO retornar confirmaciones en xml, copiar de borrarRecurso
+		else{
+			response=new OperationResponse();
+			response.setReason("Permisos insuficientes");
+		}
+		return parser.convertToXml(response, OperationResponse.class);
 	}
 	
 	@Override
@@ -80,34 +84,42 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public String getEncuesta(int ambitoId, int recursoId) {
+		EncuestaResponse response = new EncuestaResponse();
+		response.setSuccess(true);		
+		//try {
 		Encuesta encuesta = Requester.INSTANCE.getEncuesta(ambitoId, recursoId);
-		encuesta.completarDatosVisibles();
-		//usar algo que herede de OperationResponse, ver RecursosResponse
-		String xmlEncuesta = parser.convertToXml(encuesta, Encuesta.class);
-		return xmlEncuesta;
-	//  TODO retornar una response, en lugar del objeto en xml
-//		copiar de getRecursos
+		response.setEncuesta(encuesta);
+		
+		//} catch (GetException e) {
+		//	return parser.convertToXml(createFailedResponse(e.getMessage()), OperationResponse.class);
+		//}
+		return parser.convertToXml(response,response.getClass());
 	}
 	
+	
 	@Override
-	public void agregarEncuestaRespondida(EncuestaRespondida respondida, int ambitoId) {
+	public String agregarEncuestaRespondida(EncuestaRespondida respondida, int ambitoId) {
+		OperationResponse response;
 		Encuesta encuesta = Requester.INSTANCE.getEncuesta(ambitoId, respondida.getIdRecurso());
-		encuesta.completarDatosVisibles();
-		respondida.recuperarDatosVisibles(encuesta);
 		if (encuesta.isEvaluada()) {
 			respondida.evaluar(encuesta);
 		}
-		Requester.INSTANCE.saveEncuestaRespondida(respondida);
-		//  TODO retornar confirmaciones en xml, copiar de borrarRecurso
+		response = Requester.INSTANCE.saveEncuestaRespondida(respondida);
+		return parser.convertToXml(response, OperationResponse.class);
 	}
 	
 	@Override
 	public String getEncuestaRespondida(int IdAmbiente, int recursoId, int usuarioId) {
+		EncuestaRespondidaResponse response=new EncuestaRespondidaResponse();
+		response.setSuccess(true);	
+		//try {
 		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida(IdAmbiente, recursoId, usuarioId);
-		Encuesta encuesta = Requester.INSTANCE.getEncuesta(IdAmbiente, recursoId);
-		respondida.completarDatosVisibles(encuesta.getPreguntas());
-		String xmlRespondida = parser.convertToXml(respondida, EncuestaRespondida.class);
-		return xmlRespondida;
+		response.setRespondida(respondida);
+		
+		//} catch (GetException e) {
+		//	return parser.convertToXml(createFailedResponse(e.getMessage()), OperationResponse.class);
+		//}
+		return parser.convertToXml(response,response.getClass());
 	}
 	
 	@Override
@@ -168,6 +180,15 @@ public class MaterialsImpl implements Materials {
 			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
 		}
 		return getRecursos(parameter.getAmbitoId(),parameter.getUsuarioId());
+	}
+	
+	@Override
+	public String getEncuesta2(String parametros) {
+		Parameter parameter = Parameter.createParameter(parametros);
+		if (parameter.getAmbitoId() == null || parameter.getUsuarioId() == null){
+			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
+		}
+		return getEncuesta(parameter.getAmbitoId(),parameter.getUsuarioId());
 	}
 
 }
