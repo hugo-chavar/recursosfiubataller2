@@ -6,7 +6,11 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElementRefs;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -20,7 +24,16 @@ public class Encuesta extends Recurso {
 	@XmlAttribute
 	private boolean evaluada;
 	
+//	@XmlElements({ 
+//	    @XmlElement(name="pregunta1", type=PreguntaRespuestaFija.class),
+//	    @XmlElement(name="pregunta2", type=PreguntaRespuestaACompletar.class)
+//	})
+//	@XmlElementWrapper(name = "alsdfjas")
 	@XmlElementWrapper
+	@XmlElementRefs({
+		   @XmlElementRef(type=PreguntaRespuestaFija.class),
+		   @XmlElementRef(type=PreguntaRespuestaACompletar.class)
+		})
 	private List<Pregunta> preguntas = new ArrayList<Pregunta>();
 
 	public Encuesta(Integer idRecurso, Integer idAmbito, String descripcion, boolean evaluada) {
