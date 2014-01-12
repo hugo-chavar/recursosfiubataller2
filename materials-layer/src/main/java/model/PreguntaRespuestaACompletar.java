@@ -72,7 +72,7 @@ public class PreguntaRespuestaACompletar extends Pregunta {
 	}
 	
 	
-	@XmlAttribute(name = "correctas")
+	@XmlAttribute(name = "correcta")
 	public String getRtasCorrectas() {
 		return respuesta;
 	}
