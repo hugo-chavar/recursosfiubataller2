@@ -23,8 +23,9 @@ public class RecursosRequester {
 	private IntegracionStub stub;
 	private RecursosParser parser;
 	private Cache<Recurso> cache;
-	private Boolean statusOk;
-	private String statusMessage; 
+//	private Boolean statusOk;
+//	private String statusMessage; 
+	private List<Recurso> recursosEjemplo;
 
 	public RecursosRequester() {
 
@@ -34,10 +35,17 @@ public class RecursosRequester {
 
 		try {
 			stub = new IntegracionStub();
-			statusOk = true;
+			recursosEjemplo = new ArrayList<Recurso>();
+			Recurso r = new Recurso(1002,-1,"un link a google copado","Link");
+			recursosEjemplo.add(r);
+			r = new Recurso(1003,-1,"una encuesta chica","Encuesta");
+			recursosEjemplo.add(r);
+			r = new Recurso(1004,-1,"una encuesta grande","Encuesta");
+			recursosEjemplo.add(r);
+//			statusOk = true;
 		} catch (AxisFault e) {
-			statusMessage = "Error al intentar contectarse con Integracion";
-			System.out.println(statusMessage);
+//			statusMessage = "Error al intentar contectarse con Integracion";
+			System.out.println("Error al intentar contectarse con Integracion");
 			System.out.println(e.toString());
 		}
 
@@ -58,9 +66,11 @@ public class RecursosRequester {
 			System.out.println(xml_resp_e);
 			recursos = parser.deserializeRecursos(xml_resp_e);
 			if (recursos == null) {
-				String message = "Integracion dice: " + xml_resp_e.substring(0, xml_resp_e.lastIndexOf(':'));
-				System.out.println(message);
-				throw new GetException(message);
+				// TODO : devuelvo datos de ejemplo, mientras no funcione integracion
+				return recursosEjemplo;
+//				String message = "Integracion dice: " + xml_resp_e.substring(0, xml_resp_e.indexOf('<') -1);
+//				System.out.println(message);
+//				throw new GetException(message);
 			}
 			cache.addAll(recursos);
 			return recursos;
