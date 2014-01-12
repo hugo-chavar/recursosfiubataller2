@@ -51,13 +51,41 @@ public class Client {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
+//		try {
+//			String xmlRecursos = port.getRecursos(0, 0);
+//			System.out.println(xmlRecursos);
+//
+//			System.out.println("Ok, recursos obtenidos.");
+//		} catch (Exception e) {
+//			System.out.println("Error al traer recursos!");
+//		}
+		
+//		try {
+//			String xmlRecursos = port.getRecursos2("hola");
+//			System.out.println(xmlRecursos);
+//
+//			System.out.println("Ok, recursos obtenidos.");
+//		} catch (Exception e) {
+//			System.out.println("Error al traer recursos!");
+//			System.out.println(e.toString());
+//		}
+		
+		// A partir de aca se pueden descomentar los try-catch que se quieren testear
 		try {
-			String xmlRecursos = port.getRecursos(0, 0);
-			System.out.println(xmlRecursos);
-
+			String l = port.getRecursos(1, 0);
+			System.out.println(l);
 			System.out.println("Ok, recursos obtenidos.");
 		} catch (Exception e) {
 			System.out.println("Error al traer recursos!");
+			System.out.println(e.toString());
+		}
+		
+		try {
+			String l = port.getEncuesta(-1, 1003);
+			System.out.println(l);
+		} catch (Exception e) {
+			System.out.println("Error al traer la encuesta!");
+			System.out.println(e.toString());
 		}
 		// try {
 		// Encuesta enc = port.getEncuesta(0, 0);
