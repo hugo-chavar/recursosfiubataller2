@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-@XmlRootElement (name = "pregunta")
+@XmlRootElement(name = "pregunta")
 public class PreguntaRespuestaFija extends Pregunta {
 
 	@XmlTransient
 	private List<String> respuestasPosibles = new ArrayList<String>();
-	
+
 	@XmlTransient
 	private List<Integer> respuestasCorrectas = new ArrayList<Integer>();
 
@@ -51,6 +51,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 	public String marshall() {
 		StringBuilder sb = new StringBuilder("");
 		sb.append(marshallRespuestasPosibles());
+		sb.append(";");
 		sb.append(marshallRespuestasCorrectas());
 		return super.marshall() + sb.toString();
 
@@ -58,7 +59,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 
 	private String marshallRespuestasPosibles() {
 		if (respuestasPosibles.isEmpty()) {
-			return "null;";
+			return "null";
 		}
 		StringBuilder sb = new StringBuilder("");
 		for (String rta : respuestasPosibles) {
@@ -66,7 +67,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 			sb.append(",");
 		}
 		sb.setLength(sb.length() - 1);
-		sb.append(";");
+
 		return sb.toString();
 	}
 
@@ -151,13 +152,14 @@ public class PreguntaRespuestaFija extends Pregunta {
 	public Integer getNroCorrectas() {
 		return this.respuestasCorrectas.size();
 	}
-	
+
 	@Override
 	public Integer getIndiceRespuesta(String respuesta) {
 		Integer i = 0;
 		for (String res : respuestasPosibles) {
-			if (res == respuesta)
+			if (res.equalsIgnoreCase(respuesta)) {
 				return i;
+			}
 			i++;
 		}
 		return -1;
@@ -171,15 +173,15 @@ public class PreguntaRespuestaFija extends Pregunta {
 				correctas.add(respuestasPosibles.get(n));
 		}
 	}
-	
+
 	@XmlAttribute(name = "correctas")
 	public String getRtasCorrectas() {
-		return marshallRespuestasCorrectas();
+		return marshallRespuestasCorrectas() != "null" ? marshallRespuestasCorrectas() : null;
 	}
-	
+
 	@XmlElement(name = "respuestas")
 	public String getRespuestas() {
-		return marshallRespuestasPosibles();
+		return marshallRespuestasPosibles() != "null" ? marshallRespuestasPosibles() : null;
 	}
-	
+
 }

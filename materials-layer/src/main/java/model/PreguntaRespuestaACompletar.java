@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement (name = "pregunta2")
+@XmlRootElement (name = "pregunta")
 public class PreguntaRespuestaACompletar extends Pregunta {
 
 	public String respuesta = null;
