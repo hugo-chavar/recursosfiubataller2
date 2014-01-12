@@ -9,6 +9,7 @@ import javax.xml.ws.soap.SOAPBinding;
 
 import model.Encuesta;
 import model.Pregunta;
+import connection.EncuestaParameter;
 import connection.Parameter;
 import connection.Parser;
 import service.MaterialsImpl;
@@ -83,6 +84,17 @@ public class WSPublisher {
 		
 		Encuesta enc2 = (Encuesta)parser.unmarshal(xml, Encuesta.class);
 		
+		System.out.println(enc2.getDescripcion());
+		
+		EncuestaParameter ep1 = new EncuestaParameter();
+		ep1.setAmbitoId(15);
+		ep1.setUsuarioId(23);
+		ep1.setEncuesta(encuesta);
+		xml = parser.convertToXml(ep1, ep1.getClass());
+		System.out.println(xml);
+		EncuestaParameter ep2 = (EncuestaParameter) parser.unmarshal(xml, EncuestaParameter.class);
+		
+		enc2 = ep2.getEncuesta();
 		System.out.println(enc2.getDescripcion());
 		
 
