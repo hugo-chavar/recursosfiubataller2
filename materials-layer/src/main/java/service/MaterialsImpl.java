@@ -43,7 +43,7 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String agregarEncuesta(String encuestaParam) {
 		Parameter parameter = Parameter.createParameter(encuestaParam);
-		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null){
+		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null || parameter.getRecurso().getClass() != Encuesta.class){
 			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
 		}
 		OperationResponse response;	
