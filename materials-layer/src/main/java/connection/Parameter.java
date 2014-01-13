@@ -3,37 +3,54 @@ package connection;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
+import model.Archivo;
+import model.Encuesta;
+import model.EncuestaRespondida;
+import model.Link;
+import model.Recurso;
+
 @XmlRootElement(name = "parametro")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso({EncuestaParameter.class})
+@XmlSeeAlso({ EncuestaParameter.class })
 public class Parameter {
 
 	public static Parameter createParameter(String xml) {
 		Parser parser = new Parser();
-		Parameter p = (Parameter)parser.unmarshal(xml, Parameter.class);
+		Parameter p = (Parameter) parser.unmarshal(xml, Parameter.class);
 		if (p != null) {
 			return p;
 		}
 		return new Parameter();
-		
-	}
-	
-	public Parameter() {
-		
+
 	}
 
-	@XmlElement (nillable = true)
+	public Parameter() {
+
+	}
+
+	@XmlElement(nillable = true)
 	private Integer ambitoId;
-	
-	@XmlElement (nillable = true)
+
+	@XmlElement(nillable = true)
 	private Integer usuarioId;
-	
-	@XmlElement (nillable = true)
+
+	@XmlElement(nillable = true)
 	private Integer recursoId;
-	
+
+	@XmlElementRefs({ 
+		@XmlElementRef(type = Encuesta.class), 
+		@XmlElementRef(type = Link.class)
+//		@XmlElementRef(type = Archivo.class), esto da error
+//		@XmlElementRef(type = EncuestaRespondida.class) esto tambien da error
+		//porque no hereda de recurso
+		})
+	private Recurso recurso;
+
 	public Integer getAmbitoId() {
 		return ambitoId;
 	}
@@ -58,6 +75,12 @@ public class Parameter {
 		this.recursoId = recursoId;
 	}
 
-	
-	
+	public Recurso getRecurso() {
+		return recurso;
+	}
+
+	public void setRecurso(Recurso object) {
+		this.recurso = object;
+	}
+
 }

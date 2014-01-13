@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import model.Encuesta;
 
-@XmlRootElement(name = "parametro")
+@XmlRootElement(name = "parametros")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class EncuestaParameter extends Parameter  {
 	public static EncuestaParameter createParameter(String xml) {

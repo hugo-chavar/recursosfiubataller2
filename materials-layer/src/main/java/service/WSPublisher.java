@@ -86,16 +86,30 @@ public class WSPublisher {
 		
 		System.out.println(enc2.getDescripcion());
 		
-		EncuestaParameter ep1 = new EncuestaParameter();
+//		EncuestaParameter ep1 = new EncuestaParameter();
+//		ep1.setAmbitoId(15);
+//		ep1.setUsuarioId(23);
+//		ep1.setEncuesta(encuesta);
+//		xml = parser.convertToXml(ep1, ep1.getClass());
+//		System.out.println(xml);
+//		EncuestaParameter ep2 = (EncuestaParameter) parser.unmarshal(xml, EncuestaParameter.class);
+//		
+//		enc2 = ep2.getEncuesta();
+//		System.out.println(enc2.getDescripcion());
+		
+		Parameter ep1 = new Parameter();
 		ep1.setAmbitoId(15);
 		ep1.setUsuarioId(23);
-		ep1.setEncuesta(encuesta);
+		ep1.setRecurso(encuesta);
 		xml = parser.convertToXml(ep1, ep1.getClass());
 		System.out.println(xml);
-		EncuestaParameter ep2 = (EncuestaParameter) parser.unmarshal(xml, EncuestaParameter.class);
+		Parameter ep2 = (Parameter) parser.unmarshal(xml, EncuestaParameter.class);
 		
-		enc2 = ep2.getEncuesta();
+		enc2 = (Encuesta)ep2.getRecurso();
 		System.out.println(enc2.getDescripcion());
+		
+		xml = parser.convertToXml(enc2, Encuesta.class);
+		System.out.println(xml);
 		
 
 		System.out.println("Programa terminado. ");
