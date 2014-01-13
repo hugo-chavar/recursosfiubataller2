@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
@@ -31,22 +30,22 @@ public class Parameter {
 
 	}
 
-	@XmlElement(nillable = true)
+	@XmlElement //(nillable = true)
 	private Integer ambitoId;
 
-	@XmlElement(nillable = true)
+	@XmlElement //(nillable = true)
 	private Integer usuarioId;
 
-	@XmlElement(nillable = true)
+	@XmlElement //(nillable = true)
 	private Integer recursoId;
 	
-	@XmlElement(nillable = true)
+	@XmlElement //(nillable = true)
 	private EncuestaRespondida respondida;
 
 	@XmlElementRefs({ 
 		@XmlElementRef(type = Encuesta.class), 
 		@XmlElementRef(type = Link.class)
-//		@XmlElementRef(type = Archivo.class), esto da error
+//		@XmlElementRef(type = Archivo.class), esto da error faltan annotations en clase Archivos
 		})
 	private Recurso recurso;
 

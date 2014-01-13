@@ -18,7 +18,6 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 	}
 
 	public PreguntaRespuestaFijaRespondida() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public void unmarshall(String s) {
