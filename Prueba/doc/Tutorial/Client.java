@@ -51,14 +51,6 @@ public class Client {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-//		try {
-//			String xmlRecursos = port.getRecursos(0, 0);
-//			System.out.println(xmlRecursos);
-//
-//			System.out.println("Ok, recursos obtenidos.");
-//		} catch (Exception e) {
-//			System.out.println("Error al traer recursos!");
-//		}
 		
 //		try {
 //			String xmlRecursos = port.getRecursos2("hola");
@@ -95,17 +87,15 @@ public class Client {
 			System.out.println("Error al traer la encuesta!");
 			System.out.println(e.toString());
 		}
-		// try {
-		// Encuesta enc = port.getEncuesta(0, 0);
-		// System.out.println("TITULO ENCUESTA: " + enc.getDescripcion());
-		//
-		// List<Pregunta> preguntas = enc.getPreguntas();
-		// for (Pregunta p : preguntas) {
-		// System.out.println("\t" + p.getEnunciado());
-		// }
-		// } catch (Exception e) {
-		// System.out.println("Encuesta inexistente!");
-		// }
+		
+		try {
+			String xmlEncuesta = "<encuesta evaluada='true'><recursoId>1004</recursoId><tipo>Encuesta</tipo><ambitoId>-1</ambitoId><descripcion>una encuesta grande</descripcion><preguntas><pregunta correctas='3' idPregunta='1' enunciado='de que color es el caballo blanco de san martin?'><respuestas>rojo,verde,azul,blanco</respuestas></pregunta><pregunta correctas='1' idPregunta='2' enunciado='a que equipo del futbol argentino le denominan Millo'><respuestas>velez,River Plate,crucero del norte,estudiantes</respuestas></pregunta><pregunta correctas='2' idPregunta='3' enunciado='cual es un patron de diseno creacional'><respuestas>command,mediator,builder,facade</respuestas></pregunta><pregunta correctas='0,7,10,11,12,6' idPregunta='4' enunciado='Un test unitario debe presentar las siguientes características'><respuestas>Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente,Automatizable</respuestas></pregunta><pregunta correcta='4' idPregunta='5' enunciado='cuantas patas tiene un gato?'/></preguntas></encuesta>";
+			String xmlParametros = "<parametro><ambitoId>15</ambitoId><usuarioId>23</usuarioId>" + xmlEncuesta	+ "</parametro>";
+			String response = port.agregarEncuesta(xmlParametros);
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println("Error al crear la encuesta");
+		}
 
 		// try {
 		// Encuesta enc2 = new Encuesta();
