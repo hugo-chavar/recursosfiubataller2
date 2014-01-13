@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 
 import model.Archivo;
 import model.Encuesta;
@@ -16,7 +15,6 @@ import model.Recurso;
 
 @XmlRootElement(name = "parametro")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso({ EncuestaParameter.class })
 public class Parameter {
 
 	public static Parameter createParameter(String xml) {
@@ -41,13 +39,14 @@ public class Parameter {
 
 	@XmlElement(nillable = true)
 	private Integer recursoId;
+	
+	@XmlElement(nillable = true)
+	private EncuestaRespondida respondida;
 
 	@XmlElementRefs({ 
 		@XmlElementRef(type = Encuesta.class), 
 		@XmlElementRef(type = Link.class)
 //		@XmlElementRef(type = Archivo.class), esto da error
-//		@XmlElementRef(type = EncuestaRespondida.class) esto tambien da error
-		//porque no hereda de recurso
 		})
 	private Recurso recurso;
 
@@ -81,6 +80,14 @@ public class Parameter {
 
 	public void setRecurso(Recurso object) {
 		this.recurso = object;
+	}
+	
+	public EncuestaRespondida getRespondida() {
+		return respondida;
+	}
+
+	public void setRespondida(EncuestaRespondida respondida) {
+		this.respondida = respondida;
 	}
 
 }

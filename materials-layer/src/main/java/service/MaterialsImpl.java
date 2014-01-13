@@ -13,11 +13,9 @@ import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
-import connection.EncuestaParameter;
 import connection.Parameter;
 import connection.Parser;
 import connection.Requester;
-import connection.RespondidaParameter;
 import connection.exceptions.GetException;
 import connection.responses.EncuestaRespondidaResponse;
 import connection.responses.EncuestaResponse;
@@ -44,13 +42,14 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public String agregarEncuesta(String encuestaParam) {
-		EncuestaParameter parameter = EncuestaParameter.createParameter(encuestaParam);
-		if (parameter.getEncuesta() == null || parameter.getUsuarioId() == null){
+		Parameter parameter = Parameter.createParameter(encuestaParam);
+		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null){
 			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
 		}
-		OperationResponse response;		
-		if (Requester.INSTANCE.getPermisoUsuario(parameter.getEncuesta().getAmbitoId(), parameter.getUsuarioId())) {
-			response= Requester.INSTANCE.saveEncuesta(parameter.getEncuesta());
+		OperationResponse response;	
+		Encuesta encuesta = (Encuesta)parameter.getRecurso();
+		if (Requester.INSTANCE.getPermisoUsuario(encuesta.getAmbitoId(), parameter.getUsuarioId())) {
+			response= Requester.INSTANCE.saveEncuesta(encuesta);
 		}
 		else{
 			response=new OperationResponse();
@@ -105,7 +104,7 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public String agregarEncuestaRespondida(String respondidaParam) {	
-		RespondidaParameter parameter = RespondidaParameter.createParameter(respondidaParam);
+		Parameter parameter = Parameter.createParameter(respondidaParam);
 		if (parameter.getRespondida() == null || parameter.getAmbitoId() == null){
 			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
 		}
