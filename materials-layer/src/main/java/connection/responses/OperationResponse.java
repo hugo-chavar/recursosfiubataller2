@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class OperationResponse {
 
-	@XmlElement (nillable = true)
+	@XmlElement // (nillable = true)
 	private String reason;
 	
 	@XmlElement (nillable = false, required = true)
