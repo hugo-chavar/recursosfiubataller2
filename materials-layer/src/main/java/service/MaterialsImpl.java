@@ -58,6 +58,8 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public String setArchivo(int ambitoId, String name, String ext,	@XmlMimeType("application/octet-stream") DataHandler data) {
+		// TODO Dami, pasa al archivoRequester la mayoria de las validaciones
+		// y que te devuelva un response con el resultado
 		if (data != null) {
 			Archivo File = new Archivo();
 			File.setNombreArchivo(name);
@@ -88,7 +90,7 @@ public class MaterialsImpl implements Materials {
 	public String agregarEncuestaRespondida(String respondidaParam) {	
 		Parameter parameter = Parameter.createParameter(respondidaParam);
 		//TODO andy: para que chequeas el ambito?? no deberias chequear el usuario
-		if (parameter.getRespondida() == null || parameter.getAmbitoId() == null){
+		if (parameter.getRespondida() == null /*|| parameter.getAmbitoId() == null*/){
 			return createFailedResponse("Parametros invalidos");
 		}
 		EncuestaRespondida respondida = parameter.getRespondida();
@@ -104,12 +106,11 @@ public class MaterialsImpl implements Materials {
 		return toXml(response);
 	}
 	
-	@Override
-	public String getEncuestaRespondida(int IdAmbiente, int recursoId, int usuarioId) {
+	public String getEncuestaRespondida(Recurso recurso, int usuarioId) {
 		EncuestaRespondidaResponse response = new EncuestaRespondidaResponse();
 		response.setSuccess(true);	
 		//try {
-		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida(IdAmbiente, recursoId, usuarioId);
+		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida(recurso.getAmbitoId(), recurso.getRecursoId(), usuarioId);
 		response.setRespondida(respondida);
 		
 		//} catch (GetException e) {
@@ -130,7 +131,10 @@ public class MaterialsImpl implements Materials {
 			return createFailedResponse(e.getMessage());
 		}
 		// Chequeo Recursos permitidos
-		// TODO el chequeo tiene q ser a nivel ambito.. no recurso por recurso
+		// TODO andy!!! el chequeo tiene q ser a nivel ambito.. no recurso por recurso
+		// no podes hacer consultas a un ws con un for !! es muy lento
+		// ademas pasa todas las validaciones q se pueda al RecursosRequester y que aca quede un solo
+		// metodo getRecursos
 		for (Recurso r:  recursos) {
 			if (Requester.INSTANCE.getPermisoUsuario(r.getRecursoId(), usuarioId)) {
 				recursosPermitidos.add(r);
@@ -161,12 +165,13 @@ public class MaterialsImpl implements Materials {
 	}
 
 	@Override
-	public String getEncuestaRespondida2(String parametros) {
+	public String getEncuestaRespondida(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
-		if (parameter.getAmbitoId() == null || parameter.getUsuarioId() == null || parameter.getRecursoId() == null){
+		// no entiendo para que se chequea el ambito.. lo comento
+		if (/*parameter.getAmbitoId() == null || */ parameter.getUsuarioId() == null || parameter.getRecurso() == null){
 			return createFailedResponse("Parametros invalidos");
 		}
-		return getEncuestaRespondida(parameter.getAmbitoId(), parameter.getRecursoId(), parameter.getUsuarioId());
+		return getEncuestaRespondida(parameter.getRecurso(), parameter.getUsuarioId());
 	}
 
 	@Override
@@ -175,7 +180,7 @@ public class MaterialsImpl implements Materials {
 		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null) {
 			return createFailedResponse("Parametros invalidos");
 		}
-		return getRecursos(parameter.getAmbitoId(),parameter.getUsuarioId());
+		return getRecursos(parameter.getRecurso().getAmbitoId(), parameter.getUsuarioId());
 	}
 	
 //	@Override
@@ -189,7 +194,12 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public String getRecurso(String parametros) {
+		System.out.println(parametros);
 		Parameter parameter = Parameter.createParameter(parametros);
+		System.out.println(parameter);
+		System.out.println(parameter.getRecurso());
+		System.out.println(parameter.getRecurso().getRecursoId());
+		
 		// try {
 		OperationResponse response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
 		// } catch (GetException e) {

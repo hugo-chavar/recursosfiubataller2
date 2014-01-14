@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,7 +16,10 @@ import model.Recurso;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RecursosResponse extends OperationResponse {
 
-	@XmlElementWrapper(name = "recursos")
+	@XmlElementWrapper
+	@XmlElementRefs({
+		   @XmlElementRef(type=Recurso.class)
+		})
 	private List<Recurso> recursos;
 	
 	public RecursosResponse() {

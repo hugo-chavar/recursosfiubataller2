@@ -9,16 +9,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Recurso {
 
-	@XmlElement(nillable = false, required = true)
+	@XmlElement //(nillable = false, required = true)
 	protected Integer recursoId;
 
-	@XmlElement(nillable = false, required = true)
+	@XmlElement //(nillable = false, required = true)
 	protected String tipo;
 
-	@XmlElement(nillable = false, required = true)
+	@XmlElement //(nillable = false, required = true)
 	protected Integer ambitoId;
 
-	@XmlElement(nillable = false, required = true)
+	@XmlElement //(nillable = false, required = true)
 	protected String descripcion;
 
 	public Recurso(Integer idRecurso, Integer idAmbito, String descripcion) {

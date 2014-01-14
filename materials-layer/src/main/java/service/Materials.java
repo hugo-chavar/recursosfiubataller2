@@ -30,13 +30,13 @@ public interface Materials {
 //	@WebResult(name = "encuesta")
 //	String getEncuesta(@WebParam(name = "recursoId")int recursoId);
 	
+//	@WebMethod
+//	@WebResult(name = "encuestaRespondida")
+//	String getEncuestaRespondida(@WebParam(name = "ambitoId")int ambitoId, @WebParam(name = "recursoId") int recursoId,@WebParam(name="usuarioId") int usuarioId);
+//	
 	@WebMethod
 	@WebResult(name = "encuestaRespondida")
-	String getEncuestaRespondida(@WebParam(name = "ambitoId")int ambitoId, @WebParam(name = "recursoId") int recursoId,@WebParam(name="usuarioId") int usuarioId);
-	
-	@WebMethod
-	@WebResult(name = "encuestaRespondida")
-	String getEncuestaRespondida2(@WebParam(name = "parametros")String parametros);
+	String getEncuestaRespondida(@WebParam(name = "parametros")String parametros);
 
 	@WebMethod
 	String agregarEncuestaRespondida(@WebParam(name = "parametros")String respondidaParam);

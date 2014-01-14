@@ -46,8 +46,18 @@ public enum Requester {
 	public OperationResponse getRecurso(Recurso target) {
 
 		OperationResponse response;
-		if (target == null || target.getRecursoId() == null) {
-			response = OperationResponse.createFailed("Parametros invalidos");
+		if (target == null || target.getRecursoId() == null || target.getTipo() == null || !isvalidType(target.getTipo())) {
+			String reason;
+			if (target == null) {
+				reason = "falta el elemento 'recurso'";
+			} else if (target.getRecursoId() == null) {
+				reason = "falta elemento recusoId en el elemento 'recurso'";
+			} else if (target.getTipo() == null) {
+				reason = "falta elemento tipo en el elemento 'recurso'";
+			} else {
+				reason = "tipo de recurso inexistente";
+			}
+			response = OperationResponse.createFailed("Parametros invalidos: " + reason);
 			return response;
 		}
 		
@@ -114,8 +124,8 @@ public enum Requester {
 		} else {
 			// TODO: Falta para archivo
 			//response = archivoReq.getFromCache(recursoId);
-//			response = null; // Sacar esto
-			response = OperationResponse.createFailed("Tipo de recurso inexistente");
+			response = null; // Sacar esto
+			
 		}
 		
 		return response;
@@ -139,6 +149,10 @@ public enum Requester {
 		
 		return response;
 		
+	}
+	
+	private boolean isvalidType(String type) {
+		return type.equalsIgnoreCase("Link")||type.equalsIgnoreCase("Encuesta")||type.equalsIgnoreCase("Archivo");
 	}
 	
 }

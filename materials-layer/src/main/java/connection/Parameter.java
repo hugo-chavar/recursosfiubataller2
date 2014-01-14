@@ -30,48 +30,49 @@ public class Parameter {
 
 	}
 
-	@XmlElement //(nillable = true)
-	private Integer ambitoId;
+//	@XmlElement //(nillable = true)
+//	private Integer ambitoId;
 
 	@XmlElement //(nillable = true)
 	private Integer usuarioId;
 
-	@XmlElement //(nillable = true)
-	private Integer recursoId;
+//	@XmlElement //(nillable = true)
+//	private Integer recursoId;
 	
 	@XmlElement //(nillable = true)
 	private EncuestaRespondida respondida;
 
 	@XmlElementRefs({ 
+		@XmlElementRef(type = Recurso.class), 
 		@XmlElementRef(type = Encuesta.class), 
 		@XmlElementRef(type = Link.class)
-//		@XmlElementRef(type = Archivo.class), esto da error faltan annotations en clase Archivos
+//		@XmlElementRef(type = Archivo.class), da error faltan annotations en clase Archivo
 		})
 	private Recurso recurso;
 
-	public Integer getAmbitoId() {
-		return ambitoId;
-	}
+//	public Integer getAmbitoId() {
+//		return ambitoId;
+//	}
 
 	public Integer getUsuarioId() {
 		return usuarioId;
 	}
 
-	public Integer getRecursoId() {
-		return recursoId;
-	}
+//	public Integer getRecursoId() {
+//		return recursoId;
+//	}
 
-	public void setAmbitoId(Integer ambitoId) {
-		this.ambitoId = ambitoId;
-	}
+//	public void setAmbitoId(Integer ambitoId) {
+//		this.ambitoId = ambitoId;
+//	}
 
 	public void setUsuarioId(Integer usuarioId) {
 		this.usuarioId = usuarioId;
 	}
 
-	public void setRecursoId(Integer recursoId) {
-		this.recursoId = recursoId;
-	}
+//	public void setRecursoId(Integer recursoId) {
+//		this.recursoId = recursoId;
+//	}
 
 	public Recurso getRecurso() {
 		return recurso;
