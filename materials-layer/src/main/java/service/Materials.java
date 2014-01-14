@@ -18,17 +18,17 @@ public interface Materials {
 	@WebMethod
 	String sayHello(String name);
 	
-	@WebMethod 
-	@WebResult(name = "recursos")
-	String getRecursos(@WebParam(name = "ambitoId") int ambitoId, @WebParam(name = "recursoId")int usuarioId);
+//	@WebMethod 
+//	@WebResult(name = "recursos")
+//	String getRecursos(@WebParam(name = "ambitoId") int ambitoId, @WebParam(name = "recursoId")int usuarioId);
 	
 	@WebMethod 
 	@WebResult(name = "recursos")
-	String getRecursos2(@WebParam(name = "parametros")String parametros);
+	String getRecursos(@WebParam(name = "parametros")String parametros);
 		
-	@WebMethod 
-	@WebResult(name = "encuesta")
-	String getEncuesta(@WebParam(name = "ambitoId")int ambitoId, @WebParam(name = "recursoId")int recursoId);
+//	@WebMethod 
+//	@WebResult(name = "encuesta")
+//	String getEncuesta(@WebParam(name = "recursoId")int recursoId);
 	
 	@WebMethod
 	@WebResult(name = "encuestaRespondida")
@@ -54,13 +54,17 @@ public interface Materials {
 
 	@WebMethod
 	@WebResult(name = "borrado")
-	String borrarRecurso(@WebParam(name = "ambitoId") int ambitoId, @WebParam(name = "recursoId") int recursoId, @WebParam(name = "usuarioId") int usuarioId);
+	String borrarRecurso(@WebParam(name = "recursoId") int recursoId, @WebParam(name = "usuarioId") int usuarioId);
 
-	@WebMethod
-	@WebResult(name = "archivo")
-	String getArchivo(@WebParam(name = "ambitoId") int ambitoId, @WebParam(name = "recursoId") int recursoId);
+//	@WebMethod
+//	@WebResult(name = "archivo")
+//	String getArchivo(@WebParam(name = "ambitoId") int ambitoId, @WebParam(name = "recursoId") int recursoId);
 
+//	@WebMethod 
+//	@WebResult(name = "encuesta")
+//	String getEncuesta2(@WebParam(name = "parametros")String parametros);
+	
 	@WebMethod 
-	@WebResult(name = "encuesta")
-	String getEncuesta2(@WebParam(name = "parametros")String parametros);
+	@WebResult(name = "recurso")
+	String getRecurso(@WebParam(name = "parametro")String parametros);
 }

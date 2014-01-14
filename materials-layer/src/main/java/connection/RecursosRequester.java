@@ -52,17 +52,17 @@ public class RecursosRequester {
 
 	}
 	
-	public Recurso get(int recursoId) {
+	public Recurso get(Recurso target) {
 		
 		// Busco en el cache de recursos.
-		Recurso target = new Recurso(recursoId, 0, "");
+//		Recurso target = new Recurso(recursoId, 0, "");
 		if (cache.contains(target)) {
 			return cache.get(target);
 		} else {
 			try {
 
 				// Consulto el recurso guardado
-				String xml = parser.serializeRecursoQuery(recursoId);
+				String xml = parser.serializeRecursoQuery(target.getRecursoId());
 
 				////////////// PRUEBAS //////////////
 				String xml_resp_e;
@@ -84,7 +84,7 @@ public class RecursosRequester {
 				return recurso;
 	
 			} catch (AxisFault e) {
-				String message = "Error al intentar obtener el recurso con IDRecurso: " + recursoId;
+				String message = "Error al intentar obtener el recurso con IDRecurso: " + target.getRecursoId();
 				System.out.println(message);
 			} catch (RemoteException e) {
 				String message = "Error de conexion remota";

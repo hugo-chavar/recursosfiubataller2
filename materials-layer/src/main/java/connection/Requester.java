@@ -43,28 +43,32 @@ public enum Requester {
 		return linkReq.save(link);
 	}
 	
-	public OperationResponse getRecurso(int recursoId, String tipoRecurso) {
+	public OperationResponse getRecurso(Recurso target) {
 
 		OperationResponse response;
+		if (target == null || target.getRecursoId() == null) {
+			response = OperationResponse.createFailed("Parametros invalidos");
+			return response;
+		}
 		
 		// Busco en el cache de especifico del recurso.
-		response = this.getRecursoFromCache(recursoId, tipoRecurso);
+		response = getRecursoFromCache(target);
 		if (response.getSuccess())
 			return response;
 		
 		// Si no se encuentra en el cache.
 		
 		// Busco el recurso.
-		Recurso recurso = recursosReq.get(recursoId);
+		Recurso recurso = recursosReq.get(target);
 		if (recurso == null) {
-			String reason = "Error al intentar obtener el recurso, ID: " + recursoId;
+			String reason = "Error al intentar obtener el recurso, ID: " + target.getRecursoId();
 			System.out.println(reason);
 			response = OperationResponse.createFailed(reason);
 			return response;		
 		}
 		
 		// Consulto la tabla especifica del recurso.
-		response = this.makeQueryRecurso(recurso);
+		response = makeQueryRecurso(recurso);
 		
 		return response;
 		
@@ -99,18 +103,19 @@ public enum Requester {
 		return true;
 	}
 	
-	private OperationResponse getRecursoFromCache(int recursoId, String tipoRecurso) {
+	private OperationResponse getRecursoFromCache(Recurso recurso) {
 		
 		OperationResponse response;
 		
-		if (tipoRecurso.equals("Encuesta")) {
-			response = encuestaReq.getFromCache(recursoId);
-		} else if (tipoRecurso.equals("Link")) {
-			response = linkReq.getFromCache(recursoId);
+		if (recurso.getTipo().equals("Encuesta")) {
+			response = encuestaReq.getFromCache(recurso.getRecursoId());
+		} else if (recurso.getTipo().equals("Link")) {
+			response = linkReq.getFromCache(recurso.getRecursoId());
 		} else {
 			// TODO: Falta para archivo
 			//response = archivoReq.getFromCache(recursoId);
-			response = null; // Sacar esto
+//			response = null; // Sacar esto
+			response = OperationResponse.createFailed("Tipo de recurso inexistente");
 		}
 		
 		return response;
@@ -121,14 +126,15 @@ public enum Requester {
 		
 		OperationResponse response;
 		
-		if (recurso.getTipo().equals("Encuesta")) {
+		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
 			response = encuestaReq.get(recurso);
-		} else if (recurso.getTipo().equals("Link")) {
+		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
 			response = linkReq.get(recurso);
 		} else {
 			// TODO: Falta para archivo
 			//response = archivoReq.get(recurso);
-			response = null; // Sacar esto
+//			response = null; // Sacar esto
+			response = OperationResponse.createFailed("Tipo de recurso inexistente");
 		}
 		
 		return response;

@@ -208,6 +208,8 @@ public class EncuestaRequester {
 		String reason;
 		
 		// Busco en el cache de encuestas
+		// TODO: Yami es necesario buscar en el cache aca?
+		// me parece q se esta haciendo dos veces eso.. chequealo
 		OperationResponse cacheResponse = this.getFromCache(recurso.getRecursoId());
 		if (cacheResponse.getSuccess()) {
 			return cacheResponse;

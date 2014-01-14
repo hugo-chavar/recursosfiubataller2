@@ -33,11 +33,11 @@ public class MaterialsImpl implements Materials {
 		return "Hello, Welcom to jax-ws " + name;
 	}
 
-	@Override
-	public String getArchivo(int ambitoId, int recursoId){
-		OperationResponse response = Requester.INSTANCE.getRecurso(recursoId, "Archivo");
-		return toXml(response);
-	}
+//	@Override
+//	public String getArchivo(int ambitoId, int recursoId){
+//		OperationResponse response = Requester.INSTANCE.getRecurso(recursoId, "Archivo");
+//		return toXml(response);
+//	}
 	
 	@Override
 	public String agregarEncuesta(String encuestaParam) {
@@ -85,25 +85,17 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	@Override
-	public String getEncuesta(int ambitoId, int recursoId) {
-		//try {
-			OperationResponse response = Requester.INSTANCE.getRecurso(recursoId, "Encuesta");
-		//} catch (GetException e) {
-//			return createFailedResponse(e.getMessage());
-		//}
-		return toXml(response);
-	}
-	
-	
-	@Override
 	public String agregarEncuestaRespondida(String respondidaParam) {	
 		Parameter parameter = Parameter.createParameter(respondidaParam);
+		//TODO andy: para que chequeas el ambito?? no deberias chequear el usuario
 		if (parameter.getRespondida() == null || parameter.getAmbitoId() == null){
 			return createFailedResponse("Parametros invalidos");
 		}
 		EncuestaRespondida respondida = parameter.getRespondida();
 		OperationResponse response;
-		EncuestaResponse encuestaResponse = (EncuestaResponse) Requester.INSTANCE.getRecurso(respondida.getIdRecurso(), "Encuesta");
+		EncuestaResponse encuestaResponse = (EncuestaResponse) Requester.INSTANCE.getRecurso(new Recurso(respondida.getIdRecurso(),0,"","Encuesta"));
+		//TODO andy: chequea si la response es success antes de evaluar.. 
+		//sino tira un error como response "encuesta inexistente" o algo asi
 		Encuesta encuesta = encuestaResponse.getEncuesta();
 		if (encuesta.isEvaluada()) {
 			respondida.evaluar(encuesta);
@@ -126,8 +118,7 @@ public class MaterialsImpl implements Materials {
 		return toXml(response);
 	}
 	
-	@Override
-	public String getRecursos(int ambitoId, int usuarioId) {
+	private String getRecursos(int ambitoId, int usuarioId) {
 		List<Recurso> recursos = new ArrayList<Recurso>();
 		RecursosResponse recursosPermitidos = new RecursosResponse();
 		recursosPermitidos.setSuccess(true);
@@ -149,7 +140,7 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	@Override
-	public String borrarRecurso(int ambitoId, int recursoId, int usuarioId) {
+	public String borrarRecurso(int recursoId, int usuarioId) {
 		OperationResponse response;
 		if (Requester.INSTANCE.getPermisoUsuario(recursoId, usuarioId)) {
 			response = Requester.INSTANCE.deleteRecurso(recursoId,"Link");
@@ -179,21 +170,32 @@ public class MaterialsImpl implements Materials {
 	}
 
 	@Override
-	public String getRecursos2(String parametros) {
+	public String getRecursos(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
-		if (parameter.getAmbitoId() == null || parameter.getUsuarioId() == null){
+		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null) {
 			return createFailedResponse("Parametros invalidos");
 		}
 		return getRecursos(parameter.getAmbitoId(),parameter.getUsuarioId());
 	}
 	
+//	@Override
+//	public String getEncuesta2(String parametros) {
+//		Parameter parameter = Parameter.createParameter(parametros);
+//		if (parameter.getAmbitoId() == null || parameter.getRecursoId() == null){
+//			return createFailedResponse("Parametros invalidos");
+//		}
+//		return getEncuesta(parameter.getRecurso());
+//	}
+	
 	@Override
-	public String getEncuesta2(String parametros) {
+	public String getRecurso(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
-		if (parameter.getAmbitoId() == null || parameter.getRecursoId() == null){
-			return createFailedResponse("Parametros invalidos");
-		}
-		return getEncuesta(parameter.getAmbitoId(),parameter.getRecursoId());
+		// try {
+		OperationResponse response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
+		// } catch (GetException e) {
+		// return createFailedResponse(e.getMessage());
+		// }
+		return toXml(response);
 	}
 
 }

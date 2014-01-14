@@ -37,7 +37,7 @@ public class EncuestaRequesterTest {
 	public void getEncuestaWithPreguntaRespuestaACompletar() {
 		Encuesta encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);
 
-		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(15, "Encuesta");
+		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
 		Encuesta encuesta_rtn = response.getEncuesta();       
 
 		Assert.assertEquals(encuesta, encuesta_rtn);
@@ -55,7 +55,7 @@ public class EncuestaRequesterTest {
 	public void getEncuestaWithPreguntaRespuestaFija() {
 		Encuesta encuesta = new Encuesta(10, 3, "Encuesta con preguntas fijas", false);
 
-		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(10, "Encuesta");
+		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
 		Encuesta encuesta_rtn = response.getEncuesta();
 
 		Assert.assertEquals(encuesta, encuesta_rtn);
@@ -72,7 +72,7 @@ public class EncuestaRequesterTest {
 	public void getEncuestaFromCache() {
 		Encuesta encuesta = new Encuesta(1003, -1, "una encuesta chica", false);
 
-		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(1003, "Encuesta");
+		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
 		Encuesta encuesta_rtn = response.getEncuesta();       
 
 		Assert.assertEquals(encuesta, encuesta_rtn);
