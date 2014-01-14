@@ -42,8 +42,7 @@ public class LinkRequester {
 
 	public OperationResponse save(Link link) {
 		
-		OperationResponse response = new OperationResponse();
-		response.setSuccess(false);
+		OperationResponse response;
 		// Guardo el link
 		String link_str = parser.serializeLink(link);
 		try {
@@ -55,16 +54,16 @@ public class LinkRequester {
 			// or.setSuccess(true);
 			// or.setReason("algo");
 			// }
-			response.setSuccess(true);
+			response = OperationResponse.createSuccess();
 			System.out.println(g_resp.get_return());
 		} catch (AxisFault e) {
 			String reason = "Error al intentar guardar la siguiente Link: " + link.getDescripcion();
 			System.out.println(reason);
-			response.setReason(reason);
+			response = OperationResponse.createFailed(reason);
 		} catch (RemoteException e) {
 			String reason = "Error de conexion remota";
 			System.out.println(reason);
-			response.setReason(reason);
+			response = OperationResponse.createFailed(reason);
 		}
 		return response;
 		

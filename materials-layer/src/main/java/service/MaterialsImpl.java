@@ -36,14 +36,14 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String getArchivo(int ambitoId, int recursoId){
 		OperationResponse response = Requester.INSTANCE.getRecurso(recursoId, "Archivo");
-		return parser.convertToXml(response,response.getClass());
+		return toXml(response);
 	}
 	
 	@Override
 	public String agregarEncuesta(String encuestaParam) {
 		Parameter parameter = Parameter.createParameter(encuestaParam);
 		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null || parameter.getRecurso().getClass() != Encuesta.class){
-			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
+			return createFailedResponse("Parametros invalidos");
 		}
 		OperationResponse response;	
 		Encuesta encuesta = (Encuesta)parameter.getRecurso();
@@ -51,10 +51,9 @@ public class MaterialsImpl implements Materials {
 			response= Requester.INSTANCE.saveEncuesta(encuesta);
 		}
 		else{
-			response=new OperationResponse();
-			response.setReason("Permisos insuficientes");
+			return createFailedResponse("Permisos insuficientes");
 		}
-		return parser.convertToXml(response, OperationResponse.class);
+		return toXml(response);
 	}
 	
 	@Override
@@ -79,11 +78,10 @@ public class MaterialsImpl implements Materials {
 		if (Requester.INSTANCE.getPermisoUsuario(link.getAmbitoId(), usuarioId)) {
 			response = Requester.INSTANCE.saveLink(link);
 		} else {
-			response = new OperationResponse();
-			response.setReason("Permisos insuficientes");
+			return createFailedResponse("Permisos insuficientes");
 		}
 	//  TODO dejo este ejemplo hagan igual en todos los demas
-		return parser.convertToXml(response, OperationResponse.class);
+		return toXml(response);
 	}
 	
 	@Override
@@ -91,9 +89,9 @@ public class MaterialsImpl implements Materials {
 		//try {
 			OperationResponse response = Requester.INSTANCE.getRecurso(recursoId, "Encuesta");
 		//} catch (GetException e) {
-		//	return parser.convertToXml(createFailedResponse(e.getMessage()), OperationResponse.class);
+//			return createFailedResponse(e.getMessage());
 		//}
-		return parser.convertToXml(response,response.getClass());
+		return toXml(response);
 	}
 	
 	
@@ -101,7 +99,7 @@ public class MaterialsImpl implements Materials {
 	public String agregarEncuestaRespondida(String respondidaParam) {	
 		Parameter parameter = Parameter.createParameter(respondidaParam);
 		if (parameter.getRespondida() == null || parameter.getAmbitoId() == null){
-			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
+			return createFailedResponse("Parametros invalidos");
 		}
 		EncuestaRespondida respondida = parameter.getRespondida();
 		OperationResponse response;
@@ -111,21 +109,21 @@ public class MaterialsImpl implements Materials {
 			respondida.evaluar(encuesta);
 		}
 		response = Requester.INSTANCE.saveEncuestaRespondida(respondida);
-		return parser.convertToXml(response, OperationResponse.class);
+		return toXml(response);
 	}
 	
 	@Override
 	public String getEncuestaRespondida(int IdAmbiente, int recursoId, int usuarioId) {
-		EncuestaRespondidaResponse response=new EncuestaRespondidaResponse();
+		EncuestaRespondidaResponse response = new EncuestaRespondidaResponse();
 		response.setSuccess(true);	
 		//try {
 		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida(IdAmbiente, recursoId, usuarioId);
 		response.setRespondida(respondida);
 		
 		//} catch (GetException e) {
-		//	return parser.convertToXml(createFailedResponse(e.getMessage()), OperationResponse.class);
+		//	return createFailedResponse(e.getMessage());
 		//}
-		return parser.convertToXml(response,response.getClass());
+		return toXml(response);
 	}
 	
 	@Override
@@ -138,7 +136,7 @@ public class MaterialsImpl implements Materials {
 		try {
 			recursos = Requester.INSTANCE.getRecursosAmbito(ambitoId);
 		} catch (GetException e) {
-			return parser.convertToXml(createFailedResponse(e.getMessage()), OperationResponse.class);
+			return createFailedResponse(e.getMessage());
 		}
 		// Chequeo Recursos permitidos
 		// TODO el chequeo tiene q ser a nivel ambito.. no recurso por recurso
@@ -147,8 +145,7 @@ public class MaterialsImpl implements Materials {
 				recursosPermitidos.add(r);
 			}
 		}
-//		return recursosPermitidos;
-		return parser.convertToXml(recursosPermitidos, recursosPermitidos.getClass());
+		return toXml(recursosPermitidos);
 	}
 	
 	@Override
@@ -157,24 +154,26 @@ public class MaterialsImpl implements Materials {
 		if (Requester.INSTANCE.getPermisoUsuario(recursoId, usuarioId)) {
 			response = Requester.INSTANCE.deleteRecurso(recursoId,"Link");
 		} else {
-			response = createFailedResponse("Permisos insuficientes");
+			return createFailedResponse("Permisos insuficientes");
 		}
-		return parser.convertToXml(response, response.getClass());
+		return toXml(response);
 	}
 
-	private OperationResponse createFailedResponse(String reason) {
+	private String createFailedResponse(String reason) {
 		OperationResponse response;
-		response = new OperationResponse();
-		response.setSuccess(false);
-		response.setReason(reason);
-		return response;
+		response = OperationResponse.createFailed(reason);;
+		return toXml(response);
+	}
+	
+	private String toXml(OperationResponse response) {
+		return parser.convertToXml(response, response.getClass());
 	}
 
 	@Override
 	public String getEncuestaRespondida2(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
 		if (parameter.getAmbitoId() == null || parameter.getUsuarioId() == null || parameter.getRecursoId() == null){
-			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
+			return createFailedResponse("Parametros invalidos");
 		}
 		return getEncuestaRespondida(parameter.getAmbitoId(), parameter.getRecursoId(), parameter.getUsuarioId());
 	}
@@ -183,7 +182,7 @@ public class MaterialsImpl implements Materials {
 	public String getRecursos2(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
 		if (parameter.getAmbitoId() == null || parameter.getUsuarioId() == null){
-			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
+			return createFailedResponse("Parametros invalidos");
 		}
 		return getRecursos(parameter.getAmbitoId(),parameter.getUsuarioId());
 	}
@@ -191,10 +190,10 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String getEncuesta2(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
-		if (parameter.getAmbitoId() == null || parameter.getUsuarioId() == null){
-			return parser.convertToXml(createFailedResponse("Parametros invalidos"), OperationResponse.class);
+		if (parameter.getAmbitoId() == null || parameter.getRecursoId() == null){
+			return createFailedResponse("Parametros invalidos");
 		}
-		return getEncuesta(parameter.getAmbitoId(),parameter.getUsuarioId());
+		return getEncuesta(parameter.getAmbitoId(),parameter.getRecursoId());
 	}
 
 }

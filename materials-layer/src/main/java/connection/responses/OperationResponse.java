@@ -8,6 +8,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "response")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class OperationResponse {
+	
+	public static OperationResponse createFailed(String reason) {
+		OperationResponse response;
+		response = new OperationResponse();
+		response.setSuccess(false);
+		response.setReason(reason);
+		return response;
+	}
+	
+	public static OperationResponse createSuccess() {
+		OperationResponse response;
+		response = new OperationResponse();
+		response.setSuccess(true);
+		return response;
+	}
 
 	@XmlElement // (nillable = true)
 	private String reason;
@@ -29,5 +44,6 @@ public class OperationResponse {
 	public Boolean getSuccess() {
 		return this.success;
 	}
+
 
 }

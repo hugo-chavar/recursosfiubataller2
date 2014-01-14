@@ -144,48 +144,46 @@ public class EncuestaRequester {
 	}
 
 	public OperationResponse save(Encuesta encuesta) {
-		OperationResponse response = new OperationResponse();
-		response.setSuccess(false);
+		OperationResponse response;
 		// Guardo la encuesta
 		String encuesta_str = parser.serializeEncuesta(encuesta);
 		try {
 			GuardarDatos guardar = new GuardarDatos();
 			guardar.setXml(encuesta_str);
 			GuardarDatosResponse g_resp = stub.guardarDatos(guardar);
-			response.setSuccess(true);
+			response = OperationResponse.createSuccess();
 			System.out.println(g_resp.get_return());
 		} catch (AxisFault e) {
 			String reason = "Error al intentar guardar la siguiente Encuesta:" + encuesta.getDescripcion();
 			System.out.println(reason);
-			response.setReason(reason);
+			response = OperationResponse.createFailed(reason);
 		} catch (RemoteException e) {
 			String reason = "Error de conexion remota";
 			System.out.println(reason);
-			response.setReason(reason);
+			response = OperationResponse.createFailed(reason);
 		}
 		return response;
 	}
 
 	public OperationResponse saveRespondida(EncuestaRespondida respondida) {
 
-		OperationResponse response = new OperationResponse();
-		response.setSuccess(false);
+		OperationResponse response;
 		// Guardo la encuesta respondida
 		String encuesta_str = parser.serializeEncuestaRespondida(respondida);
 		try {
 			GuardarDatos guardar = new GuardarDatos();
 			guardar.setXml(encuesta_str);
 			GuardarDatosResponse g_resp = this.stub.guardarDatos(guardar);
-			response.setSuccess(true);
+			response = OperationResponse.createSuccess();
 			System.out.println(g_resp.get_return());
 		} catch (AxisFault e) {
 			String reason = "Error al intentar guardar EncuestaRespondida";
 			System.out.println(reason);
-			response.setReason(reason);
+			response = OperationResponse.createFailed(reason);
 		} catch (RemoteException e) {
 			String reason = "Error de conexion remota";
 			System.out.println(reason);
-			response.setReason(reason);
+			response = OperationResponse.createFailed(reason);
 		}
 		return response;
 	}
@@ -256,10 +254,8 @@ public class EncuestaRequester {
 			}
 
 			System.out.println(reason);
-			response = new EncuestaResponse();
-			response.setReason(reason);
 			
-			return response;
+			return OperationResponse.createFailed(reason);
 		}
 
 	}

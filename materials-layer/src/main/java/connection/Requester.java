@@ -59,8 +59,7 @@ public enum Requester {
 		if (recurso == null) {
 			String reason = "Error al intentar obtener el recurso, ID: " + recursoId;
 			System.out.println(reason);
-			response = new OperationResponse();
-			response.setReason(reason);
+			response = OperationResponse.createFailed(reason);
 			return response;		
 		}
 		
