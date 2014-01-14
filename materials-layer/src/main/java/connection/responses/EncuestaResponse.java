@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import model.Encuesta;
 
+
 @XmlRootElement(name = "response")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class EncuestaResponse extends OperationResponse {
@@ -31,5 +32,5 @@ public class EncuestaResponse extends OperationResponse {
 	public void setEncuesta(Encuesta encuesta) {
 		this.encuesta = encuesta;
 	}
-
+	
 }

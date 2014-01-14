@@ -18,6 +18,7 @@ import connection.cache.Cache;
 import connection.exceptions.GetException;
 import connection.responses.OperationResponse;
 
+
 public class RecursosRequester {
 
 	private IntegracionStub stub;
@@ -50,8 +51,52 @@ public class RecursosRequester {
 		}
 
 	}
+	
+	public Recurso get(int recursoId) {
+		
+		// Busco en el cache de recursos.
+		Recurso target = new Recurso(recursoId, 0, "");
+		if (cache.contains(target)) {
+			return cache.get(target);
+		} else {
+			try {
 
-	public List<Recurso> get(int IDAmbito) throws GetException {
+				// Consulto el recurso guardado
+				String xml = parser.serializeRecursoQuery(recursoId);
+
+				////////////// PRUEBAS //////////////
+				String xml_resp_e;
+				
+				if (xml.equals("<WS><recurso><recursoId>15</recursoId></recurso></WS>")) {
+					xml_resp_e = "<WS><recurso><recursoId>15</recursoId><ambitoId>2</ambitoId><descripcion>Encuesta con preguntas a completar</descripcion><tipo>Encuesta</tipo></recurso></WS>";
+				} else if (xml.equals("<WS><recurso><recursoId>10</recursoId></recurso></WS>")) {
+					xml_resp_e = "<WS><recurso><recursoId>10</recursoId><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></recurso></WS>";
+				} else {
+					SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+					seleccionar_e.setXml(xml);
+					SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
+					xml_resp_e = s_resp_e.get_return();
+				}
+				////////////// PRUEBAS //////////////
+				
+				Recurso recurso = parser.deserializeRecurso(xml_resp_e);
+				
+				return recurso;
+	
+			} catch (AxisFault e) {
+				String message = "Error al intentar obtener el recurso con IDRecurso: " + recursoId;
+				System.out.println(message);
+			} catch (RemoteException e) {
+				String message = "Error de conexion remota";
+				System.out.println(message);
+			}
+		}
+
+		return null;
+
+	}
+
+	public List<Recurso> getAll(int IDAmbito) throws GetException {
 
 		List<Recurso> recursos = new ArrayList<Recurso>();
 
@@ -89,13 +134,14 @@ public class RecursosRequester {
 
 	}
 
-	public OperationResponse delete(int IDRecurso) {
+	public OperationResponse delete(int recursoId) {
+		
 		OperationResponse response = new OperationResponse();
-		response.setSuccess(false);
 
-		// Borro la encuesta respondida
-		String xml = parser.serializeDeleteQuery(IDRecurso);
+		// Borro el recurso
+		String xml = parser.serializeDeleteQuery(recursoId);
 		try {
+			
 			EliminarDatos eliminar = new EliminarDatos();
 			eliminar.setXml(xml);
 			EliminarDatosResponse e_resp = stub.eliminarDatos(eliminar);
@@ -106,9 +152,11 @@ public class RecursosRequester {
 			// or.setSuccess(true);
 			// or.setReason("algo");
 			// }
+			
 			response.setSuccess(true);
+			
 		} catch (AxisFault e) {
-			String reason = "Error al intentar eliminar el siguiente Recurso con Id "  + IDRecurso;
+			String reason = "Error al intentar eliminar el Recurso, Id: " + recursoId;
 			System.out.println(reason);
 			response.setReason(reason);
 		} catch (RemoteException e) {
@@ -116,15 +164,9 @@ public class RecursosRequester {
 			System.out.println(reason);
 			response.setReason(reason);
 		}
+		
 		return response;
 
 	}
 
-	public Recurso get(Recurso target) {
-		return cache.get(target);
-	}
-
-	public Recurso getCached(int recursoId) {
-		return get(new Recurso(recursoId, 0, ""));
-	}
 }

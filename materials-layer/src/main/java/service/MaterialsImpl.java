@@ -35,9 +35,8 @@ public class MaterialsImpl implements Materials {
 
 	@Override
 	public String getArchivo(int ambitoId, int recursoId){
-		Archivo file = Requester.INSTANCE.getArchivo(ambitoId, recursoId);
-		String xmlArchivo = parser.convertToXml(file, Archivo.class);
-		return xmlArchivo;
+		OperationResponse response = Requester.INSTANCE.getRecurso(recursoId, "Archivo");
+		return parser.convertToXml(response,response.getClass());
 	}
 	
 	@Override
@@ -89,12 +88,8 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public String getEncuesta(int ambitoId, int recursoId) {
-		EncuestaResponse response = new EncuestaResponse();
-		response.setSuccess(true);		
 		//try {
-		Encuesta encuesta = Requester.INSTANCE.getEncuesta(ambitoId, recursoId);
-		response.setEncuesta(encuesta);
-		
+			OperationResponse response = Requester.INSTANCE.getRecurso(recursoId, "Encuesta");
 		//} catch (GetException e) {
 		//	return parser.convertToXml(createFailedResponse(e.getMessage()), OperationResponse.class);
 		//}
@@ -110,7 +105,8 @@ public class MaterialsImpl implements Materials {
 		}
 		EncuestaRespondida respondida = parameter.getRespondida();
 		OperationResponse response;
-		Encuesta encuesta = Requester.INSTANCE.getEncuesta(parameter.getAmbitoId(), respondida.getIdRecurso());
+		EncuestaResponse encuestaResponse = (EncuestaResponse) Requester.INSTANCE.getRecurso(respondida.getIdRecurso(), "Encuesta");
+		Encuesta encuesta = encuestaResponse.getEncuesta();
 		if (encuesta.isEvaluada()) {
 			respondida.evaluar(encuesta);
 		}
@@ -159,7 +155,7 @@ public class MaterialsImpl implements Materials {
 	public String borrarRecurso(int ambitoId, int recursoId, int usuarioId) {
 		OperationResponse response;
 		if (Requester.INSTANCE.getPermisoUsuario(recursoId, usuarioId)) {
-			response = Requester.INSTANCE.deleteRecurso(recursoId);
+			response = Requester.INSTANCE.deleteRecurso(recursoId,"Link");
 		} else {
 			response = createFailedResponse("Permisos insuficientes");
 		}

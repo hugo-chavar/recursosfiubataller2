@@ -1,0 +1,88 @@
+package connection;
+
+import java.util.List;
+
+import model.Encuesta;
+import model.Pregunta;
+import model.PreguntaRespuestaACompletar;
+import model.PreguntaRespuestaFija;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import connection.responses.EncuestaResponse;
+
+
+// Falta subir la parte de integracion modificada. No va a funcionar...
+
+public class EncuestaRequesterTest {
+
+	//      @Test
+	//      public void saveEncuestaWithPreguntaRespuestaACompletarEvaluada() {
+	//              Encuesta encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);
+	//              
+	//              PreguntaRespuestaACompletar pregunta1 = new PreguntaRespuestaACompletar();
+	//              pregunta1.setEnunciado("De que color es el caballo blanco de San Martin?");
+	//              pregunta1.addRespuestaCorrecta("blanco");
+	//              encuesta.addPregunta(pregunta1);
+	//              PreguntaRespuestaACompletar pregunta2 = new PreguntaRespuestaACompletar();
+	//              pregunta2.setEnunciado("cuantas patas tiene un gato?");
+	//              pregunta2.addRespuestaCorrecta("4");
+	//              encuesta.addPregunta(pregunta2);
+	//              
+	//              Requester.INSTANCE.saveEncuesta(encuesta);
+	//      }
+
+	@Test
+	public void getEncuestaWithPreguntaRespuestaACompletar() {
+		Encuesta encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);
+
+		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(15, "Encuesta");
+		Encuesta encuesta_rtn = response.getEncuesta();       
+
+		Assert.assertEquals(encuesta, encuesta_rtn);
+		Assert.assertEquals("Encuesta con preguntas a completar", encuesta_rtn.getDescripcion());
+		Assert.assertEquals(encuesta.isEvaluada(), encuesta_rtn.isEvaluada());
+
+		List<Pregunta> preguntas = encuesta_rtn.getPreguntas();
+		Assert.assertEquals("De que color es el caballo blanco de San Martin?", preguntas.get(0).getEnunciado());
+		Assert.assertEquals("blanco", ((PreguntaRespuestaACompletar)preguntas.get(0)).getRespuesta());
+		Assert.assertEquals("Cuantas patas tiene un gato?", preguntas.get(1).getEnunciado());
+		Assert.assertEquals("4", ((PreguntaRespuestaACompletar)preguntas.get(1)).getRespuesta());
+	}
+
+	@Test
+	public void getEncuestaWithPreguntaRespuestaFija() {
+		Encuesta encuesta = new Encuesta(10, 3, "Encuesta con preguntas fijas", false);
+
+		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(10, "Encuesta");
+		Encuesta encuesta_rtn = response.getEncuesta();
+
+		Assert.assertEquals(encuesta, encuesta_rtn);
+		Assert.assertEquals("Encuesta con preguntas fijas", encuesta_rtn.getDescripcion());
+
+		List<Pregunta> preguntas = encuesta_rtn.getPreguntas();
+		Assert.assertEquals("De que color es el caballo blanco de San Martin?", preguntas.get(0).getEnunciado());
+		Assert.assertEquals("negro", ((PreguntaRespuestaFija)preguntas.get(0)).getRespuestasPosibles().get(0));
+		Assert.assertEquals("Cuantas patas tiene un gato?", preguntas.get(1).getEnunciado());
+		Assert.assertEquals("3", ((PreguntaRespuestaFija)preguntas.get(1)).getRespuestasPosibles().get(0));
+	}
+	
+	@Test
+	public void getEncuestaFromCache() {
+		Encuesta encuesta = new Encuesta(1003, -1, "una encuesta chica", false);
+
+		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(1003, "Encuesta");
+		Encuesta encuesta_rtn = response.getEncuesta();       
+
+		Assert.assertEquals(encuesta, encuesta_rtn);
+		Assert.assertEquals("una encuesta chica", encuesta_rtn.getDescripcion());
+		Assert.assertEquals(encuesta.isEvaluada(), encuesta_rtn.isEvaluada());
+
+		List<Pregunta> preguntas = encuesta_rtn.getPreguntas();
+		Assert.assertEquals("cuantas materias te faltan para recibirte?", preguntas.get(0).getEnunciado());
+		Assert.assertEquals("que materia fue la mas dificil?", preguntas.get(1).getEnunciado());
+	}
+
+}
+

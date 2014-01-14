@@ -9,6 +9,7 @@ import model.EncuestaRespondida;
 import model.Pregunta;
 import model.PreguntaRespuestaACompletar;
 import model.PreguntaRespuestaFija;
+import model.Recurso;
 
 import org.apache.axis2.AxisFault;
 
@@ -19,7 +20,9 @@ import com.ws.services.IntegracionStub.SeleccionarDatos;
 import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
+import connection.responses.EncuestaResponse;
 import connection.responses.OperationResponse;
+
 
 public class EncuestaRequester {
 
@@ -186,38 +189,77 @@ public class EncuestaRequester {
 		}
 		return response;
 	}
-
-	public Encuesta get(int IDAmbiente, int IDEncuesta) {
-
-		// Busco en el cache de encuestas
-		Encuesta target = new Encuesta(IDEncuesta, IDAmbiente, "", false);
+	
+	public OperationResponse getFromCache(int recursoId) {
+		
+		EncuestaResponse response = new EncuestaResponse();
+		Encuesta target = new Encuesta(recursoId, 0, "", false);
 
 		if (cacheEncuestas.contains(target)) {
-			return cacheEncuestas.get(target);
+			response = new EncuestaResponse(cacheEncuestas.get(target));
+			response.setSuccess(true);
+		}
+		
+		return response;
+		
+	}
+
+	public OperationResponse get(Recurso recurso) {
+
+		EncuestaResponse response;
+		String reason;
+		
+		// Busco en el cache de encuestas
+		OperationResponse cacheResponse = this.getFromCache(recurso.getRecursoId());
+		if (cacheResponse.getSuccess()) {
+			return cacheResponse;
 		} else {
 			try {
 
 				// Consulto la encuesta guardada
-				String xml = parser.serializeEncuestaQuery(IDEncuesta);
-				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-				seleccionar_e.setXml(xml);
-				SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
-				String xml_resp_e = s_resp_e.get_return();
+				String xml = parser.serializeQueryByType(recurso.getRecursoId(), EncuestaParser.ENCUESTA_TAG);
+				
+				////////////// PRUEBAS //////////////
+				String xml_resp_e;
+				
+				if (xml.equals("<WS><encuesta><recursoId>15</recursoId></encuesta></WS>")) {
+					xml_resp_e = "<WS><encuesta><evaluada>true</evaluada><preguntas>C;1;De que color es el caballo blanco de San Martin?;blanco|" +
+							"C;2;Cuantas patas tiene un gato?;4</preguntas></encuesta></WS>";
+				} else if (xml.equals("<WS><encuesta><recursoId>10</recursoId></encuesta></WS>")) {
+					xml_resp_e = "<WS><encuesta><evaluada>true</evaluada><preguntas>F;1;De que color es el caballo blanco de San Martin?;negro,blanco,marron;1|" +
+							"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></encuesta></WS>";
+				} else {
+					SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+					seleccionar_e.setXml(xml);
+					SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
+					xml_resp_e = s_resp_e.get_return();
+				}
+				
+				////////////// PRUEBAS //////////////
+				
 				Encuesta encuesta = parser.deserializeEncuesta(xml_resp_e);
+				encuesta.setAmbitoId(recurso.getAmbitoId());
+				encuesta.setRecursoId(recurso.getRecursoId());
+				encuesta.setDescripcion(recurso.getDescripcion());
 
 				// Agrego al cache de encuestas
 				cacheEncuestas.add(encuesta);
 
-				return encuesta;
+				response = new EncuestaResponse(encuesta);
+				response.setSuccess(true);
+				return response;
 
 			} catch (AxisFault e) {
-				System.out.println("Error al intentar obtener la siguiente Encuesta:");
-				System.out.println("IDEncuesta: " + IDEncuesta);
+				reason = "Error al intentar obtener la encuesta, ID: " + recurso.getRecursoId();
 			} catch (RemoteException e) {
-				System.out.println("Error de conexion remota");
+				reason = "Error de conexion remota";
 			}
 
-			return null;
+			System.out.println(reason);
+			response = new EncuestaResponse();
+			response.setReason(reason);
+			
+			return response;
 		}
 
 	}
@@ -256,6 +298,10 @@ public class EncuestaRequester {
 
 		return null;
 
+	}
+	
+	public void deleteFromCache(int recursoId) {
+		cacheEncuestas.remove(new Encuesta(recursoId, 0, "", false));
 	}
 
 }

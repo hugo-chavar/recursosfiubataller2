@@ -17,6 +17,7 @@ import com.ws.services.IntegracionStub.GuardarDatosResponse;
 import com.ws.services.IntegracionStub.SeleccionarDatos;
 import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
+
 public class LinkRequester {
 
 	private IntegracionStub stub;
@@ -40,6 +41,7 @@ public class LinkRequester {
 	}
 
 	public OperationResponse save(Link link) {
+		
 		OperationResponse response = new OperationResponse();
 		response.setSuccess(false);
 		// Guardo el link
@@ -65,39 +67,55 @@ public class LinkRequester {
 			response.setReason(reason);
 		}
 		return response;
+		
 	}
+	
+	public OperationResponse getFromCache(int recursoId) {
+		
+		LinkResponse response = new LinkResponse();
+		Link target = new Link(recursoId, 0, "");
 
-	public OperationResponse get(int IDAmbiente, int IDRecurso) {
-
-		LinkResponse response;
-		String reason;
-		// Busco en el cache de links
-		Link target = new Link(IDAmbiente, IDRecurso, "");
 		if (cache.contains(target)) {
 			response = new LinkResponse(cache.get(target));
 			response.setSuccess(true);
-			return response ;
+		}
+		
+		return response;
+		
+	}
+
+	public OperationResponse get(Recurso recurso) {
+
+		LinkResponse response;
+		String reason;
+		
+		// Busco en el cache de links
+		OperationResponse cacheResponse = this.getFromCache(recurso.getRecursoId());
+		if (cacheResponse.getSuccess()) {
+			return cacheResponse;
 		} else {
 			try {
 
 				// Consulto el link guardado
-				String xml = this.parser.serializeLinkQuery(IDRecurso);
+				String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), LinkParser.LINK_TAG);
 				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
 				seleccionar_e.setXml(xml);
 				SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
 				String xml_resp_e = s_resp_e.get_return();
 				Link link = this.parser.deserializeLink(xml_resp_e);
+				link.setAmbitoId(recurso.getAmbitoId());
+				link.setRecursoId(recurso.getRecursoId());
+				link.setDescripcion(recurso.getDescripcion());
 
 				// Agrego al cache de links
 				cache.add(link);
 
 				response = new LinkResponse(link);
 				response.setSuccess(true);
-				return response ;
-//				return link;
+				return response;
 
 			} catch (AxisFault e) {
-				reason = "Error al intentar obtener el Link, Id =" + IDRecurso;
+				reason = "Error al intentar obtener el Link, ID: " + recurso.getRecursoId();
 			} catch (RemoteException e) {
 				reason = "Error de conexion remota";
 			}
@@ -111,46 +129,8 @@ public class LinkRequester {
 
 	}
 
-	public void delete(int recursoId) {
+	public void deleteFromCache(int recursoId) {
 		cache.remove(new Link(recursoId, 0, ""));
-	}
-
-	public OperationResponse get(Recurso recurso) {
-		LinkResponse response;
-		String reason;
-		Link target = new Link(recurso);
-		if (cache.contains(target)) {
-			response = new LinkResponse(cache.get(target));
-			response.setSuccess(true);
-			return response;
-		} else {
-			
-			try {
-				String xml = parser.serializeLinkQuery(recurso);
-				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-				seleccionar_e.setXml(xml);
-				SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
-				String xml_resp_e = s_resp_e.get_return();
-				Link link = this.parser.deserializeLink(xml_resp_e, recurso);
-
-				cache.add(link);
-				response = new LinkResponse(link);
-				response.setSuccess(true);
-				return response ;
-
-			} catch (AxisFault e) {
-				reason = "Error al intentar obtener el Link, Id =" + recurso.getRecursoId();
-			} catch (RemoteException e) {
-				reason = "Error de conexion remota";
-			}
-
-			System.out.println(reason);
-			response = new LinkResponse();
-			response.setReason(reason);
-			
-			return response;
-		}
-
 	}
 
 }

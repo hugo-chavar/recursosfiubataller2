@@ -30,59 +30,110 @@ public enum Requester {
 	public OperationResponse saveEncuesta(Encuesta encuesta) {
 		return encuestaReq.save(encuesta);
 	}
-	
-	public Encuesta getEncuesta(int idAmbito, int idEncuesta) {
-		return encuestaReq.get(idAmbito, idEncuesta);
-	}
 
 	public OperationResponse saveEncuestaRespondida(EncuestaRespondida respondida) {
 		return encuestaReq.saveRespondida(respondida);
-	}
-
-	public EncuestaRespondida getEncuestaRespondida(int idAmbito, int idEncuesta, int idUsuario) {
-		return encuestaReq.getRespondida(idAmbito, idUsuario, idEncuesta);
 	}
 	
 	public void saveFile(Archivo archivo){
 		archivoReq.save(archivo);
 	}
 	
-	public Archivo getArchivo(int idAmbito, int idArchivo){
-		return archivoReq.getArchivo(idAmbito, idArchivo);
-	}
-	
 	public OperationResponse saveLink(Link link) {
 		return linkReq.save(link);
 	}
 	
-	public OperationResponse getLink(int idAmbito, int IDLink) {
-		Recurso recurso = recursosReq.getCached(IDLink);
-		return linkReq.get(recurso);
-//		return linkReq.get(idAmbito, IDLink);
+	public OperationResponse getRecurso(int recursoId, String tipoRecurso) {
+
+		OperationResponse response;
+		
+		// Busco en el cache de especifico del recurso.
+		response = this.getRecursoFromCache(recursoId, tipoRecurso);
+		if (response.getSuccess())
+			return response;
+		
+		// Si no se encuentra en el cache.
+		
+		// Busco el recurso.
+		Recurso recurso = recursosReq.get(recursoId);
+		if (recurso == null) {
+			String reason = "Error al intentar obtener el recurso, ID: " + recursoId;
+			System.out.println(reason);
+			response = new OperationResponse();
+			response.setReason(reason);
+			return response;		
+		}
+		
+		// Consulto la tabla especifica del recurso.
+		response = this.makeQueryRecurso(recurso);
+		
+		return response;
+		
+	}
+
+	public List<Recurso> getRecursosAmbito(int ambitoId) throws GetException {
+		return recursosReq.getAll(ambitoId);
+	}
+
+	public EncuestaRespondida getEncuestaRespondida(int idAmbito, int idEncuesta, int idUsuario) {
+		return encuestaReq.getRespondida(idAmbito, idUsuario, idEncuesta);
 	}
 	
-	public OperationResponse deleteRecurso(int idRecurso) {
-		Recurso recurso = recursosReq.getCached(idRecurso);
+	public OperationResponse deleteRecurso(int idRecurso, String tipoRecurso) {
 		
-		// borro el recurso de todos los caches
-		if ("Link".equals(recurso.getTipo())) {
-			linkReq.delete(idRecurso);
-		} else if ("Encuesta".equals(recurso.getTipo())) {
-			// encuestaReq.delete(IDRecurso);
+		// Borro el recurso de todos los caches
+		if (tipoRecurso.equals("Encuesta")) {
+			encuestaReq.deleteFromCache(idRecurso);
+		} else if (tipoRecurso.equals("Link")) {
+			linkReq.deleteFromCache(idRecurso);
 		} else {
-			// archivoReq.delete(IDRecurso);
+			// TODO: Falta para archivo
+			//archivoReq.deleteFromCache(idRecurso);
 		}
+		
 		return recursosReq.delete(idRecurso);
 
 	}
 
-	public List<Recurso> getRecursosAmbito(int idAmbito) throws GetException {
-		return recursosReq.get(idAmbito);
-	}
-
-	public boolean getPermisoUsuario(Integer idRecurso, int idUsuario) {
+	public boolean getPermisoUsuario(Integer recursoId, int usuarioId) {
 		// TODO: Yami, falta implementar este metodo
 		return true;
+	}
+	
+	private OperationResponse getRecursoFromCache(int recursoId, String tipoRecurso) {
+		
+		OperationResponse response;
+		
+		if (tipoRecurso.equals("Encuesta")) {
+			response = encuestaReq.getFromCache(recursoId);
+		} else if (tipoRecurso.equals("Link")) {
+			response = linkReq.getFromCache(recursoId);
+		} else {
+			// TODO: Falta para archivo
+			//response = archivoReq.getFromCache(recursoId);
+			response = null; // Sacar esto
+		}
+		
+		return response;
+		
+	}
+	
+	private OperationResponse makeQueryRecurso(Recurso recurso) {
+		
+		OperationResponse response;
+		
+		if (recurso.getTipo().equals("Encuesta")) {
+			response = encuestaReq.get(recurso);
+		} else if (recurso.getTipo().equals("Link")) {
+			response = linkReq.get(recurso);
+		} else {
+			// TODO: Falta para archivo
+			//response = archivoReq.get(recurso);
+			response = null; // Sacar esto
+		}
+		
+		return response;
+		
 	}
 	
 }

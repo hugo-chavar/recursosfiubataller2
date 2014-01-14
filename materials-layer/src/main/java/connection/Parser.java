@@ -14,6 +14,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSSerializer;
 import org.xml.sax.InputSource;
@@ -59,7 +60,7 @@ public class Parser {
 		}
 		return null;
 	}
-//	
+
 //	public static Document loadXMLFromString(String xml) throws Exception
 //	{
 //	    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -67,7 +68,6 @@ public class Parser {
 //	    InputSource is = new InputSource(new StringReader(xml));
 //	    return builder.parse(is);
 //	}
-	
 	
 	public String convertDocumentToXml(Document doc) {
 		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
@@ -107,6 +107,23 @@ public class Parser {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public String serializeQueryByType(int IDRecurso, String RecursoType) {
+		
+		Document doc = this.buildXMLDocument();
+		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
+		doc.appendChild(rootElement);
+
+		Element typeNode = doc.createElement(RecursoType);
+		rootElement.appendChild(typeNode);
+		
+		Element recursoID = doc.createElement(Parser.RECURSOID_TAG);
+		recursoID.appendChild(doc.createTextNode(String.valueOf(IDRecurso)));
+		typeNode.appendChild(recursoID);
+		
+		return convertDocumentToXml(doc);
+		
 	}
 	
 }

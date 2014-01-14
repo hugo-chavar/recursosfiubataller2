@@ -3,11 +3,11 @@ package connection;
 import java.util.HashMap;
 
 import model.Link;
-import model.Recurso;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
 
 public class LinkParser extends Parser {
 
@@ -56,13 +56,6 @@ public class LinkParser extends Parser {
 		nombre.appendChild(doc.createTextNode(String.valueOf(link.getNombre())));
 		linkNode.appendChild(nombre);
 
-//		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-//		LSSerializer serializer = domImplLS.createLSSerializer();
-//		serializer.getDomConfig().setParameter("xml-declaration", false);
-//		String xml = serializer.writeToString(doc);
-//
-//		return xml;
-		
 		return convertDocumentToXml(doc);
 
 	}
@@ -72,118 +65,24 @@ public class LinkParser extends Parser {
 		Link link = null;
 
 		Document doc = this.convertXmlToDocument(xml);
-		NodeList nodes = doc.getElementsByTagName(Parser.RECURSO_TAG);
-		NodeList childNodes = nodes.item(0).getChildNodes();
 		HashMap<String, String> fields = new HashMap<String, String>();
 
-		if (childNodes != null) {
+		NodeList linkNode = doc.getElementsByTagName(LinkParser.LINK_TAG);
+		NodeList linkChildNodes = linkNode.item(0).getChildNodes();
 
-			for (int i = 0; i < childNodes.getLength(); i++) {
-				Element element = (Element) childNodes.item(i);
+		if (linkChildNodes != null) {
+
+			for (int i = 0; i < linkChildNodes.getLength(); i++) {
+				Element element = (Element) linkChildNodes.item(i);
 				fields.put(element.getNodeName(), element.getTextContent());
 			}
 
-			int IDRecurso = Integer.parseInt(fields.get(Parser.RECURSOID_TAG));
-			int IDAmbito = Integer.parseInt(fields.get(Parser.AMBITOID_TAG));
-			String descripcion = fields.get(Parser.DESCRIPCION_TAG);
-
-			String recursos = fields.get(Parser.RECURSOS_TAG);
-			Document subdoc = this.convertXmlToDocument(recursos);
-			NodeList subnodes = subdoc.getElementsByTagName(LinkParser.LINK_TAG);
-			NodeList subchildNodes = subnodes.item(0).getChildNodes();
-			HashMap<String, String> subfields = new HashMap<String, String>();
-
-			if (subchildNodes != null) {
-
-				for (int i = 0; i < subchildNodes.getLength(); i++) {
-					Element element = (Element) subchildNodes.item(i);
-					subfields.put(element.getNodeName(), element.getTextContent());
-				}
-
-				String nombre = subfields.get(LinkParser.NOMBRE_TAG);
-				link = new Link(IDRecurso, IDAmbito, descripcion);
-				link.setNombre(nombre);
-
-			}
-
-		}
-
-		return link;
-
-	}
-
-	public String serializeLinkQuery(int IDRecurso) {
-
-		Document doc = this.buildXMLDocument();
-		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-		doc.appendChild(rootElement);
-
-		Element nodeElement = doc.createElement(Parser.RECURSO_TAG);
-		rootElement.appendChild(nodeElement);
-
-		Element joinElement = doc.createElement(Parser.JOIN_TAG);
-		nodeElement.appendChild(joinElement);
-
-		Element link = doc.createElement(LinkParser.LINK_TAG);
-		link.appendChild(doc.createTextNode(String.valueOf(IDRecurso)));
-		joinElement.appendChild(link);
-
-//		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-//		LSSerializer serializer = domImplLS.createLSSerializer();
-//		serializer.getDomConfig().setParameter("xml-declaration", false);
-//		String xml = serializer.writeToString(doc);
-//
-//		return xml;
-		
-		return convertDocumentToXml(doc);
-
-	}
-
-	//query sin join
-	//aprovecho que ya tenemos en cache el Recurso
-	public String serializeLinkQuery(Recurso recurso) {
-		Document doc = this.buildXMLDocument();
-		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-		doc.appendChild(rootElement);
-
-//		Element nodeElement = doc.createElement(Parser.RECURSO_TAG);
-//		rootElement.appendChild(nodeElement);
-//		Element joinElement = doc.createElement(Parser.JOIN_TAG);
-//		nodeElement.appendChild(joinElement);
-
-		Element link = doc.createElement(LinkParser.LINK_TAG);
-		//TODO agregar el tag de recursoId
-		Element recursoId = doc.createElement(Parser.RECURSOID_TAG);
-		recursoId.appendChild(doc.createTextNode(String.valueOf(recurso.getRecursoId())));
-		recursoId.appendChild(recursoId);
-		link.appendChild(doc.createTextNode(String.valueOf(recurso.getRecursoId())));
-		rootElement.appendChild(link);
-
-		return convertDocumentToXml(doc);
-
-	}
-	
-	public Link deserializeLink(String xml, Recurso recurso) {
-
-		Link link = null;
-
-		Document subdoc = this.convertXmlToDocument(xml);
-		NodeList subnodes = subdoc.getElementsByTagName(LinkParser.LINK_TAG);
-		NodeList subchildNodes = subnodes.item(0).getChildNodes();
-		HashMap<String, String> subfields = new HashMap<String, String>();
-
-		if (subchildNodes != null) {
-
-			for (int i = 0; i < subchildNodes.getLength(); i++) {
-				Element element = (Element) subchildNodes.item(i);
-				subfields.put(element.getNodeName(), element.getTextContent());
-			}
-
-			String nombre = subfields.get(LinkParser.NOMBRE_TAG);
-			link = new Link(recurso.getRecursoId(), recurso.getAmbitoId(), recurso.getDescripcion());
+			String nombre = fields.get(LinkParser.NOMBRE_TAG);
+			link = new Link(0, 0, "");
 			link.setNombre(nombre);
 
 		}
+
 		return link;
 
 	}

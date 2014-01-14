@@ -66,13 +66,6 @@ public class EncuestaParser extends Parser {
 		preguntas.appendChild(doc.createTextNode(preguntas_str));
 		encuesta_el.appendChild(preguntas);
 		
-//		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-//		LSSerializer serializer = domImplLS.createLSSerializer();
-//		serializer.getDomConfig().setParameter("xml-declaration", false);
-//		String xml = serializer.writeToString(doc);		
-//		
-//		return xml;
-		
 		return convertDocumentToXml(doc);
 		
 	}
@@ -100,60 +93,36 @@ public class EncuestaParser extends Parser {
 		Element respondidas = doc.createElement(EncuestaParser.PREGUNTAS_RESPONDIDAS_TAG);
 		respondidas.appendChild(doc.createTextNode(respondidas_str));
 		nodeElement.appendChild(respondidas);
-		
-//		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-//		LSSerializer serializer = domImplLS.createLSSerializer();
-//		serializer.getDomConfig().setParameter("xml-declaration", false);
-//		String xml = serializer.writeToString(doc);		
-//		
-//		return xml;
+
 		return convertDocumentToXml(doc);
 		
 	}
 	
 	public Encuesta deserializeEncuesta(String xml) {
-		
+
 		Encuesta encuesta = null;
-		
+
 		Document doc = this.convertXmlToDocument(xml);
-		NodeList nodes = doc.getElementsByTagName(Parser.RECURSO_TAG);
-		NodeList childNodes = nodes.item(0).getChildNodes();
 		HashMap<String, String> fields = new HashMap<String, String>();
+
+		NodeList encuestaNode = doc.getElementsByTagName(EncuestaParser.ENCUESTA_TAG);
+		NodeList encuestaChildNodes = encuestaNode.item(0).getChildNodes();
 		
-	    if (childNodes != null) {
-	    	
-	        for (int i = 0; i < childNodes.getLength(); i++) {
-        	   Element element = (Element) childNodes.item(i);
-        	   fields.put(element.getNodeName(), element.getTextContent());
-	        }
-	        
-			int IDRecurso = Integer.parseInt(fields.get(Parser.RECURSOID_TAG));
-			int IDAmbito = Integer.parseInt(fields.get(Parser.AMBITOID_TAG));
-			String descripcion = fields.get(Parser.DESCRIPCION_TAG);
+		if (encuestaChildNodes != null) {
 
-			String recursos = fields.get(Parser.RECURSOS_TAG);
-			Document subdoc = this.convertXmlToDocument(recursos);
-			NodeList subnodes = subdoc.getElementsByTagName(EncuestaParser.ENCUESTA_TAG);
-			NodeList subchildNodes = subnodes.item(0).getChildNodes();
-			HashMap<String, String> subfields = new HashMap<String, String>();
-			
-		    if (subchildNodes != null) {
-		    	
-		        for (int i = 0; i < subchildNodes.getLength(); i++) {
-	        	   Element element = (Element) subchildNodes.item(i);
-	        	   subfields.put(element.getNodeName(), element.getTextContent());
-		        }
+			for (int i = 0; i < encuestaChildNodes.getLength(); i++) {
+				Element element = (Element) encuestaChildNodes.item(i);
+				fields.put(element.getNodeName(), element.getTextContent());
+			}
 
-				Boolean evaluada = Boolean.parseBoolean(subfields.get(EncuestaParser.EVALUADA_TAG));		
-				encuesta = new Encuesta(IDRecurso, IDAmbito, descripcion, evaluada);
-				encuesta.unmarshallPreguntas(subfields.get(EncuestaParser.PREGUNTAS_TAG));
-				
-		    }
-		    
-	    }
-	    
+			Boolean evaluada = Boolean.parseBoolean(fields.get(EncuestaParser.EVALUADA_TAG));
+			encuesta = new Encuesta(0, 0, "", evaluada);
+			encuesta.unmarshallPreguntas(fields.get(EncuestaParser.PREGUNTAS_TAG));
+
+		}
+
 		return encuesta;
-		
+
 	}
 	
 	public EncuestaRespondida deserializeEncuestaRespondida(String xml) {
@@ -186,33 +155,6 @@ public class EncuestaParser extends Parser {
 		
 	}
 	
-	public String serializeEncuestaQuery(int IDRecurso) {
-		
-		Document doc = this.buildXMLDocument();
-		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-		doc.appendChild(rootElement);
-		
-		Element nodeElement = doc.createElement(Parser.RECURSO_TAG);
-		rootElement.appendChild(nodeElement);
-		
-		Element joinElement = doc.createElement(Parser.JOIN_TAG);
-		nodeElement.appendChild(joinElement);
-		
-		Element encuesta = doc.createElement(EncuestaParser.ENCUESTA_TAG);
-		encuesta.appendChild(doc.createTextNode(String.valueOf(IDRecurso)));
-		joinElement.appendChild(encuesta);
-		
-//		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-//		LSSerializer serializer = domImplLS.createLSSerializer();
-//		serializer.getDomConfig().setParameter("xml-declaration", false);
-//		String xml = serializer.writeToString(doc);		
-//		
-//		return xml;
-		
-		return convertDocumentToXml(doc);
-		
-	}
-	
 	public String serializeEncuestaRespondidaQuery(int IDAmbiente, int IDUsuario, int IDEncuesta) {
 		
 		Document doc = this.buildXMLDocument();
@@ -231,13 +173,6 @@ public class EncuestaParser extends Parser {
 		Element IDUsuario_el = doc.createElement(EncuestaParser.IDUSUARIO_TAG);
 		IDUsuario_el.appendChild(doc.createTextNode(String.valueOf(IDUsuario)));
 		nodeElement.appendChild(IDUsuario_el);
-		
-//		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-//		LSSerializer serializer = domImplLS.createLSSerializer();
-//		serializer.getDomConfig().setParameter("xml-declaration", false);
-//		String xml = serializer.writeToString(doc);		
-//		
-//		return xml;
 		
 		return convertDocumentToXml(doc);
 		
