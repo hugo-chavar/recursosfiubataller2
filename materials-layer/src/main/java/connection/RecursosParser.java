@@ -70,7 +70,7 @@ public class RecursosParser extends Parser {
 				int IDRecurso = Integer.parseInt(fields.get(Parser.RECURSOID_TAG));
 				int IDAmbito = Integer.parseInt(fields.get(Parser.AMBITOID_TAG));
 				String descripcion = fields.get(Parser.DESCRIPCION_TAG);
-				String tipo = fields.get(Parser.TIPO_TAG);
+				String tipo = fields.get(Parser.TIPO_TAG);//Este tipo da la reflexion que estoy buscando
 	
 				Recurso recurso = new Recurso(IDRecurso, IDAmbito, descripcion, tipo);
 				recursos.add(recurso);

@@ -155,7 +155,7 @@ public enum Requester {
 			response = linkReq.get(recurso);
 		} else {
 			// TODO: Falta para archivo
-			//response = archivoReq.get(recurso);
+			response = archivoReq.get(recurso);
 //			response = null; // Sacar esto
 			response = OperationResponse.createFailed("Tipo de recurso inexistente");
 		}

@@ -7,10 +7,18 @@ import java.rmi.RemoteException;
 import javax.activation.DataHandler;
 
 import model.Archivo;
+import model.Link;
+import model.Recurso;
 
 import org.apache.axis2.AxisFault;
 
 import com.ws.services.IntegracionStub;
+import com.ws.services.IntegracionStub.SeleccionarDatos;
+import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
+
+import connection.responses.ArchivoResponse;
+import connection.responses.LinkResponse;
+import connection.responses.OperationResponse;
 
 
 public class ArchivoRequester {
@@ -82,4 +90,38 @@ public class ArchivoRequester {
 		return adevolver;
 		
 	}
-}
+	
+	public OperationResponse get(Recurso recurso) {
+
+		ArchivoResponse response;
+		String reason;
+		try{
+			String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
+			SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+			seleccionar_e.setXml(xml);
+			SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
+			String xml_resp_e = s_resp_e.get_return();
+			Archivo archivo = this.parser.deserializeArchivo(xml_resp_e);
+			archivo.setAmbitoId(recurso.getAmbitoId());
+			archivo.setRecursoId(recurso.getRecursoId());
+			archivo.setDescripcion(recurso.getDescripcion());
+
+
+			response = new ArchivoResponse(archivo);
+			response.setSuccess(true);
+			return response;
+
+			} catch (AxisFault e) {
+				reason = "Error al intentar obtener el Archivo, ID: " + recurso.getRecursoId();
+			} catch (RemoteException e) {
+				reason = "Error de conexion remota";
+			}
+
+			System.out.println(reason);
+			response = new ArchivoResponse();
+			response.setReason(reason);
+			
+			return response;
+		}
+
+	}
