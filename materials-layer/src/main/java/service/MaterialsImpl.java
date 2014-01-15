@@ -48,7 +48,7 @@ public class MaterialsImpl implements Materials {
 		}
 		OperationResponse response;	
 		Encuesta encuesta = (Encuesta)parameter.getRecurso();
-		if (Requester.INSTANCE.getPermisoUsuario(encuesta.getAmbitoId(), parameter.getUsuarioId())) {
+		if (Requester.INSTANCE.getPermisoUsuario(encuesta.getAmbitoId(), parameter.getUsuarioId(),"agregarEncuesta")) {
 			response= Requester.INSTANCE.saveEncuesta(encuesta);
 		}
 		else{
@@ -81,27 +81,26 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String agregarLink(Link link, int usuarioId) {
 		OperationResponse response;
-		if (Requester.INSTANCE.getPermisoUsuario(link.getAmbitoId(), usuarioId)) {
+		if (Requester.INSTANCE.getPermisoUsuario(link.getAmbitoId(), usuarioId,"agregarLink")) {
 			response = Requester.INSTANCE.saveLink(link);
 		} else {
 			return createFailedResponse("Permisos insuficientes");
 		}
-	//  TODO dejo este ejemplo hagan igual en todos los demas
 		return toXml(response);
 	}
 	
 	@Override
 	public String agregarEncuestaRespondida(String respondidaParam) {	
 		Parameter parameter = Parameter.createParameter(respondidaParam);
-		//TODO andy: para que chequeas el ambito?? no deberias chequear el usuario
-		if (parameter.getRespondida() == null /*|| parameter.getAmbitoId() == null*/){
+		if (parameter.getRespondida() == null){
 			return createFailedResponse("Parametros invalidos");
 		}
 		EncuestaRespondida respondida = parameter.getRespondida();
 		OperationResponse response;
 		EncuestaResponse encuestaResponse = (EncuestaResponse) Requester.INSTANCE.getRecurso(new Recurso(respondida.getIdRecurso(),0,"","Encuesta"));
-		//TODO andy: chequea si la response es success antes de evaluar.. 
-		//sino tira un error como response "encuesta inexistente" o algo asi
+		if (!encuestaResponse.getSuccess()){
+			return createFailedResponse("Encuesta inexistente");
+		}
 		Encuesta encuesta = encuestaResponse.getEncuesta();
 		if (encuesta.isEvaluada()) {
 			respondida.evaluar(encuesta);
@@ -124,25 +123,15 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	private String getRecursos(int ambitoId, int usuarioId) {
-		List<Recurso> recursos = new ArrayList<Recurso>();
-		RecursosResponse recursosPermitidos = new RecursosResponse();
-		recursosPermitidos.setSuccess(true);
-
+		RecursosResponse recursosPermitidos;
 		// Obtengo los recursos
 		try {
-			recursos = Requester.INSTANCE.getRecursosAmbito(ambitoId);
+			if (!Requester.INSTANCE.getPermisoUsuario(ambitoId, usuarioId,"getRecursos")){
+				return createFailedResponse("El usuario "+usuarioId+" no tiene los permisos necesarios");
+			}
+			recursosPermitidos = Requester.INSTANCE.getRecursosAmbito(ambitoId);
 		} catch (GetException e) {
 			return createFailedResponse(e.getMessage());
-		}
-		// Chequeo Recursos permitidos
-		// TODO andy!!! el chequeo tiene q ser a nivel ambito.. no recurso por recurso
-		// no podes hacer consultas a un ws con un for !! es muy lento
-		// ademas pasa todas las validaciones q se pueda al RecursosRequester y que aca quede un solo
-		// metodo getRecursos
-		for (Recurso r:  recursos) {
-			if (Requester.INSTANCE.getPermisoUsuario(r.getRecursoId(), usuarioId)) {
-				recursosPermitidos.add(r);
-			}
 		}
 		return toXml(recursosPermitidos);
 	}
@@ -160,7 +149,7 @@ public class MaterialsImpl implements Materials {
 
 	private String createFailedResponse(String reason) {
 		OperationResponse response;
-		response = OperationResponse.createFailed(reason);;
+		response = OperationResponse.createFailed(reason);
 		return toXml(response);
 	}
 	
@@ -171,8 +160,7 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String getEncuestaRespondida(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
-		// no entiendo para que se chequea el ambito.. lo comento
-		if (/*parameter.getAmbitoId() == null || */ parameter.getUsuarioId() == null || parameter.getRecurso() == null){
+		if (parameter.getUsuarioId() == null || parameter.getRecurso() == null){
 			return createFailedResponse("Parametros invalidos");
 		}
 		return getEncuestaRespondida(parameter.getRecurso(), parameter.getUsuarioId());
@@ -214,7 +202,7 @@ public class MaterialsImpl implements Materials {
 		OperationResponse response;
 		System.out.println(parametros);
 		Parameter parameter = Parameter.createParameter(parametros);
-		if (Requester.INSTANCE.getPermisoUsuario(parameter.getRecurso().getAmbitoId(), parameter.getUsuarioId())) {
+		if (Requester.INSTANCE.getPermisoUsuario(parameter.getRecurso().getAmbitoId(), parameter.getUsuarioId(),"borrarRecurso")) {
 			response = Requester.INSTANCE.deleteRecurso(parameter.getRecurso());
 		} else {
 			return createFailedResponse("Permisos insuficientes");

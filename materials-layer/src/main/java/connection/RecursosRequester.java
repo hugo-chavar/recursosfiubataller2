@@ -17,6 +17,7 @@ import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 import connection.cache.Cache;
 import connection.exceptions.GetException;
 import connection.responses.OperationResponse;
+import connection.responses.RecursosResponse;
 
 
 public class RecursosRequester {
@@ -96,10 +97,10 @@ public class RecursosRequester {
 
 	}
 
-	public List<Recurso> getAll(int IDAmbito) throws GetException {
+	public RecursosResponse getAll(int IDAmbito) throws GetException {
 
 		List<Recurso> recursos = new ArrayList<Recurso>();
-
+		RecursosResponse recursosResponse = new RecursosResponse(); 
 		try {
 
 			// Consulto los recursos guardados
@@ -112,13 +113,21 @@ public class RecursosRequester {
 			recursos = parser.deserializeRecursos(xml_resp_e);
 			if (recursos == null) {
 				// TODO : devuelvo datos de ejemplo, mientras no funcione integracion
-				return recursosEjemplo;
+				for (Recurso r:  recursosEjemplo) {
+					recursosResponse.add(r);
+				}
+				recursosResponse.setSuccess(true);
+				return recursosResponse;
 //				String message = "Integracion dice: " + xml_resp_e.substring(0, xml_resp_e.indexOf('<') -1);
 //				System.out.println(message);
 //				throw new GetException(message);
 			}
+			for (Recurso r:  recursos) {
+				recursosResponse.add(r);
+			}
 			cache.addAll(recursos);
-			return recursos;
+			recursosResponse.setSuccess(true);
+			return recursosResponse;
 
 		} catch (AxisFault e) {
 			String message = "Error al intentar obtener los recursos del IDAmbito: " + IDAmbito;

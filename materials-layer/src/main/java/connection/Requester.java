@@ -4,6 +4,7 @@ import java.util.List;
 
 import connection.exceptions.GetException;
 import connection.responses.OperationResponse;
+import connection.responses.RecursosResponse;
 import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;
@@ -94,7 +95,7 @@ public enum Requester {
 		return target == null || target.getRecursoId() == null || target.getTipo() == null || !isvalidType(target.getTipo());
 	}
 
-	public List<Recurso> getRecursosAmbito(int ambitoId) throws GetException {
+	public RecursosResponse getRecursosAmbito(int ambitoId) throws GetException {
 		return recursosReq.getAll(ambitoId);
 	}
 
@@ -121,7 +122,7 @@ public enum Requester {
 
 	}
 
-	public boolean getPermisoUsuario(Integer recursoId, int usuarioId) {
+	public boolean getPermisoUsuario(Integer ambitoId, Integer usuarioId,String action) {
 		// TODO: Yami, falta implementar este metodo
 		return true;
 	}
