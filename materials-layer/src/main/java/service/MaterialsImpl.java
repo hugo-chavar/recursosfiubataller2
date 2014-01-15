@@ -196,9 +196,6 @@ public class MaterialsImpl implements Materials {
 	public String getRecurso(String parametros) {
 		System.out.println(parametros);
 		Parameter parameter = Parameter.createParameter(parametros);
-		System.out.println(parameter);
-		System.out.println(parameter.getRecurso());
-		System.out.println(parameter.getRecurso().getRecursoId());
 		
 		// try {
 		OperationResponse response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
