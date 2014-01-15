@@ -78,11 +78,11 @@ public class RecursosRequester {
 					xml_resp_e = s_resp_e.get_return();
 				}
 				////////////// PRUEBAS //////////////
-				
-				Recurso recurso = parser.deserializeRecurso(xml_resp_e);
-				
-				return recurso;
-	
+				System.out.println(xml_resp_e);
+				if (xml_resp_e != null) {
+					return parser.deserializeRecurso(xml_resp_e);
+				}
+					
 			} catch (AxisFault e) {
 				String message = "Error al intentar obtener el recurso con IDRecurso: " + target.getRecursoId();
 				System.out.println(message);

@@ -25,6 +25,7 @@ public enum Requester {
 		encuestaReq = new EncuestaRequester();
 		archivoReq = new ArchivoRequester();
 		recursosReq = new RecursosRequester();
+		linkReq = new LinkRequester();
 	}
 	
 	public OperationResponse saveEncuesta(Encuesta encuesta) {
@@ -95,9 +96,9 @@ public enum Requester {
 	public OperationResponse deleteRecurso(int idRecurso, String tipoRecurso) {
 		
 		// Borro el recurso de todos los caches
-		if (tipoRecurso.equals("Encuesta")) {
+		if (tipoRecurso.equalsIgnoreCase("Encuesta")) {
 			encuestaReq.deleteFromCache(idRecurso);
-		} else if (tipoRecurso.equals("Link")) {
+		} else if (tipoRecurso.equalsIgnoreCase("Link")) {
 			linkReq.deleteFromCache(idRecurso);
 		} else {
 			// TODO: Falta para archivo
@@ -117,9 +118,9 @@ public enum Requester {
 		
 		OperationResponse response;
 		
-		if (recurso.getTipo().equals("Encuesta")) {
+		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
 			response = encuestaReq.getFromCache(recurso.getRecursoId());
-		} else if (recurso.getTipo().equals("Link")) {
+		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
 			response = linkReq.getFromCache(recurso.getRecursoId());
 		} else {
 			// TODO: Falta para archivo

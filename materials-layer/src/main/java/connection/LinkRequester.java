@@ -76,7 +76,6 @@ public class LinkRequester {
 
 		if (cache.contains(target)) {
 			response = new LinkResponse(cache.get(target));
-			response.setSuccess(true);
 		}
 		
 		return response;
