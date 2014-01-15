@@ -51,7 +51,7 @@ public class ImageClient{
         SOAPBinding binding = (SOAPBinding) bp.getBinding();
         binding.setMTOMEnabled(true);
    
-       String status = imageServer.setArchivo(0,"aca iria su nombre" ,"aca su extension", file);
+       String status = imageServer.setArchivo("aca iria su nombre" ,file);
         System.out.println("imageServer.uploadImage() : " + status);
         
         }catch (IOException e) {

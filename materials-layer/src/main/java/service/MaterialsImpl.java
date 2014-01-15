@@ -33,11 +33,12 @@ public class MaterialsImpl implements Materials {
 		return "Hello, Welcom to jax-ws " + name;
 	}
 
-//	@Override
-//	public String getArchivo(int ambitoId, int recursoId){
-//		OperationResponse response = Requester.INSTANCE.getRecurso(recursoId, "Archivo");
-//		return toXml(response);
-//	}
+	@Override
+	public String getArchivo(String xmlParam){
+		Parameter parameter = Parameter.createParameter(xmlParam);
+		OperationResponse response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
+		return toXml(response);
+	}
 	
 	@Override
 	public String agregarEncuesta(String encuestaParam) {
@@ -57,14 +58,17 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	@Override
-	public String setArchivo(int ambitoId, String name, String ext,	@XmlMimeType("application/octet-stream") DataHandler data) {
+	//EN el xml debe venir el ambitoId, nombre, extension.
+	public String setArchivo(String archivoParam,	@XmlMimeType("application/octet-stream") DataHandler data) {
 		// TODO Dami, pasa al archivoRequester la mayoria de las validaciones
 		// y que te devuelva un response con el resultado
+		Parameter parameter = Parameter.createParameter(archivoParam);
+		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null || parameter.getRecurso().getClass() != Encuesta.class){
+			return createFailedResponse("Parametros invalidos");
+		}
 		if (data != null) {
-			Archivo File = new Archivo();
-			File.setNombreArchivo(name);
-			File.setTipoArchivo(ext);
-			File.setRawFile(data);
+			Archivo file = (Archivo)parameter.getRecurso(); 
+			file.setRawFile(data);
 			// Requester.INSTANCE.saveArchivo(File); TODO: ACA DEBERIA ANDAR EL
 			// SAVE ARCHIVO
 			return "Archivo subido Correctamente";

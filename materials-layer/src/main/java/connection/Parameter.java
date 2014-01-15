@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
@@ -45,8 +46,8 @@ public class Parameter {
 	@XmlElementRefs({ 
 		@XmlElementRef(type = Recurso.class), 
 		@XmlElementRef(type = Encuesta.class), 
-		@XmlElementRef(type = Link.class)
-//		@XmlElementRef(type = Archivo.class), da error faltan annotations en clase Archivo
+		@XmlElementRef(type = Link.class),
+		@XmlElementRef(type = Archivo.class),// da error faltan annotations en clase Archivo
 		})
 	private Recurso recurso;
 

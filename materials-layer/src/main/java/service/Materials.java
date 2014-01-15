@@ -50,15 +50,15 @@ public interface Materials {
 	
 	@WebMethod
 	@WebResult(name = "successString")
-	String setArchivo(@WebParam(name = "ambitoId")int ambitoId, @WebParam(name = "nombre")String name, @WebParam(name = "extension")String ext, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") DataHandler data);
-
+	//String setArchivo(@WebParam(name = "ambitoId")int ambitoId, @WebParam(name = "nombre")String name, @WebParam(name = "extension")String ext, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") DataHandler data);
+	String setArchivo(@WebParam(name = "parametros")String archivoParam, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") DataHandler data);
 	@WebMethod
 	@WebResult(name = "borrado")
 	String borrarRecurso(@WebParam(name = "recursoId") int recursoId, @WebParam(name = "usuarioId") int usuarioId);
 
-//	@WebMethod
-//	@WebResult(name = "archivo")
-//	String getArchivo(@WebParam(name = "ambitoId") int ambitoId, @WebParam(name = "recursoId") int recursoId);
+	@WebMethod
+	@WebResult(name = "archivo")
+	String getArchivo(@WebParam(name = "Parametros(xml con idAmbito, idRecurso)") String xmlParam);
 
 //	@WebMethod 
 //	@WebResult(name = "encuesta")
