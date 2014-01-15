@@ -147,16 +147,16 @@ public class MaterialsImpl implements Materials {
 		return toXml(recursosPermitidos);
 	}
 	
-	@Override
-	public String borrarRecurso(int recursoId, int usuarioId) {
-		OperationResponse response;
-		if (Requester.INSTANCE.getPermisoUsuario(recursoId, usuarioId)) {
-			response = Requester.INSTANCE.deleteRecurso(recursoId,"Link");
-		} else {
-			return createFailedResponse("Permisos insuficientes");
-		}
-		return toXml(response);
-	}
+//	@Override
+//	public String borrarRecurso(int recursoId, int usuarioId) {
+//		OperationResponse response;
+//		if (Requester.INSTANCE.getPermisoUsuario(recursoId, usuarioId)) {
+//			response = Requester.INSTANCE.deleteRecurso(recursoId,"Link");
+//		} else {
+//			return createFailedResponse("Permisos insuficientes");
+//		}
+//		return toXml(response);
+//	}
 
 	private String createFailedResponse(String reason) {
 		OperationResponse response;
@@ -206,6 +206,19 @@ public class MaterialsImpl implements Materials {
 		// } catch (GetException e) {
 		// return createFailedResponse(e.getMessage());
 		// }
+		return toXml(response);
+	}
+
+	@Override
+	public String borrarRecurso(String parametros) {
+		OperationResponse response;
+		System.out.println(parametros);
+		Parameter parameter = Parameter.createParameter(parametros);
+		if (Requester.INSTANCE.getPermisoUsuario(parameter.getRecurso().getAmbitoId(), parameter.getUsuarioId())) {
+			response = Requester.INSTANCE.deleteRecurso(parameter.getRecurso());
+		} else {
+			return createFailedResponse("Permisos insuficientes");
+		}
 		return toXml(response);
 	}
 

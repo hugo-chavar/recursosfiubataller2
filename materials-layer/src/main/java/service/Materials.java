@@ -52,9 +52,9 @@ public interface Materials {
 	@WebResult(name = "successString")
 	//String setArchivo(@WebParam(name = "ambitoId")int ambitoId, @WebParam(name = "nombre")String name, @WebParam(name = "extension")String ext, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") DataHandler data);
 	String setArchivo(@WebParam(name = "parametros")String archivoParam, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") DataHandler data);
-	@WebMethod
-	@WebResult(name = "borrado")
-	String borrarRecurso(@WebParam(name = "recursoId") int recursoId, @WebParam(name = "usuarioId") int usuarioId);
+//	@WebMethod
+//	@WebResult(name = "borrado")
+//	String borrarRecurso(@WebParam(name = "recursoId") int recursoId, @WebParam(name = "usuarioId") int usuarioId);
 
 	@WebMethod
 	@WebResult(name = "archivo")
@@ -67,4 +67,8 @@ public interface Materials {
 	@WebMethod 
 	@WebResult(name = "recurso")
 	String getRecurso(@WebParam(name = "parametro")String parametros);
+	
+	@WebMethod
+	@WebResult(name = "borrado")
+	String borrarRecurso(@WebParam(name = "parametro")String parametros);
 }

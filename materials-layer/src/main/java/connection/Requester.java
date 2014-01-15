@@ -47,19 +47,8 @@ public enum Requester {
 	public OperationResponse getRecurso(Recurso target) {
 
 		OperationResponse response;
-		if (target == null || target.getRecursoId() == null || target.getTipo() == null || !isvalidType(target.getTipo())) {
-			String reason;
-			if (target == null) {
-				reason = "falta el elemento 'recurso'";
-			} else if (target.getRecursoId() == null) {
-				reason = "falta elemento recusoId en el elemento 'recurso'";
-			} else if (target.getTipo() == null) {
-				reason = "falta elemento tipo en el elemento 'recurso'";
-			} else {
-				reason = "tipo de recurso inexistente";
-			}
-			response = OperationResponse.createFailed("Parametros invalidos: " + reason);
-			return response;
+		if (notValidInput(target)) {
+			return informFailReason(target);
 		}
 		
 		// Busco en el cache de especifico del recurso.
@@ -85,6 +74,26 @@ public enum Requester {
 		
 	}
 
+	private OperationResponse informFailReason(Recurso target) {
+		OperationResponse response;
+		String reason;
+		if (target == null) {
+			reason = "falta el elemento 'recurso'";
+		} else if (target.getRecursoId() == null) {
+			reason = "falta elemento recusoId en el elemento 'recurso'";
+		} else if (target.getTipo() == null) {
+			reason = "falta elemento tipo en el elemento 'recurso'";
+		} else {
+			reason = "tipo de recurso inexistente";
+		}
+		response = OperationResponse.createFailed("Parametros invalidos: " + reason);
+		return response;
+	}
+
+	private boolean notValidInput(Recurso target) {
+		return target == null || target.getRecursoId() == null || target.getTipo() == null || !isvalidType(target.getTipo());
+	}
+
 	public List<Recurso> getRecursosAmbito(int ambitoId) throws GetException {
 		return recursosReq.getAll(ambitoId);
 	}
@@ -93,19 +102,22 @@ public enum Requester {
 		return encuestaReq.getRespondida(idAmbito, idUsuario, idEncuesta);
 	}
 	
-	public OperationResponse deleteRecurso(int idRecurso, String tipoRecurso) {
+	public OperationResponse deleteRecurso(Recurso recurso) {
 		
+		if (notValidInput(recurso)) {
+			return informFailReason(recurso);
+		}
 		// Borro el recurso de todos los caches
-		if (tipoRecurso.equalsIgnoreCase("Encuesta")) {
-			encuestaReq.deleteFromCache(idRecurso);
-		} else if (tipoRecurso.equalsIgnoreCase("Link")) {
-			linkReq.deleteFromCache(idRecurso);
+		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
+			encuestaReq.deleteFromCache(recurso.getRecursoId());
+		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
+			linkReq.deleteFromCache(recurso.getRecursoId());
 		} else {
 			// TODO: Falta para archivo
 			//archivoReq.deleteFromCache(idRecurso);
 		}
 		
-		return recursosReq.delete(idRecurso);
+		return recursosReq.delete(recurso.getRecursoId());
 
 	}
 
