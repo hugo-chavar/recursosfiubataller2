@@ -29,6 +29,7 @@ public class RecursosRequester {
 //	private String statusMessage; 
 	private List<Recurso> recursosEjemplo;
 
+	
 	public RecursosRequester() {
 
 		parser = new RecursosParser();
@@ -56,7 +57,6 @@ public class RecursosRequester {
 	public Recurso get(Recurso target) {
 		
 		// Busco en el cache de recursos.
-//		Recurso target = new Recurso(recursoId, 0, "");
 		if (cache.contains(target)) {
 			return cache.get(target);
 		} else {
@@ -79,9 +79,15 @@ public class RecursosRequester {
 					xml_resp_e = s_resp_e.get_return();
 				}
 				////////////// PRUEBAS //////////////
+				
 				System.out.println(xml_resp_e);
 				if (xml_resp_e != null) {
-					return parser.deserializeRecurso(xml_resp_e);
+					Recurso recurso = parser.deserializeRecurso(xml_resp_e);
+					
+					// Agrego el recurso al cache
+					cache.add(recurso);
+					
+					return recurso;
 				}
 					
 			} catch (AxisFault e) {
@@ -101,6 +107,7 @@ public class RecursosRequester {
 
 		List<Recurso> recursos = new ArrayList<Recurso>();
 		RecursosResponse recursosResponse = new RecursosResponse(); 
+		
 		try {
 
 			// Consulto los recursos guardados
@@ -111,6 +118,7 @@ public class RecursosRequester {
 			String xml_resp_e = s_resp_e.get_return();
 			System.out.println(xml_resp_e);
 			recursos = parser.deserializeRecursos(xml_resp_e);
+			
 			if (recursos == null) {
 				// TODO : devuelvo datos de ejemplo, mientras no funcione integracion
 				for (Recurso r:  recursosEjemplo) {
@@ -122,10 +130,14 @@ public class RecursosRequester {
 //				System.out.println(message);
 //				throw new GetException(message);
 			}
+			
 			for (Recurso r:  recursos) {
 				recursosResponse.add(r);
 			}
+			
+			// Agrego los recursos al cache
 			cache.addAll(recursos);
+			
 			recursosResponse.setSuccess(true);
 			return recursosResponse;
 
@@ -164,6 +176,9 @@ public class RecursosRequester {
 			
 			response.setSuccess(true);
 			
+			// Elimino el recurso del cache
+			cache.remove(new Recurso(recursoId, 0, ""));
+			
 		} catch (AxisFault e) {
 			String reason = "Error al intentar eliminar el Recurso, Id: " + recursoId;
 			System.out.println(reason);
@@ -176,6 +191,13 @@ public class RecursosRequester {
 		
 		return response;
 
+	}
+	
+	public void updateCache(Recurso target) {
+		if (cache.contains(target)) {
+			cache.remove(target);
+			cache.add(target);
+		}
 	}
 
 }

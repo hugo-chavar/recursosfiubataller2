@@ -24,6 +24,7 @@ public class LinkRequester {
 	private LinkParser parser;
 	private Cache<Link> cache;
 
+	
 	public LinkRequester() {
 
 		parser = new LinkParser();
@@ -43,6 +44,7 @@ public class LinkRequester {
 	public OperationResponse save(Link link) {
 		
 		OperationResponse response;
+		
 		// Guardo el link
 		String link_str = parser.serializeLink(link);
 		try {
@@ -54,10 +56,18 @@ public class LinkRequester {
 			// or.setSuccess(true);
 			// or.setReason("algo");
 			// }
-			response = OperationResponse.createSuccess();
 			System.out.println(g_resp.get_return());
+			
+			response = OperationResponse.createSuccess();
+			
+			// Actualizo el cache
+			if (cache.contains(link)) {
+				cache.remove(link);
+				cache.add(link);
+			}
+			
 		} catch (AxisFault e) {
-			String reason = "Error al intentar guardar la siguiente Link: " + link.getDescripcion();
+			String reason = "Error al guardar el Link, Id: " + link.getRecursoId();
 			System.out.println(reason);
 			response = OperationResponse.createFailed(reason);
 		} catch (RemoteException e) {
@@ -65,6 +75,7 @@ public class LinkRequester {
 			System.out.println(reason);
 			response = OperationResponse.createFailed(reason);
 		}
+		
 		return response;
 		
 	}
@@ -86,47 +97,39 @@ public class LinkRequester {
 
 		LinkResponse response;
 		String reason;
-		
-		// Busco en el cache de links
-		// TODO: Yami es necesario buscar en el cache aca?
-		// me parece q se esta haciendo dos veces eso.. chequealo
-		OperationResponse cacheResponse = this.getFromCache(recurso.getRecursoId());
-		if (cacheResponse.getSuccess()) {
-			return cacheResponse;
-		} else {
-			try {
 
-				// Consulto el link guardado
-				String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), LinkParser.LINK_TAG);
-				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-				seleccionar_e.setXml(xml);
-				SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
-				String xml_resp_e = s_resp_e.get_return();
-				Link link = this.parser.deserializeLink(xml_resp_e);
-				link.setAmbitoId(recurso.getAmbitoId());
-				link.setRecursoId(recurso.getRecursoId());
-				link.setDescripcion(recurso.getDescripcion());
+		try {
 
-				// Agrego al cache de links
-				cache.add(link);
+			// Consulto el link guardado
+			String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), LinkParser.LINK_TAG);
+			SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+			seleccionar_e.setXml(xml);
+			SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
+			String xml_resp_e = s_resp_e.get_return();
+			Link link = this.parser.deserializeLink(xml_resp_e);
+			link.setAmbitoId(recurso.getAmbitoId());
+			link.setRecursoId(recurso.getRecursoId());
+			link.setDescripcion(recurso.getDescripcion());
 
-				response = new LinkResponse(link);
-				response.setSuccess(true);
-				return response;
+			// Agrego al cache de links
+			cache.add(link);
 
-			} catch (AxisFault e) {
-				reason = "Error al intentar obtener el Link, ID: " + recurso.getRecursoId();
-			} catch (RemoteException e) {
-				reason = "Error de conexion remota";
-			}
-
-			System.out.println(reason);
-			response = new LinkResponse();
-			response.setReason(reason);
-			
+			response = new LinkResponse(link);
+			response.setSuccess(true);
 			return response;
+
+		} catch (AxisFault e) {
+			reason = "Error al intentar obtener el Link, ID: " + recurso.getRecursoId();
+		} catch (RemoteException e) {
+			reason = "Error de conexion remota";
 		}
 
+		System.out.println(reason);
+		response = new LinkResponse();
+		response.setReason(reason);
+		
+		return response;
+		
 	}
 
 	public void deleteFromCache(int recursoId) {

@@ -49,7 +49,7 @@ public class MaterialsImpl implements Materials {
 		OperationResponse response;	
 		Encuesta encuesta = (Encuesta)parameter.getRecurso();
 		if (Requester.INSTANCE.getPermisoUsuario(encuesta.getAmbitoId(), parameter.getUsuarioId(),"agregarEncuesta")) {
-			response= Requester.INSTANCE.saveEncuesta(encuesta);
+			response= Requester.INSTANCE.agregarRecurso(encuesta);
 		}
 		else{
 			return createFailedResponse("Permisos insuficientes");
@@ -82,7 +82,7 @@ public class MaterialsImpl implements Materials {
 	public String agregarLink(Link link, int usuarioId) {
 		OperationResponse response;
 		if (Requester.INSTANCE.getPermisoUsuario(link.getAmbitoId(), usuarioId,"agregarLink")) {
-			response = Requester.INSTANCE.saveLink(link);
+			response = Requester.INSTANCE.agregarRecurso(link);
 		} else {
 			return createFailedResponse("Permisos insuficientes");
 		}

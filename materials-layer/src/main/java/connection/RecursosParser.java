@@ -13,6 +13,7 @@ import org.w3c.dom.NodeList;
 
 public class RecursosParser extends Parser {
 	
+	
 	public Recurso deserializeRecurso(String xml) {
 		
 		Recurso recurso = null;

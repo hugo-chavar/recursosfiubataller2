@@ -13,8 +13,6 @@ import org.junit.Test;
 import connection.responses.EncuestaResponse;
 
 
-// Falta subir la parte de integracion modificada. No va a funcionar...
-
 public class EncuestaRequesterTest {
 
 	//      @Test

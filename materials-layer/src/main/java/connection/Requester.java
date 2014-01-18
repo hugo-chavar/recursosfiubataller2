@@ -1,7 +1,5 @@
 package connection;
 
-import java.util.List;
-
 import connection.exceptions.GetException;
 import connection.responses.OperationResponse;
 import connection.responses.RecursosResponse;
@@ -28,38 +26,45 @@ public enum Requester {
 		recursosReq = new RecursosRequester();
 		linkReq = new LinkRequester();
 	}
-	
-	public OperationResponse saveEncuesta(Encuesta encuesta) {
-		return encuestaReq.save(encuesta);
-	}
 
 	public OperationResponse saveEncuestaRespondida(EncuestaRespondida respondida) {
 		return encuestaReq.saveRespondida(respondida);
 	}
 	
-	public void saveFile(Archivo archivo){
-		archivoReq.save(archivo);
-	}
-	
-	public OperationResponse saveLink(Link link) {
-		return linkReq.save(link);
+	public OperationResponse agregarRecurso(Recurso target) {
+		
+		OperationResponse response;
+		
+		if (notValidInput(target)) {
+			return informFailReason(target);
+		}
+		
+		// Agrego el recurso segun su tipo
+		response = makeQueryAddRecurso(target);
+		
+		// Actualizo el cache de recursos
+		recursosReq.updateCache(target);
+		
+		return response;
+		
 	}
 	
 	public OperationResponse getRecurso(Recurso target) {
 
 		OperationResponse response;
+		
 		if (notValidInput(target)) {
 			return informFailReason(target);
 		}
 		
-		// Busco en el cache de especifico del recurso.
+		// Busco en el cache de especifico del recurso
 		response = getRecursoFromCache(target);
 		if (response.getSuccess())
 			return response;
 		
-		// Si no se encuentra en el cache.
+		// Si no se encuentra en el cache
 		
-		// Busco el recurso.
+		// Busco el recurso
 		Recurso recurso = recursosReq.get(target);
 		if (recurso == null) {
 			String reason = "Error al intentar obtener el recurso, ID: " + target.getRecursoId();
@@ -68,37 +73,17 @@ public enum Requester {
 			return response;		
 		}
 		
-		// Consulto la tabla especifica del recurso.
-		response = makeQueryRecurso(recurso);
+		// Consulto la tabla especifica del recurso
+		response = makeQueryGetRecurso(recurso);
 		
 		return response;
 		
 	}
-
-	private OperationResponse informFailReason(Recurso target) {
-		OperationResponse response;
-		String reason;
-		if (target == null) {
-			reason = "falta el elemento 'recurso'";
-		} else if (target.getRecursoId() == null) {
-			reason = "falta elemento recusoId en el elemento 'recurso'";
-		} else if (target.getTipo() == null) {
-			reason = "falta elemento tipo en el elemento 'recurso'";
-		} else {
-			reason = "tipo de recurso inexistente";
-		}
-		response = OperationResponse.createFailed("Parametros invalidos: " + reason);
-		return response;
-	}
-
-	private boolean notValidInput(Recurso target) {
-		return target == null || target.getRecursoId() == null || target.getTipo() == null || !isvalidType(target.getTipo());
-	}
-
+	
 	public RecursosResponse getRecursosAmbito(int ambitoId) throws GetException {
 		return recursosReq.getAll(ambitoId);
 	}
-
+	
 	public EncuestaRespondida getEncuestaRespondida(int idAmbito, int idEncuesta, int idUsuario) {
 		return encuestaReq.getRespondida(idAmbito, idUsuario, idEncuesta);
 	}
@@ -146,7 +131,25 @@ public enum Requester {
 		
 	}
 	
-	private OperationResponse makeQueryRecurso(Recurso recurso) {
+	private OperationResponse makeQueryAddRecurso(Recurso recurso) {
+		
+		OperationResponse response;
+		
+		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
+			response = encuestaReq.save((Encuesta)recurso);
+		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
+			response = linkReq.save((Link)recurso);
+		} else {
+			// TODO: Falta para archivo
+			//response = archivoReq.save((Archivo)recurso);
+			response = OperationResponse.createFailed("Tipo de recurso inexistente");
+		}
+		
+		return response;
+		
+	}
+	
+	private OperationResponse makeQueryGetRecurso(Recurso recurso) {
 		
 		OperationResponse response;
 		
@@ -157,12 +160,31 @@ public enum Requester {
 		} else {
 			// TODO: Falta para archivo
 			response = archivoReq.get(recurso);
-//			response = null; // Sacar esto
 			response = OperationResponse.createFailed("Tipo de recurso inexistente");
 		}
 		
 		return response;
 		
+	}
+
+	private OperationResponse informFailReason(Recurso target) {
+		OperationResponse response;
+		String reason;
+		if (target == null) {
+			reason = "falta el elemento 'recurso'";
+		} else if (target.getRecursoId() == null) {
+			reason = "falta elemento recusoId en el elemento 'recurso'";
+		} else if (target.getTipo() == null) {
+			reason = "falta elemento tipo en el elemento 'recurso'";
+		} else {
+			reason = "tipo de recurso inexistente";
+		}
+		response = OperationResponse.createFailed("Parametros invalidos: " + reason);
+		return response;
+	}
+
+	private boolean notValidInput(Recurso target) {
+		return target == null || target.getRecursoId() == null || target.getTipo() == null || !isvalidType(target.getTipo());
 	}
 	
 	private boolean isvalidType(String type) {

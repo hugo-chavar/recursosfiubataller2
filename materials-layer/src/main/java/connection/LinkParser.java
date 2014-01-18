@@ -14,6 +14,7 @@ public class LinkParser extends Parser {
 	public static String LINK_TAG = "link";
 	public static String NOMBRE_TAG = "nombre";
 	
+	
 	public String serializeLink(Link link) {
 
 		Document doc = this.buildXMLDocument();
