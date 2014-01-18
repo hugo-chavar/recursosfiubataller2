@@ -77,6 +77,10 @@ public class PreguntaRespuestaACompletar extends Pregunta {
 		return respuesta;
 	}
 	
+	public void setRtasCorrectas(String rts) {
+		setRespuesta(rts);
+	}
+	
 	@XmlElement(name = "respuestas")
 	public String getRespuestas() {
 		return null;

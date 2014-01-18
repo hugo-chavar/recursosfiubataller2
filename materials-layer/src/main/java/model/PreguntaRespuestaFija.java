@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-@XmlRootElement(name = "pregunta")
+@XmlRootElement(name = "preguntaMultipleOpcion")
 public class PreguntaRespuestaFija extends Pregunta {
 
 	@XmlTransient
@@ -178,10 +178,18 @@ public class PreguntaRespuestaFija extends Pregunta {
 	public String getRtasCorrectas() {
 		return marshallRespuestasCorrectas() != "null" ? marshallRespuestasCorrectas() : null;
 	}
+	
+	public void setRtasCorrectas(String rtas) {
+		unmarshallRespuestasCorrectas(rtas);
+	}
 
 	@XmlElement(name = "respuestas")
 	public String getRespuestas() {
 		return marshallRespuestasPosibles() != "null" ? marshallRespuestasPosibles() : null;
+	}
+	
+	public void setRespuestas(String rtas) {
+		unmarshallRespuestasPosibles(rtas);
 	}
 
 }
