@@ -165,14 +165,14 @@ public class PreguntaRespuestaFija extends Pregunta {
 		return -1;
 	}
 
-	@Override
-	public void completarDatosVisibles() {
-		if (this.opciones.isEmpty()) {
-			opciones = respuestasPosibles;
-			for (Integer n : this.respuestasCorrectas)
-				correctas.add(respuestasPosibles.get(n));
-		}
-	}
+//	@Override
+//	public void completarDatosVisibles() {
+//		if (this.opciones.isEmpty()) {
+//			opciones = respuestasPosibles;
+//			for (Integer n : this.respuestasCorrectas)
+//				correctas.add(respuestasPosibles.get(n));
+//		}
+//	}
 
 	@XmlAttribute(name = "correctas")
 	public String getRtasCorrectas() {

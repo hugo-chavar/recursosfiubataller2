@@ -63,13 +63,13 @@ public class PreguntaRespuestaACompletar extends Pregunta {
 		return 1;
 	}
 
-	@Override
-	public void completarDatosVisibles() {
-		if (this.correctas.isEmpty()) {
-			if (this.respuesta != null)
-				this.correctas.add(this.respuesta);
-		}
-	}
+//	@Override
+//	public void completarDatosVisibles() {
+//		if (this.correctas.isEmpty()) {
+//			if (this.respuesta != null)
+//				this.correctas.add(this.respuesta);
+//		}
+//	}
 	
 	
 	@XmlAttribute(name = "correcta")

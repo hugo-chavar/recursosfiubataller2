@@ -53,16 +53,16 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 		return 1;
 	}
 
-	@Override
-	public void completarDatosVisibles(Pregunta pregunta) {
-		if (this.respuestas.isEmpty()) {
-			pregunta.completarDatosVisibles();
-			List<String> posibles = pregunta.getOpciones();
-			for (Integer indice : respuestasfijas) {
-				this.respuestas.add(posibles.get(indice));
-			}
-		}
-	}
+//	@Override
+//	public void completarDatosVisibles(Pregunta pregunta) {
+//		if (this.respuestas.isEmpty()) {
+//			pregunta.completarDatosVisibles();
+//			List<String> posibles = pregunta.getOpciones();
+//			for (Integer indice : respuestasfijas) {
+//				this.respuestas.add(posibles.get(indice));
+//			}
+//		}
+//	}
 
 	public void addRespuesta(Integer indiceRespuesta) {
 		this.respuestasfijas.add(indiceRespuesta);

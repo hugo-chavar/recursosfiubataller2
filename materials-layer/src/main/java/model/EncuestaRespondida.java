@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -51,8 +50,7 @@ public class EncuestaRespondida {
 		return preguntasRespondidas;
 	}
 
-	public void setPreguntasRespondidas(
-			List<PreguntaRespondida> preguntasRespondidas) {
+	public void setPreguntasRespondidas(List<PreguntaRespondida> preguntasRespondidas) {
 		this.preguntasRespondidas = preguntasRespondidas;
 	}
 
@@ -93,31 +91,31 @@ public class EncuestaRespondida {
 		preguntasRespondidas =  PreguntaRespondida.unmarshallAll(field);;
 	}
 
-	public void completarDatosVisibles(List<Pregunta> preguntas) {
-		for(int i=0;i<preguntas.size();i++){
-			this.preguntasRespondidas.get(i).completarDatosVisibles(preguntas.get(i));
-		}
-	}
+//	public void completarDatosVisibles(List<Pregunta> preguntas) {
+//		for(int i=0;i<preguntas.size();i++){
+//			this.preguntasRespondidas.get(i).completarDatosVisibles(preguntas.get(i));
+//		}
+//	}
 
-	public void recuperarDatosVisibles(Encuesta encuesta) {
-		List<PreguntaRespondida> preguntasRespondidasAux = this.preguntasRespondidas;
-		this.preguntasRespondidas = new ArrayList<PreguntaRespondida>();
-		for (Integer i=0;i<encuesta.getPreguntas().size();i++){
-			Pregunta pregunta = encuesta.getPreguntas().get(i);
-			if(pregunta.getOpciones().isEmpty()){
-				PreguntaRespuestaACompletarRespondida respondida = new PreguntaRespuestaACompletarRespondida(pregunta.getIdPregunta());
-				respondida.responder(preguntasRespondidasAux.get(i).getRespuestas().get(0));
-				this.preguntasRespondidas.add(respondida);
-			}
-			else{
-				PreguntaRespuestaFijaRespondida respondida = new PreguntaRespuestaFijaRespondida(pregunta.getIdPregunta());
-				for(String res : preguntasRespondidasAux.get(i).getRespuestas()){
-					respondida.addRespuesta(pregunta.getIndiceRespuesta(res));
-				}
-				this.preguntasRespondidas.add(respondida);
-			}
-		}	
-	}
+//	public void recuperarDatosVisibles(Encuesta encuesta) {
+//		List<PreguntaRespondida> preguntasRespondidasAux = this.preguntasRespondidas;
+//		this.preguntasRespondidas = new ArrayList<PreguntaRespondida>();
+//		for (Integer i=0;i<encuesta.getPreguntas().size();i++){
+//			Pregunta pregunta = encuesta.getPreguntas().get(i);
+//			if(pregunta.getOpciones().isEmpty()){
+//				PreguntaRespuestaACompletarRespondida respondida = new PreguntaRespuestaACompletarRespondida(pregunta.getIdPregunta());
+//				respondida.responder(preguntasRespondidasAux.get(i).getRespuestas().get(0));
+//				this.preguntasRespondidas.add(respondida);
+//			}
+//			else{
+//				PreguntaRespuestaFijaRespondida respondida = new PreguntaRespuestaFijaRespondida(pregunta.getIdPregunta());
+//				for(String res : preguntasRespondidasAux.get(i).getRespuestas()){
+//					respondida.addRespuesta(pregunta.getIndiceRespuesta(res));
+//				}
+//				this.preguntasRespondidas.add(respondida);
+//			}
+//		}	
+//	}
 	
 	@Override
 	public boolean equals(Object o) {

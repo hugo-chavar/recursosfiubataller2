@@ -47,7 +47,7 @@ public class Parameter {
 		@XmlElementRef(type = Recurso.class), 
 		@XmlElementRef(type = Encuesta.class), 
 		@XmlElementRef(type = Link.class),
-		@XmlElementRef(type = Archivo.class),// da error faltan annotations en clase Archivo
+//		@XmlElementRef(type = Archivo.class),// da error faltan annotations en clase Archivo
 		})
 	private Recurso recurso;
 
