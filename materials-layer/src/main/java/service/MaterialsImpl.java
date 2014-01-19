@@ -1,8 +1,5 @@
 package service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.activation.DataHandler;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlMimeType;

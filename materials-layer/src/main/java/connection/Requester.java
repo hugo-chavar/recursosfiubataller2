@@ -173,9 +173,9 @@ public enum Requester {
 		if (target == null) {
 			reason = "falta el elemento 'recurso'";
 		} else if (target.getRecursoId() == null) {
-			reason = "falta elemento recusoId en el elemento 'recurso'";
+			reason = "falta elemento 'recusoId' en el elemento 'recurso'";
 		} else if (target.getTipo() == null) {
-			reason = "falta elemento tipo en el elemento 'recurso'";
+			reason = "falta elemento 'tipo' en el elemento 'recurso'";
 		} else {
 			reason = "tipo de recurso inexistente";
 		}
