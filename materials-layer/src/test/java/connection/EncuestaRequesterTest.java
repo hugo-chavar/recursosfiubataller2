@@ -10,6 +10,7 @@ import model.PreguntaRespuestaFija;
 import org.junit.Assert;
 import org.junit.Test;
 
+import connection.exceptions.GetException;
 import connection.responses.EncuestaResponse;
 
 
@@ -32,7 +33,7 @@ public class EncuestaRequesterTest {
 	//      }
 
 	@Test
-	public void getEncuestaWithPreguntaRespuestaACompletar() {
+	public void getEncuestaWithPreguntaRespuestaACompletar() throws GetException {
 		Encuesta encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);
 
 		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
@@ -50,7 +51,7 @@ public class EncuestaRequesterTest {
 	}
 
 	@Test
-	public void getEncuestaWithPreguntaRespuestaFija() {
+	public void getEncuestaWithPreguntaRespuestaFija() throws GetException {
 		Encuesta encuesta = new Encuesta(10, 3, "Encuesta con preguntas fijas", false);
 
 		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
@@ -67,7 +68,7 @@ public class EncuestaRequesterTest {
 	}
 	
 	@Test
-	public void getEncuestaFromCache() {
+	public void getEncuestaFromCache() throws GetException {
 		Encuesta encuesta = new Encuesta(1003, -1, "una encuesta chica", false);
 
 		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);

@@ -27,13 +27,46 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public String sayHello(String name) {
-		return "Hello, Welcom to jax-ws " + name;
+//		String path;
+//		path = System.getProperty("user.dir") + "\\webapps\\Materials\\index.jsp";
+//		StringBuffer sb = new StringBuffer();
+//		sb.append("Hello, Welcom to jax-ws " + name + '\n' + "Server Working Directory = "
+//				+ System.getProperty("user.dir"));
+//		BufferedReader br = null;
+//
+//		try {
+//			String sCurrentLine;
+//			br = new BufferedReader(new FileReader(path));
+//			while ((sCurrentLine = br.readLine()) != null) {
+//				sb.append(sCurrentLine);
+//				sb.append('\n');
+//			}
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				if (br != null)
+//					br.close();
+//			} catch (IOException ex) {
+//				ex.printStackTrace();
+//			}
+//		}
+
+		return "Hello, Welcom to jax-ws " + name + '\n' +
+				"Server Working Directory = " + System.getProperty("user.dir");
+//				+ '\n' + sb.toString();
 	}
 
 	@Override
 	public String getArchivo(String xmlParam){
 		Parameter parameter = Parameter.createParameter(xmlParam);
-		OperationResponse response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
+		OperationResponse response;
+		try {
+			response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
+		} catch (GetException e) {
+			return createFailedResponse(e.getMessage());
+		}
 		return toXml(response);
 	}
 	
@@ -94,16 +127,22 @@ public class MaterialsImpl implements Materials {
 		}
 		EncuestaRespondida respondida = parameter.getRespondida();
 		OperationResponse response;
-		EncuestaResponse encuestaResponse = (EncuestaResponse) Requester.INSTANCE.getRecurso(new Recurso(respondida.getIdRecurso(),0,"","Encuesta"));
-		if (!encuestaResponse.getSuccess()){
-			return createFailedResponse("Encuesta inexistente");
+		EncuestaResponse encuestaResponse;
+		try {
+			encuestaResponse = (EncuestaResponse) Requester.INSTANCE.getRecurso(new Recurso(respondida.getIdRecurso(),0,"","Encuesta"));
+			if (!encuestaResponse.getSuccess()){
+				return createFailedResponse("Encuesta inexistente");
+			}
+			Encuesta encuesta = encuestaResponse.getEncuesta();
+			if (encuesta.isEvaluada()) {
+				respondida.evaluar(encuesta);
+			}
+			response = Requester.INSTANCE.saveEncuestaRespondida(respondida);
+			return toXml(response);
+		} catch (GetException e) {
+			return createFailedResponse(e.getMessage());
 		}
-		Encuesta encuesta = encuestaResponse.getEncuesta();
-		if (encuesta.isEvaluada()) {
-			respondida.evaluar(encuesta);
-		}
-		response = Requester.INSTANCE.saveEncuestaRespondida(respondida);
-		return toXml(response);
+		
 	}
 	
 	public String getEncuestaRespondida(Recurso recurso, int usuarioId) {
@@ -185,13 +224,13 @@ public class MaterialsImpl implements Materials {
 	public String getRecurso(String parametros) {
 		System.out.println(parametros);
 		Parameter parameter = Parameter.createParameter(parametros);
-		
-		// try {
-		OperationResponse response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
-		// } catch (GetException e) {
-		// return createFailedResponse(e.getMessage());
-		// }
-		return toXml(response);
+
+		try {
+			OperationResponse response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
+			return toXml(response);
+		} catch (GetException e) {
+			return createFailedResponse(e.getMessage());
+		}
 	}
 
 	@Override

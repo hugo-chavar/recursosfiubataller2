@@ -54,7 +54,7 @@ public class RecursosRequester {
 
 	}
 	
-	public Recurso get(Recurso target) {
+	public Recurso get(Recurso target) throws GetException {
 		
 		// Busco en el cache de recursos.
 		if (cache.contains(target)) {
@@ -81,14 +81,18 @@ public class RecursosRequester {
 				////////////// PRUEBAS //////////////
 				
 				System.out.println(xml_resp_e);
-				if (xml_resp_e != null) {
+//				if (xml_resp_e != null) {
 					Recurso recurso = parser.deserializeRecurso(xml_resp_e);
-					
+				if (recurso == null) {	
+					String message = "Integracion dice: " + xml_resp_e.substring(0, xml_resp_e.indexOf('<') -2);
+					System.out.println(message);
+					throw new GetException(message);
+				}
 					// Agrego el recurso al cache
 					cache.add(recurso);
 					
 					return recurso;
-				}
+//				}
 					
 			} catch (AxisFault e) {
 				String message = "Error al intentar obtener el recurso con IDRecurso: " + target.getRecursoId();

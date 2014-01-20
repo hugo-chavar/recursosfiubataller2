@@ -49,7 +49,7 @@ public enum Requester {
 		
 	}
 	
-	public OperationResponse getRecurso(Recurso target) {
+	public OperationResponse getRecurso(Recurso target) throws GetException {
 
 		OperationResponse response;
 		
