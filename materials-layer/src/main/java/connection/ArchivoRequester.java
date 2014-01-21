@@ -82,7 +82,7 @@ public class ArchivoRequester {
 		
 		try {
 			System.out.println("Entra a pedir el archivo");
-			DataHandler arch = new DataHandler(new URL("/home/damian/aux"));
+			DataHandler arch = new DataHandler(new URL("file:/home/damian/aux"));
 			adevolver.setRawFile(arch);
 			
 		} catch (MalformedURLException e) {

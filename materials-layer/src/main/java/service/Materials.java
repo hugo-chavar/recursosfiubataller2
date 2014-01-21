@@ -69,12 +69,12 @@ public interface Materials {
 	String getRecurso(@WebParam(name = "parametro")String parametros);
 	
 	@WebMethod 
-	@WebResult(name = "StringOfDataHandler")
+	@WebResult(name = "String")
 	String transformDataHandlerToString(@WebParam(name = "File as DataHandler")@XmlMimeType("application/octet-stream") DataHandler data);
 	
 	@WebMethod 
-	@WebResult(name = "DataHandlerOfString")
-	@XmlMimeType("application/octet-stream") DataHandler transformDataHandlerToString(@WebParam(name = "File as String") String str);
+	@WebResult(name = "DataHandler")
+	@XmlMimeType("application/octet-stream") DataHandler transformStringtoDataHandler(@WebParam(name = "parametro")String parametros);
 
 	
 	@WebMethod

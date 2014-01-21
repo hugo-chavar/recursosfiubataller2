@@ -264,12 +264,10 @@ public class MaterialsImpl implements Materials {
 	@Override
 	@WebMethod
 	@WebResult(name = "DataHandlerOfString")
-	@XmlMimeType("application/octet-stream")
 	public
-	DataHandler transformDataHandlerToString(
-			@WebParam(name = "File as String") String str) {
+	@XmlMimeType("application/octet-stream") DataHandler transformStringtoDataHandler(@WebParam(name = "parametro")String parametro) {
 		Archivo unArchivo = new Archivo();
-		unArchivo.setStringFile(str);
+		unArchivo.setStringFile(parametro);
 		
 		return unArchivo.getRawFile();
 	}
