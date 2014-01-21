@@ -15,6 +15,7 @@ public enum Requester {
 	INSTANCE;
 	
 	private EncuestaRequester encuestaReq;
+	private EncuestaRespondidaRequester respondidaReq;
 	private ArchivoRequester archivoReq;
 	private LinkRequester linkReq;
 	private RecursosRequester recursosReq;
@@ -28,7 +29,7 @@ public enum Requester {
 	}
 
 	public OperationResponse saveEncuestaRespondida(EncuestaRespondida respondida) {
-		return encuestaReq.saveRespondida(respondida);
+		return respondidaReq.saveRespondida(respondida);
 	}
 	
 	public OperationResponse agregarRecurso(Recurso target) {
@@ -85,7 +86,7 @@ public enum Requester {
 	}
 	
 	public EncuestaRespondida getEncuestaRespondida(int idAmbito, int idEncuesta, int idUsuario) {
-		return encuestaReq.getRespondida(idAmbito, idUsuario, idEncuesta);
+		return respondidaReq.getRespondida(idAmbito, idUsuario, idEncuesta);
 	}
 	
 	public OperationResponse deleteRecurso(Recurso recurso) {

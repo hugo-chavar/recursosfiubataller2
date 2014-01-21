@@ -54,7 +54,7 @@ public class MaterialsImpl implements Materials {
 //		}
 
 		return "Hello, Welcom to jax-ws " + name + '\n' +
-				"Server Working Directory = " + System.getProperty("user.dir");
+				"Current Server Working Directory = " + System.getProperty("user.dir");
 //				+ '\n' + sb.toString();
 	}
 

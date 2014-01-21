@@ -29,7 +29,7 @@ public class EncuestaRequester {
 	private IntegracionStub stub;
 	private EncuestaParser parser;
 	private Cache<Encuesta> cacheEncuestas;
-	private Cache<EncuestaRespondida> cacheEncuestasRespondidas;
+	//private Cache<EncuestaRespondida> cacheEncuestasRespondidas;
 
 	
 	public EncuestaRequester() {
@@ -134,13 +134,13 @@ public class EncuestaRequester {
 
 		enc.addPregunta(p5);
 
-		cacheEncuestasRespondidas = new Cache<EncuestaRespondida>();
-
-		try {
-			stub = new IntegracionStub();
-		} catch (AxisFault e) {
-			System.out.println("Error al intentar contectarse con Integracion");
-		}
+//		cacheEncuestasRespondidas = new Cache<EncuestaRespondida>();
+//
+//		try {
+//			stub = new IntegracionStub();
+//		} catch (AxisFault e) {
+//			System.out.println("Error al intentar contectarse con Integracion");
+//		}
 
 	}
 
@@ -177,28 +177,28 @@ public class EncuestaRequester {
 		return response;
 	}
 
-	public OperationResponse saveRespondida(EncuestaRespondida respondida) {
-
-		OperationResponse response;
-		// Guardo la encuesta respondida
-		String encuesta_str = parser.serializeEncuestaRespondida(respondida);
-		try {
-			GuardarDatos guardar = new GuardarDatos();
-			guardar.setXml(encuesta_str);
-			GuardarDatosResponse g_resp = this.stub.guardarDatos(guardar);
-			response = OperationResponse.createSuccess();
-			System.out.println(g_resp.get_return());
-		} catch (AxisFault e) {
-			String reason = "Error al intentar guardar EncuestaRespondida";
-			System.out.println(reason);
-			response = OperationResponse.createFailed(reason);
-		} catch (RemoteException e) {
-			String reason = "Error de conexion remota";
-			System.out.println(reason);
-			response = OperationResponse.createFailed(reason);
-		}
-		return response;
-	}
+//	public OperationResponse saveRespondida(EncuestaRespondida respondida) {
+//
+//		OperationResponse response;
+//		// Guardo la encuesta respondida
+//		String encuesta_str = parser.serializeEncuestaRespondida(respondida);
+//		try {
+//			GuardarDatos guardar = new GuardarDatos();
+//			guardar.setXml(encuesta_str);
+//			GuardarDatosResponse g_resp = this.stub.guardarDatos(guardar);
+//			response = OperationResponse.createSuccess();
+//			System.out.println(g_resp.get_return());
+//		} catch (AxisFault e) {
+//			String reason = "Error al intentar guardar EncuestaRespondida";
+//			System.out.println(reason);
+//			response = OperationResponse.createFailed(reason);
+//		} catch (RemoteException e) {
+//			String reason = "Error de conexion remota";
+//			System.out.println(reason);
+//			response = OperationResponse.createFailed(reason);
+//		}
+//		return response;
+//	}
 	
 	public OperationResponse getFromCache(int recursoId) {
 		
@@ -266,41 +266,41 @@ public class EncuestaRequester {
 
 	}
 
-	public EncuestaRespondida getRespondida(int IDAmbiente, int IDUsuario, int IDEncuesta) {
-
-		// Busco en el cache de encuestas respondidas
-		EncuestaRespondida target = new EncuestaRespondida(IDEncuesta, IDUsuario, 0);
-		if (cacheEncuestasRespondidas.contains(target)) {
-			return cacheEncuestasRespondidas.get(target);
-		} else {
-
-			try {
-
-				// Consulto la encuesta guardada
-				String xml = parser.serializeEncuestaRespondidaQuery(IDAmbiente, IDUsuario, IDEncuesta);
-				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-				seleccionar_e.setXml(xml);
-				SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
-				String xml_resp_e = s_resp_e.get_return();
-				EncuestaRespondida encuesta = parser.deserializeEncuestaRespondida(xml_resp_e);
-
-				// Agrego al cache de encuestas respondidas
-				cacheEncuestasRespondidas.add(encuesta);
-
-				return encuesta;
-
-			} catch (AxisFault e) {
-				System.out.println("Error al intentar obtener la siguiente Encuesta:");
-				System.out.println("IDEncuesta: " + IDEncuesta);
-			} catch (RemoteException e) {
-				System.out.println("Error de conexion remota");
-			}
-
-		}
-
-		return null;
-
-	}
+//	public EncuestaRespondida getRespondida(int IDAmbiente, int IDUsuario, int IDEncuesta) {
+//
+//		// Busco en el cache de encuestas respondidas
+//		EncuestaRespondida target = new EncuestaRespondida(IDEncuesta, IDUsuario, 0);
+//		if (cacheEncuestasRespondidas.contains(target)) {
+//			return cacheEncuestasRespondidas.get(target);
+//		} else {
+//
+//			try {
+//
+//				// Consulto la encuesta guardada
+//				String xml = parser.serializeEncuestaRespondidaQuery(IDAmbiente, IDUsuario, IDEncuesta);
+//				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+//				seleccionar_e.setXml(xml);
+//				SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
+//				String xml_resp_e = s_resp_e.get_return();
+//				EncuestaRespondida encuesta = parser.deserializeEncuestaRespondida(xml_resp_e);
+//
+//				// Agrego al cache de encuestas respondidas
+//				cacheEncuestasRespondidas.add(encuesta);
+//
+//				return encuesta;
+//
+//			} catch (AxisFault e) {
+//				System.out.println("Error al intentar obtener la siguiente Encuesta:");
+//				System.out.println("IDEncuesta: " + IDEncuesta);
+//			} catch (RemoteException e) {
+//				System.out.println("Error de conexion remota");
+//			}
+//
+//		}
+//
+//		return null;
+//
+//	}
 	
 	public void deleteFromCache(int recursoId) {
 		cacheEncuestas.remove(new Encuesta(recursoId, 0, "", false));
