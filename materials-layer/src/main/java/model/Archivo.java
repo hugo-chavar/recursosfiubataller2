@@ -9,6 +9,7 @@ import javax.activation.DataSource;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.sun.istack.ByteArrayDataSource;
@@ -33,10 +34,14 @@ public class Archivo extends Recurso {
 	private String tipoArchivo;
 	@XmlElement
 	private String nombreArchivo;
-	@XmlElement
+	@XmlMimeType("application/octet-stream")
 	private DataHandler rawFile;
 	@XmlElement
 	private byte[] fileBinary;
+	@XmlElement
+	private String contentType;
+	@XmlElement
+	private String stringFile;
 	
     public String getNombreArchivo() {
 		return nombreArchivo;
@@ -68,7 +73,14 @@ public class Archivo extends Recurso {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+   	 	this.setContentType(this.rawFile.getContentType());
    	 	this.fileBinary = output.toByteArray();
+   	 	try {
+			this.stringFile =  new String(this.fileBinary,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     public byte[] getByteArray() throws IOException{
@@ -101,6 +113,14 @@ public class Archivo extends Recurso {
 	public void setByteArray(byte[] byteArray) {
 		this.fileBinary =byteArray;
 		
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 }

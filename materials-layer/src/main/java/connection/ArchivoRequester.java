@@ -1,10 +1,16 @@
 package connection;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 
 import javax.activation.DataHandler;
+import javax.activation.DataSource;
 
 import model.Archivo;
 import model.Link;
@@ -12,6 +18,7 @@ import model.Recurso;
 
 import org.apache.axis2.AxisFault;
 
+import com.sun.xml.internal.ws.util.ByteArrayDataSource;
 import com.ws.services.IntegracionStub;
 import com.ws.services.IntegracionStub.SeleccionarDatos;
 import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
@@ -114,10 +121,44 @@ public class ArchivoRequester {
 			archivo.setAmbitoId(14);
 			archivo.setNombreArchivo("River Plate");
 			archivo.setDescripcion("este archivo contiene informacion sobre el equipo mas grande del universo");
-			archivo.setTipoArchivo("jpg");
+			archivo.setTipoArchivo("txt");
 			try {
+				System.out.println("abre aux.txt");
 				DataHandler arch = new DataHandler(new URL("file:/home/damian/aux.txt"));
+				System.out.println("el data handler tiene como mime: "+arch.getContentType());
+				
 				archivo.setRawFile(arch);
+				byte[] fileBinary;
+				try {
+					fileBinary = archivo.getByteArray();
+					//System.out.println("como archivo deja "+archivo.getStringFile());
+					DataSource dataSource = new ByteArrayDataSource(fileBinary,"text/plain");
+		          	DataHandler dh = new DataHandler(dataSource);
+		          	InputStream is;
+					try {
+						is = dh.getInputStream();
+						OutputStream os = new FileOutputStream(new File("/home/damian/salidas/1RiverPlate.txt"));
+
+
+			          	byte[] buffer = new byte[1024];
+			          	int bytesRead = 0;
+			          	while ((bytesRead = is.read(buffer)) != -1) {
+			          	os.write(buffer,0,bytesRead);
+			          	     }
+			          	dh.writeTo(os);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+		          	
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+	          	
+	          
 			} catch (MalformedURLException e) {
 				System.out.println("no existe el URL asigando");
 				e.printStackTrace();

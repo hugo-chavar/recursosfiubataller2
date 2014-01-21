@@ -90,7 +90,8 @@ public class ArchivoParser extends Parser {
 		archivo.setRecursoId(IDArchivo);
 		archivo.setNombreArchivo(nombre);
 		archivo.setTipoArchivo(extension);
-		//archivo.setStringFile(file);
+		System.out.println("entra aca");
+		archivo.setStringFile(file);
 		
 		return archivo;
 	}

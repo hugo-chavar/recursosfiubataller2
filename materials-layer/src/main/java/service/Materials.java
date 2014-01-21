@@ -58,7 +58,7 @@ public interface Materials {
 
 	@WebMethod
 	@WebResult(name = "archivo")
-	String getArchivo(@WebParam(name = "Parametros(xml con idAmbito, idRecurso)") String xmlParam);
+	String getArchivo(@WebParam(name = "ParametrosXmlIdAmbitoIdRecurso") String xmlParam);
 
 //	@WebMethod 
 //	@WebResult(name = "encuesta")
