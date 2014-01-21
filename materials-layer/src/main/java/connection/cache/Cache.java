@@ -18,26 +18,27 @@ public class Cache<T> {
 		maxSize = MAX_ITEMS_LIST;
 		elements = new ArrayDeque<T>(maxSize);
 	}
-	
+
 	public void changeSize(int newSize) {
 		Collection<T> aux = elements;
-		elements = new ArrayDeque<T>(newSize);
+		maxSize = newSize;
+		elements = new ArrayDeque<T>(maxSize);
 		addAll(aux);
 	}
-	
+
 	public void addAll(Collection<T> elemnts) {
 		for (T e : elemnts) {
-			if (! contains(e)) {
+			if (!contains(e)) {
 				add(e);
 			}
 		}
 	}
 
 	public void add(T element) {
-        if (elements.size() >= maxSize) {                 
-        	elements.poll();
-        }
-        elements.addLast(element); 
+		if (elements.size() >= maxSize) {
+			elements.poll();
+		}
+		elements.addLast(element);
 	}
 
 	public boolean contains(T element) {
@@ -46,17 +47,17 @@ public class Cache<T> {
 
 	public T get(T element) {
 		Iterator<T> it = elements.iterator();
-        while (it.hasNext()) {
-            T current = it.next();
-            if (current.equals(element)) {
-            	elements.remove(current);
-            	elements.addLast(current);
-                return current;
-            }
-        }
-        return null;
+		while (it.hasNext()) {
+			T current = it.next();
+			if (current.equals(element)) {
+				elements.remove(current);
+				elements.addLast(current);
+				return current;
+			}
+		}
+		return null;
 	}
-	
+
 	public void remove(T element) {
 		elements.remove(element);
 	}

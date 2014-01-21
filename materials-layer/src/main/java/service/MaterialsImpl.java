@@ -79,7 +79,7 @@ public class MaterialsImpl implements Materials {
 		OperationResponse response;	
 		Encuesta encuesta = (Encuesta)parameter.getRecurso();
 		if (Requester.INSTANCE.getPermisoUsuario(encuesta.getAmbitoId(), parameter.getUsuarioId(),"agregarEncuesta")) {
-			response= Requester.INSTANCE.agregarRecurso(encuesta);
+			response = Requester.INSTANCE.agregarRecurso(encuesta);
 		}
 		else{
 			return createFailedResponse("Permisos insuficientes");
