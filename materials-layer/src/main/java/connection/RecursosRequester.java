@@ -64,7 +64,7 @@ public class RecursosRequester {
 
 				// Consulto el recurso guardado
 				String xml = parser.serializeRecursoQuery(target.getRecursoId());
-
+				
 				////////////// PRUEBAS //////////////
 				String xml_resp_e;
 				
@@ -72,7 +72,9 @@ public class RecursosRequester {
 					xml_resp_e = "<WS><recurso><recursoId>15</recursoId><ambitoId>2</ambitoId><descripcion>Encuesta con preguntas a completar</descripcion><tipo>Encuesta</tipo></recurso></WS>";
 				} else if (xml.equals("<WS><recurso><recursoId>10</recursoId></recurso></WS>")) {
 					xml_resp_e = "<WS><recurso><recursoId>10</recursoId><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></recurso></WS>";
-				} else {
+				} else if (xml.equals("<WS><recurso><recursoId>1003</recursoId></recurso></WS>")) {//TODO: sacar harcodeo para testear los archivos.
+					xml_resp_e = "<WS><recurso><recursoId>1003</recursoId><ambitoId>3</ambitoId><descripcion>Es un Archivo</descripcion><tipo>Archivo</tipo></recurso></WS>";
+				}else{
 					SeleccionarDatos seleccionar_e = new SeleccionarDatos();
 					seleccionar_e.setXml(xml);
 					SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);

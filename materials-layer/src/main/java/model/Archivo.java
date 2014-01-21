@@ -2,12 +2,16 @@ package model;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.activation.DataHandler;
+import javax.activation.DataSource;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import com.sun.istack.ByteArrayDataSource;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class Archivo extends Recurso {
@@ -71,6 +75,20 @@ public class Archivo extends Recurso {
     	
     	//return new String(this.fileBinary, "UTF-8");
     	 return this.fileBinary;
+    }
+    public String getStringFile(){
+    	try {
+			return new String(this.fileBinary,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println("Codificacion de archivo erronea");
+			e.printStackTrace();
+			return "ERROR";
+		}
+    }
+    public void setStringFile(String stringFile){
+    	this.fileBinary = stringFile.getBytes();
+    	DataSource dataSource = new ByteArrayDataSource(this.fileBinary, "UTF-8");
+    	this.rawFile = new DataHandler(dataSource);
     }
 	public Integer getSize() {
 		return this.fileBinary.length;

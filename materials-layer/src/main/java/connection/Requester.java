@@ -51,18 +51,19 @@ public enum Requester {
 	}
 	
 	public OperationResponse getRecurso(Recurso target) throws GetException {
-
+		System.out.println("Entra al get Recurso");
 		OperationResponse response;
 		
 		if (notValidInput(target)) {
 			return informFailReason(target);
 		}
-		
+		System.out.println("Es un taget valido");
+	
 		// Busco en el cache de especifico del recurso
 		response = getRecursoFromCache(target);
 		if (response.getSuccess())
 			return response;
-		
+		System.out.println("No esta en cache");
 		// Si no se encuentra en el cache
 		
 		// Busco el recurso
@@ -124,7 +125,7 @@ public enum Requester {
 		} else {
 			// TODO: Falta para archivo
 			//response = archivoReq.getFromCache(recursoId);
-			response = null; // Sacar esto
+			response = OperationResponse.createFailed("No existe cache");
 			
 		}
 		
@@ -158,9 +159,12 @@ public enum Requester {
 			response = encuestaReq.get(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
 			response = linkReq.get(recurso);
+		} else if (recurso.getTipo().equalsIgnoreCase("Archivo")) {
+			//System.out.println("Entra a makeQuery de archivo");
+			response = archivoReq.get(recurso);
 		} else {
 			// TODO: Falta para archivo
-			response = archivoReq.get(recurso);
+			
 			response = OperationResponse.createFailed("Tipo de recurso inexistente");
 		}
 		
@@ -190,6 +194,17 @@ public enum Requester {
 	
 	private boolean isvalidType(String type) {
 		return type.equalsIgnoreCase("Link")||type.equalsIgnoreCase("Encuesta")||type.equalsIgnoreCase("Archivo");
+	}
+
+	public OperationResponse saveArchivo(Archivo file) {
+		OperationResponse response;
+		String respuesta = archivoReq.save(file);
+		if(respuesta!=""){
+			response = OperationResponse.createFailed(respuesta);
+		}else{
+			response = OperationResponse.createSuccess();
+		}
+		return response;
 	}
 	
 }

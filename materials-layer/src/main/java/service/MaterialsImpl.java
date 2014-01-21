@@ -1,6 +1,9 @@
 package service;
 
 import javax.activation.DataHandler;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.soap.MTOM;
@@ -93,14 +96,13 @@ public class MaterialsImpl implements Materials {
 		// TODO Dami, pasa al archivoRequester la mayoria de las validaciones
 		// y que te devuelva un response con el resultado
 		Parameter parameter = Parameter.createParameter(archivoParam);
-		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null || parameter.getRecurso().getClass() != Encuesta.class){
+		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null || parameter.getRecurso().getClass() != Archivo.class){
 			return createFailedResponse("Parametros invalidos");
 		}
 		if (data != null) {
 			Archivo file = (Archivo)parameter.getRecurso(); 
 			file.setRawFile(data);
-			// Requester.INSTANCE.saveArchivo(File); TODO: ACA DEBERIA ANDAR EL
-			// SAVE ARCHIVO
+			 Requester.INSTANCE.saveArchivo(file); 
 			return "Archivo subido Correctamente";
 
 		}
@@ -244,6 +246,32 @@ public class MaterialsImpl implements Materials {
 			return createFailedResponse("Permisos insuficientes");
 		}
 		return toXml(response);
+	}
+
+	@Override
+	@WebMethod
+	@WebResult(name = "StringOfDataHandler")
+	public
+	String transformDataHandlerToString(
+			@WebParam(name = "File as DataHandler") @XmlMimeType("application/octet-stream") DataHandler data) {
+		Archivo unArchivo = new Archivo();
+		unArchivo.setRawFile(data);
+		
+		return unArchivo.getStringFile()
+				;
+	}
+
+	@Override
+	@WebMethod
+	@WebResult(name = "DataHandlerOfString")
+	@XmlMimeType("application/octet-stream")
+	public
+	DataHandler transformDataHandlerToString(
+			@WebParam(name = "File as String") String str) {
+		Archivo unArchivo = new Archivo();
+		unArchivo.setStringFile(str);
+		
+		return unArchivo.getRawFile();
 	}
 
 }

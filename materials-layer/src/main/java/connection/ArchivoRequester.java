@@ -36,7 +36,7 @@ public class ArchivoRequester {
 		}
 	}
 
-	public void save(Archivo archivo) {
+	public String save(Archivo archivo) {
 		String archivo_str = parser.serializeArchivo(archivo);
 		IntegracionStub.GuardarArchivoResponse responseArchivo = null;
 		try {
@@ -48,24 +48,26 @@ public class ArchivoRequester {
 			requestArchivo.setXml(archivo_str);
 			
 			responseArchivo = this.stub.guardarArchivo(requestArchivo);
-			System.out.println("La salida es : " + responseArchivo.get_return());		
+			return "";		
 		} catch (AxisFault e) {
 			// e.printStackTrace();
-			System.out.println("Error al intentar guardar la siguiente Archivo:");
-			System.out.println(archivo.getDescripcion());
+			//System.out.println("Error al intentar guardar la siguiente Archivo:");
+			//System.out.println(archivo.getDescripcion());
+			return "error al guardar archivo";
 		} catch (RemoteException e) {
-			 e.printStackTrace();
-			System.out.println("Error de conexion remota");
+			// e.printStackTrace();
+			//System.out.println("Error de conexion remota");
+			return "error de conexion";
 		}
 	}
 	public Archivo getArchivo(int idAmbiente, int idRecurso){
 		Archivo adevolver = new Archivo();
 		String archivoXml = "asc";
 		byte[] archivoRecuperado;
-		//IntegracionStub.ObtenerArchivoResponse responseArchivo = null;
+		//IntegracionStub. responseArchivo = null;
 		//	try {
 				
-			//	requestArchivo = new IntegracionStub.ObtenerArchivo();
+		//		requestArchivo = new IntegracionStub.ObtenerArchivo();
 				
 			//OP1 	archivoRecuperado = requestArchivo.getArchivo(idAmbiente,idRecurso); asi me dijeron por mail
 			//OP2	requestArchivo.setArchivo(archivo.getFile()); asi lo hacen por el ejemplo q me mandaron
@@ -82,6 +84,7 @@ public class ArchivoRequester {
 			System.out.println("Entra a pedir el archivo");
 			DataHandler arch = new DataHandler(new URL("/home/damian/aux"));
 			adevolver.setRawFile(arch);
+			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,36 +95,49 @@ public class ArchivoRequester {
 	}
 	
 	public OperationResponse get(Recurso recurso) {
-
+		//System.out.println("Entra al get de Archivo Request");
 		ArchivoResponse response;
 		String reason;
-		try{
+	//	try{
 			String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
 			SeleccionarDatos seleccionar_e = new SeleccionarDatos();
 			seleccionar_e.setXml(xml);
-			SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
+		/*	SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);// Integrar con lo nuevo de integracion
 			String xml_resp_e = s_resp_e.get_return();
 			Archivo archivo = this.parser.deserializeArchivo(xml_resp_e);
 			archivo.setAmbitoId(recurso.getAmbitoId());
 			archivo.setRecursoId(recurso.getRecursoId());
-			archivo.setDescripcion(recurso.getDescripcion());
+			archivo.setDescripcion(recurso.getDescripcion());*/
 
-
+			/*********Pruebas**************/
+			Archivo archivo = new Archivo();
+			archivo.setAmbitoId(14);
+			archivo.setNombreArchivo("River Plate");
+			archivo.setDescripcion("este archivo contiene informacion sobre el equipo mas grande del universo");
+			archivo.setTipoArchivo("jpg");
+			try {
+				DataHandler arch = new DataHandler(new URL("file:/home/damian/aux.txt"));
+				archivo.setRawFile(arch);
+			} catch (MalformedURLException e) {
+				System.out.println("no existe el URL asigando");
+				e.printStackTrace();
+			}
+			/*****FIN PRUEBAS*****/
 			response = new ArchivoResponse(archivo);
 			response.setSuccess(true);
 			return response;
 
-			} catch (AxisFault e) {
+		/*	} catch (AxisFault e) {
 				reason = "Error al intentar obtener el Archivo, ID: " + recurso.getRecursoId();
 			} catch (RemoteException e) {
 				reason = "Error de conexion remota";
 			}
-
-			System.out.println(reason);
+*/
+			/*System.out.println(reason);
 			response = new ArchivoResponse();
 			response.setReason(reason);
 			
-			return response;
+			return response;*/
 		}
 
 	}

@@ -1,9 +1,11 @@
 package connection;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import model.Archivo;
 
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -44,17 +46,14 @@ public class ArchivoParser extends Parser {
 		nodeElement.appendChild(extension);
 		
 	
-	/*	Element file = doc.createElement(ArchivoParser.FILE_TAG);
+		Element file = doc.createElement(ArchivoParser.FILE_TAG);
 		try {
 			file.appendChild(doc.createTextNode(String.valueOf(archivo.getStringFile())));
 		} catch (DOMException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		nodeElement.appendChild(file);*/
+		nodeElement.appendChild(file);
 		
 //		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
 //		LSSerializer serializer = domImplLS.createLSSerializer();
