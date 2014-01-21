@@ -14,7 +14,14 @@ import service.MaterialsImplService;
 public class Client {
 
 	public static void main(String[] args) {
-		MaterialsImplService service = new MaterialsImplService();
+		MaterialsImplService service;
+		try {
+			service = new MaterialsImplService();
+		} catch (javax.xml.ws.WebServiceException e) {
+			System.out.println("Servicio NO LEVANTADO");
+			System.out.println(e.toString());
+			return;
+		}
 		Materials port = service.getMaterialsImplPort();
 		System.out.println("------->>  Probando el servicio");
 		System.out.println(port.sayHello("Programador"));
@@ -139,6 +146,16 @@ public class Client {
 			System.out.println(e.toString());
 		}
 		
+		try {
+			//prueba link ok
+			String xml = "<parametro><recurso><recursoId>1002</recursoId><tipo>Link</tipo></recurso></parametro>";
+			String response = port.getRecurso(xml);
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println("Error al traer el link!");
+			System.out.println(e.toString());
+		}
+		
 //		try {
 //			String xmlEncuesta = "<encuesta evaluada='true'><recursoId>1004</recursoId><tipo>Encuesta</tipo><ambitoId>-1</ambitoId><descripcion>una encuesta grande</descripcion><preguntas><pregunta correctas='3' idPregunta='1' enunciado='de que color es el caballo blanco de san martin?'><respuestas>rojo,verde,azul,blanco</respuestas></pregunta><pregunta correctas='1' idPregunta='2' enunciado='a que equipo del futbol argentino le denominan Millo'><respuestas>velez,River Plate,crucero del norte,estudiantes</respuestas></pregunta><pregunta correctas='2' idPregunta='3' enunciado='cual es un patron de diseno creacional'><respuestas>command,mediator,builder,facade</respuestas></pregunta><pregunta correctas='0,7,10,11,12,6' idPregunta='4' enunciado='Un test unitario debe presentar las siguientes características'><respuestas>Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente,Automatizable</respuestas></pregunta><pregunta correcta='4' idPregunta='5' enunciado='cuantas patas tiene un gato?'/></preguntas></encuesta>";
 //			String xmlParametros = "<parametro><ambitoId>15</ambitoId><usuarioId>23</usuarioId>" + xmlEncuesta	+ "</parametro>";
@@ -147,6 +164,20 @@ public class Client {
 //		} catch (Exception e) {
 //			System.out.println("Error al crear la encuesta");
 //		}
+		
+		try{
+			System.out.println("Prueba se va a pedir un archivo");
+			String xml = "<parametro><recurso><recursoId>1003</recursoId><tipo>Archivo</tipo></recurso></parametro>";
+			String response = port.getRecurso(xml);
+			System.out.println(response);
+			String rawFile = response.substring(response.indexOf("<rawFile>") + "<rawFile>".length(), response.indexOf("</rawFile>"));
+			System.out.println("Este es el raw file:");
+			System.out.println(rawFile);
+			System.out.println("trajo el archivo Correctamente");
+		}catch (Exception e){
+			System.out.println("Se produjo un error");
+			e.printStackTrace();
+		}
 
 	}
 
