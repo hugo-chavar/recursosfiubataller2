@@ -151,7 +151,7 @@ public class MaterialsImpl implements Materials {
 		EncuestaRespondidaResponse response = new EncuestaRespondidaResponse();
 		response.setSuccess(true);	
 		//try {
-		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida(recurso.getAmbitoId(), recurso.getRecursoId(), usuarioId);
+		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida( recurso.getRecursoId(), usuarioId);
 		response.setRespondida(respondida);
 		
 		//} catch (GetException e) {

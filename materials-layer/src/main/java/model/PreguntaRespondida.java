@@ -26,6 +26,10 @@ public class PreguntaRespondida {
 	@XmlAttribute(required = false)
 	protected Boolean isCorrecta = null;
 
+	public Boolean getIsCorrecta() {
+		return isCorrecta;
+	}
+
 	@XmlAttribute(required = true)
 	protected List<String> respuestas = new ArrayList<String>();
 

@@ -55,24 +55,41 @@ public class EncuestaRespondidaRequester {
 		return response;
 	}
 	
-	public EncuestaRespondida getRespondida(int IDAmbiente, int IDUsuario, int IDEncuesta) {
+	public EncuestaRespondida getRespondida(int IDEncuesta,int IDUsuario) {
 
 		// Busco en el cache de encuestas respondidas
-		EncuestaRespondida target = new EncuestaRespondida(IDEncuesta, IDUsuario, 0);
+		EncuestaRespondida target = new EncuestaRespondida(IDEncuesta, IDUsuario);
 		if (cacheRespondidas.contains(target)) {
 			return cacheRespondidas.get(target);
 		} else {
 
 			try {
-
 				// Consulto la encuesta guardada
-				String xml = parser.serializeEncuestaRespondidaQuery(IDAmbiente, IDUsuario, IDEncuesta);
-				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-				seleccionar_e.setXml(xml);
-				SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
-				String xml_resp_e = s_resp_e.get_return();
-				EncuestaRespondida encuesta = parser.deserializeEncuestaRespondida(xml_resp_e);
+				String xml = parser.serializeEncuestaRespondidaQuery(IDUsuario, IDEncuesta);
+//				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+//				seleccionar_e.setXml(xml);
+//				SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
+//				String xml_resp_e = s_resp_e.get_return();
 
+				////////////// PRUEBAS //////////////
+				String xml_resp_e;
+				
+				if (xml.equals("<WS><encuestaRespondida><recursoId>15</recursoId><usuarioId>4</usuarioId></encuestaRespondida></WS>")) {
+					xml_resp_e = "<WS><encuestaRespondida><recursoId>15</recursoId><usuarioId>4</usuarioId><evaluacion>50</evaluacion><preguntasRespondidas>C;1;false;Azul|" +
+							"C;2;true;4</preguntasRespondidas></encuestaRespondida></WS>";
+				} else if (xml.equals("<WS><encuestaRespondida><recursoId>10</recursoId><usuarioId>5</usuarioId></encuestaRespondida></WS>")) {
+					xml_resp_e = "<WS><encuestaRespondida><recursoId>10</recursoId><usuarioId>5</usuarioId><evaluacion>100</evaluacion><preguntasRespondidas>F;1;true;1|" +
+							"F;2;true;2</preguntasRespondidas></encuestaRespondida></WS>";
+				} else {
+					SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+					seleccionar_e.setXml(xml);
+					SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
+					xml_resp_e = s_resp_e.get_return();
+				}
+				
+				////////////// PRUEBAS //////////////
+				EncuestaRespondida encuesta = parser.deserializeEncuestaRespondida(xml_resp_e);				
+				
 				// Agrego al cache de encuestas respondidas
 				cacheRespondidas.add(encuesta);
 

@@ -24,10 +24,10 @@ public class EncuestaRespondida {
 
 	public EncuestaRespondida() { }
 	
-	public EncuestaRespondida(Integer idRecurso, Integer idUsuario, int evaluacion) {
+	public EncuestaRespondida(Integer idRecurso, Integer idUsuario) {
 		this.idRecurso = idRecurso;
 		this.idUsuario = idUsuario;
-		this.evaluacion = evaluacion;
+		this.evaluacion = -1;
 	}
 	
 	public Integer getIdUsuario() {
@@ -125,6 +125,10 @@ public class EncuestaRespondida {
 					&& r.getIdUsuario().equals(getIdUsuario());
 		}
 		return false;
+	}
+
+	public void setEvaluacion(int evaluacion) {
+		this.evaluacion=evaluacion;
 	}
 	
 }

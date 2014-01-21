@@ -135,12 +135,12 @@ public class EncuestaRequester {
 		enc.addPregunta(p5);
 
 //		cacheEncuestasRespondidas = new Cache<EncuestaRespondida>();
-//
-//		try {
-//			stub = new IntegracionStub();
-//		} catch (AxisFault e) {
-//			System.out.println("Error al intentar contectarse con Integracion");
-//		}
+
+		try {
+			stub = new IntegracionStub();
+		} catch (AxisFault e) {
+			System.out.println("Error al intentar contectarse con Integracion");
+		}
 
 	}
 

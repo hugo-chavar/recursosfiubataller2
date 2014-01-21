@@ -10,7 +10,7 @@ import org.w3c.dom.NodeList;
 
 public class EncuestaRespondidaParser extends Parser {
 	
-	public static String ENCUESTA_TAG = "encuesta";
+	//public static String ENCUESTA_TAG = "encuesta";
 	public static String ENCUESTA_RESPONDIDA_TAG = "encuestaRespondida";
 	public static String IDUSUARIO_TAG = "usuarioId";
 	public static String EVALUACION_TAG = "evaluacion";
@@ -34,6 +34,8 @@ public class EncuestaRespondidaParser extends Parser {
 		IDUsuario.appendChild(doc.createTextNode(String.valueOf(respondida
 				.getIdUsuario())));
 		nodeElement.appendChild(IDUsuario);
+		//TODO: No siempre se debe incluir este campo, si es no evaluado no
+		//if(respondida.getEvaluacion()!=-1)
 		Element evaluacion = doc.createElement(EncuestaRespondidaParser.EVALUACION_TAG);
 		evaluacion.appendChild(doc.createTextNode(String.valueOf(respondida
 				.getEvaluacion())));
@@ -54,7 +56,7 @@ public class EncuestaRespondidaParser extends Parser {
 		EncuestaRespondida respondida = null;
 		
 		Document doc = this.convertXmlToDocument(xml);
-		NodeList nodes = doc.getElementsByTagName(EncuestaRespondidaParser.ENCUESTA_TAG);
+		NodeList nodes = doc.getElementsByTagName(EncuestaRespondidaParser.ENCUESTA_RESPONDIDA_TAG);
 		NodeList childNodes = nodes.item(0).getChildNodes(); 
 		HashMap<String, String> fields = new HashMap<String, String>();
 		
@@ -69,8 +71,8 @@ public class EncuestaRespondidaParser extends Parser {
 			int IDUsuario = Integer.parseInt(fields.get(EncuestaRespondidaParser.IDUSUARIO_TAG));
 			int evaluacion = Integer.parseInt(fields.get(EncuestaRespondidaParser.EVALUACION_TAG));
 			
-			respondida = new EncuestaRespondida(IDEncuesta, IDUsuario, evaluacion);
-			
+			respondida = new EncuestaRespondida(IDEncuesta, IDUsuario);
+			respondida.setEvaluacion(evaluacion);
 			respondida.unmarshallPreguntasRespondidas(fields.get(EncuestaRespondidaParser.PREGUNTAS_RESPONDIDAS_TAG));
 			
 	    }
@@ -79,18 +81,18 @@ public class EncuestaRespondidaParser extends Parser {
 		
 	}
 	
-	public String serializeEncuestaRespondidaQuery(int IDAmbiente, int IDUsuario, int IDEncuesta) {
+	public String serializeEncuestaRespondidaQuery(int IDUsuario, int IDEncuesta) {
 		
 		Document doc = this.buildXMLDocument();
 		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
 		doc.appendChild(rootElement);
 		
-		Element nodeElement = doc.createElement(EncuestaRespondidaParser.ENCUESTA_TAG);
+		Element nodeElement = doc.createElement(EncuestaRespondidaParser.ENCUESTA_RESPONDIDA_TAG);
 		rootElement.appendChild(nodeElement);
 		
-		Element IDAmbiente_el = doc.createElement(EncuestaRespondidaParser.AMBITOID_TAG);
-		IDAmbiente_el.appendChild(doc.createTextNode(String.valueOf(IDAmbiente)));
-		nodeElement.appendChild(IDAmbiente_el);
+//		Element IDAmbiente_el = doc.createElement(EncuestaRespondidaParser.AMBITOID_TAG);
+//		IDAmbiente_el.appendChild(doc.createTextNode(String.valueOf(IDAmbiente)));
+//		nodeElement.appendChild(IDAmbiente_el);
 		Element IDEncuesta_el = doc.createElement(EncuestaRespondidaParser.RECURSOID_TAG);
 		IDEncuesta_el.appendChild(doc.createTextNode(String.valueOf(IDEncuesta)));
 		nodeElement.appendChild(IDEncuesta_el);
