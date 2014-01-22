@@ -39,11 +39,11 @@ public class RecursosRequester {
 		try {
 			stub = new IntegracionStub();
 			recursosEjemplo = new ArrayList<Recurso>();
-			Recurso r = new Recurso(1002,-1,"un link a google copado","Link");
+			Recurso r = new Recurso(11002,-1,"un link a google copado","Link");
 			recursosEjemplo.add(r);
-			r = new Recurso(1003,-1,"una encuesta chica","Encuesta");
+			r = new Recurso(11003,-1,"una encuesta chica","Encuesta");
 			recursosEjemplo.add(r);
-			r = new Recurso(1004,-1,"una encuesta grande","Encuesta");
+			r = new Recurso(11004,-1,"una encuesta grande","Encuesta");
 			recursosEjemplo.add(r);
 //			statusOk = true;
 		} catch (AxisFault e) {

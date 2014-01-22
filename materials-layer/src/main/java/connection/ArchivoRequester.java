@@ -89,7 +89,10 @@ public class ArchivoRequester {
 		
 		try {
 			System.out.println("Entra a pedir el archivo");
-			DataHandler arch = new DataHandler(new URL("file:/home/damian/aux"));
+			String path;
+			path = "file:"+ System.getProperty("user.dir") + "\\webapps\\Materials\\index.jsp";
+			DataHandler arch = new DataHandler(new URL(path));
+//			DataHandler arch = new DataHandler(new URL("file:/home/damian/aux"));
 			adevolver.setRawFile(arch);
 			
 		} catch (MalformedURLException e) {
@@ -123,9 +126,13 @@ public class ArchivoRequester {
 			archivo.setDescripcion("este archivo contiene informacion sobre el equipo mas grande del universo");
 			archivo.setTipoArchivo("txt");
 			try {
-				System.out.println("abre aux.txt");
-				DataHandler arch = new DataHandler(new URL("file:/home/damian/aux.txt"));
-				System.out.println("el data handler tiene como mime: "+arch.getContentType());
+				String path;
+				path = "file:"+ System.getProperty("user.dir") + "\\webapps\\Materials\\index.jsp";
+				DataHandler arch = new DataHandler(new URL(path));
+//				DataHandler arch = new DataHandler(new URL("file:/home/damian/aux.txt"));
+//				System.out.println("abre aux.txt");
+//				DataHandler arch = new DataHandler(new URL("file:/home/damian/aux.txt"));
+//				System.out.println("el data handler tiene como mime: "+arch.getContentType());
 				
 				archivo.setRawFile(arch);
 				byte[] fileBinary;
