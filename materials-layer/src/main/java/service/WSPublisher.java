@@ -16,8 +16,6 @@ import javax.activation.DataSource;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.soap.SOAPBinding;
 
-import com.sun.xml.internal.ws.util.ByteArrayDataSource;
-
 import model.Archivo;
 import model.Encuesta;
 import model.Recurso;
@@ -29,23 +27,23 @@ import connection.responses.EncuestaResponse;
 public class WSPublisher {
 
 	public static void main(String[] args) {
-//		Endpoint ep = Endpoint.publish("http://localhost:8082/WS2/Greeting2", new MaterialsImpl());
-//		SOAPBinding binding = (SOAPBinding) ep.getBinding();
-//
-//		binding.setMTOMEnabled(true);
-//
-//		System.out.println("Capa de Negocio --- Materiales--- Web Services ");
-//
-//		System.out.println("Enter para salir : ");
-//
-//		try {
-//			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-//			bufferRead.readLine();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//		ep.stop();
+		Endpoint ep = Endpoint.publish("http://localhost:8082/WS2/Greeting2", new MaterialsImpl());
+		SOAPBinding binding = (SOAPBinding) ep.getBinding();
+
+		binding.setMTOMEnabled(true);
+
+		System.out.println("Capa de Negocio --- Materiales--- Web Services ");
+
+		System.out.println("Enter para salir : ");
+
+		try {
+			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+			bufferRead.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		ep.stop();
 //
 //		System.out.println("Prueba marshal de parametros: ");
 //		Parameter p = new Parameter();
@@ -105,7 +103,7 @@ public class WSPublisher {
 		Archivo archivo = new Archivo();
 		archivo.setAmbitoId(14);
 		archivo.setNombreArchivo("River Plate");
-		archivo.setDescripcion("este archivo contiene informacion sobre el equipo mas grande del universo");
+		archivo.setDescripcion("informacion sobre el equipo mas grande del universo");
 		archivo.setTipoArchivo("png");
 		try {
 			String path;
@@ -113,8 +111,6 @@ public class WSPublisher {
 			DataHandler arch = new DataHandler(new URL(path));
 //			DataHandler arch = new DataHandler(new URL("file:/home/damian/aux.txt"));
 //			System.out.println("abre aux.txt");
-//			DataHandler arch = new DataHandler(new URL("file:/home/damian/aux.txt"));
-//			System.out.println("el data handler tiene como mime: "+arch.getContentType());
 			
 			archivo.setRawFile(arch);
 			String xml = parser.convertToXml(archivo, archivo.getClass());
@@ -126,13 +122,6 @@ public class WSPublisher {
 			
 			DataHandler handler = arch2.getRawFile();
 
-//			try {
-//				InputStream is = handler.getInputStream();
-//			} catch (IOException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-
 			path = "C:\\Users\\HugoW7\\Desktop\\diagramaNuevo2.png";
 			OutputStream os;
 			try {
@@ -140,26 +129,11 @@ public class WSPublisher {
 				handler.writeTo(os);
 				os.close();
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-//
-//			byte[] buffer = new byte[1024];
-//			int bytesRead = 0;
-//			while ((bytesRead = is.read(buffer)) != -1) {
-//			os.write(buffer,0,bytesRead);
-//			     }
-//
-//			handler = fichier.getFichier();
-
-			
-			
-			
-          
 		} catch (MalformedURLException e) {
 			System.out.println("no existe el URL asigando");
 			e.printStackTrace();

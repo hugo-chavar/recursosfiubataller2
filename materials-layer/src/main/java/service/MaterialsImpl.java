@@ -110,16 +110,16 @@ public class MaterialsImpl implements Materials {
 		return "ERROR al subir el archivo";
 	}
 	
-	@Override
-	public String agregarLink(Link link, int usuarioId) {
-		OperationResponse response;
-		if (Requester.INSTANCE.getPermisoUsuario(link.getAmbitoId(), usuarioId,"agregarLink")) {
-			response = Requester.INSTANCE.agregarRecurso(link);
-		} else {
-			return createFailedResponse("Permisos insuficientes");
-		}
-		return toXml(response);
-	}
+//	@Override
+//	public String agregarLink(Link link, int usuarioId) {
+//		OperationResponse response;
+//		if (Requester.INSTANCE.getPermisoUsuario(link.getAmbitoId(), usuarioId,"agregarLink")) {
+//			response = Requester.INSTANCE.agregarRecurso(link);
+//		} else {
+//			return createFailedResponse("Permisos insuficientes");
+//		}
+//		return toXml(response);
+//	}
 	
 	@Override
 	public String agregarEncuestaRespondida(String respondidaParam) {	

@@ -2,21 +2,15 @@ package connection;
 
 import java.util.List;
 
-import model.Encuesta;
 import model.EncuestaRespondida;
-import model.Pregunta;
 import model.PreguntaRespondida;
-import model.PreguntaRespuestaACompletar;
 import model.PreguntaRespuestaACompletarRespondida;
-import model.PreguntaRespuestaFija;
 import model.PreguntaRespuestaFijaRespondida;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import connection.exceptions.GetException;
-import connection.responses.EncuestaRespondidaResponse;
-import connection.responses.EncuestaResponse;
 
 public class EncuestaRespondidaRequesterTest {
 

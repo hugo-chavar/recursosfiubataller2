@@ -1,0 +1,23 @@
+<response>
+  <success>true</success>
+  <recursos>
+    <recurso>
+      <recursoId>11002</recursoId>
+      <tipo>Link</tipo>
+      <ambitoId>-1</ambitoId>
+      <descripcion>un link a google copado</descripcion>
+    </recurso>
+    <recurso>
+      <recursoId>11003</recursoId>
+      <tipo>Encuesta</tipo>
+      <ambitoId>-1</ambitoId>
+      <descripcion>una encuesta chica</descripcion>
+    </recurso>
+    <recurso>
+      <recursoId>11004</recursoId>
+      <tipo>Encuesta</tipo>
+      <ambitoId>-1</ambitoId>
+      <descripcion>una encuesta grande</descripcion>
+    </recurso>
+  </recursos>
+</response>

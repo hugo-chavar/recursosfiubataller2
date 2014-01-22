@@ -41,9 +41,9 @@ public interface Materials {
 	@WebMethod
 	String agregarEncuestaRespondida(@WebParam(name = "parametros")String respondidaParam);
 
-	@WebMethod
-	@WebResult(name = "agregarLink")
-	String agregarLink(@WebParam(name = "link") Link link, @WebParam(name = "usuarioId") int usuarioId);
+//	@WebMethod
+//	@WebResult(name = "agregarLink")
+//	String agregarLink(@WebParam(name = "link") Link link, @WebParam(name = "usuarioId") int usuarioId);
 
 	@WebMethod
 	String agregarEncuesta(@WebParam(name = "parametros")String encuestaParam);

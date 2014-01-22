@@ -69,9 +69,9 @@ public class EncuestaRequesterTest {
 	
 	@Test
 	public void getEncuestaFromCache() throws GetException {
-		Encuesta encuesta = new Encuesta(1003, -1, "una encuesta chica", false);
+		Encuesta encuesta = new Encuesta(11003, -1, "una encuesta chica", false);
 
-		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
+		EncuestaResponse response =  (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
 		Encuesta encuesta_rtn = response.getEncuesta();       
 
 		Assert.assertEquals(encuesta, encuesta_rtn);

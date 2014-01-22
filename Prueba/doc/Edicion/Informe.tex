@@ -17,6 +17,7 @@
 \usepackage{enumitem}
 \usepackage{multicol}
 \usepackage{pifont}
+\usepackage{listings}
 \let\verbatiminput=\verbatimtabinput
 \usepackage[nottoc,numbib]{tocbibind}
 \setcounter{tocdepth}{3}
@@ -33,8 +34,35 @@
 \subsectionfont{\Large}
 \subsubsectionfont{\large}
 \paragraphfont{\large}
+\usepackage{color}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{maroon}{rgb}{0.5,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML}
+{
+basicstyle=\ttfamily,
+  morestring=[s]{"}{"},
+  morecomment=[s]{?}{?},
+  morecomment=[s]{!--}{--},
+  commentstyle=\color{darkgreen},
+  moredelim=[s][\color{black}]{>}{<},
+  moredelim=[s][\color{red}]{\ }{=},
+  stringstyle=\color{blue},
+  identifierstyle=\color{darkblue}
+}
 \begin{document}
 
+\lstset{language=XML,
+        breaklines=true}
 \begin{titlepage}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
@@ -415,56 +443,70 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 		\begin{itemize}
 			\item Como par\'ametro se necesitan los siguientes items detallados de la siguiente forma:
 				
-				\begin{verbatim}
-					<parametro>
-						<recurso>
-							<recursoId>INT idDelRecurso</recursoId>
-							<tipo>STRING tipo (ARCHIVO,LINK,ENCUESTA)</tipo>
-						</recurso>
-					</parametro>
-				\end{verbatim}
+\begin{lstlisting}
+<parametro>
+  <recurso>
+    <recursoId>INT idDelRecurso</recursoId>
+    <tipo>STRING tipo (ARCHIVO,LINK,ENCUESTA)</tipo>
+  </recurso>
+</parametro>
+\end{lstlisting}
 				
 			\item Como resultado se obtendr\'an los siguientes archivos dependiendo la respuesta del servicio:
 			
-			\i	\item ARCHIVO 
+
+
+			\item ARCHIVO 
 			
 			\lstinputlisting{archivo.xml}	
-			
-			\item ENCUESTA NO EVALUADA
-			
-			\lstinputlisting{encuestaNoEvaluada.xml}
-			
-			\item ENCUESTA EVALUADA
-									
-			\lstinputlisting{encuestaEvaluada.xml}
+			\textbf{Donde el tag \emph{rawFile} contiene un archivo serializado con JAXB, el tipo de dato que devuelve es un DataHandler, el cliente para deserializar debe poseer una clase con el siguiente atributo:} \newline
+			\begin{verbatim}
+				@XmlElement(name = "rawFile")
+				@XmlMimeType("application/octet-stream")
+				private DataHandler dataHandler;
+			\end{verbatim}
 			
 			\item LINK
 			
 			\lstinputlisting{link.xml}
-
+%\clearpage
+			
+			\item ENCUESTA NO EVALUABLE
+			
+			\lstinputlisting{encuestaNoEvaluada.xml}
+			
+			\item ENCUESTA EVALUABLE
+									
+			\lstinputlisting{encuestaEvaluada.xml}
+\textbf{Notar que existen dos tags para las preguntas \emph{preguntaMultipleOpcion} y \emph{pregunta} para diferenciar las que deben ser completadas en un TextBox de las que usan un RadioButton o llista desplegable. } \newline
 		
 		\end{itemize}
+\clearpage
 			\item Los posibles errores detectados se mostrar\'an de la siguiente manera:
 			\begin{itemize}
-				\item ERROR PARAMETROS INVALIDOS:
+				\item ERROR PARAMETROS INVALIDOS EN GENERAL
 				
 				\lstinputlisting{parInvalidos.xml}
 				
-				\item ERROR FALTA EL TIPO DE MATERIAL:
+				\item ERROR PARAMETROS ESPEC\'IFICOS INVALIDOS FALTA EL TIPO
 				
 				\lstinputlisting{materialInvalido.xml}		
 								
-				\item ERROR FALTA EL ID RECURSO:
+				\item ERROR PARAMETROS ESPEC\'IFICOS INVALIDOS FALTA EL ID RECURSO:
 				
 				\lstinputlisting{idRecursoInvalido.xml}	
 				
-				\item ERROR RECURSO NO ENCONTRADO:
+				\item ERROR PARAMETROS ESPEC\'IFICOS INVALIDOS TIPO DE RECURSO INEXISTENTE (los v\'alidos son: Link, Encuesta y Archivo):
 				
 				\lstinputlisting{recursoInvalido.xml}				
 				
 				\item ERROR AL OBTENER RECURSO:
 				
-				\lstinputlisting{recursoNoAlcanzable.xml}	
+				\lstinputlisting{recursoNoAlcanzable.xml}
+				
+				\item ERRORES PROVENIENTES DE LA CAPA DE INTEGRACION:
+				
+				\lstinputlisting{errorIntegracion.xml}
 				
 			\end{itemize}
 			\item \emph{OBTENER LISTA RECURSOS}
@@ -472,6 +514,7 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 				\item[INPUT] ID-AMBIENTE
 				\item[OUTPUT] LISTA-DE [ID-RECURSO, DESCRIPCION, TIPO]\\
 			\end{description}
+			\lstinputlisting{recursos.xml}
 			
 			\item \emph{AGREGAR ARCHIVO}
 			\begin{description}

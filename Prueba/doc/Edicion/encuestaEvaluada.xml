@@ -1,15 +1,24 @@
 <response>
   <success>true</success>
   <encuesta evaluada="true">
-    <recursoId>15</recursoId>
+    <recursoId>11004</recursoId>
     <tipo>Encuesta</tipo>
-    <ambitoId>2</ambitoId>
-    <descripcion>Encuesta con preguntas a completar</descripcion>
+    <ambitoId>-1</ambitoId>
+    <descripcion>una encuesta grande</descripcion>
     <preguntas>
-      <pregunta correcta="blanco" idPregunta="1"
-		 enunciado="De que color es el caballo blanco de San Martin?"/>
-      <pregunta correcta="4" idPregunta="2"
-		 enunciado="Cuantas patas tiene un gato?"/>
+      <preguntaMultipleOpcion correctas="3" idPregunta="1" enunciado="de que color es el caballo blanco de san martin?">
+        <respuestas>rojo,verde,azul,blanco</respuestas>
+      </preguntaMultipleOpcion>
+      <preguntaMultipleOpcion correctas="1" idPregunta="2" enunciado="a que equipo del futbol argentino le denominan Millo">
+        <respuestas>velez,River Plate,crucero del norte,estudiantes</respuestas>
+      </preguntaMultipleOpcion>
+      <preguntaMultipleOpcion correctas="2" idPregunta="3" enunciado="cual es un patron de diseno creacional">
+        <respuestas>command,mediator,builder,facade</respuestas>
+      </preguntaMultipleOpcion>
+      <preguntaMultipleOpcion correctas="0,7,10,11,12,6" idPregunta="4" enunciado="Un test unitario debe presentar las siguientes características">
+        <respuestas>Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente,Automatizable</respuestas>
+      </preguntaMultipleOpcion>
+      <pregunta correcta="4" idPregunta="5" enunciado="cuantas patas tiene un gato?"/>
     </preguntas>
   </encuesta>
 </response>

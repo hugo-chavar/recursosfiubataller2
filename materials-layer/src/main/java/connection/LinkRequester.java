@@ -29,7 +29,7 @@ public class LinkRequester {
 
 		parser = new LinkParser();
 		cache = new Cache<Link>();
-		Link link = new Link(1002,-1,"un link a google copado");
+		Link link = new Link(11002,-1,"un link a google copado");
 		link.setNombre("www.google.com.ar");
 		cache.add(link);
 
