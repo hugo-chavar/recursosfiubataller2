@@ -12,8 +12,6 @@ import model.Recurso;
 
 import org.apache.axis2.AxisFault;
 
-import com.ws.services.IntegracionStub.GuardarDatos;
-import com.ws.services.IntegracionStub.GuardarDatosResponse;
 import com.ws.services.IntegracionStub.SeleccionarDatos;
 import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
@@ -27,6 +25,7 @@ public class EncuestaRequester extends HandlerRequester {
 //	private IntegracionStub stub;
 	private EncuestaParser parser;
 	private Cache<Encuesta> cacheEncuestas;
+	private Encuesta currentEncuesta;
 	//private Cache<EncuestaRespondida> cacheEncuestasRespondidas;
 
 	
@@ -143,35 +142,37 @@ public class EncuestaRequester extends HandlerRequester {
 
 	public OperationResponse save(Encuesta encuesta) {
 
-		OperationResponse response;
-		
+//		OperationResponse response;
+		currentEncuesta = encuesta;
 		// Guardo la encuesta
 		String encuesta_str = parser.serializeEncuesta(encuesta);
-		try {
-			GuardarDatos guardar = new GuardarDatos();
-			guardar.setXml(encuesta_str);
-			GuardarDatosResponse g_resp = stub.guardarDatos(guardar);
-			System.out.println(g_resp.get_return());
-			
-			response = OperationResponse.createSuccess();
-			
-			// Actualizo el cache
-			if (cacheEncuestas.contains(encuesta)) {
-				cacheEncuestas.remove(encuesta);
-				cacheEncuestas.add(encuesta);
-			}
-			
-		} catch (AxisFault e) {
-			String reason = "Error al guardar la Encuesta, Id: " + encuesta.getRecursoId();
-			System.out.println(reason);
-			response = OperationResponse.createFailed(reason);
-		} catch (RemoteException e) {
-			String reason = "Error de conexion remota";
-			System.out.println(reason);
-			response = OperationResponse.createFailed(reason);
-		}
 		
-		return response;
+		return save(encuesta_str, encuesta.getRecursoId());
+//		try {
+//			GuardarDatos guardar = new GuardarDatos();
+//			guardar.setXml(encuesta_str);
+//			GuardarDatosResponse g_resp = stub.guardarDatos(guardar);
+//			System.out.println(g_resp.get_return());
+//			
+//			response = OperationResponse.createSuccess();
+//			
+//			// Actualizo el cache
+//			if (cacheEncuestas.contains(encuesta)) {
+//				cacheEncuestas.remove(encuesta);
+//				cacheEncuestas.add(encuesta);
+//			}
+//			
+//		} catch (AxisFault e) {
+//			String reason = "Error al guardar la Encuesta, Id: " + encuesta.getRecursoId();
+//			System.out.println(reason);
+//			response = OperationResponse.createFailed(reason);
+//		} catch (RemoteException e) {
+//			String reason = "Error de conexion remota";
+//			System.out.println(reason);
+//			response = OperationResponse.createFailed(reason);
+//		}
+//		
+//		return response;
 	}
 	public OperationResponse getFromCache(int recursoId) {
 		
@@ -241,6 +242,19 @@ public class EncuestaRequester extends HandlerRequester {
 
 	public void deleteFromCache(int recursoId) {
 		cacheEncuestas.remove(new Encuesta(recursoId, 0, "", false));
+	}
+
+	@Override
+	protected String getHandledType() {
+		return "Encuesta";
+	}
+
+	@Override
+	public void udpateCache() {
+		if (cacheEncuestas.contains(currentEncuesta)) {
+			cacheEncuestas.remove(currentEncuesta);
+		}
+		cacheEncuestas.add(currentEncuesta);
 	}
 
 }

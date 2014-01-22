@@ -17,6 +17,7 @@ import model.Recurso;
 
 import org.apache.axis2.AxisFault;
 
+
 //import com.sun.xml.internal.ws.util.ByteArrayDataSource;
 import com.ws.services.IntegracionStub;
 import com.ws.services.IntegracionStub.SeleccionarDatos;
@@ -187,5 +188,17 @@ public class ArchivoRequester extends HandlerRequester {
 			
 			return response;*/
 		}
+
+	@Override
+	protected String getHandledType() {
+		return "Archivo";
+	}
+
+	@Override
+	public void udpateCache() {
+		// TODO Dami, podrias cachear los que tienen pocos bytes, hasta cierto limite
+		// en caso de tener tiempo hacelo parecido a como esta en LinkRequester 
+		
+	}
 
 	}

@@ -28,52 +28,29 @@ public class Parameter {
 	}
 
 	public Parameter() {
-
 	}
 
-//	@XmlElement //(nillable = true)
-//	private Integer ambitoId;
-
-	@XmlElement //(nillable = true)
+	@XmlElement
 	private Integer usuarioId;
 
-//	@XmlElement //(nillable = true)
-//	private Integer recursoId;
-	
-	@XmlElement //(nillable = true)
+	@XmlElement
 	private EncuestaRespondida respondida;
 
 	@XmlElementRefs({ 
 		@XmlElementRef(type = Recurso.class), 
 		@XmlElementRef(type = Encuesta.class), 
 		@XmlElementRef(type = Link.class),
-//		@XmlElementRef(type = Archivo.class),// da error faltan annotations en clase Archivo
+		@XmlElementRef(type = Archivo.class),
 		})
 	private Recurso recurso;
-
-//	public Integer getAmbitoId() {
-//		return ambitoId;
-//	}
 
 	public Integer getUsuarioId() {
 		return usuarioId;
 	}
 
-//	public Integer getRecursoId() {
-//		return recursoId;
-//	}
-
-//	public void setAmbitoId(Integer ambitoId) {
-//		this.ambitoId = ambitoId;
-//	}
-
 	public void setUsuarioId(Integer usuarioId) {
 		this.usuarioId = usuarioId;
 	}
-
-//	public void setRecursoId(Integer recursoId) {
-//		this.recursoId = recursoId;
-//	}
 
 	public Recurso getRecurso() {
 		return recurso;

@@ -11,8 +11,6 @@ import connection.cache.Cache;
 import connection.responses.LinkResponse;
 import connection.responses.OperationResponse;
 
-import com.ws.services.IntegracionStub.GuardarDatos;
-import com.ws.services.IntegracionStub.GuardarDatosResponse;
 import com.ws.services.IntegracionStub.SeleccionarDatos;
 import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
@@ -22,6 +20,7 @@ public class LinkRequester extends HandlerRequester {
 //	private IntegracionStub stub;
 	private LinkParser parser;
 	private Cache<Link> cache;
+	private Link currentLink;
 
 	
 	public LinkRequester() {
@@ -43,40 +42,41 @@ public class LinkRequester extends HandlerRequester {
 
 	public OperationResponse save(Link link) {
 		
-		OperationResponse response;
-		
+		currentLink = link;
 		// Guardo el link
 		String link_str = parser.serializeLink(link);
-		try {
-			GuardarDatos guardar = new GuardarDatos();
-			guardar.setXml(link_str);
-			GuardarDatosResponse g_resp = stub.guardarDatos(guardar);
-			// TODO implementar método que chequee las respuestas
-			// if (xmlUtil.isResponseOk(g_resp.get_return())) {
-			// or.setSuccess(true);
-			// or.setReason("algo");
-			// }
-			System.out.println(g_resp.get_return());
-			
-			response = OperationResponse.createSuccess();
-			
-			// Actualizo el cache
-			if (cache.contains(link)) {
-				cache.remove(link);
-				cache.add(link);
-			}
-			
-		} catch (AxisFault e) {
-			String reason = "Error al guardar el Link, Id: " + link.getRecursoId();
-			System.out.println(reason);
-			response = OperationResponse.createFailed(reason);
-		} catch (RemoteException e) {
-			String reason = "Error de conexion remota";
-			System.out.println(reason);
-			response = OperationResponse.createFailed(reason);
-		}
 		
-		return response;
+		return save(link_str, link.getRecursoId());
+//		try {
+//			GuardarDatos guardar = new GuardarDatos();
+//			guardar.setXml(link_str);
+//			GuardarDatosResponse g_resp = stub.guardarDatos(guardar);
+//			// TODO implementar método que chequee las respuestas
+//			// if (xmlUtil.isResponseOk(g_resp.get_return())) {
+//			// or.setSuccess(true);
+//			// or.setReason("algo");
+//			// }
+//			System.out.println(g_resp.get_return());
+//			
+//			response = OperationResponse.createSuccess();
+//			
+//			// Actualizo el cache
+//			if (cache.contains(link)) {
+//				cache.remove(link);
+//				cache.add(link);
+//			}
+//			
+//		} catch (AxisFault e) {
+//			String reason = "Error al guardar el Link, Id: " + link.getRecursoId();
+//			System.out.println(reason);
+//			response = OperationResponse.createFailed(reason);
+//		} catch (RemoteException e) {
+//			String reason = "Error de conexion remota";
+//			System.out.println(reason);
+//			response = OperationResponse.createFailed(reason);
+//		}
+//		
+//		return response;
 		
 	}
 	
@@ -98,10 +98,9 @@ public class LinkRequester extends HandlerRequester {
 		LinkResponse response;
 		String reason;
 
+		// Consulto el link guardado
+		String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), LinkParser.LINK_TAG);
 		try {
-
-			// Consulto el link guardado
-			String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), LinkParser.LINK_TAG);
 			SeleccionarDatos seleccionar_e = new SeleccionarDatos();
 			seleccionar_e.setXml(xml);
 			SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
@@ -134,6 +133,19 @@ public class LinkRequester extends HandlerRequester {
 
 	public void deleteFromCache(int recursoId) {
 		cache.remove(new Link(recursoId, 0, ""));
+	}
+
+	@Override
+	protected String getHandledType() {
+		return "Link";
+	}
+
+	@Override
+	public void udpateCache() {
+		if (cache.contains(currentLink)) {
+			cache.remove(currentLink);
+		}
+		cache.add(currentLink);
 	}
 
 }
