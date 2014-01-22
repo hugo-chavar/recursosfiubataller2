@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage{latexsym}
-\usepackage[utf8]{inputenx}
+\usepackage{inputenx}
 \usepackage[spanish]{babel}
 \usepackage{graphicx}
 \usepackage{anysize}
@@ -13,6 +13,7 @@
 \usepackage{verbatim}
 \usepackage{moreverb}
 \usepackage{url}
+\usepackage{listings}
 \usepackage{enumitem}
 \usepackage{multicol}
 \usepackage{pifont}
@@ -404,16 +405,74 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 		\item[Provistas a la capa de Presentaci\'on ] \
 		\renewcommand{\labelitemi}{\ding{105}} 
 		\begin{itemize}
+		\item \emph{OBTENER RECURSO}:
+			Este m\'etodo devuelve ya sea un Archivo, un Link o una Encuesta segun lo que se solicite.
+			\begin{description}
+				\item[INPUT] XML\_PARAMETROS
+				\item[OUTPUT] XML\_RESULTADO\\
+			\end{description}
+		
+		\begin{itemize}
+			\item Como par\'ametro se necesitan los siguientes items detallados de la siguiente forma:
+				
+				\begin{verbatim}
+					<parametro>
+						<recurso>
+							<recursoId>INT idDelRecurso</recursoId>
+							<tipo>STRING tipo (ARCHIVO,LINK,ENCUESTA)</tipo>
+						</recurso>
+					</parametro>
+				\end{verbatim}
+				
+			\item Como resultado se obtendr\'an los siguientes archivos dependiendo la respuesta del servicio:
+			
+			\i	\item ARCHIVO 
+			
+			\lstinputlisting{archivo.xml}	
+			
+			\item ENCUESTA NO EVALUADA
+			
+			\lstinputlisting{encuestaNoEvaluada.xml}
+			
+			\item ENCUESTA EVALUADA
+									
+			\lstinputlisting{encuestaEvaluada.xml}
+			
+			\item LINK
+			
+			\lstinputlisting{link.xml}
+
+		
+		\end{itemize}
+			\item Los posibles errores detectados se mostrar\'an de la siguiente manera:
+			\begin{itemize}
+				\item ERROR PARAMETROS INVALIDOS:
+				
+				\lstinputlisting{parInvalidos.xml}
+				
+				\item ERROR FALTA EL TIPO DE MATERIAL:
+				
+				\lstinputlisting{materialInvalido.xml}		
+								
+				\item ERROR FALTA EL ID RECURSO:
+				
+				\lstinputlisting{idRecursoInvalido.xml}	
+				
+				\item ERROR RECURSO NO ENCONTRADO:
+				
+				\lstinputlisting{recursoInvalido.xml}				
+				
+				\item ERROR AL OBTENER RECURSO:
+				
+				\lstinputlisting{recursoNoAlcanzable.xml}	
+				
+			\end{itemize}
 			\item \emph{OBTENER LISTA RECURSOS}
 			\begin{description}
 				\item[INPUT] ID-AMBIENTE
 				\item[OUTPUT] LISTA-DE [ID-RECURSO, DESCRIPCION, TIPO]\\
 			\end{description}
-			\item \emph{OBTENER RECURSO}
-			\begin{description}
-				\item[INPUT] ID-AMBIENTE, ID-RECURSO, ID-USUARIO
-				\item[OUTPUT] LINK-AL-RECURSO \'o ARCHIVO \'o ACCESO-A-ENCUESTA\\
-			\end{description}
+			
 			\item \emph{AGREGAR ARCHIVO}
 			\begin{description}
 				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, ARCHIVO

@@ -1,0 +1,17 @@
+<response>
+  <success>true</success>
+  <encuesta evaluada="true">
+    <recursoId>15</recursoId>
+    <tipo>Encuesta</tipo>
+    <ambitoId>2</ambitoId>
+    <descripcion>Encuesta con preguntas a completar</descripcion>
+    <preguntas>
+      <pregunta correcta="blanco" idPregunta="1"
+		 enunciado="De que color es el caballo blanco de San Martin?"/>
+      <pregunta correcta="4" idPregunta="2"
+		 enunciado="Cuantas patas tiene un gato?"/>
+    </preguntas>
+  </encuesta>
+</response>
+
+

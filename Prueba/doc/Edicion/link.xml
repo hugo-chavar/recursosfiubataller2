@@ -1,0 +1,12 @@
+<response>
+  <success>true</success>
+  <recurso>
+    <recursoId>1002</recursoId>
+    <tipo>Link</tipo>
+    <ambitoId>-1</ambitoId>
+    <descripcion>un link a google copado</descripcion>
+    <link>www.google.com.ar</link>
+  </recurso>
+</response>
+
+
