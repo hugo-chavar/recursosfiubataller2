@@ -10,43 +10,32 @@ import org.apache.axis2.AxisFault;
 import connection.cache.Cache;
 import connection.responses.OperationResponse;
 
-import com.ws.services.IntegracionStub.SeleccionarDatos;
-import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
-
-
 public class LinkRequester extends HandlerRequester {
 
 //	private IntegracionStub stub;
-//	private LinkParser parser;
+	private LinkParser parser;
 	private Cache<Link> cache;
-	private Link currentLink;
+	private Recurso current;
 
 	
 	public LinkRequester() {
 		super();
-
 		parser = new LinkParser();
 		cache = new Cache<Link>();
-//		Link link = new Link(11002,-1,"un link a google copado");
-//		link.setNombre("www.google.com.ar");
-//		cache.add(link);
-		currentLink = new Link(11002,-1,"un link a google copado");
-		currentLink.setNombre("www.google.com.ar");
+		generateTestData();
+	}
+
+	private void generateTestData() {
+		Link link = new Link(11002,-1,"un link a google copado");
+		link.setNombre("www.google.com.ar");
+		current = link;
 		updateCache();
-
-//		try {
-//			this.stub = new IntegracionStub();
-//		} catch (AxisFault e) {
-//			System.out.println("Error al intentar contectarse con Integracion");
-//		}
-
 	}
 
 	public OperationResponse save(Link link) {
 		
-		currentLink = link;
-		// Guardo el link
-		String link_str = ((LinkParser) parser).serializeLink(link);
+		current = link;
+		String link_str = parser.serializeLink(link);
 		
 		return save(link_str);
 //		try {
@@ -100,53 +89,54 @@ public class LinkRequester extends HandlerRequester {
 //	}
 
 	protected Recurso retrieveCached(int recursoId) {
-		Link target = new Link(recursoId, 0, "");
-		return cache.get(target);
+		return cache.get(new Link(recursoId, 0, ""));
 	}
 	
 	public boolean cacheContains(int recursoId) {
-		Link target = new Link(recursoId, 0, "");
-		return cache.contains(target);
+		return cache.contains(new Link(recursoId, 0, ""));
 	}
 
 	public OperationResponse get(Recurso recurso) {
 
-		OperationResponse response;
-		String reason;
+//		OperationResponse response;
+//		String reason;
+		
+		current = recurso;
 
 		// Consulto el link guardado
 		String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), LinkParser.LINK_TAG);
-		try {
-			SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-			seleccionar_e.setXml(xml);
-			SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
-			String xml_resp_e = s_resp_e.get_return();
-			Link link = ((LinkParser) parser).deserializeLink(xml_resp_e);
-			link.setAmbitoId(recurso.getAmbitoId());
-			link.setRecursoId(recurso.getRecursoId());
-			link.setDescripcion(recurso.getDescripcion());
-
-			// Agrego al cache de links
-			cache.add(link);
-
-//			response = new LinkResponse(link);
-//			response.setSuccess(true);
-			response = OperationResponse.createSuccess();
-			response.setRecurso(link);
-			return response;
-
-		} catch (AxisFault e) {
-			reason = "Error al intentar obtener el Link, ID: " + recurso.getRecursoId();
-		} catch (RemoteException e) {
-			reason = "Error de conexion remota";
-		}
-
-		response = OperationResponse.createFailed(reason);
-		System.out.println(reason);
-//		response = new LinkResponse();
-//		response.setReason(reason);
-		
-		return response;
+		return get(xml);
+//		try {
+//			SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+//			seleccionar_e.setXml(xml);
+//			SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
+//			String xml_resp_e = s_resp_e.get_return();
+//			Link link = parser.deserializeLink(xml_resp_e);
+//			link.setAmbitoId(recurso.getAmbitoId());
+//			link.setRecursoId(recurso.getRecursoId());
+//			link.setDescripcion(recurso.getDescripcion());
+//
+//			// Agrego al cache de links
+//			cache.add(link);
+//
+////			response = new LinkResponse(link);
+////			response.setSuccess(true);
+//			response = OperationResponse.createSuccess();
+//			response.setRecurso(link);
+//			return response;
+//
+//		} catch (AxisFault e) {
+//			reason = "Error al intentar obtener el Link, ID: " + recurso.getRecursoId();
+//		} catch (RemoteException e) {
+//			reason = "Error de conexion remota";
+//		}
+//
+//		response = OperationResponse.createFailed(reason);
+//		System.out.println(reason);
+////		response = new LinkResponse();
+////		response.setReason(reason);
+//		
+//		return response;
 		
 	}
 
@@ -169,18 +159,23 @@ public class LinkRequester extends HandlerRequester {
 
 	@Override
 	protected void createCurrentObject(String xml_resp_e) {
-		currentLink = ((LinkParser) parser).deserializeLink(xml_resp_e);
+		current = parser.deserializeLink(xml_resp_e);
 	}
 
 	@Override
 	protected Recurso getCurrent() {
-		return currentLink;
+		return current;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected Cache getCache() {
 		return cache;
+	}
+
+	@Override
+	protected Parser getParser() {
+		return parser;
 	}
 
 }

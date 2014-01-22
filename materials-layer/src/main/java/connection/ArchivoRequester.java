@@ -17,7 +17,6 @@ import model.Recurso;
 
 import org.apache.axis2.AxisFault;
 
-
 //import com.sun.xml.internal.ws.util.ByteArrayDataSource;
 import com.ws.services.IntegracionStub;
 import com.ws.services.IntegracionStub.SeleccionarDatos;
@@ -30,10 +29,12 @@ import connection.responses.OperationResponse;
 public class ArchivoRequester extends HandlerRequester {
 	// private IntegracionStub stub;
 	private ArchivoParser parser;
+	private Cache<Archivo> cache;
 
 	public ArchivoRequester() {
 		super();
 		parser = new ArchivoParser();
+		cache = new Cache<Archivo>();
 	}
 
 	public String save(Archivo archivo) {
@@ -242,6 +243,11 @@ public class ArchivoRequester extends HandlerRequester {
 	protected Recurso retrieveCached(int recursoId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	protected Parser getParser() {
+		return parser;
 	}
 
 }

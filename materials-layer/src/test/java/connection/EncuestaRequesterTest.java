@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import connection.exceptions.GetException;
 import connection.responses.EncuestaResponse;
+import connection.responses.OperationResponse;
 
 
 public class EncuestaRequesterTest {
@@ -71,8 +72,9 @@ public class EncuestaRequesterTest {
 	public void getEncuestaFromCache() throws GetException {
 		Encuesta encuesta = new Encuesta(11003, -1, "una encuesta chica", false);
 
-		EncuestaResponse response =  (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
-		Encuesta encuesta_rtn = response.getEncuesta();       
+//		EncuestaResponse response =  (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
+		OperationResponse response = Requester.INSTANCE.getRecurso(encuesta);
+		Encuesta encuesta_rtn = (Encuesta)response.getRecurso();       
 
 		Assert.assertEquals(encuesta, encuesta_rtn);
 		Assert.assertEquals("una encuesta chica", encuesta_rtn.getDescripcion());

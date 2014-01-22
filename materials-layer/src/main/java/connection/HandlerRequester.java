@@ -18,7 +18,7 @@ import connection.responses.OperationResponse;
 public abstract class HandlerRequester {
 
 	protected IntegracionStub stub;
-	protected Parser parser;
+	
 
 	protected HandlerRequester() {
 		try {
@@ -54,7 +54,7 @@ public abstract class HandlerRequester {
 		return response;
 	}
 
-	public OperationResponse get(String xml, int recursoId) {
+	public OperationResponse get(String xml) {
 		String reason;
 
 		try {
@@ -69,7 +69,7 @@ public abstract class HandlerRequester {
 			return currentObjetToResponse();
 
 		} catch (AxisFault e) {
-			reason = "Error al intentar obtener " + getHandledType() + ", ID: " + recursoId;
+			reason = "Error al intentar obtener " + getHandledType() + ", ID: " + getCurrent().getRecursoId();
 		} catch (RemoteException e) {
 			reason = "Error de conexion remota";
 		}
@@ -98,21 +98,21 @@ public abstract class HandlerRequester {
 		getCache().add(getCurrent());
 	}
 	
-public OperationResponse getFromCache(int recursoId) {
-		
+	public OperationResponse getFromCache(int recursoId) {
+
 		OperationResponse response;
-//		LinkResponse response = new LinkResponse();
-//		Link target = new Link(recursoId, 0, "");
+		// LinkResponse response = new LinkResponse();
+		// Link target = new Link(recursoId, 0, "");
 
 		if (cacheContains(recursoId)) {
 			response = OperationResponse.createSuccess();
 			response.setRecurso(retrieveCached(recursoId));
 			return response;
-//			response = new LinkResponse(cache.get(target));
+			// response = new LinkResponse(cache.get(target));
 		}
-		
+
 		return OperationResponse.createFailed("no esta");
-		
+
 	}
 
 	public abstract void deleteFromCache(int recursoId);
@@ -130,6 +130,8 @@ public OperationResponse getFromCache(int recursoId) {
 //	protected abstract void updateCache();
 	
 	protected abstract Recurso getCurrent();
+	
+	protected abstract Parser getParser();
 	
 	@SuppressWarnings("rawtypes")
 	protected abstract Cache getCache();

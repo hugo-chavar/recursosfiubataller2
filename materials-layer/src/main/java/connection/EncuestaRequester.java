@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Encuesta;
+import model.Link;
 import model.Pregunta;
 import model.PreguntaRespuestaACompletar;
 import model.PreguntaRespuestaFija;
@@ -25,7 +26,7 @@ public class EncuestaRequester extends HandlerRequester {
 //	private IntegracionStub stub;
 	private EncuestaParser parser;
 	private Cache<Encuesta> cache;
-	private Encuesta currentEncuesta;
+	private Encuesta current;
 	//private Cache<EncuestaRespondida> cacheEncuestasRespondidas;
 
 	
@@ -143,7 +144,7 @@ public class EncuestaRequester extends HandlerRequester {
 	public OperationResponse save(Encuesta encuesta) {
 
 //		OperationResponse response;
-		currentEncuesta = encuesta;
+		current = encuesta;
 		// Guardo la encuesta
 		String encuesta_str = parser.serializeEncuesta(encuesta);
 		
@@ -174,19 +175,19 @@ public class EncuestaRequester extends HandlerRequester {
 //		
 //		return response;
 	}
-	public OperationResponse getFromCache(int recursoId) {
-		
-		EncuestaResponse response = new EncuestaResponse();
-		Encuesta target = new Encuesta(recursoId, 0, "", false);
-
-		if (cache.contains(target)) {
-			response = new EncuestaResponse(cache.get(target));
-			response.setSuccess(true);
-		}
-		
-		return response;
-		
-	}
+//	public OperationResponse getFromCache(int recursoId) {
+//		
+//		EncuestaResponse response = new EncuestaResponse();
+//		Encuesta target = new Encuesta(recursoId, 0, "", false);
+//
+//		if (cache.contains(target)) {
+//			response = new EncuestaResponse(cache.get(target));
+//			response.setSuccess(true);
+//		}
+//		
+//		return response;
+//		
+//	}
 
 	public OperationResponse get(Recurso recurso) {
 
@@ -248,15 +249,6 @@ public class EncuestaRequester extends HandlerRequester {
 	protected String getHandledType() {
 		return "Encuesta";
 	}
-
-//	@Override
-//	public void udpateCache() {
-//		if (cacheEncuestas.contains(currentEncuesta)) {
-//			cacheEncuestas.remove(currentEncuesta);
-//		}
-//		cacheEncuestas.add(currentEncuesta);
-//	}
-
 	@Override
 	protected void createCurrentObject(String xml_resp_e) {
 		// TODO Auto-generated method stub
@@ -265,7 +257,7 @@ public class EncuestaRequester extends HandlerRequester {
 
 	@Override
 	protected Recurso getCurrent() {
-		return currentEncuesta;
+		return current;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -276,14 +268,25 @@ public class EncuestaRequester extends HandlerRequester {
 
 	@Override
 	protected boolean cacheContains(int recursoId) {
-		// TODO Auto-generated method stub
-		return false;
+		return cache.contains(new Encuesta(recursoId, 0, "", false));
 	}
 
 	@Override
 	protected Recurso retrieveCached(int recursoId) {
-		// TODO Auto-generated method stub
-		return null;
+		return cache.get(new Encuesta(recursoId, 0, "", false));
 	}
+
+	@Override
+	protected Parser getParser() {
+		return parser;
+	}
+
+//	@Override
+//	public void udpateCache() {
+//		if (cacheEncuestas.contains(currentEncuesta)) {
+//			cacheEncuestas.remove(currentEncuesta);
+//		}
+//		cacheEncuestas.add(currentEncuesta);
+//	}
 
 }
