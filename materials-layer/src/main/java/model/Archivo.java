@@ -10,11 +10,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlMimeType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.sun.istack.ByteArrayDataSource;
 
-@XmlAccessorType(XmlAccessType.NONE)
+//@XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Archivo extends Recurso {
 
 	public Archivo(Integer idRecurso, Integer idAmbiente, String descripcion) {
@@ -30,17 +33,24 @@ public class Archivo extends Recurso {
 //	private String path;
 	@XmlTransient
 	private Integer tamanio;
+	
 	@XmlElement
 	private String tipoArchivo;
 	@XmlElement
 	private String nombreArchivo;
+	
+//	@XmlTransient
+	@XmlElement
 	@XmlMimeType("application/octet-stream")
 	private DataHandler rawFile;
-	@XmlElement
+//	@XmlElement
+	@XmlTransient
 	private byte[] fileBinary;
-	@XmlElement
+//	@XmlElement
+	@XmlTransient
 	private String contentType;
-	@XmlElement
+//	@XmlElement
+	@XmlTransient
 	private String stringFile;
 	
     public String getNombreArchivo() {
