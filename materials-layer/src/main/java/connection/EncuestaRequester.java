@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Encuesta;
-import model.EncuestaRespondida;
 import model.Pregunta;
 import model.PreguntaRespuestaACompletar;
 import model.PreguntaRespuestaFija;
@@ -13,7 +12,6 @@ import model.Recurso;
 
 import org.apache.axis2.AxisFault;
 
-import com.ws.services.IntegracionStub;
 import com.ws.services.IntegracionStub.GuardarDatos;
 import com.ws.services.IntegracionStub.GuardarDatosResponse;
 import com.ws.services.IntegracionStub.SeleccionarDatos;
@@ -24,9 +22,9 @@ import connection.responses.EncuestaResponse;
 import connection.responses.OperationResponse;
 
 
-public class EncuestaRequester {
+public class EncuestaRequester extends HandlerRequester {
 
-	private IntegracionStub stub;
+//	private IntegracionStub stub;
 	private EncuestaParser parser;
 	private Cache<Encuesta> cacheEncuestas;
 	//private Cache<EncuestaRespondida> cacheEncuestasRespondidas;
@@ -34,6 +32,7 @@ public class EncuestaRequester {
 	
 	public EncuestaRequester() {
 
+		super();
 		parser = new EncuestaParser();
 		cacheEncuestas = new Cache<Encuesta>();
 		// TODO cargo encuestas de ejemplo (sacar)
@@ -134,11 +133,11 @@ public class EncuestaRequester {
 
 		enc.addPregunta(p5);
 
-		try {
-			stub = new IntegracionStub();
-		} catch (AxisFault e) {
-			System.out.println("Error al intentar contectarse con Integracion");
-		}
+//		try {
+//			stub = new IntegracionStub();
+//		} catch (AxisFault e) {
+//			System.out.println("Error al intentar contectarse con Integracion");
+//		}
 
 	}
 

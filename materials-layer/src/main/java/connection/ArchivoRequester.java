@@ -13,7 +13,6 @@ import javax.activation.DataHandler;
 import javax.activation.DataSource;
 
 import model.Archivo;
-import model.Link;
 import model.Recurso;
 
 import org.apache.axis2.AxisFault;
@@ -24,23 +23,23 @@ import com.ws.services.IntegracionStub.SeleccionarDatos;
 import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
 import connection.responses.ArchivoResponse;
-import connection.responses.LinkResponse;
 import connection.responses.OperationResponse;
 
 
-public class ArchivoRequester {
+public class ArchivoRequester extends HandlerRequester {
 	private IntegracionStub stub;
 	private ArchivoParser parser;
 
 	public ArchivoRequester() {
+		super();
 		parser = new ArchivoParser();
 		
-		try {
-			stub = new IntegracionStub();
-		} catch (AxisFault e) {
-			// e.printStackTrace();
-			System.out.println("Error al intentar contectarse con Integracion");
-		}
+//		try {
+//			stub = new IntegracionStub();
+//		} catch (AxisFault e) {
+//			// e.printStackTrace();
+//			System.out.println("Error al intentar contectarse con Integracion");
+//		}
 	}
 
 	public String save(Archivo archivo) {

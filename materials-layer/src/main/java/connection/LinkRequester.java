@@ -11,21 +11,21 @@ import connection.cache.Cache;
 import connection.responses.LinkResponse;
 import connection.responses.OperationResponse;
 
-import com.ws.services.IntegracionStub;
 import com.ws.services.IntegracionStub.GuardarDatos;
 import com.ws.services.IntegracionStub.GuardarDatosResponse;
 import com.ws.services.IntegracionStub.SeleccionarDatos;
 import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
 
-public class LinkRequester {
+public class LinkRequester extends HandlerRequester {
 
-	private IntegracionStub stub;
+//	private IntegracionStub stub;
 	private LinkParser parser;
 	private Cache<Link> cache;
 
 	
 	public LinkRequester() {
+		super();
 
 		parser = new LinkParser();
 		cache = new Cache<Link>();
@@ -33,11 +33,11 @@ public class LinkRequester {
 		link.setNombre("www.google.com.ar");
 		cache.add(link);
 
-		try {
-			this.stub = new IntegracionStub();
-		} catch (AxisFault e) {
-			System.out.println("Error al intentar contectarse con Integracion");
-		}
+//		try {
+//			this.stub = new IntegracionStub();
+//		} catch (AxisFault e) {
+//			System.out.println("Error al intentar contectarse con Integracion");
+//		}
 
 	}
 
