@@ -6,12 +6,12 @@
     <ambitoId>-1</ambitoId>
     <descripcion>una encuesta chica</descripcion>
     <preguntas>
-      <preguntaMultipleOpcion idPregunta="1" enunciado="cuantas materias te faltan para recibirte?">
+      <preguntaConOpciones multiplesCorrectas="false" idPregunta="1" enunciado="cuantas materias te faltan para recibirte?">
         <respuestas>1,menos de 5,entre 5 y 10,mas de 10</respuestas>
-      </preguntaMultipleOpcion>
-      <preguntaMultipleOpcion idPregunta="2" enunciado="que materia fue la mas dificil?">
+      </preguntaConOpciones>
+      <preguntaConOpciones multiplesCorrectas="false" idPregunta="2" enunciado="que materia fue la mas dificil?">
         <respuestas>analisis 2,algebra 2,taller 1,org de datos</respuestas>
-      </preguntaMultipleOpcion>
+      </preguntaConOpciones>
     </preguntas>
   </encuesta>
 </response>

@@ -470,7 +470,7 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 			\item LINK
 			
 			\lstinputlisting{link.xml}
-%\clearpage
+\clearpage
 			
 			\item ENCUESTA NO EVALUABLE
 			
@@ -479,7 +479,8 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 			\item ENCUESTA EVALUABLE
 									
 			\lstinputlisting{encuestaEvaluada.xml}
-\textbf{Notar que existen dos tags para las preguntas \emph{preguntaMultipleOpcion} y \emph{pregunta} para diferenciar las que deben ser completadas en un TextBox de las que usan un RadioButton o llista desplegable. } \newline
+\textbf{Notar que existen dos tags para las preguntas \emph{preguntaConOpciones} y \emph{preguntaSinOpciones} para diferenciar las que deben ser completadas en un TextBox de las que usan un mecanismo para tildar la/s opcion/es correcta/s. Dentro de \emph{preguntaConOpciones} se diferencian por el atributo \textit{multiplesCorrectas}, para que sea posible elegir una o muchas, esto hay que hacerlo debido a que una pregunta puede ser marcada como \textit{multiplesCorrectas = "true"} pero tenga una sola que es correcta.\newline
+Se enviar\'a \textit{multiplesCorrectas = "false"} cuando no hayan respuestas correctas, es decir, cuando no sea evaluable la encuesta.  } \newline
 		
 		\end{itemize}
 \clearpage
@@ -510,6 +511,7 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 				\lstinputlisting{errorIntegracion.xml}
 				
 			\end{itemize}
+			\clearpage
 			\item \emph{OBTENER LISTA RECURSOS}
 			\begin{description}
 				\item[INPUT] ID-AMBIENTE
@@ -525,17 +527,17 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 			\item \emph{AGREGAR LINK}
 			\begin{description}
 				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, LINK
-				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON (\emph{Coordinar con presentaci\'on que se requiere})\\
+				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \\
 			\end{description}
 			\item \emph{AGREGAR ENCUESTA}
 			\begin{description}
-				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, ENCUESTA (\emph{Coordinar con presentaci\'on forma de pasarlo})
+				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, ENCUESTA 
 				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON\\
 			\end{description}
 			\item \emph{GUARDAR ENCUESTA RESPONDIDA}
 			\begin{description}
 				\item[INPUT] ID-ENCUESTA, ID-USUARIO, LISTA-RESPUESTAS
-				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON (\emph{Coordinar con presentaci\'on})\\
+				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \\
 			\end{description}
 			\item \emph{OBTENER ENCUESTA RESPONDIDA}
 			\begin{description}
@@ -545,7 +547,7 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 			\item \emph{BORRAR RECURSO}
 			\begin{description}
 				\item[INPUT] ID-AMBIENTE, ID-RECURSO
-				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON(\emph{Coordinar con presentaci\'on si requieren algun dato})\\
+				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \\
 			\end{description}
 		\end{itemize}
 %		\renewcommand{\labelitemi}{\ding{118}} 

@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement (name = "pregunta")
+@XmlRootElement (name = "preguntaSinOpciones")
 public class PreguntaRespuestaACompletar extends Pregunta {
 
 	public String respuesta = null;
@@ -62,15 +62,6 @@ public class PreguntaRespuestaACompletar extends Pregunta {
 	public Integer getNroCorrectas() {
 		return 1;
 	}
-
-//	@Override
-//	public void completarDatosVisibles() {
-//		if (this.correctas.isEmpty()) {
-//			if (this.respuesta != null)
-//				this.correctas.add(this.respuesta);
-//		}
-//	}
-	
 	
 	@XmlAttribute(name = "correcta")
 	public String getRtasCorrectas() {

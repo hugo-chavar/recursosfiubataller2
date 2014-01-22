@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-@XmlRootElement(name = "preguntaMultipleOpcion")
+@XmlRootElement(name = "preguntaConOpciones")
 public class PreguntaRespuestaFija extends Pregunta {
 
 	@XmlTransient
@@ -17,9 +17,8 @@ public class PreguntaRespuestaFija extends Pregunta {
 	@XmlTransient
 	private List<Integer> respuestasCorrectas = new ArrayList<Integer>();
 
-	public boolean isMultiplesRespuestasCorrectas() {
-		return respuestasCorrectas.size() > 1;
-	}
+	@XmlAttribute(name = "multiplesCorrectas")
+	private boolean multiplesCorrectas = false;
 
 	public PreguntaRespuestaFija() {
 		type = FIXED_ANSWER_TYPE;
@@ -130,6 +129,9 @@ public class PreguntaRespuestaFija extends Pregunta {
 
 	private void addRespuestaCorrecta(Integer integer) {
 		respuestasCorrectas.add(integer);
+		if (respuestasCorrectas.size() > 1) {
+			setMultiplesCorrectas(true);
+		}
 
 	}
 
@@ -165,15 +167,6 @@ public class PreguntaRespuestaFija extends Pregunta {
 		return -1;
 	}
 
-//	@Override
-//	public void completarDatosVisibles() {
-//		if (this.opciones.isEmpty()) {
-//			opciones = respuestasPosibles;
-//			for (Integer n : this.respuestasCorrectas)
-//				correctas.add(respuestasPosibles.get(n));
-//		}
-//	}
-
 	@XmlAttribute(name = "correctas")
 	public String getRtasCorrectas() {
 		return marshallRespuestasCorrectas() != "null" ? marshallRespuestasCorrectas() : null;
@@ -190,6 +183,14 @@ public class PreguntaRespuestaFija extends Pregunta {
 	
 	public void setRespuestas(String rtas) {
 		unmarshallRespuestasPosibles(rtas);
+	}
+	
+	public boolean getMultiplesCorrectas() {
+		return multiplesCorrectas;
+	}
+	
+	public void setMultiplesCorrectas(boolean multiple) {
+		multiplesCorrectas = multiple;
 	}
 
 }
