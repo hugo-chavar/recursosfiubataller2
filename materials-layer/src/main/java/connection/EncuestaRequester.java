@@ -24,7 +24,7 @@ public class EncuestaRequester extends HandlerRequester {
 
 //	private IntegracionStub stub;
 	private EncuestaParser parser;
-	private Cache<Encuesta> cacheEncuestas;
+	private Cache<Encuesta> cache;
 	private Encuesta currentEncuesta;
 	//private Cache<EncuestaRespondida> cacheEncuestasRespondidas;
 
@@ -33,7 +33,7 @@ public class EncuestaRequester extends HandlerRequester {
 
 		super();
 		parser = new EncuestaParser();
-		cacheEncuestas = new Cache<Encuesta>();
+		cache = new Cache<Encuesta>();
 		// TODO cargo encuestas de ejemplo (sacar)
 		Encuesta enc = new Encuesta(11003, -1, "una encuesta chica", false);
 		
@@ -57,10 +57,10 @@ public class EncuestaRequester extends HandlerRequester {
 		opciones.add("org de datos");
 		((PreguntaRespuestaFija) p3).setRespuestasPosibles(opciones);
 		enc.addPregunta(p3);
-		cacheEncuestas.add(enc);
+		cache.add(enc);
 
 		enc = new Encuesta(11004, -1, "una encuesta grande", false);
-		cacheEncuestas.add(enc);
+		cache.add(enc);
 		p1 = new PreguntaRespuestaFija();
 		p1.setEnunciado("de que color es el caballo blanco de san martin?");
 		opciones = new ArrayList<String>();
@@ -147,7 +147,7 @@ public class EncuestaRequester extends HandlerRequester {
 		// Guardo la encuesta
 		String encuesta_str = parser.serializeEncuesta(encuesta);
 		
-		return save(encuesta_str, encuesta.getRecursoId());
+		return save(encuesta_str);
 //		try {
 //			GuardarDatos guardar = new GuardarDatos();
 //			guardar.setXml(encuesta_str);
@@ -179,8 +179,8 @@ public class EncuestaRequester extends HandlerRequester {
 		EncuestaResponse response = new EncuestaResponse();
 		Encuesta target = new Encuesta(recursoId, 0, "", false);
 
-		if (cacheEncuestas.contains(target)) {
-			response = new EncuestaResponse(cacheEncuestas.get(target));
+		if (cache.contains(target)) {
+			response = new EncuestaResponse(cache.get(target));
 			response.setSuccess(true);
 		}
 		
@@ -222,7 +222,7 @@ public class EncuestaRequester extends HandlerRequester {
 			encuesta.setDescripcion(recurso.getDescripcion());
 
 			// Agrego al cache de encuestas
-			cacheEncuestas.add(encuesta);
+			cache.add(encuesta);
 
 			response = new EncuestaResponse(encuesta);
 			response.setSuccess(true);
@@ -241,7 +241,7 @@ public class EncuestaRequester extends HandlerRequester {
 	}
 
 	public void deleteFromCache(int recursoId) {
-		cacheEncuestas.remove(new Encuesta(recursoId, 0, "", false));
+		cache.remove(new Encuesta(recursoId, 0, "", false));
 	}
 
 	@Override
@@ -249,12 +249,41 @@ public class EncuestaRequester extends HandlerRequester {
 		return "Encuesta";
 	}
 
+//	@Override
+//	public void udpateCache() {
+//		if (cacheEncuestas.contains(currentEncuesta)) {
+//			cacheEncuestas.remove(currentEncuesta);
+//		}
+//		cacheEncuestas.add(currentEncuesta);
+//	}
+
 	@Override
-	public void udpateCache() {
-		if (cacheEncuestas.contains(currentEncuesta)) {
-			cacheEncuestas.remove(currentEncuesta);
-		}
-		cacheEncuestas.add(currentEncuesta);
+	protected void createCurrentObject(String xml_resp_e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Recurso getCurrent() {
+		return currentEncuesta;
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	protected Cache getCache() {
+		return cache;
+	}
+
+	@Override
+	protected boolean cacheContains(int recursoId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected Recurso retrieveCached(int recursoId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

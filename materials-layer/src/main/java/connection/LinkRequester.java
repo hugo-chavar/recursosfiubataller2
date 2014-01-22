@@ -8,7 +8,6 @@ import model.Recurso;
 import org.apache.axis2.AxisFault;
 
 import connection.cache.Cache;
-import connection.responses.LinkResponse;
 import connection.responses.OperationResponse;
 
 import com.ws.services.IntegracionStub.SeleccionarDatos;
@@ -18,7 +17,7 @@ import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 public class LinkRequester extends HandlerRequester {
 
 //	private IntegracionStub stub;
-	private LinkParser parser;
+//	private LinkParser parser;
 	private Cache<Link> cache;
 	private Link currentLink;
 
@@ -28,9 +27,12 @@ public class LinkRequester extends HandlerRequester {
 
 		parser = new LinkParser();
 		cache = new Cache<Link>();
-		Link link = new Link(11002,-1,"un link a google copado");
-		link.setNombre("www.google.com.ar");
-		cache.add(link);
+//		Link link = new Link(11002,-1,"un link a google copado");
+//		link.setNombre("www.google.com.ar");
+//		cache.add(link);
+		currentLink = new Link(11002,-1,"un link a google copado");
+		currentLink.setNombre("www.google.com.ar");
+		updateCache();
 
 //		try {
 //			this.stub = new IntegracionStub();
@@ -44,9 +46,9 @@ public class LinkRequester extends HandlerRequester {
 		
 		currentLink = link;
 		// Guardo el link
-		String link_str = parser.serializeLink(link);
+		String link_str = ((LinkParser) parser).serializeLink(link);
 		
-		return save(link_str, link.getRecursoId());
+		return save(link_str);
 //		try {
 //			GuardarDatos guardar = new GuardarDatos();
 //			guardar.setXml(link_str);
@@ -80,22 +82,36 @@ public class LinkRequester extends HandlerRequester {
 		
 	}
 	
-	public OperationResponse getFromCache(int recursoId) {
-		
-		LinkResponse response = new LinkResponse();
-		Link target = new Link(recursoId, 0, "");
+//	public OperationResponse getFromCache(int recursoId) {
+//		
+//		OperationResponse response;
+////		LinkResponse response = new LinkResponse();
+////		Link target = new Link(recursoId, 0, "");
+//
+//		if (cacheContains(recursoId)) {
+//			response = OperationResponse.createSuccess();
+//			response.setRecurso(retrieveCached(recursoId));
+//			return response;
+////			response = new LinkResponse(cache.get(target));
+//		}
+//		
+//		return OperationResponse.createFailed("no esta");
+//		
+//	}
 
-		if (cache.contains(target)) {
-			response = new LinkResponse(cache.get(target));
-		}
-		
-		return response;
-		
+	protected Recurso retrieveCached(int recursoId) {
+		Link target = new Link(recursoId, 0, "");
+		return cache.get(target);
+	}
+	
+	public boolean cacheContains(int recursoId) {
+		Link target = new Link(recursoId, 0, "");
+		return cache.contains(target);
 	}
 
 	public OperationResponse get(Recurso recurso) {
 
-		LinkResponse response;
+		OperationResponse response;
 		String reason;
 
 		// Consulto el link guardado
@@ -105,7 +121,7 @@ public class LinkRequester extends HandlerRequester {
 			seleccionar_e.setXml(xml);
 			SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
 			String xml_resp_e = s_resp_e.get_return();
-			Link link = this.parser.deserializeLink(xml_resp_e);
+			Link link = ((LinkParser) parser).deserializeLink(xml_resp_e);
 			link.setAmbitoId(recurso.getAmbitoId());
 			link.setRecursoId(recurso.getRecursoId());
 			link.setDescripcion(recurso.getDescripcion());
@@ -113,8 +129,10 @@ public class LinkRequester extends HandlerRequester {
 			// Agrego al cache de links
 			cache.add(link);
 
-			response = new LinkResponse(link);
-			response.setSuccess(true);
+//			response = new LinkResponse(link);
+//			response.setSuccess(true);
+			response = OperationResponse.createSuccess();
+			response.setRecurso(link);
 			return response;
 
 		} catch (AxisFault e) {
@@ -123,9 +141,10 @@ public class LinkRequester extends HandlerRequester {
 			reason = "Error de conexion remota";
 		}
 
+		response = OperationResponse.createFailed(reason);
 		System.out.println(reason);
-		response = new LinkResponse();
-		response.setReason(reason);
+//		response = new LinkResponse();
+//		response.setReason(reason);
 		
 		return response;
 		
@@ -140,12 +159,28 @@ public class LinkRequester extends HandlerRequester {
 		return "Link";
 	}
 
+//	@Override
+//	protected void updateCache() {
+//		if (cache.contains(currentLink)) {
+//			cache.remove(currentLink);
+//		}
+//		cache.add(currentLink);
+//	}
+
 	@Override
-	public void udpateCache() {
-		if (cache.contains(currentLink)) {
-			cache.remove(currentLink);
-		}
-		cache.add(currentLink);
+	protected void createCurrentObject(String xml_resp_e) {
+		currentLink = ((LinkParser) parser).deserializeLink(xml_resp_e);
+	}
+
+	@Override
+	protected Recurso getCurrent() {
+		return currentLink;
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	protected Cache getCache() {
+		return cache;
 	}
 
 }
