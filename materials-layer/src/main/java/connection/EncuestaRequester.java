@@ -187,54 +187,53 @@ public class EncuestaRequester extends HandlerRequester {
 
 	public OperationResponse get(Recurso recurso) {
 
-		OperationResponse response;
-		String reason;
+//		OperationResponse response;
+//		String reason;
 
-		try {
-
-			// Consulto la encuesta guardada
-			String xml = parser.serializeQueryByType(recurso.getRecursoId(), EncuestaParser.ENCUESTA_TAG);
-			
-			////////////// PRUEBAS //////////////
-			String xml_resp_e;
-			
-			if (xml.equals("<WS><encuesta><recursoId>15</recursoId></encuesta></WS>")) {
-				xml_resp_e = "<WS><encuesta><evaluada>true</evaluada><preguntas>C;1;De que color es el caballo blanco de San Martin?;blanco|" +
-						"C;2;Cuantas patas tiene un gato?;4</preguntas></encuesta></WS>";
-			} else if (xml.equals("<WS><encuesta><recursoId>10</recursoId></encuesta></WS>")) {
-				xml_resp_e = "<WS><encuesta><evaluada>true</evaluada><preguntas>F;1;De que color es el caballo blanco de San Martin?;negro,blanco,marron;1|" +
-						"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></encuesta></WS>";
-			} else {
-				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-				seleccionar_e.setXml(xml);
-				SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
-				xml_resp_e = s_resp_e.get_return();
-			}
-			
-			////////////// PRUEBAS //////////////
-			
-			Encuesta encuesta = parser.deserializeEncuesta(xml_resp_e);
-			encuesta.setAmbitoId(recurso.getAmbitoId());
-			encuesta.setRecursoId(recurso.getRecursoId());
-			encuesta.setDescripcion(recurso.getDescripcion());
-
-			// Agrego al cache de encuestas
-			cache.add(encuesta);
-
-			response = OperationResponse.createSuccess();
-			response.setRecurso(encuesta);
-			return response;
-
-		} catch (AxisFault e) {
-			reason = "Error al intentar obtener la encuesta, ID: " + recurso.getRecursoId();
-		} catch (RemoteException e) {
-			reason = "Error de conexion remota";
-		}
-
-		System.out.println(reason);
-		
-		return OperationResponse.createFailed(reason);
-
+		current = recurso;
+		// Consulto la encuesta guardada
+		String xml = parser.serializeQueryByType(recurso.getRecursoId(), EncuestaParser.ENCUESTA_TAG);
+		return get(xml);
+//		try {	
+//			////////////// PRUEBAS //////////////
+//			String xml_resp_e;
+//			
+//			if (xml.equals("<WS><encuesta><recursoId>15</recursoId></encuesta></WS>")) {
+//				xml_resp_e = "<WS><encuesta><evaluada>true</evaluada><preguntas>C;1;De que color es el caballo blanco de San Martin?;blanco|" +
+//						"C;2;Cuantas patas tiene un gato?;4</preguntas></encuesta></WS>";
+//			} else if (xml.equals("<WS><encuesta><recursoId>10</recursoId></encuesta></WS>")) {
+//				xml_resp_e = "<WS><encuesta><evaluada>true</evaluada><preguntas>F;1;De que color es el caballo blanco de San Martin?;negro,blanco,marron;1|" +
+//						"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></encuesta></WS>";
+//			} else {
+//				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+//				seleccionar_e.setXml(xml);
+//				SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
+//				xml_resp_e = s_resp_e.get_return();
+//			}
+//			
+//			////////////// PRUEBAS //////////////
+//			
+//			Encuesta encuesta = parser.deserializeEncuesta(xml_resp_e);
+//			encuesta.setAmbitoId(recurso.getAmbitoId());
+//			encuesta.setRecursoId(recurso.getRecursoId());
+//			encuesta.setDescripcion(recurso.getDescripcion());
+//
+//			// Agrego al cache de encuestas
+//			cache.add(encuesta);
+//
+//			response = OperationResponse.createSuccess();
+//			response.setRecurso(encuesta);
+//			return response;
+//
+//		} catch (AxisFault e) {
+//			reason = "Error al intentar obtener la encuesta, ID: " + recurso.getRecursoId();
+//		} catch (RemoteException e) {
+//			reason = "Error de conexion remota";
+//		}
+//
+//		System.out.println(reason);
+//		
+//		return OperationResponse.createFailed(reason);
 	}
 
 	public void deleteFromCache(int recursoId) {
@@ -274,7 +273,6 @@ public class EncuestaRequester extends HandlerRequester {
 
 	@Override
 	protected Recurso deserialize(String xml_resp_e) {
-		
 		return parser.deserializeEncuesta(xml_resp_e);
 	}
 

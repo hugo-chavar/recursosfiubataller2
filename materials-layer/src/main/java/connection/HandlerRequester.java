@@ -66,6 +66,15 @@ public abstract class HandlerRequester {
 			seleccionar_e.setXml(xml);
 			SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
 			String xml_resp_e = s_resp_e.get_return();
+			//TODO: pruebas de Yami
+			if (xml.equals("<WS><encuesta><recursoId>15</recursoId></encuesta></WS>")) {
+				xml_resp_e = "<WS><encuesta><evaluada>true</evaluada><preguntas>C;1;De que color es el caballo blanco de San Martin?;blanco|" +
+						"C;2;Cuantas patas tiene un gato?;4</preguntas></encuesta></WS>";
+			} else if (xml.equals("<WS><encuesta><recursoId>10</recursoId></encuesta></WS>")) {
+				xml_resp_e = "<WS><encuesta><evaluada>true</evaluada><preguntas>F;1;De que color es el caballo blanco de San Martin?;negro,blanco,marron;1|" +
+						"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></encuesta></WS>";
+			}
+			//fin pruebas
 			createCurrentObject(xml_resp_e);
 
 			updateCache();
