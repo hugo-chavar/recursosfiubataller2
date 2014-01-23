@@ -22,9 +22,8 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 
 	// private static String servicesServer =
 	// "http://localhost:8080/Integracion2/services/";
-	// private static String servicesServer =
-	// "http://localhost:8080/axis2/services/";
-	private static String servicesServer = "http://200.68.65.249:58080/axis2/services/";
+	private static String servicesServer = "http://localhost:8080/axis2/services/";
+//	private static String servicesServer = "http://200.68.65.249:58080/axis2/services/";
 
 	private static synchronized java.lang.String getUniqueSuffix() {
 		// reset the counter if it is greater than 99999

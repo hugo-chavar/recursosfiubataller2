@@ -105,14 +105,14 @@ public class WSPublisher {
 		archivo.setAmbitoId(14);
 		archivo.setNombreArchivo("River Plate");
 		archivo.setDescripcion("informacion sobre el equipo mas grande del universo");
-		archivo.setTipoArchivo("png");
+		String extension = "jpg";
+		archivo.setTipoArchivo(extension);
 		try {
 			String path;
-			path = "file:C:\\Users\\HugoW7\\Desktop\\diagrama.png";
+			path = WSPublisher.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+			path = path.substring(0, path.lastIndexOf("classes") + 8);
+			path = path + "teofilo."+ extension;
 			DataHandler arch = new DataHandler(new URL(path));
-//			DataHandler arch = new DataHandler(new URL("file:/home/damian/aux.txt"));
-//			System.out.println("abre aux.txt");
-			
 			archivo.setRawFile(arch);
 			String xml2 = parser.convertToXml(archivo, archivo.getClass());
 			System.out.println(xml2);
@@ -123,7 +123,7 @@ public class WSPublisher {
 			
 			DataHandler handler = arch2.getRawFile();
 
-			path = "C:\\Users\\HugoW7\\Desktop\\diagramaNuevo2.png";
+			path = System.getProperty("user.home")+ System.getProperty("file.separator")+"generadaXws.jpg";
 			OutputStream os;
 			try {
 				os = new FileOutputStream(new File(path));
@@ -148,7 +148,11 @@ public class WSPublisher {
 			System.out.println(or.getReason());
 		}
 		
+		
+		
+		String absolute = WSPublisher.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
 
+		System.out.println(absolute);
 		System.out.println("Programa terminado. ");
 
 	}

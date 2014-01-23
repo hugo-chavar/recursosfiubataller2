@@ -24,49 +24,9 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public String sayHello(String name) {
-//		String path;
-//		path = System.getProperty("user.dir") + "\\webapps\\Materials\\index.jsp";
-//		StringBuffer sb = new StringBuffer();
-//		sb.append("Hello, Welcom to jax-ws " + name + '\n' + "Server Working Directory = "
-//				+ System.getProperty("user.dir"));
-//		BufferedReader br = null;
-//
-//		try {
-//			String sCurrentLine;
-//			br = new BufferedReader(new FileReader(path));
-//			while ((sCurrentLine = br.readLine()) != null) {
-//				sb.append(sCurrentLine);
-//				sb.append('\n');
-//			}
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} finally {
-//			try {
-//				if (br != null)
-//					br.close();
-//			} catch (IOException ex) {
-//				ex.printStackTrace();
-//			}
-//		}
-
-		return "Hello, Welcom to jax-ws " + name + '\n' +
-				"Current Server Working Directory = " + System.getProperty("user.dir");
-//				+ '\n' + sb.toString();
+		return "Hello, Welcom to jax-ws " + name + '\n';
 	}
 
-//	@Override
-//	public String getArchivo(String xmlParam){
-//		Parameter parameter = Parameter.createParameter(xmlParam);
-//		OperationResponse response;
-//		try {
-//			response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
-//		} catch (GetException e) {
-//			return createFailedResponse(e.getMessage());
-//		}
-//		return toXml(response);
-//	}
-	
 	@Override
 	public String agregarEncuesta(String encuestaParam) {
 		Parameter parameter = Parameter.createParameter(encuestaParam);
@@ -164,17 +124,6 @@ public class MaterialsImpl implements Materials {
 		return toXml(recursosPermitidos);
 	}
 	
-//	@Override
-//	public String borrarRecurso(int recursoId, int usuarioId) {
-//		OperationResponse response;
-//		if (Requester.INSTANCE.getPermisoUsuario(recursoId, usuarioId)) {
-//			response = Requester.INSTANCE.deleteRecurso(recursoId,"Link");
-//		} else {
-//			return createFailedResponse("Permisos insuficientes");
-//		}
-//		return toXml(response);
-//	}
-
 	private String createFailedResponse(String reason) {
 		OperationResponse response;
 		response = OperationResponse.createFailed(reason);
@@ -203,15 +152,6 @@ public class MaterialsImpl implements Materials {
 		return getRecursos(parameter.getRecurso().getAmbitoId(), parameter.getUsuarioId());
 	}
 	
-//	@Override
-//	public String getEncuesta2(String parametros) {
-//		Parameter parameter = Parameter.createParameter(parametros);
-//		if (parameter.getAmbitoId() == null || parameter.getRecursoId() == null){
-//			return createFailedResponse("Parametros invalidos");
-//		}
-//		return getEncuesta(parameter.getRecurso());
-//	}
-	
 	@Override
 	public String getRecurso(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
@@ -231,29 +171,5 @@ public class MaterialsImpl implements Materials {
 		}
 		return toXml(response);
 	}
-
-//	@Override
-//	@WebMethod
-//	@WebResult(name = "StringOfDataHandler")
-//	public
-//	String transformDataHandlerToString(
-//			@WebParam(name = "File as DataHandler") @XmlMimeType("application/octet-stream") DataHandler data) {
-//		Archivo unArchivo = new Archivo();
-//		unArchivo.setRawFile(data);
-//		
-//		return unArchivo.getStringFile()
-//				;
-//	}
-//
-//	@Override
-//	@WebMethod
-//	@WebResult(name = "DataHandlerOfString")
-//	public
-//	@XmlMimeType("application/octet-stream") DataHandler transformStringtoDataHandler(@WebParam(name = "parametro")String parametro) {
-//		Archivo unArchivo = new Archivo();
-//		unArchivo.setStringFile(parametro);
-//		
-//		return unArchivo.getRawFile();
-//	}
 
 }

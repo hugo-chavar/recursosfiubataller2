@@ -56,11 +56,13 @@ public class ArchivoRequester extends HandlerRequester {
 		archivo.setAmbitoId(14);
 		archivo.setNombreArchivo("teofilo");
 		archivo.setDescripcion("Campeon clausura 2014");
+		String extension = "jpg";
 		archivo.setTipoArchivo("jpg");
 		try {
 			String path;
-//			path = "file:/home/damian/voucherAbuela.pdf";
-			path = "file:" + System.getProperty("user.dir") + "\\webapps\\Materials\\WEB-INF\\classes\\teofilo.jpg";
+			path = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+			path = path.substring(0, path.lastIndexOf("classes") + 8);
+			path = path + "teofilo." + extension;
 			DataHandler arch = new DataHandler(new URL(path));
 			archivo.setRawFile(arch);
 		} catch (MalformedURLException e) {
