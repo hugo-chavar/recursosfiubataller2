@@ -131,14 +131,15 @@ public class ArchivoRequester extends HandlerRequester {
 		/********* Pruebas **************/
 		Archivo archivo = new Archivo();
 		archivo.setAmbitoId(14);
-		archivo.setNombreArchivo("River Plate");
-		archivo.setDescripcion("este archivo contiene informacion sobre el equipo mas grande del universo");
-		archivo.setTipoArchivo("png");
+		archivo.setNombreArchivo("teofilo");
+		archivo.setDescripcion("Campeon clausura 2014");
+		archivo.setTipoArchivo("jpg");
 		try {
 			String path;
 			// path = "file:"+ System.getProperty("user.dir") +
 			// "\\webapps\\Materials\\index.jsp";
-			path = "file:C:\\Users\\HugoW7\\Desktop\\diagrama.png";
+//			path = "file:C:\\Users\\HugoW7\\Desktop\\diagrama.png";
+			path = "file:" + System.getProperty("user.dir") + "\\webapps\\Materials\\WEB-INF\\classes\\teofilo.jpg";
 			DataHandler arch = new DataHandler(new URL(path));
 			// DataHandler arch = new DataHandler(new
 			// URL("file:/home/damian/aux.txt"));
