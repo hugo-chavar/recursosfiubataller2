@@ -1,10 +1,18 @@
 package connection;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.axis2.AxisFault;
 
+import model.Encuesta;
 import model.EncuestaRespondida;
+import model.Pregunta;
+import model.PreguntaRespondida;
+import model.PreguntaRespuestaACompletarRespondida;
+import model.PreguntaRespuestaFija;
+import model.PreguntaRespuestaFijaRespondida;
 
 import com.ws.services.IntegracionStub;
 import com.ws.services.IntegracionStub.GuardarDatos;
@@ -25,6 +33,24 @@ public class EncuestaRespondidaRequester {
 	public EncuestaRespondidaRequester(){
 		parser = new EncuestaRespondidaParser();
 		cacheRespondidas = new Cache<EncuestaRespondida>();
+		
+		// TODO cargo encuestasRespondida de ejemplo (sacar)
+		EncuestaRespondida resp = new EncuestaRespondida(2,15);
+		
+		PreguntaRespuestaFijaRespondida p1 = new PreguntaRespuestaFijaRespondida(1);
+		PreguntaRespuestaACompletarRespondida p2 = new PreguntaRespuestaACompletarRespondida(2);
+
+		List<PreguntaRespondida> preguntasRespondidas = new ArrayList<PreguntaRespondida>();
+		p1.addRespuesta(1);
+		p1.addRespuesta(4);
+		p2.responder("Buenos Aires");
+		p1.setIsCorrecta(true);
+		p2.setIsCorrecta(false);
+        preguntasRespondidas.add(p1);
+        preguntasRespondidas.add(p2);
+        resp.setEvaluacion(50);
+		resp.setPreguntasRespondidas(preguntasRespondidas);
+		cacheRespondidas.add(resp);
 
 		try {
 			stub = new IntegracionStub();

@@ -13,6 +13,10 @@ public class EncuestaRespondida {
 	@XmlElement
 	private Integer evaluacion;
 
+	public void setEvaluacion(Integer evaluacion) {
+		this.evaluacion = evaluacion;
+	}
+
 	@XmlTransient
 	private Integer idUsuario;
 
@@ -127,9 +131,6 @@ public class EncuestaRespondida {
 		return false;
 	}
 
-	public void setEvaluacion(int evaluacion) {
-		this.evaluacion=evaluacion;
-	}
 	
 }
 

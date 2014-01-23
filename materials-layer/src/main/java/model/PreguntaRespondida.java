@@ -26,6 +26,10 @@ public class PreguntaRespondida {
 	@XmlAttribute(required = false)
 	protected Boolean isCorrecta = null;
 
+	public void setIsCorrecta(Boolean isCorrecta) {
+		this.isCorrecta = isCorrecta;
+	}
+
 	public Boolean getIsCorrecta() {
 		return isCorrecta;
 	}

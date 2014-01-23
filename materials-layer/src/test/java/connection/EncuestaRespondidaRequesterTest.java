@@ -30,7 +30,7 @@ public class EncuestaRespondidaRequesterTest {
 
 	@Test
 	public void getEncuestaRespondidaWithPreguntaRespuestaFijaRespondida() throws GetException {
-		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(10, 5);
+		EncuestaRespondida encuesta_rtn = Requester.INSTANCE.getEncuestaRespondida(10, 5);
 
 		Assert.assertEquals(new Integer(100), encuesta_rtn.getEvaluacion());
 
@@ -41,28 +41,20 @@ public class EncuestaRespondidaRequesterTest {
 		Assert.assertEquals(true,respondidas.get(1).getIsCorrecta());
 	}
 	
-//	if (xml.equals("<WS><encuestarespondida><recursoId>15</recursoId><usuarioId>5</usuarioId></encuestarespondida></WS>")) {
-//	xml_resp_e = "<WS><encuestarespondida><recursoId>15</recursoId><usuarioId>5</usuarioId><evaluacion>50</evaluacion><preguntasrespondidas>C;1;false;Azul|" +
-//			"C;2;true;4</preguntas></encuestarespondida></WS>";
-//} else if (xml.equals("<WS><encuestarespondida><recursoId>10</recursoId><usuarioId>5</usuarioId></encuestarespondida></WS>")) {
-//	xml_resp_e = "<WS><encuestarespondida><recursoId>10</recursoId><usuarioId>5</usuarioId><evaluacion>100</evaluacion><preguntasrespondidas>F;1;true;1|" +
-//			"F;2;true;2</preguntasrespondidas></encuestarespondida></WS>";
-//
+
 	
-//	@Test
-//	public void getEncuestaFromCache() throws GetException {
-//		Encuesta encuesta = new Encuesta(1003, -1, "una encuesta chica", false);
-//
-//		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
-//		Encuesta encuesta_rtn = response.getEncuesta();       
-//
-//		Assert.assertEquals(encuesta, encuesta_rtn);
-//		Assert.assertEquals("una encuesta chica", encuesta_rtn.getDescripcion());
-//		Assert.assertEquals(encuesta.isEvaluada(), encuesta_rtn.isEvaluada());
-//
-//		List<Pregunta> preguntas = encuesta_rtn.getPreguntas();
-//		Assert.assertEquals("cuantas materias te faltan para recibirte?", preguntas.get(0).getEnunciado());
-//		Assert.assertEquals("que materia fue la mas dificil?", preguntas.get(1).getEnunciado());
-//	}
+	@Test
+	public void getEncuestaRespondidaFromCache() throws GetException {
+
+		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida(2, 15);     
+
+		Assert.assertEquals(new Integer(50), respondida.getEvaluacion());
+		List<PreguntaRespondida> respondidas = respondida.getPreguntasRespondidas();
+		Assert.assertEquals(new Integer(1), ((PreguntaRespuestaFijaRespondida) respondidas.get(0)).getRespuestasFijas().get(0));
+		Assert.assertEquals(new Integer(4), ((PreguntaRespuestaFijaRespondida) respondidas.get(0)).getRespuestasFijas().get(1));
+		Assert.assertEquals(true, respondidas.get(0).getIsCorrecta());
+		Assert.assertNotEquals("Salta", ((PreguntaRespuestaACompletarRespondida) respondidas.get(1)).getRespuesta());
+		Assert.assertEquals(false,respondidas.get(1).getIsCorrecta());
+	}
 	
 }
