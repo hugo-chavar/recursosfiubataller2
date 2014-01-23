@@ -196,12 +196,7 @@ public enum Requester {
 
 	public OperationResponse saveArchivo(Archivo file) {
 		OperationResponse response;
-		String respuesta = archivoReq.save(file);
-		if(respuesta!=""){
-			response = OperationResponse.createFailed(respuesta);
-		}else{
-			response = OperationResponse.createSuccess();
-		}
+		response = archivoReq.save(file);
 		return response;
 	}
 	

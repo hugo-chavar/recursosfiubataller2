@@ -33,6 +33,7 @@ public abstract class HandlerRequester {
 		return current;
 	}
 
+
 	protected OperationResponse save(String xml_str) {
 		OperationResponse response;
 
@@ -59,7 +60,7 @@ public abstract class HandlerRequester {
 		return response;
 	}
 
-	public OperationResponse getArchivo (String xml){
+	public OperationResponse getFile (String xml){
 	
 		SeleccionarDatos seleccionar_e = new SeleccionarDatos();
 		seleccionar_e.setXml(xml);
@@ -76,6 +77,29 @@ public abstract class HandlerRequester {
 	}
 	 
 	  return currentObjetToResponse();
+	}
+	
+	protected OperationResponse saveFile(String xml){
+		IntegracionStub.GuardarArchivoResponse responseArchivo = null;
+		Archivo archivo = (Archivo) current;
+		OperationResponse response;
+		try {
+
+			IntegracionStub.GuardarArchivo requestArchivo = new IntegracionStub.GuardarArchivo();
+			requestArchivo.setArchivo(archivo.getRawFile());
+			requestArchivo.setXml(xml);
+
+			responseArchivo = this.stub.guardarArchivo(requestArchivo);
+			response = OperationResponse.createSuccess();
+			
+		} catch (AxisFault e) {
+			 e.printStackTrace();
+			 response = OperationResponse.createFailed("No se pudo guardar el archivo: "+archivo.getNombreArchivo());
+		
+		} catch (RemoteException e) {
+			response = OperationResponse.createFailed("Error de conexion");
+		}
+		return response;
 	}
 	public OperationResponse get(String xml) {
 		String reason;
