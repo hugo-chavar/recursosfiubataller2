@@ -1,6 +1,5 @@
 package connection;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +8,6 @@ import model.Pregunta;
 import model.PreguntaRespuestaACompletar;
 import model.PreguntaRespuestaFija;
 import model.Recurso;
-
-import org.apache.axis2.AxisFault;
-
-import com.ws.services.IntegracionStub.SeleccionarDatos;
-import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
-
 import connection.cache.Cache;
 import connection.responses.OperationResponse;
 
@@ -23,8 +16,6 @@ public class EncuestaRequester extends HandlerRequester {
 
 	private EncuestaParser parser;
 	private Cache<Encuesta> cache;
-//	private Recurso current;
-
 	
 	public EncuestaRequester() {
 

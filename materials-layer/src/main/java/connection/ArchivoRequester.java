@@ -33,7 +33,6 @@ public class ArchivoRequester extends HandlerRequester {
 	// private IntegracionStub stub;
 	private ArchivoParser parser;
 	private Cache<Archivo> cache;
-	private Recurso current;
 
 	public ArchivoRequester() {
 		super();
@@ -43,6 +42,7 @@ public class ArchivoRequester extends HandlerRequester {
 
 	public String save(Archivo archivo) {
 		current = archivo; //Dami.. esta linea es muy necesaria, revisa el LinkRequester y su clase padre HandlerRequester
+		//trata de que esto quede lo mas parecido posible a LinkRequester, si no podes seguir el codigo facilmente avisame
 		String archivo_str = parser.serializeArchivo(archivo);
 		IntegracionStub.GuardarArchivoResponse responseArchivo = null;
 		try {
@@ -68,6 +68,8 @@ public class ArchivoRequester extends HandlerRequester {
 	}
 
 	public Archivo getArchivo(int idAmbiente, int idRecurso) {
+		//Dami trata que este metodo desaparezca.. no se si se esta usando en algun lado
+		//tiene q quedar solo el otro get
 		Archivo adevolver = new Archivo();
 		String archivoXml = "asc";
 		byte[] archivoRecuperado;

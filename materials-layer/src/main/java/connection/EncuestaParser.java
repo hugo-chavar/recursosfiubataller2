@@ -3,7 +3,6 @@ package connection;
 import java.util.HashMap;
 
 import model.Encuesta;
-import model.EncuestaRespondida;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

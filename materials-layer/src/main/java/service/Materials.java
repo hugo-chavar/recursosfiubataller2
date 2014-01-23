@@ -56,9 +56,9 @@ public interface Materials {
 //	@WebResult(name = "borrado")
 //	String borrarRecurso(@WebParam(name = "recursoId") int recursoId, @WebParam(name = "usuarioId") int usuarioId);
 
-	@WebMethod
-	@WebResult(name = "archivo")
-	String getArchivo(@WebParam(name = "ParametrosXmlIdAmbitoIdRecurso") String xmlParam);
+//	@WebMethod
+//	@WebResult(name = "archivo")
+//	String getArchivo(@WebParam(name = "ParametrosXmlIdAmbitoIdRecurso") String xmlParam);
 
 //	@WebMethod 
 //	@WebResult(name = "encuesta")
@@ -68,13 +68,13 @@ public interface Materials {
 	@WebResult(name = "recurso")
 	String getRecurso(@WebParam(name = "parametro")String parametros);
 	
-	@WebMethod 
-	@WebResult(name = "String")
-	String transformDataHandlerToString(@WebParam(name = "File as DataHandler")@XmlMimeType("application/octet-stream") DataHandler data);
-	
-	@WebMethod 
-	@WebResult(name = "DataHandler")
-	@XmlMimeType("application/octet-stream") DataHandler transformStringtoDataHandler(@WebParam(name = "parametro")String parametros);
+//	@WebMethod 
+//	@WebResult(name = "String")
+//	String transformDataHandlerToString(@WebParam(name = "File as DataHandler")@XmlMimeType("application/octet-stream") DataHandler data);
+//	
+//	@WebMethod 
+//	@WebResult(name = "DataHandler")
+//	@XmlMimeType("application/octet-stream") DataHandler transformStringtoDataHandler(@WebParam(name = "parametro")String parametros);
 
 	
 	@WebMethod

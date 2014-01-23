@@ -59,17 +59,17 @@ public class MaterialsImpl implements Materials {
 //				+ '\n' + sb.toString();
 	}
 
-	@Override
-	public String getArchivo(String xmlParam){
-		Parameter parameter = Parameter.createParameter(xmlParam);
-		OperationResponse response;
-		try {
-			response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
-		} catch (GetException e) {
-			return createFailedResponse(e.getMessage());
-		}
-		return toXml(response);
-	}
+//	@Override
+//	public String getArchivo(String xmlParam){
+//		Parameter parameter = Parameter.createParameter(xmlParam);
+//		OperationResponse response;
+//		try {
+//			response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
+//		} catch (GetException e) {
+//			return createFailedResponse(e.getMessage());
+//		}
+//		return toXml(response);
+//	}
 	
 	@Override
 	public String agregarEncuesta(String encuestaParam) {
@@ -246,28 +246,28 @@ public class MaterialsImpl implements Materials {
 		return toXml(response);
 	}
 
-	@Override
-	@WebMethod
-	@WebResult(name = "StringOfDataHandler")
-	public
-	String transformDataHandlerToString(
-			@WebParam(name = "File as DataHandler") @XmlMimeType("application/octet-stream") DataHandler data) {
-		Archivo unArchivo = new Archivo();
-		unArchivo.setRawFile(data);
-		
-		return unArchivo.getStringFile()
-				;
-	}
-
-	@Override
-	@WebMethod
-	@WebResult(name = "DataHandlerOfString")
-	public
-	@XmlMimeType("application/octet-stream") DataHandler transformStringtoDataHandler(@WebParam(name = "parametro")String parametro) {
-		Archivo unArchivo = new Archivo();
-		unArchivo.setStringFile(parametro);
-		
-		return unArchivo.getRawFile();
-	}
+//	@Override
+//	@WebMethod
+//	@WebResult(name = "StringOfDataHandler")
+//	public
+//	String transformDataHandlerToString(
+//			@WebParam(name = "File as DataHandler") @XmlMimeType("application/octet-stream") DataHandler data) {
+//		Archivo unArchivo = new Archivo();
+//		unArchivo.setRawFile(data);
+//		
+//		return unArchivo.getStringFile()
+//				;
+//	}
+//
+//	@Override
+//	@WebMethod
+//	@WebResult(name = "DataHandlerOfString")
+//	public
+//	@XmlMimeType("application/octet-stream") DataHandler transformStringtoDataHandler(@WebParam(name = "parametro")String parametro) {
+//		Archivo unArchivo = new Archivo();
+//		unArchivo.setStringFile(parametro);
+//		
+//		return unArchivo.getRawFile();
+//	}
 
 }

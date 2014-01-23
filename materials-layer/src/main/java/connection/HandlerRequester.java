@@ -120,7 +120,7 @@ public abstract class HandlerRequester {
 			return response;
 		}
 
-		return OperationResponse.createFailed("no esta");
+		return OperationResponse.createFailed("No existe en cache, id:" + recursoId);
 
 	}
 	
