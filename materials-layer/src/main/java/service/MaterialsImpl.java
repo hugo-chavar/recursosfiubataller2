@@ -222,7 +222,7 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public String getRecurso(String parametros) {
-		System.out.println(parametros);
+//		System.out.println(parametros);
 		Parameter parameter = Parameter.createParameter(parametros);
 
 		try {

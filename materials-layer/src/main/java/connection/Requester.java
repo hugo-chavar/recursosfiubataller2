@@ -52,19 +52,16 @@ public enum Requester {
 	}
 	
 	public OperationResponse getRecurso(Recurso target) throws GetException {
-		System.out.println("Entra al get Recurso");
 		OperationResponse response;
 		
 		if (notValidInput(target)) {
 			return informFailReason(target);
 		}
-		System.out.println("Es un taget valido");
 	
 		// Busco en el cache de especifico del recurso
 		response = getRecursoFromCache(target);
 		if (response.getSuccess())
 			return response;
-		System.out.println("No esta en cache");
 		// Si no se encuentra en el cache
 		
 		// Busco el recurso

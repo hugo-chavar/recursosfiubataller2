@@ -2,6 +2,7 @@ package connection;
 
 import java.rmi.RemoteException;
 
+import model.Archivo;
 import model.Recurso;
 
 import org.apache.axis2.AxisFault;
@@ -58,6 +59,24 @@ public abstract class HandlerRequester {
 		return response;
 	}
 
+	public OperationResponse getArchivo (String xml){
+	
+		SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+		seleccionar_e.setXml(xml);
+	
+	  SeleccionarDatosResponse s_resp_e;
+	try {
+		s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
+		String xml_resp_e = s_resp_e.get_return();
+		System.out.println("Integracion me esta contestando : "+ xml_resp_e);
+		createCurrentObject(xml_resp_e);
+	} catch (RemoteException e) {
+		
+		e.printStackTrace();
+	}
+	 
+	  return currentObjetToResponse();
+	}
 	public OperationResponse get(String xml) {
 		String reason;
 
