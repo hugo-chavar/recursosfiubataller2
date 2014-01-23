@@ -11,14 +11,12 @@ import javax.xml.ws.soap.MTOM;
 import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;
-import model.Link;
 import model.Recurso;
 import connection.Parameter;
 import connection.Parser;
 import connection.Requester;
 import connection.exceptions.GetException;
 import connection.responses.EncuestaRespondidaResponse;
-import connection.responses.EncuestaResponse;
 import connection.responses.OperationResponse;
 import connection.responses.RecursosResponse;
 
@@ -129,13 +127,13 @@ public class MaterialsImpl implements Materials {
 		}
 		EncuestaRespondida respondida = parameter.getRespondida();
 		OperationResponse response;
-		EncuestaResponse encuestaResponse;
+		OperationResponse encuestaResponse;
 		try {
-			encuestaResponse = (EncuestaResponse) Requester.INSTANCE.getRecurso(new Recurso(respondida.getIdRecurso(),0,"","Encuesta"));
+			encuestaResponse = Requester.INSTANCE.getRecurso(new Encuesta(respondida.getIdRecurso(),0,"", false));
 			if (!encuestaResponse.getSuccess()){
 				return createFailedResponse("Encuesta inexistente");
 			}
-			Encuesta encuesta = encuestaResponse.getEncuesta();
+			Encuesta encuesta = (Encuesta)encuestaResponse.getRecurso();
 			if (encuesta.isEvaluada()) {
 				respondida.evaluar(encuesta);
 			}

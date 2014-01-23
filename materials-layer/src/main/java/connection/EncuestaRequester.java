@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Encuesta;
-import model.Link;
 import model.Pregunta;
 import model.PreguntaRespuestaACompletar;
 import model.PreguntaRespuestaFija;
@@ -17,17 +16,14 @@ import com.ws.services.IntegracionStub.SeleccionarDatos;
 import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
-import connection.responses.EncuestaResponse;
 import connection.responses.OperationResponse;
 
 
 public class EncuestaRequester extends HandlerRequester {
 
-//	private IntegracionStub stub;
 	private EncuestaParser parser;
 	private Cache<Encuesta> cache;
-	private Encuesta current;
-	//private Cache<EncuestaRespondida> cacheEncuestasRespondidas;
+//	private Recurso current;
 
 	
 	public EncuestaRequester() {
@@ -35,7 +31,12 @@ public class EncuestaRequester extends HandlerRequester {
 		super();
 		parser = new EncuestaParser();
 		cache = new Cache<Encuesta>();
-		// TODO cargo encuestas de ejemplo (sacar)
+
+		generateTestData();
+
+	}
+
+	private void generateTestData() {
 		Encuesta enc = new Encuesta(11003, -1, "una encuesta chica", false);
 		
 		Pregunta p1, p2, p3, p4, p5;
@@ -58,10 +59,12 @@ public class EncuestaRequester extends HandlerRequester {
 		opciones.add("org de datos");
 		((PreguntaRespuestaFija) p3).setRespuestasPosibles(opciones);
 		enc.addPregunta(p3);
-		cache.add(enc);
+		current = enc;
+//		cache.add(enc);
+		updateCache();
 
 		enc = new Encuesta(11004, -1, "una encuesta grande", false);
-		cache.add(enc);
+//		cache.add(enc);
 		p1 = new PreguntaRespuestaFija();
 		p1.setEnunciado("de que color es el caballo blanco de san martin?");
 		opciones = new ArrayList<String>();
@@ -132,20 +135,13 @@ public class EncuestaRequester extends HandlerRequester {
 		p5.addRespuestaCorrecta("4");
 
 		enc.addPregunta(p5);
-
-//		try {
-//			stub = new IntegracionStub();
-//		} catch (AxisFault e) {
-//			System.out.println("Error al intentar contectarse con Integracion");
-//		}
-
+		current = enc;
+		updateCache();
 	}
 
 	public OperationResponse save(Encuesta encuesta) {
 
-//		OperationResponse response;
 		current = encuesta;
-		// Guardo la encuesta
 		String encuesta_str = parser.serializeEncuesta(encuesta);
 		
 		return save(encuesta_str);
@@ -191,7 +187,7 @@ public class EncuestaRequester extends HandlerRequester {
 
 	public OperationResponse get(Recurso recurso) {
 
-		EncuestaResponse response;
+		OperationResponse response;
 		String reason;
 
 		try {
@@ -225,8 +221,8 @@ public class EncuestaRequester extends HandlerRequester {
 			// Agrego al cache de encuestas
 			cache.add(encuesta);
 
-			response = new EncuestaResponse(encuesta);
-			response.setSuccess(true);
+			response = OperationResponse.createSuccess();
+			response.setRecurso(encuesta);
 			return response;
 
 		} catch (AxisFault e) {
@@ -249,16 +245,11 @@ public class EncuestaRequester extends HandlerRequester {
 	protected String getHandledType() {
 		return "Encuesta";
 	}
-	@Override
-	protected void createCurrentObject(String xml_resp_e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected Recurso getCurrent() {
-		return current;
-	}
+	
+//	@Override
+//	protected Recurso getCurrent() {
+//		return current;
+//	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -279,6 +270,12 @@ public class EncuestaRequester extends HandlerRequester {
 	@Override
 	protected Parser getParser() {
 		return parser;
+	}
+
+	@Override
+	protected Recurso deserialize(String xml_resp_e) {
+		
+		return parser.deserializeEncuesta(xml_resp_e);
 	}
 
 //	@Override

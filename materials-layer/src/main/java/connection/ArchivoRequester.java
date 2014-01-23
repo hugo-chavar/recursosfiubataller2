@@ -13,9 +13,12 @@ import javax.activation.DataHandler;
 import javax.activation.DataSource;
 
 import model.Archivo;
+import model.Link;
 import model.Recurso;
 
 import org.apache.axis2.AxisFault;
+
+
 
 //import com.sun.xml.internal.ws.util.ByteArrayDataSource;
 import com.ws.services.IntegracionStub;
@@ -30,6 +33,7 @@ public class ArchivoRequester extends HandlerRequester {
 	// private IntegracionStub stub;
 	private ArchivoParser parser;
 	private Cache<Archivo> cache;
+	private Recurso current;
 
 	public ArchivoRequester() {
 		super();
@@ -38,6 +42,7 @@ public class ArchivoRequester extends HandlerRequester {
 	}
 
 	public String save(Archivo archivo) {
+		current = archivo; //Dami.. esta linea es muy necesaria, revisa el LinkRequester y su clase padre HandlerRequester
 		String archivo_str = parser.serializeArchivo(archivo);
 		IntegracionStub.GuardarArchivoResponse responseArchivo = null;
 		try {
@@ -200,54 +205,58 @@ public class ArchivoRequester extends HandlerRequester {
 		return "Archivo";
 	}
 
-	// @Override
-	// public void udpateCache() {
-	// // TODO Dami, podrias cachear los que tienen pocos bytes, hasta cierto
-	// limite
-	// // en caso de tener tiempo hacelo parecido a como esta en LinkRequester
-	//
-	// }
-
 	@Override
 	protected void createCurrentObject(String xml_resp_e) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	protected Recurso getCurrent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	protected Recurso getCurrent() {
+//		return current;
+//	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected Cache getCache() {
-		// TODO Auto-generated method stub
-		return null;
+		return cache;
 	}
 
 	@Override
 	public void deleteFromCache(int recursoId) {
-		// TODO Auto-generated method stub
-
+		cache.remove(new Archivo(recursoId, 0, ""));
 	}
 
 	@Override
 	protected boolean cacheContains(int recursoId) {
-		// TODO Auto-generated method stub
-		return false;
+		return cache.contains(new Archivo(recursoId, 0, ""));
 	}
 
 	@Override
 	protected Recurso retrieveCached(int recursoId) {
-		// TODO Auto-generated method stub
-		return null;
+		return cache.get(new Archivo(recursoId, 0, ""));
 	}
 
 	@Override
 	protected Parser getParser() {
 		return parser;
+	}
+	
+	@Override
+	protected void updateCache() {
+		if (currentHasValidSize()) {
+			super.updateCache();
+		}
+	}
+
+	private boolean currentHasValidSize() {
+		// TODO Dami aca chequea si x el tamanio del archivo se puede cachear (limite 50k)
+		return false;
+	}
+
+	@Override
+	protected Recurso deserialize(String xml_resp_e) {
+		return parser.deserializeArchivo(xml_resp_e);
 	}
 
 }

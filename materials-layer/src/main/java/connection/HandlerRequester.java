@@ -18,7 +18,7 @@ import connection.responses.OperationResponse;
 public abstract class HandlerRequester {
 
 	protected IntegracionStub stub;
-	
+	protected Recurso current;
 
 	protected HandlerRequester() {
 		try {
@@ -26,6 +26,10 @@ public abstract class HandlerRequester {
 		} catch (AxisFault e) {
 			System.out.println("Error al intentar contectarse con Integracion");
 		}
+	}
+	
+	protected Recurso getCurrent() {
+		return current;
 	}
 
 	protected OperationResponse save(String xml_str) {
@@ -89,7 +93,6 @@ public abstract class HandlerRequester {
 		return response;
 	}
 	
-	//si no anda.. hacerlo abstracto y codificar en los requesters
 	@SuppressWarnings("unchecked")
 	protected void updateCache() {
 		if (getCache().contains(getCurrent())) {
@@ -101,18 +104,24 @@ public abstract class HandlerRequester {
 	public OperationResponse getFromCache(int recursoId) {
 
 		OperationResponse response;
-		// LinkResponse response = new LinkResponse();
-		// Link target = new Link(recursoId, 0, "");
 
 		if (cacheContains(recursoId)) {
 			response = OperationResponse.createSuccess();
 			response.setRecurso(retrieveCached(recursoId));
 			return response;
-			// response = new LinkResponse(cache.get(target));
 		}
 
 		return OperationResponse.createFailed("no esta");
 
+	}
+	
+	protected void createCurrentObject(String xml_resp_e) {
+		Recurso aux = current;
+		current = deserialize(xml_resp_e);
+		current.setAmbitoId(aux.getAmbitoId());
+		current.setRecursoId(aux.getRecursoId());
+		current.setDescripcion(aux.getDescripcion());
+		
 	}
 
 	public abstract void deleteFromCache(int recursoId);
@@ -121,7 +130,10 @@ public abstract class HandlerRequester {
 	
 	protected abstract Recurso retrieveCached(int recursoId);
 
-	protected abstract void createCurrentObject(String xml_resp_e);
+//	protected abstract void createCurrentObject(String xml_resp_e);
+	
+	protected abstract Recurso deserialize(String xml_resp_e);
+	
 
 //	protected abstract OperationResponse currentObjetToResponse();
 	
@@ -129,7 +141,7 @@ public abstract class HandlerRequester {
 
 //	protected abstract void updateCache();
 	
-	protected abstract Recurso getCurrent();
+//	protected abstract Recurso getCurrent();
 	
 	protected abstract Parser getParser();
 	

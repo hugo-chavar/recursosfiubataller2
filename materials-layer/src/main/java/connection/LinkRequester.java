@@ -1,21 +1,15 @@
 package connection;
 
-import java.rmi.RemoteException;
-
 import model.Link;
 import model.Recurso;
-
-import org.apache.axis2.AxisFault;
-
 import connection.cache.Cache;
 import connection.responses.OperationResponse;
 
 public class LinkRequester extends HandlerRequester {
 
-//	private IntegracionStub stub;
 	private LinkParser parser;
 	private Cache<Link> cache;
-	private Recurso current;
+//	private Recurso current;
 
 	
 	public LinkRequester() {
@@ -150,22 +144,24 @@ public class LinkRequester extends HandlerRequester {
 	}
 
 //	@Override
-//	protected void updateCache() {
-//		if (cache.contains(currentLink)) {
-//			cache.remove(currentLink);
-//		}
-//		cache.add(currentLink);
+//	protected void createCurrentObject(String xml_resp_e) {
+//		Recurso aux = current;
+//		current = deserialize(xml_resp_e);
+//		current.setAmbitoId(aux.getAmbitoId());
+//		current.setRecursoId(aux.getRecursoId());
+//		current.setDescripcion(aux.getDescripcion());
+//		
 //	}
 
 	@Override
-	protected void createCurrentObject(String xml_resp_e) {
-		current = parser.deserializeLink(xml_resp_e);
+	protected Recurso deserialize(String xml_resp_e) {
+		return parser.deserializeLink(xml_resp_e);
 	}
 
-	@Override
-	protected Recurso getCurrent() {
-		return current;
-	}
+//	@Override
+//	protected Recurso getCurrent() {
+//		return current;
+//	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -177,5 +173,13 @@ public class LinkRequester extends HandlerRequester {
 	protected Parser getParser() {
 		return parser;
 	}
+	
+//	@Override
+//	protected void updateCache() {
+//		if (cache.contains(currentLink)) {
+//			cache.remove(currentLink);
+//		}
+//		cache.add(currentLink);
+//	}
 
 }

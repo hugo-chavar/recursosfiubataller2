@@ -20,7 +20,7 @@ import model.Recurso;
 import connection.EncuestaRequester;
 import connection.Parameter;
 import connection.Parser;
-import connection.responses.EncuestaResponse;
+import connection.responses.OperationResponse;
 
 public class WSPublisher {
 
@@ -68,9 +68,9 @@ public class WSPublisher {
 		System.out.println("Parameter: " + p3);
 		
 		System.out.println("Prueba marshal de encuesta: ");
-		EncuestaResponse er = (EncuestaResponse)((new EncuestaRequester()).getFromCache(11004));
+		OperationResponse er = (new EncuestaRequester()).getFromCache(11004);
 
-		Encuesta encuesta = er.getEncuesta();
+		Encuesta encuesta = (Encuesta)er.getRecurso();
 		
 		xml = parser.convertToXml(encuesta, Encuesta.class);
 		

@@ -11,7 +11,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import connection.exceptions.GetException;
-import connection.responses.EncuestaResponse;
 import connection.responses.OperationResponse;
 
 
@@ -37,8 +36,9 @@ public class EncuestaRequesterTest {
 	public void getEncuestaWithPreguntaRespuestaACompletar() throws GetException {
 		Encuesta encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);
 
-		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
-		Encuesta encuesta_rtn = response.getEncuesta();       
+//		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
+		OperationResponse response = Requester.INSTANCE.getRecurso(encuesta);
+		Encuesta encuesta_rtn = (Encuesta)response.getRecurso();       
 
 		Assert.assertEquals(encuesta, encuesta_rtn);
 		Assert.assertEquals("Encuesta con preguntas a completar", encuesta_rtn.getDescripcion());
@@ -55,8 +55,11 @@ public class EncuestaRequesterTest {
 	public void getEncuestaWithPreguntaRespuestaFija() throws GetException {
 		Encuesta encuesta = new Encuesta(10, 3, "Encuesta con preguntas fijas", false);
 
-		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
-		Encuesta encuesta_rtn = response.getEncuesta();
+//		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
+//		Encuesta encuesta_rtn = response.getEncuesta();
+//		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
+		OperationResponse response = Requester.INSTANCE.getRecurso(encuesta);
+		Encuesta encuesta_rtn = (Encuesta)response.getRecurso();    
 
 		Assert.assertEquals(encuesta, encuesta_rtn);
 		Assert.assertEquals("Encuesta con preguntas fijas", encuesta_rtn.getDescripcion());
