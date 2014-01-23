@@ -71,6 +71,7 @@ public abstract class HandlerRequester {
 		String xml_resp_e = s_resp_e.get_return();
 		System.out.println("Integracion me esta contestando : "+ xml_resp_e);
 		createCurrentObject(xml_resp_e);
+		updateCache();
 	} catch (RemoteException e) {
 		
 		e.printStackTrace();
@@ -91,6 +92,8 @@ public abstract class HandlerRequester {
 
 			responseArchivo = this.stub.guardarArchivo(requestArchivo);
 			response = OperationResponse.createSuccess();
+			
+			updateCache();
 			
 		} catch (AxisFault e) {
 			 e.printStackTrace();

@@ -10,6 +10,7 @@ import javax.activation.DataHandler;
 
 
 import model.Archivo;
+import model.Encuesta;
 import model.Recurso;
 
 import org.apache.axis2.AxisFault;
@@ -84,7 +85,7 @@ public class ArchivoRequester extends HandlerRequester {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 //	@Override
 //	protected Recurso getCurrent() {
 //		return current;

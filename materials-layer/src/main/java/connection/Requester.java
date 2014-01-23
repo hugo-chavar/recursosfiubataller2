@@ -120,9 +120,10 @@ public enum Requester {
 			response = encuestaReq.getFromCache(recurso.getRecursoId());
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
 			response = linkReq.getFromCache(recurso.getRecursoId());
-		} else {
-			// TODO: Falta para archivo
-			//response = archivoReq.getFromCache(recursoId);
+		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
+			response = archivoReq.getFromCache(recurso.getRecursoId());
+		}else {
+			
 			response = OperationResponse.createFailed("No existe cache");
 			
 		}
@@ -140,9 +141,8 @@ public enum Requester {
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
 			response = linkReq.save((Link)recurso);
 		} else {
-			// TODO: Falta para archivo
-			//response = archivoReq.save((Archivo)recurso);
-			response = OperationResponse.createFailed("Tipo de recurso inexistente");
+			response = archivoReq.save((Archivo)recurso);
+		//	response = OperationResponse.createFailed("Tipo de recurso inexistente");
 		}
 		
 		return response;
