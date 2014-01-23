@@ -50,19 +50,25 @@ public class Recurso {
 	}
 
 	public void setRecursoId(Integer idRecurso) {
-		this.recursoId = idRecurso;
+		if (idRecurso != null) {
+			this.recursoId = idRecurso;
+		}
 	}
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
-	public void setAmbitoId(int id) {
-		this.ambitoId = id;
+	public void setAmbitoId(Integer id) {
+		if (id != null) {
+			this.ambitoId = id;
+		}
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescripcion(String descrip) {
+		if (descrip != null) {
+			this.descripcion = descrip;
+		}
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import model.PreguntaRespuestaACompletar;
 import model.PreguntaRespuestaFija;
 import model.Recurso;
 import connection.cache.Cache;
+import connection.exceptions.GetException;
 import connection.responses.OperationResponse;
 
 
@@ -176,7 +177,7 @@ public class EncuestaRequester extends HandlerRequester {
 //		
 //	}
 
-	public OperationResponse get(Recurso recurso) {
+	public OperationResponse get(Recurso recurso){
 
 //		OperationResponse response;
 //		String reason;
@@ -184,7 +185,11 @@ public class EncuestaRequester extends HandlerRequester {
 		current = recurso;
 		// Consulto la encuesta guardada
 		String xml = parser.serializeQueryByType(recurso.getRecursoId(), EncuestaParser.ENCUESTA_TAG);
-		return get(xml);
+		try {
+			return get(xml);
+		} catch (GetException e) {
+			return OperationResponse.createFailed(e.toString());
+		}
 //		try {	
 //			////////////// PRUEBAS //////////////
 //			String xml_resp_e;
@@ -263,8 +268,8 @@ public class EncuestaRequester extends HandlerRequester {
 	}
 
 	@Override
-	protected Recurso deserialize(String xml_resp_e) {
-		return parser.deserializeEncuesta(xml_resp_e);
+	protected void deserialize(String xml_resp_e) {
+		current = parser.deserializeEncuesta(xml_resp_e);
 	}
 
 //	@Override

@@ -28,9 +28,10 @@ public class Cache<T> {
 
 	public void addAll(Collection<T> elemnts) {
 		for (T e : elemnts) {
-			if (!contains(e)) {
-				add(e);
+			if (contains(e)) {
+				remove(e);
 			}
+			add(e);
 		}
 	}
 

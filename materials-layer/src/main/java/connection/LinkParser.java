@@ -66,6 +66,9 @@ public class LinkParser extends Parser {
 		Link link = null;
 
 		Document doc = this.convertXmlToDocument(xml);
+		if (doc == null) {
+			return null;
+		}
 		HashMap<String, String> fields = new HashMap<String, String>();
 
 		NodeList linkNode = doc.getElementsByTagName(LinkParser.LINK_TAG);

@@ -102,6 +102,9 @@ public class EncuestaParser extends Parser {
 		Encuesta encuesta = null;
 
 		Document doc = this.convertXmlToDocument(xml);
+		if (doc == null) {
+			return null;
+		}
 		HashMap<String, String> fields = new HashMap<String, String>();
 
 		NodeList encuestaNode = doc.getElementsByTagName(EncuestaParser.ENCUESTA_TAG);

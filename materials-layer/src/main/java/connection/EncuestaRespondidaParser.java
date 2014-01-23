@@ -56,6 +56,9 @@ public class EncuestaRespondidaParser extends Parser {
 		EncuestaRespondida respondida = null;
 		
 		Document doc = this.convertXmlToDocument(xml);
+		if (doc == null) {
+			return null;
+		}
 		NodeList nodes = doc.getElementsByTagName(EncuestaRespondidaParser.ENCUESTA_RESPONDIDA_TAG);
 		NodeList childNodes = nodes.item(0).getChildNodes(); 
 		HashMap<String, String> fields = new HashMap<String, String>();

@@ -103,7 +103,7 @@ public enum Requester {
 			//archivoReq.deleteFromCache(idRecurso);
 		}
 		
-		return recursosReq.delete(recurso.getRecursoId());
+		return recursosReq.delete(recurso);
 
 	}
 

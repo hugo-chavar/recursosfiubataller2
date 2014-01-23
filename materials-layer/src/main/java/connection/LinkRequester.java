@@ -3,6 +3,7 @@ package connection;
 import model.Link;
 import model.Recurso;
 import connection.cache.Cache;
+import connection.exceptions.GetException;
 import connection.responses.OperationResponse;
 
 public class LinkRequester extends HandlerRequester {
@@ -99,7 +100,11 @@ public class LinkRequester extends HandlerRequester {
 
 		// Consulto el link guardado
 		String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), LinkParser.LINK_TAG);
-		return get(xml);
+		try {
+			return get(xml);
+		} catch (GetException e) {
+			return OperationResponse.createFailed(e.toString());
+		}
 //		try {
 //			SeleccionarDatos seleccionar_e = new SeleccionarDatos();
 //			seleccionar_e.setXml(xml);
@@ -154,8 +159,8 @@ public class LinkRequester extends HandlerRequester {
 //	}
 
 	@Override
-	protected Recurso deserialize(String xml_resp_e) {
-		return parser.deserializeLink(xml_resp_e);
+	protected void deserialize(String xml_resp_e) {
+		current = parser.deserializeLink(xml_resp_e);
 	}
 
 //	@Override

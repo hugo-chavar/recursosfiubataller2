@@ -9,6 +9,7 @@ import javax.activation.DataHandler;
 
 
 
+
 import model.Archivo;
 import model.Encuesta;
 import model.Recurso;
@@ -17,12 +18,12 @@ import org.apache.axis2.AxisFault;
 
 
 
+
 //import com.sun.xml.internal.ws.util.ByteArrayDataSource;
 import com.ws.services.IntegracionStub;
 
-
 import connection.cache.Cache;
-
+import connection.exceptions.GetException;
 import connection.responses.OperationResponse;
 
 public class ArchivoRequester extends HandlerRequester {
@@ -48,7 +49,11 @@ public class ArchivoRequester extends HandlerRequester {
 		OperationResponse response;
 		String reason;
 		String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
-		response = getFile ( xml ); 
+		try {
+			response = getFile ( xml );
+		} catch (GetException e) {
+			response = OperationResponse.createFailed(e.toString());
+		} 
 		if(response.getSuccess()==false)
 				return harcodeoDeArchivo();
 		return response;
@@ -80,12 +85,12 @@ public class ArchivoRequester extends HandlerRequester {
 		return "Archivo";
 	}
 
-	@Override
-	protected void createCurrentObject(String xml_resp_e) {
-		// TODO Auto-generated method stub
+//	@Override
+//	protected void createCurrentObject(String xml_resp_e) {
+//		// TODO Auto-generated method stub
+//
+//	}
 
-	}
-	
 //	@Override
 //	protected Recurso getCurrent() {
 //		return current;
@@ -130,8 +135,8 @@ public class ArchivoRequester extends HandlerRequester {
 	}
 
 	@Override
-	protected Recurso deserialize(String xml_resp_e) {
-		return parser.deserializeArchivo(xml_resp_e);
+	protected void deserialize(String xml_resp_e) {
+		current = parser.deserializeArchivo(xml_resp_e);
 	}
 
 }
