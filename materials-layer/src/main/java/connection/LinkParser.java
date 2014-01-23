@@ -8,6 +8,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import connection.exceptions.ParseException;
+
 
 public class LinkParser extends Parser {
 
@@ -61,7 +63,7 @@ public class LinkParser extends Parser {
 
 	}
 
-	public Link deserializeLink(String xml) {
+	public Link deserializeLink(String xml) throws ParseException {
 
 		Link link = null;
 

@@ -10,6 +10,7 @@ import org.apache.axis2.AxisFault;
 import com.ws.services.IntegracionStub;
 import com.ws.services.IntegracionStub.EliminarDatos;
 import com.ws.services.IntegracionStub.EliminarDatosResponse;
+import com.ws.services.IntegracionStub.GuardarArchivoResponse;
 import com.ws.services.IntegracionStub.GuardarDatos;
 import com.ws.services.IntegracionStub.GuardarDatosResponse;
 import com.ws.services.IntegracionStub.SeleccionarDatos;
@@ -17,6 +18,7 @@ import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
 import connection.exceptions.GetException;
+import connection.exceptions.ParseException;
 import connection.responses.OperationResponse;
 
 public abstract class HandlerRequester {
@@ -63,7 +65,7 @@ public abstract class HandlerRequester {
 		return response;
 	}
 
-	public OperationResponse getFile (String xml) throws GetException{
+	public OperationResponse getFile (String xml) throws GetException, ParseException{
 	
 		SeleccionarDatos seleccionar_e = new SeleccionarDatos();
 		seleccionar_e.setXml(xml);
@@ -84,7 +86,7 @@ public abstract class HandlerRequester {
 	}
 	
 	protected OperationResponse saveFile(String xml){
-		IntegracionStub.GuardarArchivoResponse responseArchivo = null;
+		GuardarArchivoResponse responseArchivo;
 		Archivo archivo = (Archivo) current;
 		OperationResponse response;
 		try {
@@ -94,6 +96,7 @@ public abstract class HandlerRequester {
 			requestArchivo.setXml(xml);
 
 			responseArchivo = this.stub.guardarArchivo(requestArchivo);
+			//TODO: Dami Falta ver si realmente se guardo bien.. hay que chequear lo que devuelve integracion
 			response = OperationResponse.createSuccess();
 			
 			updateCache();
@@ -108,7 +111,7 @@ public abstract class HandlerRequester {
 		return response;
 	}
 
-	public OperationResponse get(String xml) throws GetException {
+	public OperationResponse get(String xml) throws ParseException, GetException {
 		String reason;
 
 		try {
@@ -130,6 +133,8 @@ public abstract class HandlerRequester {
 			} else if (xml.equals("<WS><recurso><recursoId>1003</recursoId></recurso></WS>")) {//TODO: sacar harcodeo para testear los archivos.
 				xml_resp_e = "<WS><recurso><recursoId>1003</recursoId><ambitoId>3</ambitoId><descripcion>Es un Archivo</descripcion><tipo>Archivo</tipo></recurso></WS>";
 			}
+			System.out.println("Esto es lo que me devuelve:");
+			System.out.println(xml_resp_e);
 			//fin pruebas
 			createCurrentObject(xml_resp_e);
 
@@ -180,19 +185,19 @@ public abstract class HandlerRequester {
 
 	}
 	
-	protected void createCurrentObject(String xml_resp_e) throws GetException {
+	protected void createCurrentObject(String xml_resp_e) throws ParseException, GetException {
 		Recurso aux = current;
 		deserialize(xml_resp_e);
-		verifyCurrentObject(xml_resp_e);
+		verifyCurrentObject();
 		current.setAmbitoId(aux.getAmbitoId());
 		current.setRecursoId(aux.getRecursoId());
 		current.setDescripcion(aux.getDescripcion());
 		
 	}
 	
-	private void verifyCurrentObject(String xml_resp_e) throws GetException {
+	private void verifyCurrentObject() throws GetException {
 		if (current == null) {	
-			String message = "Integracion dice: " + xml_resp_e; //.substring(0, xml_resp_e.indexOf('<') - 2)
+			String message = "Error desconocido current is null ";
 			System.out.println(message);
 			throw new GetException(message);
 		}
@@ -236,7 +241,7 @@ public abstract class HandlerRequester {
 
 //	protected abstract void createCurrentObject(String xml_resp_e);
 	
-	protected abstract void deserialize(String xml_resp_e);
+	protected abstract void deserialize(String xml_resp_e) throws ParseException;
 	
 
 //	protected abstract OperationResponse currentObjetToResponse();

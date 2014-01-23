@@ -4,19 +4,16 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Link;
 import model.Recurso;
 
 import org.apache.axis2.AxisFault;
 
-import com.ws.services.IntegracionStub;
-import com.ws.services.IntegracionStub.EliminarDatos;
-import com.ws.services.IntegracionStub.EliminarDatosResponse;
 import com.ws.services.IntegracionStub.SeleccionarDatos;
 import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
 import connection.exceptions.GetException;
+import connection.exceptions.ParseException;
 import connection.responses.OperationResponse;
 import connection.responses.RecursosResponse;
 
@@ -60,64 +57,71 @@ public class RecursosRequester extends HandlerRequester {
 		recursosEjemplo.add(r);
 	}
 	
-	public Recurso get(Recurso target) throws GetException {
+	public OperationResponse get(Recurso target) throws GetException, ParseException {
 		current = target;
 		// Busco en el cache de recursos.
 		if (cache.contains(target)) {
-			return cache.get(target);
+			OperationResponse response = OperationResponse.createSuccess();
+			response.setRecurso(cache.get(target));
+			return response;
 		} else {
 			// Consulto el recurso guardado
 			String xml = parser.serializeRecursoQuery(target.getRecursoId());
-			try {
-			
-				////////////// PRUEBAS //////////////
-				String xml_resp_e;
-				
-				if (xml.equals("<WS><recurso><recursoId>15</recursoId></recurso></WS>")) {
-					xml_resp_e = "<WS><recurso><recursoId>15</recursoId><ambitoId>2</ambitoId><descripcion>Encuesta con preguntas a completar</descripcion><tipo>Encuesta</tipo></recurso></WS>";
-				} else if (xml.equals("<WS><recurso><recursoId>10</recursoId></recurso></WS>")) {
-					xml_resp_e = "<WS><recurso><recursoId>10</recursoId><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></recurso></WS>";
-				} else if (xml.equals("<WS><recurso><recursoId>1003</recursoId></recurso></WS>")) {//TODO: sacar harcodeo para testear los archivos.
-					xml_resp_e = "<WS><recurso><recursoId>1003</recursoId><ambitoId>3</ambitoId><descripcion>Es un Archivo</descripcion><tipo>Archivo</tipo></recurso></WS>";
-				}else{
-					SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-					seleccionar_e.setXml(xml);
-					SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
-					xml_resp_e = s_resp_e.get_return();
-				}
-				////////////// PRUEBAS //////////////
-				
-				System.out.println(xml_resp_e);
-//				if (xml_resp_e != null) {
-					Recurso recurso = parser.deserializeRecurso(xml_resp_e);
-				if (recurso == null) {	
-					String message = "Integracion dice: " + xml_resp_e.substring(0, xml_resp_e.indexOf('<') -2);
-					System.out.println(message);
-					throw new GetException(message);
-				}
-					// Agrego el recurso al cache
-					cache.add(recurso);
-					
-					return recurso;
-//				}
-					
-			} catch (AxisFault e) {
-				String message = "Error al intentar obtener el recurso con IDRecurso: " + target.getRecursoId();
-				System.out.println(message);
-			} catch (RemoteException e) {
-				String message = "Error de conexion remota";
-				System.out.println(message);
-			}
+//			System.out.println("Esto es lo que voy a buscar:");
+//			System.out.println(xml);
+			return get(xml);
 		}
-
-		return null;
+//			try {
+//			
+//				////////////// PRUEBAS //////////////
+//				String xml_resp_e;
+//				
+//				if (xml.equals("<WS><recurso><recursoId>15</recursoId></recurso></WS>")) {
+//					xml_resp_e = "<WS><recurso><recursoId>15</recursoId><ambitoId>2</ambitoId><descripcion>Encuesta con preguntas a completar</descripcion><tipo>Encuesta</tipo></recurso></WS>";
+//				} else if (xml.equals("<WS><recurso><recursoId>10</recursoId></recurso></WS>")) {
+//					xml_resp_e = "<WS><recurso><recursoId>10</recursoId><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></recurso></WS>";
+//				} else if (xml.equals("<WS><recurso><recursoId>1003</recursoId></recurso></WS>")) {//TODO: sacar harcodeo para testear los archivos.
+//					xml_resp_e = "<WS><recurso><recursoId>1003</recursoId><ambitoId>3</ambitoId><descripcion>Es un Archivo</descripcion><tipo>Archivo</tipo></recurso></WS>";
+//				}else{
+//					SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+//					seleccionar_e.setXml(xml);
+//					SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
+//					xml_resp_e = s_resp_e.get_return();
+//				}
+//				////////////// PRUEBAS //////////////
+//				
+//				System.out.println(xml_resp_e);
+////				if (xml_resp_e != null) {
+//					Recurso recurso = parser.deserializeRecurso(xml_resp_e);
+//				if (recurso == null) {	
+//					String message = "Integracion dice: " + xml_resp_e.substring(0, xml_resp_e.indexOf('<') -2);
+//					System.out.println(message);
+//					throw new GetException(message);
+//				}
+//					// Agrego el recurso al cache
+//					cache.add(recurso);
+//					
+//					return recurso;
+////				}
+//					
+//			} catch (AxisFault e) {
+//				String message = "Error al intentar obtener el recurso con IDRecurso: " + target.getRecursoId();
+//				System.out.println(message);
+//			} catch (RemoteException e) {
+//				String message = "Error de conexion remota";
+//				System.out.println(message);
+//			}
+//		}
+//
+//		return null;
 
 	}
 
-	public RecursosResponse getAll(int IDAmbito) throws GetException {
+	public OperationResponse getAll(int IDAmbito) {
 
 		List<Recurso> recursos = new ArrayList<Recurso>();
-		RecursosResponse recursosResponse = new RecursosResponse(); 
+		RecursosResponse recursosResponse = new RecursosResponse();
+		String message;
 		
 		try {
 
@@ -130,39 +134,31 @@ public class RecursosRequester extends HandlerRequester {
 			System.out.println(xml_resp_e);
 			recursos = parser.deserializeRecursos(xml_resp_e);
 			
-			if (recursos == null) {
-				// TODO : devuelvo datos de ejemplo, mientras no funcione integracion
-				for (Recurso r:  recursosEjemplo) {
-					recursosResponse.add(r);
-				}
-				recursosResponse.setSuccess(true);
-				return recursosResponse;
-//				String message = "Integracion dice: " + xml_resp_e.substring(0, xml_resp_e.indexOf('<') -1);
-//				System.out.println(message);
-//				throw new GetException(message);
-			}
-			
 			for (Recurso r:  recursos) {
 				recursosResponse.add(r);
 			}
 			
-			// Agrego los recursos al cache
 			cache.addAll(recursos);
 			
 			recursosResponse.setSuccess(true);
 			return recursosResponse;
-
+		} catch (ParseException e) {
+			message = e.getMessage();
+			
+			// TODO : (Hugo) devuelvo datos de ejemplo, mientras no funcione integracion
+			for (Recurso r:  recursosEjemplo) {
+				recursosResponse.add(r);
+			}
+			recursosResponse.setSuccess(true);
+			return recursosResponse;
 		} catch (AxisFault e) {
-			String message = "Error al intentar obtener los recursos del IDAmbito: " + IDAmbito;
-			System.out.println(message);
-			throw new GetException(message);
+			message = "Error al intentar obtener los recursos del IDAmbito: " + IDAmbito;
 		} catch (RemoteException e) {
-			String message = "Error de conexion remota";
-			System.out.println(message);
-			throw new GetException(message);
+			message = "Error de conexion remota";
 		}
+		System.out.println(message);
 
-//		return null;
+		return OperationResponse.createFailed(message);
 
 	}
 
@@ -238,7 +234,7 @@ public class RecursosRequester extends HandlerRequester {
 	}
 
 	@Override
-	protected void deserialize(String xml_resp_e) {
+	protected void deserialize(String xml_resp_e) throws ParseException {
 		current = parser.deserializeRecurso(xml_resp_e);
 	}
 

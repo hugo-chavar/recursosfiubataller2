@@ -8,6 +8,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import connection.exceptions.ParseException;
+
 
 public class EncuestaParser extends Parser {
 	
@@ -97,7 +99,7 @@ public class EncuestaParser extends Parser {
 //		
 //	}
 	
-	public Encuesta deserializeEncuesta(String xml) {
+	public Encuesta deserializeEncuesta(String xml) throws ParseException {
 
 		Encuesta encuesta = null;
 

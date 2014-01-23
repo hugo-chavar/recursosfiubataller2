@@ -1,6 +1,5 @@
 package connection;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import model.Archivo;
@@ -9,6 +8,8 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import connection.exceptions.ParseException;
 
 public class ArchivoParser extends Parser {
 	public static String ARCHIVO_TAG = "archivo";
@@ -65,7 +66,7 @@ public class ArchivoParser extends Parser {
 		return convertDocumentToXml(doc);
 	}
 
-	public Archivo deserializeArchivo(String xml) {
+	public Archivo deserializeArchivo(String xml) throws ParseException {
 		Document doc = this.convertXmlToDocument(xml);
 		if (doc == null) {
 			return null;

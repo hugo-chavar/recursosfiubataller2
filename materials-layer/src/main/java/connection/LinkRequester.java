@@ -4,6 +4,7 @@ import model.Link;
 import model.Recurso;
 import connection.cache.Cache;
 import connection.exceptions.GetException;
+import connection.exceptions.ParseException;
 import connection.responses.OperationResponse;
 
 public class LinkRequester extends HandlerRequester {
@@ -103,8 +104,10 @@ public class LinkRequester extends HandlerRequester {
 		try {
 			return get(xml);
 		} catch (GetException e) {
-			return OperationResponse.createFailed(e.toString());
-		}
+			return OperationResponse.createFailed(e.getMessage());
+	} catch (ParseException e) {
+		return OperationResponse.createFailed(e.getMessage());
+	}
 //		try {
 //			SeleccionarDatos seleccionar_e = new SeleccionarDatos();
 //			seleccionar_e.setXml(xml);
@@ -159,7 +162,7 @@ public class LinkRequester extends HandlerRequester {
 //	}
 
 	@Override
-	protected void deserialize(String xml_resp_e) {
+	protected void deserialize(String xml_resp_e) throws ParseException {
 		current = parser.deserializeLink(xml_resp_e);
 	}
 

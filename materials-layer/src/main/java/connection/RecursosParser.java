@@ -10,15 +10,17 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import connection.exceptions.ParseException;
+
 
 public class RecursosParser extends Parser {
 	
 	
-	public Recurso deserializeRecurso(String xml) {
+	public Recurso deserializeRecurso(String xml) throws ParseException {
 		
 		Recurso recurso = null;
 		
-		Document doc = this.convertXmlToDocument(xml);
+		Document doc = convertXmlToDocument(xml);
 		if (doc == null) {
 			return recurso;
 		}
@@ -46,7 +48,7 @@ public class RecursosParser extends Parser {
 		
 	}
 	
-	public List<Recurso> deserializeRecursos(String xml) {
+	public List<Recurso> deserializeRecursos(String xml) throws ParseException {
 		
 		List<Recurso> recursos = new ArrayList<Recurso>();
 		

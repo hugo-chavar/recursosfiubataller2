@@ -19,6 +19,9 @@ import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSSerializer;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+
+import connection.exceptions.ParseException;
 
 
 public class Parser {	
@@ -45,12 +48,15 @@ public class Parser {
 		return document;
 	}
 	
-	public Document convertXmlToDocument(String xml) {		
+	public Document convertXmlToDocument(String xml) throws ParseException {		
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder;
 		try {
 			docBuilder = docFactory.newDocumentBuilder();
 			return docBuilder.parse(new InputSource(new StringReader(xml)));
+		} catch (SAXParseException e) {
+			String rcv = xml.substring(0, xml.indexOf('<') - 2);
+			throw new ParseException("Xml recibido de integracion contiene errores. Recibido: " + rcv);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {

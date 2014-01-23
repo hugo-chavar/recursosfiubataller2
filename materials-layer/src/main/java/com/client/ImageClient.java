@@ -1,6 +1,5 @@
 package com.client;
 
-import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -9,14 +8,9 @@ import java.net.URL;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
-import javax.xml.ws.soap.MTOMFeature;
 import javax.xml.ws.soap.SOAPBinding;
 
 import service.Materials;
@@ -35,7 +29,7 @@ public class ImageClient{
         Materials imageServer = service.getPort(Materials.class);
 
         /************  test upload ****************/
-        Image imgUpload = ImageIO.read(new File("/home/damian/multa2.pdf"));
+//        Image imgUpload = ImageIO.read(new File("/home/damian/multa2.pdf"));
 		
         try{
         	System.out.println("ingrese el path de su archivo");

@@ -1,4 +1,4 @@
 <response>
-  <reason>Integracion dice: com.ws.handler.recursoHandlerXML</reason>
+  <reason>Xml recibido de integracion contiene errores. Recibido: com.ws.handler.recursoHandlerXML</reason>
   <success>false</success>
 </response>

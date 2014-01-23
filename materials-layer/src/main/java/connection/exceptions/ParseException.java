@@ -1,11 +1,12 @@
 package connection.exceptions;
 
-public class GetException extends Exception {
+public class ParseException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 	
-	public GetException (String message) {
+	public ParseException (String message) {
 		super(message);
 	}
+
 
 }

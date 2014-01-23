@@ -10,6 +10,7 @@ import model.PreguntaRespuestaFija;
 import model.Recurso;
 import connection.cache.Cache;
 import connection.exceptions.GetException;
+import connection.exceptions.ParseException;
 import connection.responses.OperationResponse;
 
 
@@ -188,9 +189,14 @@ public class EncuestaRequester extends HandlerRequester {
 		try {
 			return get(xml);
 		} catch (GetException e) {
-			return OperationResponse.createFailed(e.toString());
+			return OperationResponse.createFailed(e.getMessage());
+		} catch (ParseException e) {
+			return OperationResponse.createFailed(e.getMessage());
 		}
-//		try {	
+
+		
+		
+		//		try {	
 //			////////////// PRUEBAS //////////////
 //			String xml_resp_e;
 //			
@@ -230,6 +236,7 @@ public class EncuestaRequester extends HandlerRequester {
 //		System.out.println(reason);
 //		
 //		return OperationResponse.createFailed(reason);
+
 	}
 
 	public void deleteFromCache(int recursoId) {
@@ -268,7 +275,7 @@ public class EncuestaRequester extends HandlerRequester {
 	}
 
 	@Override
-	protected void deserialize(String xml_resp_e) {
+	protected void deserialize(String xml_resp_e) throws ParseException {
 		current = parser.deserializeEncuesta(xml_resp_e);
 	}
 

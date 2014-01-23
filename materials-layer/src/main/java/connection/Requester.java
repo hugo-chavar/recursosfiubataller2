@@ -1,6 +1,7 @@
 package connection;
 
 import connection.exceptions.GetException;
+import connection.exceptions.ParseException;
 import connection.responses.OperationResponse;
 import connection.responses.RecursosResponse;
 import model.Archivo;
@@ -51,7 +52,7 @@ public enum Requester {
 		
 	}
 	
-	public OperationResponse getRecurso(Recurso target) throws GetException {
+	public OperationResponse getRecurso(Recurso target) {
 		OperationResponse response;
 		
 		if (notValidInput(target)) {
@@ -60,27 +61,33 @@ public enum Requester {
 	
 		// Busco en el cache de especifico del recurso
 		response = getRecursoFromCache(target);
-		if (response.getSuccess())
+		if (response.getSuccess()) {
 			return response;
+		}
 		// Si no se encuentra en el cache
 		
 		// Busco el recurso
-		Recurso recurso = recursosReq.get(target);
-		if (recurso == null) {
-			String reason = "Error al intentar obtener el recurso, ID: " + target.getRecursoId();
-			System.out.println(reason);
-			response = OperationResponse.createFailed(reason);
+//		Recurso recurso;
+		try {
+			response = recursosReq.get(target);
+		} catch (GetException e) {
+			response = OperationResponse.createFailed(e.getMessage());
+		} catch (ParseException e) {
+			response = OperationResponse.createFailed(e.getMessage());
+		}
+		
+		if (!response.getSuccess()) {
 			return response;		
 		}
 		
 		// Consulto la tabla especifica del recurso
-		response = makeQueryGetRecurso(recurso);
+		response = makeQueryGetRecurso(response.getRecurso());
 		
 		return response;
 		
 	}
 	
-	public RecursosResponse getRecursosAmbito(int ambitoId) throws GetException {
+	public OperationResponse getRecursosAmbito(int ambitoId) throws GetException {
 		return recursosReq.getAll(ambitoId);
 	}
 	

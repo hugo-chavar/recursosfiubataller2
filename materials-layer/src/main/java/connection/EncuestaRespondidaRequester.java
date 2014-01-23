@@ -13,6 +13,7 @@ import com.ws.services.IntegracionStub.SeleccionarDatos;
 import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
+import connection.exceptions.ParseException;
 //import connection.responses.EncuestaRespondidaResponse;
 import connection.responses.OperationResponse;
 
@@ -88,7 +89,15 @@ public class EncuestaRespondidaRequester {
 				}
 				
 				////////////// PRUEBAS //////////////
-				EncuestaRespondida encuesta = parser.deserializeEncuestaRespondida(xml_resp_e);				
+				EncuestaRespondida encuesta;
+				try {
+					encuesta = parser.deserializeEncuestaRespondida(xml_resp_e);
+				} catch (ParseException e) {
+					// TODO Andy: Esto hay que arreglar, este metodo tiene q devolver un OperationResponse
+					//igual que el resto de los requesters
+					encuesta = null;
+					e.printStackTrace();
+				}				
 				
 				// Agrego al cache de encuestas respondidas
 				cacheRespondidas.add(encuesta);

@@ -1,9 +1,6 @@
 package service;
 
 import javax.activation.DataHandler;
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.soap.MTOM;
@@ -18,7 +15,6 @@ import connection.Requester;
 import connection.exceptions.GetException;
 import connection.responses.EncuestaRespondidaResponse;
 import connection.responses.OperationResponse;
-import connection.responses.RecursosResponse;
 
 @MTOM 
 @WebService(endpointInterface = "service.Materials")
@@ -120,29 +116,25 @@ public class MaterialsImpl implements Materials {
 //	}
 	
 	@Override
-	public String agregarEncuestaRespondida(String respondidaParam) {	
+	public String agregarEncuestaRespondida(String respondidaParam) {
 		Parameter parameter = Parameter.createParameter(respondidaParam);
-		if (parameter.getRespondida() == null){
+		if (parameter.getRespondida() == null) {
 			return createFailedResponse("Parametros invalidos");
 		}
 		EncuestaRespondida respondida = parameter.getRespondida();
 		OperationResponse response;
 		OperationResponse encuestaResponse;
-		try {
-			encuestaResponse = Requester.INSTANCE.getRecurso(new Encuesta(respondida.getIdRecurso(),0,"", false));
-			if (!encuestaResponse.getSuccess()){
-				return createFailedResponse("Encuesta inexistente");
-			}
-			Encuesta encuesta = (Encuesta)encuestaResponse.getRecurso();
-			if (encuesta.isEvaluada()) {
-				respondida.evaluar(encuesta);
-			}
-			response = Requester.INSTANCE.saveEncuestaRespondida(respondida);
-			return toXml(response);
-		} catch (GetException e) {
-			return createFailedResponse(e.getMessage());
+		encuestaResponse = Requester.INSTANCE.getRecurso(new Encuesta(respondida.getIdRecurso(), 0, "", false));
+		if (!encuestaResponse.getSuccess()) {
+			return createFailedResponse("Encuesta inexistente");
 		}
-		
+		Encuesta encuesta = (Encuesta) encuestaResponse.getRecurso();
+		if (encuesta.isEvaluada()) {
+			respondida.evaluar(encuesta);
+		}
+		response = Requester.INSTANCE.saveEncuestaRespondida(respondida);
+		return toXml(response);
+
 	}
 	
 	public String getEncuestaRespondida(Recurso recurso, int usuarioId) {
@@ -159,7 +151,7 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	private String getRecursos(int ambitoId, int usuarioId) {
-		RecursosResponse recursosPermitidos;
+		OperationResponse recursosPermitidos;
 		// Obtengo los recursos
 		try {
 			if (!Requester.INSTANCE.getPermisoUsuario(ambitoId, usuarioId,"getRecursos")){
@@ -222,15 +214,9 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public String getRecurso(String parametros) {
-//		System.out.println(parametros);
 		Parameter parameter = Parameter.createParameter(parametros);
-
-		try {
-			OperationResponse response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
-			return toXml(response);
-		} catch (GetException e) {
-			return createFailedResponse(e.getMessage());
-		}
+		OperationResponse response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
+		return toXml(response);
 	}
 
 	@Override

@@ -435,7 +435,7 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 		\renewcommand{\labelitemi}{\ding{105}} 
 		\begin{itemize}
 		\item \emph{OBTENER RECURSO}:
-			Este m\'etodo devuelve ya sea un Archivo, un Link o una Encuesta segun lo que se solicite.
+			Este m\'etodo devuelve ya sea un Archivo, un Link o una Encuesta segun lo que se solicite. Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
 			\begin{description}
 				\item[INPUT] XML\_PARAMETROS
 				\item[OUTPUT] XML\_RESULTADO\\
@@ -534,17 +534,17 @@ Se enviar\'a \textit{multiplesCorrectas = "false"} cuando no hayan respuestas co
 				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, ENCUESTA 
 				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON\\
 			\end{description}
-			\item \emph{GUARDAR ENCUESTA RESPONDIDA}
+			\item \emph{GUARDAR ENCUESTA RESPONDIDA}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
 			\begin{description}
 				\item[INPUT] ID-ENCUESTA, ID-USUARIO, LISTA-RESPUESTAS
 				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \\
 			\end{description}
-			\item \emph{OBTENER ENCUESTA RESPONDIDA}
+			\item \emph{OBTENER ENCUESTA RESPONDIDA}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
 			\begin{description}
 				\item[INPUT] ID-ENCUESTA, ID-USUARIO
 				\item[OUTPUT] LISTA-RESPUESTAS\\
 			\end{description}
-			\item \emph{BORRAR RECURSO}
+			\item \emph{BORRAR RECURSO}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
 			\begin{description}
 				\item[INPUT] ID-AMBIENTE, ID-RECURSO
 				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \\

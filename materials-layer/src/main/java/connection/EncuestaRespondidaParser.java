@@ -8,6 +8,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import connection.exceptions.ParseException;
+
 public class EncuestaRespondidaParser extends Parser {
 	
 	//public static String ENCUESTA_TAG = "encuesta";
@@ -51,7 +53,7 @@ public class EncuestaRespondidaParser extends Parser {
 
 	}
 	
-	public EncuestaRespondida deserializeEncuestaRespondida(String xml) {
+	public EncuestaRespondida deserializeEncuestaRespondida(String xml) throws ParseException {
 		
 		EncuestaRespondida respondida = null;
 		

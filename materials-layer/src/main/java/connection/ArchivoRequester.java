@@ -3,31 +3,17 @@ package connection;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.rmi.RemoteException;
 
 import javax.activation.DataHandler;
 
-
-
-
 import model.Archivo;
-import model.Encuesta;
 import model.Recurso;
-
-import org.apache.axis2.AxisFault;
-
-
-
-
-//import com.sun.xml.internal.ws.util.ByteArrayDataSource;
-import com.ws.services.IntegracionStub;
-
 import connection.cache.Cache;
 import connection.exceptions.GetException;
+import connection.exceptions.ParseException;
 import connection.responses.OperationResponse;
 
 public class ArchivoRequester extends HandlerRequester {
-	// private IntegracionStub stub;
 	private ArchivoParser parser;
 	private Cache<Archivo> cache;
 
@@ -43,21 +29,26 @@ public class ArchivoRequester extends HandlerRequester {
 		return saveFile(archivo_str);
 	}
 
-	//Este metodo es el que consulta a integración y trae el archivo necesario.
+	// Este metodo es el que consulta a integración y trae el archivo necesario.
 	public OperationResponse get(Recurso recurso) {
-		
+
 		OperationResponse response;
-		String reason;
 		String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
 		try {
-			response = getFile ( xml );
+			response = getFile(xml);
 		} catch (GetException e) {
-			response = OperationResponse.createFailed(e.toString());
-		} 
-		if(response.getSuccess()==false)
-				return harcodeoDeArchivo();
+			response = OperationResponse.createFailed(e.getMessage());
+		} catch (ParseException e) {
+			response = OperationResponse.createFailed(e.getMessage());
+		}
+		
+		if (!response.getSuccess()) {
+			return harcodeoDeArchivo();
+		}
+		
 		return response;
 	}
+	
 	//Metodo privado para testear.
 	private OperationResponse harcodeoDeArchivo(){
 		OperationResponse response;
@@ -68,16 +59,16 @@ public class ArchivoRequester extends HandlerRequester {
 		archivo.setTipoArchivo("jpg");
 		try {
 			String path;
-			path = "file:/home/damian/voucherAbuela.pdf";
+//			path = "file:/home/damian/voucherAbuela.pdf";
+			path = "file:" + System.getProperty("user.dir") + "\\webapps\\Materials\\WEB-INF\\classes\\teofilo.jpg";
 			DataHandler arch = new DataHandler(new URL(path));
 			archivo.setRawFile(arch);
 		} catch (MalformedURLException e) {
 			System.out.println("no existe el URL asigando");
 			e.printStackTrace();
 		}
-		response = new OperationResponse();
+		response = OperationResponse.createSuccess();
 		response.setRecurso(archivo);
-		response.setSuccess(true);
 		return response;
 	}
 	@Override
@@ -135,7 +126,7 @@ public class ArchivoRequester extends HandlerRequester {
 	}
 
 	@Override
-	protected void deserialize(String xml_resp_e) {
+	protected void deserialize(String xml_resp_e) throws ParseException {
 		current = parser.deserializeArchivo(xml_resp_e);
 	}
 

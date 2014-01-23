@@ -67,6 +67,10 @@ public class OperationResponse {
 	public void setRecurso(Recurso object) {
 		this.recurso = object;
 	}
+	
+	public String getReason() {
+		return this.reason;
+	}
 
 
 }

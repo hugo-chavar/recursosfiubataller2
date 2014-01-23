@@ -20,6 +20,7 @@ import model.Recurso;
 import connection.EncuestaRequester;
 import connection.Parameter;
 import connection.Parser;
+import connection.Requester;
 import connection.responses.OperationResponse;
 
 public class WSPublisher {
@@ -43,14 +44,16 @@ public class WSPublisher {
 
 		ep.stop();
 
-		System.out.println("Prueba marshal de parametros: ");
+		String xml;
+		Parser parser = new Parser();
 		Parameter p = new Parameter();
 		Recurso r = new Recurso();
+		OperationResponse or;
+		System.out.println("Prueba marshal de parametros: ");
 		p.setRecurso(r);
 		r.setAmbitoId(15);
 		p.setUsuarioId(23);
-		Parser parser = new Parser();
-		String xml = parser.convertToXml(p, p.getClass());
+		xml = parser.convertToXml(p, p.getClass());
 		System.out.println(xml);
 
 		Parameter p2 = (Parameter) parser.unmarshal(xml, Parameter.class);
@@ -68,9 +71,9 @@ public class WSPublisher {
 		System.out.println("Parameter: " + p3);
 		
 		System.out.println("Prueba marshal de encuesta: ");
-		OperationResponse er = (new EncuestaRequester()).getFromCache(11004);
+		or = (new EncuestaRequester()).getFromCache(11004);
 
-		Encuesta encuesta = (Encuesta)er.getRecurso();
+		Encuesta encuesta = (Encuesta)or.getRecurso();
 		
 		xml = parser.convertToXml(encuesta, Encuesta.class);
 		
@@ -136,6 +139,13 @@ public class WSPublisher {
 			System.out.println("no existe el URL asigando");
 			e.printStackTrace();
 			return;
+		}
+		
+		xml = "<parametro><recurso><recursoId>16</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
+		p = Parameter.createParameter(xml);
+		or = Requester.INSTANCE.getRecurso(p.getRecurso());
+		if (!or.getSuccess()) {
+			System.out.println(or.getReason());
 		}
 		
 
