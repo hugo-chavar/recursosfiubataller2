@@ -44,7 +44,6 @@ public class Client {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-		
 		try {
 			//prueba con parametros invalidos
 			String xmlRecursos = port.getRecursos("hola");
@@ -136,6 +135,32 @@ public class Client {
 		}
 		
 		try {
+			//prueba encuesta que existe en cache de recursos pero no de encuestas
+			String xml = "<parametro><recurso><recursoId>996</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
+			String response = port.getRecurso(xml);
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		try {
+			//prueba encuesta que existe en cache de recursos pero no de links
+			String xml = "<parametro><recurso><recursoId>997</recursoId><tipo>Link</tipo></recurso></parametro>";
+			String response = port.getRecurso(xml);
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		try {
+			//prueba encuesta que existe en cache de recursos pero no de archivos
+			String xml = "<parametro><recurso><recursoId>998</recursoId><tipo>Archivo</tipo></recurso></parametro>";
+			String response = port.getRecurso(xml);
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		
+		try {
 			//prueba link ok
 			String xml = "<parametro><recurso><recursoId>11002</recursoId><tipo>Link</tipo></recurso></parametro>";
 			String response = port.getRecurso(xml);
@@ -154,20 +179,27 @@ public class Client {
 //			System.out.println("Error al crear la encuesta");
 //		}
 		
-		try{
+		try {
 			System.out.println("Prueba se va a pedir un archivo");
 			String xml = "<parametro><recurso><recursoId>1003</recursoId><tipo>Archivo</tipo></recurso></parametro>";
 			String response = port.getRecurso(xml);
 			System.out.println(response);
-			String rawFile = response.substring(response.indexOf("<rawFile>"), response.indexOf("</rawFile>") + "</rawFile>".length());
-			String nombre = response.substring(response.indexOf("<nombreArchivo>") + "<nombreArchivo>".length(), response.indexOf("</nombreArchivo>"));
-			String tipo = response.substring(response.indexOf("<tipoArchivo>") + "<tipoArchivo>".length(), response.indexOf("</tipoArchivo>"));
-//			System.out.println("Este es el raw file:");
-//			System.out.println(rawFile);
-			System.out.println("trajo el archivo Correctamente");
-			PresentacionHandler ph = PresentacionHandler.unmarshal(rawFile);
-			ph.saveTo(nombre + "." + tipo);
-		}catch (Exception e){
+			String success = response.substring(response.indexOf("<success>") + "</success>".length() - 1, response.indexOf("</success>"));
+			if (Boolean.valueOf(success)) {
+				String rawFile = response.substring(response.indexOf("<rawFile>"), response.indexOf("</rawFile>") + "</rawFile>".length());
+				String nombre = response.substring(response.indexOf("<nombreArchivo>") + "<nombreArchivo>".length(), response.indexOf("</nombreArchivo>"));
+				String tipo = response.substring(response.indexOf("<tipoArchivo>") + "<tipoArchivo>".length(), response.indexOf("</tipoArchivo>"));
+				// System.out.println("Este es el raw file:");
+				// System.out.println(rawFile);
+				System.out.println("trajo el archivo Correctamente");
+				PresentacionHandler ph = PresentacionHandler.unmarshal(rawFile);
+				ph.saveTo(nombre + "." + tipo);
+			} else {
+				System.out.println("No existe archivo.");
+				String reason = response.substring(response.indexOf("<reason>") + "</reason>".length() - 1, response.indexOf("</reason>"));
+				System.out.println(reason);
+			}
+		} catch (Exception e) {
 			System.out.println("Se produjo un error");
 			System.out.println(e.toString());
 		}

@@ -36,6 +36,13 @@ public class RecursosRequester extends HandlerRequester {
 		recursosEjemplo.add(r);
 		r = new Recurso(1003, -1, "la foto del siglo", "Archivo");
 		recursosEjemplo.add(r);
+		r = new Recurso(996, -1, "encuesta sobre el dolar", "Encuesta");
+		recursosEjemplo.add(r);
+		r = new Recurso(997, -1, "link a respuestas oficiales", "Link");
+		recursosEjemplo.add(r);
+		r = new Recurso(998, -1, "pdf con todo lo que necesitas", "Archivo");
+		recursosEjemplo.add(r);
+		cache.addAll(recursosEjemplo);
 	}
 
 	public OperationResponse get(Recurso target) throws GetException, ParseException {

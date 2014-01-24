@@ -15,7 +15,9 @@ import javax.xml.ws.Endpoint;
 import javax.xml.ws.soap.SOAPBinding;
 
 import model.Archivo;
+import model.Encuesta;
 import model.Recurso;
+import connection.EncuestaRequester;
 import connection.Parameter;
 import connection.Parser;
 import connection.Requester;
@@ -42,11 +44,11 @@ public class WSPublisher {
 
 		ep.stop();
 
-		String xml;
 		Parser parser = new Parser();
-		Parameter p = new Parameter();
 		Recurso r = new Recurso();
 		OperationResponse or;
+		String xml;
+		Parameter p = new Parameter();
 //		System.out.println("Prueba marshal de parametros: ");
 //		p.setRecurso(r);
 //		r.setAmbitoId(15);
@@ -68,35 +70,35 @@ public class WSPublisher {
 //		Parameter p3 = (Parameter) parser.unmarshal("hola", Parameter.class);
 //		System.out.println("Parameter: " + p3);
 //		
-//		System.out.println("Prueba marshal de encuesta: ");
-//		or = (new EncuestaRequester()).getFromCache(11004);
-//
-//		Encuesta encuesta = (Encuesta)or.getRecurso();
-//		
-//		xml = parser.convertToXml(encuesta, Encuesta.class);
-//		
-//		System.out.println(xml);
-//		
-//		Encuesta enc2 = (Encuesta)parser.unmarshal(xml, Encuesta.class);
-//		
-//		System.out.println(enc2.getDescripcion());
-//		
-//		Parameter ep1 = new Parameter();
-//		ep1.setUsuarioId(23);
-//		ep1.setRecurso(encuesta);
-//		xml = parser.convertToXml(ep1, ep1.getClass());
-//		System.out.println(xml);
-//		Parameter ep2 = (Parameter) parser.unmarshal(xml, Parameter.class);
-//		
-//		enc2 = (Encuesta)ep2.getRecurso();
-//		System.out.println(enc2.getDescripcion());
-//		
-//		xml = parser.convertToXml(enc2, Encuesta.class);
-//		System.out.println(xml);
-//		
-//		xml = "<parametro><recurso><recursoId>11003</recursoId></recurso></parametro>";
-//		ep2 = (Parameter) parser.unmarshal(xml, Parameter.class);
-//		System.out.println(ep2.getRecurso().getRecursoId());
+		System.out.println("Prueba marshal de encuesta: ");
+		or = (new EncuestaRequester()).getFromCache(11004);
+
+		Encuesta encuesta = (Encuesta)or.getRecurso();
+		
+		xml = parser.convertToXml(encuesta, Encuesta.class);
+		
+		System.out.println(xml);
+		
+		Encuesta enc2 = (Encuesta)parser.unmarshal(xml, Encuesta.class);
+		
+		System.out.println(enc2.getDescripcion());
+		
+		Parameter ep1 = new Parameter();
+		ep1.setUsuarioId(23);
+		ep1.setRecurso(encuesta);
+		xml = parser.convertToXml(ep1, ep1.getClass());
+		System.out.println(xml);
+		Parameter ep2 = (Parameter) parser.unmarshal(xml, Parameter.class);
+		
+		enc2 = (Encuesta)ep2.getRecurso();
+		System.out.println(enc2.getDescripcion());
+		
+		xml = parser.convertToXml(enc2, Encuesta.class);
+		System.out.println(xml);
+		
+		xml = "<parametro><recurso><recursoId>11003</recursoId></recurso></parametro>";
+		ep2 = (Parameter) parser.unmarshal(xml, Parameter.class);
+		System.out.println(ep2.getRecurso().getRecursoId());
 		
 		/*********Pruebas**************/
 		Archivo archivo = new Archivo();
@@ -151,15 +153,25 @@ public class WSPublisher {
 		// prueba Archivo que existe
 		xml = "<parametro><recurso><recursoId>1003</recursoId><tipo>Archivo</tipo></recurso></parametro>";
 		p = Parameter.createParameter(xml);
+		System.out.println(p.getRecurso().getRecursoId());
+		or = Requester.INSTANCE.getRecurso(p.getRecurso());
+		if (!or.getSuccess()) {
+			System.out.println(or.getReason());
+		}
+		
+		// prueba encuesta que existe en cache de recursos pero no de encuestas
+		xml = "<parametro><recurso><recursoId>996</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
+		p = Parameter.createParameter(xml);
+		System.out.println(p.getRecurso().getRecursoId());
 		or = Requester.INSTANCE.getRecurso(p.getRecurso());
 		if (!or.getSuccess()) {
 			System.out.println(or.getReason());
 		}
 		
 		
-		String absolute = WSPublisher.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+//		String absolute = WSPublisher.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
 
-		System.out.println(absolute);
+//		System.out.println(absolute);
 		System.out.println("Programa terminado. ");
 
 	}
