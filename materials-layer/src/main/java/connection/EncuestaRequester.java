@@ -53,11 +53,9 @@ public class EncuestaRequester extends HandlerRequester {
 		((PreguntaRespuestaFija) p3).setRespuestasPosibles(opciones);
 		enc.addPregunta(p3);
 		current = enc;
-//		cache.add(enc);
 		updateCache();
 
 		enc = new Encuesta(11004, -1, "una encuesta grande", false);
-//		cache.add(enc);
 		p1 = new PreguntaRespuestaFija();
 		p1.setEnunciado("de que color es el caballo blanco de san martin?");
 		opciones = new ArrayList<String>();
@@ -138,51 +136,9 @@ public class EncuestaRequester extends HandlerRequester {
 		String encuesta_str = parser.serializeEncuesta(encuesta);
 		
 		return save(encuesta_str);
-//		try {
-//			GuardarDatos guardar = new GuardarDatos();
-//			guardar.setXml(encuesta_str);
-//			GuardarDatosResponse g_resp = stub.guardarDatos(guardar);
-//			System.out.println(g_resp.get_return());
-//			
-//			response = OperationResponse.createSuccess();
-//			
-//			// Actualizo el cache
-//			if (cacheEncuestas.contains(encuesta)) {
-//				cacheEncuestas.remove(encuesta);
-//				cacheEncuestas.add(encuesta);
-//			}
-//			
-//		} catch (AxisFault e) {
-//			String reason = "Error al guardar la Encuesta, Id: " + encuesta.getRecursoId();
-//			System.out.println(reason);
-//			response = OperationResponse.createFailed(reason);
-//		} catch (RemoteException e) {
-//			String reason = "Error de conexion remota";
-//			System.out.println(reason);
-//			response = OperationResponse.createFailed(reason);
-//		}
-//		
-//		return response;
 	}
-//	public OperationResponse getFromCache(int recursoId) {
-//		
-//		EncuestaResponse response = new EncuestaResponse();
-//		Encuesta target = new Encuesta(recursoId, 0, "", false);
-//
-//		if (cache.contains(target)) {
-//			response = new EncuestaResponse(cache.get(target));
-//			response.setSuccess(true);
-//		}
-//		
-//		return response;
-//		
-//	}
 
 	public OperationResponse get(Recurso recurso){
-
-//		OperationResponse response;
-//		String reason;
-
 		current = recurso;
 		// Consulto la encuesta guardada
 		String xml = parser.serializeQueryByType(recurso.getRecursoId(), EncuestaParser.ENCUESTA_TAG);
@@ -193,54 +149,6 @@ public class EncuestaRequester extends HandlerRequester {
 		} catch (ParseException e) {
 			return OperationResponse.createFailed(e.getMessage());
 		}
-
-		
-		
-		//		try {	
-//			////////////// PRUEBAS //////////////
-//			String xml_resp_e;
-//			
-//			if (xml.equals("<WS><encuesta><recursoId>15</recursoId></encuesta></WS>")) {
-//				xml_resp_e = "<WS><encuesta><evaluada>true</evaluada><preguntas>C;1;De que color es el caballo blanco de San Martin?;blanco|" +
-//						"C;2;Cuantas patas tiene un gato?;4</preguntas></encuesta></WS>";
-//			} else if (xml.equals("<WS><encuesta><recursoId>10</recursoId></encuesta></WS>")) {
-//				xml_resp_e = "<WS><encuesta><evaluada>true</evaluada><preguntas>F;1;De que color es el caballo blanco de San Martin?;negro,blanco,marron;1|" +
-//						"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></encuesta></WS>";
-//			} else {
-//				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-//				seleccionar_e.setXml(xml);
-//				SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
-//				xml_resp_e = s_resp_e.get_return();
-//			}
-//			
-//			////////////// PRUEBAS //////////////
-//			
-//			Encuesta encuesta = parser.deserializeEncuesta(xml_resp_e);
-//			encuesta.setAmbitoId(recurso.getAmbitoId());
-//			encuesta.setRecursoId(recurso.getRecursoId());
-//			encuesta.setDescripcion(recurso.getDescripcion());
-//
-//			// Agrego al cache de encuestas
-//			cache.add(encuesta);
-//
-//			response = OperationResponse.createSuccess();
-//			response.setRecurso(encuesta);
-//			return response;
-//
-//		} catch (AxisFault e) {
-//			reason = "Error al intentar obtener la encuesta, ID: " + recurso.getRecursoId();
-//		} catch (RemoteException e) {
-//			reason = "Error de conexion remota";
-//		}
-//
-//		System.out.println(reason);
-//		
-//		return OperationResponse.createFailed(reason);
-
-	}
-
-	public void deleteFromCache(int recursoId) {
-		cache.remove(new Encuesta(recursoId, 0, "", false));
 	}
 
 	@Override
@@ -248,11 +156,6 @@ public class EncuestaRequester extends HandlerRequester {
 		return "Encuesta";
 	}
 	
-//	@Override
-//	protected Recurso getCurrent() {
-//		return current;
-//	}
-
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected Cache getCache() {
@@ -278,13 +181,5 @@ public class EncuestaRequester extends HandlerRequester {
 	protected void deserialize(String xml_resp_e) throws ParseException {
 		current = parser.deserializeEncuesta(xml_resp_e);
 	}
-
-//	@Override
-//	public void udpateCache() {
-//		if (cacheEncuestas.contains(currentEncuesta)) {
-//			cacheEncuestas.remove(currentEncuesta);
-//		}
-//		cacheEncuestas.add(currentEncuesta);
-//	}
 
 }

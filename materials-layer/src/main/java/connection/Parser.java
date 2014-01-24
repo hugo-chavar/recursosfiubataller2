@@ -43,7 +43,7 @@ public class Parser {
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			return docBuilder.newDocument();
 		} catch (ParserConfigurationException pce) {
-			pce.printStackTrace();
+			System.out.println(pce.getMessage());
 		}
 		return document;
 	}
@@ -58,11 +58,11 @@ public class Parser {
 			String rcv = xml.substring(0, xml.indexOf('<') - 2);
 			throw new ParseException("Xml recibido de integracion contiene errores. Recibido: " + rcv);
 		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		} catch (SAXException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return null;
 	}
@@ -110,7 +110,7 @@ public class Parser {
 		} catch (UnmarshalException ue) {
 			// do nothing
 		} catch (JAXBException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return null;
 	}

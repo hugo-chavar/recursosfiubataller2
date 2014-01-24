@@ -122,7 +122,7 @@ public class EncuestaRespondidaRequester {
 					// TODO Andy: Esto hay que arreglar, este metodo tiene q devolver un OperationResponse
 					//igual que el resto de los requesters
 					encuesta = null;
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}				
 				
 				// Agrego al cache de encuestas respondidas

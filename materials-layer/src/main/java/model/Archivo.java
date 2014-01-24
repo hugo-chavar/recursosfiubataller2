@@ -23,7 +23,6 @@ public class Archivo extends Recurso {
 	public Archivo(Integer idRecurso, Integer idAmbiente, String descripcion) {
 		super(idRecurso, idAmbiente, descripcion);
 		this.tipo="Archivo";
-		// TODO Auto-generated constructor stub
 	}
 
 	public Archivo() {
@@ -80,8 +79,8 @@ public class Archivo extends Recurso {
    	 	try {
 			this.rawFile.writeTo(output);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			System.out.println("error al setear el DataHandler");
 		}
    	 	this.setContentType(this.rawFile.getContentType());
    	 	this.fileBinary = output.toByteArray();
@@ -89,7 +88,8 @@ public class Archivo extends Recurso {
 			this.stringFile =  new String(this.fileBinary,"UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			System.out.println("codificacion no valida");
 		}
     }
     
@@ -103,7 +103,7 @@ public class Archivo extends Recurso {
 			return new String(this.fileBinary,"UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			System.out.println("Codificacion de archivo erronea");
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return "ERROR";
 		}
     }

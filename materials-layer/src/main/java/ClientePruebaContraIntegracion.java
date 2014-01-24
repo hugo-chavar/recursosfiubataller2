@@ -39,10 +39,10 @@ public class ClientePruebaContraIntegracion {
 	    	System.out.println("Todo anda OK!");
 	    	
 		} catch (AxisFault e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			System.out.println("Hay errores de AxisFault.. tal vez falta una libreria.. avisa a HUGO ");
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			System.out.println("Hay errores de RemoteException.. levantaste el servicio? ");
 		}
 

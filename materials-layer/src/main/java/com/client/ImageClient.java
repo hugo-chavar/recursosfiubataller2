@@ -49,7 +49,7 @@ public class ImageClient{
         System.out.println("imageServer.uploadImage() : " + status);
         
         }catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
         }
         
         

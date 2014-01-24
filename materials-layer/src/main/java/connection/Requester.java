@@ -101,11 +101,11 @@ public enum Requester {
 		}
 		// Borro el recurso de todos los caches
 		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
-			encuestaReq.deleteFromCache(recurso.getRecursoId());
+			encuestaReq.deleteRecurso(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
-			linkReq.deleteFromCache(recurso.getRecursoId());
+			linkReq.deleteRecurso(recurso);
 		} else {
-			archivoReq.deleteFromCache(recurso.getRecursoId());
+			archivoReq.deleteRecurso(recurso);
 		}
 		
 		return recursosReq.delete(recurso);
@@ -120,17 +120,14 @@ public enum Requester {
 	private OperationResponse getRecursoFromCache(Recurso recurso) {
 		
 		OperationResponse response;
-		
 		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
 			response = encuestaReq.getFromCache(recurso.getRecursoId());
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
 			response = linkReq.getFromCache(recurso.getRecursoId());
-		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
+		} else if (recurso.getTipo().equalsIgnoreCase("Archivo")) {
 			response = archivoReq.getFromCache(recurso.getRecursoId());
-		}else {
-			
+		} else {
 			response = OperationResponse.createFailed("No existe cache");
-			
 		}
 		
 		return response;
