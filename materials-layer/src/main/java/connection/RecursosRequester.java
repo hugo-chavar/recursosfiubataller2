@@ -119,7 +119,7 @@ public class RecursosRequester extends HandlerRequester {
 
 	public OperationResponse getAll(int IDAmbito) {
 
-		List<Recurso> recursos = new ArrayList<Recurso>();
+		List<Recurso> recursos;
 		RecursosResponse recursosResponse = new RecursosResponse();
 		String message;
 		
@@ -134,9 +134,7 @@ public class RecursosRequester extends HandlerRequester {
 			System.out.println(xml_resp_e);
 			recursos = parser.deserializeRecursos(xml_resp_e);
 			
-			for (Recurso r:  recursos) {
-				recursosResponse.add(r);
-			}
+			recursosResponse.setRecursos(recursos);
 			
 			cache.addAll(recursos);
 			
@@ -146,9 +144,7 @@ public class RecursosRequester extends HandlerRequester {
 			message = e.getMessage();
 			
 			// TODO : (Hugo) devuelvo datos de ejemplo, mientras no funcione integracion
-			for (Recurso r:  recursosEjemplo) {
-				recursosResponse.add(r);
-			}
+			recursosResponse.setRecursos(recursosEjemplo);
 			recursosResponse.setSuccess(true);
 			return recursosResponse;
 		} catch (AxisFault e) {
