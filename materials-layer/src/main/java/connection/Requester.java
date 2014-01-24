@@ -105,8 +105,7 @@ public enum Requester {
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
 			linkReq.deleteFromCache(recurso.getRecursoId());
 		} else {
-			// TODO: Falta para archivo
-			//archivoReq.deleteFromCache(idRecurso);
+			archivoReq.deleteFromCache(recurso.getRecursoId());
 		}
 		
 		return recursosReq.delete(recurso);

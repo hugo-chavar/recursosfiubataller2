@@ -65,24 +65,25 @@ public abstract class HandlerRequester {
 		return response;
 	}
 
-	public OperationResponse getFile (String xml) throws GetException, ParseException{
-	
-		SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-		seleccionar_e.setXml(xml);
-	
-	  SeleccionarDatosResponse s_resp_e;
-	try {
-		s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
-		String xml_resp_e = s_resp_e.get_return();
-		System.out.println("Integracion me esta contestando : "+ xml_resp_e);
-		createCurrentObject(xml_resp_e);
-		updateCache();
-	} catch (RemoteException e) {
-		
-		e.printStackTrace();
-	}
-	 
-	  return currentObjetToResponse();
+	public OperationResponse getFile(String xml) throws GetException, ParseException {
+
+//		SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+//		seleccionar_e.setXml(xml);
+
+//		SeleccionarDatosResponse s_resp_e;
+		try {
+//			s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
+//			String xml_resp_e = s_resp_e.get_return();
+			String xml_resp_e = seleccionar(xml);
+			System.out.println("Integracion me esta contestando : " + xml_resp_e);
+			createCurrentObject(xml_resp_e);
+			updateCache();
+		} catch (RemoteException e) {
+
+			e.printStackTrace();
+		}
+
+		return currentObjetToResponse();
 	}
 	
 	protected OperationResponse saveFile(String xml){
@@ -102,7 +103,7 @@ public abstract class HandlerRequester {
 			updateCache();
 			
 		} catch (AxisFault e) {
-			 e.printStackTrace();
+//			 e.printStackTrace();
 			 response = OperationResponse.createFailed("No se pudo guardar el archivo: "+archivo.getNombreArchivo());
 		
 		} catch (RemoteException e) {
@@ -115,10 +116,7 @@ public abstract class HandlerRequester {
 		String reason;
 
 		try {
-			SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-			seleccionar_e.setXml(xml);
-			SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
-			String xml_resp_e = s_resp_e.get_return();
+			String xml_resp_e;
 			//TODO: pruebas de Yami
 			if (xml.equals("<WS><encuesta><recursoId>15</recursoId></encuesta></WS>")) {
 				xml_resp_e = "<WS><encuesta><evaluada>true</evaluada><preguntas>C;1;De que color es el caballo blanco de San Martin?;blanco|" +
@@ -132,9 +130,11 @@ public abstract class HandlerRequester {
 				xml_resp_e = "<WS><recurso><recursoId>10</recursoId><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></recurso></WS>";
 			} else if (xml.equals("<WS><recurso><recursoId>1003</recursoId></recurso></WS>")) {//TODO: sacar harcodeo para testear los archivos.
 				xml_resp_e = "<WS><recurso><recursoId>1003</recursoId><ambitoId>3</ambitoId><descripcion>Es un Archivo</descripcion><tipo>Archivo</tipo></recurso></WS>";
+			} else {
+				xml_resp_e = seleccionar(xml);
 			}
-			System.out.println("Esto es lo que me devuelve:");
-			System.out.println(xml_resp_e);
+//			System.out.println("Esto es lo que me devuelve:");
+//			System.out.println(xml_resp_e);
 			//fin pruebas
 			createCurrentObject(xml_resp_e);
 
@@ -152,6 +152,14 @@ public abstract class HandlerRequester {
 
 	}
 
+	protected String seleccionar(String xml) throws RemoteException {
+		SeleccionarDatos seleccionar_e = new SeleccionarDatos();
+		seleccionar_e.setXml(xml);
+		SeleccionarDatosResponse s_resp_e = this.stub.seleccionarDatos(seleccionar_e);
+		String xml_resp_e = s_resp_e.get_return();
+		return xml_resp_e;
+	}
+
 	protected OperationResponse currentObjetToResponse() {
 		OperationResponse response;
 		if (getCurrent() == null) {
@@ -165,10 +173,15 @@ public abstract class HandlerRequester {
 	
 	@SuppressWarnings("unchecked")
 	protected void updateCache() {
+		deleteIfExists();
+		getCache().add(getCurrent());
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void deleteIfExists() {
 		if (getCache().contains(getCurrent())) {
 			getCache().remove(getCurrent());
 		}
-		getCache().add(getCurrent());
 	}
 	
 	public OperationResponse getFromCache(int recursoId) {
@@ -197,7 +210,7 @@ public abstract class HandlerRequester {
 	
 	private void verifyCurrentObject() throws GetException {
 		if (current == null) {	
-			String message = "Error desconocido current is null ";
+			String message = "Error desconocido: current is null ";
 			System.out.println(message);
 			throw new GetException(message);
 		}

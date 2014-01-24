@@ -94,20 +94,16 @@ public class LinkRequester extends HandlerRequester {
 
 	public OperationResponse get(Recurso recurso) {
 
-//		OperationResponse response;
-//		String reason;
-		
 		current = recurso;
 
-		// Consulto el link guardado
 		String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), LinkParser.LINK_TAG);
 		try {
 			return get(xml);
 		} catch (GetException e) {
 			return OperationResponse.createFailed(e.getMessage());
-	} catch (ParseException e) {
-		return OperationResponse.createFailed(e.getMessage());
-	}
+		} catch (ParseException e) {
+			return OperationResponse.createFailed(e.getMessage());
+		}
 //		try {
 //			SeleccionarDatos seleccionar_e = new SeleccionarDatos();
 //			seleccionar_e.setXml(xml);

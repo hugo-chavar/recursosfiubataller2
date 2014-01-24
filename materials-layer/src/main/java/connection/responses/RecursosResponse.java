@@ -1,6 +1,5 @@
 package connection.responses;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -17,19 +16,17 @@ import model.Recurso;
 public class RecursosResponse extends OperationResponse {
 
 	@XmlElementWrapper
-	@XmlElementRefs({
-		   @XmlElementRef(type=Recurso.class)
-		})
+	@XmlElementRefs({ @XmlElementRef(type = Recurso.class) })
 	private List<Recurso> recursos;
-	
+
 	public RecursosResponse() {
-		recursos = new ArrayList<Recurso>();
+		// recursos = new ArrayList<Recurso>();
 	}
-	
-	public void add(Recurso recurso) {
-		recursos.add(recurso);
-	}
-	
+
+	// public void add(Recurso recurso) {
+	// recursos.add(recurso);
+	// }
+
 	public void setRecursos(List<Recurso> recursos) {
 		this.recursos = recursos;
 	}
