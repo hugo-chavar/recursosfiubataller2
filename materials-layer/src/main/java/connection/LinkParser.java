@@ -13,7 +13,7 @@ import connection.exceptions.ParseException;
 
 public class LinkParser extends Parser {
 
-	public static String LINK_TAG = "link";
+	public static String LINK_TAG = "Link";
 	public static String NOMBRE_TAG = "nombre";
 	
 	

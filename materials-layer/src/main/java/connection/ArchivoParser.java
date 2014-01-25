@@ -12,8 +12,8 @@ import org.w3c.dom.NodeList;
 import connection.exceptions.ParseException;
 
 public class ArchivoParser extends Parser {
-	public static String ARCHIVO_TAG = "archivo";
-	public static String IDARCHIVO_TAG = "archivoId";
+	public static String ARCHIVO_TAG = "Archivo";
+//	public static String IDARCHIVO_TAG = "archivoId";
 	public static String DESCRIPCION_TAG = "descripcion";
 	public static String NOMBRE_TAG = "nombre";
 	public static String EXTENSION_TAG = "tipo";
@@ -31,7 +31,7 @@ public class ArchivoParser extends Parser {
 		Element IDAmbiente = doc.createElement(Parser.AMBITOID_TAG);
 		IDAmbiente.appendChild(doc.createTextNode(String.valueOf(archivo.getAmbitoId())));
 		nodeElement.appendChild(IDAmbiente);
-		Element IDArchivo = doc.createElement(ArchivoParser.IDARCHIVO_TAG);
+		Element IDArchivo = doc.createElement(Parser.RECURSOID_TAG);
 		IDArchivo.appendChild(doc.createTextNode(String.valueOf(archivo.getRecursoId())));
 		nodeElement.appendChild(IDArchivo);
 		Element descripcion = doc.createElement(ArchivoParser.DESCRIPCION_TAG);
@@ -82,7 +82,7 @@ public class ArchivoParser extends Parser {
 	    }
 	    
 		int IDAmbiente = Integer.parseInt(fields.get(ArchivoParser.AMBITOID_TAG));
-		int IDArchivo = Integer.parseInt(fields.get(ArchivoParser.IDARCHIVO_TAG));
+		int IDArchivo = Integer.parseInt(fields.get(Parser.RECURSOID_TAG));
 		String descripcion = fields.get(ArchivoParser.DESCRIPCION_TAG);
 		String nombre = fields.get(ArchivoParser.NOMBRE_TAG);		
 		String extension = fields.get(ArchivoParser.EXTENSION_TAG);

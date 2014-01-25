@@ -13,7 +13,7 @@ import connection.exceptions.ParseException;
 
 public class EncuestaParser extends Parser {
 	
-	public static String ENCUESTA_TAG = "encuesta";
+	public static String ENCUESTA_TAG = "Encuesta";
 	public static String EVALUADA_TAG = "evaluada";
 	public static String PREGUNTAS_TAG = "preguntas";
 	

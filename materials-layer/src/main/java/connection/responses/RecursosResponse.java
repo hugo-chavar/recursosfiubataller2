@@ -30,4 +30,8 @@ public class RecursosResponse extends OperationResponse {
 	public void setRecursos(List<Recurso> recursos) {
 		this.recursos = recursos;
 	}
+	
+	public List<Recurso> getRecursos() {
+		return recursos;
+	}
 }

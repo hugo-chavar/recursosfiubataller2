@@ -26,24 +26,49 @@ public class ArchivoRequester extends HandlerRequester {
 	}
 	
 	protected void generateTestData() {
+		String path, nombre, desc, extension;
+		int idRec;
+		path = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+		path = path.substring(0, path.lastIndexOf("classes") + 8);
+		nombre = "teofilo";
+		desc = "la foto del siglo";
+		extension = "jpg";
+		idRec = 1003;
+		
+		addFileToCache(path, nombre, desc, extension, idRec);
+		
+////		path = "file:/opt/apache-tomcat-7.0.47/webapps/axis2/WEB-INF/services/";
+//		nombre = "head";
+//		desc = "x";
+//		extension = "pdf";
+//		idRec = -18;
+//		
+//		addFileToCache(path, nombre, desc, extension, idRec);
+		
+//		path = "file:/opt/apache-tomcat-7.0.47/webapps/axis2/WEB-INF/services/";
+//		nombre = "integracion";
+//		desc = "x";
+//		extension = "aar";
+//		idRec = -18;
+//		
+//		addFileToCache(path, nombre, desc, extension, idRec);
+	}
+
+	protected void addFileToCache(String path, String nombre, String desc, String extension, int idRec) {
 		Archivo archivo = new Archivo();
 		archivo.setAmbitoId(-1);
-		archivo.setRecursoId(1003);
-		archivo.setNombreArchivo("teofilo");
-		archivo.setDescripcion("la foto del siglo");
-		String extension = "jpg";
-		archivo.setTipoArchivo("jpg");
-		try {
-			String path;
-			path = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();
-			path = path.substring(0, path.lastIndexOf("classes") + 8);
-			path = path + "teofilo." + extension;
+		archivo.setRecursoId(idRec);
+		archivo.setNombreArchivo(nombre);
+		archivo.setDescripcion(desc);
+		archivo.setTipoArchivo(extension);
+		try {			
+			path = path + nombre + "." + extension;
 			DataHandler arch = new DataHandler(new URL(path));
 			archivo.setRawFile(arch);
 			current = archivo;
 			updateCache();
 		} catch (MalformedURLException e) {
-			System.out.println("no existe el URL asigando");
+			System.out.println("no existe el URL: " + path);
 			System.out.println(e.getMessage());
 		}
 	}
@@ -74,23 +99,46 @@ public class ArchivoRequester extends HandlerRequester {
 	}
 	
 	//Metodo privado para testear. lo meti en el cache .. ver generateTestData()
-//	private OperationResponse harcodeoDeArchivo(){
+//	public OperationResponse harcodeoDeArchivo(){
 //		OperationResponse response;
+//		String path, nombre, desc, extension;
+//		int idRec;
+////		Archivo archivo = new Archivo();
+////		archivo.setAmbitoId(14);
+////		archivo.setNombreArchivo("teofilo");
+////		archivo.setDescripcion("la foto del siglo");
+////		String extension = "jpg";
+////		archivo.setTipoArchivo("jpg");
+////		try {
+////			String path;
+////			path = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+////			path = path.substring(0, path.lastIndexOf("classes") + 8);
+////			path = path + "teofilo." + extension;
+////			DataHandler arch = new DataHandler(new URL(path));
+////			archivo.setRawFile(arch);
+////		} catch (MalformedURLException e) {
+////			System.out.println("no existe el URL asigando");
+////			System.out.println(e.getMessage());
+////		}
+//		path = "file:/opt/apache-tomcat-7.0.47/webapps/axis2/WEB-INF/services/";
+//		nombre = "integracion";
+//		desc = "x";
+//		extension = "aar";
+//		idRec = -18;
 //		Archivo archivo = new Archivo();
-//		archivo.setAmbitoId(14);
-//		archivo.setNombreArchivo("teofilo");
-//		archivo.setDescripcion("la foto del siglo");
-//		String extension = "jpg";
-//		archivo.setTipoArchivo("jpg");
-//		try {
-//			String path;
-//			path = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();
-//			path = path.substring(0, path.lastIndexOf("classes") + 8);
-//			path = path + "teofilo." + extension;
+//		archivo.setAmbitoId(-1);
+//		archivo.setRecursoId(idRec);
+//		archivo.setNombreArchivo(nombre);
+//		archivo.setDescripcion(desc);
+//		archivo.setTipoArchivo(extension);
+//		try {			
+//			path = path + nombre + "." + extension;
 //			DataHandler arch = new DataHandler(new URL(path));
 //			archivo.setRawFile(arch);
+//			current = archivo;
+//			updateCache();
 //		} catch (MalformedURLException e) {
-//			System.out.println("no existe el URL asigando");
+//			System.out.println("no existe el URL: " + path);
 //			System.out.println(e.getMessage());
 //		}
 //		response = OperationResponse.createSuccess();

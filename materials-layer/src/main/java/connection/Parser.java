@@ -27,9 +27,9 @@ import connection.exceptions.ParseException;
 public class Parser {	
 
 	public static String INITIAL_TAG = "WS";
-	public static String RECURSO_TAG = "recurso";
-	public static String RECURSOID_TAG = "recursoId";
-	public static String AMBITOID_TAG = "ambitoId";
+	public static String RECURSO_TAG = "Recurso";
+	public static String RECURSOID_TAG = "id";
+	public static String AMBITOID_TAG = "idAmbiente";
 	public static String DESCRIPCION_TAG = "descripcion";
 	public static String TIPO_TAG = "tipo";
 	public static String RECURSOS_TAG = "recursos";
@@ -56,6 +56,8 @@ public class Parser {
 			return docBuilder.parse(new InputSource(new StringReader(xml)));
 		} catch (SAXParseException e) {
 			String rcv = xml.substring(0, xml.indexOf('<') - 2);
+			System.out.println("RECIBIDO:");
+			System.out.println(xml);
 			throw new ParseException("Xml recibido de integracion contiene errores. Recibido: " + rcv);
 		} catch (ParserConfigurationException e) {
 			System.out.println(e.getMessage());

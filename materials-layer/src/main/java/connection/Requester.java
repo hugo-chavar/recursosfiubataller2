@@ -57,6 +57,10 @@ public enum Requester {
 		if (notValidInput(target)) {
 			return informFailReason(target);
 		}
+		
+//		if (target.getTipo().equalsIgnoreCase("Archivo")){
+//			return archivoReq.harcodeoDeArchivo();
+//		}
 	
 		// Busco en el cache de especifico del recurso
 		response = getRecursoFromCache(target);
@@ -66,7 +70,6 @@ public enum Requester {
 		// Si no se encuentra en el cache
 		
 		// Busco el recurso
-//		Recurso recurso;
 		try {
 			response = recursosReq.get(target);
 		} catch (GetException e) {
@@ -163,8 +166,6 @@ public enum Requester {
 			//System.out.println("Entra a makeQuery de archivo");
 			response = archivoReq.get(recurso);
 		} else {
-			// TODO: Falta para archivo
-			
 			response = OperationResponse.createFailed("Tipo de recurso inexistente");
 		}
 		
