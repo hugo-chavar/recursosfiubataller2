@@ -10,6 +10,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 
+import connection.Parser;
+
 @XmlRootElement(name = "pregunta")
 @XmlSeeAlso({PreguntaRespuestaFija.class,  PreguntaRespuestaACompletar.class})
 @XmlAccessorType(XmlAccessType.NONE)
@@ -36,6 +38,7 @@ public class Pregunta {
 
 	public static List<Pregunta> unmarshallAll(String field) {
 		String[] splited = field.split("\\|");
+		splited = ignoreSpecialCharactersInSplit(splited);
 		List<Pregunta> result = new ArrayList<Pregunta>();
 
 		for (String s : splited) {
@@ -74,6 +77,35 @@ public class Pregunta {
 	public void addRespuestaCorrecta(String rta) {
 
 	}
+	
+	public String escapeSpecialCharacters(String line) {
+		
+		for (int index = 0; index < Parser.SPECIAL_CHARACTERS.length(); index++) {
+			char specialChar = Parser.SPECIAL_CHARACTERS.charAt(index);
+			int line_idx = line.indexOf(specialChar);
+			while (line_idx > -1) {
+				line = line.substring(0, line_idx) + "\\" + line.substring(line_idx, line.length());
+				line_idx = line.indexOf(specialChar);
+			}
+		}
+		
+		return line;
+		
+	}
+	
+	public static String[] ignoreSpecialCharactersInSplit(String[] splitted) {
+		
+		int i = 0;
+		while (i < splitted.length) {
+			if (splitted[i].endsWith("\\")) {
+				splitted[i].concat(splitted[i+1]);
+				splitted[i+1] = null;
+			}
+		}
+		
+		return splitted;
+		
+	}
 
 	protected String marshall() {
 		StringBuilder sb = new StringBuilder("");
@@ -81,13 +113,14 @@ public class Pregunta {
 		sb.append(";");
 		sb.append(idPregunta);
 		sb.append(";");
-		sb.append(enunciado);
+		sb.append(escapeSpecialCharacters(enunciado));
 		sb.append(";");
 		return sb.toString();
 	}
 
 	protected void unmarshall(String s) {
 		String[] splited = s.split(";");
+		splited = ignoreSpecialCharactersInSplit(splited);
 		type = splited[0];
 		idPregunta = Integer.valueOf(splited[1]);
 		enunciado = splited[2];

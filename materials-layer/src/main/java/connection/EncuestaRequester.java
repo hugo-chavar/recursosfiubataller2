@@ -35,7 +35,7 @@ public class EncuestaRequester extends HandlerRequester {
 		Pregunta p1, p2, p3, p4, p5;
 		p2 = new PreguntaRespuestaFija();
 		List<String> opciones = new ArrayList<String>();
-		p2.setEnunciado("cuantas materias te faltan para recibirte?");
+		p2.setEnunciado("cuantas materias| te, faltan; para recibirte?");
 		opciones.add("1");
 		opciones.add("menos de 5");
 		opciones.add("entre 5 y 10");

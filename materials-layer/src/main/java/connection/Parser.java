@@ -35,6 +35,8 @@ public class Parser {
 	public static String RECURSOS_TAG = "recursos";
 	public static String JOIN_TAG = "join";
 	
+	public static String SPECIAL_CHARACTERS = ",;|";
+	
 	
 	public Document buildXMLDocument() {
 		Document document = null;

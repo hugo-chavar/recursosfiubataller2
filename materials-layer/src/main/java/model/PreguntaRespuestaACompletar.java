@@ -4,6 +4,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import connection.Parser;
+
 @XmlRootElement (name = "preguntaSinOpciones")
 public class PreguntaRespuestaACompletar extends Pregunta {
 
@@ -34,12 +36,13 @@ public class PreguntaRespuestaACompletar extends Pregunta {
 
 	@Override
 	public String marshall() {
-		return super.marshall() + respuesta;
+		return super.marshall() + escapeSpecialCharacters(respuesta);
 	}
 
 	public void unmarshall(String s) {
 		super.unmarshall(s);
 		String[] splited = s.split(";");
+		splited = ignoreSpecialCharactersInSplit(splited);
 		respuesta = splited[3];
 	}
 

@@ -1,5 +1,7 @@
 package model;
 
+import connection.Parser;
+
 public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 
 	private String respuesta;
@@ -42,12 +44,13 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 	
 	@Override
 	public String marshall() {
-		return super.marshall() + respuesta;
+		return super.marshall() + escapeSpecialCharacters(respuesta);
 	}
 
 	public void unmarshall(String s) {
 		super.unmarshall(s);
 		String[] splited = s.split(";");
+		splited = ignoreSpecialCharactersInSplit(splited);
 		respuesta = splited[3];
 	}
 

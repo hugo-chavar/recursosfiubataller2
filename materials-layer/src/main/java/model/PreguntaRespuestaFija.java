@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import connection.Parser;
+
 @XmlRootElement(name = "preguntaConOpciones")
 public class PreguntaRespuestaFija extends Pregunta {
 
@@ -45,7 +47,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 	public Integer evaluar(PreguntaRespondida respondida) {
 		return respondida.evaluar(this);
 	}
-
+	
 	@Override
 	public String marshall() {
 		StringBuilder sb = new StringBuilder("");
@@ -62,7 +64,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 		}
 		StringBuilder sb = new StringBuilder("");
 		for (String rta : respuestasPosibles) {
-			sb.append(rta);
+			sb.append(escapeSpecialCharacters(rta));
 			sb.append(",");
 		}
 		sb.setLength(sb.length() - 1);
@@ -86,6 +88,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 	public void unmarshall(String s) {
 		super.unmarshall(s);
 		String[] splited = s.split(";");
+		splited = ignoreSpecialCharactersInSplit(splited);
 		unmarshallRespuestasPosibles(splited[3]);
 		unmarshallRespuestasCorrectas(splited[4]);
 
@@ -96,6 +99,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 			return;
 		}
 		String[] splited = rtas.split(",");
+		splited = ignoreSpecialCharactersInSplit(splited);
 		respuestasPosibles = new ArrayList<String>();
 		for (String s : splited) {
 			respuestasPosibles.add(s);
@@ -108,6 +112,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 			return;
 		}
 		String[] splited = rtas.split(",");
+		splited = ignoreSpecialCharactersInSplit(splited);
 		respuestasCorrectas = new ArrayList<Integer>();
 		for (String s : splited) {
 			respuestasCorrectas.add(Integer.valueOf(s));

@@ -84,7 +84,7 @@ public class EncuestaRequesterTest {
 		Assert.assertEquals(encuesta.isEvaluada(), encuesta_rtn.isEvaluada());
 
 		List<Pregunta> preguntas = encuesta_rtn.getPreguntas();
-		Assert.assertEquals("cuantas materias te faltan para recibirte?", preguntas.get(0).getEnunciado());
+		Assert.assertEquals("cuantas materias| te, faltan; para recibirte?", preguntas.get(0).getEnunciado());
 		Assert.assertEquals("que materia fue la mas dificil?", preguntas.get(1).getEnunciado());
 	}
 

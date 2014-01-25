@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import connection.Parser;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class PreguntaRespondida {
@@ -43,6 +45,7 @@ public class PreguntaRespondida {
 
 	public static List<PreguntaRespondida> unmarshallAll(String field) {
 		String[] splited = field.split("\\|");
+		splited = ignoreSpecialCharactersInSplit(splited);
 		List<PreguntaRespondida> result = new ArrayList<PreguntaRespondida>();
 
 		for (String s : splited) {
@@ -57,6 +60,35 @@ public class PreguntaRespondida {
 
 	private static String unmarshallType(String marshalled) {
 		return marshalled.substring(0, marshalled.indexOf(";"));
+	}
+	
+	public String escapeSpecialCharacters(String line) {
+		
+		for (int index = 0; index < Parser.SPECIAL_CHARACTERS.length(); index++) {
+			char specialChar = Parser.SPECIAL_CHARACTERS.charAt(index);
+			int line_idx = line.indexOf(specialChar);
+			while (line_idx > -1) {
+				line = line.substring(0, line_idx) + "\\" + line.substring(line_idx, line.length());
+				line_idx = line.indexOf(specialChar);
+			}
+		}
+		
+		return line;
+		
+	}
+	
+	public static String[] ignoreSpecialCharactersInSplit(String[] splitted) {
+		
+		int i = 0;
+		while (i < splitted.length) {
+			if (splitted[i].endsWith("\\")) {
+				splitted[i].concat(splitted[i+1]);
+				splitted[i+1] = null;
+			}
+		}
+		
+		return splitted;
+		
 	}
 
 	public PreguntaRespondida() {

@@ -23,6 +23,7 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 	public void unmarshall(String s) {
 		super.unmarshall(s);
 		String[] splited = s.split(";");
+		splited = ignoreSpecialCharactersInSplit(splited);
 		unmarshallRespuestas(splited[3]);
 		
 	}
