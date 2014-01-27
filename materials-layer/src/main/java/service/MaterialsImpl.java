@@ -13,7 +13,6 @@ import connection.Parameter;
 import connection.Parser;
 import connection.Requester;
 import connection.exceptions.GetException;
-import connection.responses.EncuestaRespondidaResponse;
 import connection.responses.OperationResponse;
 
 @MTOM 
@@ -98,11 +97,12 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	public String getEncuestaRespondida(Recurso recurso, int usuarioId) {
-		EncuestaRespondidaResponse response = new EncuestaRespondidaResponse();
+		OperationResponse response = new OperationResponse();
 		response.setSuccess(true);	
 		//try {
 		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida( recurso.getRecursoId(), usuarioId);
-		response.setRespondida(respondida);
+//		response.setRespondida(respondida);
+		response.setSerializable(respondida);
 		
 		//} catch (GetException e) {
 		//	return createFailedResponse(e.getMessage());

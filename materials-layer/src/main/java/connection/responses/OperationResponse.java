@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import connection.Serializable;
 import model.Archivo;
 import model.Encuesta;
+import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
 
@@ -43,6 +44,7 @@ public class OperationResponse {
 		@XmlElementRef(type = Encuesta.class), 
 		@XmlElementRef(type = Link.class),
 		@XmlElementRef(type = Archivo.class),
+		@XmlElementRef(type = EncuestaRespondida.class)
 		})
 	private Serializable serializable;
 
