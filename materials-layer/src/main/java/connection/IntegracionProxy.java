@@ -40,6 +40,8 @@ public class IntegracionProxy {
 			return "<WS><Recurso><id>11</id><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></Recurso></WS>";
 		} else if (xml.equals("<WS><Recurso><id>1003</id></Recurso></WS>")) {//TODO: sacar harcodeo para testear los archivos.
 			return "<WS><Recurso><recursoId>1003</recursoId><ambitoId>3</ambitoId><descripcion>Es un Archivo</descripcion><tipo>Archivo</tipo></Recurso></WS>";
+		} else if (xml.equals("<WS><Link><id>999</id></Link></WS>")) {
+			return "<WS><Link><id>11002</id><nombre>www.lomejordelomejor.es</nombre></Link></WS>";
 		}
 		//fin pruebas
 		IntegracionStub.SeleccionarDatos seleccionar_e = new IntegracionStub.SeleccionarDatos();

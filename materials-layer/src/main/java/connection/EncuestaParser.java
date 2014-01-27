@@ -18,6 +18,9 @@ public class EncuestaParser extends Parser {
 	public static String EVALUADA_TAG = "evaluada";
 	public static String PREGUNTAS_TAG = "preguntas";
 	
+	public EncuestaParser() {
+		baseTag = ENCUESTA_TAG;
+	}
 	public String serializeEncuesta(Encuesta encuesta) {
 		
 		Document doc = this.buildXMLDocument();
@@ -66,39 +69,39 @@ public class EncuestaParser extends Parser {
 		
 	}
 	
-	public Encuesta deserializeEncuesta(String xml) throws ParseException {
-
-		Encuesta encuesta = null;
-		baseTag = ENCUESTA_TAG;
-
-		Document doc = this.convertXmlToDocument(xml);
-		if (doc == null) {
-			return null;
-		}
-		HashMap<String, String> fields = new HashMap<String, String>();
-
-		NodeList nodes = doc.getElementsByTagName(baseTag);
-		if (nodes.getLength() == 0) {
-			throw new ParseException("No existe tag " + baseTag);
-		}
-		NodeList encuestaChildNodes = nodes.item(0).getChildNodes();
-		
-		if (encuestaChildNodes != null) {
-
-			for (int i = 0; i < encuestaChildNodes.getLength(); i++) {
-				Element element = (Element) encuestaChildNodes.item(i);
-				fields.put(element.getNodeName(), element.getTextContent());
-			}
-
-			Boolean evaluada = Boolean.parseBoolean(fields.get(EVALUADA_TAG));
-			encuesta = new Encuesta(0, 0, "", evaluada);
-			encuesta.unmarshallPreguntas(fields.get(PREGUNTAS_TAG));
-
-		}
-
-		return encuesta;
-
-	}
+//	public Encuesta deserializeEncuesta(String xml) throws ParseException {
+//
+//		Encuesta encuesta = null;
+//		baseTag = ENCUESTA_TAG;
+//
+//		Document doc = this.convertXmlToDocument(xml);
+//		if (doc == null) {
+//			return null;
+//		}
+//		HashMap<String, String> fields = new HashMap<String, String>();
+//
+//		NodeList nodes = doc.getElementsByTagName(baseTag);
+//		if (nodes.getLength() == 0) {
+//			throw new ParseException("No existe tag " + baseTag);
+//		}
+//		NodeList encuestaChildNodes = nodes.item(0).getChildNodes();
+//		
+//		if (encuestaChildNodes != null) {
+//
+//			for (int i = 0; i < encuestaChildNodes.getLength(); i++) {
+//				Element element = (Element) encuestaChildNodes.item(i);
+//				fields.put(element.getNodeName(), element.getTextContent());
+//			}
+//
+//			Boolean evaluada = Boolean.parseBoolean(fields.get(EVALUADA_TAG));
+//			encuesta = new Encuesta(0, 0, "", evaluada);
+//			encuesta.unmarshallPreguntas(fields.get(PREGUNTAS_TAG));
+//
+//		}
+//
+//		return encuesta;
+//
+//	}
 	
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {

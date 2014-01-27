@@ -268,7 +268,7 @@ public class WSPublisher {
 		
 		Encuesta encuesta;
 		OperationResponse response;
-//		
+		
 		System.out.println("existe");
 		encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);
 		response = Requester.INSTANCE.getRecurso(encuesta);
@@ -278,18 +278,29 @@ public class WSPublisher {
 		} else {
 			System.out.println(response.getReason());
 		}
+//		
+//		System.out.println("no existe");
+//		encuesta = new Encuesta(16, 2, "Encuesta con preguntas a completar", true);
+//		response = Requester.INSTANCE.getRecurso(encuesta);
+//		if (response.getSuccess()) {
+//			Encuesta encuesta_rtn = (Encuesta) response.getSerializable();
+//			System.out.println(encuesta_rtn.getDescripcion());
+//		} else {
+//			System.out.println(response.getReason());
+//		}
 		
-		System.out.println("no existe");
-		encuesta = new Encuesta(16, 2, "Encuesta con preguntas a completar", true);
-		response = Requester.INSTANCE.getRecurso(encuesta);
+		System.out.println("save link");
+		Link link = new Link(16, 2, "Encuesta con preguntas a completar");
+		link.setNombre("www.sport.es");
+		response = Requester.INSTANCE.agregarRecurso(link);
 		if (response.getSuccess()) {
-			Encuesta encuesta_rtn = (Encuesta) response.getSerializable();
-			System.out.println(encuesta_rtn.getDescripcion());
+			Link link_rtn = (Link) response.getSerializable();
+			System.out.println(link_rtn.getNombre());
 		} else {
+			System.out.println();
 			System.out.println(response.getReason());
 		}
-		
-		
+//		
 //		encuesta = new Encuesta(10, 3, "Encuesta con preguntas fijas", false);
 
 //		response = Requester.INSTANCE.getRecurso(encuesta);

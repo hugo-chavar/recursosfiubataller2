@@ -28,7 +28,7 @@ public abstract class HandlerRequester {
 
 		try {
 			String xml_resp_e = proxy.guardar(xml);
-			System.out.println(xml_resp_e);
+//			System.out.println(xml_resp_e);
 			return validateOneWayOperation(xml_resp_e);
 //			updateCache(); al guardar no se actualiza el cache
 
@@ -42,10 +42,11 @@ public abstract class HandlerRequester {
 
 	protected OperationResponse validateOneWayOperation(String xml_resp) throws GetException {
 		notification = (Notification) getParser().unmarshal(xml_resp, Notification.class);
-		if (notification != null & notification.success()) {
+		if (notification != null && notification.success()) {
 			return OperationResponse.createSuccess();
 		} else {
-			String message = notification != null ? notification.getMessage() : "notif error " + xml_resp;
+			String[] lines = xml_resp.split("\n");
+			String message = notification != null ? notification.getMessage() : "notif error " + lines[0];
 			return OperationResponse.createFailed(message);
 		}
 	}
@@ -53,7 +54,8 @@ public abstract class HandlerRequester {
 	protected boolean validateTwoWayOperation(String xml_resp) throws GetException {
 		notification = (Notification) getParser().unmarshal(xml_resp, Notification.class);
 		if (notification != null && !notification.success()) {
-			String message = notification != null ? notification.getMessage() : "notif error " + xml_resp;
+			String[] lines = xml_resp.split(System.getProperty("line.separator"));
+			String message = notification != null ? notification.getMessage() : "Notif error: " + lines[0];
 			throw new GetException(message + " para " + getCurrent().getInfo());
 		} 
 		return notification == null;
@@ -62,7 +64,7 @@ public abstract class HandlerRequester {
 	public OperationResponse getFile(String xml) throws GetException, ParseException {
 		try {
 			String xml_resp_e = proxy.seleccionar(xml);
-			System.out.println("Integracion me esta contestando : " + xml_resp_e);
+//			System.out.println("Integracion me esta contestando : " + xml_resp_e);
 			if (validateTwoWayOperation(xml_resp_e)) {
 				createCurrentObject(xml_resp_e);
 				updateCache();

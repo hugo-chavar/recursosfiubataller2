@@ -20,12 +20,7 @@ public class RecursosResponse extends OperationResponse {
 	private List<Recurso> recursos;
 
 	public RecursosResponse() {
-		// recursos = new ArrayList<Recurso>();
 	}
-
-	// public void add(Recurso recurso) {
-	// recursos.add(recurso);
-	// }
 
 	public void setRecursos(List<Recurso> recursos) {
 		this.recursos = recursos;

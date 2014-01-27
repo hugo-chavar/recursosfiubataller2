@@ -42,6 +42,8 @@ public class RecursosRequester extends HandlerRequester {
 		recursosEjemplo.add(r);
 		r = new Recurso(998, -1, "pdf con todo lo que necesitas", "Archivo");
 		recursosEjemplo.add(r);
+		r = new Recurso(999, -1, "link con lo mejor de lo mejor", "Link");
+		recursosEjemplo.add(r);
 		cache.addAll(recursosEjemplo);
 	}
 

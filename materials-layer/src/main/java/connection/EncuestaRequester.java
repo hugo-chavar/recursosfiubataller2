@@ -183,7 +183,7 @@ public class EncuestaRequester extends HandlerRequester {
 
 	@Override
 	protected void deserialize(String xml_resp_e) throws ParseException {
-		current = parser.deserializeEncuesta(xml_resp_e);
+		current = parser.deserialize(xml_resp_e);
 	}
 
 }

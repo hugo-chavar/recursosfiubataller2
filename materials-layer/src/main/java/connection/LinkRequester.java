@@ -29,6 +29,7 @@ public class LinkRequester extends HandlerRequester {
 	public OperationResponse save(Link link) {
 		current = link;
 		String link_str = parser.serializeLink(link);
+		System.out.println(link_str);
 		
 		try {
 			return save(link_str);
@@ -71,7 +72,7 @@ public class LinkRequester extends HandlerRequester {
 
 	@Override
 	protected void deserialize(String xml_resp_e) throws ParseException {
-		current = parser.deserializeLink(xml_resp_e);
+		current = parser.deserialize(xml_resp_e);
 	}
 
 	@SuppressWarnings("rawtypes")
