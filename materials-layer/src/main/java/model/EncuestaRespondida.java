@@ -5,17 +5,17 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-@XmlAccessorType(XmlAccessType.NONE)
-public class EncuestaRespondida {
+import connection.Serializable;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class EncuestaRespondida implements Serializable {
 
 	@XmlElement
 	private Integer evaluacion;
-
-	public void setEvaluacion(Integer evaluacion) {
-		this.evaluacion = evaluacion;
-	}
 
 	@XmlTransient
 	private Integer idUsuario;
@@ -58,6 +58,10 @@ public class EncuestaRespondida {
 		this.preguntasRespondidas = preguntasRespondidas;
 	}
 
+	public void setEvaluacion(Integer evaluacion) {
+		this.evaluacion = evaluacion;
+	}
+
 	public void evaluar(Encuesta encuesta) {
 		Integer resultado = 0;
 		List<Pregunta> preguntas = encuesta.getPreguntas();
@@ -95,32 +99,6 @@ public class EncuestaRespondida {
 		preguntasRespondidas =  PreguntaRespondida.unmarshallAll(field);;
 	}
 
-//	public void completarDatosVisibles(List<Pregunta> preguntas) {
-//		for(int i=0;i<preguntas.size();i++){
-//			this.preguntasRespondidas.get(i).completarDatosVisibles(preguntas.get(i));
-//		}
-//	}
-
-//	public void recuperarDatosVisibles(Encuesta encuesta) {
-//		List<PreguntaRespondida> preguntasRespondidasAux = this.preguntasRespondidas;
-//		this.preguntasRespondidas = new ArrayList<PreguntaRespondida>();
-//		for (Integer i=0;i<encuesta.getPreguntas().size();i++){
-//			Pregunta pregunta = encuesta.getPreguntas().get(i);
-//			if(pregunta.getOpciones().isEmpty()){
-//				PreguntaRespuestaACompletarRespondida respondida = new PreguntaRespuestaACompletarRespondida(pregunta.getIdPregunta());
-//				respondida.responder(preguntasRespondidasAux.get(i).getRespuestas().get(0));
-//				this.preguntasRespondidas.add(respondida);
-//			}
-//			else{
-//				PreguntaRespuestaFijaRespondida respondida = new PreguntaRespuestaFijaRespondida(pregunta.getIdPregunta());
-//				for(String res : preguntasRespondidasAux.get(i).getRespuestas()){
-//					respondida.addRespuesta(pregunta.getIndiceRespuesta(res));
-//				}
-//				this.preguntasRespondidas.add(respondida);
-//			}
-//		}	
-//	}
-	
 	@Override
 	public boolean equals(Object o) {
 		if (o.getClass().equals(this.getClass())) {
@@ -131,6 +109,14 @@ public class EncuestaRespondida {
 		return false;
 	}
 
-	
-}
+	@Override
+	public String getInfo() {
+		return "EncuestaRespondida recursoId: " + getIdRecurso() + " usuarioId: " + getIdUsuario();
+	}
 
+	@Override
+	public void updateFields(Serializable s) {
+//		EncuestaRespondida er = (EncuestaRespondida)s;
+		
+	}
+}

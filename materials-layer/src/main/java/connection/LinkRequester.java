@@ -30,7 +30,11 @@ public class LinkRequester extends HandlerRequester {
 		current = link;
 		String link_str = parser.serializeLink(link);
 		
-		return save(link_str);
+		try {
+			return save(link_str);
+		} catch (GetException e) {
+			return OperationResponse.createFailed(e.getMessage());
+		}
 		
 	}
 	

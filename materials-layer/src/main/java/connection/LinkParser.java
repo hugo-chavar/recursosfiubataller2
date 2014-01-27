@@ -28,7 +28,7 @@ public class LinkParser extends Parser {
 		rootElement.appendChild(recursoNode);
 
 		if ((link.getRecursoId() != null) && (!link.getRecursoId().equals(0))) {
-			Element recursoId = doc.createElement(Parser.RECURSOID_TAG);
+			Element recursoId = doc.createElement(Parser.ID_TAG);
 			recursoId.appendChild(doc.createTextNode(String.valueOf(link.getRecursoId())));
 			recursoNode.appendChild(recursoId);
 		}
@@ -51,7 +51,7 @@ public class LinkParser extends Parser {
 		recursos.appendChild(linkNode);
 
 		if ((link.getRecursoId() != null) && (!link.getRecursoId().equals(0))) {
-			Element recursoId = doc.createElement(Parser.RECURSOID_TAG);
+			Element recursoId = doc.createElement(Parser.ID_TAG);
 			recursoId.appendChild(doc.createTextNode(String.valueOf(link.getRecursoId())));
 			linkNode.appendChild(recursoId);
 		}
@@ -66,24 +66,28 @@ public class LinkParser extends Parser {
 	public Link deserializeLink(String xml) throws ParseException {
 
 		Link link = null;
+		baseTag = LINK_TAG;
 
-		Document doc = this.convertXmlToDocument(xml);
+		Document doc = convertXmlToDocument(xml);
 		if (doc == null) {
-			return null;
+			throw new ParseException("Xml invalido: " + xml);
 		}
 		HashMap<String, String> fields = new HashMap<String, String>();
 
-		NodeList linkNode = doc.getElementsByTagName(LinkParser.LINK_TAG);
-		NodeList linkChildNodes = linkNode.item(0).getChildNodes();
+		NodeList nodes = doc.getElementsByTagName(baseTag);
+		if (nodes.getLength() == 0) {
+			throw new ParseException("No existe tag " + baseTag);
+		}
+		NodeList childNodes = nodes.item(0).getChildNodes();
 
-		if (linkChildNodes != null) {
+		if (childNodes != null) {
 
-			for (int i = 0; i < linkChildNodes.getLength(); i++) {
-				Element element = (Element) linkChildNodes.item(i);
+			for (int i = 0; i < childNodes.getLength(); i++) {
+				Element element = (Element) childNodes.item(i);
 				fields.put(element.getNodeName(), element.getTextContent());
 			}
 
-			String nombre = fields.get(LinkParser.NOMBRE_TAG);
+			String nombre = fields.get(NOMBRE_TAG);
 			link = new Link(0, 0, "");
 			link.setNombre(nombre);
 
@@ -91,6 +95,13 @@ public class LinkParser extends Parser {
 
 		return link;
 
+	}
+	
+	@Override
+	protected Serializable createSerializable(HashMap<String, String> fields) {
+		Link link = new Link(0, 0, "");
+		link.setNombre(fields.get(NOMBRE_TAG));
+		return link;
 	}
 
 }

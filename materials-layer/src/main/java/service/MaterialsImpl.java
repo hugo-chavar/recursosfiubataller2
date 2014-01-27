@@ -88,7 +88,7 @@ public class MaterialsImpl implements Materials {
 		if (!encuestaResponse.getSuccess()) {
 			return createFailedResponse("Encuesta inexistente");
 		}
-		Encuesta encuesta = (Encuesta) encuestaResponse.getRecurso();
+		Encuesta encuesta = (Encuesta) encuestaResponse.getSerializable();
 		if (encuesta.isEvaluada()) {
 			respondida.evaluar(encuesta);
 		}

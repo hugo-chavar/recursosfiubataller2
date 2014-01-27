@@ -13,8 +13,6 @@ import connection.exceptions.ParseException;
 
 public class ArchivoParser extends Parser {
 	public static String ARCHIVO_TAG = "Archivo";
-//	public static String IDARCHIVO_TAG = "archivoId";
-	public static String DESCRIPCION_TAG = "descripcion";
 	public static String NOMBRE_TAG = "nombre";
 	public static String EXTENSION_TAG = "tipo";
 	public static String FILE_TAG = "file";
@@ -25,29 +23,31 @@ public class ArchivoParser extends Parser {
 		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
 		doc.appendChild(rootElement);
 		
-		Element nodeElement = doc.createElement(ArchivoParser.ARCHIVO_TAG);
+		Element nodeElement = doc.createElement(ARCHIVO_TAG);
 		rootElement.appendChild(nodeElement);
 		
 		Element IDAmbiente = doc.createElement(Parser.AMBITOID_TAG);
 		IDAmbiente.appendChild(doc.createTextNode(String.valueOf(archivo.getAmbitoId())));
 		nodeElement.appendChild(IDAmbiente);
-		Element IDArchivo = doc.createElement(Parser.RECURSOID_TAG);
+		
+		Element IDArchivo = doc.createElement(Parser.ID_TAG);
 		IDArchivo.appendChild(doc.createTextNode(String.valueOf(archivo.getRecursoId())));
 		nodeElement.appendChild(IDArchivo);
-		Element descripcion = doc.createElement(ArchivoParser.DESCRIPCION_TAG);
+		
+		Element descripcion = doc.createElement(Parser.DESCRIPCION_TAG);
 		descripcion.appendChild(doc.createTextNode(archivo.getDescripcion()));
 		nodeElement.appendChild(descripcion);
 		
-		Element nombre = doc.createElement(ArchivoParser.NOMBRE_TAG);
-		nombre.appendChild(doc.createTextNode(String.valueOf(archivo.getNombreArchivo())));
+		Element nombre = doc.createElement(NOMBRE_TAG);
+		nombre.appendChild(doc.createTextNode(archivo.getNombreArchivo()));
 		nodeElement.appendChild(nombre);
 		
-		Element extension = doc.createElement(ArchivoParser.EXTENSION_TAG);
-		extension.appendChild(doc.createTextNode(String.valueOf(archivo.getTipoArchivo())));
+		Element extension = doc.createElement(EXTENSION_TAG);
+		extension.appendChild(doc.createTextNode(archivo.getTipoArchivo()));
 		nodeElement.appendChild(extension);
 		
 	
-		Element file = doc.createElement(ArchivoParser.FILE_TAG);
+		Element file = doc.createElement(FILE_TAG);
 		try {
 			file.appendChild(doc.createTextNode(String.valueOf(archivo.getStringFile())));
 		} catch (DOMException e) {
@@ -56,24 +56,23 @@ public class ArchivoParser extends Parser {
 		}
 		nodeElement.appendChild(file);
 		
-//		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-//		LSSerializer serializer = domImplLS.createLSSerializer();
-//		serializer.getDomConfig().setParameter("xml-declaration", false);
-//		String xml = serializer.writeToString(doc);		
-//		
-//		return xml;
-		
 		return convertDocumentToXml(doc);
 	}
 
 	public Archivo deserializeArchivo(String xml) throws ParseException {
+		baseTag = ARCHIVO_TAG;
 		Document doc = this.convertXmlToDocument(xml);
 		if (doc == null) {
 			return null;
 		}
-		NodeList nodes = doc.getElementsByTagName(ArchivoParser.ARCHIVO_TAG);
-		NodeList childNodes = nodes.item(0).getChildNodes(); 
 		HashMap<String, String> fields = new HashMap<String, String>();
+		
+		NodeList nodes = doc.getElementsByTagName(baseTag);
+		if (nodes.getLength() == 0) {
+			throw new ParseException("No existe tag " + baseTag);
+		}
+		NodeList childNodes = nodes.item(0).getChildNodes(); 
+		
 	    if (childNodes != null) {
 	        for (int i = 0; i < childNodes.getLength(); i++) {
         	   Element element = (Element) childNodes.item(i);
@@ -81,12 +80,12 @@ public class ArchivoParser extends Parser {
 	        }
 	    }
 	    
-		int IDAmbiente = Integer.parseInt(fields.get(ArchivoParser.AMBITOID_TAG));
-		int IDArchivo = Integer.parseInt(fields.get(Parser.RECURSOID_TAG));
-		String descripcion = fields.get(ArchivoParser.DESCRIPCION_TAG);
-		String nombre = fields.get(ArchivoParser.NOMBRE_TAG);		
-		String extension = fields.get(ArchivoParser.EXTENSION_TAG);
-		String file = fields.get(ArchivoParser.FILE_TAG);
+		int IDAmbiente = Integer.parseInt(fields.get(AMBITOID_TAG));
+		int IDArchivo = Integer.parseInt(fields.get(Parser.ID_TAG));
+		String descripcion = fields.get(DESCRIPCION_TAG);
+		String nombre = fields.get(NOMBRE_TAG);		
+		String extension = fields.get(EXTENSION_TAG);
+		String file = fields.get(FILE_TAG);
 		
 		Archivo archivo = new Archivo();
 		archivo.setAmbitoId(IDAmbiente);
@@ -94,7 +93,27 @@ public class ArchivoParser extends Parser {
 		archivo.setRecursoId(IDArchivo);
 		archivo.setNombreArchivo(nombre);
 		archivo.setTipoArchivo(extension);
-		System.out.println("entra aca");
+		archivo.setStringFile(file);
+		
+		return archivo;
+	}
+	
+	@Override
+	protected Serializable createSerializable(HashMap<String, String> fields) {
+		
+		int IDAmbiente = Integer.parseInt(fields.get(AMBITOID_TAG));
+		int IDArchivo = Integer.parseInt(fields.get(Parser.ID_TAG));
+		String descripcion = fields.get(DESCRIPCION_TAG);
+		String nombre = fields.get(NOMBRE_TAG);		
+		String extension = fields.get(EXTENSION_TAG);
+		String file = fields.get(FILE_TAG);
+		
+		Archivo archivo = new Archivo();
+		archivo.setAmbitoId(IDAmbiente);
+		archivo.setDescripcion(descripcion);
+		archivo.setRecursoId(IDArchivo);
+		archivo.setNombreArchivo(nombre);
+		archivo.setTipoArchivo(extension);
 		archivo.setStringFile(file);
 		
 		return archivo;

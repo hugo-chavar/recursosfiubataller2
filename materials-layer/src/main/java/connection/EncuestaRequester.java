@@ -135,7 +135,11 @@ public class EncuestaRequester extends HandlerRequester {
 		current = encuesta;
 		String encuesta_str = parser.serializeEncuesta(encuesta);
 		
-		return save(encuesta_str);
+		try {
+			return save(encuesta_str);
+		} catch (GetException e) {
+			return OperationResponse.createFailed(e.getMessage());
+		}
 	}
 
 	public OperationResponse get(Recurso recurso){

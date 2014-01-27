@@ -19,14 +19,19 @@ public class RecursosParser extends Parser {
 	public Recurso deserializeRecurso(String xml) throws ParseException {
 		
 		Recurso recurso = null;
+		baseTag = Parser.RECURSO_TAG;
 		
 		Document doc = convertXmlToDocument(xml);
 		if (doc == null) {
-			return recurso;
+			throw new ParseException("Xml invalido: " + xml);
 		}
-		NodeList nodes = doc.getElementsByTagName(Parser.RECURSO_TAG);
-		NodeList childNodes = nodes.item(0).getChildNodes();
 		HashMap<String, String> fields = new HashMap<String, String>();
+
+		NodeList nodes = doc.getElementsByTagName(baseTag);
+		if (nodes.getLength() == 0) {
+			throw new ParseException("No existe tag " + baseTag);
+		}
+		NodeList childNodes = nodes.item(0).getChildNodes();
 		
 	    if (childNodes != null) {
 	    	
@@ -35,7 +40,7 @@ public class RecursosParser extends Parser {
         	   fields.put(element.getNodeName(), element.getTextContent());
 	        }
 	        
-			int IDRecurso = Integer.parseInt(fields.get(Parser.RECURSOID_TAG));
+			int IDRecurso = Integer.parseInt(fields.get(Parser.ID_TAG));
 			int IDAmbito = Integer.parseInt(fields.get(Parser.AMBITOID_TAG));
 			String descripcion = fields.get(Parser.DESCRIPCION_TAG);
 			String tipo = fields.get(Parser.TIPO_TAG);
@@ -70,7 +75,7 @@ public class RecursosParser extends Parser {
 	        	   fields.put(element.getNodeName(), element.getTextContent());
 		        }
 		        
-				int IDRecurso = Integer.parseInt(fields.get(Parser.RECURSOID_TAG));
+				int IDRecurso = Integer.parseInt(fields.get(Parser.ID_TAG));
 				int IDAmbito = Integer.parseInt(fields.get(Parser.AMBITOID_TAG));
 				String descripcion = fields.get(Parser.DESCRIPCION_TAG);
 				String tipo = fields.get(Parser.TIPO_TAG);//Este tipo da la reflexion que estoy buscando
@@ -95,7 +100,7 @@ public class RecursosParser extends Parser {
 		Element recursoNode = doc.createElement(Parser.RECURSO_TAG);
 		rootElement.appendChild(recursoNode);
 		
-		Element recursoID = doc.createElement(Parser.RECURSOID_TAG);
+		Element recursoID = doc.createElement(Parser.ID_TAG);
 		recursoID.appendChild(doc.createTextNode(String.valueOf(recursoId)));
 		recursoNode.appendChild(recursoID);
 		
@@ -129,7 +134,7 @@ public class RecursosParser extends Parser {
 		Element nodeElement = doc.createElement(EncuestaParser.RECURSO_TAG);
 		rootElement.appendChild(nodeElement);
 		
-		Element IDRecurso_el = doc.createElement(EncuestaParser.RECURSOID_TAG);
+		Element IDRecurso_el = doc.createElement(EncuestaParser.ID_TAG);
 		IDRecurso_el.appendChild(doc.createTextNode(String.valueOf(IDRecurso)));
 		nodeElement.appendChild(IDRecurso_el);
 		

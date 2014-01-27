@@ -76,7 +76,11 @@ public class ArchivoRequester extends HandlerRequester {
 	public OperationResponse save(Archivo archivo) {
 		current = archivo; 
 		String archivo_str = parser.serializeArchivo(archivo);
-		return saveFile(archivo_str);
+		try {
+			return saveFile(archivo_str);
+		} catch (GetException e) {
+			return OperationResponse.createFailed(e.getMessage());
+		}
 	}
 
 	// Este metodo es el que consulta a integración y trae el archivo necesario.
@@ -190,15 +194,16 @@ public class ArchivoRequester extends HandlerRequester {
 	}
 
 	@Override
-	public void deleteRecurso(Recurso recurso) {
-		super.deleteRecurso(recurso);
+	public void deleteRecurso(Serializable s) {
+		Recurso aux = (Recurso)s;
+		super.deleteRecurso(aux);
 		//TODO Dami esto hay que probarlo
-		String xml = parser.serializeQueryByType(recurso.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
+		String xml = parser.serializeQueryByType(aux.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
 		try {
 			String xml_resp_e = proxy.eliminarArchivo(xml);
 			System.out.println(xml_resp_e);
 		} catch (ConnectionException e) {
-			String message = "Intentando eliminar archivo id: " + recurso.getRecursoId();
+			String message = "Intentando eliminar archivo id: " + aux.getRecursoId();
 			message = e.getMessage() + message;
 			System.out.println(message);
 		}

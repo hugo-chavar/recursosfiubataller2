@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import connection.Serializable;
 import model.Archivo;
 import model.Encuesta;
 import model.Link;
@@ -31,7 +32,7 @@ public class OperationResponse {
 		return response;
 	}
 
-	@XmlElement // (nillable = true)
+	@XmlElement
 	private String reason;
 	
 	@XmlElement (nillable = false, required = true)
@@ -43,7 +44,7 @@ public class OperationResponse {
 		@XmlElementRef(type = Link.class),
 		@XmlElementRef(type = Archivo.class),
 		})
-	private Recurso recurso;
+	private Serializable serializable;
 
 	public OperationResponse() {
 	}
@@ -60,12 +61,12 @@ public class OperationResponse {
 		return this.success;
 	}
 
-	public Recurso getRecurso() {
-		return recurso;
+	public Serializable getSerializable() {
+		return serializable;
 	}
 
-	public void setRecurso(Recurso object) {
-		this.recurso = object;
+	public void setSerializable(Serializable object) {
+		this.serializable = object;
 	}
 	
 	public String getReason() {

@@ -15,7 +15,6 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.sun.istack.ByteArrayDataSource;
 
-//@XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Archivo extends Recurso {
@@ -35,20 +34,20 @@ public class Archivo extends Recurso {
 	
 	@XmlElement
 	private String tipoArchivo;
+
 	@XmlElement
 	private String nombreArchivo;
-	
-//	@XmlTransient
+
 	@XmlElement
 	@XmlMimeType("application/octet-stream")
 	private DataHandler rawFile;
-//	@XmlElement
+
 	@XmlTransient
 	private byte[] fileBinary;
-//	@XmlElement
+
 	@XmlTransient
 	private String contentType;
-//	@XmlElement
+
 	@XmlTransient
 	private String stringFile;
 	
@@ -87,7 +86,6 @@ public class Archivo extends Recurso {
    	 	try {
 			this.stringFile =  new String(this.fileBinary,"UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 			System.out.println("codificacion no valida");
 		}
@@ -131,6 +129,11 @@ public class Archivo extends Recurso {
 
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
+	}
+
+	@Override
+	public String getInfo() {
+		return super.getInfo() + " " + getNombreArchivo();
 	}
 
 }

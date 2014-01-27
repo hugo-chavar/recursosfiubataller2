@@ -3,6 +3,7 @@ package connection;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.HashMap;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -15,6 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSSerializer;
 import org.xml.sax.InputSource;
@@ -28,7 +30,7 @@ public class Parser {
 
 	public static String INITIAL_TAG = "WS";
 	public static String RECURSO_TAG = "Recurso";
-	public static String RECURSOID_TAG = "id";
+	public static String ID_TAG = "id";
 	public static String AMBITOID_TAG = "ambitoId";
 	public static String DESCRIPCION_TAG = "descripcion";
 	public static String TIPO_TAG = "tipo";
@@ -36,6 +38,8 @@ public class Parser {
 	public static String JOIN_TAG = "join";
 	
 	public static String SPECIAL_CHARACTERS = ",;|";
+	
+	protected String baseTag;
 	
 	
 	public Document buildXMLDocument() {
@@ -58,17 +62,17 @@ public class Parser {
 			return docBuilder.parse(new InputSource(new StringReader(xml)));
 		} catch (SAXParseException e) {
 			String rcv = xml.substring(0, xml.indexOf('<') - 2);
-			System.out.println("RECIBIDO:");
-			System.out.println(xml);
+//			System.out.println("RECIBIDO:");
+//			System.out.println(xml);
 			throw new ParseException("Xml recibido de integracion contiene errores. Recibido: " + rcv);
 		} catch (ParserConfigurationException e) {
-			System.out.println(e.getMessage());
+			throw new ParseException("ParserConfigurationException al convertir: " + xml);
 		} catch (SAXException e) {
-			System.out.println(e.getMessage());
+			throw new ParseException("SAXException al convertir: " + xml);
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			throw new ParseException("IOException al convertir: " + xml);
 		}
-		return null;
+//		return null;
 	}
 
 //	public static Document loadXMLFromString(String xml) throws Exception
@@ -128,7 +132,7 @@ public class Parser {
 		Element typeNode = doc.createElement(RecursoType);
 		rootElement.appendChild(typeNode);
 		
-		Element recursoID = doc.createElement(Parser.RECURSOID_TAG);
+		Element recursoID = doc.createElement(Parser.ID_TAG);
 		recursoID.appendChild(doc.createTextNode(String.valueOf(IDRecurso)));
 		typeNode.appendChild(recursoID);
 		
@@ -136,4 +140,36 @@ public class Parser {
 		
 	}
 	
+	public Serializable deserialize(String xml) throws ParseException {
+
+		Document doc = convertXmlToDocument(xml);
+		if (doc == null) {
+			throw new ParseException("Xml invalido: " + xml);
+		}
+		HashMap<String, String> fields = new HashMap<String, String>();
+
+		NodeList nodes = doc.getElementsByTagName(baseTag);
+		if (nodes.getLength() == 0) {
+			throw new ParseException("No existe tag " + baseTag);
+		}
+		NodeList linkChildNodes = nodes.item(0).getChildNodes();
+
+		if (linkChildNodes != null) {
+
+			for (int i = 0; i < linkChildNodes.getLength(); i++) {
+				Element element = (Element) linkChildNodes.item(i);
+				fields.put(element.getNodeName(), element.getTextContent());
+			}
+			
+			return createSerializable(fields);
+
+		}
+
+		return null;
+	}
+
+	protected Serializable createSerializable(HashMap<String, String> fields) {
+		return null;
+	}
+
 }

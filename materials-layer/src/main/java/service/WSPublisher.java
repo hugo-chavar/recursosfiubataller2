@@ -17,6 +17,7 @@ import javax.xml.ws.soap.SOAPBinding;
 
 import model.Archivo;
 import model.Encuesta;
+import model.EncuestaRespondida;
 import model.Link;
 import model.Pregunta;
 import model.PreguntaRespuestaFija;
@@ -64,8 +65,12 @@ public class WSPublisher {
 //		p.setUsuarioId(23);
 //		xml = parser.convertToXml(p, p.getClass());
 //		System.out.println(xml);
+//		xml = "hola munco: " + xml;
 //
 //		Parameter p2 = (Parameter) parser.unmarshal(xml, Parameter.class);
+//		if (p2 == null) {
+//			System.out.println("p2 null ");
+//		}
 //		System.out.println("Ambito: " + p2.getRecurso().getAmbitoId());
 //		System.out.println("Usuario: " + p2.getUsuarioId());
 //		System.out.println("Recurso: " + p2.getRecurso().getRecursoId());
@@ -210,7 +215,7 @@ public class WSPublisher {
 //		}
 		
 		
-//		IntegracionProxy ip = new IntegracionProxy();
+		IntegracionProxy ip = new IntegracionProxy();
 //		try {
 //			xml = ip.seleccionar("<WS><Usuario><username>javier</username></Usuario></WS>");
 //			System.out.println(xml);
@@ -230,22 +235,25 @@ public class WSPublisher {
 //		} catch (ConnectionException e) {
 //			System.out.println(e.getMessage());
 //		}
-		
-		
+//		
+//		try {
+//			xml = ip.seleccionar("<WS><Recurso><id>1009</id></Recurso></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
 //		try {
 //			xml = ip.seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
 //			System.out.println(xml);
 //		} catch (ConnectionException e) {
 //			System.out.println(e.getMessage());
 //		}
-		
 //		try {
-//			xml = ip.guardar("<?xml version=\"1.0\"?><WS><Recurso><descripcion>prueba</descripcion><tipo>L</tipo></Recurso></WS>");
+//			xml = ip.guardar("<WS><Recurso><descripcion>prueba</descripcion><tipo>L</tipo></Recurso></WS>");
 //			System.out.println(xml);
 //		} catch (ConnectionException e) {
 //			System.out.println(e.getMessage());
 //		}
-		
 //		try {
 //			xml = ip.guardar("<?xml version=\"1.0\"?><WS><Link><nombre>prueba</nombre></Link></WS>");
 //			System.out.println(xml);
@@ -256,14 +264,38 @@ public class WSPublisher {
 //		String absolute = WSPublisher.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
 
 //		System.out.println(absolute);
-		System.out.println("Programa terminado. ");
 		
-		Encuesta encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);
+		
+		Encuesta encuesta;
+		OperationResponse response;
+//		
+		System.out.println("existe");
+		encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);
+		response = Requester.INSTANCE.getRecurso(encuesta);
+		if (response.getSuccess()) {
+			Encuesta encuesta_rtn = (Encuesta) response.getSerializable();
+			System.out.println(encuesta_rtn.getDescripcion());
+		} else {
+			System.out.println(response.getReason());
+		}
+		
+		System.out.println("no existe");
+		encuesta = new Encuesta(16, 2, "Encuesta con preguntas a completar", true);
+		response = Requester.INSTANCE.getRecurso(encuesta);
+		if (response.getSuccess()) {
+			Encuesta encuesta_rtn = (Encuesta) response.getSerializable();
+			System.out.println(encuesta_rtn.getDescripcion());
+		} else {
+			System.out.println(response.getReason());
+		}
+		
+		
+//		encuesta = new Encuesta(10, 3, "Encuesta con preguntas fijas", false);
 
-//		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
-		OperationResponse response = Requester.INSTANCE.getRecurso(encuesta);
-		Encuesta encuesta_rtn = (Encuesta)response.getRecurso();  
+//		response = Requester.INSTANCE.getRecurso(encuesta);
 		
+//		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(15, 4);
+		System.out.println("Programa terminado. ");
 	}
 
 }

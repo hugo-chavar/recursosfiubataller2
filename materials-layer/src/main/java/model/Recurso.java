@@ -5,20 +5,22 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import connection.Serializable;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Recurso {
+public class Recurso implements Serializable {
 
-	@XmlElement //(nillable = false, required = true)
+	@XmlElement
 	protected Integer recursoId;
 
-	@XmlElement //(nillable = false, required = true)
+	@XmlElement
 	protected String tipo;
 
-	@XmlElement //(nillable = false, required = true)
+	@XmlElement
 	protected Integer ambitoId;
 
-	@XmlElement //(nillable = false, required = true)
+	@XmlElement
 	protected String descripcion;
 
 	public Recurso(Integer idRecurso, Integer idAmbito, String descripcion) {
@@ -78,5 +80,19 @@ public class Recurso {
 			return r.getRecursoId().equals(getRecursoId());
 		}
 		return false;
+	}
+
+	@Override
+	public String getInfo() {
+		return "Recurso ID " +  getRecursoId();
+	}
+
+	@Override
+	public void updateFields(Serializable s) {
+		Recurso aux = (Recurso)s; 
+		setRecursoId(aux.getRecursoId());
+		setAmbitoId(aux.getAmbitoId());
+		setDescripcion(aux.getDescripcion());
+		
 	}
 }

@@ -102,7 +102,11 @@ public class RecursosRequester extends HandlerRequester {
 	public OperationResponse delete(Recurso recurso) {
 		current = recurso;
 		String xml = parser.serializeDeleteQuery(recurso.getRecursoId());
-		return delete(xml);
+		try {
+			return delete(xml);
+		} catch (GetException e) {
+			return OperationResponse.createFailed(e.getMessage());
+		}
 	}
 
 	public void updateCache(Recurso target) {

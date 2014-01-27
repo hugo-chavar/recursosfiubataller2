@@ -83,7 +83,7 @@ public enum Requester {
 		}
 		
 		// Consulto la tabla especifica del recurso
-		response = makeQueryGetRecurso(response.getRecurso());
+		response = makeQueryGetRecurso((Recurso)response.getSerializable());
 		
 		return response;
 		
