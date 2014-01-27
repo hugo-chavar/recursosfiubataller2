@@ -67,24 +67,24 @@ public class PreguntaRespondidaTest {
 //		Assert.assertEquals("F;10;false;3,8,345", p3.marshall());
 //	}
 	
-//	@Test
-//	public void unmarshallPreguntaRespuestaFijaRespondidaSetIdCorrectly() {
-//		String marshalledPregunta = p3.marshall();
-//		PreguntaRespuestaFijaRespondida p = new PreguntaRespuestaFijaRespondida();
-//		p.unmarshall(marshalledPregunta);
-//		Assert.assertEquals(p.getIdPregunta(), p3.getIdPregunta());
-//		//Assert.assertEquals(p.getRespuestas().isEmpty(), p3.getRespuestas().isEmpty());
-//		
-//	}
+	@Test
+	public void unmarshallPreguntaRespuestaFijaRespondidaSetIdCorrectly() {
+		String marshalledPregunta = p3.marshall();
+		PreguntaRespuestaFijaRespondida p = new PreguntaRespuestaFijaRespondida();
+		p.unmarshall(marshalledPregunta);
+		Assert.assertEquals(p.getIdPregunta(), p3.getIdPregunta());
+		//Assert.assertEquals(p.getRespuestas().isEmpty(), p3.getRespuestas().isEmpty());
+		
+	}
 	
-//	@Test
-//	public void unmarshallPreguntaRespuestaFijaRespondidaSetAttrCorrectly() {
-//		String marshalledPregunta = p2.marshall();
-//		PreguntaRespuestaFijaRespondida p = new PreguntaRespuestaFijaRespondida();
-//		p.unmarshall(marshalledPregunta);
-//		Assert.assertEquals(p.getIdPregunta(), p2.getIdPregunta());
-//		Assert.assertEquals(p.getRespuestas().isEmpty(), p2.getRespuestas().isEmpty());
-//		
-//	}
+	@Test
+	public void unmarshallPreguntaRespuestaFijaRespondidaSetAttrCorrectly() {
+		String marshalledPregunta = p2.marshall();
+		PreguntaRespuestaFijaRespondida p = new PreguntaRespuestaFijaRespondida();
+		p.unmarshall(marshalledPregunta);
+		Assert.assertEquals(p.getIdPregunta(), p2.getIdPregunta());
+		Assert.assertEquals(p.getRespuestas().isEmpty(), p2.getRespuestas().isEmpty());
+		
+	}
 
 }

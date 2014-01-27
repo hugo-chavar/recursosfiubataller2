@@ -29,10 +29,15 @@ public class IntegracionProxy {
 		} else if (xml.equals("<WS><Encuesta><id>10</id></Encuesta></WS>")) {
 			return "<WS><encuesta><evaluada>true</evaluada><preguntas>F;1;De que color es el caballo blanco de San Martin?;negro,blanco,marron;1|" +
 					"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></encuesta></WS>";
+		} else if (xml.equals("<WS><Encuesta><id>11</id></Encuesta></WS>")) {
+			return "<WS><encuesta><evaluada>true</evaluada><preguntas>F;1;De que color\\; es\\, el\\| caballo blanco de San Martin?;negro,blanco,marron;1|" +
+					"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></encuesta></WS>";
 		} else if (xml.equals("<WS><Recurso><id>15</id></Recurso></WS>")) {
 			return "<WS><Recurso><id>15</id><ambitoId>2</ambitoId><descripcion>Encuesta con preguntas a completar</descripcion><tipo>Encuesta</tipo></Recurso></WS>";
 		} else if (xml.equals("<WS><Recurso><id>10</id></Recurso></WS>")) {
 			return "<WS><Recurso><id>10</id><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></Recurso></WS>";
+		} else if (xml.equals("<WS><Recurso><id>11</id></Recurso></WS>")) {
+			return "<WS><Recurso><id>11</id><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></Recurso></WS>";
 		} else if (xml.equals("<WS><Recurso><id>1003</id></Recurso></WS>")) {//TODO: sacar harcodeo para testear los archivos.
 			return "<WS><recurso><recursoId>1003</recursoId><ambitoId>3</ambitoId><descripcion>Es un Archivo</descripcion><tipo>Archivo</tipo></recurso></WS>";
 		}

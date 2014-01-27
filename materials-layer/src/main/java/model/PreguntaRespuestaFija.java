@@ -88,7 +88,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 	public void unmarshall(String s) {
 		super.unmarshall(s);
 		String[] splited = s.split(";");
-		splited = ignoreSpecialCharactersInSplit(splited);
+		splited = ignoreSpecialCharactersInSplit(splited, ";");
 		unmarshallRespuestasPosibles(splited[3]);
 		unmarshallRespuestasCorrectas(splited[4]);
 
@@ -99,7 +99,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 			return;
 		}
 		String[] splited = rtas.split(",");
-		splited = ignoreSpecialCharactersInSplit(splited);
+		splited = ignoreSpecialCharactersInSplit(splited, ",");
 		respuestasPosibles = new ArrayList<String>();
 		for (String s : splited) {
 			respuestasPosibles.add(s);
@@ -112,7 +112,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 			return;
 		}
 		String[] splited = rtas.split(",");
-		splited = ignoreSpecialCharactersInSplit(splited);
+		splited = ignoreSpecialCharactersInSplit(splited, ",");
 		respuestasCorrectas = new ArrayList<Integer>();
 		for (String s : splited) {
 			respuestasCorrectas.add(Integer.valueOf(s));

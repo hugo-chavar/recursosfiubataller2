@@ -6,12 +6,9 @@ import java.util.List;
 
 import org.apache.axis2.AxisFault;
 
-import model.Encuesta;
 import model.EncuestaRespondida;
-import model.Pregunta;
 import model.PreguntaRespondida;
 import model.PreguntaRespuestaACompletarRespondida;
-import model.PreguntaRespuestaFija;
 import model.PreguntaRespuestaFijaRespondida;
 
 import com.ws.services.IntegracionStub;
@@ -101,11 +98,11 @@ public class EncuestaRespondidaRequester {
 				////////////// PRUEBAS //////////////
 				String xml_resp_e;
 				
-				if (xml.equals("<WS><encuestaRespondida><recursoId>15</recursoId><usuarioId>4</usuarioId></encuestaRespondida></WS>")) {
-					xml_resp_e = "<WS><encuestaRespondida><recursoId>15</recursoId><usuarioId>4</usuarioId><evaluacion>50</evaluacion><preguntasRespondidas>C;1;false;Azul|" +
+				if (xml.equals("<WS><encuestaRespondida><id>15</id><usuarioId>4</usuarioId></encuestaRespondida></WS>")) {
+					xml_resp_e = "<WS><encuestaRespondida><id>15</id><usuarioId>4</usuarioId><evaluacion>50</evaluacion><preguntasRespondidas>C;1;false;Azul|" +
 							"C;2;true;4</preguntasRespondidas></encuestaRespondida></WS>";
-				} else if (xml.equals("<WS><encuestaRespondida><recursoId>10</recursoId><usuarioId>5</usuarioId></encuestaRespondida></WS>")) {
-					xml_resp_e = "<WS><encuestaRespondida><recursoId>10</recursoId><usuarioId>5</usuarioId><evaluacion>100</evaluacion><preguntasRespondidas>F;1;true;1|" +
+				} else if (xml.equals("<WS><encuestaRespondida><id>10</id><usuarioId>5</usuarioId></encuestaRespondida></WS>")) {
+					xml_resp_e = "<WS><encuestaRespondida><id>10</id><usuarioId>5</usuarioId><evaluacion>100</evaluacion><preguntasRespondidas>F;1;true;1|" +
 							"F;2;true;2</preguntasRespondidas></encuestaRespondida></WS>";
 				} else {
 					SeleccionarDatos seleccionar_e = new SeleccionarDatos();

@@ -116,29 +116,29 @@ public class EncuestaTest {
 		Assert.assertEquals(expected, p4.getIdPregunta());
 	}
 	
-//	@Test
-//	public void unmarshallPreguntaRespuestaACompletarSetEnunciadoCorrectly() {
-//		String marshalledPregunta = p5.marshall();
-//		PreguntaRespuestaACompletar pregunta = new PreguntaRespuestaACompletar();
-//		pregunta.unmarshall(marshalledPregunta);
-//		Assert.assertEquals(pregunta.getEnunciado(), p5.getEnunciado());
-//	}
+	@Test
+	public void unmarshallPreguntaRespuestaACompletarSetEnunciadoCorrectly() {
+		String marshalledPregunta = p5.marshall();
+		PreguntaRespuestaACompletar pregunta = new PreguntaRespuestaACompletar();
+		pregunta.unmarshall(marshalledPregunta);
+		Assert.assertEquals(pregunta.getEnunciado(), p5.getEnunciado());
+	}
 	
-//	@Test
-//	public void unmarshallPreguntaRespuestaACompletarSetIdCorrectly() {
-//		String marshalledPregunta = p5.marshall();
-//		PreguntaRespuestaACompletar pregunta = new PreguntaRespuestaACompletar();
-//		pregunta.unmarshall(marshalledPregunta);
-//		Assert.assertEquals(pregunta.getIdPregunta(), p5.getIdPregunta());
-//	}
+	@Test
+	public void unmarshallPreguntaRespuestaACompletarSetIdCorrectly() {
+		String marshalledPregunta = p5.marshall();
+		PreguntaRespuestaACompletar pregunta = new PreguntaRespuestaACompletar();
+		pregunta.unmarshall(marshalledPregunta);
+		Assert.assertEquals(pregunta.getIdPregunta(), p5.getIdPregunta());
+	}
 	
-//	@Test
-//	public void unmarshallPreguntaRespuestaACompletarSetRespuestaCorrectly() {
-//		String marshalledPregunta = p5.marshall();
-//		PreguntaRespuestaACompletar pregunta = new PreguntaRespuestaACompletar();
-//		pregunta.unmarshall(marshalledPregunta);
-//		Assert.assertEquals(pregunta.getRespuesta(), ((PreguntaRespuestaACompletar)p5).getRespuesta());
-//	}
+	@Test
+	public void unmarshallPreguntaRespuestaACompletarSetRespuestaCorrectly() {
+		String marshalledPregunta = p5.marshall();
+		PreguntaRespuestaACompletar pregunta = new PreguntaRespuestaACompletar();
+		pregunta.unmarshall(marshalledPregunta);
+		Assert.assertEquals(pregunta.getRespuesta(), ((PreguntaRespuestaACompletar)p5).getRespuesta());
+	}
 
 	@Test
 	public void answeredPreguntaRespuestaACompletarEvaluationReturns0WhenWrong() {
@@ -294,13 +294,13 @@ public class EncuestaTest {
 		Assert.assertEquals(expected,encuestaRes.getEvaluacion());
 	}
 	
-//	@Test
-//	public void marshalingEmptyPreguntaRespuestaFijaDoesntThrowExceptions() {
-//		Assert.assertEquals("F;0;null;null;null", p6.marshall());
-//	}
+	@Test
+	public void marshalingEmptyPreguntaRespuestaFijaDoesntThrowExceptions() {
+		Assert.assertEquals("F;0;null;null;null", p6.marshall());
+	}
 	
-//	@Test
-//	public void marshalingEmptyPreguntaRespuestaACompletarDoesntThrowExceptions() {
-//		Assert.assertEquals("C;0;null;null", p7.marshall());
-//	}
+	@Test
+	public void marshalingEmptyPreguntaRespuestaACompletarDoesntThrowExceptions() {
+		Assert.assertEquals("C;0;null;null", p7.marshall());
+	}
 }

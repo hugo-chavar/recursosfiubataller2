@@ -38,7 +38,7 @@ public class Pregunta {
 
 	public static List<Pregunta> unmarshallAll(String field) {
 		String[] splited = field.split("\\|");
-		splited = ignoreSpecialCharactersInSplit(splited);
+		splited = ignoreSpecialCharactersInSplit(splited, "|");
 		List<Pregunta> result = new ArrayList<Pregunta>();
 
 		for (String s : splited) {
@@ -80,12 +80,14 @@ public class Pregunta {
 	
 	public String escapeSpecialCharacters(String line) {
 		
-		for (int index = 0; index < Parser.SPECIAL_CHARACTERS.length(); index++) {
-			char specialChar = Parser.SPECIAL_CHARACTERS.charAt(index);
-			int line_idx = line.indexOf(specialChar);
-			while (line_idx > -1) {
-				line = line.substring(0, line_idx) + "\\" + line.substring(line_idx, line.length());
-				line_idx = line.indexOf(specialChar);
+		if (line != null) {
+			for (int index = 0; index < Parser.SPECIAL_CHARACTERS.length(); index++) {
+				char specialChar = Parser.SPECIAL_CHARACTERS.charAt(index);
+				int line_idx = line.indexOf(specialChar);
+				while (line_idx > -1) {
+					line = line.substring(0, line_idx) + "\\" + line.substring(line_idx, line.length());
+					line_idx = line.indexOf(specialChar);
+				}
 			}
 		}
 		
@@ -93,17 +95,31 @@ public class Pregunta {
 		
 	}
 	
-	public static String[] ignoreSpecialCharactersInSplit(String[] splitted) {
+	public static String[] ignoreSpecialCharactersInSplit(String[] splitted, String specialChar) {
 		
 		int i = 0;
+		int j = 0;
 		while (i < splitted.length) {
 			if (splitted[i].endsWith("\\")) {
-				splitted[i].concat(splitted[i+1]);
+				splitted[i] = splitted[i].substring(0, splitted[i].length()-1);
+				splitted[i] = splitted[i].concat(specialChar + splitted[i+1]);
 				splitted[i+1] = null;
+				i++;
+				j++;
+			}
+			i++;
+		}
+		
+		String[] newSplitted = new String[i-j];
+		j = 0;
+		for (i = 0; i < splitted.length; i++) {
+			if (splitted[i] != null) {
+				newSplitted[j] = splitted[i];
+				j++;
 			}
 		}
 		
-		return splitted;
+		return newSplitted;
 		
 	}
 
@@ -120,7 +136,7 @@ public class Pregunta {
 
 	protected void unmarshall(String s) {
 		String[] splited = s.split(";");
-		splited = ignoreSpecialCharactersInSplit(splited);
+		splited = ignoreSpecialCharactersInSplit(splited, ";");
 		type = splited[0];
 		idPregunta = Integer.valueOf(splited[1]);
 		enunciado = splited[2];

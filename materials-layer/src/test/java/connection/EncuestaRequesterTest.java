@@ -71,6 +71,26 @@ public class EncuestaRequesterTest {
 		Assert.assertEquals("3", ((PreguntaRespuestaFija)preguntas.get(1)).getRespuestasPosibles().get(0));
 	}
 	
+//	@Test
+//	public void getEncuestaWithPreguntaRespuestaFijaWithSpecialCharacters() throws GetException {
+//		Encuesta encuesta = new Encuesta(11, 3, "Encuesta con preguntas fijas", false);
+//
+////		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
+////		Encuesta encuesta_rtn = response.getEncuesta();
+////		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
+//		OperationResponse response = Requester.INSTANCE.getRecurso(encuesta);
+//		Encuesta encuesta_rtn = (Encuesta)response.getRecurso();    
+//
+//		Assert.assertEquals(encuesta, encuesta_rtn);
+//		Assert.assertEquals("Encuesta con preguntas fijas", encuesta_rtn.getDescripcion());
+//
+//		List<Pregunta> preguntas = encuesta_rtn.getPreguntas();
+//		Assert.assertEquals("De que color; es, el| caballo blanco de San Martin?", preguntas.get(0).getEnunciado());
+//		Assert.assertEquals("negro", ((PreguntaRespuestaFija)preguntas.get(0)).getRespuestasPosibles().get(0));
+//		Assert.assertEquals("Cuantas patas tiene un gato?", preguntas.get(1).getEnunciado());
+//		Assert.assertEquals("3", ((PreguntaRespuestaFija)preguntas.get(1)).getRespuestasPosibles().get(0));
+//	}
+	
 	@Test
 	public void getEncuestaFromCache() throws GetException {
 		Encuesta encuesta = new Encuesta(11003, -1, "una encuesta chica", false);

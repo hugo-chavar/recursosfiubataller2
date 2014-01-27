@@ -50,7 +50,7 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 	public void unmarshall(String s) {
 		super.unmarshall(s);
 		String[] splited = s.split(";");
-		splited = ignoreSpecialCharactersInSplit(splited);
+		splited = ignoreSpecialCharactersInSplit(splited, ";");
 		respuesta = splited[3];
 	}
 
