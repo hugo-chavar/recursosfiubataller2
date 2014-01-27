@@ -109,7 +109,7 @@ public class EncuestaParser extends Parser {
 		}
 		HashMap<String, String> fields = new HashMap<String, String>();
 
-		NodeList encuestaNode = doc.getElementsByTagName(EncuestaParser.ENCUESTA_TAG);
+		NodeList encuestaNode = doc.getElementsByTagName(EncuestaParser.ENCUESTA_TAG.toLowerCase());
 		NodeList encuestaChildNodes = encuestaNode.item(0).getChildNodes();
 		
 		if (encuestaChildNodes != null) {

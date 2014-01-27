@@ -29,7 +29,7 @@ public class Parser {
 	public static String INITIAL_TAG = "WS";
 	public static String RECURSO_TAG = "Recurso";
 	public static String RECURSOID_TAG = "id";
-	public static String AMBITOID_TAG = "idAmbiente";
+	public static String AMBITOID_TAG = "ambitoId";
 	public static String DESCRIPCION_TAG = "descripcion";
 	public static String TIPO_TAG = "tipo";
 	public static String RECURSOS_TAG = "recursos";

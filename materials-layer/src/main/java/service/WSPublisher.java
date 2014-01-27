@@ -18,6 +18,8 @@ import javax.xml.ws.soap.SOAPBinding;
 import model.Archivo;
 import model.Encuesta;
 import model.Link;
+import model.Pregunta;
+import model.PreguntaRespuestaFija;
 import model.Recurso;
 import connection.EncuestaRequester;
 import connection.IntegracionProxy;
@@ -208,7 +210,7 @@ public class WSPublisher {
 //		}
 		
 		
-		IntegracionProxy ip = new IntegracionProxy();
+//		IntegracionProxy ip = new IntegracionProxy();
 //		try {
 //			xml = ip.seleccionar("<WS><Usuario><username>javier</username></Usuario></WS>");
 //			System.out.println(xml);
@@ -230,12 +232,12 @@ public class WSPublisher {
 //		}
 		
 		
-		try {
-			xml = ip.seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
-			System.out.println(xml);
-		} catch (ConnectionException e) {
-			System.out.println(e.getMessage());
-		}
+//		try {
+//			xml = ip.seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
 		
 //		try {
 //			xml = ip.guardar("<?xml version=\"1.0\"?><WS><Recurso><descripcion>prueba</descripcion><tipo>L</tipo></Recurso></WS>");
@@ -255,7 +257,13 @@ public class WSPublisher {
 
 //		System.out.println(absolute);
 		System.out.println("Programa terminado. ");
+		
+		Encuesta encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);
 
+//		EncuestaResponse response = (EncuestaResponse) Requester.INSTANCE.getRecurso(encuesta);
+		OperationResponse response = Requester.INSTANCE.getRecurso(encuesta);
+		Encuesta encuesta_rtn = (Encuesta)response.getRecurso();  
+		
 	}
 
 }

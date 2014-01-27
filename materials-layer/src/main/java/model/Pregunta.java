@@ -107,7 +107,7 @@ public class Pregunta {
 		
 	}
 
-	protected String marshall() {
+	public String marshall() {
 		StringBuilder sb = new StringBuilder("");
 		sb.append(type);
 		sb.append(";");

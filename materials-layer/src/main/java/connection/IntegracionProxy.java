@@ -23,10 +23,10 @@ public class IntegracionProxy {
 	
 	public String seleccionar(String xml) throws ConnectionException {
 		//TODO: pruebas de Yami
-		if (xml.equals("<WS><Recurso><id>15</id></Recurso></WS>")) {
+		if (xml.equals("<WS><Encuesta><id>15</id></Encuesta></WS>")) {
 			return "<WS><encuesta><evaluada>true</evaluada><preguntas>C;1;De que color es el caballo blanco de San Martin?;blanco|" +
 					"C;2;Cuantas patas tiene un gato?;4</preguntas></encuesta></WS>";
-		} else if (xml.equals("<WS><Recurso><id>10</id></Recurso></WS>")) {
+		} else if (xml.equals("<WS><Encuesta><id>10</id></Encuesta></WS>")) {
 			return "<WS><encuesta><evaluada>true</evaluada><preguntas>F;1;De que color es el caballo blanco de San Martin?;negro,blanco,marron;1|" +
 					"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></encuesta></WS>";
 		} else if (xml.equals("<WS><Recurso><id>15</id></Recurso></WS>")) {
