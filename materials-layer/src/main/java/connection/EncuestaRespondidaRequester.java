@@ -116,7 +116,7 @@ public class EncuestaRespondidaRequester {
 				////////////// PRUEBAS //////////////
 				EncuestaRespondida encuesta;
 				try {
-					encuesta = parser.deserializeEncuestaRespondida(xml_resp_e);
+					encuesta = (EncuestaRespondida) parser.deserialize(xml_resp_e);
 				} catch (ParseException e) {
 					// TODO Andy: Esto hay que arreglar, este metodo tiene q devolver un OperationResponse
 					//igual que el resto de los requesters

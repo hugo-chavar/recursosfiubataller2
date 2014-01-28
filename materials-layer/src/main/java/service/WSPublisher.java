@@ -306,6 +306,9 @@ public class WSPublisher {
 //		response = Requester.INSTANCE.getRecurso(encuesta);
 		
 //		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(15, 4);
+		System.out.println("prueba encuesta respondida");
+		EncuestaRespondida encuesta_rtn = Requester.INSTANCE.getEncuestaRespondida(10, 5);
+		System.out.println(encuesta_rtn.getInfo());
 		System.out.println("Programa terminado. ");
 	}
 
