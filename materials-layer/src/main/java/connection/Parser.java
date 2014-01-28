@@ -72,17 +72,8 @@ public class Parser {
 		} catch (IOException e) {
 			throw new ParseException("IOException al convertir: " + xml);
 		}
-//		return null;
 	}
 
-//	public static Document loadXMLFromString(String xml) throws Exception
-//	{
-//	    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//	    DocumentBuilder builder = factory.newDocumentBuilder();
-//	    InputSource is = new InputSource(new StringReader(xml));
-//	    return builder.parse(is);
-//	}
-	
 	public String convertDocumentToXml(Document doc) {
 		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
 		LSSerializer serializer = domImplLS.createLSSerializer();
@@ -142,30 +133,42 @@ public class Parser {
 	
 	public Serializable deserialize(String xml) throws ParseException {
 
-		Document doc = convertXmlToDocument(xml);
-		if (doc == null) {
-			throw new ParseException("Xml invalido: " + xml);
-		}
-		HashMap<String, String> fields = new HashMap<String, String>();
-
-		NodeList nodes = doc.getElementsByTagName(baseTag);
-		if (nodes.getLength() == 0) {
-			throw new ParseException("No existe tag " + baseTag);
-		}
+		NodeList nodes = getBaseTagNodes(xml);
+		
 		NodeList linkChildNodes = nodes.item(0).getChildNodes();
+		HashMap<String, String> fields;
 
 		if (linkChildNodes != null) {
-
-			for (int i = 0; i < linkChildNodes.getLength(); i++) {
-				Element element = (Element) linkChildNodes.item(i);
-				fields.put(element.getNodeName(), element.getTextContent());
-			}
-			
+			fields = fillFieldValues(linkChildNodes);
 			return createSerializable(fields);
-
 		}
 
 		return null;
+	}
+
+	protected NodeList getBaseTagNodes(String xml) throws ParseException {
+		Document doc = convertXmlToDocument(xml);
+		
+		if (doc == null) {
+			throw new ParseException("Xml invalido: " + xml);
+		}
+
+		NodeList nodes = doc.getElementsByTagName(baseTag);
+		
+		if (nodes.getLength() == 0) {
+			throw new ParseException("No existe tag " + baseTag);
+		}
+		return nodes;
+	}
+
+	protected HashMap<String, String> fillFieldValues(NodeList linkChildNodes) {
+		HashMap<String, String> fields;
+		fields = new HashMap<String, String>();
+		for (int i = 0; i < linkChildNodes.getLength(); i++) {
+			Element element = (Element) linkChildNodes.item(i);
+			fields.put(element.getNodeName(), element.getTextContent());
+		}
+		return fields;
 	}
 
 	protected Serializable createSerializable(HashMap<String, String> fields) {

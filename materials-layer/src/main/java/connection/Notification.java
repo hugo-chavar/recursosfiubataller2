@@ -23,7 +23,7 @@ public class Notification implements Serializable {
 	}
 
 	public String getMessage() {
-		return number + ":" + message;
+		return number + ": " + message;
 	}
 
 	public void setMessage(String message) {

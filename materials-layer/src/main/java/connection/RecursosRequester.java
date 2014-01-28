@@ -132,7 +132,7 @@ public class RecursosRequester extends HandlerRequester {
 
 	@Override
 	protected void deserialize(String xml_resp_e) throws ParseException {
-		current = parser.deserializeRecurso(xml_resp_e);
+		current = parser.deserialize(xml_resp_e);
 	}
 
 	@Override

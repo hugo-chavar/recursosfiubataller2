@@ -35,12 +35,15 @@ public class EncuestaParser extends Parser {
 			IDRecurso.appendChild(doc.createTextNode(String.valueOf(encuesta.getRecursoId())));
 			nodeElement.appendChild(IDRecurso);
 		}
+		
 		Element IDAmbito = doc.createElement(Parser.AMBITOID_TAG);
 		IDAmbito.appendChild(doc.createTextNode(String.valueOf(encuesta.getAmbitoId())));
 		nodeElement.appendChild(IDAmbito);
+		
 		Element descripcion = doc.createElement(Parser.DESCRIPCION_TAG);
 		descripcion.appendChild(doc.createTextNode(encuesta.getDescripcion()));
 		nodeElement.appendChild(descripcion);
+		
 		Element tipo = doc.createElement(Parser.TIPO_TAG);
 		tipo.appendChild(doc.createTextNode(encuesta.getTipo()));
 		nodeElement.appendChild(tipo);
@@ -56,6 +59,7 @@ public class EncuestaParser extends Parser {
 			IDRecurso.appendChild(doc.createTextNode(String.valueOf(encuesta.getRecursoId())));
 			encuesta_el.appendChild(IDRecurso);
 		}
+		
 		Element evaluada = doc.createElement(EncuestaParser.EVALUADA_TAG);
 		evaluada.appendChild(doc.createTextNode(String.valueOf(encuesta.isEvaluada())));
 		encuesta_el.appendChild(evaluada);

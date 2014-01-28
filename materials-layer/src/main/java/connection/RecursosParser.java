@@ -15,72 +15,34 @@ import connection.exceptions.ParseException;
 
 public class RecursosParser extends Parser {
 	
-	
-	public Recurso deserializeRecurso(String xml) throws ParseException {
-		
-		Recurso recurso = null;
+	public RecursosParser() {
 		baseTag = Parser.RECURSO_TAG;
-		
-		Document doc = convertXmlToDocument(xml);
-		if (doc == null) {
-			throw new ParseException("Xml invalido: " + xml);
-		}
-		HashMap<String, String> fields = new HashMap<String, String>();
-
-		NodeList nodes = doc.getElementsByTagName(baseTag);
-		if (nodes.getLength() == 0) {
-			throw new ParseException("No existe tag " + baseTag);
-		}
-		NodeList childNodes = nodes.item(0).getChildNodes();
-		
-	    if (childNodes != null) {
-	    	
-	        for (int j = 0; j < childNodes.getLength(); j++) {
-        	   Element element = (Element) childNodes.item(j);
-        	   fields.put(element.getNodeName(), element.getTextContent());
-	        }
-	        
-			int IDRecurso = Integer.parseInt(fields.get(Parser.ID_TAG));
-			int IDAmbito = Integer.parseInt(fields.get(Parser.AMBITOID_TAG));
-			String descripcion = fields.get(Parser.DESCRIPCION_TAG);
-			String tipo = fields.get(Parser.TIPO_TAG);
-
-			recurso = new Recurso(IDRecurso, IDAmbito, descripcion, tipo);
-		    
-	    }
-	    
-		return recurso;
-		
 	}
 	
 	public List<Recurso> deserializeRecursos(String xml) throws ParseException {
 		
 		List<Recurso> recursos = new ArrayList<Recurso>();
 		
-		Document doc = this.convertXmlToDocument(xml);
-		if (doc == null) {
-			return null;
-		}
-		NodeList nodes = doc.getElementsByTagName(Parser.RECURSO_TAG);
+//		Document doc = convertXmlToDocument(xml);
+//		if (doc == null) {
+//			return null;
+//		}
+		NodeList nodes = getBaseTagNodes(xml);
 		
 		for (int i = 0; i < nodes.getLength(); i++) {
 		
 			NodeList childNodes = nodes.item(i).getChildNodes();
-			HashMap<String, String> fields = new HashMap<String, String>();
+			HashMap<String, String> fields;
 			
 		    if (childNodes != null) {
 		    	
-		        for (int j = 0; j < childNodes.getLength(); j++) {
-	        	   Element element = (Element) childNodes.item(j);
-	        	   fields.put(element.getNodeName(), element.getTextContent());
-		        }
+		    	fields = fillFieldValues(childNodes);
+//		        for (int j = 0; j < childNodes.getLength(); j++) {
+//	        	   Element element = (Element) childNodes.item(j);
+//	        	   fields.put(element.getNodeName(), element.getTextContent());
+//		        }
 		        
-				int IDRecurso = Integer.parseInt(fields.get(Parser.ID_TAG));
-				int IDAmbito = Integer.parseInt(fields.get(Parser.AMBITOID_TAG));
-				String descripcion = fields.get(Parser.DESCRIPCION_TAG);
-				String tipo = fields.get(Parser.TIPO_TAG);//Este tipo da la reflexion que estoy buscando
-	
-				Recurso recurso = new Recurso(IDRecurso, IDAmbito, descripcion, tipo);
+				Recurso recurso = (Recurso) createSerializable(fields);
 				recursos.add(recurso);
 			    
 		    }
@@ -140,6 +102,16 @@ public class RecursosParser extends Parser {
 		
 		return convertDocumentToXml(doc);
 		
+	}
+	
+	@Override
+	protected Serializable createSerializable(HashMap<String, String> fields) {
+		int IDRecurso = Integer.parseInt(fields.get(Parser.ID_TAG));
+		int IDAmbito = Integer.parseInt(fields.get(Parser.AMBITOID_TAG));
+		String descripcion = fields.get(Parser.DESCRIPCION_TAG);
+		String tipo = fields.get(Parser.TIPO_TAG);
+
+		return new Recurso(IDRecurso, IDAmbito, descripcion, tipo);
 	}
 	
 }
