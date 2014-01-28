@@ -102,7 +102,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 		splited = ignoreSpecialCharactersInSplit(splited, ",");
 		respuestasPosibles = new ArrayList<String>();
 		for (String s : splited) {
-			respuestasPosibles.add(s);
+			respuestasPosibles.add(removeSpecialCharacters(s));
 		}
 
 	}

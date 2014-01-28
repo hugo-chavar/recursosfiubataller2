@@ -30,8 +30,8 @@ public class IntegracionProxy {
 			return "<WS><Encuesta><evaluada>true</evaluada><preguntas>F;1;De que color es el caballo blanco de San Martin?;negro,blanco,marron;1|" +
 					"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></Encuesta></WS>";
 		} else if (xml.equals("<WS><Encuesta><id>11</id></Encuesta></WS>")) {
-			return "<WS><encuesta><evaluada>true</evaluada><preguntas>F;1;De que color\\; es\\, el\\| caballo blanco de San Martin?;negro,blanco,marron;1|" +
-					"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></encuesta></WS>";
+			return "<WS><Encuesta><evaluada>true</evaluada><preguntas>F;1;De que color\\; es\\, el\\| caballo blanco de San Martin?;negro,blanco,marron;1|" +
+					"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></Encuesta></WS>";
 		} else if (xml.equals("<WS><Recurso><id>15</id></Recurso></WS>")) {
 			return "<WS><Recurso><id>15</id><ambitoId>2</ambitoId><descripcion>Encuesta con preguntas a completar</descripcion><tipo>Encuesta</tipo></Recurso></WS>";
 		} else if (xml.equals("<WS><Recurso><id>10</id></Recurso></WS>")) {

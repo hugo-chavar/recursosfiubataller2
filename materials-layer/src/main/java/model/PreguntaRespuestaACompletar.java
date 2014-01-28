@@ -43,7 +43,7 @@ public class PreguntaRespuestaACompletar extends Pregunta {
 		super.unmarshall(s);
 		String[] splited = s.split(";");
 		splited = ignoreSpecialCharactersInSplit(splited, ";");
-		respuesta = splited[3];
+		respuesta = removeSpecialCharacters(splited[3]);
 	}
 
 	@Override

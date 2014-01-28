@@ -79,6 +79,20 @@ public class PreguntaRespondida {
 		
 	}
 	
+	public String removeSpecialCharacters(String line) {
+		
+		if (line != null) {
+			int line_idx = line.indexOf("\\");
+			while (line_idx > -1) {
+				line = line.substring(0, line_idx) + line.substring(line_idx + 1, line.length());
+				line_idx = line.indexOf("\\");
+			}
+		}
+		
+		return line;
+		
+	}
+	
 	public static String[] ignoreSpecialCharactersInSplit(String[] splitted, String specialChar) {
 		
 		int i = 0;

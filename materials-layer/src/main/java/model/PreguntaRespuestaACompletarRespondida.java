@@ -51,7 +51,7 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 		super.unmarshall(s);
 		String[] splited = s.split(";");
 		splited = ignoreSpecialCharactersInSplit(splited, ";");
-		respuesta = splited[3];
+		respuesta = removeSpecialCharacters(splited[3]);
 	}
 
 }
