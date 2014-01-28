@@ -4,15 +4,12 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.axis2.AxisFault;
-
-import model.Encuesta;
 import model.EncuestaRespondida;
-import model.Pregunta;
 import model.PreguntaRespondida;
 import model.PreguntaRespuestaACompletarRespondida;
-import model.PreguntaRespuestaFija;
 import model.PreguntaRespuestaFijaRespondida;
+
+import org.apache.axis2.AxisFault;
 
 import com.ws.services.IntegracionStub;
 import com.ws.services.IntegracionStub.GuardarDatos;
@@ -22,7 +19,6 @@ import com.ws.services.IntegracionStub.SeleccionarDatosResponse;
 
 import connection.cache.Cache;
 import connection.exceptions.ParseException;
-//import connection.responses.EncuestaRespondidaResponse;
 import connection.responses.OperationResponse;
 
 public class EncuestaRespondidaRequester {
@@ -93,10 +89,6 @@ public class EncuestaRespondidaRequester {
 			try {
 				// Consulto la encuesta guardada
 				String xml = parser.serializeEncuestaRespondidaQuery(IDUsuario, IDEncuesta);
-//				SeleccionarDatos seleccionar_e = new SeleccionarDatos();
-//				seleccionar_e.setXml(xml);
-//				SeleccionarDatosResponse s_resp_e = stub.seleccionarDatos(seleccionar_e);
-//				String xml_resp_e = s_resp_e.get_return();
 
 				////////////// PRUEBAS //////////////
 				String xml_resp_e;

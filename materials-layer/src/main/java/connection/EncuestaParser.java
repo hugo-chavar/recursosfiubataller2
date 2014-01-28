@@ -3,13 +3,9 @@ package connection;
 import java.util.HashMap;
 
 import model.Encuesta;
-import model.Link;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
-import connection.exceptions.ParseException;
 
 
 public class EncuestaParser extends Parser {
@@ -21,6 +17,7 @@ public class EncuestaParser extends Parser {
 	public EncuestaParser() {
 		baseTag = ENCUESTA_TAG;
 	}
+	
 	public String serializeEncuesta(Encuesta encuesta) {
 		
 		Document doc = this.buildXMLDocument();
@@ -73,40 +70,6 @@ public class EncuestaParser extends Parser {
 		
 	}
 	
-//	public Encuesta deserializeEncuesta(String xml) throws ParseException {
-//
-//		Encuesta encuesta = null;
-//		baseTag = ENCUESTA_TAG;
-//
-//		Document doc = this.convertXmlToDocument(xml);
-//		if (doc == null) {
-//			return null;
-//		}
-//		HashMap<String, String> fields = new HashMap<String, String>();
-//
-//		NodeList nodes = doc.getElementsByTagName(baseTag);
-//		if (nodes.getLength() == 0) {
-//			throw new ParseException("No existe tag " + baseTag);
-//		}
-//		NodeList encuestaChildNodes = nodes.item(0).getChildNodes();
-//		
-//		if (encuestaChildNodes != null) {
-//
-//			for (int i = 0; i < encuestaChildNodes.getLength(); i++) {
-//				Element element = (Element) encuestaChildNodes.item(i);
-//				fields.put(element.getNodeName(), element.getTextContent());
-//			}
-//
-//			Boolean evaluada = Boolean.parseBoolean(fields.get(EVALUADA_TAG));
-//			encuesta = new Encuesta(0, 0, "", evaluada);
-//			encuesta.unmarshallPreguntas(fields.get(PREGUNTAS_TAG));
-//
-//		}
-//
-//		return encuesta;
-//
-//	}
-	
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		Boolean evaluada = Boolean.parseBoolean(fields.get(EVALUADA_TAG));
@@ -114,5 +77,4 @@ public class EncuestaParser extends Parser {
 		encuesta.unmarshallPreguntas(fields.get(PREGUNTAS_TAG));
 		return encuesta;
 	}
-	
 }

@@ -2,14 +2,10 @@ package connection;
 
 import java.util.HashMap;
 
-import model.Encuesta;
 import model.EncuestaRespondida;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
-import connection.exceptions.ParseException;
 
 public class EncuestaRespondidaParser extends Parser {
 
@@ -53,43 +49,6 @@ public class EncuestaRespondidaParser extends Parser {
 
 	}
 
-//	public EncuestaRespondida deserializeEncuestaRespondida(String xml) throws ParseException {
-//
-//		EncuestaRespondida respondida = null;
-//
-//		Document doc = this.convertXmlToDocument(xml);
-//		if (doc == null) {
-//			return null;
-//		}
-//		HashMap<String, String> fields = new HashMap<String, String>();
-//
-//		NodeList nodes = doc.getElementsByTagName(baseTag);
-//		if (nodes.getLength() == 0) {
-//			throw new ParseException("No existe tag " + baseTag);
-//		}
-//		NodeList childNodes = nodes.item(0).getChildNodes();
-//
-//		if (childNodes != null) {
-//
-//			for (int i = 0; i < childNodes.getLength(); i++) {
-//				Element element = (Element) childNodes.item(i);
-//				fields.put(element.getNodeName(), element.getTextContent());
-//			}
-//
-//			int IDEncuesta = Integer.parseInt(fields.get(IDRECURSO_TAG));
-//			int IDUsuario = Integer.parseInt(fields.get(IDUSUARIO_TAG));
-//			int evaluacion = Integer.parseInt(fields.get(EVALUACION_TAG));
-//
-//			respondida = new EncuestaRespondida(IDEncuesta, IDUsuario);
-//			respondida.setEvaluacion(evaluacion);
-//			respondida.unmarshallPreguntasRespondidas(fields.get(PREGUNTAS_RESPONDIDAS_TAG));
-//
-//		}
-//
-//		return respondida;
-//
-//	}
-	
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		EncuestaRespondida respondida;
@@ -113,10 +72,6 @@ public class EncuestaRespondidaParser extends Parser {
 		Element nodeElement = doc.createElement(ENCUESTA_RESPONDIDA_TAG);
 		rootElement.appendChild(nodeElement);
 
-		// Element IDAmbiente_el =
-		// doc.createElement(EncuestaRespondidaParser.AMBITOID_TAG);
-		// IDAmbiente_el.appendChild(doc.createTextNode(String.valueOf(IDAmbiente)));
-		// nodeElement.appendChild(IDAmbiente_el);
 		Element IDEncuesta_el = doc.createElement(IDRECURSO_TAG);
 		IDEncuesta_el.appendChild(doc.createTextNode(String.valueOf(IDEncuesta)));
 		nodeElement.appendChild(IDEncuesta_el);
@@ -127,7 +82,4 @@ public class EncuestaRespondidaParser extends Parser {
 		return convertDocumentToXml(doc);
 
 	}
-	
-	
-
 }

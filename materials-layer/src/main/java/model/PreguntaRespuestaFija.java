@@ -8,8 +8,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import connection.Parser;
-
 @XmlRootElement(name = "preguntaConOpciones")
 public class PreguntaRespuestaFija extends Pregunta {
 

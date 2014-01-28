@@ -6,9 +6,6 @@ import model.Link;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
-import connection.exceptions.ParseException;
 
 
 public class LinkParser extends Parser {
@@ -68,40 +65,6 @@ public class LinkParser extends Parser {
 		return convertDocumentToXml(doc);
 
 	}
-
-//	public Link deserializeLink(String xml) throws ParseException {
-//
-//		Link link = null;
-//		
-//
-//		Document doc = convertXmlToDocument(xml);
-//		if (doc == null) {
-//			throw new ParseException("Xml invalido: " + xml);
-//		}
-//		HashMap<String, String> fields = new HashMap<String, String>();
-//
-//		NodeList nodes = doc.getElementsByTagName(baseTag);
-//		if (nodes.getLength() == 0) {
-//			throw new ParseException("No existe tag " + baseTag);
-//		}
-//		NodeList childNodes = nodes.item(0).getChildNodes();
-//
-//		if (childNodes != null) {
-//
-//			for (int i = 0; i < childNodes.getLength(); i++) {
-//				Element element = (Element) childNodes.item(i);
-//				fields.put(element.getNodeName(), element.getTextContent());
-//			}
-//
-//			String nombre = fields.get(NOMBRE_TAG);
-//			link = new Link(0, 0, "");
-//			link.setNombre(nombre);
-//
-//		}
-//
-//		return link;
-//
-//	}
 	
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {

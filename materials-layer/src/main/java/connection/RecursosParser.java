@@ -23,10 +23,6 @@ public class RecursosParser extends Parser {
 		
 		List<Recurso> recursos = new ArrayList<Recurso>();
 		
-//		Document doc = convertXmlToDocument(xml);
-//		if (doc == null) {
-//			return null;
-//		}
 		NodeList nodes = getBaseTagNodes(xml);
 		
 		for (int i = 0; i < nodes.getLength(); i++) {
@@ -37,10 +33,6 @@ public class RecursosParser extends Parser {
 		    if (childNodes != null) {
 		    	
 		    	fields = fillFieldValues(childNodes);
-//		        for (int j = 0; j < childNodes.getLength(); j++) {
-//	        	   Element element = (Element) childNodes.item(j);
-//	        	   fields.put(element.getNodeName(), element.getTextContent());
-//		        }
 		        
 				Recurso recurso = (Recurso) createSerializable(fields);
 				recursos.add(recurso);

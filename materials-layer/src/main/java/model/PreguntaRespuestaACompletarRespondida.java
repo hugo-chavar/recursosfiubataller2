@@ -1,6 +1,5 @@
 package model;
 
-import connection.Parser;
 
 public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 

@@ -4,8 +4,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import connection.Parser;
-
 @XmlRootElement (name = "preguntaSinOpciones")
 public class PreguntaRespuestaACompletar extends Pregunta {
 
