@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "notificacion")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Notification implements Serializable {
+	
 	@XmlElement(name = "numero")
 	private Integer number;
 	

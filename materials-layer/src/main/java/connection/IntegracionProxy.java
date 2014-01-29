@@ -68,6 +68,7 @@ public class IntegracionProxy {
 		IntegracionStub.SeleccionarDatos seleccionar_e = new IntegracionStub.SeleccionarDatos();
 		seleccionar_e.setXml(xml);
 		IntegracionStub.SeleccionarDatosResponse s_resp_e;
+		
 		try {
 			s_resp_e = stub.seleccionarDatos(seleccionar_e);
 			return s_resp_e.get_return();
@@ -82,6 +83,7 @@ public class IntegracionProxy {
 		IntegracionStub.EliminarDatos eliminar = new IntegracionStub.EliminarDatos();
 		eliminar.setXml(xml);
 		IntegracionStub.EliminarDatosResponse e_resp;
+		
 		try {
 			e_resp = stub.eliminarDatos(eliminar);
 			return e_resp.get_return();
@@ -96,9 +98,10 @@ public class IntegracionProxy {
 	public String guardar(String xml) throws ConnectionException {
 		IntegracionStub.GuardarDatos guardar = new IntegracionStub.GuardarDatos();
 		guardar.setXml(xml);
+		IntegracionStub.GuardarDatosResponse g_resp;
 		
 		try {
-			IntegracionStub.GuardarDatosResponse g_resp = stub.guardarDatos(guardar);
+			g_resp = stub.guardarDatos(guardar);
 			return g_resp.get_return();
 		} catch (AxisFault e) {
 			throw new ConnectionException("No se pudo guardar. ");
@@ -108,13 +111,14 @@ public class IntegracionProxy {
 	}
 
 	public String guardarArchivo(String xml, DataHandler archivo) throws ConnectionException {
-		IntegracionStub.GuardarArchivoResponse responseArchivo;
 		IntegracionStub.GuardarArchivo requestArchivo = new IntegracionStub.GuardarArchivo();
 		requestArchivo.setArchivo(archivo);
 		requestArchivo.setXml(xml);
+		IntegracionStub.GuardarArchivoResponse ga_resp;
+		
 		try {
-			responseArchivo = stub.guardarArchivo(requestArchivo);
-			return responseArchivo.get_return();
+			ga_resp = stub.guardarArchivo(requestArchivo);
+			return ga_resp.get_return();
 		} catch (AxisFault e) {
 			throw new ConnectionException("No se pudo guardar archivo. ");
 		} catch (RemoteException e) {

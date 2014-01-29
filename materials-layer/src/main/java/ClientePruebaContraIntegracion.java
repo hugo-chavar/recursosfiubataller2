@@ -60,7 +60,7 @@ public class ClientePruebaContraIntegracion {
 //		}
 		
 		try {
-			xml = ip.eliminar("<WS><Recurso><id>1002</id></Recurso></WS>");
+			xml = ip.eliminar("<WS><Recurso><id>1006</id></Recurso></WS>");
 			System.out.println(xml);
 		} catch (ConnectionException e) {
 			System.out.println(e.getMessage());
