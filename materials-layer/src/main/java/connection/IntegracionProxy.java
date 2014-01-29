@@ -1,6 +1,7 @@
 package connection;
 
 import java.rmi.RemoteException;
+import java.util.HashMap;
 
 import javax.activation.DataHandler;
 
@@ -12,6 +13,7 @@ import connection.exceptions.ConnectionException;
 
 public class IntegracionProxy {
 	private IntegracionStub stub;
+	private HashMap<String, String> harcodeos;
 
 	public IntegracionProxy() {
 		try {
@@ -19,29 +21,48 @@ public class IntegracionProxy {
 		} catch (AxisFault e) {
 			System.out.println("Error al intentar contectarse con Integracion");
 		}
+		generateTestData();
+	}
+
+	private void generateTestData() {
+		harcodeos = new HashMap<String, String>();
+		String el1, el2;
+		el1 = "<WS><Encuesta><id>15</id></Encuesta></WS>";
+		el2 = "<WS><Encuesta><evaluada>true</evaluada><preguntas>C;1;De que color es el caballo blanco de San Martin?;blanco|" +
+				"C;2;Cuantas patas tiene un gato?;4</preguntas></Encuesta></WS>";
+		harcodeos.put(el1, el2);
+		el1 = "<WS><Encuesta><id>10</id></Encuesta></WS>";
+		el2 = "<WS><Encuesta><evaluada>true</evaluada><preguntas>F;1;De que color es el caballo blanco de San Martin?;negro,blanco,marron;1|" +
+				"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></Encuesta></WS>";
+		harcodeos.put(el1, el2);
+		el1 = "<WS><Encuesta><id>11</id></Encuesta></WS>";
+		el2 = "<WS><Encuesta><evaluada>true</evaluada><preguntas>F;1;De que color\\; es\\, el\\| caballo blanco de San Martin?;negro,blanco,marron;1|" +
+				"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></Encuesta></WS>";
+		harcodeos.put(el1, el2);
+		el1 = "<WS><Recurso><id>15</id></Recurso></WS>";
+		el2 = "<WS><Recurso><id>15</id><ambitoId>2</ambitoId><descripcion>Encuesta con preguntas a completar</descripcion><tipo>Encuesta</tipo></Recurso></WS>";
+		harcodeos.put(el1, el2);
+		el1 = "<WS><Recurso><id>10</id></Recurso></WS>";
+		el2 = "<WS><Recurso><id>10</id><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></Recurso></WS>";
+		harcodeos.put(el1, el2);
+		el1 = "<WS><Recurso><id>10</id></Recurso></WS>";
+		el2 = "<WS><Recurso><id>10</id><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></Recurso></WS>";
+		harcodeos.put(el1, el2);
+		el1 = "<WS><Recurso><id>11</id></Recurso></WS>";
+		el2 = "<WS><Recurso><id>11</id><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></Recurso></WS>"; 
+		harcodeos.put(el1, el2);
+		el1 = "<WS><Recurso><id>1003</id></Recurso></WS>";
+		el2 = "<WS><Recurso><recursoId>1003</recursoId><ambitoId>3</ambitoId><descripcion>Es un Archivo</descripcion><tipo>Archivo</tipo></Recurso></WS>"; 
+		harcodeos.put(el1, el2);
+		el1 = "<WS><Link><id>999</id></Link></WS>";
+		el2 = "<WS><Link><id>999</id><nombre>www.lomejordelomejor.es</nombre></Link></WS>"; 
+		harcodeos.put(el1, el2);
 	}
 	
 	public String seleccionar(String xml) throws ConnectionException {
 		//TODO: pruebas de Yami
-		if (xml.equals("<WS><Encuesta><id>15</id></Encuesta></WS>")) {
-			return "<WS><Encuesta><evaluada>true</evaluada><preguntas>C;1;De que color es el caballo blanco de San Martin?;blanco|" +
-					"C;2;Cuantas patas tiene un gato?;4</preguntas></Encuesta></WS>";
-		} else if (xml.equals("<WS><Encuesta><id>10</id></Encuesta></WS>")) {
-			return "<WS><Encuesta><evaluada>true</evaluada><preguntas>F;1;De que color es el caballo blanco de San Martin?;negro,blanco,marron;1|" +
-					"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></Encuesta></WS>";
-		} else if (xml.equals("<WS><Encuesta><id>11</id></Encuesta></WS>")) {
-			return "<WS><Encuesta><evaluada>true</evaluada><preguntas>F;1;De que color\\; es\\, el\\| caballo blanco de San Martin?;negro,blanco,marron;1|" +
-					"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></Encuesta></WS>";
-		} else if (xml.equals("<WS><Recurso><id>15</id></Recurso></WS>")) {
-			return "<WS><Recurso><id>15</id><ambitoId>2</ambitoId><descripcion>Encuesta con preguntas a completar</descripcion><tipo>Encuesta</tipo></Recurso></WS>";
-		} else if (xml.equals("<WS><Recurso><id>10</id></Recurso></WS>")) {
-			return "<WS><Recurso><id>10</id><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></Recurso></WS>";
-		} else if (xml.equals("<WS><Recurso><id>11</id></Recurso></WS>")) {
-			return "<WS><Recurso><id>11</id><ambitoId>3</ambitoId><descripcion>Encuesta con preguntas fijas</descripcion><tipo>Encuesta</tipo></Recurso></WS>";
-		} else if (xml.equals("<WS><Recurso><id>1003</id></Recurso></WS>")) {//TODO: sacar harcodeo para testear los archivos.
-			return "<WS><Recurso><recursoId>1003</recursoId><ambitoId>3</ambitoId><descripcion>Es un Archivo</descripcion><tipo>Archivo</tipo></Recurso></WS>";
-		} else if (xml.equals("<WS><Link><id>999</id></Link></WS>")) {
-			return "<WS><Link><id>11002</id><nombre>www.lomejordelomejor.es</nombre></Link></WS>";
+		if (harcodeos.containsKey(xml)) {
+			return harcodeos.get(xml);
 		}
 		//fin pruebas
 		IntegracionStub.SeleccionarDatos seleccionar_e = new IntegracionStub.SeleccionarDatos();
