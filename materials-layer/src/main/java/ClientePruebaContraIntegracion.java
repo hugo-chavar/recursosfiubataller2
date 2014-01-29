@@ -1,51 +1,70 @@
-//import model.Encuesta;
-//import model.PreguntaRespuestaACompletar;
-
-//import connection.Requester;
-
-import java.rmi.RemoteException;
-
-import org.apache.axis2.AxisFault;
-
-import com.ws.services.IntegracionStub.GuardarDatos;
-import com.ws.services.IntegracionStub.GuardarDatosResponse;
-//import com.ws.services.IntegracionWSStub.SeleccionarDatos;
-//import com.ws.services.IntegracionWSStub.SeleccionarDatosResponse;
-import com.ws.services.IntegracionStub;
+import connection.IntegracionProxy;
+import connection.exceptions.ConnectionException;
 
 public class ClientePruebaContraIntegracion {
 
 	public static void main(String[] args) {
 
-//		Encuesta encuesta = new Encuesta(0, 1, "Encuesta de prueba", false);
-//		PreguntaRespuestaACompletar pregunta1 = new PreguntaRespuestaACompletar("De que color es el caballo blanco de San Martin?", 0);
-//		encuesta.agregarPregunta(pregunta1);
-//		PreguntaRespuestaACompletar pregunta2 = new PreguntaRespuestaACompletar("A cuantos km se encuentra Bariloche de Buenos Aires?", 1);
-//		encuesta.agregarPregunta(pregunta2);
-//		Requester.INSTANCE.saveEncuesta(encuesta);
-//		encuesta = Requester.INSTANCE.getEncuesta(1, 0);
+		IntegracionProxy ip = new IntegracionProxy();
+		String xml;
 		
-		IntegracionStub stub;
-
+//		try {
+//			xml = ip.guardar("<WS><Link><id>400</id><nombre>www.hola.com</nombre></Link></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e1) {
+//			System.out.println(e1.getMessage());
+//		}
+//
+//		try {
+//			xml = ip.seleccionar("<WS><Usuario><username>javier</username></Usuario></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
+//		try {
+//			xml = ip.seleccionar("<WS><Usuario><id>117</id></Usuario></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
+//		try {
+//			xml = ip.seleccionar("<WS><Link><id>1002</id></Link></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
+//
+//		try {
+//			xml = ip.seleccionar("<WS><Recurso><id>1009</id></Recurso></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
+//		try {
+//			xml = ip.seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
+//		try {
+//			xml = ip.guardar("<WS><Recurso><descripcion>prueba</descripcion><tipo>L</tipo></Recurso></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
+//		try {
+//			xml = ip.guardar("<?xml version=\"1.0\"?><WS><Link><nombre>prueba</nombre></Link></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
+		
 		try {
-			stub = new IntegracionStub();
-			
-	    	GuardarDatos guardar = new GuardarDatos();
-	    	guardar.setXml("<WS><hola><id>IdAmbiente</id><id>IdRecurso</id></hola></WS>");
-	    	GuardarDatosResponse g_resp = stub.guardarDatos(guardar);
-	    	
-	    	System.out.println("Respuesta recibida de Integracion:");
-	    	System.out.println(g_resp.get_return());
-	    	System.out.println("Todo anda OK!");
-	    	
-		} catch (AxisFault e) {
+			xml = ip.eliminar("<WS><Recurso><id>1002</id></Recurso></WS>");
+			System.out.println(xml);
+		} catch (ConnectionException e) {
 			System.out.println(e.getMessage());
-			System.out.println("Hay errores de AxisFault.. tal vez falta una libreria.. avisa a HUGO ");
-		} catch (RemoteException e) {
-			System.out.println(e.getMessage());
-			System.out.println("Hay errores de RemoteException.. levantaste el servicio? ");
 		}
-
 
 	}
 
