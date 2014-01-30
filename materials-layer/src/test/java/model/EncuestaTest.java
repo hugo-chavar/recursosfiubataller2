@@ -58,7 +58,7 @@ public class EncuestaTest {
 		
 		p4 = new PreguntaRespuestaFija();
 		opciones = new ArrayList<String>();
-		p4.setEnunciado("Un test unitario debe presentar las siguientes características");
+		p4.setEnunciado("Un test unitario debe presentar, las siguientes características");
 		opciones.add("Rapido");
 		opciones.add("Moldeable");
 		opciones.add("Configurable");
