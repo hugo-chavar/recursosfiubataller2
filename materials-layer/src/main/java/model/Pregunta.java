@@ -29,13 +29,6 @@ public class Pregunta {
 	@XmlAttribute
 	protected String enunciado;
 	
-	//@XmlElement(required = false)
-//	protected List<String> opciones = new ArrayList<String>();
-	
-	//@XmlAttribute(required = true) 
-	//esto tiene q ser una lista de ints, segun lo requerido x presentacion
-//	protected List<String> correctas = new ArrayList<String>();
-
 	public static List<Pregunta> unmarshallAll(String field) {
 		String[] splited = field.split("\\|");
 		splited = ignoreSpecialCharactersInSplit(splited, "|");
@@ -174,20 +167,8 @@ public class Pregunta {
 		return null;
 	}
 
-//	public List<String> getOpciones() {
-//		return this.opciones;
-//	}
-//
-//	public List<String> getCorrectas() {
-//		return this.correctas;
-//	}
-
-//	public void completarDatosVisibles() {
-//	}
-
 	public Integer getIndiceRespuesta(String Respuesta) {
 		return 0;
 	}
 	
-
 }

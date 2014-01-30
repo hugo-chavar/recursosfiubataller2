@@ -22,10 +22,6 @@ public class Encuesta extends Recurso {
 	@XmlAttribute
 	private boolean evaluada;
 	
-//	@XmlElements({ 
-//	    @XmlElement(name="pregunta1", type=PreguntaRespuestaFija.class),
-//	    @XmlElement(name="pregunta2", type=PreguntaRespuestaACompletar.class)
-//	})
 	@XmlElementWrapper
 	@XmlElementRefs({
 		   @XmlElementRef(type=PreguntaRespuestaFija.class),
@@ -78,34 +74,4 @@ public class Encuesta extends Recurso {
 	public void unmarshallPreguntas(String field) {
 		preguntas = Pregunta.unmarshallAll(field);
 	}
-
-//	public void completarDatosVisibles() {
-//		for (Pregunta pregunta : this.getPreguntas()) {
-//			pregunta.completarDatosVisibles();
-//		}
-//	}
-
-//	public void recuperarDatosVisibles() {
-//		List<Pregunta> preguntasAux = this.getPreguntas();
-//		this.preguntas = new ArrayList<Pregunta>();
-//		for (Pregunta pregunta : preguntasAux) {
-//			if (pregunta.getOpciones().isEmpty()) {
-//				PreguntaRespuestaACompletar pregunta2 = new PreguntaRespuestaACompletar();
-//				pregunta2.setEnunciado(pregunta.getEnunciado());
-//				if (!pregunta.getCorrectas().isEmpty()) {
-//					pregunta2.setRespuesta(pregunta.getCorrectas().get(0));
-//				}
-//				addPregunta(pregunta2);
-//			} else {
-//				PreguntaRespuestaFija pregunta2 = new PreguntaRespuestaFija();
-//				pregunta2.setEnunciado(pregunta.getEnunciado());
-//				pregunta2.setRespuestasPosibles(pregunta.getOpciones());
-//				for (String res : pregunta.getCorrectas()) {
-//					pregunta2.addRespuestaCorrecta(res);
-//				}
-//				addPregunta(pregunta2);
-//			}
-//		}
-//	}
-
 }
