@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 
-import connection.Parser;
+import model.StringEscapeUtils;
 
 @XmlRootElement(name = "pregunta")
 @XmlSeeAlso({PreguntaRespuestaFija.class,  PreguntaRespuestaACompletar.class})
@@ -31,7 +31,7 @@ public class Pregunta {
 	
 	public static List<Pregunta> unmarshallAll(String field) {
 		String[] splited = field.split("\\|");
-		splited = ignoreSpecialCharactersInSplit(splited, "|");
+		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, "|");
 		List<Pregunta> result = new ArrayList<Pregunta>();
 
 		for (String s : splited) {
@@ -70,65 +70,6 @@ public class Pregunta {
 	public void addRespuestaCorrecta(String rta) {
 
 	}
-	
-	public String escapeSpecialCharacters(String line) {
-		
-		if (line != null) {
-			for (int index = 0; index < Parser.SPECIAL_CHARACTERS.length(); index++) {
-				char specialChar = Parser.SPECIAL_CHARACTERS.charAt(index);
-				int line_idx = line.indexOf(specialChar);
-				while (line_idx > -1) {
-					line = line.substring(0, line_idx) + "\\" + line.substring(line_idx, line.length());
-					line_idx = line.indexOf(specialChar);
-				}
-			}
-		}
-		
-		return line;
-		
-	}
-	
-	public String removeSpecialCharacters(String line) {
-		
-		if (line != null) {
-			int line_idx = line.indexOf("\\");
-			while (line_idx > -1) {
-				line = line.substring(0, line_idx) + line.substring(line_idx + 1, line.length());
-				line_idx = line.indexOf("\\");
-			}
-		}
-		
-		return line;
-		
-	}
-	
-	public static String[] ignoreSpecialCharactersInSplit(String[] splitted, String specialChar) {
-		
-		int i = 0;
-		int j = 0;
-		while (i < splitted.length) {
-			if (splitted[i].endsWith("\\")) {
-				splitted[i] = splitted[i].substring(0, splitted[i].length()-1);
-				splitted[i] = splitted[i].concat(specialChar + splitted[i+1]);
-				splitted[i+1] = null;
-				i++;
-				j++;
-			}
-			i++;
-		}
-		
-		String[] newSplitted = new String[i-j];
-		j = 0;
-		for (i = 0; i < splitted.length; i++) {
-			if (splitted[i] != null) {
-				newSplitted[j] = splitted[i];
-				j++;
-			}
-		}
-		
-		return newSplitted;
-		
-	}
 
 	public String marshall() {
 		StringBuilder sb = new StringBuilder("");
@@ -136,17 +77,17 @@ public class Pregunta {
 		sb.append(";");
 		sb.append(idPregunta);
 		sb.append(";");
-		sb.append(escapeSpecialCharacters(enunciado));
+		sb.append(StringEscapeUtils.escapeSpecialCharacters(enunciado));
 		sb.append(";");
 		return sb.toString();
 	}
 
 	protected void unmarshall(String s) {
 		String[] splited = s.split(";");
-		splited = ignoreSpecialCharactersInSplit(splited, ";");
+		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
 		type = splited[0];
 		idPregunta = Integer.valueOf(splited[1]);
-		enunciado = removeSpecialCharacters(splited[2]);
+		enunciado = StringEscapeUtils.removeSpecialCharacters(splited[2]);
 	}
 
 	// --------------------- metodos "abstractos" -------------

@@ -34,14 +34,14 @@ public class PreguntaRespuestaACompletar extends Pregunta {
 
 	@Override
 	public String marshall() {
-		return super.marshall() + escapeSpecialCharacters(respuesta);
+		return super.marshall() + StringEscapeUtils.escapeSpecialCharacters(respuesta);
 	}
 
 	public void unmarshall(String s) {
 		super.unmarshall(s);
 		String[] splited = s.split(";");
-		splited = ignoreSpecialCharactersInSplit(splited, ";");
-		respuesta = removeSpecialCharacters(splited[3]);
+		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
+		respuesta = StringEscapeUtils.removeSpecialCharacters(splited[3]);
 	}
 
 	@Override
