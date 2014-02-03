@@ -18,7 +18,6 @@ public class ArchivoParser extends Parser {
 	public static String FILE_TAG = "file";
 	
 	public String serializeArchivo(Archivo archivo) {
-		
 		Document doc = this.buildXMLDocument();
 		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
 		doc.appendChild(rootElement);
@@ -47,16 +46,18 @@ public class ArchivoParser extends Parser {
 		nodeElement.appendChild(extension);
 		
 	
-		Element file = doc.createElement(FILE_TAG);
+	/*	Element file = doc.createElement(FILE_TAG);
 		try {
 			file.appendChild(doc.createTextNode(String.valueOf(archivo.getStringFile())));
 		} catch (DOMException e) {
 			System.out.println(e.getMessage());
 			System.out.println("error al agregar file tag");
 		}
-		nodeElement.appendChild(file);
+		nodeElement.appendChild(file);*/
 		
-		return convertDocumentToXml(doc);
+		String r = convertDocumentToXml(doc);
+	
+		return r;
 	}
 
 	public Archivo deserializeArchivo(String xml) throws ParseException {
@@ -85,7 +86,6 @@ public class ArchivoParser extends Parser {
 		String descripcion = fields.get(DESCRIPCION_TAG);
 		String nombre = fields.get(NOMBRE_TAG);		
 		String extension = fields.get(EXTENSION_TAG);
-		String file = fields.get(FILE_TAG);
 		
 		Archivo archivo = new Archivo();
 		archivo.setAmbitoId(IDAmbiente);
@@ -93,7 +93,7 @@ public class ArchivoParser extends Parser {
 		archivo.setRecursoId(IDArchivo);
 		archivo.setNombreArchivo(nombre);
 		archivo.setTipoArchivo(extension);
-		archivo.setStringFile(file);
+//		archivo.setStringFile(file);
 		
 		return archivo;
 	}

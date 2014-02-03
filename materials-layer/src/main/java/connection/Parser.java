@@ -75,10 +75,18 @@ public class Parser {
 	}
 
 	public String convertDocumentToXml(Document doc) {
+		String response;
 		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
+		
 		LSSerializer serializer = domImplLS.createLSSerializer();
+		
 		serializer.getDomConfig().setParameter("xml-declaration", false);
-		return serializer.writeToString(doc);
+		 try{
+			response =  serializer.writeToString(doc);
+		 }catch(Exception e){
+			 response = "error";
+		 }
+		return response;
 	}
 	
 	@SuppressWarnings("rawtypes")
