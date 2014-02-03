@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
@@ -208,6 +209,21 @@ public class Client {
 			System.out.println(response);
 		}catch (Exception e){
 			System.out.println("Error al traer la encuesta Respondida!");
+			System.out.println(e.toString());
+		}
+		try{
+			System.out.println("Prueba set Archivo");
+			String path, nombre, desc, extension;
+			int idRec;
+			String xml =" <WS><Archivo><ambitoId>-1</ambitoId><id>1003</id><descripcion>la foto del siglo</descripcion><nombre>teofilo</nombre><tipo>jpg</tipo></Archivo></WS>";
+			//path = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+			//path = path.substring(0, path.lastIndexOf("classes") + 8);
+			path = "file:/home/damian/aux.txt";
+			DataHandler arch = new DataHandler(new URL(path));
+			String response = port.setArchivo(xml, arch);
+			System.out.println(response);
+		}catch (Exception e){
+			System.out.println("Se produjo un error");
 			System.out.println(e.toString());
 		}
 	}
