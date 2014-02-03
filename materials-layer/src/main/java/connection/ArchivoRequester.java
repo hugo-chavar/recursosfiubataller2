@@ -30,6 +30,7 @@ public class ArchivoRequester extends HandlerRequester {
 		int idRec;
 		path = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();
 		path = path.substring(0, path.lastIndexOf("classes") + 8);
+//		System.out.println("Se trae de "+path);
 		nombre = "teofilo";
 		desc = "la foto del siglo";
 		extension = "jpg";
@@ -66,7 +67,7 @@ public class ArchivoRequester extends HandlerRequester {
 			DataHandler arch = new DataHandler(new URL(path));
 			archivo.setRawFile(arch);
 			current = archivo;
-			updateCache();
+			updateCache(archivo);
 		} catch (MalformedURLException e) {
 			System.out.println("no existe el URL: " + path);
 			System.out.println(e.getMessage());
@@ -98,11 +99,11 @@ public class ArchivoRequester extends HandlerRequester {
 //		if (!response.getSuccess()) {
 //			return harcodeoDeArchivo();
 //		} //esto lo mete al cache
-		
+//		
 		return response;
 	}
 	
-	//Metodo privado para testear. lo meti en el cache .. ver generateTestData()
+//	Metodo privado para testear. lo meti en el cache .. ver generateTestData()
 //	public OperationResponse harcodeoDeArchivo(){
 //		OperationResponse response;
 //		String path, nombre, desc, extension;
@@ -176,16 +177,21 @@ public class ArchivoRequester extends HandlerRequester {
 		return parser;
 	}
 	
-	@Override
-	protected void updateCache() {
-		if (currentHasValidSize()) {
+//	@Override
+	protected void updateCache(Archivo archivo) {
+		if (currentHasValidSize(archivo)) {
+//			System.out.println("Se va a cachear");
 			super.updateCache();
+		}
+		else{
+//			System.out.println("No se cachea");
 		}
 	}
 
-	private boolean currentHasValidSize() {
-		// TODO Dami aca chequea si x el tamanio del archivo se puede cachear (limite 50k)
-		return true;
+	private boolean currentHasValidSize(Archivo archivo) {
+		// aca chequea si x el tamanio del archivo se puede cachear (limite 50k)
+		return (archivo.getSize()<=50000);
+//		return true;
 	}
 
 	@Override
