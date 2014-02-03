@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
@@ -51,105 +50,95 @@ public class Client {
 //			e.printStackTrace();
 //		}
 //-------------		
-//		try {
-//			//prueba con parametros invalidos
-//			String xmlRecursos = port.getRecursos("hola");
-//			System.out.println(xmlRecursos);
-//		} catch (Exception e) {
-//			System.out.println("Error al traer recursos!");
-//			System.out.println(e.toString());
-//		}
-//		
-//		try {
-//			String xml = "<parametro><usuarioId>23</usuarioId><recurso><ambitoId>15</ambitoId></recurso></parametro>";
-//			String response = port.getRecursos(xml);
-//			System.out.println(response);
-//		} catch (Exception e) {
-//			System.out.println("Error al traer recursos!");
-//			System.out.println(e.toString());
-//		}
-//		
-//		try {
-//			// prueba q da error por no definir tipo de recurso
-//			String xml = "<parametro><recurso><recursoId>1003</recursoId></recurso></parametro>";
-//			String response = port.getRecurso(xml);
-//			System.out.println(response);
-//		} catch (Exception e) {
-//			System.out.println("Error al traer la encuesta!");
-//			System.out.println(e.toString());
-//		}
-//		
-//		
-//		try {
-//			// prueba q da error por no definir id de recurso
-//			String xml = "<parametro><recurso><tipo>Link</tipo></recurso></parametro>";
-//			String response = port.getRecurso(xml);
-//			System.out.println(response);
-//		} catch (Exception e) {
-//			System.out.println("Error al traer la encuesta!");
-//			System.out.println(e.toString());
-//		}
-//		
-//		try {
-//			// prueba q da error por definir tipo inexistente
-//			String xml = "<parametro><recurso><recursoId>1003</recursoId><tipo>abcd</tipo></recurso></parametro>";
-//			String response = port.getRecurso(xml);
-//			System.out.println(response);
-//		} catch (Exception e) {
-//			System.out.println("Error al traer la encuesta!");
-//			System.out.println(e.toString());
-//		}
-//		
-//		
-//		try {
-//			// prueba Ok de cache
-//			String xml = "<parametro><recurso><recursoId>1003</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
-//			String response = port.getRecurso(xml);//ese id de encuesta esta harcodeado en el cache.. mira
-//			System.out.println(response);
-//		} catch (Exception e) {
-//			System.out.println("Error al traer la encuesta!");
-//			System.out.println(e.toString());
-//		}
-//		
-//		try {
-//			// prueba Ok de cache de nuevo
-//			String xml = "<parametro><recurso><recursoId>1004</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
-//			String response = port.getRecurso(xml);
-//			System.out.println(response);
-//		} catch (Exception e) {
-//			System.out.println("Error al traer la encuesta!");
-//			System.out.println(e.toString());
-//		}
-//		
-//		try {
-////		 prueba con datos mockeados de integracion
-//			String xml = "<parametro><recurso><recursoId>15</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
-//			String response = port.getRecurso(xml);
-//			System.out.println(response);
-//		} catch (Exception e) {
-//			System.out.println("Error al traer la encuesta!");
-//			System.out.println(e.toString());
-//		}
-//		
-//		try {
-//			//prueba encuesta inexistente
-//			String xml = "<parametro><recurso><recursoId>16</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
-//			String response = port.getRecurso(xml);
-//			System.out.println(response);
-//		} catch (Exception e) {
-//			System.out.println("Error al traer la encuesta!");
-//			System.out.println(e.toString());
-//		}
-//		
-//		try {
-//			//prueba encuesta inexistente
-//			String xml = "<parametro><recurso><recursoId>16</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
-//			String response = port.getRecurso(xml);
-//			System.out.println(response);
-//		} catch (Exception e) {
-//			System.out.println("Error al traer la encuesta!");
-//			System.out.println(e.toString());
-//		} 
+		try {
+			//prueba con parametros invalidos
+			String xmlRecursos = port.getRecursos("hola");
+			System.out.println(xmlRecursos);
+		} catch (Exception e) {
+			System.out.println("Error al traer recursos!");
+			System.out.println(e.toString());
+		}
+		
+		try {
+			String xml = "<parametro><usuarioId>23</usuarioId><recurso><ambitoId>15</ambitoId></recurso></parametro>";
+			String response = port.getRecursos(xml);
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println("Error al traer recursos!");
+			System.out.println(e.toString());
+		}
+		
+		try {
+			// prueba q da error por no definir tipo de recurso
+			String xml = "<parametro><recurso><recursoId>1003</recursoId></recurso></parametro>";
+			String response = port.getRecurso(xml);
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println("Error al traer la encuesta!");
+			System.out.println(e.toString());
+		}
+		
+		
+		try {
+			// prueba q da error por no definir id de recurso
+			String xml = "<parametro><recurso><tipo>Link</tipo></recurso></parametro>";
+			String response = port.getRecurso(xml);
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println("Error al traer la encuesta!");
+			System.out.println(e.toString());
+		}
+		
+		try {
+			// prueba q da error por definir tipo inexistente
+			String xml = "<parametro><recurso><recursoId>1003</recursoId><tipo>abcd</tipo></recurso></parametro>";
+			String response = port.getRecurso(xml);
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println("Error al traer la encuesta!");
+			System.out.println(e.toString());
+		}
+		
+		
+		try {
+			// prueba Ok de cache
+			String xml = "<parametro><recurso><recursoId>1003</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
+			String response = port.getRecurso(xml);//ese id de encuesta esta harcodeado en el cache.. mira
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println("Error al traer la encuesta!");
+			System.out.println(e.toString());
+		}
+		
+		try {
+			// prueba Ok de cache de nuevo
+			String xml = "<parametro><recurso><recursoId>1004</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
+			String response = port.getRecurso(xml);
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println("Error al traer la encuesta!");
+			System.out.println(e.toString());
+		}
+		
+		try {
+			//prueba con datos mockeados de integracion
+			String xml = "<parametro><recurso><recursoId>15</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
+			String response = port.getRecurso(xml);
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println("Error al traer la encuesta!");
+			System.out.println(e.toString());
+		}
+		
+		try {
+			//prueba encuesta inexistente
+			String xml = "<parametro><recurso><recursoId>16</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
+			String response = port.getRecurso(xml);
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println("Error al traer la encuesta!");
+			System.out.println(e.toString());
+		} 
 
 //-------------
 //		try {
@@ -209,21 +198,6 @@ public class Client {
 			System.out.println(response);
 		}catch (Exception e){
 			System.out.println("Error al traer la encuesta Respondida!");
-			System.out.println(e.toString());
-		}
-		try{
-			System.out.println("Prueba set Archivo");
-			String path, nombre, desc, extension;
-			int idRec;
-			String xml =" <WS><Archivo><ambitoId>-1</ambitoId><id>1003</id><descripcion>la foto del siglo</descripcion><nombre>teofilo</nombre><tipo>jpg</tipo></Archivo></WS>";
-			//path = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();
-			//path = path.substring(0, path.lastIndexOf("classes") + 8);
-			path = "file:/home/damian/aux.txt";
-			DataHandler arch = new DataHandler(new URL(path));
-			String response = port.setArchivo(xml, arch);
-			System.out.println(response);
-		}catch (Exception e){
-			System.out.println("Se produjo un error");
 			System.out.println(e.toString());
 		}
 	}
