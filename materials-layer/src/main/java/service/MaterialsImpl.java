@@ -9,12 +9,10 @@ import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Recurso;
-import connection.ArchivoParser;
 import connection.Parameter;
 import connection.Parser;
 import connection.Requester;
 import connection.exceptions.GetException;
-import connection.exceptions.ParseException;
 import connection.responses.OperationResponse;
 
 @MTOM 
@@ -49,27 +47,26 @@ public class MaterialsImpl implements Materials {
 	//EN el xml debe venir el ambitoId, nombre, extension.
 	public String setArchivo(String archivoParam,	@XmlMimeType("application/octet-stream") DataHandler data) {
 
-		/*Parameter parameter = Parameter.createParameter(archivoParam);
-		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null || parameter.getRecurso().getClass() != Archivo.class){
-			return createFailedResponse("Parametros invalidos");
-		}*/
+		Parameter parameter = Parameter.createParameter(archivoParam);
+		if (parameter.getRecurso() == null || parameter.getRecurso().getClass() != Archivo.class){
+			return createFailedResponse("Parametros invalidos: debe especificar 'archivo' en xml");
+		}
+		
 		if (data != null) {
-			ArchivoParser parser = new ArchivoParser();
-			Archivo file;
-			try {
-				file = parser.deserializeArchivo(archivoParam);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return createFailedResponse("Parametros invalidos");
-			} 
+//			ArchivoParser parser = new ArchivoParser();
+			Archivo file = (Archivo) parameter.getRecurso();
+//			try {
+//				file = parser.deserializeArchivo(archivoParam);
+//			} catch (ParseException e) {
+//				e.printStackTrace();
+//				return createFailedResponse("Parametros invalidos");
+//			} 
 			file.setRawFile(data);
 			OperationResponse response =  Requester.INSTANCE.saveArchivo(file); 
 			return toXml(response);
 
 		}
-		//  TODO retornar confirmaciones en xml, hablar con presentacion para ver como lo quieren
-		return createFailedResponse("ERROR al subir el archivo");
+		return createFailedResponse("Archivo sin datos recibido.");
 	}
 	
 //	@Override
@@ -105,7 +102,7 @@ public class MaterialsImpl implements Materials {
 
 	}
 	
-	public String getEncuestaRespondida(Recurso recurso, int usuarioId) {
+	private String getEncuestaRespondida(Recurso recurso, int usuarioId) {
 		OperationResponse response = new OperationResponse();
 		response.setSuccess(true);	
 		//try {

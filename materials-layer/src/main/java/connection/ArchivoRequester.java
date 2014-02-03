@@ -99,7 +99,7 @@ public class ArchivoRequester extends HandlerRequester {
 		
 //		if (!response.getSuccess()) {
 //			return harcodeoDeArchivo();
-//		} //esto lo mete al cache
+//		} //esto lo meti al cache
 //		
 		return response;
 	}
@@ -191,13 +191,12 @@ public class ArchivoRequester extends HandlerRequester {
 
 	private boolean currentHasValidSize(Archivo archivo) {
 		// aca chequea si x el tamanio del archivo se puede cachear (limite 50k)
-		return (archivo.getSize()<=50000);
-//		return true;
+		return (archivo.getSize() <= 50000);
 	}
 
 	@Override
 	protected void deserialize(String xml_resp_e) throws ParseException {
-		current = parser.deserializeArchivo(xml_resp_e);
+		current = parser.deserialize(xml_resp_e);
 	}
 
 	@Override

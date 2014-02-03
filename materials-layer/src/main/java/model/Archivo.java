@@ -32,10 +32,10 @@ public class Archivo extends Recurso {
 	@XmlTransient
 	private Integer tamanio;
 
-	@XmlElement
+	@XmlElement (name = "tipo")
 	private String tipoArchivo;
 
-	@XmlElement
+	@XmlElement (name = "nombre")
 	private String nombreArchivo;
 
 	@XmlElement
