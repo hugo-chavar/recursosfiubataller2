@@ -22,6 +22,7 @@ public class ArchivoRequester extends HandlerRequester {
 		super();
 		parser = new ArchivoParser();
 		cache = new Cache<Archivo>();
+		cache.changeSize(5);
 		generateTestData();
 	}
 	

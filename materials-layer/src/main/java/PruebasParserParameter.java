@@ -37,10 +37,11 @@ public class PruebasParserParameter {
 		Parameter p2 = (Parameter) parser.unmarshal(xml, Parameter.class);
 		if (p2 == null) {
 			System.out.println("p2 null ");
+		} else {
+			System.out.println("Ambito: " + p2.getRecurso().getAmbitoId());
+			System.out.println("Usuario: " + p2.getUsuarioId());
+			System.out.println("Recurso: " + p2.getRecurso().getRecursoId());
 		}
-		System.out.println("Ambito: " + p2.getRecurso().getAmbitoId());
-		System.out.println("Usuario: " + p2.getUsuarioId());
-		System.out.println("Recurso: " + p2.getRecurso().getRecursoId());
 
 		xml = "<parametro><recurso><ambitoId>15</ambitoId></recurso><usuarioId>23</usuarioId></parametro>";
 		p2 = (Parameter) parser.unmarshal(xml, Parameter.class);

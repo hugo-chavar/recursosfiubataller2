@@ -35,13 +35,13 @@ public class EncuestaTest {
 		opciones = new ArrayList<String>();
 		p2.setEnunciado("a que equipo del futbol argentino le denominan Millo");
 		opciones.add("velez");
-		opciones.add("River Plate");
+		opciones.add("River|| Plate");
 		opciones.add("crucero del norte");
-		opciones.add("estudiantes");
+		opciones.add("estudiantes|");
 		((PreguntaRespuestaFija) p2).setRespuestasPosibles(opciones);
 
 		encuesta.addPregunta(p2);
-		p2.addRespuestaCorrecta("River Plate");
+		p2.addRespuestaCorrecta("River|| Plate");
 
 		p3 = new PreguntaRespuestaFija();
 		opciones = new ArrayList<String>();
@@ -70,7 +70,7 @@ public class EncuestaTest {
 		opciones.add("Maduro");
 		opciones.add("Amplio");
 		opciones.add("Simple");
-		opciones.add("Independiente");
+		opciones.add("Independiente;");
 		opciones.add("Automatizable");
 
 		((PreguntaRespuestaFija) p4).setRespuestasPosibles(opciones);
@@ -78,7 +78,7 @@ public class EncuestaTest {
 		p4.addRespuestaCorrecta("Rapido");
 		p4.addRespuestaCorrecta("Profesional");
 		p4.addRespuestaCorrecta("Simple");
-		p4.addRespuestaCorrecta("Independiente");
+		p4.addRespuestaCorrecta("Independiente;");
 		p4.addRespuestaCorrecta("Automatizable");
 		p4.addRespuestaCorrecta("Repetible");
 
@@ -102,7 +102,7 @@ public class EncuestaTest {
 	
 	@Test
 	public void marshallPreguntasWorksAsExpected() {
-		Assert.assertEquals("F;1;de que color es el caballo blanco de san martin?;rojo,verde,azul,blanco;3|F;2;a que equipo del futbol argentino le denominan Millo;velez,River Plate,crucero del norte,estudiantes;1|F;3;cual es un patron de diseno creacional;command,mediator,builder,facade;2|F;4;Un test unitario debe presentar\\, las\\, siguientes\\, características;Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente,Automatizable;0,7,10,11,12,6|C;5;cuantas patas tiene un gato?;4", encuesta.marshallPreguntas());
+		Assert.assertEquals("F;1;de que color es el caballo blanco de san martin?;rojo,verde,azul,blanco;3|F;2;a que equipo del futbol argentino le denominan Millo;velez,River\\|\\| Plate,crucero del norte,estudiantes\\|;1|F;3;cual es un patron de diseno creacional;command,mediator,builder,facade;2|F;4;Un test unitario debe presentar\\, las\\, siguientes\\, características;Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente\\;,Automatizable;0,7,10,11,12,6|C;5;cuantas patas tiene un gato?;4", encuesta.marshallPreguntas());
 	}
 	
 	@Test
