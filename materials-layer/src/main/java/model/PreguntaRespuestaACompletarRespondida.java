@@ -1,13 +1,20 @@
 package model;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "preguntaRespondidaConOpciones")
 public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 
+	@XmlAttribute(required = true)
 	private String respuesta;
 
 	public PreguntaRespuestaACompletarRespondida(Integer idPregunta) {
 		super(idPregunta);
 		type = ANSWERED_QUESTION_TO_COMPLETE_TYPE;
+	}
+	
+	public PreguntaRespuestaACompletarRespondida() {
 	}
 
 	public PreguntaRespuestaACompletarRespondida(String s) {

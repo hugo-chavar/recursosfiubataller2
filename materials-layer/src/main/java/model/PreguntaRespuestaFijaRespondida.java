@@ -3,8 +3,13 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "preguntaRespondidaSinOpciones")
 public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 
+	@XmlAttribute(name = "respuestas",required = true)
 	private List<Integer> respuestasfijas = new ArrayList<Integer>();
 
 	public PreguntaRespuestaFijaRespondida(Integer idPregunta) {

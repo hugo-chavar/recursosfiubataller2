@@ -5,6 +5,9 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -23,7 +26,11 @@ public class EncuestaRespondida implements Serializable {
 	@XmlTransient
 	private Integer idRecurso;
 
-	@XmlElement
+	@XmlElementWrapper
+	@XmlElementRefs({
+		   @XmlElementRef(type=PreguntaRespuestaFijaRespondida.class),
+		   @XmlElementRef(type=PreguntaRespuestaACompletarRespondida.class)
+		})
 	private List<PreguntaRespondida> preguntasRespondidas;
 
 	public EncuestaRespondida() { }
@@ -96,7 +103,7 @@ public class EncuestaRespondida implements Serializable {
 	}
 
 	public void unmarshallPreguntasRespondidas(String field) {
-		preguntasRespondidas =  PreguntaRespondida.unmarshallAll(field);;
+		preguntasRespondidas =  PreguntaRespondida.unmarshallAll(field);
 	}
 
 	@Override
