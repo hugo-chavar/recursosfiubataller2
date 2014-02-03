@@ -45,17 +45,17 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 	public Integer evaluar(Pregunta pregunta) {
 		// Chequeo que coincida cantidad de respuestas
 		if (!pregunta.getNroCorrectas().equals(this.respuestasfijas.size())) {
-			isCorrecta = false;
+			correcta = false;
 			return 0;
 		}
 		// Chequeo cada una de las respuestas
 		for (Integer respuesta : respuestasfijas) {
 			if (!pregunta.isCorrect(respuesta)) {
-				isCorrecta = false;
+				correcta = false;
 				return 0;
 			}
 		}
-		isCorrecta = true;
+		correcta = true;
 		return 1;
 	}
 

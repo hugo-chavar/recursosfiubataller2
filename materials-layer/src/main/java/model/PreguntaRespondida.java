@@ -29,14 +29,14 @@ public class PreguntaRespondida {
 
 	// Si no es evaluado siempre estara en null este atributo
 	@XmlAttribute(required = false)
-	protected Boolean isCorrecta = null;
+	protected Boolean correcta = null;
 
 	public void setIsCorrecta(Boolean isCorrecta) {
-		this.isCorrecta = isCorrecta;
+		this.correcta = isCorrecta;
 	}
 
 	public Boolean getIsCorrecta() {
-		return isCorrecta;
+		return correcta;
 	}
 
 	//@XmlElement(required = true)
@@ -92,7 +92,7 @@ public class PreguntaRespondida {
 		sb.append(";");
 		sb.append(idPregunta);
 		sb.append(";");
-		sb.append(isCorrecta);
+		sb.append(correcta);
 		sb.append(";");
 		return sb.toString();
 	}
@@ -101,7 +101,7 @@ public class PreguntaRespondida {
 		String[] splited = s.split(";");
 		type = splited[0];
 		idPregunta = Integer.valueOf(splited[1]);
-		isCorrecta = splited[2] != "null" ? Boolean.valueOf(splited[2]) : null;
+		correcta = splited[2] != "null" ? Boolean.valueOf(splited[2]) : null;
 	}
 
 }
