@@ -178,9 +178,9 @@ public class ArchivoRequester extends HandlerRequester {
 		return parser;
 	}
 	
-//	@Override
-	protected void updateCache(Archivo archivo) {
-		if (currentHasValidSize(archivo)) {
+	@Override
+	protected void updateCache() {
+		if (currentHasValidSize()) {
 //			System.out.println("Se va a cachear");
 			super.updateCache();
 		}
@@ -189,8 +189,9 @@ public class ArchivoRequester extends HandlerRequester {
 		}
 	}
 
-	private boolean currentHasValidSize(Archivo archivo) {
+	private boolean currentHasValidSize() {
 		// aca chequea si x el tamanio del archivo se puede cachear (limite 50k)
+		Archivo archivo = (Archivo) current;
 		return (archivo.getSize() <= 50000);
 	}
 
