@@ -68,7 +68,7 @@ public class ArchivoRequester extends HandlerRequester {
 			DataHandler arch = new DataHandler(new URL(path));
 			archivo.setRawFile(arch);
 			current = archivo;
-			updateCache(archivo);
+			updateCache();
 		} catch (MalformedURLException e) {
 			System.out.println("no existe el URL: " + path);
 			System.out.println(e.getMessage());
