@@ -120,6 +120,12 @@ public class ClienteDelRequesterNuestro {
 		System.out.println("prueba encuesta respondida");
 		EncuestaRespondida encuesta_rtn = Requester.INSTANCE.getEncuestaRespondida(10, 5);
 		System.out.println(encuesta_rtn.getInfo());
+		
+		System.out.println("prueba encuesta respondida que no existe");
+		encuesta_rtn = Requester.INSTANCE.getEncuestaRespondida(20, 4);
+		System.out.println(encuesta_rtn.getInfo());
+		
+		
 	}
 
 }
