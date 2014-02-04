@@ -35,7 +35,19 @@ public class ClientePruebaContraIntegracion {
 //		}
 //
 //		try {
-//			xml = ip.seleccionar("<WS><Recurso><id>1009</id></Recurso></WS>");
+//			xml = ip.seleccionar("<WS><Recurso><id>997</id></Recurso></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
+		try {
+			xml = ip.seleccionar("<WS><Link><id>997</id></Link></WS>");
+			System.out.println(xml);
+		} catch (ConnectionException e) {
+			System.out.println(e.getMessage());
+		}
+//		try {
+//			xml = ip.seleccionar("<WS><Encuesta><id>1003</id></Encuesta></WS>");
 //			System.out.println(xml);
 //		} catch (ConnectionException e) {
 //			System.out.println(e.getMessage());
@@ -59,12 +71,12 @@ public class ClientePruebaContraIntegracion {
 //			System.out.println(e.getMessage());
 //		}
 		
-		try {
-			xml = ip.eliminar("<WS><Recurso><id>1006</id></Recurso></WS>");
-			System.out.println(xml);
-		} catch (ConnectionException e) {
-			System.out.println(e.getMessage());
-		}
+//		try {
+//			xml = ip.eliminar("<WS><Recurso><id>1006</id></Recurso></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
 
 	}
 

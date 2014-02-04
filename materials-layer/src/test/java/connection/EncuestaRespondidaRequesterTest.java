@@ -23,9 +23,9 @@ public class EncuestaRespondidaRequesterTest {
 
 		List<PreguntaRespondida> respondidas = encuesta_rtn.getPreguntasRespondidas();
 		Assert.assertEquals("Azul",((PreguntaRespuestaACompletarRespondida) respondidas.get(0)).getRespuesta());
-		Assert.assertEquals(false,respondidas.get(0).getIsCorrecta());
+		Assert.assertEquals(false,respondidas.get(0).getCorrecta());
 		Assert.assertEquals("4", ((PreguntaRespuestaACompletarRespondida) respondidas.get(1)).getRespuesta());
-		Assert.assertEquals(true,respondidas.get(1).getIsCorrecta());
+		Assert.assertEquals(true,respondidas.get(1).getCorrecta());
 	}
 
 	@Test
@@ -36,9 +36,9 @@ public class EncuestaRespondidaRequesterTest {
 
 		List<PreguntaRespondida> respondidas = encuesta_rtn.getPreguntasRespondidas();
 		Assert.assertEquals(new Integer(1), ((PreguntaRespuestaFijaRespondida) respondidas.get(0)).getRespuestasFijas().get(0));
-		Assert.assertEquals(true, respondidas.get(0).getIsCorrecta());
+		Assert.assertEquals(true, respondidas.get(0).getCorrecta());
 		Assert.assertEquals(new Integer(2), ((PreguntaRespuestaFijaRespondida) respondidas.get(1)).getRespuestasFijas().get(0));
-		Assert.assertEquals(true,respondidas.get(1).getIsCorrecta());
+		Assert.assertEquals(true,respondidas.get(1).getCorrecta());
 	}
 	
 
@@ -52,9 +52,9 @@ public class EncuestaRespondidaRequesterTest {
 		List<PreguntaRespondida> respondidas = respondida.getPreguntasRespondidas();
 		Assert.assertEquals(new Integer(1), ((PreguntaRespuestaFijaRespondida) respondidas.get(0)).getRespuestasFijas().get(0));
 		Assert.assertEquals(new Integer(4), ((PreguntaRespuestaFijaRespondida) respondidas.get(0)).getRespuestasFijas().get(1));
-		Assert.assertEquals(true, respondidas.get(0).getIsCorrecta());
+		Assert.assertEquals(true, respondidas.get(0).getCorrecta());
 		Assert.assertNotEquals("Salta", ((PreguntaRespuestaACompletarRespondida) respondidas.get(1)).getRespuesta());
-		Assert.assertEquals(false,respondidas.get(1).getIsCorrecta());
+		Assert.assertEquals(false,respondidas.get(1).getCorrecta());
 	}
 	
 }

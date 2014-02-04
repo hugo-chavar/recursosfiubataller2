@@ -40,8 +40,8 @@ public class EncuestaRespondidaRequester {
 		p1.addRespuesta(1);
 		p1.addRespuesta(4);
 		p2.responder("Buenos Aires");
-		p1.setIsCorrecta(true);
-		p2.setIsCorrecta(false);
+		p1.setCorrecta(true);
+		p2.setCorrecta(false);
         preguntasRespondidas.add(p1);
         preguntasRespondidas.add(p2);
         resp.setEvaluacion(50);
