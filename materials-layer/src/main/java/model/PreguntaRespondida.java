@@ -30,11 +30,11 @@ public class PreguntaRespondida {
 	@XmlAttribute(required = false)
 	protected Boolean correcta = null;
 
-	public void setIsCorrecta(Boolean isCorrecta) {
+	public void setCorrecta(Boolean isCorrecta) {
 		this.correcta = isCorrecta;
 	}
 
-	public Boolean getIsCorrecta() {
+	public Boolean getCorrecta() {
 		return correcta;
 	}
 
