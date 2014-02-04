@@ -10,6 +10,11 @@ public class StringEscapeUtils {
 		if (line != null) {
 			for (int index = 0; index < Parser.SPECIAL_CHARACTERS.length(); index++) {
 				char specialChar = Parser.SPECIAL_CHARACTERS.charAt(index);
+        // TODO Yami, todo lo que sigue yo lo cambiaria por:
+  //    String newLine = line.replaceAll(String.valueOf(specialChar), "\\" + specialChar);
+  // creo que la ultima linea puede ser asi:
+    //    String newLine = line.replace(specialChar, "\\" + specialChar);
+  //    line = newLine;
 				int line_idx = line.indexOf(specialChar);
 				while (line_idx > -1) {
 					line = line.substring(0, line_idx) + "\\" + line.substring(line_idx, line.length());
@@ -29,6 +34,9 @@ public class StringEscapeUtils {
 	public static String removeSpecialCharacters(String line) {
 		
 		if (line != null) {
+     // TODO Yami: esto evitaria el while .. lo pruebo despues
+  //    String newLine = line.replace("\\", "");
+  //    line = newLine;
 			int line_idx = line.indexOf("\\");
 			while (line_idx > -1) {
 				line = line.substring(0, line_idx) + line.substring(line_idx + 1, line.length());
