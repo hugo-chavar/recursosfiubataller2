@@ -11,6 +11,7 @@ import javax.activation.DataHandler;
 import model.Archivo;
 import model.Encuesta;
 import model.Recurso;
+import model.StringEscapeUtils;
 import connection.EncuestaRequester;
 import connection.Parameter;
 import connection.Parser;
@@ -20,6 +21,33 @@ import connection.responses.OperationResponse;
 public class PruebasParserParameter {
 
 	public static void main(String[] args) {
+		
+		String prueba = "informacion sobre| el; equipo,, mas grande del universo,:,||";
+		prueba = StringEscapeUtils.escapeSpecialCharacters(prueba);
+		System.out.println(prueba);
+		String prueba2 = StringEscapeUtils.removeEscapers(prueba);
+		System.out.println(prueba2);
+		prueba += "," + StringEscapeUtils.escapeSpecialCharacters("ho|la");
+		prueba += "," + StringEscapeUtils.escapeSpecialCharacters("xx;tt;");
+		prueba += "," + StringEscapeUtils.escapeSpecialCharacters("mi,sio;nes|");
+		System.out.println(prueba);
+		String[] splited = StringEscapeUtils.splitIgnoringEscaped(prueba, ',');
+		for (String s : splited){
+			System.out.println(s);
+		}
+		
+		splited = StringEscapeUtils.splitIgnoringEscaped("hola mundo xxxx", ',');
+		for (String s : splited){
+			System.out.println(s);
+		}
+		
+		prueba  = "C;1;De que color es el caballo blanco de San Martin?;blanco|C;2;Cuantas patas tiene un gato?;4";
+		splited = StringEscapeUtils.splitIgnoringEscaped(prueba, '|');
+		for (String s : splited){
+			System.out.println(s);
+		}
+
+		
 
 		Parser parser = new Parser();
 		Recurso r = new Recurso();

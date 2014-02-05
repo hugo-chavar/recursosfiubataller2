@@ -85,8 +85,9 @@ public class PreguntaRespuestaFija extends Pregunta {
 
 	public void unmarshall(String s) {
 		super.unmarshall(s);
-		String[] splited = s.split(";");
-		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
+//		String[] splited = s.split(";");
+//		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
+		String[] splited = StringEscapeUtils.splitIgnoringEscaped(s, ';');
 		unmarshallRespuestasPosibles(splited[3]);
 		unmarshallRespuestasCorrectas(splited[4]);
 
@@ -96,11 +97,12 @@ public class PreguntaRespuestaFija extends Pregunta {
 		if ("null".equals(rtas)) {
 			return;
 		}
-		String[] splited = rtas.split(",");
-		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ",");
+//		String[] splited = rtas.split(",");
+//		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ",");
+		String[] splited = StringEscapeUtils.splitIgnoringEscaped(rtas, ',');
 		respuestasPosibles = new ArrayList<String>();
 		for (String s : splited) {
-			respuestasPosibles.add(StringEscapeUtils.removeSpecialCharacters(s));
+			respuestasPosibles.add(StringEscapeUtils.removeEscapers(s));
 		}
 
 	}
@@ -109,8 +111,9 @@ public class PreguntaRespuestaFija extends Pregunta {
 		if ("null".equals(rtas)) {
 			return;
 		}
-		String[] splited = rtas.split(",");
-		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ",");
+//		String[] splited = rtas.split(",");
+//		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ",");
+		String[] splited = StringEscapeUtils.splitIgnoringEscaped(rtas, ',');
 		respuestasCorrectas = new ArrayList<Integer>();
 		for (String s : splited) {
 			respuestasCorrectas.add(Integer.valueOf(s));

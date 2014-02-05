@@ -40,18 +40,30 @@ public class ClientePruebaContraIntegracion {
 //		} catch (ConnectionException e) {
 //			System.out.println(e.getMessage());
 //		}
-		try {
-			xml = ip.seleccionar("<WS><Link><id>997</id></Link></WS>");
-			System.out.println(xml);
-		} catch (ConnectionException e) {
-			System.out.println(e.getMessage());
-		}
+//		try {
+//			xml = ip.seleccionar("<WS><Recurso><ambitoId>1</ambitoId></Recurso></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
+//		try {
+//			xml = ip.seleccionar("<WS><Link><recursoId>997</recursoId></Link></WS>");
+//			System.out.println(xml);
+//		} catch (ConnectionException e) {
+//			System.out.println(e.getMessage());
+//		}
 //		try {
 //			xml = ip.seleccionar("<WS><Encuesta><id>1003</id></Encuesta></WS>");
 //			System.out.println(xml);
 //		} catch (ConnectionException e) {
 //			System.out.println(e.getMessage());
 //		}
+		try {
+			xml = ip.seleccionar("<WS><EncuestaRespondida><id>1003</id></EncuestaRespondida></WS>");
+			System.out.println(xml);
+		} catch (ConnectionException e) {
+			System.out.println(e.getMessage());
+		}
 //		try {
 //			xml = ip.seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
 //			System.out.println(xml);

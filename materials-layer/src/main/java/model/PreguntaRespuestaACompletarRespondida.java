@@ -55,9 +55,10 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 
 	public void unmarshall(String s) {
 		super.unmarshall(s);
-		String[] splited = s.split(";");
-		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
-		respuesta = StringEscapeUtils.removeSpecialCharacters(splited[3]);
+//		String[] splited = s.split(";");
+//		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
+		String[] splited = StringEscapeUtils.splitIgnoringEscaped(s, ';');
+		respuesta = StringEscapeUtils.removeEscapers(splited[3]);
 	}
 
 }

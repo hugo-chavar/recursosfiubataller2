@@ -47,8 +47,9 @@ public class PreguntaRespondida {
 	}
 
 	public static List<PreguntaRespondida> unmarshallAll(String field) {
-		String[] splited = field.split("\\|");
-		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, "|");
+//		String[] splited = field.split("\\|");
+//		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, "|");
+		String[] splited = StringEscapeUtils.splitIgnoringEscaped(field, '|');
 		List<PreguntaRespondida> result = new ArrayList<PreguntaRespondida>();
 
 		for (String s : splited) {

@@ -30,8 +30,9 @@ public class Pregunta {
 	protected String enunciado;
 	
 	public static List<Pregunta> unmarshallAll(String field) {
-		String[] splited = field.split("\\|");
-		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, "|");
+//		String[] splited = field.split("\\|");
+//		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, "|");
+		String[] splited = StringEscapeUtils.splitIgnoringEscaped(field, '|');
 		List<Pregunta> result = new ArrayList<Pregunta>();
 
 		for (String s : splited) {
@@ -83,11 +84,12 @@ public class Pregunta {
 	}
 
 	protected void unmarshall(String s) {
-		String[] splited = s.split(";");
-		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
+//		String[] splited = s.split(";");
+//		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
+		String[] splited = StringEscapeUtils.splitIgnoringEscaped(s, ';');
 		type = splited[0];
 		idPregunta = Integer.valueOf(splited[1]);
-		enunciado = StringEscapeUtils.removeSpecialCharacters(splited[2]);
+		enunciado = StringEscapeUtils.removeEscapers(splited[2]);
 	}
 
 	// --------------------- metodos "abstractos" -------------
