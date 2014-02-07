@@ -108,15 +108,10 @@ public class MaterialsImpl implements Materials {
 	
 	private String getRecursos(int ambitoId, int usuarioId) {
 		OperationResponse recursosPermitidos;
-		// Obtengo los recursos
-		try {
-			if (!Requester.INSTANCE.getPermisoUsuario(ambitoId, usuarioId, "getRecursos")){
-				return createFailedResponse("El usuario " + usuarioId + " no tiene los permisos necesarios");
-			}
-			recursosPermitidos = Requester.INSTANCE.getRecursosAmbito(ambitoId);
-		} catch (GetException e) {
-			return createFailedResponse(e.getMessage());
+		if (!Requester.INSTANCE.getPermisoUsuario(ambitoId, usuarioId, "getRecursos")){
+			return createFailedResponse("El usuario " + usuarioId + " no tiene los permisos necesarios");
 		}
+		recursosPermitidos = Requester.INSTANCE.getRecursosAmbito(ambitoId);
 		return toXml(recursosPermitidos);
 	}
 	

@@ -60,19 +60,15 @@ public class ClienteDelRequesterNuestro {
 		}
 		xml = "<parametro><usuarioId>23</usuarioId><recurso><ambitoId>15</ambitoId></recurso></parametro>";
 		p = Parameter.createParameter(xml);
-		try {
-			or = Requester.INSTANCE.getRecursosAmbito(1);
-			if (!or.getSuccess()) {
-				System.out.println(or.getReason());
-			} else {
-				RecursosResponse rec = (RecursosResponse)or;
-				List<Recurso> lis = rec.getRecursos();
-				for(Recurso recu : lis){
-					System.out.println(recu.getDescripcion());
-				}
+		or = Requester.INSTANCE.getRecursosAmbito(1);
+		if (!or.getSuccess()) {
+			System.out.println(or.getReason());
+		} else {
+			RecursosResponse rec = (RecursosResponse)or;
+			List<Recurso> lis = rec.getRecursos();
+			for(Recurso recu : lis){
+				System.out.println(recu.getDescripcion());
 			}
-		} catch (GetException e) {
-			System.out.println(e.getMessage());
 		}
 		String absolute = ClienteDelRequesterNuestro.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
 		System.out.println(absolute);

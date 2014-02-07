@@ -85,7 +85,7 @@ public enum Requester {
 		
 	}
 	
-	public OperationResponse getRecursosAmbito(int ambitoId) throws GetException {
+	public OperationResponse getRecursosAmbito(int ambitoId) {
 		//TODO Hugo atrapar aca la excepcion
 		return recursosReq.getAll(ambitoId);
 	}

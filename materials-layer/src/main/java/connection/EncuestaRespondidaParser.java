@@ -34,7 +34,7 @@ public class EncuestaRespondidaParser extends Parser {
 		Element IDUsuario = doc.createElement(IDUSUARIO_TAG);
 		IDUsuario.appendChild(doc.createTextNode(String.valueOf(respondida.getIdUsuario())));
 		nodeElement.appendChild(IDUsuario);
-		// TODO: No siempre se debe incluir este campo, si es no evaluado no
+		// TODO: Andy No siempre se debe incluir este campo, si es no evaluado no
 		// if(respondida.getEvaluacion()!=-1)
 		Element evaluacion = doc.createElement(EVALUACION_TAG);
 		evaluacion.appendChild(doc.createTextNode(String.valueOf(respondida.getEvaluacion())));

@@ -66,12 +66,13 @@ public class RecursosRequester extends HandlerRequester {
 		RecursosResponse recursosResponse = new RecursosResponse();
 		String message;
 
+		// Consulto los recursos guardados
+		String xml = parser.serializeRecursosQuery(IDAmbito);
 		try {
 
-			// Consulto los recursos guardados
-			String xml = parser.serializeRecursosQuery(IDAmbito);
+			
 			String xml_resp_e = proxy.seleccionar(xml);
-			System.out.println(xml_resp_e);
+//			System.out.println(xml_resp_e);
 			recursos = parser.deserializeRecursos(xml_resp_e);
 
 			recursosResponse.setRecursos(recursos);
