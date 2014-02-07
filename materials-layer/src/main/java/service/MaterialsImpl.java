@@ -1,6 +1,9 @@
 package service;
 
 import javax.activation.DataHandler;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.soap.MTOM;
@@ -161,5 +164,32 @@ public class MaterialsImpl implements Materials {
 		}
 		return toXml(response);
 	}
+
+	@Override
+	@WebMethod
+	@WebResult(name = "successString")
+	public String setMaterial(
+			@WebParam(name = "StringMaterialXml") String param,
+			@WebParam(name = "archivo") @XmlMimeType("application/octet-stream") Object... data ) {
+		
+		Parameter parameter = Parameter.createParameter(param);
+		String toReturn = null;
+		if(parameter.getRecurso().getTipo().equalsIgnoreCase("Encuesta"))
+			toReturn = agregarEncuesta(param);
+		else if (parameter.getRecurso().getTipo().equalsIgnoreCase("Link")) {
+			//TODO: no veo lo de los links
+		}else if (parameter.getRecurso().getTipo().equalsIgnoreCase("EncuestaRespondida")) {
+		
+			toReturn = agregarEncuestaRespondida(param);
+		}else if(parameter.getRecurso().getTipo().equalsIgnoreCase("Archivo")){
+			return setArchivo(param,(DataHandler)data[0]);//TODO: ver esta parte que esta mas harcodeada que el Chavo del 8
+		}else{
+			toReturn = createFailedResponse("Parametros invalidos");
+		}
+		return toReturn;
+		
+	}
+
+
 
 }
