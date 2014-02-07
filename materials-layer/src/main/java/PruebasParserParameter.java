@@ -80,8 +80,9 @@ public class PruebasParserParameter {
 		Parameter p3 = (Parameter) parser.unmarshal("hola", Parameter.class);
 		System.out.println("Parameter: " + p3);
 		
-		System.out.println("Prueba marshal de encuesta: ");
-		or = (new EncuestaRequester()).getFromCache(11004);
+		System.out.println("Prueba marshal de encuesta: ");	
+//		or = (new EncuestaRequester()).getFromCache(11004);
+		or = (new EncuestaRequester()).getFromCache(new Encuesta(1004, null, null, false));
 
 		Encuesta encuesta = (Encuesta)or.getSerializable();
 		

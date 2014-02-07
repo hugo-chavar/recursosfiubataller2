@@ -53,14 +53,7 @@ public class MaterialsImpl implements Materials {
 		}
 		
 		if (data != null) {
-//			ArchivoParser parser = new ArchivoParser();
 			Archivo file = (Archivo) parameter.getRecurso();
-//			try {
-//				file = parser.deserializeArchivo(archivoParam);
-//			} catch (ParseException e) {
-//				e.printStackTrace();
-//				return createFailedResponse("Parametros invalidos");
-//			} 
 			file.setRawFile(data);
 			OperationResponse response =  Requester.INSTANCE.saveArchivo(file); 
 			return toXml(response);
@@ -103,12 +96,9 @@ public class MaterialsImpl implements Materials {
 	}
 	
 	private String getEncuestaRespondida(Recurso recurso, int usuarioId) {
-		OperationResponse response = new OperationResponse();
-		response.setSuccess(true);	
-		//try {
-		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida( recurso.getRecursoId(), usuarioId);
-//		response.setRespondida(respondida);
-		response.setSerializable(respondida);
+		OperationResponse response = Requester.INSTANCE.getEncuestaRespondida( recurso.getRecursoId(), usuarioId);
+//		EncuestaRespondida respondida = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida( recurso.getRecursoId(), usuarioId).getSerializable();
+//		response.setSerializable(respondida);
 		
 		//} catch (GetException e) {
 		//	return createFailedResponse(e.getMessage());
@@ -120,8 +110,8 @@ public class MaterialsImpl implements Materials {
 		OperationResponse recursosPermitidos;
 		// Obtengo los recursos
 		try {
-			if (!Requester.INSTANCE.getPermisoUsuario(ambitoId, usuarioId,"getRecursos")){
-				return createFailedResponse("El usuario "+usuarioId+" no tiene los permisos necesarios");
+			if (!Requester.INSTANCE.getPermisoUsuario(ambitoId, usuarioId, "getRecursos")){
+				return createFailedResponse("El usuario " + usuarioId + " no tiene los permisos necesarios");
 			}
 			recursosPermitidos = Requester.INSTANCE.getRecursosAmbito(ambitoId);
 		} catch (GetException e) {

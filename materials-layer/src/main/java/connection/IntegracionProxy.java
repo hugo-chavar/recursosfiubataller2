@@ -57,6 +57,15 @@ public class IntegracionProxy {
 		el1 = "<WS><Link><id>999</id></Link></WS>";
 		el2 = "<WS><Link><id>999</id><nombre>www.lomejordelomejor.es</nombre></Link></WS>"; 
 		harcodeos.put(el1, el2);
+		//--------------
+		el1 = "<WS><EncuestaRespondida><recursoId>15</recursoId><usuarioId>4</usuarioId></EncuestaRespondida></WS>";
+		el2 = "<WS><EncuestaRespondida><recursoId>15</recursoId><usuarioId>4</usuarioId><evaluacion>50</evaluacion><preguntasRespondidas>C;1;false;Azul|" +
+				"C;2;true;4</preguntasRespondidas></EncuestaRespondida></WS>"; 
+		harcodeos.put(el1, el2);
+		el1 = "<WS><EncuestaRespondida><recursoId>10</recursoId><usuarioId>5</usuarioId></EncuestaRespondida></WS>";
+		el2 = "<WS><EncuestaRespondida><recursoId>10</recursoId><usuarioId>5</usuarioId><evaluacion>100</evaluacion><preguntasRespondidas>F;1;true;1|" +
+				"F;2;true;2</preguntasRespondidas></EncuestaRespondida></WS>";
+		harcodeos.put(el1, el2);
 	}
 	
 	public String seleccionar(String xml) throws ConnectionException {

@@ -118,11 +118,11 @@ public class ClienteDelRequesterNuestro {
 		
 //		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(15, 4);
 		System.out.println("prueba encuesta respondida");
-		EncuestaRespondida encuesta_rtn = Requester.INSTANCE.getEncuestaRespondida(10, 5);
+		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(10, 5).getSerializable();
 		System.out.println(encuesta_rtn.getInfo());
 		
 		System.out.println("prueba encuesta respondida que no existe");
-		encuesta_rtn = Requester.INSTANCE.getEncuestaRespondida(20, 4);
+		encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(20, 4).getSerializable();
 		System.out.println(encuesta_rtn.getInfo());
 		
 		

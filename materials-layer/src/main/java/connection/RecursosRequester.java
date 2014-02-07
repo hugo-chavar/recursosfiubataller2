@@ -50,7 +50,7 @@ public class RecursosRequester extends HandlerRequester {
 	public OperationResponse get(Recurso target) throws GetException, ParseException {
 		current = target;
 		// Busco en el cache de recursos.
-		OperationResponse response = getFromCache(target.getRecursoId());
+		OperationResponse response = getFromCache();
 		if (response.getSuccess()) {
 			return response;
 		}
@@ -120,15 +120,15 @@ public class RecursosRequester extends HandlerRequester {
 		// cache.add(target);
 	}
 
-	@Override
-	protected boolean cacheContains(int recursoId) {
-		return cache.contains(new Recurso(recursoId, 0, ""));
-	}
-
-	@Override
-	protected Recurso retrieveCached(int recursoId) {
-		return cache.get(new Recurso(recursoId, 0, ""));
-	}
+//	@Override
+//	protected boolean cacheContains(int recursoId) {
+//		return cache.contains(new Recurso(recursoId, 0, ""));
+//	}
+//
+//	@Override
+//	protected Recurso retrieveCached(int recursoId) {
+//		return cache.get(new Recurso(recursoId, 0, ""));
+//	}
 
 	@Override
 	protected void deserialize(String xml_resp_e) throws ParseException {

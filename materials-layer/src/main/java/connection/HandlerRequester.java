@@ -3,7 +3,6 @@ package connection;
 import javax.activation.DataHandler;
 
 import model.Archivo;
-import model.Recurso;
 import connection.cache.Cache;
 import connection.exceptions.ConnectionException;
 import connection.exceptions.GetException;
@@ -35,7 +34,7 @@ public abstract class HandlerRequester {
 		} catch (ConnectionException e) {
 			String reason = "Intentando guardar " + getCurrent().getInfo();
 			reason = e.getMessage() + reason;
-			System.out.println(reason);
+//			System.out.println(reason);
 			return OperationResponse.createFailed(reason);
 		}
 	}
@@ -155,16 +154,18 @@ public abstract class HandlerRequester {
 		}
 	}
 	
-	public OperationResponse getFromCache(int id) {
+	@SuppressWarnings("unchecked")
+	public OperationResponse getFromCache(/*int id*/) {
 
 		OperationResponse response;
-		if (cacheContains(id)) {
+//		if (cacheContains(id)) {
+		if (getCache().contains(getCurrent())) {
 			response = OperationResponse.createSuccess();
-			response.setSerializable(retrieveCached(id));
+			response.setSerializable((Serializable) getCache().get(getCurrent()));
 			return response;
 		}
 
-		return OperationResponse.createFailed("No existe en cache, id:" + id);
+		return OperationResponse.createFailed("No existe en cache:" + getCurrent().getInfo());
 
 	}
 	
@@ -191,9 +192,14 @@ public abstract class HandlerRequester {
 		
 	}
 	
-	protected abstract boolean cacheContains(int id);
+	public OperationResponse getFromCache(Serializable serializable) {
+		current = serializable;
+		return getFromCache();
+	}
 	
-	protected abstract Recurso retrieveCached(int id);
+//	protected abstract boolean cacheContains(int id);
+	
+//	protected abstract Recurso retrieveCached(int id);
 
 	protected abstract void deserialize(String xml_resp_e) throws ParseException;
 	

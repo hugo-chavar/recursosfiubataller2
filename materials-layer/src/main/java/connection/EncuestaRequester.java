@@ -166,15 +166,15 @@ public class EncuestaRequester extends HandlerRequester {
 		return cache;
 	}
 
-	@Override
-	protected boolean cacheContains(int recursoId) {
-		return cache.contains(new Encuesta(recursoId, 0, "", false));
-	}
-
-	@Override
-	protected Recurso retrieveCached(int recursoId) {
-		return cache.get(new Encuesta(recursoId, 0, "", false));
-	}
+//	@Override
+//	protected boolean cacheContains(int recursoId) {
+//		return cache.contains(new Encuesta(recursoId, 0, "", false));
+//	}
+//
+//	@Override
+//	protected Recurso retrieveCached(int recursoId) {
+//		return cache.get(new Encuesta(recursoId, 0, "", false));
+//	}
 
 	@Override
 	protected Parser getParser() {
@@ -185,5 +185,6 @@ public class EncuestaRequester extends HandlerRequester {
 	protected void deserialize(String xml_resp_e) throws ParseException {
 		current = parser.deserialize(xml_resp_e);
 	}
+
 
 }

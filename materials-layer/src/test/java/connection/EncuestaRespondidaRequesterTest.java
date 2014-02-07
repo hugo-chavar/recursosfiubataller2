@@ -17,7 +17,7 @@ public class EncuestaRespondidaRequesterTest {
 	@Test
 	public void getEncuestaRespondidaWithPreguntaRespuestaACompletarRespondida() throws GetException {
 
-		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(15, 4);      
+		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(15, 4).getSerializable();      
 		
 		Assert.assertEquals(new Integer(50), encuesta_rtn.getEvaluacion());
 
@@ -30,7 +30,7 @@ public class EncuestaRespondidaRequesterTest {
 
 	@Test
 	public void getEncuestaRespondidaWithPreguntaRespuestaFijaRespondida() throws GetException {
-		EncuestaRespondida encuesta_rtn = Requester.INSTANCE.getEncuestaRespondida(10, 5);
+		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(10, 5).getSerializable();
 
 		Assert.assertEquals(new Integer(100), encuesta_rtn.getEvaluacion());
 
@@ -46,7 +46,7 @@ public class EncuestaRespondidaRequesterTest {
 	@Test
 	public void getEncuestaRespondidaFromCache() throws GetException {
 
-		EncuestaRespondida respondida = Requester.INSTANCE.getEncuestaRespondida(2, 15);     
+		EncuestaRespondida respondida = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(2, 15).getSerializable();     
 
 		Assert.assertEquals(new Integer(50), respondida.getEvaluacion());
 		List<PreguntaRespondida> respondidas = respondida.getPreguntasRespondidas();

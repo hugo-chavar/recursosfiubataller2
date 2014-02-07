@@ -30,7 +30,7 @@ public enum Requester {
 	}
 
 	public OperationResponse saveEncuestaRespondida(EncuestaRespondida respondida) {
-		return respondidaReq.saveRespondida(respondida);
+		return respondidaReq.save(respondida);
 	}
 	
 	public OperationResponse agregarRecurso(Recurso target) {
@@ -57,10 +57,6 @@ public enum Requester {
 		if (notValidInput(target)) {
 			return informFailReason(target);
 		}
-		
-//		if (target.getTipo().equalsIgnoreCase("Archivo")){
-//			return archivoReq.harcodeoDeArchivo();
-//		}
 	
 		// Busco en el cache de especifico del recurso
 		response = getRecursoFromCache(target);
@@ -90,10 +86,11 @@ public enum Requester {
 	}
 	
 	public OperationResponse getRecursosAmbito(int ambitoId) throws GetException {
+		//TODO Hugo atrapar aca la excepcion
 		return recursosReq.getAll(ambitoId);
 	}
 	
-	public EncuestaRespondida getEncuestaRespondida(int idEncuesta, int idUsuario) {
+	public OperationResponse getEncuestaRespondida(int idEncuesta, int idUsuario) {
 		return respondidaReq.getRespondida(idEncuesta, idUsuario);
 	}
 	
@@ -116,7 +113,6 @@ public enum Requester {
 	}
 
 	public boolean getPermisoUsuario(Integer ambitoId, Integer usuarioId,String action) {
-		// TODO: Yami, falta implementar este metodo
 		return true;
 	}
 	
@@ -124,11 +120,11 @@ public enum Requester {
 		
 		OperationResponse response;
 		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
-			response = encuestaReq.getFromCache(recurso.getRecursoId());
+			response = encuestaReq.getFromCache(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
-			response = linkReq.getFromCache(recurso.getRecursoId());
+			response = linkReq.getFromCache(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Archivo")) {
-			response = archivoReq.getFromCache(recurso.getRecursoId());
+			response = archivoReq.getFromCache(recurso);
 		} else {
 			response = OperationResponse.createFailed("No existe cache");
 		}

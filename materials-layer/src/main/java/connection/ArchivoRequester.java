@@ -163,15 +163,15 @@ public class ArchivoRequester extends HandlerRequester {
 		return cache;
 	}
 
-	@Override
-	protected boolean cacheContains(int recursoId) {
-		return cache.contains(new Archivo(recursoId, 0, ""));
-	}
-
-	@Override
-	protected Recurso retrieveCached(int recursoId) {
-		return cache.get(new Archivo(recursoId, 0, ""));
-	}
+//	@Override
+//	protected boolean cacheContains(int recursoId) {
+//		return cache.contains(new Archivo(recursoId, 0, ""));
+//	}
+//
+//	@Override
+//	protected Recurso retrieveCached(int recursoId) {
+//		return cache.get(new Archivo(recursoId, 0, ""));
+//	}
 
 	@Override
 	protected Parser getParser() {
