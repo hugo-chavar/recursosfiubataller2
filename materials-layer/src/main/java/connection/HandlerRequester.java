@@ -34,7 +34,6 @@ public abstract class HandlerRequester {
 		} catch (ConnectionException e) {
 			String reason = "Intentando guardar " + getCurrent().getInfo();
 			reason = e.getMessage() + reason;
-//			System.out.println(reason);
 			return OperationResponse.createFailed(reason);
 		}
 	}
@@ -84,7 +83,6 @@ public abstract class HandlerRequester {
 		try {
 
 			String xml_resp_e = proxy.guardarArchivo(xml, archivo);
-//			System.out.println("Integracion me esta contestando : " + xml_resp_e);
 			return validateOneWayOperation(xml_resp_e);
 			
 //			updateCache(); al guardar no se actualiza el cache
@@ -118,7 +116,6 @@ public abstract class HandlerRequester {
 		try {
 
 			String xml_resp_e = proxy.eliminar(xml);
-//			System.out.println(xml_resp_e);
 			deleteIfExists();
 
 			return validateOneWayOperation(xml_resp_e);
@@ -155,10 +152,9 @@ public abstract class HandlerRequester {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public OperationResponse getFromCache(/*int id*/) {
+	public OperationResponse getFromCache() {
 
 		OperationResponse response;
-//		if (cacheContains(id)) {
 		if (getCache().contains(getCurrent())) {
 			response = OperationResponse.createSuccess();
 			response.setSerializable((Serializable) getCache().get(getCurrent()));
@@ -197,13 +193,7 @@ public abstract class HandlerRequester {
 		return getFromCache();
 	}
 	
-//	protected abstract boolean cacheContains(int id);
-	
-//	protected abstract Recurso retrieveCached(int id);
-
 	protected abstract void deserialize(String xml_resp_e) throws ParseException;
-	
-//	protected abstract String getHandledType();
 	
 	protected abstract Parser getParser();
 	

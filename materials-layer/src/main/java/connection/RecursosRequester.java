@@ -94,7 +94,6 @@ public class RecursosRequester extends HandlerRequester {
 			recursosResponse.setRecursos(recursosEjemplo);
 			recursosResponse.setSuccess(true);
 			return recursosResponse;
-			
 		}
 
 	}
@@ -119,11 +118,6 @@ public class RecursosRequester extends HandlerRequester {
 	protected void deserialize(String xml_resp_e) throws ParseException {
 		current = parser.deserialize(xml_resp_e);
 	}
-
-//	@Override
-//	protected String getHandledType() {
-//		return "Recurso";
-//	}
 
 	@Override
 	protected Parser getParser() {

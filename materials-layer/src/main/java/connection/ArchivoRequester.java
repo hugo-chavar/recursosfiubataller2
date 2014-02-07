@@ -152,11 +152,6 @@ public class ArchivoRequester extends HandlerRequester {
 //		return response;
 //	}
 	
-//	@Override
-//	protected String getHandledType() {
-//		return "Archivo";
-//	}
-
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected Cache getCache() {

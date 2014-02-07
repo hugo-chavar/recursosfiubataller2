@@ -155,26 +155,11 @@ public class EncuestaRequester extends HandlerRequester {
 		}
 	}
 
-//	@Override
-//	protected String getHandledType() {
-//		return "Encuesta";
-//	}
-	
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected Cache getCache() {
 		return cache;
 	}
-
-//	@Override
-//	protected boolean cacheContains(int recursoId) {
-//		return cache.contains(new Encuesta(recursoId, 0, "", false));
-//	}
-//
-//	@Override
-//	protected Recurso retrieveCached(int recursoId) {
-//		return cache.get(new Encuesta(recursoId, 0, "", false));
-//	}
 
 	@Override
 	protected Parser getParser() {

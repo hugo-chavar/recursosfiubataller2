@@ -65,11 +65,6 @@ public class LinkRequester extends HandlerRequester {
 		cache.remove(new Link(recursoId, 0, ""));
 	}
 
-//	@Override
-//	protected String getHandledType() {
-//		return "Link";
-//	}
-
 	@Override
 	protected void deserialize(String xml_resp_e) throws ParseException {
 		current = parser.deserialize(xml_resp_e);
