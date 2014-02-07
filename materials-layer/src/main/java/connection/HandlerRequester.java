@@ -133,7 +133,7 @@ public abstract class HandlerRequester {
 	protected OperationResponse currentObjetToResponse() {
 		OperationResponse response;
 		if (getCurrent() == null) {
-			response = OperationResponse.createFailed("NullPointer: Error al obtener " + getHandledType());
+			response = OperationResponse.createFailed("NullPointer: Error al obtener " + getCurrent().getInfo());
 		} else {
 			response = OperationResponse.createSuccess();
 			response.setSerializable(getCurrent());
@@ -203,7 +203,7 @@ public abstract class HandlerRequester {
 
 	protected abstract void deserialize(String xml_resp_e) throws ParseException;
 	
-	protected abstract String getHandledType();
+//	protected abstract String getHandledType();
 	
 	protected abstract Parser getParser();
 	

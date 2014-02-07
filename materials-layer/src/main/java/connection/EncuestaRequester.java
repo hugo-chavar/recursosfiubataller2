@@ -155,10 +155,10 @@ public class EncuestaRequester extends HandlerRequester {
 		}
 	}
 
-	@Override
-	protected String getHandledType() {
-		return "Encuesta";
-	}
+//	@Override
+//	protected String getHandledType() {
+//		return "Encuesta";
+//	}
 	
 	@SuppressWarnings("rawtypes")
 	@Override

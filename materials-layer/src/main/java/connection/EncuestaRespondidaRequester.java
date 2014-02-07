@@ -79,10 +79,10 @@ public class EncuestaRespondidaRequester extends HandlerRequester {
 		current = parser.deserialize(xml_resp_e);
 	}
 
-	@Override
-	protected String getHandledType() {
-		return "EncuestaRespondida";
-	}
+//	@Override
+//	protected String getHandledType() {
+//		return "EncuestaRespondida";
+//	}
 
 	@Override
 	protected Parser getParser() {

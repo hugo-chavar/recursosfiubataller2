@@ -55,8 +55,6 @@ public class RecursosRequester extends HandlerRequester {
 			return response;
 		}
 		String xml = parser.serializeRecursoQuery(target.getRecursoId());
-		// System.out.println("Esto es lo que voy a buscar:");
-		// System.out.println(xml);
 		return get(xml);
 	}
 
@@ -72,7 +70,6 @@ public class RecursosRequester extends HandlerRequester {
 
 			
 			String xml_resp_e = proxy.seleccionar(xml);
-//			System.out.println(xml_resp_e);
 			recursos = parser.deserializeRecursos(xml_resp_e);
 
 			recursosResponse.setRecursos(recursos);
@@ -115,31 +112,18 @@ public class RecursosRequester extends HandlerRequester {
 	public void updateCache(Recurso target) {
 		current = target;
 		updateCache();
-		// if (cache.contains(target)) {
-		// cache.remove(target);
-		// }
-		// cache.add(target);
-	}
 
-//	@Override
-//	protected boolean cacheContains(int recursoId) {
-//		return cache.contains(new Recurso(recursoId, 0, ""));
-//	}
-//
-//	@Override
-//	protected Recurso retrieveCached(int recursoId) {
-//		return cache.get(new Recurso(recursoId, 0, ""));
-//	}
+	}
 
 	@Override
 	protected void deserialize(String xml_resp_e) throws ParseException {
 		current = parser.deserialize(xml_resp_e);
 	}
 
-	@Override
-	protected String getHandledType() {
-		return "Recurso";
-	}
+//	@Override
+//	protected String getHandledType() {
+//		return "Recurso";
+//	}
 
 	@Override
 	protected Parser getParser() {

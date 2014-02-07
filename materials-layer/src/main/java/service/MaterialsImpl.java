@@ -12,7 +12,6 @@ import model.Recurso;
 import connection.Parameter;
 import connection.Parser;
 import connection.Requester;
-import connection.exceptions.GetException;
 import connection.responses.OperationResponse;
 
 @MTOM 

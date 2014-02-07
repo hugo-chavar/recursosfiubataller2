@@ -152,26 +152,16 @@ public class ArchivoRequester extends HandlerRequester {
 //		return response;
 //	}
 	
-	@Override
-	protected String getHandledType() {
-		return "Archivo";
-	}
+//	@Override
+//	protected String getHandledType() {
+//		return "Archivo";
+//	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected Cache getCache() {
 		return cache;
 	}
-
-//	@Override
-//	protected boolean cacheContains(int recursoId) {
-//		return cache.contains(new Archivo(recursoId, 0, ""));
-//	}
-//
-//	@Override
-//	protected Recurso retrieveCached(int recursoId) {
-//		return cache.get(new Archivo(recursoId, 0, ""));
-//	}
 
 	@Override
 	protected Parser getParser() {
