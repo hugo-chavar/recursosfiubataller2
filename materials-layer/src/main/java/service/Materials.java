@@ -8,9 +8,6 @@ import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.BindingType;
 
-import com.sun.xml.ws.dump.MessageDumping;
-
-
 @BindingType(value = javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
 @WebService
 public interface Materials {
@@ -46,21 +43,21 @@ public interface Materials {
 //	String agregarLink(@WebParam(name = "link") Link link, @WebParam(name = "usuarioId") int usuarioId);
 
 	@WebMethod
-	String agregarEncuesta(@WebParam(name = "parametros")String encuestaParam);
+	String agregarRecurso(@WebParam(name = "parametros")String encuestaParam);
 	
 	@WebMethod
 	@WebResult(name = "successString")
 	//String setArchivo(@WebParam(name = "ambitoId")int ambitoId, @WebParam(name = "nombre")String name, @WebParam(name = "extension")String ext, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") DataHandler data);
-	String setArchivo(@WebParam(name = "parametros")String archivoParam, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") DataHandler data);
+	String agregarArchivo(@WebParam(name = "parametros")String archivoParam, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") DataHandler data);
 //	@WebMethod
 //	@WebResult(name = "borrado")
 //	String borrarRecurso(@WebParam(name = "recursoId") int recursoId, @WebParam(name = "usuarioId") int usuarioId);
 	
 	
 	
-	@WebMethod
-	@WebResult(name="successString")
-	String setMaterial(@WebParam(name="StringMaterialXml") String param, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") Object... data );
+//	@WebMethod
+//	@WebResult(name="successString")
+//	String setMaterial(@WebParam(name="StringMaterialXml") String param, @WebParam(name = "archivo") @XmlMimeType("application/octet-stream") Object... data );
 //	@WebMethod
 //	@WebResult(name = "archivo")
 //	String getArchivo(@WebParam(name = "ParametrosXmlIdAmbitoIdRecurso") String xmlParam);

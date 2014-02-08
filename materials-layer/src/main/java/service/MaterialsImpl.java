@@ -1,9 +1,6 @@
 package service;
 
 import javax.activation.DataHandler;
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.ws.soap.MTOM;
@@ -29,15 +26,18 @@ public class MaterialsImpl implements Materials {
 	}
 
 	@Override
-	public String agregarEncuesta(String encuestaParam) {
+	public String agregarRecurso(String encuestaParam) {
 		Parameter parameter = Parameter.createParameter(encuestaParam);
-		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null || parameter.getRecurso().getClass() != Encuesta.class){
+		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null) {
 			return createFailedResponse("Parametros invalidos");
 		}
+		if (parameter.getRecurso().getClass() == Archivo.class) {
+			createFailedResponse("Para archivos utilice el WS agregarArchivo");
+		}
 		OperationResponse response;	
-		Encuesta encuesta = (Encuesta)parameter.getRecurso();
-		if (Requester.INSTANCE.getPermisoUsuario(encuesta.getAmbitoId(), parameter.getUsuarioId(),"agregarEncuesta")) {
-			response = Requester.INSTANCE.agregarRecurso(encuesta);
+		Recurso recurso = parameter.getRecurso();
+		if (Requester.INSTANCE.getPermisoUsuario(recurso.getAmbitoId(), parameter.getUsuarioId(),"agregarEncuesta")) {
+			response = Requester.INSTANCE.agregarRecurso(recurso);
 		}
 		else{
 			return createFailedResponse("Permisos insuficientes");
@@ -47,7 +47,7 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	//EN el xml debe venir el ambitoId, nombre, extension.
-	public String setArchivo(String archivoParam,	@XmlMimeType("application/octet-stream") DataHandler data) {
+	public String agregarArchivo(String archivoParam,	@XmlMimeType("application/octet-stream") DataHandler data) {
 
 		Parameter parameter = Parameter.createParameter(archivoParam);
 		if (parameter.getRecurso() == null || parameter.getRecurso().getClass() != Archivo.class){
@@ -159,30 +159,30 @@ public class MaterialsImpl implements Materials {
 		return toXml(response);
 	}
 
-	@Override
-	@WebMethod
-	@WebResult(name = "successString")
-	public String setMaterial(
-			@WebParam(name = "StringMaterialXml") String param,
-			@WebParam(name = "archivo") @XmlMimeType("application/octet-stream") Object... data ) {
-		
-		Parameter parameter = Parameter.createParameter(param);
-		String toReturn = null;
-		if(parameter.getRecurso().getTipo().equalsIgnoreCase("Encuesta"))
-			toReturn = agregarEncuesta(param);
-		else if (parameter.getRecurso().getTipo().equalsIgnoreCase("Link")) {
-			//TODO: no veo lo de los links
-		}else if (parameter.getRecurso().getTipo().equalsIgnoreCase("EncuestaRespondida")) {
-		
-			toReturn = agregarEncuestaRespondida(param);
-		}else if(parameter.getRecurso().getTipo().equalsIgnoreCase("Archivo")){
-			return setArchivo(param,(DataHandler)data[0]);//TODO: ver esta parte que esta mas harcodeada que el Chavo del 8
-		}else{
-			toReturn = createFailedResponse("Parametros invalidos");
-		}
-		return toReturn;
-		
-	}
+//	@Override
+//	@WebMethod
+//	@WebResult(name = "successString")
+//	public String setMaterial(
+//			@WebParam(name = "StringMaterialXml") String param,
+//			@WebParam(name = "archivo") @XmlMimeType("application/octet-stream") Object... data ) {
+//		
+//		Parameter parameter = Parameter.createParameter(param);
+//		String toReturn = null;
+//		if(parameter.getRecurso().getTipo().equalsIgnoreCase("Encuesta"))
+//			toReturn = agregarRecurso(param);
+//		else if (parameter.getRecurso().getTipo().equalsIgnoreCase("Link")) {
+//			//: no veo lo de los links
+//		}else if (parameter.getRecurso().getTipo().equalsIgnoreCase("EncuestaRespondida")) {
+//		
+//			toReturn = agregarEncuestaRespondida(param);
+//		}else if(parameter.getRecurso().getTipo().equalsIgnoreCase("Archivo")){
+//			return agregarArchivo(param,(DataHandler)data[0]);//: ver esta parte que esta mas harcodeada que el Chavo del 8
+//		}else{
+//			toReturn = createFailedResponse("Parametros invalidos");
+//		}
+//		return toReturn;
+//		
+//	}
 
 
 

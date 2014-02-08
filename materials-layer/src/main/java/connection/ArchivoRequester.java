@@ -17,6 +17,7 @@ import connection.responses.OperationResponse;
 public class ArchivoRequester extends HandlerRequester {
 	private ArchivoParser parser;
 	private Cache<Archivo> cache;
+	private DataHandler dataHandler;
 
 	public ArchivoRequester() {
 		super();
@@ -79,7 +80,7 @@ public class ArchivoRequester extends HandlerRequester {
 		current = archivo; 
 		String archivo_str = parser.serializeArchivo(archivo);
 		try {
-			return saveFile(archivo_str);
+			return saveFile(archivo_str, archivo.getRawFile());
 		} catch (GetException e) {
 			return OperationResponse.createFailed(e.getMessage());
 		}
@@ -200,6 +201,30 @@ public class ArchivoRequester extends HandlerRequester {
 			System.out.println(message);
 		}
 		
+	}
+
+	public DataHandler getDataHandler() {
+		return dataHandler;
+	}
+
+	public void setDataHandler(DataHandler dataHandler) {
+		this.dataHandler = dataHandler;
+	}
+	
+	
+	protected OperationResponse saveFile(String xml, DataHandler dataHandler) throws GetException {
+//		DataHandler archivo = ((Archivo) current).getRawFile();
+		try {
+
+			String xml_resp_e = proxy.guardarArchivo(xml, dataHandler);
+			return validateOneWayOperation(xml_resp_e);
+			
+//			updateCache(); al guardar no se actualiza el cache
+		} catch (ConnectionException e) {
+			String reason = e.getMessage() + getCurrent().getInfo();
+			return OperationResponse.createFailed(reason);
+
+		}	
 	}
 
 }

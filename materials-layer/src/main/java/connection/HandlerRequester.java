@@ -1,8 +1,5 @@
 package connection;
 
-import javax.activation.DataHandler;
-
-import model.Archivo;
 import connection.cache.Cache;
 import connection.exceptions.ConnectionException;
 import connection.exceptions.GetException;
@@ -77,21 +74,7 @@ public abstract class HandlerRequester {
 		}
 		
 	}
-	
-	protected OperationResponse saveFile(String xml) throws GetException {
-		DataHandler archivo = ((Archivo) current).getRawFile();
-		try {
 
-			String xml_resp_e = proxy.guardarArchivo(xml, archivo);
-			return validateOneWayOperation(xml_resp_e);
-			
-//			updateCache(); al guardar no se actualiza el cache
-		} catch (ConnectionException e) {
-			String reason = e.getMessage() + getCurrent().getInfo();
-			return OperationResponse.createFailed(reason);
-
-		}	
-	}
 
 	public OperationResponse get(String xml) throws ParseException, GetException {
 

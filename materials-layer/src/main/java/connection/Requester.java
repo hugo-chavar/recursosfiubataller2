@@ -14,23 +14,27 @@ public enum Requester {
 	
 	INSTANCE;
 	
-	private EncuestaRequester encuestaReq;
-	private EncuestaRespondidaRequester respondidaReq;
-	private ArchivoRequester archivoReq;
-	private LinkRequester linkReq;
-	private RecursosRequester recursosReq;
+	private EncuestaRequester encuestaRequester;
+	private EncuestaRespondidaRequester respondidaRequester;
+	private ArchivoRequester archivoRequester;
+	private LinkRequester linkRequester;
+	private RecursosRequester recursosRequester;
 	
 	
 	private Requester() {
-		encuestaReq = new EncuestaRequester();
-		archivoReq = new ArchivoRequester();
-		recursosReq = new RecursosRequester();
-		linkReq = new LinkRequester();
-		respondidaReq = new EncuestaRespondidaRequester();
+		encuestaRequester = new EncuestaRequester();
+		archivoRequester = new ArchivoRequester();
+		recursosRequester = new RecursosRequester();
+		linkRequester = new LinkRequester();
+		respondidaRequester = new EncuestaRespondidaRequester();
+	}
+	
+	public ArchivoRequester getArchivoRequester() {
+		return archivoRequester;
 	}
 
 	public OperationResponse saveEncuestaRespondida(EncuestaRespondida respondida) {
-		return respondidaReq.save(respondida);
+		return respondidaRequester.save(respondida);
 	}
 	
 	public OperationResponse agregarRecurso(Recurso target) {
@@ -45,7 +49,7 @@ public enum Requester {
 		response = makeQueryAddRecurso(target);
 		
 		// Actualizo el cache de recursos
-		recursosReq.updateCache(target);
+		recursosRequester.updateCache(target);
 		
 		return response;
 		
@@ -67,7 +71,7 @@ public enum Requester {
 		
 		// Busco el recurso
 		try {
-			response = recursosReq.get(target);
+			response = recursosRequester.get(target);
 		} catch (GetException e) {
 			response = OperationResponse.createFailed(e.getMessage());
 		} catch (ParseException e) {
@@ -86,12 +90,11 @@ public enum Requester {
 	}
 	
 	public OperationResponse getRecursosAmbito(int ambitoId) {
-		//TODO Hugo atrapar aca la excepcion
-		return recursosReq.getAll(ambitoId);
+		return recursosRequester.getAll(ambitoId);
 	}
 	
 	public OperationResponse getEncuestaRespondida(int idEncuesta, int idUsuario) {
-		return respondidaReq.getRespondida(idEncuesta, idUsuario);
+		return respondidaRequester.getRespondida(idEncuesta, idUsuario);
 	}
 	
 	public OperationResponse deleteRecurso(Recurso recurso) {
@@ -101,14 +104,14 @@ public enum Requester {
 		}
 		// Borro el recurso de todos los caches
 		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
-			encuestaReq.deleteRecurso(recurso);
+			encuestaRequester.deleteRecurso(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
-			linkReq.deleteRecurso(recurso);
+			linkRequester.deleteRecurso(recurso);
 		} else {
-			archivoReq.deleteRecurso(recurso);
+			archivoRequester.deleteRecurso(recurso);
 		}
 		
-		return recursosReq.delete(recurso);
+		return recursosRequester.delete(recurso);
 
 	}
 
@@ -120,11 +123,11 @@ public enum Requester {
 		
 		OperationResponse response;
 		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
-			response = encuestaReq.getFromCache(recurso);
+			response = encuestaRequester.getFromCache(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
-			response = linkReq.getFromCache(recurso);
+			response = linkRequester.getFromCache(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Archivo")) {
-			response = archivoReq.getFromCache(recurso);
+			response = archivoRequester.getFromCache(recurso);
 		} else {
 			response = OperationResponse.createFailed("No existe cache");
 		}
@@ -138,11 +141,11 @@ public enum Requester {
 		OperationResponse response;
 		
 		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
-			response = encuestaReq.save((Encuesta)recurso);
+			response = encuestaRequester.save((Encuesta)recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
-			response = linkReq.save((Link)recurso);
+			response = linkRequester.save((Link)recurso);
 		} else {
-			response = archivoReq.save((Archivo)recurso);
+			response = archivoRequester.save((Archivo)recurso);
 		//	response = OperationResponse.createFailed("Tipo de recurso inexistente");
 		}
 		
@@ -155,12 +158,12 @@ public enum Requester {
 		OperationResponse response;
 		
 		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
-			response = encuestaReq.get(recurso);
+			response = encuestaRequester.get(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
-			response = linkReq.get(recurso);
+			response = linkRequester.get(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Archivo")) {
 			//System.out.println("Entra a makeQuery de archivo");
-			response = archivoReq.get(recurso);
+			response = archivoRequester.get(recurso);
 		} else {
 			response = OperationResponse.createFailed("Tipo de recurso inexistente");
 		}
@@ -195,7 +198,7 @@ public enum Requester {
 
 	public OperationResponse saveArchivo(Archivo file) {
 		OperationResponse response;
-		response = archivoReq.save(file);
+		response = archivoRequester.save(file);
 		return response;
 	}
 	
