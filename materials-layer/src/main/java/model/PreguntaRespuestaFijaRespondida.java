@@ -31,7 +31,10 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 //		String[] splited = s.split(";");
 //		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
 		String[] splited = StringEscapeUtils.splitIgnoringEscaped(s, ';');
-		unmarshallRespuestas(splited[3]);
+		if(splited.length==4)
+			unmarshallRespuestas(splited[3]);
+		else
+			unmarshallRespuestas("null");
 		
 	}
 
@@ -41,7 +44,7 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 
 	@XmlAttribute(name = "respuestas")
 	public String getRespuestasFijas() {
-		return marshallRespuestas() != "null" ? marshallRespuestas() : null;
+		return marshallRespuestas() != "null" ? marshallRespuestas() : "";
 	}
 
 	@Override
@@ -88,11 +91,11 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 	}
 	
 	private void unmarshallRespuestas(String rtas) {
+		respuestasfijas = new ArrayList<Integer>();
 		if ("null".equals(rtas)) {
 			return;
 		}
 		String[] splited = rtas.split(",");
-		respuestasfijas = new ArrayList<Integer>();
 		for (String s : splited) {
 			respuestasfijas.add(Integer.valueOf(s)-1);
 		}

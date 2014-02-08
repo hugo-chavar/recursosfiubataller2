@@ -58,7 +58,10 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 //		String[] splited = s.split(";");
 //		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
 		String[] splited = StringEscapeUtils.splitIgnoringEscaped(s, ';');
-		respuesta = StringEscapeUtils.removeEscapers(splited[3]);
+		if (splited.length==4)
+			respuesta = StringEscapeUtils.removeEscapers(splited[3]);
+		else
+			respuesta = "";
 	}
 
 }

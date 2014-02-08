@@ -183,6 +183,26 @@ public class Client {
 		}
 		
 		try {
+			//Prueba get otra Respondida con parametros validos de cache conteniendo respuestas multiples
+			String xmlParametro ="<parametro><recurso><recursoId>18</recursoId></recurso><usuarioId>5</usuarioId></parametro>";
+			String response = port.getEncuestaRespondida(xmlParametro);
+			System.out.println(response);
+		}catch (Exception e){
+			System.out.println("Error al traer la encuesta Respondida!");
+			System.out.println(e.toString());
+		}
+		
+		try {
+			//Prueba get otra Respondida con parametros validos de cache conteniendo respuestas vacias
+			String xmlParametro ="<parametro><recurso><recursoId>19</recursoId></recurso><usuarioId>5</usuarioId></parametro>";
+			String response = port.getEncuestaRespondida(xmlParametro);
+			System.out.println(response);
+		}catch (Exception e){
+			System.out.println("Error al traer la encuesta Respondida!");
+			System.out.println(e.toString());
+		}
+		
+		try {
 			//Prueba get Respondida sin especificar recursoId
 			String xmlParametro ="<parametro><usuarioId>4</usuarioId></parametro>";
 			String response = port.getEncuestaRespondida(xmlParametro);
@@ -202,21 +222,21 @@ public class Client {
 			System.out.println(e.toString());
 		}
 		
-		try{		
-			System.out.println("Prueba set Archivo");		
-			String path, nombre, desc, extension;		
-			int idRec;		
-			String xml =" <WS><Archivo><ambitoId>-1</ambitoId><id>1003</id><descripcion>la foto del siglo</descripcion><nombre>teofilo</nombre><tipo>jpg</tipo></Archivo></WS>";		
-			//path = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();		
-			//path = path.substring(0, path.lastIndexOf("classes") + 8);		
-			path = "file:/home/damian/aux.txt";		
-			DataHandler arch = new DataHandler(new URL(path));		
-			String response = port.setArchivo(xml, arch);		
-			System.out.println(response);		
-		}catch (Exception e){		
-			System.out.println("Se produjo un error");		
-			System.out.println(e.toString());		
-		}
+//		try{		
+//			System.out.println("Prueba set Archivo");		
+//			String path, nombre, desc, extension;		
+//			int idRec;		
+//			String xml =" <WS><Archivo><ambitoId>-1</ambitoId><id>1003</id><descripcion>la foto del siglo</descripcion><nombre>teofilo</nombre><tipo>jpg</tipo></Archivo></WS>";		
+//			//path = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();		
+//			//path = path.substring(0, path.lastIndexOf("classes") + 8);		
+//			path = "file:/home/damian/aux.txt";		
+//			DataHandler arch = new DataHandler(new URL(path));		
+//			String response = port.setArchivo(xml, arch);		
+//			System.out.println(response);		
+//		}catch (Exception e){		
+//			System.out.println("Se produjo un error");		
+//			System.out.println(e.toString());		
+//		}
 	}
 
 }
