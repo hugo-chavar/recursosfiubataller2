@@ -116,14 +116,13 @@ public abstract class HandlerRequester {
 		try {
 
 			String xml_resp_e = proxy.eliminar(xml);
-//			deleteIfExists();
+			deleteFromCache();
 
 			return validateOneWayOperation(xml_resp_e);
 			
 		} catch (ConnectionException e) {
 			String reason = e.getMessage() + "Intentando borrar " + getCurrent().getInfo();
 			return OperationResponse.createFailed(reason);
-
 		}
 	}
 
@@ -150,7 +149,6 @@ public abstract class HandlerRequester {
 	
 	@SuppressWarnings("unchecked")
 	protected void updateCache() {
-//		deleteFromCache();
 		getCache().add(getCurrent());
 	}
 
@@ -173,7 +171,7 @@ public abstract class HandlerRequester {
 
 	}
 	
-	private void createCurrentObject(String xml_resp_e) throws ParseException, GetException {
+	protected void createCurrentObject(String xml_resp_e) throws ParseException, GetException {
 		Serializable aux = current;
 		
 		deserialize(xml_resp_e);
@@ -182,17 +180,17 @@ public abstract class HandlerRequester {
 		
 	}
 
-	private void verifyCurrentObject() throws GetException {
-		if (current == null) {	
+	protected void verifyCurrentObject() throws GetException {
+		if (currentIsInvalid()) {	
 			String message = "Error desconocido: current is null ";
 			throw new GetException(message);
 		}
 		
 	}
 	
-	public void deleteRecurso(Serializable s) {
-		current = s;
-//		deleteIfExists();
+	public void deleteRecurso(Serializable serializable) {
+		current = serializable;
+		deleteFromCache();
 		
 	}
 	

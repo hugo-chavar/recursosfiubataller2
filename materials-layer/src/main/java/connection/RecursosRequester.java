@@ -11,7 +11,7 @@ import connection.responses.OperationResponse;
 import connection.responses.RecursosResponse;
 
 public class RecursosRequester extends HandlerRequester {
-	
+
 	private boolean all;
 
 	private RecursosParser parser;
@@ -64,59 +64,21 @@ public class RecursosRequester extends HandlerRequester {
 	public OperationResponse getAll(int IDAmbito) {
 
 		setAll(true);
-		
-
 		// Consulto los recursos guardados
 		String xml = parser.serializeRecursosQuery(IDAmbito);
-		
-			try {
-				return get(xml);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				System.out.println(e.getMessage());
-				e.printStackTrace();
-				return OperationResponse.createFailed(e.getMessage());
-			} catch (GetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println(e.getMessage());
-				return OperationResponse.createFailed(e.getMessage());
-			}
-			// TODO : (Hugo) devuelvo datos de ejemplo, mientras no funcione integracion
-//			 String message = e.getMessage();
-//			 return OperationResponse.createFailed(message);
-//			RecursosResponse recursosResponse = new RecursosResponse();
-//			recursosResponse.setRecursos(recursosEjemplo);
-//			recursosResponse.setSuccess(true);
-//			return recursosResponse;
-		
-//		try {
-//			String xml_resp_e = proxy.seleccionar(xml);
-//			recursosCurrent = parser.deserializeRecursos(xml_resp_e);
-//
-//			recursosResponse.setRecursos(recursosCurrent);
-//
-//			cache.addAll(recursosCurrent);
-//
-//			recursosResponse.setSuccess(true);
-//			return recursosResponse;
-//		} catch (ParseException e) {
-//			message = e.getMessage();
-//
-//			// TODO : (Hugo) devuelvo datos de ejemplo, mientras no funcione integracion
-//			// return OperationResponse.createFailed(message);
-//			recursosResponse.setRecursos(recursosEjemplo);
-//			recursosResponse.setSuccess(true);
-//			return recursosResponse;
-//		} catch (ConnectionException e) {
-//			message = "Intentando obtener los recursos del IDAmbito: " + IDAmbito;
-//			message = e.getMessage() + message;
-//			// TODO : (Hugo) devuelvo datos de ejemplo, mientras no funcione integracion
-//			// return OperationResponse.createFailed(message);
-//			recursosResponse.setRecursos(recursosEjemplo);
-//			recursosResponse.setSuccess(true);
-//			return recursosResponse;
-//		}
+
+		try {
+			return get(xml);
+		} catch (ParseException e) {
+			return OperationResponse.createFailed(e.getMessage());
+		} catch (GetException e) {
+			return OperationResponse.createFailed(e.getMessage());
+		}
+		// TODO : (Hugo) devuelvo datos de ejemplo
+		// RecursosResponse recursosResponse = new RecursosResponse();
+		// recursosResponse.setRecursos(recursosEjemplo);
+		// recursosResponse.setSuccess(true);
+		// return recursosResponse;
 
 	}
 
@@ -141,7 +103,6 @@ public class RecursosRequester extends HandlerRequester {
 	@Override
 	protected void deserialize(String xml_resp_e) throws ParseException {
 		if (isAll()) {
-			System.out.println(xml_resp_e);
 			recursosCurrent = parser.deserializeRecursos(xml_resp_e);
 		} else {
 			current = parser.deserialize(xml_resp_e);
@@ -158,18 +119,18 @@ public class RecursosRequester extends HandlerRequester {
 	protected Cache getCache() {
 		return cache;
 	}
-	
+
 	@Override
 	protected OperationResponse createResponse() {
 		if (!isAll()) {
 			return super.createResponse();
 		}
-		RecursosResponse response = new RecursosResponse();;
+		RecursosResponse response = new RecursosResponse();
 		response.setRecursos(recursosCurrent);
 		response.setSuccess(true);
 		return response;
 	}
-	
+
 	@Override
 	protected void updateCache() {
 		if (!isAll()) {
@@ -178,7 +139,13 @@ public class RecursosRequester extends HandlerRequester {
 			cache.addAll(recursosCurrent);
 		}
 	}
-	
+
+	@Override
+	protected void createCurrentObject(String xml_resp_e) throws ParseException, GetException {
+		deserialize(xml_resp_e);
+		verifyCurrentObject();
+
+	}
 
 	protected boolean currentIsInvalid() {
 		if (!isAll()) {
