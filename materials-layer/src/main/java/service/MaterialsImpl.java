@@ -99,12 +99,6 @@ public class MaterialsImpl implements Materials {
 	
 	private String getEncuestaRespondida(Recurso recurso, int usuarioId) {
 		OperationResponse response = Requester.INSTANCE.getEncuestaRespondida( recurso.getRecursoId(), usuarioId);
-//		EncuestaRespondida respondida = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida( recurso.getRecursoId(), usuarioId).getSerializable();
-//		response.setSerializable(respondida);
-		
-		//} catch (GetException e) {
-		//	return createFailedResponse(e.getMessage());
-		//}
 		return toXml(response);
 	}
 	

@@ -163,6 +163,7 @@ public class Parser {
 
 		NodeList nodes = doc.getElementsByTagName(baseTag);
 		
+		
 		if (nodes.getLength() == 0) {
 			throw new ParseException("No existe tag " + baseTag);
 		}
@@ -172,6 +173,7 @@ public class Parser {
 	protected HashMap<String, String> fillFieldValues(NodeList linkChildNodes) {
 		HashMap<String, String> fields;
 		fields = new HashMap<String, String>();
+		int a = linkChildNodes.getLength();
 		for (int i = 0; i < linkChildNodes.getLength(); i++) {
 			Element element = (Element) linkChildNodes.item(i);
 			fields.put(element.getNodeName(), element.getTextContent());

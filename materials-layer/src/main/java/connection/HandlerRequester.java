@@ -116,7 +116,7 @@ public abstract class HandlerRequester {
 		try {
 
 			String xml_resp_e = proxy.eliminar(xml);
-			deleteIfExists();
+//			deleteIfExists();
 
 			return validateOneWayOperation(xml_resp_e);
 			
@@ -129,26 +129,34 @@ public abstract class HandlerRequester {
 
 	protected OperationResponse currentObjetToResponse() {
 		OperationResponse response;
-		if (getCurrent() == null) {
+		if (currentIsInvalid()) {
 			response = OperationResponse.createFailed("NullPointer: Error al obtener " + getCurrent().getInfo());
 		} else {
-			response = OperationResponse.createSuccess();
-			response.setSerializable(getCurrent());
+			response = createResponse();
 		}
+		return response;
+	}
+
+	protected boolean currentIsInvalid() {
+		return getCurrent() == null;
+	}
+
+	protected OperationResponse createResponse() {
+		OperationResponse response;
+		response = OperationResponse.createSuccess();
+		response.setSerializable(getCurrent());
 		return response;
 	}
 	
 	@SuppressWarnings("unchecked")
 	protected void updateCache() {
-		deleteIfExists();
+//		deleteFromCache();
 		getCache().add(getCurrent());
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void deleteIfExists() {
-		if (getCache().contains(getCurrent())) {
-			getCache().remove(getCurrent());
-		}
+	protected void deleteFromCache() {
+		getCache().remove(getCurrent());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -184,7 +192,7 @@ public abstract class HandlerRequester {
 	
 	public void deleteRecurso(Serializable s) {
 		current = s;
-		deleteIfExists();
+//		deleteIfExists();
 		
 	}
 	

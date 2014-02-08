@@ -28,14 +28,13 @@ public class Cache<T> {
 
 	public void addAll(Collection<T> elemnts) {
 		for (T e : elemnts) {
-			if (contains(e)) {
-				remove(e);
-			}
+			remove(e);
 			add(e);
 		}
 	}
 
 	public void add(T element) {
+		remove(element);
 		if (elements.size() >= maxSize) {
 			elements.poll();
 		}
@@ -60,7 +59,9 @@ public class Cache<T> {
 	}
 
 	public void remove(T element) {
-		elements.remove(element);
+		if (contains(element)) {
+			elements.remove(element);
+		}
 	}
 
 }
