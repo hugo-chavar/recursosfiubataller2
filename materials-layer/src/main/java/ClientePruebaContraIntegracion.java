@@ -1,3 +1,8 @@
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.activation.DataHandler;
+
 import connection.IntegracionProxy;
 import connection.exceptions.ConnectionException;
 
@@ -7,32 +12,45 @@ public class ClientePruebaContraIntegracion {
 	private static String xml;
 
 	public static void main(String[] args) {
-
-		seleccionar("<WS><Usuario><username>javier</username></Usuario></WS>");
-
-		seleccionar("<WS><Usuario><id>117</id></Usuario></WS>");
-
-		seleccionar("<WS><Link><id>1002</id></Link></WS>");
-
-		seleccionar("<WS><Recurso><id>997</id></Recurso></WS>");
-
-		seleccionar("<WS><Recurso><ambitoId>1</ambitoId></Recurso></WS>");
-
-		seleccionar("<WS><Link><recursoId>997</recursoId></Link></WS>");
+		
+//		seleccionar("<WS><Usuario><username>javier</username></Usuario></WS>");
+//
+//		seleccionar("<WS><Usuario><id>117</id></Usuario></WS>");
+//
+//		seleccionar("<WS><Link><id>1002</id></Link></WS>");
+//
+//		seleccionar("<WS><Recurso><id>997</id></Recurso></WS>");
+//
+//		seleccionar("<WS><Recurso><ambitoId>1</ambitoId></Recurso></WS>");
+//
+//		seleccionar("<WS><Link><recursoId>997</recursoId></Link></WS>");
 
 		seleccionar("<WS><Encuesta><id>1003</id></Encuesta></WS>");
 
-		seleccionar("<WS><EncuestaRespondida><id>1003</id></EncuestaRespondida></WS>");
+//		seleccionar("<WS><EncuestaRespondida><id>1003</id></EncuestaRespondida></WS>");
+//
+//		seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
+//
+//		guardar("<WS><Link><id>400</id><nombre>www.hola.com</nombre></Link></WS>");
+//
+//		guardar("<WS><Recurso><descripcion>prueba</descripcion><tipo>L</tipo></Recurso></WS>");
+//
+//		guardar("<?xml version=\"1.0\"?><WS><Link><nombre>prueba</nombre></Link></WS>");
+//
+		eliminar("<WS><Recurso><id>1010</id></Recurso></WS>");
+		
+		String path, nombre, extension;
+		
+		nombre = "teofilo";
+		extension = "jpg";
+		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+		path = path.substring(0, path.lastIndexOf("classes") + 8);
+		path = path + nombre + "." + extension;
+		
+//		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo</nombre><tamanio>1</tamanio><tipo>txt</tipo><recursoId>1010</recursoId></ArchivoMetadata></WS>";
+		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo</nombre><tamanio>1</tamanio><tipo>txt</tipo><recursoId>1010</recursoId></ArchivoMetadata></WS>";
 
-		seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
-
-		guardar("<WS><Link><id>400</id><nombre>www.hola.com</nombre></Link></WS>");
-
-		guardar("<WS><Recurso><descripcion>prueba</descripcion><tipo>L</tipo></Recurso></WS>");
-
-		guardar("<?xml version=\"1.0\"?><WS><Link><nombre>prueba</nombre></Link></WS>");
-
-		eliminar("<WS><Recurso><id>1006</id></Recurso></WS>");
+		guardarArchivo(xml, path);
 
 	}
 
@@ -59,6 +77,19 @@ public class ClientePruebaContraIntegracion {
 			xml = ip.seleccionar(xmlInput);
 			System.out.println(xml);
 		} catch (ConnectionException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	private static void guardarArchivo(String xmlInput, String path) {
+		
+		try {
+			DataHandler file = new DataHandler(new URL(path));
+			xml = ip.guardarArchivo(xmlInput, null);
+			System.out.println(xml);
+		} catch (ConnectionException e) {
+			System.out.println(e.getMessage());
+		} catch (MalformedURLException e) {
 			System.out.println(e.getMessage());
 		}
 	}

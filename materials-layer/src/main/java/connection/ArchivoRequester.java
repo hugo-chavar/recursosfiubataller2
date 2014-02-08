@@ -212,7 +212,7 @@ public class ArchivoRequester extends HandlerRequester {
 	}
 	
 	
-	protected OperationResponse saveFile(String xml, DataHandler dataHandler) throws GetException {
+	private OperationResponse saveFile(String xml, DataHandler dataHandler) throws GetException {
 //		DataHandler archivo = ((Archivo) current).getRawFile();
 		try {
 
