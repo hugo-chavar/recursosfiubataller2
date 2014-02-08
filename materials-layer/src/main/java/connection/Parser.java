@@ -16,6 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSSerializer;
@@ -62,8 +63,6 @@ public class Parser {
 			return docBuilder.parse(new InputSource(new StringReader(xml)));
 		} catch (SAXParseException e) {
 			String rcv = xml.substring(0, xml.indexOf('<') - 2);
-//			System.out.println("RECIBIDO:");
-//			System.out.println(xml);
 			throw new ParseException("Xml recibido de integracion contiene errores. Recibido: " + rcv);
 		} catch (ParserConfigurationException e) {
 			throw new ParseException("ParserConfigurationException al convertir: " + xml);
@@ -124,7 +123,7 @@ public class Parser {
 	
 	public String serializeQueryByType(int IDRecurso, String RecursoType) {
 		
-		Document doc = this.buildXMLDocument();
+		Document doc = buildXMLDocument();
 		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
 		doc.appendChild(rootElement);
 
@@ -160,7 +159,7 @@ public class Parser {
 		if (doc == null) {
 			throw new ParseException("Xml invalido: " + xml);
 		}
-
+		
 		NodeList nodes = doc.getElementsByTagName(baseTag);
 		
 		
@@ -173,10 +172,13 @@ public class Parser {
 	protected HashMap<String, String> fillFieldValues(NodeList linkChildNodes) {
 		HashMap<String, String> fields;
 		fields = new HashMap<String, String>();
-		int a = linkChildNodes.getLength();
 		for (int i = 0; i < linkChildNodes.getLength(); i++) {
-			Element element = (Element) linkChildNodes.item(i);
-			fields.put(element.getNodeName(), element.getTextContent());
+			Node childNode = linkChildNodes.item(i);
+			if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element element = (Element) childNode;
+				fields.put(element.getNodeName(), element.getTextContent());
+			}
+
 		}
 		return fields;
 	}
