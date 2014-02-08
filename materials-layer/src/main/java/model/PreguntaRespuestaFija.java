@@ -76,7 +76,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 		}
 		StringBuilder sb = new StringBuilder("");
 		for (Integer rta : respuestasCorrectas) {
-			sb.append(rta);
+			sb.append(rta + 1);
 			sb.append(",");
 		}
 		sb.setLength(sb.length() - 1);
@@ -116,7 +116,7 @@ public class PreguntaRespuestaFija extends Pregunta {
 		String[] splited = StringEscapeUtils.splitIgnoringEscaped(rtas, ',');
 		respuestasCorrectas = new ArrayList<Integer>();
 		for (String s : splited) {
-			respuestasCorrectas.add(Integer.valueOf(s));
+			respuestasCorrectas.add(Integer.valueOf(s)-1);
 		}
 	}
 

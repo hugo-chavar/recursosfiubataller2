@@ -35,9 +35,9 @@ public class EncuestaRespondidaRequesterTest {
 		Assert.assertEquals(new Integer(100), encuesta_rtn.getEvaluacion());
 
 		List<PreguntaRespondida> respondidas = encuesta_rtn.getPreguntasRespondidas();
-		Assert.assertEquals(new Integer(1), ((PreguntaRespuestaFijaRespondida) respondidas.get(0)).getRespuestasFijas().get(0));
+		Assert.assertEquals("1", ((PreguntaRespuestaFijaRespondida) respondidas.get(0)).getRespuestasFijas());
 		Assert.assertEquals(true, respondidas.get(0).getCorrecta());
-		Assert.assertEquals(new Integer(2), ((PreguntaRespuestaFijaRespondida) respondidas.get(1)).getRespuestasFijas().get(0));
+		Assert.assertEquals("2", ((PreguntaRespuestaFijaRespondida) respondidas.get(1)).getRespuestasFijas());
 		Assert.assertEquals(true,respondidas.get(1).getCorrecta());
 	}
 	
@@ -50,8 +50,7 @@ public class EncuestaRespondidaRequesterTest {
 
 		Assert.assertEquals(new Integer(50), respondida.getEvaluacion());
 		List<PreguntaRespondida> respondidas = respondida.getPreguntasRespondidas();
-		Assert.assertEquals(new Integer(1), ((PreguntaRespuestaFijaRespondida) respondidas.get(0)).getRespuestasFijas().get(0));
-		Assert.assertEquals(new Integer(4), ((PreguntaRespuestaFijaRespondida) respondidas.get(0)).getRespuestasFijas().get(1));
+		Assert.assertEquals("1,4", ((PreguntaRespuestaFijaRespondida) respondidas.get(0)).getRespuestasFijas());
 		Assert.assertEquals(true, respondidas.get(0).getCorrecta());
 		Assert.assertNotEquals("Salta", ((PreguntaRespuestaACompletarRespondida) respondidas.get(1)).getRespuesta());
 		Assert.assertEquals(false,respondidas.get(1).getCorrecta());

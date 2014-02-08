@@ -102,12 +102,12 @@ public class EncuestaTest {
 	
 	@Test
 	public void marshallPreguntasWorksAsExpected() {
-		Assert.assertEquals("F;1;de que color es el caballo blanco de san martin?;rojo,verde,azul,blanco;3|F;2;a que equipo del futbol argentino le denominan Millo;velez,River\\|\\| Plate,crucero del norte,estudiantes\\|;1|F;3;cual es un patron de diseno creacional;command,mediator,builder,facade;2|F;4;Un test unitario debe presentar\\, las\\, siguientes\\, características;Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente\\;,Automatizable;0,7,10,11,12,6|C;5;cuantas patas tiene un gato?;4", encuesta.marshallPreguntas());
+		Assert.assertEquals("F;1;de que color es el caballo blanco de san martin?;rojo,verde,azul,blanco;4|F;2;a que equipo del futbol argentino le denominan Millo;velez,River\\|\\| Plate,crucero del norte,estudiantes\\|;2|F;3;cual es un patron de diseno creacional;command,mediator,builder,facade;3|F;4;Un test unitario debe presentar\\, las\\, siguientes\\, características;Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente\\;,Automatizable;1,8,11,12,13,7|C;5;cuantas patas tiene un gato?;4", encuesta.marshallPreguntas());
 	}
 	
 	@Test
 	public void marshallPreguntaRespuestaFijaWorksAsExpected() {
-		Assert.assertEquals("F;3;cual es un patron de diseno creacional;command,mediator,builder,facade;2", p3.marshall());
+		Assert.assertEquals("F;3;cual es un patron de diseno creacional;command,mediator,builder,facade;3", p3.marshall());
 	}
 	
 	@Test

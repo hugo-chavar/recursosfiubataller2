@@ -32,12 +32,12 @@ public class IntegracionProxy {
 				"C;2;Cuantas patas tiene un gato?;4</preguntas></Encuesta></WS>";
 		harcodeos.put(el1, el2);
 		el1 = "<WS><Encuesta><id>10</id></Encuesta></WS>";
-		el2 = "<WS><Encuesta><evaluada>true</evaluada><preguntas>F;1;De que color es el caballo blanco de San Martin?;negro,blanco,marron;1|" +
-				"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></Encuesta></WS>";
+		el2 = "<WS><Encuesta><evaluada>true</evaluada><preguntas>F;1;De que color es el caballo blanco de San Martin?;negro,blanco,marron;2|" +
+				"F;2;Cuantas patas tiene un gato?;3,2,4;3</preguntas></Encuesta></WS>";
 		harcodeos.put(el1, el2);
 		el1 = "<WS><Encuesta><id>11</id></Encuesta></WS>";
-		el2 = "<WS><Encuesta><evaluada>true</evaluada><preguntas>F;1;De que color\\; es\\, el\\| caballo blanco de San Martin?;negro,blanco,marron;1|" +
-				"F;2;Cuantas patas tiene un gato?;3,2,4;2</preguntas></Encuesta></WS>";
+		el2 = "<WS><Encuesta><evaluada>true</evaluada><preguntas>F;1;De que color\\; es\\, el\\| caballo blanco de San Martin?;negro,blanco,marron;2|" +
+				"F;2;Cuantas patas tiene un gato?;3,2,4;3</preguntas></Encuesta></WS>";
 		harcodeos.put(el1, el2);
 		el1 = "<WS><Recurso><id>15</id></Recurso></WS>";
 		el2 = "<WS><Recurso><id>15</id><ambitoId>2</ambitoId><descripcion>Encuesta con preguntas a completar</descripcion><tipo>Encuesta</tipo></Recurso></WS>";

@@ -5,11 +5,12 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
-@XmlRootElement(name = "preguntaRespondidaSinOpciones")
+@XmlRootElement(name = "preguntaRespondidaConOpciones")
 public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 
-	@XmlAttribute(name = "respuestas",required = true)
+	@XmlTransient
 	private List<Integer> respuestasfijas = new ArrayList<Integer>();
 
 	public PreguntaRespuestaFijaRespondida(Integer idPregunta) {
@@ -38,8 +39,9 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 		this.respuestasfijas = respuestas;
 	}
 
-	public List<Integer> getRespuestasFijas() {
-		return respuestasfijas;
+	@XmlAttribute(name = "respuestas")
+	public String getRespuestasFijas() {
+		return marshallRespuestas() != "null" ? marshallRespuestas() : null;
 	}
 
 	@Override
@@ -78,7 +80,7 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 		}
 		StringBuilder sb = new StringBuilder("");
 		for (Integer rta : respuestasfijas) {
-			sb.append(rta);
+			sb.append(rta + 1);
 			sb.append(",");
 		}
 		sb.setLength(sb.length() - 1);
@@ -92,7 +94,7 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 		String[] splited = rtas.split(",");
 		respuestasfijas = new ArrayList<Integer>();
 		for (String s : splited) {
-			respuestasfijas.add(Integer.valueOf(s));
+			respuestasfijas.add(Integer.valueOf(s)-1);
 		}
 
 	}

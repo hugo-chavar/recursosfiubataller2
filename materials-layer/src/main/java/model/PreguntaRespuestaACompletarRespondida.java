@@ -3,10 +3,9 @@ package model;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "preguntaRespondidaConOpciones")
+@XmlRootElement(name = "preguntaRespondidaSinOpciones")
 public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 
-	@XmlAttribute(required = true)
 	private String respuesta;
 
 	public PreguntaRespuestaACompletarRespondida(Integer idPregunta) {
@@ -26,6 +25,7 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 		this.respuesta = respuesta;
 	}
 
+	@XmlAttribute(name = "respuesta")
 	public String getRespuesta() {
 		return respuesta;
 	}

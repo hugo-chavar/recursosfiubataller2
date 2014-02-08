@@ -31,8 +31,8 @@ public class EncuestaRespondidaRequester extends HandlerRequester {
 		PreguntaRespuestaACompletarRespondida p2 = new PreguntaRespuestaACompletarRespondida(2);
 
 		List<PreguntaRespondida> preguntasRespondidas = new ArrayList<PreguntaRespondida>();
-		p1.addRespuesta(1);
-		p1.addRespuesta(4);
+		p1.addRespuesta(0);
+		p1.addRespuesta(3);
 		p2.responder("Buenos Aires");
 		p1.setCorrecta(true);
 		p2.setCorrecta(false);
