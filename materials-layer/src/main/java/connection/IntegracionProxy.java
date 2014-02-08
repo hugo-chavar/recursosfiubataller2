@@ -144,6 +144,7 @@ public class IntegracionProxy {
 
 	public String eliminarArchivo(String xml) throws ConnectionException {
 		//TODO Dami, revisa la especificacion en la doc de integracion.. para ver como se manda este xml
+		//TODO (Hugo) me parece que esto no es necesario--> eliminar archivos con el otro metodo
 		IntegracionStub.EliminarArchivoResponse responseArchivo;
 		IntegracionStub.EliminarArchivo requestArchivo = new IntegracionStub.EliminarArchivo();
 		requestArchivo.setXml(xml);

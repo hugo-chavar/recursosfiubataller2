@@ -190,7 +190,7 @@ public class ArchivoRequester extends HandlerRequester {
 	public void deleteRecurso(Serializable s) {
 		Recurso aux = (Recurso)s;
 		super.deleteRecurso(aux);
-		//TODO Dami esto hay que probarlo
+		//TODO parece que esto no hace falta
 		String xml = parser.serializeQueryByType(aux.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
 		try {
 			String xml_resp_e = proxy.eliminarArchivo(xml);
