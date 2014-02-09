@@ -103,6 +103,21 @@ public abstract class IntegracionCallbackHandler {
 	}
 
 	/**
+	 * auto generated Axis2 call back method for seleccionarArchivo method
+	 * override this method for handling normal response from seleccionarArchivo
+	 * operation
+	 */
+	public void receiveResultseleccionarArchivo(com.ws.services.IntegracionStub.SeleccionarArchivoResponse result) {
+	}
+
+	/**
+	 * auto generated Axis2 Error handler override this method for handling
+	 * error response from seleccionarArchivo operation
+	 */
+	public void receiveErrorseleccionarArchivo(java.lang.Exception e) {
+	}
+
+	/**
 	 * auto generated Axis2 call back method for actualizarDatos method override
 	 * this method for handling normal response from actualizarDatos operation
 	 */
