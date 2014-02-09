@@ -48,7 +48,8 @@ public class ClientePruebaContraIntegracion {
 		path = path + nombre + "." + extension;
 		
 //		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo</nombre><tamanio>1</tamanio><tipo>txt</tipo><recursoId>1010</recursoId></ArchivoMetadata></WS>";
-		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
+//		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
+		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1012</id></ArchivoMetadata></WS>";
 
 		guardarArchivo(xml, path);
 
