@@ -17,7 +17,7 @@ public class ClientePruebaContraIntegracion {
 //
 //		seleccionar("<WS><Usuario><id>117</id></Usuario></WS>");
 //
-//		seleccionar("<WS><Link><id>1002</id></Link></WS>");
+		seleccionar("<WS><Link><id>1002</id></Link></WS>");
 //
 //		seleccionar("<WS><Recurso><id>997</id></Recurso></WS>");
 //
@@ -31,7 +31,7 @@ public class ClientePruebaContraIntegracion {
 //
 //		seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
 //
-//		guardar("<WS><Link><id>400</id><nombre>www.hola.com</nombre></Link></WS>");
+		guardar("<WS><Link><id>1019</id><nombre>www.hola.com</nombre></Link></WS>");
 //
 //		guardar("<WS><Recurso><descripcion>prueba</descripcion><tipo>L</tipo></Recurso></WS>");
 //
@@ -48,13 +48,14 @@ public class ClientePruebaContraIntegracion {
 		path = path + nombre + "." + extension;
 		
 //		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo</nombre><tamanio>1</tamanio><tipo>txt</tipo><recursoId>1010</recursoId></ArchivoMetadata></WS>";
-		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo</nombre><tamanio>1</tamanio><tipo>txt</tipo><recursoId>1010</recursoId></ArchivoMetadata></WS>";
+		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
 
 		guardarArchivo(xml, path);
 
 	}
 
 	private static void eliminar(String xmlInput) {
+		System.out.println("Eliminando " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
 		try {
 			xml = ip.eliminar(xmlInput);
 			System.out.println(xml);
@@ -64,6 +65,7 @@ public class ClientePruebaContraIntegracion {
 	}
 
 	private static void guardar(String xmlInput) {
+		System.out.println("Guardando " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
 		try {
 			xml = ip.guardar(xmlInput);
 			System.out.println(xml);
@@ -73,6 +75,7 @@ public class ClientePruebaContraIntegracion {
 	}
 
 	private static void seleccionar(String xmlInput) {
+		System.out.println("Seleccionando " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
 		try {
 			xml = ip.seleccionar(xmlInput);
 			System.out.println(xml);
@@ -82,10 +85,10 @@ public class ClientePruebaContraIntegracion {
 	}
 	
 	private static void guardarArchivo(String xmlInput, String path) {
-		
+		System.out.println("Guardando archivo " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
 		try {
 			DataHandler file = new DataHandler(new URL(path));
-			xml = ip.guardarArchivo(xmlInput, null);
+			xml = ip.guardarArchivo(xmlInput, file);
 			System.out.println(xml);
 		} catch (ConnectionException e) {
 			System.out.println(e.getMessage());
