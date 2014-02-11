@@ -1,0 +1,10 @@
+<response>
+   <success>true</success>
+   <encuestaRespondida>
+      <preguntasRespondidas>
+         <preguntaRespondidaConOpciones respuestas="2,4"/>
+	 <preguntaRespondidaSinOpciones respuesta="blanco"/>
+	 <preguntaRespondidaConOpciones respuestas="3"/>
+      </preguntasRespondidas>
+   </encuestaRespondida>
+</response>

@@ -481,6 +481,8 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 			\lstinputlisting{encuestaEvaluada.xml}
 \textbf{Notar que existen dos tags para las preguntas \emph{preguntaConOpciones} y \emph{preguntaSinOpciones} para diferenciar las que deben ser completadas en un TextBox de las que usan un mecanismo para tildar la/s opcion/es correcta/s. Dentro de \emph{preguntaConOpciones} se diferencian por el atributo \textit{multiplesCorrectas}, para que sea posible elegir una o muchas, esto hay que hacerlo debido a que una pregunta puede ser marcada como \textit{multiplesCorrectas = "true"} pero tenga una sola que es correcta.\newline
 Se enviar\'a \textit{multiplesCorrectas = "false"} cuando no hayan respuestas correctas, es decir, cuando no sea evaluable la encuesta.  } \newline
+
+\textbf{Además, tener en cuenta que las respuestas en las preguntasConOpciones arrancan en 1, y no en 0 como se hab\'ia definido inicialmente, quedando sus posibles valores definidos entre 1 y la cantidad de respuestasPosibles.  } \newline
 		
 		\end{itemize}
 \clearpage
@@ -544,6 +546,31 @@ Se enviar\'a \textit{multiplesCorrectas = "false"} cuando no hayan respuestas co
 				\item[INPUT] ID-ENCUESTA, ID-USUARIO
 				\item[OUTPUT] LISTA-RESPUESTAS\\
 			\end{description}
+			
+Como par\'ametro se necesitan los siguientes items detallados de la siguiente forma:
+				
+\begin{lstlisting}
+<parametro>
+  <recurso>
+    <recursoId>INT idDelRecurso</recursoId>
+  </recurso>
+  <usuarioId>INT idDelUsuario</usuarioId>
+</parametro>
+\end{lstlisting}	
+
+De ser exitoso la ejecuci\'on se obtendr\'an las siguientes respuestas del servicio:		
+
+		\begin{itemize}
+			\item ENCUESTA RESPONDIDA EVALUADA
+			
+			\lstinputlisting{encuestaRespondidaEvaluada.xml}
+			
+			\item ENCUESTA RESPONDIDA NO EVALUADA
+			
+			\lstinputlisting{encuestaRespondidaNoEvaluada.xml}
+		\end{itemize}
+		
+		\textbf{Tener en cuenta que las respuestas en las preguntasRespondidasConOpciones arrancan en 1, y no en 0 como se hab\'ia definido inicialmente, quedando sus posibles valores definidos entre 1 y la cantidad de respuestasPosibles.  } \newline
 			\item \emph{BORRAR RECURSO}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
 			\begin{description}
 				\item[INPUT] ID-AMBIENTE, ID-RECURSO

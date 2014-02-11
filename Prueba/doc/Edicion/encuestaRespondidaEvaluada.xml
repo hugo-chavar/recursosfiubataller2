@@ -1,0 +1,11 @@
+<response>
+   <success>true</success>
+   <encuestaRespondida>
+      <evaluacion>67</evaluacion>
+      <preguntasRespondidas>
+         <preguntaRespondidaConOpciones respuestas="1,5,7" correcta="true"/>
+	 <preguntaRespondidaSinOpciones respuesta="cientifico" correcta="false"/>
+	 <preguntaRespondidaConOpciones respuestas="1" correcta="true"/>
+      </preguntasRespondidas>
+   </encuestaRespondida>
+</response>

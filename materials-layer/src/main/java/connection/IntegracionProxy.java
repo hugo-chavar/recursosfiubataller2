@@ -69,7 +69,7 @@ public class IntegracionProxy<ReturnedObject> {
 				"F;2;true;2</preguntasRespondidas></EncuestaRespondida></WS>";
 		harcodeos.put(el1, el2);
 		el1 = "<WS><EncuestaRespondida><recursoId>18</recursoId><usuarioId>5</usuarioId></EncuestaRespondida></WS>";
-		el2 = "<WS><EncuestaRespondida><recursoId>18</recursoId><usuarioId>5</usuarioId><evaluacion>100</evaluacion><preguntasRespondidas>F;1;true;1,5,7|C;2;false;cientifico|" +
+		el2 = "<WS><EncuestaRespondida><recursoId>18</recursoId><usuarioId>5</usuarioId><evaluacion>67</evaluacion><preguntasRespondidas>F;1;true;1,5,7|C;2;false;cientifico|" +
 				"F;3;true;1</preguntasRespondidas></EncuestaRespondida></WS>";
 		harcodeos.put(el1, el2);
 		el1 = "<WS><EncuestaRespondida><recursoId>19</recursoId><usuarioId>5</usuarioId></EncuestaRespondida></WS>";

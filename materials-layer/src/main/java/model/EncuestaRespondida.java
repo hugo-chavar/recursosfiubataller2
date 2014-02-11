@@ -17,7 +17,7 @@ import connection.Serializable;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class EncuestaRespondida implements Serializable {
 
-	@XmlElement
+	@XmlElement(required = false)
 	private Integer evaluacion;
 
 	@XmlTransient
@@ -38,7 +38,7 @@ public class EncuestaRespondida implements Serializable {
 	public EncuestaRespondida(Integer idRecurso, Integer idUsuario) {
 		this.idRecurso = idRecurso;
 		this.idUsuario = idUsuario;
-		this.evaluacion = -1;
+		this.evaluacion = null;
 	}
 	
 	public Integer getIdUsuario() {
