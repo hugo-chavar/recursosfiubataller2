@@ -9,6 +9,7 @@ import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Recurso;
+import connection.ArchivoParser;
 import connection.Parameter;
 import connection.Parser;
 import connection.Requester;
@@ -49,12 +50,15 @@ public class MaterialsImpl implements Materials {
 	//EN el xml debe venir el ambitoId, nombre, extension.
 	public String agregarArchivo(String archivoParam,	@XmlMimeType("application/octet-stream") DataHandler data) {
 
+		//TODO: Este parser sirve para los gets, pero como hace para setear??
 		Parameter parameter = Parameter.createParameter(archivoParam);
-		if (parameter.getRecurso() == null || parameter.getRecurso().getClass() != Archivo.class){
+		if (parameter.getRecurso() == null ){
 			return createFailedResponse("Parametros invalidos: debe especificar 'archivo' en xml");
 		}
 		
 		if (data != null) {
+//			ArchivoParser parameter = new ArchivoParser();
+//			Archivo file = parameter.deserialize(archivoParam);
 			Archivo file = (Archivo) parameter.getRecurso();
 			file.setRawFile(data);
 			OperationResponse response =  Requester.INSTANCE.saveArchivo(file); 

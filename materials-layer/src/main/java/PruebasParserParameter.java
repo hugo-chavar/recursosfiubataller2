@@ -10,9 +10,11 @@ import javax.activation.DataHandler;
 
 import model.Archivo;
 import model.Encuesta;
+import model.Link;
 import model.Recurso;
 import model.StringEscapeUtils;
 import connection.EncuestaRequester;
+import connection.LinkRequester;
 import connection.Parameter;
 import connection.Parser;
 import connection.responses.OperationResponse;
@@ -87,6 +89,15 @@ public class PruebasParserParameter {
 		Encuesta encuesta = (Encuesta)or.getSerializable();
 //		
 		xml = parser.convertToXml(encuesta, Encuesta.class);
+		
+		System.out.println(xml);
+		
+		
+		or = (new LinkRequester()).getFromCache(new Link(11002, null, null));
+
+		Link link = (Link)or.getSerializable();
+		
+		xml = parser.convertToXml(link, Link.class);
 		
 		System.out.println(xml);
 		

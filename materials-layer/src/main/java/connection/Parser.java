@@ -29,9 +29,12 @@ import connection.exceptions.ParseException;
 
 public class Parser {	
 
+	public static  String TAMANIO = "tamanio";
+	public static  String XML_TAG = "<?xml version=\"1.0\"?>";
 	public static String INITIAL_TAG = "WS";
 	public static String RECURSO_TAG = "Recurso";
 	public static String ID_TAG = "id";
+	public static String RECURSOID_TAG = "recursoId";
 	public static String AMBITOID_TAG = "ambitoId";
 	public static String DESCRIPCION_TAG = "descripcion";
 	public static String TIPO_TAG = "tipo";

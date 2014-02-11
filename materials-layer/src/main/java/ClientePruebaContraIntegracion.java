@@ -17,44 +17,64 @@ public class ClientePruebaContraIntegracion {
 //
 //		seleccionar("<WS><Usuario><id>117</id></Usuario></WS>");
 //
-		seleccionar("<WS><Link><id>1002</id></Link></WS>");
+//		seleccionar("<WS><Link><id>1002</id></Link></WS>");
 //
 //		seleccionar("<WS><Recurso><id>997</id></Recurso></WS>");
 //
 //		seleccionar("<WS><Recurso><ambitoId>1</ambitoId></Recurso></WS>");
 //
 //		seleccionar("<WS><Link><recursoId>997</recursoId></Link></WS>");
-
-		seleccionar("<WS><Encuesta><id>1003</id></Encuesta></WS>");
+//
+//		seleccionar("<WS><Encuesta><id>1003</id></Encuesta></WS>");
 
 //		seleccionar("<WS><EncuestaRespondida><id>1003</id></EncuestaRespondida></WS>");
 //
 //		seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
 //
-		guardar("<WS><Link><id>1019</id><nombre>www.hola.com</nombre></Link></WS>");
+//		guardar("<WS><Link><id>1017</id><nombre>www.hola.com</nombre></Link></WS>");
 //
-//		guardar("<WS><Recurso><descripcion>prueba</descripcion><tipo>L</tipo></Recurso></WS>");
+//		guardar("<WS><Recurso><descripcion>prueba Dami</descripcion><tipo>L</tipo></Recurso></WS>");
 //
 //		guardar("<?xml version=\"1.0\"?><WS><Link><nombre>prueba</nombre></Link></WS>");
 //
-		eliminar("<WS><Recurso><id>1010</id></Recurso></WS>");
+//		eliminar("<WS><Recurso><id>1023</id></Recurso></WS>");
+//		
 		
+		PruebasDeArchivo();
+	}
+
+	private static void PruebasDeArchivo(){
 		String path, nombre, extension;
 		
+		System.out.println("COMIENZA TESTEO DE ARCHIVOS");
 		nombre = "teofilo";
 		extension = "jpg";
 		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
 		path = path.substring(0, path.lastIndexOf("classes") + 8);
 		path = path + nombre + "." + extension;
 		
-//		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo</nombre><tamanio>1</tamanio><tipo>txt</tipo><recursoId>1010</recursoId></ArchivoMetadata></WS>";
+		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo2</nombre><tamanio>1</tamanio><tipo>jpg</tipo><recursoId>10</recursoId></ArchivoMetadata></WS>";
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
-		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1012</id></ArchivoMetadata></WS>";
-
+//		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1012</id></ArchivoMetadata></WS>";
+//		System.out.println("Va a guardar un archivo");
+		System.out.println("TEST 1 TRAER ARCHIVO EXISTENTE");
+		try {
+//			xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><recursoId>1012</recursoId></ArchivoMetadata></WS>";
+			com.ws.services.IntegracionStub.ReturnedObject[] objects = ip.seleccionarArchivo(xml);
+			if(objects==null){
+				System.out.println("La consulta no trajo resultados");
+			}else{
+				System.out.println("Algo Trajo");
+				//com.ws.services.IntegracionStub.ReturnedObject supuestoArchivo = objects[0];
+				
+			}
+		} catch (ConnectionException e) {
+			System.out.println("No lo pudo traer al archivo");
+			//e.printStackTrace();
+		}
 		guardarArchivo(xml, path);
-
+		
 	}
-
 	private static void eliminar(String xmlInput) {
 		System.out.println("Eliminando " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
 		try {

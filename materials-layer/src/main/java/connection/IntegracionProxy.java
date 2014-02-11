@@ -2,16 +2,18 @@ package connection;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.activation.DataHandler;
 
 import org.apache.axis2.AxisFault;
 
+
 import com.ws.services.IntegracionStub;
 
 import connection.exceptions.ConnectionException;
 
-public class IntegracionProxy {
+public class IntegracionProxy<ReturnedObject> {
 	private IntegracionStub stub;
 	private HashMap<String, String> harcodeos;
 
@@ -157,4 +159,19 @@ public class IntegracionProxy {
 			throw new ConnectionException("No se pudo conectar al servicio Integracion. ");
 		}
 	}
+	public com.ws.services.IntegracionStub.ReturnedObject[] seleccionarArchivo(String xml) throws ConnectionException{
+		IntegracionStub.SeleccionarArchivo fileSelected = new IntegracionStub.SeleccionarArchivo();
+		IntegracionStub.SeleccionarArchivoResponse responseArchivo;
+		try{
+			
+			fileSelected.setXml(xml);
+			responseArchivo = stub.seleccionarArchivo(fileSelected);
+			return responseArchivo.get_return();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new ConnectionException("No se pudo obtener el  archivo. ");
+		}
+	}
+	//no esta el seleccionar acá--
 }
