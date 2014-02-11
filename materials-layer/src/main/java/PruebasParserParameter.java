@@ -82,10 +82,10 @@ public class PruebasParserParameter {
 		
 		System.out.println("Prueba marshal de encuesta: ");	
 //		or = (new EncuestaRequester()).getFromCache(11004);
-		or = (new EncuestaRequester()).getFromCache(new Encuesta(1004, null, null, false));
+		or = (new EncuestaRequester()).getFromCache(new Encuesta(11004, null, null, false));
 
 		Encuesta encuesta = (Encuesta)or.getSerializable();
-		
+//		
 		xml = parser.convertToXml(encuesta, Encuesta.class);
 		
 		System.out.println(xml);
