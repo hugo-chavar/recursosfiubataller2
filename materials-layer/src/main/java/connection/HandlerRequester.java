@@ -29,7 +29,7 @@ public abstract class HandlerRequester {
 //			updateCache(); al guardar no se actualiza el cache
 
 		} catch (ConnectionException e) {
-			String reason = "Intentando guardar " + getCurrent().getInfo();
+			String reason = "Intentando guardar " + getInfo();
 			reason = e.getMessage() + reason;
 			return OperationResponse.createFailed(reason);
 		}
@@ -51,9 +51,13 @@ public abstract class HandlerRequester {
 		if (notification != null && !notification.success()) {
 			String[] lines = xml_resp.split(System.getProperty("line.separator"));
 			String message = notification != null ? notification.getMessage() : "Notif error: " + lines[0];
-			throw new GetException(message + " para " + getCurrent().getInfo());
+			throw new GetException(message + " para " + getInfo());
 		} 
 		return notification == null;
+	}
+
+	protected String getInfo() {
+		return getCurrent().getInfo();
 	}
 
 	public OperationResponse getFile(String xml) throws GetException, ParseException {
@@ -68,7 +72,7 @@ public abstract class HandlerRequester {
 			return OperationResponse.createFailed("Respuesta inesperada: " + notification.getInfo()); 
 			
 		} catch (ConnectionException e) {
-			String reason = "Intentando guardar " +  getCurrent().getInfo() +". ";
+			String reason = "Intentando guardar " +  getInfo() +". ";
 			reason = reason + e.getMessage();
 			return OperationResponse.createFailed(reason);
 		}
@@ -89,7 +93,7 @@ public abstract class HandlerRequester {
 			return OperationResponse.createFailed("Respuesta inesperada: " + notification.getInfo());
 			
 		} catch (ConnectionException e) {
-			String reason = e.getMessage() + "Intentando obtener " + getCurrent().getInfo();
+			String reason = e.getMessage() + "Intentando obtener " + getInfo();
 			return OperationResponse.createFailed(reason);
 
 		}
@@ -104,7 +108,7 @@ public abstract class HandlerRequester {
 			return validateOneWayOperation(xml_resp_e);
 			
 		} catch (ConnectionException e) {
-			String reason = e.getMessage() + "Intentando borrar " + getCurrent().getInfo();
+			String reason = e.getMessage() + "Intentando borrar " + getInfo();
 			return OperationResponse.createFailed(reason);
 		}
 	}
@@ -112,7 +116,7 @@ public abstract class HandlerRequester {
 	protected OperationResponse currentObjetToResponse() {
 		OperationResponse response;
 		if (currentIsInvalid()) {
-			response = OperationResponse.createFailed("NullPointer: Error al obtener " + getCurrent().getInfo());
+			response = OperationResponse.createFailed("NullPointer: Error al obtener " + getInfo());
 		} else {
 			response = createResponse();
 		}
@@ -150,7 +154,7 @@ public abstract class HandlerRequester {
 			return response;
 		}
 
-		return OperationResponse.createFailed("No existe en cache:" + getCurrent().getInfo());
+		return OperationResponse.createFailed("No existe en cache:" + getInfo());
 
 	}
 	

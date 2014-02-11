@@ -61,11 +61,12 @@ public class RecursosRequester extends HandlerRequester {
 		return get(xml);
 	}
 
-	public OperationResponse getAll(int IDAmbito) {
+	public OperationResponse getAll(int ambitoId) {
 
 		setAll(true);
+		current = new Recurso(null, ambitoId, null);
 		// Consulto los recursos guardados
-		String xml = parser.serializeRecursosQuery(IDAmbito);
+		String xml = parser.serializeRecursosQuery(ambitoId);
 
 		try {
 			return get(xml);

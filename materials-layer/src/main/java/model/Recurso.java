@@ -84,6 +84,9 @@ public class Recurso implements Serializable {
 
 	@Override
 	public String getInfo() {
+		if (getRecursoId() == null) {
+			return "Ambito ID " +  getAmbitoId();
+		}
 		return "Recurso ID " +  getRecursoId();
 	}
 
