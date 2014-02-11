@@ -113,14 +113,14 @@ public class Client {
 		
 		// Prueba guardar archivo
 
-		xml = "<archivo><tipo>Archivo</tipo><ambitoId>14</ambitoId><descripcion>informacion sobre el equipo mas grande del universo</descripcion><tipo>jpg</tipo><nombre>River Plate</nombre></archivo>";
+		xml = "<archivo><tipo>Archivo</tipo><ambitoId>14</ambitoId><descripcion>una clase java</descripcion><tipo>class</tipo><nombre>Client</nombre></archivo>";
 		path = Client.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
 		path = path.substring(0, path.lastIndexOf("classes") + 8);
 		path = path + "Client.class";
 		pruebaGuardarArchivo();
 		
 //		String xmlEncuesta = "<encuesta evaluada='true'><recursoId>1004</recursoId><tipo>Encuesta</tipo><ambitoId>-1</ambitoId><descripcion>una encuesta grande</descripcion><preguntas><pregunta correctas='3' idPregunta='1' enunciado='de que color es el caballo blanco de san martin?'><respuestas>rojo,verde,azul,blanco</respuestas></pregunta><pregunta correctas='1' idPregunta='2' enunciado='a que equipo del futbol argentino le denominan Millo'><respuestas>velez,River Plate,crucero del norte,estudiantes</respuestas></pregunta><pregunta correctas='2' idPregunta='3' enunciado='cual es un patron de diseno creacional'><respuestas>command,mediator,builder,facade</respuestas></pregunta><pregunta correctas='0,7,10,11,12,6' idPregunta='4' enunciado='Un test unitario debe presentar las siguientes caracter�sticas'><respuestas>Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente,Automatizable</respuestas></pregunta><pregunta correcta='4' idPregunta='5' enunciado='cuantas patas tiene un gato?'/></preguntas></encuesta>";
-//		xml = "<parametro><ambitoId>15</ambitoId><usuarioId>23</usuarioId>" + xmlEncuesta + "";
+//		xml = "<ambitoId>15</ambitoId><usuarioId>23</usuarioId>" + xmlEncuesta + "";
 //		
 //		pruebaGuardarEncuesta();
 
