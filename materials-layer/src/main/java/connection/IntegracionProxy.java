@@ -2,7 +2,6 @@ package connection;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.activation.DataHandler;
 
@@ -13,7 +12,7 @@ import com.ws.services.IntegracionStub;
 
 import connection.exceptions.ConnectionException;
 
-public class IntegracionProxy<ReturnedObject> {
+public class IntegracionProxy {
 	private IntegracionStub stub;
 	private HashMap<String, String> harcodeos;
 
@@ -86,7 +85,7 @@ public class IntegracionProxy<ReturnedObject> {
 		IntegracionStub.SeleccionarDatos seleccionar_e = new IntegracionStub.SeleccionarDatos();
 		seleccionar_e.setXml(xml);
 		IntegracionStub.SeleccionarDatosResponse s_resp_e;
-		
+
 		try {
 			s_resp_e = stub.seleccionarDatos(seleccionar_e);
 			return s_resp_e.get_return();
@@ -101,7 +100,7 @@ public class IntegracionProxy<ReturnedObject> {
 		IntegracionStub.EliminarDatos eliminar = new IntegracionStub.EliminarDatos();
 		eliminar.setXml(xml);
 		IntegracionStub.EliminarDatosResponse e_resp;
-		
+
 		try {
 			e_resp = stub.eliminarDatos(eliminar);
 			return e_resp.get_return();
@@ -110,14 +109,14 @@ public class IntegracionProxy<ReturnedObject> {
 		} catch (RemoteException e) {
 			throw new ConnectionException("No se pudo conectar al servicio Integracion. ");
 		}
-		
+
 	}
 
 	public String guardar(String xml) throws ConnectionException {
 		IntegracionStub.GuardarDatos guardar = new IntegracionStub.GuardarDatos();
 		guardar.setXml(xml);
 		IntegracionStub.GuardarDatosResponse g_resp;
-		
+
 		try {
 			g_resp = stub.guardarDatos(guardar);
 			return g_resp.get_return();
@@ -133,7 +132,7 @@ public class IntegracionProxy<ReturnedObject> {
 		requestArchivo.setArchivo(archivo);
 		requestArchivo.setXml(xml);
 		IntegracionStub.GuardarArchivoResponse ga_resp;
-		
+
 		try {
 			ga_resp = stub.guardarArchivo(requestArchivo);
 			return ga_resp.get_return();
@@ -159,19 +158,18 @@ public class IntegracionProxy<ReturnedObject> {
 			throw new ConnectionException("No se pudo conectar al servicio Integracion. ");
 		}
 	}
-	public com.ws.services.IntegracionStub.ReturnedObject[] seleccionarArchivo(String xml) throws ConnectionException{
+
+	public IntegracionStub.ReturnedObject[] seleccionarArchivo(String xml) throws ConnectionException {
 		IntegracionStub.SeleccionarArchivo fileSelected = new IntegracionStub.SeleccionarArchivo();
 		IntegracionStub.SeleccionarArchivoResponse responseArchivo;
-		try{
-			
+		try {
 			fileSelected.setXml(xml);
 			responseArchivo = stub.seleccionarArchivo(fileSelected);
 			return responseArchivo.get_return();
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ConnectionException("No se pudo obtener el  archivo. ");
 		}
 	}
-	//no esta el seleccionar acá--
 }

@@ -6,6 +6,7 @@ import javax.activation.DataHandler;
 import connection.IntegracionProxy;
 import connection.exceptions.ConnectionException;
 
+@SuppressWarnings("unused")
 public class ClientePruebaContraIntegracion {
 
 	private static IntegracionProxy ip = new IntegracionProxy();
@@ -63,16 +64,18 @@ public class ClientePruebaContraIntegracion {
 			com.ws.services.IntegracionStub.ReturnedObject[] objects = ip.seleccionarArchivo(xml);
 			if(objects==null){
 				System.out.println("La consulta no trajo resultados");
+				
 			}else{
 				System.out.println("Algo Trajo");
-				//com.ws.services.IntegracionStub.ReturnedObject supuestoArchivo = objects[0];
-				
+				System.out.println("Cantidad: " + objects.length);
+				com.ws.services.IntegracionStub.ReturnedObject supuestoArchivo = objects[0];
+				System.out.println(supuestoArchivo.getId());
 			}
 		} catch (ConnectionException e) {
 			System.out.println("No lo pudo traer al archivo");
 			//e.printStackTrace();
 		}
-		guardarArchivo(xml, path);
+//		guardarArchivo(xml, path);
 		
 	}
 	private static void eliminar(String xmlInput) {
