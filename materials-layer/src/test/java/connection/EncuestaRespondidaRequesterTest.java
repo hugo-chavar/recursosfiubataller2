@@ -29,16 +29,16 @@ public class EncuestaRespondidaRequesterTest {
 	}
 
 	@Test
-	public void getEncuestaRespondidaWithPreguntaRespuestaFijaRespondida() throws GetException {
+	public void getEncuestaRespondidaNoEvaluadaWithPreguntaRespuestaFijaRespondida() throws GetException {
 		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(10, 5).getSerializable();
 
-		Assert.assertEquals(new Integer(100), encuesta_rtn.getEvaluacion());
+		Assert.assertEquals(null, encuesta_rtn.getEvaluacion());
 
 		List<PreguntaRespondida> respondidas = encuesta_rtn.getPreguntasRespondidas();
 		Assert.assertEquals("1", ((PreguntaRespuestaFijaRespondida) respondidas.get(0)).getRespuestasFijas());
-		Assert.assertEquals(true, respondidas.get(0).getCorrecta());
+		Assert.assertEquals(null, respondidas.get(0).getCorrecta());
 		Assert.assertEquals("2", ((PreguntaRespuestaFijaRespondida) respondidas.get(1)).getRespuestasFijas());
-		Assert.assertEquals(true,respondidas.get(1).getCorrecta());
+		Assert.assertEquals(null,respondidas.get(1).getCorrecta());
 	}
 	
 
