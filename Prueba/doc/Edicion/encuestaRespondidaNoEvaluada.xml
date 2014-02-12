@@ -1,6 +1,8 @@
 <response>
    <success>true</success>
    <encuestaRespondida>
+      <usuarioId>5</usuarioId>
+      <recursoId>10</recursoId>
       <preguntasRespondidas>
          <preguntaRespondidaConOpciones respuestas="2,4"/>
 	 <preguntaRespondidaSinOpciones respuesta="blanco"/>

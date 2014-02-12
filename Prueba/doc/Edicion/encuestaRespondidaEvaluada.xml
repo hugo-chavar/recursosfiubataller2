@@ -2,6 +2,8 @@
    <success>true</success>
    <encuestaRespondida>
       <evaluacion>67</evaluacion>
+      <usuarioId>5</usuarioId>
+      <recursoId>10</recursoId>
       <preguntasRespondidas>
          <preguntaRespondidaConOpciones respuestas="1,5,7" correcta="true"/>
 	 <preguntaRespondidaSinOpciones respuesta="cientifico" correcta="false"/>

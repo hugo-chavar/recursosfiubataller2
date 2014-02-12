@@ -482,7 +482,7 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 \textbf{Notar que existen dos tags para las preguntas \emph{preguntaConOpciones} y \emph{preguntaSinOpciones} para diferenciar las que deben ser completadas en un TextBox de las que usan un mecanismo para tildar la/s opcion/es correcta/s. Dentro de \emph{preguntaConOpciones} se diferencian por el atributo \textit{multiplesCorrectas}, para que sea posible elegir una o muchas, esto hay que hacerlo debido a que una pregunta puede ser marcada como \textit{multiplesCorrectas = "true"} pero tenga una sola que es correcta.\newline
 Se enviar\'a \textit{multiplesCorrectas = "false"} cuando no hayan respuestas correctas, es decir, cuando no sea evaluable la encuesta.  } \newline
 
-\textbf{Además, tener en cuenta que las respuestas en las preguntasConOpciones arrancan en 1, y no en 0 como se hab\'ia definido inicialmente, quedando sus posibles valores definidos entre 1 y la cantidad de respuestasPosibles.  } \newline
+\textbf{Adem\'as, tener en cuenta que las respuestas en las preguntasConOpciones arrancan en 1, y no en 0 como se hab\'ia definido inicialmente, quedando sus posibles valores definidos entre 1 y la cantidad de respuestasPosibles.  } \newline
 		
 		\end{itemize}
 \clearpage
@@ -543,8 +543,8 @@ Se enviar\'a \textit{multiplesCorrectas = "false"} cuando no hayan respuestas co
 			\end{description}
 			\item \emph{OBTENER ENCUESTA RESPONDIDA}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
 			\begin{description}
-				\item[INPUT] ID-ENCUESTA, ID-USUARIO
-				\item[OUTPUT] LISTA-RESPUESTAS\\
+				\item[INPUT] XML\_PARAMETROS
+				\item[OUTPUT] XML\_RESULTADO\\
 			\end{description}
 			
 Como par\'ametro se necesitan los siguientes items detallados de la siguiente forma:

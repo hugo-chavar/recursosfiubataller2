@@ -20,10 +20,10 @@ public class EncuestaRespondida implements Serializable {
 	@XmlElement(required = false)
 	private Integer evaluacion;
 
-	@XmlTransient
+	@XmlElement(name="usuarioId")
 	private Integer idUsuario;
 
-	@XmlTransient
+	@XmlElement(name="recursoId")
 	private Integer idRecurso;
 
 	@XmlElementWrapper

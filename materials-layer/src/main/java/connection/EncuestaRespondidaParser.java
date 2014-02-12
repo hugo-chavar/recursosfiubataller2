@@ -54,10 +54,12 @@ public class EncuestaRespondidaParser extends Parser {
 		EncuestaRespondida respondida;
 		int IDEncuesta = Integer.parseInt(fields.get(IDRECURSO_TAG));
 		int IDUsuario = Integer.parseInt(fields.get(IDUSUARIO_TAG));
-		int evaluacion = Integer.parseInt(fields.get(EVALUACION_TAG));
 
 		respondida = new EncuestaRespondida(IDEncuesta, IDUsuario);
-		respondida.setEvaluacion(evaluacion);
+		if(fields.get(EVALUACION_TAG) != null){
+			int evaluacion = Integer.parseInt(fields.get(EVALUACION_TAG));
+			respondida.setEvaluacion(evaluacion);
+		}
 		respondida.unmarshallPreguntasRespondidas(fields.get(PREGUNTAS_RESPONDIDAS_TAG));
 		return respondida;
 

@@ -101,7 +101,7 @@ public class PreguntaRespondida {
 		String[] splited = s.split(";");
 		type = splited[0];
 		idPregunta = Integer.valueOf(splited[1]);
-		correcta = splited[2] != "null" ? Boolean.valueOf(splited[2]) : null;
+		correcta = (!splited[2].equals("null"))? Boolean.valueOf(splited[2]) : null;
 	}
 
 }
