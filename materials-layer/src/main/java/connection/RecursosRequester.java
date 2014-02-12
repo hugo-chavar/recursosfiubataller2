@@ -62,36 +62,22 @@ public class RecursosRequester extends HandlerRequester {
 	}
 
 	public OperationResponse getAll(int ambitoId) {
-
 		setAll(true);
 		current = new Recurso(null, ambitoId, null);
-		// Consulto los recursos guardados
 		String xml = parser.serializeRecursosQuery(ambitoId);
-
-		try {
-			return get(xml);
-		} catch (ParseException e) {
-			return OperationResponse.createFailed(e.getMessage());
-		} catch (GetException e) {
-			return OperationResponse.createFailed(e.getMessage());
-		}
+		return get(xml);
 		// TODO : (Hugo) devuelvo datos de ejemplo
 		// RecursosResponse recursosResponse = new RecursosResponse();
 		// recursosResponse.setRecursos(recursosEjemplo);
 		// recursosResponse.setSuccess(true);
 		// return recursosResponse;
-
 	}
 
 	public OperationResponse delete(Recurso recurso) {
 		setAll(false);
 		current = recurso;
 		String xml = parser.serializeDeleteQuery(recurso.getRecursoId());
-		try {
-			return delete(xml);
-		} catch (GetException e) {
-			return OperationResponse.createFailed(e.getMessage());
-		}
+		return delete(xml);
 	}
 
 	public void updateCache(Recurso target) {

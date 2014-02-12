@@ -8,7 +8,6 @@ import model.PreguntaRespondida;
 import model.PreguntaRespuestaACompletarRespondida;
 import model.PreguntaRespuestaFijaRespondida;
 import connection.cache.Cache;
-import connection.exceptions.GetException;
 import connection.exceptions.ParseException;
 import connection.responses.OperationResponse;
 
@@ -58,13 +57,8 @@ public class EncuestaRespondidaRequester extends HandlerRequester {
 			return response;
 		}
 		String xml = parser.serializeEncuestaRespondidaQuery(IDUsuario, IDEncuesta);
-		try {
-			return get(xml);
-		} catch (GetException e) {
-			return OperationResponse.createFailed(e.getMessage());
-		} catch (ParseException e) {
-			return OperationResponse.createFailed(e.getMessage());
-		}
+		return get(xml);
+
 	}
 
 	@Override

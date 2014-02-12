@@ -3,7 +3,6 @@ package connection;
 import model.Link;
 import model.Recurso;
 import connection.cache.Cache;
-import connection.exceptions.GetException;
 import connection.exceptions.ParseException;
 import connection.responses.OperationResponse;
 
@@ -29,10 +28,8 @@ public class LinkRequester extends HandlerRequester {
 	public OperationResponse save(Link link) {
 		current = link;
 		String link_str = parser.serializeLink(link);
-		System.out.println(link_str);
-
+//		System.out.println(link_str);
 		return save(link_str);
-
 	}
 	
 	protected Recurso retrieveCached(int recursoId) {
@@ -44,17 +41,9 @@ public class LinkRequester extends HandlerRequester {
 	}
 
 	public OperationResponse get(Recurso recurso) {
-
 		current = recurso;
 		String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), LinkParser.LINK_TAG);
-		try {
-			return get(xml);
-		} catch (GetException e) {
-			return OperationResponse.createFailed(e.getMessage());
-		} catch (ParseException e) {
-			return OperationResponse.createFailed(e.getMessage());
-		}
-		
+		return get(xml);
 	}
 
 	public void deleteFromCache(int recursoId) {

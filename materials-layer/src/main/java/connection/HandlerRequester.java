@@ -81,7 +81,7 @@ public abstract class HandlerRequester {
 	}
 
 
-	public OperationResponse get(String xml) throws ParseException, GetException {
+	public OperationResponse get(String xml) {
 
 		try {
 			String xml_resp_e =  proxy.seleccionar(xml);
@@ -93,6 +93,10 @@ public abstract class HandlerRequester {
 			}
 			return OperationResponse.createFailed("Respuesta inesperada: " + notification.getInfo());
 			
+		} catch (GetException e) {
+			return OperationResponse.createFailed(e.getMessage());
+		} catch (ParseException e) {
+			return OperationResponse.createFailed(e.getMessage());
 		} catch (ConnectionException e) {
 			String reason = e.getMessage() + "Intentando obtener " + getInfo();
 			return OperationResponse.createFailed(reason);
@@ -100,14 +104,13 @@ public abstract class HandlerRequester {
 		}
 	}
 
-	public OperationResponse delete(String xml) throws GetException {
+	public OperationResponse delete(String xml) {
 		try {
-
 			String xml_resp_e = proxy.eliminar(xml);
 			deleteFromCache();
-
 			return validateOneWayOperation(xml_resp_e);
-			
+		} catch (GetException e) {
+			return OperationResponse.createFailed(e.getMessage());
 		} catch (ConnectionException e) {
 			String reason = e.getMessage() + "Intentando borrar " + getInfo();
 			return OperationResponse.createFailed(reason);
