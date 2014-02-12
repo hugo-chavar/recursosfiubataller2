@@ -44,16 +44,9 @@ public class EncuestaRespondidaRequester extends HandlerRequester {
 	}
 
 	public OperationResponse save(EncuestaRespondida respondida) {
-
 		current = respondida;
 		String xml = parser.serializeEncuestaRespondida(respondida);
-
-		try {
-			return save(xml);
-		} catch (GetException e) {
-			return OperationResponse.createFailed(e.getMessage());
-		}
-
+		return save(xml);
 	}
 
 	public OperationResponse getRespondida(int IDEncuesta, int IDUsuario) {

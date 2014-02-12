@@ -49,35 +49,20 @@ public class MaterialsImpl implements Materials {
 	//EN el xml debe venir el ambitoId, nombre, extension.
 	public String agregarArchivo(String archivoParam,	@XmlMimeType("application/octet-stream") DataHandler data) {
 
-		//TODO: Este parser sirve para los gets, pero como hace para setear??
 		Parameter parameter = Parameter.createParameter(archivoParam);
 		if (parameter.getRecurso() == null ){
 			return createFailedResponse("Parametros invalidos: debe especificar 'archivo' en xml");
 		}
 		
 		if (data != null) {
-//			ArchivoParser parameter = new ArchivoParser();
-//			Archivo file = parameter.deserialize(archivoParam);
 			Archivo file = (Archivo) parameter.getRecurso();
 			file.setRawFile(data);
 			OperationResponse response =  Requester.INSTANCE.saveArchivo(file); 
 			return toXml(response);
-
 		}
 		return createFailedResponse("Archivo sin datos recibido.");
 	}
-	
-//	@Override
-//	public String agregarLink(Link link, int usuarioId) {
-//		OperationResponse response;
-//		if (Requester.INSTANCE.getPermisoUsuario(link.getAmbitoId(), usuarioId,"agregarLink")) {
-//			response = Requester.INSTANCE.agregarRecurso(link);
-//		} else {
-//			return createFailedResponse("Permisos insuficientes");
-//		}
-//		return toXml(response);
-//	}
-	
+
 	@Override
 	public String agregarEncuestaRespondida(String respondidaParam) {
 		Parameter parameter = Parameter.createParameter(respondidaParam);
@@ -161,32 +146,5 @@ public class MaterialsImpl implements Materials {
 		}
 		return toXml(response);
 	}
-
-//	@Override
-//	@WebMethod
-//	@WebResult(name = "successString")
-//	public String setMaterial(
-//			@WebParam(name = "StringMaterialXml") String param,
-//			@WebParam(name = "archivo") @XmlMimeType("application/octet-stream") Object... data ) {
-//		
-//		Parameter parameter = Parameter.createParameter(param);
-//		String toReturn = null;
-//		if(parameter.getRecurso().getTipo().equalsIgnoreCase("Encuesta"))
-//			toReturn = agregarRecurso(param);
-//		else if (parameter.getRecurso().getTipo().equalsIgnoreCase("Link")) {
-//			//: no veo lo de los links
-//		}else if (parameter.getRecurso().getTipo().equalsIgnoreCase("EncuestaRespondida")) {
-//		
-//			toReturn = agregarEncuestaRespondida(param);
-//		}else if(parameter.getRecurso().getTipo().equalsIgnoreCase("Archivo")){
-//			return agregarArchivo(param,(DataHandler)data[0]);//: ver esta parte que esta mas harcodeada que el Chavo del 8
-//		}else{
-//			toReturn = createFailedResponse("Parametros invalidos");
-//		}
-//		return toReturn;
-//		
-//	}
-
-
 
 }

@@ -20,14 +20,15 @@ public abstract class HandlerRequester {
 		return current;
 	}
 
-	protected OperationResponse save(String xml) throws GetException {
+	protected OperationResponse save(String xml) {
 
 		try {
 			String xml_resp_e = proxy.guardar(xml);
-//			System.out.println(xml_resp_e);
 			return validateOneWayOperation(xml_resp_e);
-//			updateCache(); al guardar no se actualiza el cache
+//			updateCache(); al guardar no se actualiza el cache?
 
+		} catch (GetException e) {
+			return OperationResponse.createFailed(e.getMessage());
 		} catch (ConnectionException e) {
 			String reason = "Intentando guardar " + getInfo();
 			reason = e.getMessage() + reason;

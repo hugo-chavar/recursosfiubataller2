@@ -30,13 +30,9 @@ public class LinkRequester extends HandlerRequester {
 		current = link;
 		String link_str = parser.serializeLink(link);
 		System.out.println(link_str);
-		
-		try {
-			return save(link_str);
-		} catch (GetException e) {
-			return OperationResponse.createFailed(e.getMessage());
-		}
-		
+
+		return save(link_str);
+
 	}
 	
 	protected Recurso retrieveCached(int recursoId) {

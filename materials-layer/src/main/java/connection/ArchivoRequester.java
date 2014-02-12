@@ -212,7 +212,6 @@ public class ArchivoRequester extends HandlerRequester {
 		this.dataHandler = dataHandler;
 	}
 	
-	
 	private OperationResponse saveFile(String xml, DataHandler dataHandler) throws GetException {
 //		DataHandler archivo = ((Archivo) current).getRawFile();
 		try {
