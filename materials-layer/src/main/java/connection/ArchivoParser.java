@@ -52,8 +52,6 @@ public class ArchivoParser extends Parser {
 		nodeElement.appendChild(file);*/
 		
 		String r = convertDocumentToXml(doc);
-//		if(r!="error")
-//			r=Parser.XML_TAG+r;
 		return r;
 	}
 

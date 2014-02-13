@@ -163,6 +163,7 @@ public class ClienteDelRequesterNuestro {
 
 	protected static void probarLinkQueNoExiste() {
 		// prueba link q existe
+		System.out.println("probarLinkQueNoExiste");
 		xml = "<parametro><recurso><recursoId>997</recursoId><tipo>Link</tipo></recurso></parametro>";
 		p = Parameter.createParameter(xml);
 		or = Requester.INSTANCE.getRecurso(p.getRecurso());

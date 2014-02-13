@@ -29,8 +29,7 @@ import connection.exceptions.ParseException;
 
 public class Parser {	
 
-	public static  String TAMANIO = "tamanio";
-	public static  String XML_TAG = "<?xml version=\"1.0\"?>";
+	public static String TAMANIO = "tamanio";
 	public static String INITIAL_TAG = "WS";
 	public static String RECURSO_TAG = "Recurso";
 	public static String ID_TAG = "id";
@@ -105,6 +104,7 @@ public class Parser {
             throw new RuntimeException(e);
         }
 
+        System.out.println(result);
         return result;
 	}
 	

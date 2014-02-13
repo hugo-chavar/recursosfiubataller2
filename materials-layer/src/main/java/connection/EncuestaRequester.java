@@ -9,7 +9,6 @@ import model.PreguntaRespuestaACompletar;
 import model.PreguntaRespuestaFija;
 import model.Recurso;
 import connection.cache.Cache;
-import connection.exceptions.ParseException;
 import connection.responses.OperationResponse;
 
 
@@ -154,10 +153,10 @@ public class EncuestaRequester extends HandlerRequester {
 		return parser;
 	}
 
-	@Override
-	protected void deserialize(String xml_resp_e) throws ParseException {
-		current = parser.deserialize(xml_resp_e);
-	}
+//	@Override
+//	protected void deserialize(String xml_resp_e) throws ParseException {
+//		current = getParser().deserialize(xml_resp_e);
+//	}
 
 
 }

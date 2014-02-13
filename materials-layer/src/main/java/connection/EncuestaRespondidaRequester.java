@@ -8,7 +8,6 @@ import model.PreguntaRespondida;
 import model.PreguntaRespuestaACompletarRespondida;
 import model.PreguntaRespuestaFijaRespondida;
 import connection.cache.Cache;
-import connection.exceptions.ParseException;
 import connection.responses.OperationResponse;
 
 public class EncuestaRespondidaRequester extends HandlerRequester {
@@ -61,10 +60,10 @@ public class EncuestaRespondidaRequester extends HandlerRequester {
 
 	}
 
-	@Override
-	protected void deserialize(String xml_resp_e) throws ParseException {
-		current = parser.deserialize(xml_resp_e);
-	}
+//	@Override
+//	protected void deserialize(String xml_resp_e) throws ParseException {
+//		current = parser.deserialize(xml_resp_e);
+//	}
 
 	@Override
 	protected Parser getParser() {

@@ -3,7 +3,6 @@ package connection;
 import model.Link;
 import model.Recurso;
 import connection.cache.Cache;
-import connection.exceptions.ParseException;
 import connection.responses.OperationResponse;
 
 public class LinkRequester extends HandlerRequester {
@@ -50,10 +49,10 @@ public class LinkRequester extends HandlerRequester {
 		cache.remove(new Link(recursoId, 0, ""));
 	}
 
-	@Override
-	protected void deserialize(String xml_resp_e) throws ParseException {
-		current = parser.deserialize(xml_resp_e);
-	}
+//	@Override
+//	protected void deserialize(String xml_resp_e) throws ParseException {
+//		current = parser.deserialize(xml_resp_e);
+//	}
 
 	@SuppressWarnings("rawtypes")
 	@Override

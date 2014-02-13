@@ -49,7 +49,7 @@ public class RecursosRequester extends HandlerRequester {
 		cache.addAll(recursosEjemplo);
 	}
 
-	public OperationResponse get(Recurso target) throws GetException, ParseException {
+	public OperationResponse get(Recurso target) {
 		setAll(false);
 		current = target;
 		// Busco en el cache de recursos.
@@ -84,7 +84,6 @@ public class RecursosRequester extends HandlerRequester {
 		setAll(false);
 		current = target;
 		updateCache();
-
 	}
 
 	@Override

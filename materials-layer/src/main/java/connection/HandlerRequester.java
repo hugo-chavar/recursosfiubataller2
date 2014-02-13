@@ -190,7 +190,10 @@ public abstract class HandlerRequester {
 		return getFromCache();
 	}
 	
-	protected abstract void deserialize(String xml_resp_e) throws ParseException;
+//	protected abstract void deserialize(String xml_resp_e) throws ParseException;
+	protected void deserialize(String xml_resp_e) throws ParseException {
+		current = getParser().deserialize(xml_resp_e);
+	}
 	
 	protected abstract Parser getParser();
 	

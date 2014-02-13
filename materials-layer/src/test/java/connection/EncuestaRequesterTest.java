@@ -37,7 +37,7 @@ public class EncuestaRequesterTest {
 		Encuesta encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);
 
 		OperationResponse response = Requester.INSTANCE.getRecurso(encuesta);
-		Encuesta encuesta_rtn = (Encuesta)response.getSerializable();       
+		Encuesta encuesta_rtn = (Encuesta)response.getSerializable();
 
 		Assert.assertEquals(encuesta, encuesta_rtn);
 		Assert.assertEquals("Encuesta con preguntas a completar", encuesta_rtn.getDescripcion());

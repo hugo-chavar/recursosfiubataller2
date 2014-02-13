@@ -38,10 +38,21 @@ public class ClientePruebaContraIntegracion {
 //
 //		guardar("<?xml version=\"1.0\"?><WS><Link><nombre>prueba</nombre></Link></WS>");
 //
-//		eliminar("<WS><Recurso><id>1023</id></Recurso></WS>");
-//		
+//		eliminar("<WS><Recurso><id>1016</id></Recurso></WS>");
+		
+		String path, nombre, extension;
+		nombre = "teofilo";
+		extension = "jpg";
+		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+		path = path.substring(0, path.lastIndexOf("classes") + 8);
+		path = path + nombre + "." + extension;
+		xml = "<WS><ArchivoMetadata><nombre>teofilo2</nombre><tamanio>1</tamanio><tipo>jpg</tipo><recursoId>1018</recursoId></ArchivoMetadata></WS>";
+//		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
+//		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1018</id></ArchivoMetadata></WS>";
+//		guardarArchivo(xml, path);
 		
 		PruebasDeArchivo();
+		
 	}
 
 	private static void PruebasDeArchivo(){
@@ -54,7 +65,8 @@ public class ClientePruebaContraIntegracion {
 		path = path.substring(0, path.lastIndexOf("classes") + 8);
 		path = path + nombre + "." + extension;
 		
-		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo2</nombre><tamanio>1</tamanio><tipo>jpg</tipo><recursoId>10</recursoId></ArchivoMetadata></WS>";
+//		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo2</nombre><tamanio>1</tamanio><tipo>jpg</tipo><recursoId>1012</recursoId></ArchivoMetadata></WS>";
+		xml = "<WS><ArchivoMetadata><recursoId>1012</recursoId></ArchivoMetadata></WS>";
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1012</id></ArchivoMetadata></WS>";
 //		System.out.println("Va a guardar un archivo");
@@ -69,13 +81,12 @@ public class ClientePruebaContraIntegracion {
 				System.out.println("Algo Trajo");
 				System.out.println("Cantidad: " + objects.length);
 				com.ws.services.IntegracionStub.ReturnedObject supuestoArchivo = objects[0];
-				System.out.println(supuestoArchivo.getId());
+//				System.out.println(supuestoArchivo.getId());
 			}
 		} catch (ConnectionException e) {
 			System.out.println("No lo pudo traer al archivo");
 			//e.printStackTrace();
 		}
-//		guardarArchivo(xml, path);
 		
 	}
 	private static void eliminar(String xmlInput) {

@@ -78,8 +78,9 @@ public class IntegracionProxy {
 	
 	public String seleccionar(String xml) throws ConnectionException {
 		//TODO: pruebas de Yami
-		if (harcodeos.containsKey(xml)) {
-			return harcodeos.get(xml);
+		String x = xml.substring(xml.indexOf("<WS>"));
+		if (harcodeos.containsKey(x)) {
+			return harcodeos.get(x);
 		}
 		//fin pruebas
 		IntegracionStub.SeleccionarDatos seleccionar_e = new IntegracionStub.SeleccionarDatos();

@@ -1,13 +1,11 @@
 package connection;
 
-import connection.exceptions.GetException;
-import connection.exceptions.ParseException;
-import connection.responses.OperationResponse;
 import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
+import connection.responses.OperationResponse;
 
 
 public enum Requester {
@@ -70,13 +68,7 @@ public enum Requester {
 		// Si no se encuentra en el cache
 		
 		// Busco el recurso
-		try {
-			response = recursosRequester.get(target);
-		} catch (GetException e) {
-			response = OperationResponse.createFailed(e.getMessage());
-		} catch (ParseException e) {
-			response = OperationResponse.createFailed(e.getMessage());
-		}
+		response = recursosRequester.get(target);
 		
 		if (!response.getSuccess()) {
 			return response;		
@@ -84,7 +76,6 @@ public enum Requester {
 		
 		// Consulto la tabla especifica del recurso
 		response = makeQueryGetRecurso((Recurso)response.getSerializable());
-		
 		return response;
 		
 	}
