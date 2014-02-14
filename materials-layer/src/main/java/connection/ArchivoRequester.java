@@ -78,7 +78,7 @@ public class ArchivoRequester extends HandlerRequester {
 
 	public OperationResponse save(Archivo archivo) {
 		current = archivo; 
-		String archivo_str = parser.serializeArchivo(archivo);
+		String archivo_str = parser.serialize(archivo);
 		System.out.println("a Integracion se le envia: "+archivo_str);
 		try {
 			return saveFile(archivo_str, archivo.getRawFile());
