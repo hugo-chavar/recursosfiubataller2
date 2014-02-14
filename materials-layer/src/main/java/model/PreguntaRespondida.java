@@ -27,7 +27,7 @@ public class PreguntaRespondida {
 	protected String type;
 
 	// Si no es evaluado siempre estara en null este atributo
-	@XmlAttribute(required = false)
+	@XmlAttribute
 	protected Boolean correcta = null;
 
 	public void setCorrecta(Boolean isCorrecta) {
@@ -38,7 +38,6 @@ public class PreguntaRespondida {
 		return correcta;
 	}
 
-	//@XmlElement(required = true)
 	@XmlTransient
 	protected List<String> respuestas = new ArrayList<String>();
 
@@ -81,9 +80,6 @@ public class PreguntaRespondida {
 
 	public Integer evaluar(Pregunta pregunta) {
 		return null;
-	}
-
-	public void completarDatosVisibles(Pregunta pregunta) {
 	}
 
 	protected String marshall() {

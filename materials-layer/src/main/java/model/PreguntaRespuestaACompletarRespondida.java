@@ -41,12 +41,12 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 		return 0;
 	}
 
-	@Override
-	public void completarDatosVisibles(Pregunta pregunta) {
-		if (this.respuestas.isEmpty()) {
-			respuestas.add(this.getRespuesta());
-		}
-	}
+//	@Override
+//	public void completarDatosVisibles(Pregunta pregunta) {
+//		if (this.respuestas.isEmpty()) {
+//			respuestas.add(this.getRespuesta());
+//		}
+//	}
 	
 	@Override
 	public String marshall() {

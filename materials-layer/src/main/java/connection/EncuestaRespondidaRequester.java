@@ -55,7 +55,7 @@ public class EncuestaRespondidaRequester extends HandlerRequester {
 		if (response.getSuccess()) {
 			return response;
 		}
-		String xml = parser.serializeEncuestaRespondidaQuery(IDUsuario, IDEncuesta);
+		String xml = parser.serialize(current);
 		return get(xml);
 
 	}

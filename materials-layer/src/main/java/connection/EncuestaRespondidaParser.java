@@ -3,9 +3,7 @@ package connection;
 import java.util.HashMap;
 
 import model.EncuestaRespondida;
-import model.Link;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class EncuestaRespondidaParser extends Parser {
@@ -67,36 +65,33 @@ public class EncuestaRespondidaParser extends Parser {
 
 	}
 
-	public String serializeEncuestaRespondidaQuery(int IDUsuario, int IDEncuesta) {
-
-		Document doc = buildXMLDocument();
-		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-		doc.appendChild(rootElement);
-
-		Element nodeElement = doc.createElement(ENCUESTA_RESPONDIDA_TAG);
-		rootElement.appendChild(nodeElement);
-
-		Element IDEncuesta_el = doc.createElement(IDRECURSO_TAG);
-		IDEncuesta_el.appendChild(doc.createTextNode(String.valueOf(IDEncuesta)));
-		nodeElement.appendChild(IDEncuesta_el);
-		
-		Element IDUsuario_el = doc.createElement(IDUSUARIO_TAG);
-		IDUsuario_el.appendChild(doc.createTextNode(String.valueOf(IDUsuario)));
-		nodeElement.appendChild(IDUsuario_el);
-
-		return convertDocumentToXml(doc);
-
-	}
+//	public String serializeEncuestaRespondidaQuery(int IDUsuario, int IDEncuesta) {
+//
+//		Document doc = buildXMLDocument();
+//		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
+//		doc.appendChild(rootElement);
+//
+//		Element nodeElement = doc.createElement(ENCUESTA_RESPONDIDA_TAG);
+//		rootElement.appendChild(nodeElement);
+//
+//		Element IDEncuesta_el = doc.createElement(IDRECURSO_TAG);
+//		IDEncuesta_el.appendChild(doc.createTextNode(String.valueOf(IDEncuesta)));
+//		nodeElement.appendChild(IDEncuesta_el);
+//		
+//		Element IDUsuario_el = doc.createElement(IDUSUARIO_TAG);
+//		IDUsuario_el.appendChild(doc.createTextNode(String.valueOf(IDUsuario)));
+//		nodeElement.appendChild(IDUsuario_el);
+//
+//		return convertDocumentToXml(doc);
+//
+//	}
 	
 	@Override
 	protected void addElements(Serializable serializable, Element baseNode) {
 		EncuestaRespondida respondida = (EncuestaRespondida) serializable;
 		addTextElement(baseNode, IDRECURSO_TAG, String.valueOf(respondida.getIdRecurso()));
 		addTextElement(baseNode, IDUSUARIO_TAG, String.valueOf(respondida.getIdUsuario()));
-		
-		if (respondida.getEvaluacion() != null) {
-			addTextElement(baseNode, EVALUACION_TAG, String.valueOf(respondida.getEvaluacion()));
-		}
+		addTextElement(baseNode, EVALUACION_TAG, String.valueOf(respondida.getEvaluacion()));
 		
 		String respondidas_str = respondida.marshallPreguntasRespondidas();
 		addTextElement(baseNode, PREGUNTAS_RESPONDIDAS_TAG, respondidas_str);

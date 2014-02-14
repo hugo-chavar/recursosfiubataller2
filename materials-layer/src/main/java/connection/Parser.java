@@ -26,8 +26,7 @@ import org.xml.sax.SAXParseException;
 
 import connection.exceptions.ParseException;
 
-
-public class Parser {	
+public class Parser {
 
 	public static String TAMANIO = "tamanio";
 	public static String INITIAL_TAG = "WS";
@@ -39,16 +38,16 @@ public class Parser {
 	public static String TIPO_TAG = "tipo";
 	public static String RECURSOS_TAG = "recursos";
 	public static String JOIN_TAG = "join";
-	
+
 	public static String SPECIAL_CHARACTERS = ",;|";
-	
+
 	protected String baseTag;
 	protected Document document;
-	
-	
+
 	public Document buildXMLDocument() {
 		try {
-			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilderFactory docFactory = DocumentBuilderFactory
+					.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			return docBuilder.newDocument();
 		} catch (ParserConfigurationException pce) {
@@ -56,18 +55,22 @@ public class Parser {
 		}
 		return null;
 	}
-	
-	public Document convertXmlToDocument(String xml) throws ParseException {		
-		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+
+	public Document convertXmlToDocument(String xml) throws ParseException {
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory
+				.newInstance();
 		DocumentBuilder docBuilder;
 		try {
 			docBuilder = docFactory.newDocumentBuilder();
 			return docBuilder.parse(new InputSource(new StringReader(xml)));
 		} catch (SAXParseException e) {
 			String rcv = xml.substring(0, xml.indexOf('<') - 2);
-			throw new ParseException("Xml recibido de integracion contiene errores. Recibido: " + rcv);
+			throw new ParseException(
+					"Xml recibido de integracion contiene errores. Recibido: "
+							+ rcv);
 		} catch (ParserConfigurationException e) {
-			throw new ParseException("ParserConfigurationException al convertir: " + xml);
+			throw new ParseException(
+					"ParserConfigurationException al convertir: " + xml);
 		} catch (SAXException e) {
 			throw new ParseException("SAXException al convertir: " + xml);
 		} catch (IOException e) {
@@ -76,39 +79,35 @@ public class Parser {
 	}
 
 	public String convertDocumentToXml(Document doc) {
-		String response;
-		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
-		
-		LSSerializer serializer = domImplLS.createLSSerializer();
-		
-		serializer.getDomConfig().setParameter("xml-declaration", false);
-		 try{
-			response =  serializer.writeToString(doc);
-		 }catch(Exception e){
-			 response = "error";
-		 }
-		return response;
-	}
-	
-	@SuppressWarnings("rawtypes")
-	public String convertToXml(Object source, Class... type ) {
-		String result;
-        StringWriter sw = new StringWriter();
-        try {
-            JAXBContext carContext = JAXBContext.newInstance(type);
-            Marshaller carMarshaller = carContext.createMarshaller();
-            carMarshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-            carMarshaller.marshal(source, sw);
-            result = sw.toString();
-        } catch (JAXBException e) {
-            throw new RuntimeException(e);
-        }
+		DOMImplementationLS domImplLS = (DOMImplementationLS) doc
+				.getImplementation();
 
-        return result;
+		LSSerializer serializer = domImplLS.createLSSerializer();
+
+		serializer.getDomConfig().setParameter("xml-declaration", false);
+		return serializer.writeToString(doc);
+
 	}
-	
+
 	@SuppressWarnings("rawtypes")
-	public Object unmarshal(String xml, Class... type ) {
+	public String convertToXml(Object source, Class... type) {
+		String result;
+		StringWriter sw = new StringWriter();
+		try {
+			JAXBContext carContext = JAXBContext.newInstance(type);
+			Marshaller carMarshaller = carContext.createMarshaller();
+			carMarshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+			carMarshaller.marshal(source, sw);
+			result = sw.toString();
+		} catch (JAXBException e) {
+			throw new RuntimeException(e);
+		}
+
+		return result;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Object unmarshal(String xml, Class... type) {
 		JAXBContext jaxbContext;
 		try {
 			jaxbContext = JAXBContext.newInstance(type);
@@ -123,26 +122,26 @@ public class Parser {
 		}
 		return null;
 	}
-	
+
 	public String serializeXmlQuery(int recursoId) {
-		
+
 		document = buildXMLDocument();
 		Element rootElement = document.createElement(Parser.INITIAL_TAG);
 		document.appendChild(rootElement);
 
 		Element typeNode = document.createElement(baseTag);
 		rootElement.appendChild(typeNode);
-		
+
 		addTextElement(typeNode, ID_TAG, String.valueOf(recursoId));
 
 		return convertDocumentToXml(document);
-		
+
 	}
-	
+
 	public Serializable deserialize(String xml) throws ParseException {
 
 		NodeList nodes = getBaseTagNodes(xml);
-		
+
 		NodeList childNodes = nodes.item(0).getChildNodes();
 		HashMap<String, String> fields;
 
@@ -156,13 +155,13 @@ public class Parser {
 
 	protected NodeList getBaseTagNodes(String xml) throws ParseException {
 		Document doc = convertXmlToDocument(xml);
-		
+
 		if (doc == null) {
 			throw new ParseException("Xml invalido: " + xml);
 		}
-		
+
 		NodeList nodes = doc.getElementsByTagName(baseTag);
-		
+
 		if (nodes.getLength() == 0) {
 			throw new ParseException("No existe tag " + baseTag);
 		}
@@ -196,14 +195,16 @@ public class Parser {
 	}
 
 	protected void addTextElement(Element element, String tag, String text) {
-		Element nombre = document.createElement(tag);
-		nombre.appendChild(document.createTextNode(text));
-		element.appendChild(nombre);
+		if (text != null && !text.equals("null")) {
+			Element nombre = document.createElement(tag);
+			nombre.appendChild(document.createTextNode(text));
+			element.appendChild(nombre);
+		}
 	}
 
 	protected void addElements(Serializable serializable, Element baseNode) {
 	}
-	
+
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		return null;
 	}

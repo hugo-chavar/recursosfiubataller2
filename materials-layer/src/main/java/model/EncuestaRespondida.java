@@ -16,7 +16,7 @@ import connection.Serializable;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class EncuestaRespondida implements Serializable {
 
-	@XmlElement(required = false)
+	@XmlElement
 	private Integer evaluacion;
 
 	@XmlElement(name="usuarioId")
@@ -89,7 +89,7 @@ public class EncuestaRespondida implements Serializable {
 	}
 	
 	public String marshallPreguntasRespondidas() {
-		if (preguntasRespondidas.isEmpty()) {
+		if (preguntasRespondidas == null || preguntasRespondidas.isEmpty()) {
 			return "null";
 		}
 		StringBuilder sb = new StringBuilder("");
