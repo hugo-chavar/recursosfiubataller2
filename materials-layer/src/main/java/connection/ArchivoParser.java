@@ -81,21 +81,14 @@ public class ArchivoParser extends Parser {
 	protected void addElements(Serializable serializable, Element baseNode) {
 		Archivo archivo = (Archivo) serializable;
 
-		Element nombre = document.createElement(NOMBRE_TAG);
-		nombre.appendChild(document.createTextNode(archivo.getNombreArchivo()));
-		baseNode.appendChild(nombre);
+		addTextElement(baseNode, NOMBRE_TAG, archivo.getNombreArchivo());
 		
-		Element IDAmbiente = document.createElement(Parser.TAMANIO);
-		IDAmbiente.appendChild(document.createTextNode(String.valueOf(archivo.getSize())));
-		baseNode.appendChild(IDAmbiente);
+		addTextElement(baseNode, Parser.TAMANIO, String.valueOf(archivo.getSize()));
+
+		addTextElement(baseNode, EXTENSION_TAG, archivo.getTipoArchivo());
 		
+		addTextElement(baseNode, Parser.RECURSOID_TAG, String.valueOf(archivo.getRecursoId()));
 		
-		Element extension = document.createElement(EXTENSION_TAG);
-		extension.appendChild(document.createTextNode(archivo.getTipoArchivo()));
-		baseNode.appendChild(extension);
-		
-		Element IDArchivo = document.createElement(Parser.RECURSOID_TAG);
-		IDArchivo.appendChild(document.createTextNode(String.valueOf(archivo.getRecursoId())));
-		baseNode.appendChild(IDArchivo);
 	}
+
 }

@@ -125,18 +125,16 @@ public class Parser {
 	
 	public String serializeXmlQuery(int recursoId, String RecursoType) {
 		
-		Document doc = buildXMLDocument();
-		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-		doc.appendChild(rootElement);
+		document = buildXMLDocument();
+		Element rootElement = document.createElement(Parser.INITIAL_TAG);
+		document.appendChild(rootElement);
 
-		Element typeNode = doc.createElement(baseTag);
+		Element typeNode = document.createElement(baseTag);
 		rootElement.appendChild(typeNode);
 		
-		Element recursoIdElement = doc.createElement(Parser.ID_TAG);
-		recursoIdElement.appendChild(doc.createTextNode(String.valueOf(recursoId)));
-		typeNode.appendChild(recursoIdElement);
-		
-		return convertDocumentToXml(doc);
+		addTextElement(typeNode, ID_TAG, String.valueOf(recursoId));
+
+		return convertDocumentToXml(document);
 		
 	}
 	
@@ -164,7 +162,6 @@ public class Parser {
 		
 		NodeList nodes = doc.getElementsByTagName(baseTag);
 		
-		
 		if (nodes.getLength() == 0) {
 			throw new ParseException("No existe tag " + baseTag);
 		}
@@ -180,7 +177,6 @@ public class Parser {
 				Element element = (Element) childNode;
 				fields.put(element.getNodeName(), element.getTextContent());
 			}
-
 		}
 		return fields;
 	}
@@ -201,9 +197,15 @@ public class Parser {
 
 		return convertDocumentToXml(document);
 	}
+	
+
+	protected void addTextElement(Element element, String tag, String text) {
+		Element nombre = document.createElement(tag);
+		nombre.appendChild(document.createTextNode(text));
+		element.appendChild(nombre);
+	}
 
 	protected void addElements(Serializable serializable, Element baseNode) {
-
 	}
 
 }

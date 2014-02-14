@@ -10,6 +10,7 @@ import connection.Requester;
 import connection.responses.OperationResponse;
 import connection.responses.RecursosResponse;
 
+@SuppressWarnings("unused")
 public class ClienteDelRequesterNuestro {
 
 	private static OperationResponse or, response;
@@ -21,16 +22,16 @@ public class ClienteDelRequesterNuestro {
 	public static void main(String[] args) {
 
 		probarLinkQueNoExiste();
-		borrarRecurso();
-		getArchivoQueExiste();
-		getEncuestaQExisteEnCacheRecursosPeroNoEnEncuestas();
-		getEncuestaQueNoExiste();
-		getListaRecursos();
-		getEncuestaHarcodeada();
-		getEncuestaQNoExisteEnNingunNivel();
-		guardarLink();
-		getRespondidaQueExiste();
-		getRespondidaInexistente();
+//		borrarRecurso();
+//		getArchivoQueExiste();
+//		getEncuestaQExisteEnCacheRecursosPeroNoEnEncuestas();
+//		getEncuestaQueNoExiste();
+//		getListaRecursos();
+//		getEncuestaHarcodeada();
+//		getEncuestaQNoExisteEnNingunNivel();
+//		guardarLink();
+//		getRespondidaQueExiste();
+//		getRespondidaInexistente();
 
 		// String absolute =
 		// ClienteDelRequesterNuestro.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
