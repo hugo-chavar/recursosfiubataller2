@@ -21,7 +21,7 @@ public class EncuestaRespondidaParser extends Parser {
 
 	public String serializeEncuestaRespondida(EncuestaRespondida respondida) {
 
-		Document doc = this.buildXMLDocument();
+		Document doc = buildXMLDocument();
 		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
 		doc.appendChild(rootElement);
 
@@ -52,10 +52,10 @@ public class EncuestaRespondidaParser extends Parser {
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		EncuestaRespondida respondida;
-		int IDEncuesta = Integer.parseInt(fields.get(IDRECURSO_TAG));
-		int IDUsuario = Integer.parseInt(fields.get(IDUSUARIO_TAG));
+		int idEncuesta = Integer.parseInt(fields.get(IDRECURSO_TAG));
+		int idUsuario = Integer.parseInt(fields.get(IDUSUARIO_TAG));
 
-		respondida = new EncuestaRespondida(IDEncuesta, IDUsuario);
+		respondida = new EncuestaRespondida(idEncuesta, idUsuario);
 		if(fields.get(EVALUACION_TAG) != null){
 			int evaluacion = Integer.parseInt(fields.get(EVALUACION_TAG));
 			respondida.setEvaluacion(evaluacion);
@@ -77,6 +77,7 @@ public class EncuestaRespondidaParser extends Parser {
 		Element IDEncuesta_el = doc.createElement(IDRECURSO_TAG);
 		IDEncuesta_el.appendChild(doc.createTextNode(String.valueOf(IDEncuesta)));
 		nodeElement.appendChild(IDEncuesta_el);
+		
 		Element IDUsuario_el = doc.createElement(IDUSUARIO_TAG);
 		IDUsuario_el.appendChild(doc.createTextNode(String.valueOf(IDUsuario)));
 		nodeElement.appendChild(IDUsuario_el);

@@ -124,18 +124,18 @@ public class Parser {
 		return null;
 	}
 	
-	public String serializeQueryByType(int IDRecurso, String RecursoType) {
+	public String serializeXmlQuery(int recursoId, String RecursoType) {
 		
 		Document doc = buildXMLDocument();
 		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
 		doc.appendChild(rootElement);
 
-		Element typeNode = doc.createElement(RecursoType);
+		Element typeNode = doc.createElement(baseTag);
 		rootElement.appendChild(typeNode);
 		
-		Element recursoID = doc.createElement(Parser.ID_TAG);
-		recursoID.appendChild(doc.createTextNode(String.valueOf(IDRecurso)));
-		typeNode.appendChild(recursoID);
+		Element recursoIdElement = doc.createElement(Parser.ID_TAG);
+		recursoIdElement.appendChild(doc.createTextNode(String.valueOf(recursoId)));
+		typeNode.appendChild(recursoIdElement);
 		
 		return convertDocumentToXml(doc);
 		
@@ -145,11 +145,11 @@ public class Parser {
 
 		NodeList nodes = getBaseTagNodes(xml);
 		
-		NodeList linkChildNodes = nodes.item(0).getChildNodes();
+		NodeList childNodes = nodes.item(0).getChildNodes();
 		HashMap<String, String> fields;
 
-		if (linkChildNodes != null) {
-			fields = fillFieldValues(linkChildNodes);
+		if (childNodes != null) {
+			fields = fillFieldValues(childNodes);
 			return createSerializable(fields);
 		}
 

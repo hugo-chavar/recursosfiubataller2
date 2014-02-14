@@ -14,9 +14,7 @@ public class ArchivoParser extends Parser {
 	public static String FILE_TAG = "file";
 	
 	public String serializeArchivo(Archivo archivo) {
-		Document doc = this.buildXMLDocument();
-		//Element xmlTag = doc.createElement(Parser.XML_TAG);
-		//doc.appendChild(xmlTag);
+		Document doc = buildXMLDocument();
 		
 		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
 		doc.appendChild(rootElement);

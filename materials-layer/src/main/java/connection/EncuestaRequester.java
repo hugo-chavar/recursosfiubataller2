@@ -131,14 +131,14 @@ public class EncuestaRequester extends HandlerRequester {
 	public OperationResponse save(Encuesta encuesta) {
 
 		current = encuesta;
-		String encuesta_str = parser.serializeEncuesta(encuesta);
+		String encuesta_str = parser.serialize(encuesta);
 
 		return save(encuesta_str);
 	}
 
 	public OperationResponse get(Recurso recurso) {
 		current = recurso;
-		String xml = parser.serializeQueryByType(recurso.getRecursoId(), EncuestaParser.ENCUESTA_TAG);
+		String xml = parser.serializeXmlQuery(recurso.getRecursoId(), EncuestaParser.ENCUESTA_TAG);
 		return get(xml);
 	}
 

@@ -26,28 +26,28 @@ public class LinkRequester extends HandlerRequester {
 
 	public OperationResponse save(Link link) {
 		current = link;
-		String link_str = parser.serializeLink(link);
+		String link_str = parser.serialize(link);
 //		System.out.println(link_str);
 		return save(link_str);
 	}
 	
-	protected Recurso retrieveCached(int recursoId) {
-		return cache.get(new Link(recursoId, 0, ""));
-	}
-	
-	public boolean cacheContains(int recursoId) {
-		return cache.contains(new Link(recursoId, 0, ""));
-	}
+//	protected Recurso retrieveCached(int recursoId) {
+//		return cache.get(new Link(recursoId, 0, ""));
+//	}
+//	
+//	public boolean cacheContains(int recursoId) {
+//		return cache.contains(new Link(recursoId, 0, ""));
+//	}
 
 	public OperationResponse get(Recurso recurso) {
 		current = recurso;
-		String xml = this.parser.serializeQueryByType(recurso.getRecursoId(), LinkParser.LINK_TAG);
+		String xml = this.parser.serializeXmlQuery(recurso.getRecursoId(), LinkParser.LINK_TAG);
 		return get(xml);
 	}
 
-	public void deleteFromCache(int recursoId) {
-		cache.remove(new Link(recursoId, 0, ""));
-	}
+//	public void deleteFromCache(int recursoId) {
+//		cache.remove(new Link(recursoId, 0, ""));
+//	}
 
 //	@Override
 //	protected void deserialize(String xml_resp_e) throws ParseException {

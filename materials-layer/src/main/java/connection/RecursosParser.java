@@ -106,4 +106,34 @@ public class RecursosParser extends Parser {
 		return new Recurso(IDRecurso, IDAmbito, descripcion, tipo);
 	}
 	
+	public String serialize(Serializable serializable) {
+
+		Recurso recurso = (Recurso) serializable;
+		Document doc = this.buildXMLDocument();
+		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
+		doc.appendChild(rootElement);
+
+		Element recursoNode = doc.createElement(Parser.RECURSO_TAG);
+		rootElement.appendChild(recursoNode);
+
+//		Element recursoId = doc.createElement(Parser.ID_TAG);
+//		recursoId.appendChild(doc.createTextNode(String.valueOf(recurso.getRecursoId())));
+//		recursoNode.appendChild(recursoId);
+
+		Element ambitoId = doc.createElement(Parser.AMBITOID_TAG);
+		ambitoId.appendChild(doc.createTextNode(String.valueOf(recurso.getAmbitoId())));
+		recursoNode.appendChild(ambitoId);
+
+		Element descripcion = doc.createElement(Parser.DESCRIPCION_TAG);
+		descripcion.appendChild(doc.createTextNode(recurso.getDescripcion()));
+		recursoNode.appendChild(descripcion);
+
+		Element tipo = doc.createElement(Parser.TIPO_TAG);
+		tipo.appendChild(doc.createTextNode(recurso.getTipo()));
+		recursoNode.appendChild(tipo);
+
+		return convertDocumentToXml(doc);
+
+	}
+	
 }

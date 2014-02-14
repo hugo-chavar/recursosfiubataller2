@@ -32,7 +32,7 @@ public class ClientePruebaContraIntegracion {
 //
 //		seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
 //
-//		guardar("<WS><Link><id>1017</id><nombre>www.hola.com</nombre></Link></WS>");
+		guardar("<WS><Link><id>1017</id><nombre>www.hola.com</nombre></Link></WS>");
 //
 //		guardar("<WS><Recurso><descripcion>prueba Dami</descripcion><tipo>L</tipo></Recurso></WS>");
 //
@@ -40,18 +40,18 @@ public class ClientePruebaContraIntegracion {
 //
 //		eliminar("<WS><Recurso><id>1016</id></Recurso></WS>");
 		
-		String path, nombre, extension;
-		nombre = "teofilo";
-		extension = "jpg";
-		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
-		path = path.substring(0, path.lastIndexOf("classes") + 8);
-		path = path + nombre + "." + extension;
-		xml = "<WS><ArchivoMetadata><nombre>teofilo2</nombre><tamanio>1</tamanio><tipo>jpg</tipo><recursoId>1018</recursoId></ArchivoMetadata></WS>";
-//		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
-//		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1018</id></ArchivoMetadata></WS>";
-//		guardarArchivo(xml, path);
-		
-		PruebasDeArchivo();
+//		String path, nombre, extension;
+//		nombre = "teofilo";
+//		extension = "jpg";
+//		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+//		path = path.substring(0, path.lastIndexOf("classes") + 8);
+//		path = path + nombre + "." + extension;
+//		xml = "<WS><ArchivoMetadata><nombre>teofilo2</nombre><tamanio>1</tamanio><tipo>jpg</tipo><recursoId>1018</recursoId></ArchivoMetadata></WS>";
+////		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
+////		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1018</id></ArchivoMetadata></WS>";
+////		guardarArchivo(xml, path);
+//		
+//		PruebasDeArchivo();
 		
 	}
 

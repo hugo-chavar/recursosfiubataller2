@@ -18,44 +18,43 @@ public class EncuestaParser extends Parser {
 		baseTag = ENCUESTA_TAG;
 	}
 	
-	public String serializeEncuesta(Encuesta encuesta) {
+	public String serialize(Serializable serializable) {
 		
-		Document doc = this.buildXMLDocument();
+		Encuesta encuesta = (Encuesta) serializable;
+		Document doc = buildXMLDocument();
 		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
 		doc.appendChild(rootElement);
 		
-		Element nodeElement = doc.createElement(Parser.RECURSO_TAG);
-		rootElement.appendChild(nodeElement);
-		
-		if ((encuesta.getRecursoId() != null) && (!encuesta.getRecursoId().equals(0))) {
-			Element IDRecurso = doc.createElement(Parser.ID_TAG);
-			IDRecurso.appendChild(doc.createTextNode(String.valueOf(encuesta.getRecursoId())));
-			nodeElement.appendChild(IDRecurso);
-		}
-		
-		Element IDAmbito = doc.createElement(Parser.AMBITOID_TAG);
-		IDAmbito.appendChild(doc.createTextNode(String.valueOf(encuesta.getAmbitoId())));
-		nodeElement.appendChild(IDAmbito);
-		
-		Element descripcion = doc.createElement(Parser.DESCRIPCION_TAG);
-		descripcion.appendChild(doc.createTextNode(encuesta.getDescripcion()));
-		nodeElement.appendChild(descripcion);
-		
-		Element tipo = doc.createElement(Parser.TIPO_TAG);
-		tipo.appendChild(doc.createTextNode(encuesta.getTipo()));
-		nodeElement.appendChild(tipo);
-		
-		Element recursos = doc.createElement(Parser.RECURSOS_TAG);
-		nodeElement.appendChild(recursos);
+//		Element nodeElement = doc.createElement(Parser.RECURSO_TAG);
+//		rootElement.appendChild(nodeElement);
+//		
+//		if ((encuesta.getRecursoId() != null) && (!encuesta.getRecursoId().equals(0))) {
+//			Element IDRecurso = doc.createElement(Parser.ID_TAG);
+//			IDRecurso.appendChild(doc.createTextNode(String.valueOf(encuesta.getRecursoId())));
+//			nodeElement.appendChild(IDRecurso);
+//		}
+//		
+//		Element IDAmbito = doc.createElement(Parser.AMBITOID_TAG);
+//		IDAmbito.appendChild(doc.createTextNode(String.valueOf(encuesta.getAmbitoId())));
+//		nodeElement.appendChild(IDAmbito);
+//		
+//		Element descripcion = doc.createElement(Parser.DESCRIPCION_TAG);
+//		descripcion.appendChild(doc.createTextNode(encuesta.getDescripcion()));
+//		nodeElement.appendChild(descripcion);
+//		
+//		Element tipo = doc.createElement(Parser.TIPO_TAG);
+//		tipo.appendChild(doc.createTextNode(encuesta.getTipo()));
+//		nodeElement.appendChild(tipo);
+//		
+//		Element recursos = doc.createElement(Parser.RECURSOS_TAG);
+//		nodeElement.appendChild(recursos);
 		
 		Element encuesta_el = doc.createElement(EncuestaParser.ENCUESTA_TAG);
-		recursos.appendChild(encuesta_el);
+		rootElement.appendChild(encuesta_el);
 		
-		if ((encuesta.getRecursoId() != null) && (!encuesta.getRecursoId().equals(0))) {
-			Element IDRecurso = doc.createElement(Parser.ID_TAG);
-			IDRecurso.appendChild(doc.createTextNode(String.valueOf(encuesta.getRecursoId())));
-			encuesta_el.appendChild(IDRecurso);
-		}
+		Element IDRecurso = doc.createElement(Parser.ID_TAG);
+		IDRecurso.appendChild(doc.createTextNode(String.valueOf(encuesta.getRecursoId())));
+		encuesta_el.appendChild(IDRecurso);
 		
 		Element evaluada = doc.createElement(EncuestaParser.EVALUADA_TAG);
 		evaluada.appendChild(doc.createTextNode(String.valueOf(encuesta.isEvaluada())));
@@ -67,7 +66,6 @@ public class EncuestaParser extends Parser {
 		encuesta_el.appendChild(preguntas);
 		
 		return convertDocumentToXml(doc);
-		
 	}
 	
 	@Override

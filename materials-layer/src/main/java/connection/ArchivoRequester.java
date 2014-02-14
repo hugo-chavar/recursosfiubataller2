@@ -90,7 +90,7 @@ public class ArchivoRequester extends HandlerRequester {
 	// Este metodo es el que consulta a integración y trae el archivo necesario.
 	public OperationResponse get(Recurso recurso) {
 		OperationResponse response;
-		String xml = parser.serializeQueryByType(recurso.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
+		String xml = parser.serializeXmlQuery(recurso.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
 		try {
 			response = getFile(xml);
 		} catch (GetException e) {
@@ -192,7 +192,7 @@ public class ArchivoRequester extends HandlerRequester {
 		Recurso aux = (Recurso)s;
 		super.deleteRecurso(aux);
 		//TODO parece que esto no hace falta
-		String xml = parser.serializeQueryByType(aux.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
+		String xml = parser.serializeXmlQuery(aux.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
 		try {
 			String xml_resp_e = proxy.eliminarArchivo(xml);
 			System.out.println(xml_resp_e);
