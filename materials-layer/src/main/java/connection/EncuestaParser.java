@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import model.Encuesta;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 
@@ -18,55 +17,31 @@ public class EncuestaParser extends Parser {
 		baseTag = ENCUESTA_TAG;
 	}
 	
-	public String serialize(Serializable serializable) {
-		
-		Encuesta encuesta = (Encuesta) serializable;
-		Document doc = buildXMLDocument();
-		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-		doc.appendChild(rootElement);
-		
-//		Element nodeElement = doc.createElement(Parser.RECURSO_TAG);
-//		rootElement.appendChild(nodeElement);
+//	public String serialize(Serializable serializable) {
 //		
-//		if ((encuesta.getRecursoId() != null) && (!encuesta.getRecursoId().equals(0))) {
-//			Element IDRecurso = doc.createElement(Parser.ID_TAG);
-//			IDRecurso.appendChild(doc.createTextNode(String.valueOf(encuesta.getRecursoId())));
-//			nodeElement.appendChild(IDRecurso);
-//		}
+//		Encuesta encuesta = (Encuesta) serializable;
+//		Document document = buildXMLDocument();
+//		Element rootElement = document.createElement(Parser.INITIAL_TAG);
+//		document.appendChild(rootElement);
 //		
-//		Element IDAmbito = doc.createElement(Parser.AMBITOID_TAG);
-//		IDAmbito.appendChild(doc.createTextNode(String.valueOf(encuesta.getAmbitoId())));
-//		nodeElement.appendChild(IDAmbito);
+//		Element baseNode = document.createElement(EncuestaParser.ENCUESTA_TAG);
+//		rootElement.appendChild(baseNode);
 //		
-//		Element descripcion = doc.createElement(Parser.DESCRIPCION_TAG);
-//		descripcion.appendChild(doc.createTextNode(encuesta.getDescripcion()));
-//		nodeElement.appendChild(descripcion);
+//		Element IDRecurso = document.createElement(Parser.ID_TAG);
+//		IDRecurso.appendChild(document.createTextNode(String.valueOf(encuesta.getRecursoId())));
+//		baseNode.appendChild(IDRecurso);
 //		
-//		Element tipo = doc.createElement(Parser.TIPO_TAG);
-//		tipo.appendChild(doc.createTextNode(encuesta.getTipo()));
-//		nodeElement.appendChild(tipo);
+//		Element evaluada = document.createElement(EncuestaParser.EVALUADA_TAG);
+//		evaluada.appendChild(document.createTextNode(String.valueOf(encuesta.isEvaluada())));
+//		baseNode.appendChild(evaluada);
 //		
-//		Element recursos = doc.createElement(Parser.RECURSOS_TAG);
-//		nodeElement.appendChild(recursos);
-		
-		Element encuesta_el = doc.createElement(EncuestaParser.ENCUESTA_TAG);
-		rootElement.appendChild(encuesta_el);
-		
-		Element IDRecurso = doc.createElement(Parser.ID_TAG);
-		IDRecurso.appendChild(doc.createTextNode(String.valueOf(encuesta.getRecursoId())));
-		encuesta_el.appendChild(IDRecurso);
-		
-		Element evaluada = doc.createElement(EncuestaParser.EVALUADA_TAG);
-		evaluada.appendChild(doc.createTextNode(String.valueOf(encuesta.isEvaluada())));
-		encuesta_el.appendChild(evaluada);
-		
-		String preguntas_str = encuesta.marshallPreguntas();
-		Element preguntas = doc.createElement(EncuestaParser.PREGUNTAS_TAG);
-		preguntas.appendChild(doc.createTextNode(preguntas_str));
-		encuesta_el.appendChild(preguntas);
-		
-		return convertDocumentToXml(doc);
-	}
+//		String preguntas_str = encuesta.marshallPreguntas();
+//		Element preguntas = document.createElement(EncuestaParser.PREGUNTAS_TAG);
+//		preguntas.appendChild(document.createTextNode(preguntas_str));
+//		baseNode.appendChild(preguntas);
+//		
+//		return convertDocumentToXml(document);
+//	}
 	
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {
@@ -74,5 +49,24 @@ public class EncuestaParser extends Parser {
 		Encuesta encuesta = new Encuesta(0, 0, "", evaluada);
 		encuesta.unmarshallPreguntas(fields.get(PREGUNTAS_TAG));
 		return encuesta;
+	}
+	
+	@Override
+	protected void addElements(Serializable serializable, Element baseNode) {
+		Encuesta encuesta = (Encuesta) serializable;
+		
+		Element idRecursoElement = document.createElement(Parser.ID_TAG);
+		idRecursoElement.appendChild(document.createTextNode(String.valueOf(encuesta.getRecursoId())));
+		baseNode.appendChild(idRecursoElement);
+		
+		Element evaluada = document.createElement(EncuestaParser.EVALUADA_TAG);
+		evaluada.appendChild(document.createTextNode(String.valueOf(encuesta.isEvaluada())));
+		baseNode.appendChild(evaluada);
+		
+		String preguntas_str = encuesta.marshallPreguntas();
+		Element preguntas = document.createElement(EncuestaParser.PREGUNTAS_TAG);
+		preguntas.appendChild(document.createTextNode(preguntas_str));
+		baseNode.appendChild(preguntas);
+
 	}
 }

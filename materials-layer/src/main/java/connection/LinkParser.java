@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import model.Link;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 
@@ -17,59 +16,42 @@ public class LinkParser extends Parser {
 		baseTag = LINK_TAG;
 	}
 	
-	public String serialize(Serializable serializable) {
-
-		Document doc = buildXMLDocument();
-		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-		doc.appendChild(rootElement);
-
-//		// cargo datos del recurso
-//		Element recursoNode = doc.createElement(Parser.RECURSO_TAG);
-//		rootElement.appendChild(recursoNode);
+//	public String serialize(Serializable serializable) {
 //
-//		if ((link.getRecursoId() != null) && (!link.getRecursoId().equals(0))) {
-//			Element recursoId = doc.createElement(Parser.ID_TAG);
-//			recursoId.appendChild(doc.createTextNode(String.valueOf(link.getRecursoId())));
-//			recursoNode.appendChild(recursoId);
-//		}
-//		
-//		Element ambitoId = doc.createElement(Parser.AMBITOID_TAG);
-//		ambitoId.appendChild(doc.createTextNode(String.valueOf(link.getAmbitoId())));
-//		recursoNode.appendChild(ambitoId);
-//		
-//		Element descripcion = doc.createElement(Parser.DESCRIPCION_TAG);
-//		descripcion.appendChild(doc.createTextNode(link.getDescripcion()));
-//		recursoNode.appendChild(descripcion);
-//		
-//		Element tipo = doc.createElement(Parser.TIPO_TAG);
-//		tipo.appendChild(doc.createTextNode(link.getTipo()));
-//		recursoNode.appendChild(tipo);
+//		Document doc = buildXMLDocument();
+//		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
+//		doc.appendChild(rootElement);
 //
-//		// Creo el elemento Recursos
-//		Element recursos = doc.createElement(Parser.RECURSOS_TAG);
-//		recursoNode.appendChild(recursos);
-
-		// Creo el elemento Link
-		Element linkNode = doc.createElement(baseTag);
-//		recursos.appendChild(linkNode);
-		rootElement.appendChild(linkNode);
-
-		Element recursoId = doc.createElement(Parser.ID_TAG);
-		recursoId.appendChild(doc.createTextNode(String.valueOf(((Link) serializable).getRecursoId())));
-		linkNode.appendChild(recursoId);
-		Element nombre = doc.createElement(LinkParser.NOMBRE_TAG);
-		nombre.appendChild(doc.createTextNode(String.valueOf(((Link) serializable).getNombre())));
-		linkNode.appendChild(nombre);
-
-		return convertDocumentToXml(doc);
-
-	}
+//		Element baseNode = doc.createElement(baseTag);
+//		rootElement.appendChild(baseNode);
+//
+//		Element recursoId = doc.createElement(Parser.ID_TAG);
+//		recursoId.appendChild(doc.createTextNode(String.valueOf(((Link) serializable).getRecursoId())));
+//		baseNode.appendChild(recursoId);
+//		Element nombre = doc.createElement(LinkParser.NOMBRE_TAG);
+//		nombre.appendChild(doc.createTextNode(String.valueOf(((Link) serializable).getNombre())));
+//		baseNode.appendChild(nombre);
+//
+//		return convertDocumentToXml(doc);
+//
+//	}
 	
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		Link link = new Link(0, 0, "");
 		link.setNombre(fields.get(NOMBRE_TAG));
 		return link;
+	}
+	
+	@Override
+	protected void addElements(Serializable serializable, Element baseNode) {
+		Link link = (Link) serializable;
+		Element recursoId = document.createElement(Parser.ID_TAG);
+		recursoId.appendChild(document.createTextNode(String.valueOf(link.getRecursoId())));
+		baseNode.appendChild(recursoId);
+		Element nombre = document.createElement(LinkParser.NOMBRE_TAG);
+		nombre.appendChild(document.createTextNode(link.getNombre()));
+		baseNode.appendChild(nombre);
 	}
 
 }

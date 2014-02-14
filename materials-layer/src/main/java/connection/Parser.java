@@ -43,10 +43,10 @@ public class Parser {
 	public static String SPECIAL_CHARACTERS = ",;|";
 	
 	protected String baseTag;
+	protected Document document;
 	
 	
 	public Document buildXMLDocument() {
-		Document document = null;
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -54,7 +54,7 @@ public class Parser {
 		} catch (ParserConfigurationException pce) {
 			System.out.println(pce.getMessage());
 		}
-		return document;
+		return null;
 	}
 	
 	public Document convertXmlToDocument(String xml) throws ParseException {		
@@ -104,7 +104,6 @@ public class Parser {
             throw new RuntimeException(e);
         }
 
-        System.out.println(result);
         return result;
 	}
 	
@@ -188,6 +187,23 @@ public class Parser {
 
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		return null;
+	}
+	
+	public String serialize(Serializable serializable) {
+		document = buildXMLDocument();
+		Element rootElement = document.createElement(Parser.INITIAL_TAG);
+		document.appendChild(rootElement);
+
+		Element baseNode = document.createElement(baseTag);
+		rootElement.appendChild(baseNode);
+
+		addElements(serializable, baseNode);
+
+		return convertDocumentToXml(document);
+	}
+
+	protected void addElements(Serializable serializable, Element baseNode) {
+
 	}
 
 }
