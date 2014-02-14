@@ -41,13 +41,13 @@ public class EncuestaRespondidaRequester extends HandlerRequester {
 		cache.add(resp);
 	}
 
-	public OperationResponse save(EncuestaRespondida respondida) {
-		current = respondida;
-		String xml = parser.serializeEncuestaRespondida(respondida);
-		return save(xml);
-	}
+//	public OperationResponse save(EncuestaRespondida respondida) {
+//		current = respondida;
+//		String xml = parser.serializeEncuestaRespondida(respondida);
+//		return save(xml);
+//	}
 
-	public OperationResponse getRespondida(int IDEncuesta, int IDUsuario) {
+	public OperationResponse get(int IDEncuesta, int IDUsuario) {
 		// Busco en el cache de encuestas respondidas
 		current = new EncuestaRespondida(IDEncuesta, IDUsuario);
 		OperationResponse response = getFromCache();
@@ -59,11 +59,6 @@ public class EncuestaRespondidaRequester extends HandlerRequester {
 		return get(xml);
 
 	}
-
-//	@Override
-//	protected void deserialize(String xml_resp_e) throws ParseException {
-//		current = parser.deserialize(xml_resp_e);
-//	}
 
 	@Override
 	protected Parser getParser() {

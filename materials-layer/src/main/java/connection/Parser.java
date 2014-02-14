@@ -115,15 +115,16 @@ public class Parser {
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 			StringReader reader = new StringReader(xml);
 			return unmarshaller.unmarshal(reader);
-		} catch (UnmarshalException ue) {
+		} catch (UnmarshalException e) {
 			// do nothing
+			System.out.println(e.getMessage());
 		} catch (JAXBException e) {
 			System.out.println(e.getMessage());
 		}
 		return null;
 	}
 	
-	public String serializeXmlQuery(int recursoId, String RecursoType) {
+	public String serializeXmlQuery(int recursoId) {
 		
 		document = buildXMLDocument();
 		Element rootElement = document.createElement(Parser.INITIAL_TAG);
@@ -181,10 +182,6 @@ public class Parser {
 		return fields;
 	}
 
-	protected Serializable createSerializable(HashMap<String, String> fields) {
-		return null;
-	}
-	
 	public String serialize(Serializable serializable) {
 		document = buildXMLDocument();
 		Element rootElement = document.createElement(Parser.INITIAL_TAG);
@@ -197,7 +194,6 @@ public class Parser {
 
 		return convertDocumentToXml(document);
 	}
-	
 
 	protected void addTextElement(Element element, String tag, String text) {
 		Element nombre = document.createElement(tag);
@@ -206,6 +202,10 @@ public class Parser {
 	}
 
 	protected void addElements(Serializable serializable, Element baseNode) {
+	}
+	
+	protected Serializable createSerializable(HashMap<String, String> fields) {
+		return null;
 	}
 
 }

@@ -85,7 +85,7 @@ public enum Requester {
 	}
 	
 	public OperationResponse getEncuestaRespondida(int idEncuesta, int idUsuario) {
-		return respondidaRequester.getRespondida(idEncuesta, idUsuario);
+		return respondidaRequester.get(idEncuesta, idUsuario);
 	}
 	
 	public OperationResponse deleteRecurso(Recurso recurso) {

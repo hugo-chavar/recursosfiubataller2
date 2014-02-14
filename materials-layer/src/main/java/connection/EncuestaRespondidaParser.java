@@ -3,6 +3,7 @@ package connection;
 import java.util.HashMap;
 
 import model.EncuestaRespondida;
+import model.Link;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,35 +20,36 @@ public class EncuestaRespondidaParser extends Parser {
 		baseTag = ENCUESTA_RESPONDIDA_TAG;
 	}
 
-	public String serializeEncuestaRespondida(EncuestaRespondida respondida) {
-
-		Document doc = buildXMLDocument();
-		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-		doc.appendChild(rootElement);
-
-		Element nodeElement = doc.createElement(ENCUESTA_RESPONDIDA_TAG);
-		rootElement.appendChild(nodeElement);
-
-		Element IDEncuesta = doc.createElement(IDRECURSO_TAG);
-		IDEncuesta.appendChild(doc.createTextNode(String.valueOf(respondida.getIdRecurso())));
-		nodeElement.appendChild(IDEncuesta);
-		Element IDUsuario = doc.createElement(IDUSUARIO_TAG);
-		IDUsuario.appendChild(doc.createTextNode(String.valueOf(respondida.getIdUsuario())));
-		nodeElement.appendChild(IDUsuario);
-		// TODO: Andy No siempre se debe incluir este campo, si es no evaluado no
-		// if(respondida.getEvaluacion()!=-1)
-		Element evaluacion = doc.createElement(EVALUACION_TAG);
-		evaluacion.appendChild(doc.createTextNode(String.valueOf(respondida.getEvaluacion())));
-		nodeElement.appendChild(evaluacion);
-
-		String respondidas_str = respondida.marshallPreguntasRespondidas();
-		Element respondidas = doc.createElement(PREGUNTAS_RESPONDIDAS_TAG);
-		respondidas.appendChild(doc.createTextNode(respondidas_str));
-		nodeElement.appendChild(respondidas);
-
-		return convertDocumentToXml(doc);
-
-	}
+//	public String serialize(EncuestaRespondida respondida) {
+//
+//		Document document = buildXMLDocument();
+//		Element rootElement = document.createElement(Parser.INITIAL_TAG);
+//		document.appendChild(rootElement);
+//
+//		Element baseNode = document.createElement(ENCUESTA_RESPONDIDA_TAG);
+//		rootElement.appendChild(baseNode);
+//
+//		Element IDEncuesta = document.createElement(IDRECURSO_TAG);
+//		IDEncuesta.appendChild(document.createTextNode(String.valueOf(respondida.getIdRecurso())));
+//		baseNode.appendChild(IDEncuesta);
+//		
+//		Element IDUsuario = document.createElement(IDUSUARIO_TAG);
+//		IDUsuario.appendChild(document.createTextNode(String.valueOf(respondida.getIdUsuario())));
+//		baseNode.appendChild(IDUsuario);
+//		// TODO: Andy No siempre se debe incluir este campo, si es no evaluado no
+//		// if(respondida.getEvaluacion()!=-1)
+//		Element evaluacion = document.createElement(EVALUACION_TAG);
+//		evaluacion.appendChild(document.createTextNode(String.valueOf(respondida.getEvaluacion())));
+//		baseNode.appendChild(evaluacion);
+//
+//		String respondidas_str = respondida.marshallPreguntasRespondidas();
+//		Element respondidas = document.createElement(PREGUNTAS_RESPONDIDAS_TAG);
+//		respondidas.appendChild(document.createTextNode(respondidas_str));
+//		baseNode.appendChild(respondidas);
+//
+//		return convertDocumentToXml(document);
+//
+//	}
 
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {
@@ -84,5 +86,20 @@ public class EncuestaRespondidaParser extends Parser {
 
 		return convertDocumentToXml(doc);
 
+	}
+	
+	@Override
+	protected void addElements(Serializable serializable, Element baseNode) {
+		EncuestaRespondida respondida = (EncuestaRespondida) serializable;
+		addTextElement(baseNode, IDRECURSO_TAG, String.valueOf(respondida.getIdRecurso()));
+		addTextElement(baseNode, IDUSUARIO_TAG, String.valueOf(respondida.getIdUsuario()));
+		
+		if (respondida.getEvaluacion() != null) {
+			addTextElement(baseNode, EVALUACION_TAG, String.valueOf(respondida.getEvaluacion()));
+		}
+		
+		String respondidas_str = respondida.marshallPreguntasRespondidas();
+		addTextElement(baseNode, PREGUNTAS_RESPONDIDAS_TAG, respondidas_str);
+		
 	}
 }

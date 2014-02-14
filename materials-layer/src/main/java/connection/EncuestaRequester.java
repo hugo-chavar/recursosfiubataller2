@@ -128,17 +128,17 @@ public class EncuestaRequester extends HandlerRequester {
 		updateCache();
 	}
 
-	public OperationResponse save(Encuesta encuesta) {
-
-		current = encuesta;
-		String encuesta_str = parser.serialize(encuesta);
-
-		return save(encuesta_str);
-	}
+//	public OperationResponse save(Encuesta encuesta) {
+//
+//		current = encuesta;
+//		String encuesta_str = parser.serialize(encuesta);
+//
+//		return save(encuesta_str);
+//	}
 
 	public OperationResponse get(Recurso recurso) {
 		current = recurso;
-		String xml = parser.serializeXmlQuery(recurso.getRecursoId(), EncuestaParser.ENCUESTA_TAG);
+		String xml = parser.serializeXmlQuery(recurso.getRecursoId());
 		return get(xml);
 	}
 

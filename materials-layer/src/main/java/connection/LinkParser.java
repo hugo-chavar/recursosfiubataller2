@@ -46,12 +46,9 @@ public class LinkParser extends Parser {
 	@Override
 	protected void addElements(Serializable serializable, Element baseNode) {
 		Link link = (Link) serializable;
-		Element recursoId = document.createElement(Parser.ID_TAG);
-		recursoId.appendChild(document.createTextNode(String.valueOf(link.getRecursoId())));
-		baseNode.appendChild(recursoId);
-		Element nombre = document.createElement(LinkParser.NOMBRE_TAG);
-		nombre.appendChild(document.createTextNode(link.getNombre()));
-		baseNode.appendChild(nombre);
+		addTextElement(baseNode, Parser.ID_TAG, String.valueOf(link.getRecursoId()));
+		addTextElement(baseNode, NOMBRE_TAG, link.getNombre());
+		
 	}
 
 }

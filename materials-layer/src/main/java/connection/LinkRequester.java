@@ -18,41 +18,23 @@ public class LinkRequester extends HandlerRequester {
 	}
 
 	private void generateTestData() {
-		Link link = new Link(11002,-1,"un link a google copado");
+		Link link = new Link(11002,-1, "un link a google copado");
 		link.setNombre("www.google.com.ar");
 		current = link;
 		updateCache();
 	}
 
-	public OperationResponse save(Link link) {
-		current = link;
-		String link_str = parser.serialize(link);
-//		System.out.println(link_str);
-		return save(link_str);
-	}
-	
-//	protected Recurso retrieveCached(int recursoId) {
-//		return cache.get(new Link(recursoId, 0, ""));
-//	}
-//	
-//	public boolean cacheContains(int recursoId) {
-//		return cache.contains(new Link(recursoId, 0, ""));
+//	public OperationResponse save(Link link) {
+//		current = link;
+//		String link_str = parser.serialize(link);
+//		return save(link_str);
 //	}
 
 	public OperationResponse get(Recurso recurso) {
 		current = recurso;
-		String xml = this.parser.serializeXmlQuery(recurso.getRecursoId(), LinkParser.LINK_TAG);
+		String xml = parser.serializeXmlQuery(recurso.getRecursoId());
 		return get(xml);
 	}
-
-//	public void deleteFromCache(int recursoId) {
-//		cache.remove(new Link(recursoId, 0, ""));
-//	}
-
-//	@Override
-//	protected void deserialize(String xml_resp_e) throws ParseException {
-//		current = parser.deserialize(xml_resp_e);
-//	}
 
 	@SuppressWarnings("rawtypes")
 	@Override

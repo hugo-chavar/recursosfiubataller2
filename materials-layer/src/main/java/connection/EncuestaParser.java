@@ -55,18 +55,9 @@ public class EncuestaParser extends Parser {
 	protected void addElements(Serializable serializable, Element baseNode) {
 		Encuesta encuesta = (Encuesta) serializable;
 		
-		Element idRecursoElement = document.createElement(Parser.ID_TAG);
-		idRecursoElement.appendChild(document.createTextNode(String.valueOf(encuesta.getRecursoId())));
-		baseNode.appendChild(idRecursoElement);
-		
-		Element evaluada = document.createElement(EncuestaParser.EVALUADA_TAG);
-		evaluada.appendChild(document.createTextNode(String.valueOf(encuesta.isEvaluada())));
-		baseNode.appendChild(evaluada);
-		
-		String preguntas_str = encuesta.marshallPreguntas();
-		Element preguntas = document.createElement(EncuestaParser.PREGUNTAS_TAG);
-		preguntas.appendChild(document.createTextNode(preguntas_str));
-		baseNode.appendChild(preguntas);
+		addTextElement(baseNode, Parser.ID_TAG, String.valueOf(encuesta.getRecursoId()));
+		addTextElement(baseNode, EVALUADA_TAG, String.valueOf(encuesta.isEvaluada()));
+		addTextElement(baseNode, PREGUNTAS_TAG, encuesta.marshallPreguntas());
 
 	}
 }

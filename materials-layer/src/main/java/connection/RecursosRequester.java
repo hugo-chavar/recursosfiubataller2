@@ -80,11 +80,11 @@ public class RecursosRequester extends HandlerRequester {
 		return delete(xml);
 	}
 	
-	public OperationResponse save(Serializable serializable) {
-		current = serializable;
-		String link_str = parser.serialize(serializable);
-		return save(link_str);
-	}
+//	public OperationResponse save(Serializable serializable) {
+//		current = serializable;
+//		String link_str = parser.serialize(serializable);
+//		return save(link_str);
+//	}
 
 	public void updateCache(Recurso target) {
 		setAll(false);

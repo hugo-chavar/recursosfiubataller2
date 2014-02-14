@@ -20,7 +20,10 @@ public abstract class HandlerRequester {
 		return current;
 	}
 
-	protected OperationResponse save(String xml) {
+	protected OperationResponse save(Serializable serializable) {
+//		protected OperationResponse save(String xml) {
+		current = serializable;
+		String xml = getParser().serialize(serializable);
 
 		try {
 			String xml_resp_e = proxy.guardar(xml);

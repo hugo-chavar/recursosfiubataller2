@@ -17,7 +17,7 @@ import connection.responses.OperationResponse;
 public class ArchivoRequester extends HandlerRequester {
 	private ArchivoParser parser;
 	private Cache<Archivo> cache;
-	private DataHandler dataHandler;
+//	private DataHandler dataHandler;
 
 	public ArchivoRequester() {
 		super();
@@ -90,7 +90,7 @@ public class ArchivoRequester extends HandlerRequester {
 	// Este metodo es el que consulta a integración y trae el archivo necesario.
 	public OperationResponse get(Recurso recurso) {
 		OperationResponse response;
-		String xml = parser.serializeXmlQuery(recurso.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
+		String xml = parser.serializeXmlQuery(recurso.getRecursoId());
 		try {
 			response = getFile(xml);
 		} catch (GetException e) {
@@ -171,9 +171,9 @@ public class ArchivoRequester extends HandlerRequester {
 //			System.out.println("Se va a cachear");
 			super.updateCache();
 		}
-		else{
+//		else{
 //			System.out.println("No se cachea");
-		}
+//		}
 	}
 
 	private boolean currentHasValidSize() {
@@ -182,35 +182,35 @@ public class ArchivoRequester extends HandlerRequester {
 		return (archivo.getSize() <= 50000);
 	}
 
-	@Override
-	protected void deserialize(String xml_resp_e) throws ParseException {
-		current = parser.deserialize(xml_resp_e);
-	}
+//	@Override
+//	protected void deserialize(String xml_resp_e) throws ParseException {
+//		current = parser.deserialize(xml_resp_e);
+//	}
 
-	@Override
-	public void deleteRecurso(Serializable s) {
-		Recurso aux = (Recurso)s;
-		super.deleteRecurso(aux);
-		//TODO parece que esto no hace falta
-		String xml = parser.serializeXmlQuery(aux.getRecursoId(), ArchivoParser.ARCHIVO_TAG);
-		try {
-			String xml_resp_e = proxy.eliminarArchivo(xml);
-			System.out.println(xml_resp_e);
-		} catch (ConnectionException e) {
-			String message = "Intentando eliminar archivo id: " + aux.getRecursoId();
-			message = e.getMessage() + message;
-			System.out.println(message);
-		}
-		
-	}
+//	@Override
+//	public void deleteRecurso(Serializable s) {
+//		Recurso aux = (Recurso)s;
+//		super.deleteRecurso(aux);
+//		//TODO parece que esto no hace falta
+//		String xml = parser.serializeXmlQuery(aux.getRecursoId());
+//		try {
+//			String xml_resp_e = proxy.eliminarArchivo(xml);
+//			System.out.println(xml_resp_e);
+//		} catch (ConnectionException e) {
+//			String message = "Intentando eliminar archivo id: " + aux.getRecursoId();
+//			message = e.getMessage() + message;
+//			System.out.println(message);
+//		}
+//		
+//	}
 
-	public DataHandler getDataHandler() {
-		return dataHandler;
-	}
-
-	public void setDataHandler(DataHandler dataHandler) {
-		this.dataHandler = dataHandler;
-	}
+//	public DataHandler getDataHandler() {
+//		return dataHandler;
+//	}
+//
+//	public void setDataHandler(DataHandler dataHandler) {
+//		this.dataHandler = dataHandler;
+//	}
 	
 	private OperationResponse saveFile(String xml, DataHandler dataHandler) throws GetException {
 //		DataHandler archivo = ((Archivo) current).getRawFile();

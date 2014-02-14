@@ -82,11 +82,8 @@ public class ArchivoParser extends Parser {
 		Archivo archivo = (Archivo) serializable;
 
 		addTextElement(baseNode, NOMBRE_TAG, archivo.getNombreArchivo());
-		
 		addTextElement(baseNode, Parser.TAMANIO, String.valueOf(archivo.getSize()));
-
 		addTextElement(baseNode, EXTENSION_TAG, archivo.getTipoArchivo());
-		
 		addTextElement(baseNode, Parser.RECURSOID_TAG, String.valueOf(archivo.getRecursoId()));
 		
 	}
