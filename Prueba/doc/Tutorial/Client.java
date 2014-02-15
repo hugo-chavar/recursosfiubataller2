@@ -62,11 +62,11 @@ public class Client {
 		pruebaGetRecurso();
 
 		// prueba Ok de cache
-		xml = "<recurso><recursoId>1003</recursoId><tipo>Encuesta</tipo></recurso>";
+		xml = "<recurso><recursoId>11003</recursoId><tipo>Encuesta</tipo></recurso>";
 		pruebaGetRecurso();
 		
 		// prueba Ok de cache de nuevo
-		xml = "<recurso><recursoId>1004</recursoId><tipo>Encuesta</tipo></recurso>";
+		xml = "<recurso><recursoId>11004</recursoId><tipo>Encuesta</tipo></recurso>";
 		pruebaGetRecurso();
 		
 		// prueba con datos mockeados de integracion

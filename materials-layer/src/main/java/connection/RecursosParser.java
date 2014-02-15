@@ -6,7 +6,6 @@ import java.util.List;
 
 import model.Recurso;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -20,81 +19,74 @@ public class RecursosParser extends Parser {
 	}
 	
 	public List<Recurso> deserializeRecursos(String xml) throws ParseException {
-		
 		List<Recurso> recursos = new ArrayList<Recurso>();
-		
 		NodeList nodes = getBaseTagNodes(xml);
 		
 		for (int i = 0; i < nodes.getLength(); i++) {
-		
 			NodeList childNodes = nodes.item(i).getChildNodes();
 			HashMap<String, String> fields;
 			
 		    if (childNodes != null) {
-		    	
 		    	fields = fillFieldValues(childNodes);
 		        
 				Recurso recurso = (Recurso) createSerializable(fields);
 				recursos.add(recurso);
-			    
 		    }
-		    
 		}
-	    
 		return recursos;
 		
 	}
 	
-	public String serializeRecursoQuery(int recursoId) {
-		
-		Document doc = this.buildXMLDocument();
-		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-		doc.appendChild(rootElement);
-
-		Element recursoNode = doc.createElement(Parser.RECURSO_TAG);
-		rootElement.appendChild(recursoNode);
-		
-		Element recursoID = doc.createElement(Parser.ID_TAG);
-		recursoID.appendChild(doc.createTextNode(String.valueOf(recursoId)));
-		recursoNode.appendChild(recursoID);
-		
-		return convertDocumentToXml(doc);
-		
-	}
-	
-	public String serializeRecursosQuery(int IDAmbito) {
-		
-		Document doc = this.buildXMLDocument();
-		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-		doc.appendChild(rootElement);
-		
-		Element nodeElement = doc.createElement(Parser.RECURSO_TAG);
-		rootElement.appendChild(nodeElement);
-		
-		Element IDAmbito_el = doc.createElement(Parser.AMBITOID_TAG);
-		IDAmbito_el.appendChild(doc.createTextNode(String.valueOf(IDAmbito)));
-		nodeElement.appendChild(IDAmbito_el);
-		
-		return convertDocumentToXml(doc);
-		
-	}
-	
-	public String serializeDeleteQuery(int IDRecurso) {
-		
-		Document doc = this.buildXMLDocument();
-		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-		doc.appendChild(rootElement);
-		
-		Element nodeElement = doc.createElement(EncuestaParser.RECURSO_TAG);
-		rootElement.appendChild(nodeElement);
-		
-		Element IDRecurso_el = doc.createElement(EncuestaParser.ID_TAG);
-		IDRecurso_el.appendChild(doc.createTextNode(String.valueOf(IDRecurso)));
-		nodeElement.appendChild(IDRecurso_el);
-		
-		return convertDocumentToXml(doc);
-		
-	}
+//	public String serializeRecursoQuery(int recursoId) {
+//		
+//		Document doc = this.buildXMLDocument();
+//		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
+//		doc.appendChild(rootElement);
+//
+//		Element recursoNode = doc.createElement(Parser.RECURSO_TAG);
+//		rootElement.appendChild(recursoNode);
+//		
+//		Element recursoID = doc.createElement(Parser.ID_TAG);
+//		recursoID.appendChild(doc.createTextNode(String.valueOf(recursoId)));
+//		recursoNode.appendChild(recursoID);
+//		
+//		return convertDocumentToXml(doc);
+//		
+//	}
+//	
+//	public String serializeRecursosQuery(int IDAmbito) {
+//		
+//		Document doc = this.buildXMLDocument();
+//		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
+//		doc.appendChild(rootElement);
+//		
+//		Element nodeElement = doc.createElement(Parser.RECURSO_TAG);
+//		rootElement.appendChild(nodeElement);
+//		
+//		Element IDAmbito_el = doc.createElement(Parser.AMBITOID_TAG);
+//		IDAmbito_el.appendChild(doc.createTextNode(String.valueOf(IDAmbito)));
+//		nodeElement.appendChild(IDAmbito_el);
+//		
+//		return convertDocumentToXml(doc);
+//		
+//	}
+//	
+//	public String serializeDeleteQuery(int IDRecurso) {
+//		
+//		Document doc = this.buildXMLDocument();
+//		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
+//		doc.appendChild(rootElement);
+//		
+//		Element nodeElement = doc.createElement(EncuestaParser.RECURSO_TAG);
+//		rootElement.appendChild(nodeElement);
+//		
+//		Element IDRecurso_el = doc.createElement(EncuestaParser.ID_TAG);
+//		IDRecurso_el.appendChild(doc.createTextNode(String.valueOf(IDRecurso)));
+//		nodeElement.appendChild(IDRecurso_el);
+//		
+//		return convertDocumentToXml(doc);
+//		
+//	}
 	
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {
@@ -106,34 +98,44 @@ public class RecursosParser extends Parser {
 		return new Recurso(IDRecurso, IDAmbito, descripcion, tipo);
 	}
 	
-	public String serialize(Serializable serializable) {
-
+//	public String serialize(Serializable serializable) {
+//
+//		Recurso recurso = (Recurso) serializable;
+//		Document document = this.buildXMLDocument();
+//		Element rootElement = document.createElement(Parser.INITIAL_TAG);
+//		document.appendChild(rootElement);
+//
+//		Element baseNode = document.createElement(Parser.RECURSO_TAG);
+//		rootElement.appendChild(baseNode);
+//
+////		Element recursoId = doc.createElement(Parser.ID_TAG);
+////		recursoId.appendChild(doc.createTextNode(String.valueOf(recurso.getRecursoId())));
+////		recursoNode.appendChild(recursoId);
+//
+//		Element ambitoId = document.createElement(Parser.AMBITOID_TAG);
+//		ambitoId.appendChild(document.createTextNode(String.valueOf(recurso.getAmbitoId())));
+//		baseNode.appendChild(ambitoId);
+//
+//		Element descripcion = document.createElement(Parser.DESCRIPCION_TAG);
+//		descripcion.appendChild(document.createTextNode(recurso.getDescripcion()));
+//		baseNode.appendChild(descripcion);
+//
+//		Element tipo = document.createElement(Parser.TIPO_TAG);
+//		tipo.appendChild(document.createTextNode(recurso.getTipo()));
+//		baseNode.appendChild(tipo);
+//
+//		return convertDocumentToXml(document);
+//
+//	}
+	
+	@Override
+	protected void addElements(Serializable serializable, Element baseNode) {
 		Recurso recurso = (Recurso) serializable;
-		Document doc = this.buildXMLDocument();
-		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-		doc.appendChild(rootElement);
-
-		Element recursoNode = doc.createElement(Parser.RECURSO_TAG);
-		rootElement.appendChild(recursoNode);
-
-//		Element recursoId = doc.createElement(Parser.ID_TAG);
-//		recursoId.appendChild(doc.createTextNode(String.valueOf(recurso.getRecursoId())));
-//		recursoNode.appendChild(recursoId);
-
-		Element ambitoId = doc.createElement(Parser.AMBITOID_TAG);
-		ambitoId.appendChild(doc.createTextNode(String.valueOf(recurso.getAmbitoId())));
-		recursoNode.appendChild(ambitoId);
-
-		Element descripcion = doc.createElement(Parser.DESCRIPCION_TAG);
-		descripcion.appendChild(doc.createTextNode(recurso.getDescripcion()));
-		recursoNode.appendChild(descripcion);
-
-		Element tipo = doc.createElement(Parser.TIPO_TAG);
-		tipo.appendChild(doc.createTextNode(recurso.getTipo()));
-		recursoNode.appendChild(tipo);
-
-		return convertDocumentToXml(doc);
-
+		addTextElement(baseNode, Parser.ID_TAG, String.valueOf(recurso.getRecursoId()));
+		addTextElement(baseNode, Parser.AMBITOID_TAG, String.valueOf(recurso.getAmbitoId()));
+		addTextElement(baseNode, Parser.DESCRIPCION_TAG, recurso.getDescripcion());
+		addTextElement(baseNode, Parser.TIPO_TAG, recurso.getTipo());
+		
 	}
 	
 }

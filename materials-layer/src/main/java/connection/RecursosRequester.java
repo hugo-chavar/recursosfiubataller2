@@ -57,14 +57,15 @@ public class RecursosRequester extends HandlerRequester {
 		if (response.getSuccess()) {
 			return response;
 		}
-		String xml = parser.serializeRecursoQuery(target.getRecursoId());
+		target = new Recurso(target.getRecursoId(), null, null);
+		String xml = parser.serialize(target);
 		return get(xml);
 	}
 
 	public OperationResponse getAll(int ambitoId) {
 		setAll(true);
 		current = new Recurso(null, ambitoId, null);
-		String xml = parser.serializeRecursosQuery(ambitoId);
+		String xml = parser.serialize(current);
 		return get(xml);
 		// TODO : (Hugo) devuelvo datos de ejemplo
 		// RecursosResponse recursosResponse = new RecursosResponse();
@@ -76,7 +77,8 @@ public class RecursosRequester extends HandlerRequester {
 	public OperationResponse delete(Recurso recurso) {
 		setAll(false);
 		current = recurso;
-		String xml = parser.serializeDeleteQuery(recurso.getRecursoId());
+		recurso = new Recurso(recurso.getRecursoId(), null, null);
+		String xml = parser.serialize(recurso);
 		return delete(xml);
 	}
 	

@@ -92,6 +92,7 @@ public class PruebasParserParameter {
 		
 		System.out.println(xml);
 		
+		Encuesta enc2 = (Encuesta)parser.unmarshal(xml, Encuesta.class);
 		
 		or = (new LinkRequester()).getFromCache(new Link(11002, null, null));
 
@@ -101,7 +102,7 @@ public class PruebasParserParameter {
 		
 		System.out.println(xml);
 		
-		Encuesta enc2 = (Encuesta)parser.unmarshal(xml, Encuesta.class);
+		
 		
 		System.out.println(enc2.getDescripcion());
 		

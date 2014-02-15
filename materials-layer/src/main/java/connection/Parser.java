@@ -46,8 +46,7 @@ public class Parser {
 
 	public Document buildXMLDocument() {
 		try {
-			DocumentBuilderFactory docFactory = DocumentBuilderFactory
-					.newInstance();
+			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			return docBuilder.newDocument();
 		} catch (ParserConfigurationException pce) {
@@ -57,20 +56,16 @@ public class Parser {
 	}
 
 	public Document convertXmlToDocument(String xml) throws ParseException {
-		DocumentBuilderFactory docFactory = DocumentBuilderFactory
-				.newInstance();
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder;
 		try {
 			docBuilder = docFactory.newDocumentBuilder();
 			return docBuilder.parse(new InputSource(new StringReader(xml)));
 		} catch (SAXParseException e) {
 			String rcv = xml.substring(0, xml.indexOf('<') - 2);
-			throw new ParseException(
-					"Xml recibido de integracion contiene errores. Recibido: "
-							+ rcv);
+			throw new ParseException("Xml recibido de integracion contiene errores. Recibido: " + rcv);
 		} catch (ParserConfigurationException e) {
-			throw new ParseException(
-					"ParserConfigurationException al convertir: " + xml);
+			throw new ParseException("ParserConfigurationException al convertir: " + xml);
 		} catch (SAXException e) {
 			throw new ParseException("SAXException al convertir: " + xml);
 		} catch (IOException e) {
@@ -79,8 +74,7 @@ public class Parser {
 	}
 
 	public String convertDocumentToXml(Document doc) {
-		DOMImplementationLS domImplLS = (DOMImplementationLS) doc
-				.getImplementation();
+		DOMImplementationLS domImplLS = (DOMImplementationLS) doc.getImplementation();
 
 		LSSerializer serializer = domImplLS.createLSSerializer();
 
@@ -116,10 +110,15 @@ public class Parser {
 			return unmarshaller.unmarshal(reader);
 		} catch (UnmarshalException e) {
 			// do nothing
-			System.out.println(e.getMessage());
+//			System.out.println(" Object unmarshal 1");
+//			
+//			System.out.println(e.getMessage());
 		} catch (JAXBException e) {
-			System.out.println(e.getMessage());
+//			System.out.println(" Object unmarshal 2");
+//			System.out.println(e.getMessage());
 		}
+//		System.out.println(xml);
+//		System.out.println(type.getClass().getName());
 		return null;
 	}
 
@@ -168,11 +167,11 @@ public class Parser {
 		return nodes;
 	}
 
-	protected HashMap<String, String> fillFieldValues(NodeList linkChildNodes) {
+	protected HashMap<String, String> fillFieldValues(NodeList nodeList) {
 		HashMap<String, String> fields;
 		fields = new HashMap<String, String>();
-		for (int i = 0; i < linkChildNodes.getLength(); i++) {
-			Node childNode = linkChildNodes.item(i);
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node childNode = nodeList.item(i);
 			if (childNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element element = (Element) childNode;
 				fields.put(element.getNodeName(), element.getTextContent());

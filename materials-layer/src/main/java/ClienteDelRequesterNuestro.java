@@ -21,7 +21,7 @@ public class ClienteDelRequesterNuestro {
 
 	public static void main(String[] args) {
 
-		probarLinkQueNoExiste();
+//		probarLinkQueNoExiste();
 //		borrarRecurso();
 //		getArchivoQueExiste();
 //		getEncuestaQExisteEnCacheRecursosPeroNoEnEncuestas();
@@ -29,6 +29,7 @@ public class ClienteDelRequesterNuestro {
 //		getListaRecursos();
 //		getEncuestaHarcodeada();
 //		getEncuestaQNoExisteEnNingunNivel();
+		getEncuesta1003();
 //		guardarLink();
 //		getRespondidaQueExiste();
 //		getRespondidaInexistente();
@@ -97,6 +98,19 @@ public class ClienteDelRequesterNuestro {
 	private static void getEncuestaHarcodeada() {
 		System.out.println("existe");
 		encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);
+		response = Requester.INSTANCE.getRecurso(encuesta);
+		if (response.getSuccess()) {
+			Encuesta encuesta_rtn = (Encuesta) response.getSerializable();
+			System.out.println(encuesta_rtn.getDescripcion());
+		} else {
+			System.out.println(response.getReason());
+		}
+	}
+	
+
+	private static void getEncuesta1003() {
+		System.out.println("1003");
+		encuesta = new Encuesta(1003, null, null, true);
 		response = Requester.INSTANCE.getRecurso(encuesta);
 		if (response.getSuccess()) {
 			Encuesta encuesta_rtn = (Encuesta) response.getSerializable();
