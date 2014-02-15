@@ -1,0 +1,10 @@
+<parametro>
+   <archivo>
+      <tipo>Archivo</tipo>
+      <recursoId>14</recursoId>
+      <descripcion>una clase java</descripcion>
+      <tipo>class</tipo>
+      <nombre>Client</nombre>
+   </archivo>
+   <usuarioId>5</usuarioId>
+</parametro>

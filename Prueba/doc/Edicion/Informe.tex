@@ -520,32 +520,42 @@ Se enviar\'a \textit{multiplesCorrectas = "false"} cuando no hayan respuestas co
 				\item[OUTPUT] LISTA-DE [ID-RECURSO, DESCRIPCION, TIPO]\\
 			\end{description}
 			\lstinputlisting{recursos.xml}
-			
+	
 			\item \emph{AGREGAR ARCHIVO}
+		%	\begin{description}
+				Este WS recibe un xml con la MetaData del archivo, y un byte array que contiene al archivo a agregar:
+				El xml debe cumplir la siguiente especificaci\'on:
+				
+		%	\end{description}
+			\lstinputlisting{Agregar/archivo.xml}	
+			
+			\item \emph{AGREGAR RECURSO} Aclaraci\'on: este WS no es compatible con la parte de archivos. VER AGREGAR ARCHIVO.
 			\begin{description}
-				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, ARCHIVO
-				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON\\
+				La utilidad es la adicción de LINKS y ENCUESTAS.
+				Para ello recibe los siguientes parametros:
+				 LINKS:
+				 
+				 \lstinputlisting{Agregar/link.xml}	
+				 
+				 ENCUESTA:
+				 
+				 \lstinputlisting{Agregar/encuesta.xml}	
 			\end{description}
-			\item \emph{AGREGAR LINK}
-			\begin{description}
-				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, LINK
-				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \\
-			\end{description}
-			\item \emph{AGREGAR ENCUESTA}
-			\begin{description}
-				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, ENCUESTA 
-				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON\\
-			\end{description}
-			\item \emph{GUARDAR ENCUESTA RESPONDIDA}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
-			\begin{description}
-				\item[INPUT] ID-ENCUESTA, ID-USUARIO, LISTA-RESPUESTAS
-				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \\
-			\end{description}
-			\item \emph{OBTENER ENCUESTA RESPONDIDA}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
-			\begin{description}
-				\item[INPUT] XML\_PARAMETROS
-				\item[OUTPUT] XML\_RESULTADO\\
-			\end{description}
+%			\item \emph{AGREGAR ENCUESTA}
+%			\begin{description}
+%				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, ENCUESTA 
+%				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON\\
+%			\end{description}
+%			\item \emph{GUARDAR ENCUESTA RESPONDIDA}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
+%			\begin{description}
+%				\item[INPUT] ID-ENCUESTA, ID-USUARIO, LISTA-RESPUESTAS
+%				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \\
+%			\end{description}
+%			\item \emph{OBTENER ENCUESTA RESPONDIDA}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
+%			\begin{description}
+%				\item[INPUT] XML\_PARAMETROS
+%				\item[OUTPUT] XML\_RESULTADO\\
+%			\end{description}
 			
 Como par\'ametro se necesitan los siguientes items detallados de la siguiente forma:
 				
@@ -576,6 +586,8 @@ De ser exitoso la ejecuci\'on se obtendr\'an las siguientes respuestas del servi
 				\item[INPUT] ID-AMBIENTE, ID-RECURSO
 				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \\
 			\end{description}
+		
+				
 		\end{itemize}
 %		\renewcommand{\labelitemi}{\ding{118}} 
 %		\item[Requeridas a la capa de Integraci\'on \emph{( incompleto)}] \
