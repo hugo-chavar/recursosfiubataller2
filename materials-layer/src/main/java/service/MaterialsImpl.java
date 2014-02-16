@@ -129,6 +129,7 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public String getRecurso(String parametros) {
+		System.out.println(parametros);
 		Parameter parameter = Parameter.createParameter(parametros);
 		OperationResponse response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
 		return toXml(response);

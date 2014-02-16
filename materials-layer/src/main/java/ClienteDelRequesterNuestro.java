@@ -29,7 +29,7 @@ public class ClienteDelRequesterNuestro {
 //		getListaRecursos();
 //		getEncuestaHarcodeada();
 //		getEncuestaQNoExisteEnNingunNivel();
-		getEncuesta1003();
+		getEncuesta11004();
 //		guardarLink();
 //		getRespondidaQueExiste();
 //		getRespondidaInexistente();
@@ -108,10 +108,16 @@ public class ClienteDelRequesterNuestro {
 	}
 	
 
-	private static void getEncuesta1003() {
-		System.out.println("1003");
-		encuesta = new Encuesta(1003, null, null, true);
-		response = Requester.INSTANCE.getRecurso(encuesta);
+	private static void getEncuesta11004() {
+		System.out.println("11004");
+
+//		encuesta = new Encuesta(11004, null, null, true);
+//		response = Requester.INSTANCE.getRecurso(encuesta);
+		
+		xml = "<parametro><recurso><recursoId>11004</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
+		p = Parameter.createParameter(xml);
+		response = Requester.INSTANCE.getRecurso(p.getRecurso());
+		
 		if (response.getSuccess()) {
 			Encuesta encuesta_rtn = (Encuesta) response.getSerializable();
 			System.out.println(encuesta_rtn.getDescripcion());

@@ -24,7 +24,7 @@ public class ClientePruebaContraIntegracion {
 //
 //		seleccionar("<WS><Recurso><ambitoId>1</ambitoId></Recurso></WS>");
 //
-//		seleccionar("<WS><Link><recursoId>997</recursoId></Link></WS>");
+		seleccionar("<WS><Link><recursoId>997</recursoId></Link></WS>");
 //
 //		seleccionar("<WS><Encuesta><id>1003</id></Encuesta></WS>");
 
@@ -32,7 +32,7 @@ public class ClientePruebaContraIntegracion {
 //
 //		seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
 //
-		guardar("<WS><Link><id>1017</id><nombre>www.hola.com</nombre></Link></WS>");
+//		guardar("<WS><Link><recursoId>1017</recursoId><nombre>www.hola.com</nombre></Link></WS>");
 //
 //		guardar("<WS><Recurso><descripcion>prueba Dami</descripcion><tipo>L</tipo></Recurso></WS>");
 //
