@@ -39,6 +39,10 @@ public class Encuesta extends Recurso {
 		super();
 		this.tipo = "Encuesta";
 	}
+	
+	public Encuesta(Recurso recurso) {
+		super(recurso.getRecursoId(), null, null);
+	}
 
 	public boolean isEvaluada() {
 		return evaluada;

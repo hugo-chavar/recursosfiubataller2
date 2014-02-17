@@ -111,12 +111,12 @@ public class ClienteDelRequesterNuestro {
 	private static void getEncuesta11004() {
 		System.out.println("11004");
 
-//		encuesta = new Encuesta(11004, null, null, true);
-//		response = Requester.INSTANCE.getRecurso(encuesta);
+		encuesta = new Encuesta(11, null, null, true);
+		response = Requester.INSTANCE.getRecurso(encuesta);
 		
-		xml = "<parametro><recurso><recursoId>11004</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
-		p = Parameter.createParameter(xml);
-		response = Requester.INSTANCE.getRecurso(p.getRecurso());
+//		xml = "<parametro><recurso><recursoId>11004</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
+//		p = Parameter.createParameter(xml);
+//		response = Requester.INSTANCE.getRecurso(p.getRecurso());
 		
 		if (response.getSuccess()) {
 			Encuesta encuesta_rtn = (Encuesta) response.getSerializable();
