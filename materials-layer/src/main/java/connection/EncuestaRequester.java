@@ -9,6 +9,8 @@ import model.PreguntaRespuestaACompletar;
 import model.PreguntaRespuestaFija;
 import model.Recurso;
 import connection.cache.Cache;
+import connection.parsers.EncuestaParser;
+import connection.parsers.Parser;
 import connection.responses.OperationResponse;
 
 

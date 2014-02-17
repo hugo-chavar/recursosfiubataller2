@@ -10,8 +10,8 @@ import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Recurso;
 import connection.Parameter;
-import connection.Parser;
 import connection.Requester;
+import connection.parsers.Parser;
 import connection.responses.OperationResponse;
 
 @MTOM 

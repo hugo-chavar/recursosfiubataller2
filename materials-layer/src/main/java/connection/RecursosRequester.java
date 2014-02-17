@@ -7,6 +7,8 @@ import model.Recurso;
 import connection.cache.Cache;
 import connection.exceptions.GetException;
 import connection.exceptions.ParseException;
+import connection.parsers.Parser;
+import connection.parsers.RecursosParser;
 import connection.responses.OperationResponse;
 import connection.responses.RecursosResponse;
 

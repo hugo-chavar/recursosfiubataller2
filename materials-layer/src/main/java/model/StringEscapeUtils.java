@@ -1,6 +1,6 @@
 package model;
 
-import connection.Parser;
+import connection.parsers.Parser;
 
 public class StringEscapeUtils {
 

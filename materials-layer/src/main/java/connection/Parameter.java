@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import connection.parsers.Parser;
 import model.Archivo;
 import model.Encuesta;
 import model.EncuestaRespondida;

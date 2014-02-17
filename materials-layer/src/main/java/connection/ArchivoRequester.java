@@ -12,6 +12,8 @@ import connection.cache.Cache;
 import connection.exceptions.ConnectionException;
 import connection.exceptions.GetException;
 import connection.exceptions.ParseException;
+import connection.parsers.ArchivoParser;
+import connection.parsers.Parser;
 import connection.responses.OperationResponse;
 
 public class ArchivoRequester extends HandlerRequester {

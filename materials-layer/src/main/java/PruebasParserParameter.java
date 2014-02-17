@@ -16,7 +16,7 @@ import model.StringEscapeUtils;
 import connection.EncuestaRequester;
 import connection.LinkRequester;
 import connection.Parameter;
-import connection.Parser;
+import connection.parsers.Parser;
 import connection.responses.OperationResponse;
 
 

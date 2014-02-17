@@ -8,6 +8,8 @@ import model.PreguntaRespondida;
 import model.PreguntaRespuestaACompletarRespondida;
 import model.PreguntaRespuestaFijaRespondida;
 import connection.cache.Cache;
+import connection.parsers.EncuestaRespondidaParser;
+import connection.parsers.Parser;
 import connection.responses.OperationResponse;
 
 public class EncuestaRespondidaRequester extends HandlerRequester {

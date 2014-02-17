@@ -3,6 +3,8 @@ package connection;
 import model.Link;
 import model.Recurso;
 import connection.cache.Cache;
+import connection.parsers.LinkParser;
+import connection.parsers.Parser;
 import connection.responses.OperationResponse;
 
 public class LinkRequester extends HandlerRequester {

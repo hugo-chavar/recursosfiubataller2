@@ -4,6 +4,7 @@ import connection.cache.Cache;
 import connection.exceptions.ConnectionException;
 import connection.exceptions.GetException;
 import connection.exceptions.ParseException;
+import connection.parsers.Parser;
 import connection.responses.OperationResponse;
 
 public abstract class HandlerRequester {
