@@ -1,6 +1,7 @@
 package connection;
 
 import model.Archivo;
+import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Recurso;
 import connection.responses.OperationResponse;
