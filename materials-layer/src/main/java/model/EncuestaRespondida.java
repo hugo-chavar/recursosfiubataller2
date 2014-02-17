@@ -125,4 +125,9 @@ public class EncuestaRespondida implements Serializable {
 //		EncuestaRespondida er = (EncuestaRespondida)s;
 		
 	}
+
+	@Override
+	public Serializable cloneById() {
+		return new EncuestaRespondida(idRecurso, idUsuario);
+	}
 }

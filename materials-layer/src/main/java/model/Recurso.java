@@ -98,4 +98,9 @@ public class Recurso implements Serializable {
 		setDescripcion(aux.getDescripcion());
 		
 	}
+
+	@Override
+	public Serializable cloneById() {
+		return new Recurso(recursoId, null, null, null);
+	}
 }

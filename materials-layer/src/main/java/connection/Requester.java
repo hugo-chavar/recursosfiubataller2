@@ -1,9 +1,7 @@
 package connection;
 
 import model.Archivo;
-import model.Encuesta;
 import model.EncuestaRespondida;
-import model.Link;
 import model.Recurso;
 import connection.responses.OperationResponse;
 
@@ -27,9 +25,9 @@ public enum Requester {
 		respondidaRequester = new EncuestaRespondidaRequester();
 	}
 	
-	public ArchivoRequester getArchivoRequester() {
-		return archivoRequester;
-	}
+//	public ArchivoRequester getArchivoRequester() {
+//		return archivoRequester;
+//	}
 
 	public OperationResponse saveEncuestaRespondida(EncuestaRespondida respondida) {
 		return respondidaRequester.save(respondida);
@@ -132,9 +130,9 @@ public enum Requester {
 		OperationResponse response;
 		
 		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
-			response = encuestaRequester.save((Encuesta)recurso);
+			response = encuestaRequester.save(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
-			response = linkRequester.save((Link)recurso);
+			response = linkRequester.save(recurso);
 		} else {
 			response = archivoRequester.save((Archivo)recurso);
 		//	response = OperationResponse.createFailed("Tipo de recurso inexistente");

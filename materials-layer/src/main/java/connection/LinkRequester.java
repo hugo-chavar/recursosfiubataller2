@@ -1,7 +1,6 @@
 package connection;
 
 import model.Link;
-import model.Recurso;
 import connection.cache.Cache;
 import connection.parsers.LinkParser;
 import connection.parsers.Parser;
@@ -9,7 +8,7 @@ import connection.responses.OperationResponse;
 
 public class LinkRequester extends HandlerRequester {
 
-	private LinkParser parser;
+	private Parser parser;
 	private Cache<Link> cache;
 	
 	public LinkRequester() {
@@ -32,9 +31,9 @@ public class LinkRequester extends HandlerRequester {
 //		return save(link_str);
 //	}
 
-	public OperationResponse get(Recurso recurso) {
-		current = recurso;
-		String xml = parser.serializeXmlQuery(recurso.getRecursoId());
+	public OperationResponse get(Serializable serializable) {
+		current = serializable;
+		String xml = parser.serialize(serializable.cloneById());
 		return get(xml);
 	}
 

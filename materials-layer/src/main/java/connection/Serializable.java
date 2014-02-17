@@ -8,5 +8,7 @@ public interface Serializable {
 	String getInfo();
 	
 	void updateFields(Serializable s);
+	
+	Serializable cloneById();
 
 }

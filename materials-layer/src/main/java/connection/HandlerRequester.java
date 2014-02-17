@@ -74,7 +74,7 @@ public abstract class HandlerRequester {
 				updateCache();
 				return currentObjetToResponse();
 			}
-			return OperationResponse.createFailed("Respuesta inesperada: " + notification.getInfo()); 
+			return OperationResponse.createFailed("Respuesta inesperada: " + notification.getMessage()); 
 			
 		} catch (ConnectionException e) {
 			String reason = "Intentando guardar " +  getInfo() +". ";
@@ -95,7 +95,7 @@ public abstract class HandlerRequester {
 				updateCache();
 				return currentObjetToResponse();
 			}
-			return OperationResponse.createFailed("Respuesta inesperada: " + notification.getInfo());
+			return OperationResponse.createFailed("Respuesta inesperada: " + notification.getMessage());
 			
 		} catch (GetException e) {
 			return OperationResponse.createFailed(e.getMessage());
