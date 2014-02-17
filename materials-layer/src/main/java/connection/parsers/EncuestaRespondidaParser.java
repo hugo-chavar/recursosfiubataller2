@@ -1,10 +1,12 @@
-package connection;
+package connection.parsers;
 
 import java.util.HashMap;
 
 import model.EncuestaRespondida;
 
 import org.w3c.dom.Element;
+
+import connection.Serializable;
 
 public class EncuestaRespondidaParser extends Parser {
 

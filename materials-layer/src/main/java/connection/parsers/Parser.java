@@ -1,4 +1,4 @@
-package connection;
+package connection.parsers;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -24,6 +24,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import connection.Serializable;
 import connection.exceptions.ParseException;
 
 public class Parser {

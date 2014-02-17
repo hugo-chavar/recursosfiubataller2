@@ -1,4 +1,4 @@
-package connection;
+package connection.parsers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +9,7 @@ import model.Recurso;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import connection.Serializable;
 import connection.exceptions.ParseException;
 
 

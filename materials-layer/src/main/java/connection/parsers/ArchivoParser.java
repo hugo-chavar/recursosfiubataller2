@@ -1,10 +1,12 @@
-package connection;
+package connection.parsers;
 
 import java.util.HashMap;
 
 import model.Archivo;
 
 import org.w3c.dom.Element;
+
+import connection.Serializable;
 
 public class ArchivoParser extends Parser {
 	public static String ARCHIVO_TAG = "ArchivoMetadata";
