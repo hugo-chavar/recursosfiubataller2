@@ -7,6 +7,7 @@ import model.Encuesta;
 import model.Pregunta;
 import model.PreguntaRespuestaACompletar;
 import model.PreguntaRespuestaFija;
+import model.Recurso;
 import connection.cache.Cache;
 import connection.parsers.EncuestaParser;
 import connection.parsers.Parser;
@@ -17,7 +18,6 @@ public class EncuestaRequester extends HandlerRequester {
 
 	private Parser parser;
 	private Cache<Encuesta> cache;
-	
 	public EncuestaRequester() {
 
 		super();
@@ -139,7 +139,7 @@ public class EncuestaRequester extends HandlerRequester {
 
 	public OperationResponse get(Serializable serializable) {
 		current = serializable;
-		String xml = parser.serialize(serializable.cloneById());
+		String xml = parser.serialize(new Encuesta(((Recurso) serializable).getRecursoId()));
 		return get(xml);
 	}
 
@@ -153,11 +153,6 @@ public class EncuestaRequester extends HandlerRequester {
 	protected Parser getParser() {
 		return parser;
 	}
-
-//	@Override
-//	protected void deserialize(String xml_resp_e) throws ParseException {
-//		current = getParser().deserialize(xml_resp_e);
-//	}
 
 
 }

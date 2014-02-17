@@ -25,6 +25,10 @@ public class Link extends Recurso {
 		super(recurso.getRecursoId(), recurso.getAmbitoId(), recurso.getDescripcion());
 		this.tipo = "Link";
 	}
+	
+	public Link(Integer id) {
+		super(id);
+	}
 
 	public String getNombre() {
 		return nombre;

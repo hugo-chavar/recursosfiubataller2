@@ -36,6 +36,10 @@ public class Recurso implements Serializable {
 		this.tipo = tipo;
 	}
 
+	public Recurso(Integer idRecurso) {
+		this.recursoId = idRecurso;
+	}
+	
 	public Recurso() {
 	}
 

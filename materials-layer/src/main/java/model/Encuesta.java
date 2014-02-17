@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import connection.Serializable;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class Encuesta extends Recurso {
@@ -20,7 +22,7 @@ public class Encuesta extends Recurso {
 	private int countOptions = 0;
 
 	@XmlAttribute
-	private boolean evaluada;
+	private Boolean evaluada;
 	
 	@XmlElementWrapper
 	@XmlElementRefs({
@@ -29,9 +31,9 @@ public class Encuesta extends Recurso {
 		})
 	private List<Pregunta> preguntas = new ArrayList<Pregunta>();
 
-	public Encuesta(Integer idRecurso, Integer idAmbito, String descripcion, boolean evaluada) {
+	public Encuesta(Integer idRecurso, Integer idAmbito, String descripcion, Boolean evaluada) {
 		super(idRecurso, idAmbito, descripcion);
-		this.tipo = "Encuesta";
+		tipo = "Encuesta";
 		this.evaluada = evaluada;
 	}
 
@@ -41,10 +43,16 @@ public class Encuesta extends Recurso {
 	}
 	
 	public Encuesta(Recurso recurso) {
-		super(recurso.getRecursoId(), null, null);
+		super(recurso.getRecursoId(), recurso.getAmbitoId(), recurso.getDescripcion());
+		tipo = null;
+		evaluada = null;
+	}
+	
+	public Encuesta(Integer id) {
+		super(id);
 	}
 
-	public boolean isEvaluada() {
+	public Boolean isEvaluada() {
 		return evaluada;
 	}
 
@@ -77,5 +85,11 @@ public class Encuesta extends Recurso {
 
 	public void unmarshallPreguntas(String field) {
 		preguntas = Pregunta.unmarshallAll(field);
+	}
+	
+
+	@Override
+	public Serializable cloneById() {
+		return new Encuesta(this);
 	}
 }

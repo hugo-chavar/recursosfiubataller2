@@ -20,10 +20,10 @@ public class MaterialsImpl implements Materials {
 
 	private Parser parser = new Parser();
 	
-	@Override
-	public String sayHello(String name) {
-		return "Hello, Welcom to jax-ws " + name + '\n';
-	}
+//	@Override
+//	public String sayHello(String name) {
+//		return "Hello, Welcom to jax-ws " + name + '\n';
+//	}
 
 	@Override
 	public String agregarRecurso(String encuestaParam) {

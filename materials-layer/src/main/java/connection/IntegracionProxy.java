@@ -77,7 +77,7 @@ public class IntegracionProxy {
 	}
 	
 	public String seleccionar(String xml) throws ConnectionException {
-		//TODO: pruebas de Yami
+		//TODO: harcodeos de "respuestas" de integracion
 		String x = xml.substring(xml.indexOf("<WS>"));
 		if (harcodeos.containsKey(x)) {
 			return harcodeos.get(x);
@@ -91,7 +91,7 @@ public class IntegracionProxy {
 			s_resp_e = stub.seleccionarDatos(seleccionar_e);
 			return s_resp_e.get_return();
 		} catch (AxisFault e) {
-			throw new ConnectionException("No se pudo seleccionar. ");
+			throw new ConnectionException("Fallo en la conexion con Integracion, reintente luego. ");
 		} catch (RemoteException e) {
 			throw new ConnectionException("No se pudo conectar al servicio Integracion. ");
 		}

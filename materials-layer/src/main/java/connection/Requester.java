@@ -1,9 +1,7 @@
 package connection;
 
 import model.Archivo;
-import model.Encuesta;
 import model.EncuestaRespondida;
-import model.Link;
 import model.Recurso;
 import connection.responses.OperationResponse;
 
@@ -145,9 +143,9 @@ public enum Requester {
 		OperationResponse response;
 		
 		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
-			response = encuestaRequester.get(new Encuesta (recurso));
+			response = encuestaRequester.get(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
-			response = linkRequester.get(new Link (recurso));
+			response = linkRequester.get(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Archivo")) {
 			//System.out.println("Entra a makeQuery de archivo");
 			response = archivoRequester.get(recurso);

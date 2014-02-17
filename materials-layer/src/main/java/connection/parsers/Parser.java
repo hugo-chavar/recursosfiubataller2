@@ -123,20 +123,20 @@ public class Parser {
 		return null;
 	}
 
-	public String serializeXmlQuery(int recursoId) {
-
-		document = buildXMLDocument();
-		Element rootElement = document.createElement(Parser.INITIAL_TAG);
-		document.appendChild(rootElement);
-
-		Element typeNode = document.createElement(baseTag);
-		rootElement.appendChild(typeNode);
-
-		addTextElement(typeNode, ID_TAG, String.valueOf(recursoId));
-
-		return convertDocumentToXml(document);
-
-	}
+//	public String serializeXmlQuery(int recursoId) {
+//
+//		document = buildXMLDocument();
+//		Element rootElement = document.createElement(Parser.INITIAL_TAG);
+//		document.appendChild(rootElement);
+//
+//		Element typeNode = document.createElement(baseTag);
+//		rootElement.appendChild(typeNode);
+//
+//		addTextElement(typeNode, ID_TAG, String.valueOf(recursoId));
+//
+//		return convertDocumentToXml(document);
+//
+//	}
 
 	public Serializable deserialize(String xml) throws ParseException {
 

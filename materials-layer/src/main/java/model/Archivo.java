@@ -27,8 +27,11 @@ public class Archivo extends Recurso {
 	public Archivo() {
 		this.tipo = "Archivo";
 	}
+	
+	public Archivo(Integer idRecurso) {
+		super(idRecurso);
+	}
 
-	// private String path;
 	@XmlTransient
 	private Integer tamanio;
 

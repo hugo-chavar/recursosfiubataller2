@@ -17,9 +17,8 @@ import connection.parsers.Parser;
 import connection.responses.OperationResponse;
 
 public class ArchivoRequester extends HandlerRequester {
-	private ArchivoParser parser;
+	private Parser parser;
 	private Cache<Archivo> cache;
-//	private DataHandler dataHandler;
 
 	public ArchivoRequester() {
 		super();
@@ -90,9 +89,9 @@ public class ArchivoRequester extends HandlerRequester {
 	}
 
 	// Este metodo es el que consulta a integración y trae el archivo necesario.
-	public OperationResponse get(Recurso recurso) {
+	public OperationResponse get(Serializable serializable) {
 		OperationResponse response;
-		String xml = parser.serializeXmlQuery(recurso.getRecursoId());
+		String xml = parser.serialize(new Archivo(((Recurso) serializable).getRecursoId()));
 		try {
 			response = getFile(xml);
 		} catch (GetException e) {
@@ -100,11 +99,6 @@ public class ArchivoRequester extends HandlerRequester {
 		} catch (ParseException e) {
 			response = OperationResponse.createFailed(e.getMessage());
 		}
-		
-//		if (!response.getSuccess()) {
-//			return harcodeoDeArchivo();
-//		} //esto lo meti al cache
-//		
 		return response;
 	}
 	
@@ -185,11 +179,6 @@ public class ArchivoRequester extends HandlerRequester {
 	}
 
 //	@Override
-//	protected void deserialize(String xml_resp_e) throws ParseException {
-//		current = parser.deserialize(xml_resp_e);
-//	}
-
-//	@Override
 //	public void deleteRecurso(Serializable s) {
 //		Recurso aux = (Recurso)s;
 //		super.deleteRecurso(aux);
@@ -206,22 +195,13 @@ public class ArchivoRequester extends HandlerRequester {
 //		
 //	}
 
-//	public DataHandler getDataHandler() {
-//		return dataHandler;
-//	}
-//
-//	public void setDataHandler(DataHandler dataHandler) {
-//		this.dataHandler = dataHandler;
-//	}
-	
 	private OperationResponse saveFile(String xml, DataHandler dataHandler) throws GetException {
 //		DataHandler archivo = ((Archivo) current).getRawFile();
 		try {
 
 			String xml_resp_e = proxy.guardarArchivo(xml, dataHandler);
 			return validateOneWayOperation(xml_resp_e);
-			
-//			updateCache(); al guardar no se actualiza el cache
+//			updateCache(); al guardar no se actualiza el cache ?
 		} catch (ConnectionException e) {
 			String reason = e.getMessage() + getCurrent().getInfo();
 			return OperationResponse.createFailed(reason);

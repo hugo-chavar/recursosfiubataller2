@@ -13,37 +13,9 @@ public class Client {
 	public static void main(String[] args) {
 		MaterialsImplService service = new MaterialsImplService();
 		port = service.getMaterialsImplPort();
-		System.out.println("------->>  Probando el servicio");
-		System.out.println(port.sayHello("Programador"));
-		System.out.println("------->>  ESTA TODO OK!");
 
-//		System.out.println("Ingrese algo para continuar y probar las encuestas : ");
-//
-//		try {
-//			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-//			bufferRead.readLine();
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		try {
-//			System.out.println("ingrese el path de su archivo");
-//			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-//			String path = bufferRead.readLine();
-//
-//			File arch = new File(path);
-//			DataHandler file = new DataHandler(new FileDataSource(arch));
-//			// enable MTOM in client
-//			BindingProvider bp = (BindingProvider) port;
-//			SOAPBinding binding = (SOAPBinding) bp.getBinding();
-//			binding.setMTOMEnabled(true);
-//
-//			String status = port.setArchivo(0, "aca iria su nombre", "aca su extension", file);
-//			System.out.println("imageServer.uploadImage() : " + status);
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+
+
 		xml = "hola";
 		pruebaGetRecusos();
 
@@ -141,6 +113,35 @@ public class Client {
 //		}
 
 
+
+
+//		System.out.println("Ingrese algo para continuar y probar las encuestas : ");
+//
+//		try {
+//			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+//			bufferRead.readLine();
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		try {
+//			System.out.println("ingrese el path de su archivo");
+//			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+//			String path = bufferRead.readLine();
+//
+//			File arch = new File(path);
+//			DataHandler file = new DataHandler(new FileDataSource(arch));
+//			// enable MTOM in client
+//			BindingProvider bp = (BindingProvider) port;
+//			SOAPBinding binding = (SOAPBinding) bp.getBinding();
+//			binding.setMTOMEnabled(true);
+//
+//			String status = port.setArchivo(0, "aca iria su nombre", "aca su extension", file);
+//			System.out.println("imageServer.uploadImage() : " + status);
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 	}
 

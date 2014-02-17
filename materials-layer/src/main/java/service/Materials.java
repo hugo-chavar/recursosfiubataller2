@@ -12,8 +12,8 @@ import javax.xml.ws.BindingType;
 @WebService
 public interface Materials {
 
-	@WebMethod
-	String sayHello(String name);
+//	@WebMethod
+//	String sayHello(String name);
 	
 //	@WebMethod 
 //	@WebResult(name = "recursos")

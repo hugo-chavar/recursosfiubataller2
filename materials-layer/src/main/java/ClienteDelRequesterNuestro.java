@@ -111,10 +111,10 @@ public class ClienteDelRequesterNuestro {
 	private static void getEncuesta11004() {
 		System.out.println("11004");
 
-		encuesta = new Encuesta(11, null, null, true);
+		encuesta = new Encuesta(11, null, null, null);
 		response = Requester.INSTANCE.getRecurso(encuesta);
 		
-//		xml = "<parametro><recurso><recursoId>11004</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
+//		xml = "<parametro><recurso><recursoId>11</recursoId><tipo>Encuesta</tipo></recurso></parametro>";
 //		p = Parameter.createParameter(xml);
 //		response = Requester.INSTANCE.getRecurso(p.getRecurso());
 		
