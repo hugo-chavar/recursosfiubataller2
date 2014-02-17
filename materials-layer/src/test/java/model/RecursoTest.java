@@ -6,10 +6,10 @@ import org.junit.Test;
 public class RecursoTest {
 
 	@Test
-	public void differentRecursoWithSameIdsArentEqual() {
+	public void differentRecursoWithSameIdsAreEqual() {
 		Encuesta e = new Encuesta(1, 5, "", false);
 		Link l = new Link(1, 5, "");
-		Assert.assertFalse(l.equals(e));
+		Assert.assertTrue(l.equals(e));
 	}
 
 	@Test

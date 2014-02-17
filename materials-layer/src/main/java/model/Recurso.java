@@ -75,7 +75,7 @@ public class Recurso implements Serializable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o.getClass().equals(this.getClass()) || o.getClass().getSuperclass().equals(Recurso.class )) {
+		if (o.getClass().equals(this.getClass()) || this.getClass().getSuperclass().equals(Recurso.class )|| o.getClass().getSuperclass().equals(Recurso.class )) {
 			Recurso r = (Recurso) o;
 			return r.getRecursoId().equals(getRecursoId());
 		}
