@@ -1,7 +1,6 @@
 package connection;
 
 import model.Archivo;
-import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Recurso;
 import connection.responses.OperationResponse;
@@ -25,10 +24,6 @@ public enum Requester {
 		linkRequester = new LinkRequester();
 		respondidaRequester = new EncuestaRespondidaRequester();
 	}
-	
-//	public ArchivoRequester getArchivoRequester() {
-//		return archivoRequester;
-//	}
 
 	public OperationResponse saveEncuestaRespondida(EncuestaRespondida respondida) {
 		return respondidaRequester.save(respondida);
