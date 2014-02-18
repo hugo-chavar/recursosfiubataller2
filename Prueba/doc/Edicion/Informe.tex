@@ -465,10 +465,10 @@ De ser exitoso la ejecuci\'on se obtendr\'a una respuesta similar a la mostrada 
   </recurso>
 </parametro>
 \end{lstlisting}
-				
+			
+			\clearpage
 			Como resultado se obtendr\'an los siguientes archivos dependiendo la respuesta del servicio:
 			
-
 		\begin{itemize}
 			\item ARCHIVO 
 			
@@ -488,6 +488,7 @@ De ser exitoso la ejecuci\'on se obtendr\'a una respuesta similar a la mostrada 
 			
 			\lstinputlisting{encuestaNoEvaluada.xml}
 			
+			\clearpage
 			\item ENCUESTA EVALUABLE
 									
 			\lstinputlisting{encuestaEvaluada.xml}
@@ -508,6 +509,7 @@ Se enviar\'a \textit{multiplesCorrectas = "false"} cuando no hayan respuestas co
 				
 				\lstinputlisting{materialInvalido.xml}		
 								
+				\clearpage
 				\item ERROR PARAMETROS ESPEC\'IFICOS INVALIDOS FALTA EL ID RECURSO:
 				
 				\lstinputlisting{idRecursoInvalido.xml}	
@@ -529,7 +531,6 @@ Se enviar\'a \textit{multiplesCorrectas = "false"} cuando no hayan respuestas co
 				\lstinputlisting{errorIntegracion.xml}
 				
 			\end{itemize}
-			\clearpage
 			
 \item \emph{GET ENCUESTA RESPONDIDA}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{GET RECURSOS}.
 			
@@ -543,6 +544,8 @@ Como par\'ametro se necesitan los siguientes items detallados de la siguiente fo
   <usuarioId>INT idDelUsuario</usuarioId>
 </parametro>
 \end{lstlisting}	
+
+\clearpage
 
 De ser exitoso la ejecuci\'on se obtendr\'an las siguientes respuestas del servicio:		
 
@@ -566,6 +569,7 @@ De ser exitoso la ejecuci\'on se obtendr\'an las siguientes respuestas del servi
 		%	\end{description}
 			\lstinputlisting{Agregar/archivo.xml}	
 			
+			\clearpage
 			\item \emph{AGREGAR RECURSO} Aclaraci\'on: este WS no es compatible con la parte de archivos. VER AGREGAR ARCHIVO.
 			\begin{description}
 				La utilidad es la adicci\'on de LINKS y ENCUESTAS.
@@ -580,6 +584,7 @@ De ser exitoso la ejecuci\'on se obtendr\'an las siguientes respuestas del servi
 				 \lstinputlisting{Agregar/encuesta.xml}	
 			\end{description}
 			
+			\clearpage
 			\item \emph{AGREGAR ENCUESTA RESPONDIDA}
 			Este WS recibe como par\'ametro un xml con la encuesta respondida a agregar. A continuaci\'on se muestra un ejemplo de encuesta Respondida:
 			
@@ -607,8 +612,8 @@ Como par\'ametro se necesitan los siguientes items detallados de la siguiente fo
 <parametro>
   <recurso>
     <recursoId>INT idDelRecurso</recursoId>
-    <usuarioId>INT idDelUsuario</usuarioId>
   </recurso>
+  <usuarioId>INT idDelUsuario</usuarioId>
 </parametro>
 \end{lstlisting}
 		
