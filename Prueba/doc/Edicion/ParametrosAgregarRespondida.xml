@@ -1,0 +1,6 @@
+<parametro>
+  <recurso>
+    <recursoId>INT idDelRecurso</recursoId>
+  </recurso>
+  <usuarioId>INT idDelUsuario</usuarioId>
+</parametro>

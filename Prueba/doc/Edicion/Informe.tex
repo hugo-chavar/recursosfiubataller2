@@ -434,13 +434,26 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 		\item[Provistas a la capa de Presentaci\'on ] \
 		\renewcommand{\labelitemi}{\ding{105}} 
 		\begin{itemize}
-		\item \emph{OBTENER RECURSO}:
-			Este m\'etodo devuelve ya sea un Archivo, un Link o una Encuesta segun lo que se solicite. Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
-			\begin{description}
-				\item[INPUT] XML\_PARAMETROS
-				\item[OUTPUT] XML\_RESULTADO\\
-			\end{description}
 		
+\item \emph{GET RECURSOS}
+	
+Como par\'ametro se necesitan los siguientes items detallados de la siguiente forma:
+				
+\begin{lstlisting}
+<parametro>
+  <recurso>
+    <ambitoId>INT idDelAmbiente</ambitoId>
+  </recurso>
+  <usuarioId>INT idDelUsuario</usuarioId>
+</parametro>
+\end{lstlisting}
+
+De ser exitoso la ejecuci\'on se obtendr\'a una respuesta similar a la mostrada a continuación:
+
+			\lstinputlisting{recursos.xml}		
+		
+		\item \emph{GET RECURSO}:
+			Este m\'etodo devuelve ya sea un Archivo, un Link o una Encuesta segun lo que se solicite. Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{GET RECURSOS}.		
 
 			Como par\'ametro se necesitan los siguientes items detallados de la siguiente forma:
 				
@@ -470,7 +483,6 @@ Los links ser\'an las referencias a otros sitios webs o referencias a articulos 
 			\item LINK
 			
 			\lstinputlisting{link.xml}
-\clearpage
 			
 			\item ENCUESTA NO EVALUABLE
 			
@@ -518,48 +530,8 @@ Se enviar\'a \textit{multiplesCorrectas = "false"} cuando no hayan respuestas co
 				
 			\end{itemize}
 			\clearpage
-			\item \emph{OBTENER LISTA RECURSOS}
-			\begin{description}
-				\item[INPUT] ID-AMBIENTE
-				\item[OUTPUT] LISTA-DE [ID-RECURSO, DESCRIPCION, TIPO]\\
-			\end{description}
-			\lstinputlisting{recursos.xml}
-	
-			\item \emph{AGREGAR ARCHIVO}
-		%	\begin{description}
-				Este WS recibe un xml con la MetaData del archivo, y un byte array que contiene al archivo a agregar:
-				El xml debe cumplir la siguiente especificaci\'on:
-				
-		%	\end{description}
-			\lstinputlisting{Agregar/archivo.xml}	
 			
-			\item \emph{AGREGAR RECURSO} Aclaraci\'on: este WS no es compatible con la parte de archivos. VER AGREGAR ARCHIVO.
-			\begin{description}
-				La utilidad es la adicción de LINKS y ENCUESTAS.
-				Para ello recibe los siguientes parametros:
-				 LINKS:
-				 
-				 \lstinputlisting{Agregar/link.xml}	
-				 
-				 ENCUESTA:
-				 
-				 \lstinputlisting{Agregar/encuesta.xml}	
-			\end{description}
-%			\item \emph{AGREGAR ENCUESTA}
-%			\begin{description}
-%				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, ENCUESTA 
-%				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON\\
-%			\end{description}
-%			\item \emph{GUARDAR ENCUESTA RESPONDIDA}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
-%			\begin{description}
-%				\item[INPUT] ID-ENCUESTA, ID-USUARIO, LISTA-RESPUESTAS
-%				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \\
-%			\end{description}
-%			\item \emph{OBTENER ENCUESTA RESPONDIDA}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
-%			\begin{description}
-%				\item[INPUT] XML\_PARAMETROS
-%				\item[OUTPUT] XML\_RESULTADO\\
-%			\end{description}
+\item \emph{GET ENCUESTA RESPONDIDA}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{GET RECURSOS}.
 			
 Como par\'ametro se necesitan los siguientes items detallados de la siguiente forma:
 				
@@ -584,15 +556,85 @@ De ser exitoso la ejecuci\'on se obtendr\'an las siguientes respuestas del servi
 			\lstinputlisting{encuestaRespondidaNoEvaluada.xml}
 		\end{itemize}
 		
-		\textbf{Tener en cuenta que las respuestas en las preguntasRespondidasConOpciones arrancan en 1, y no en 0 como se hab\'ia definido inicialmente, quedando sus posibles valores definidos entre 1 y la cantidad de respuestasPosibles.  } \newline
-			\item \emph{BORRAR RECURSO}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
+		\textbf{Tener en cuenta que las respuestas en las preguntasRespondidasConOpciones arrancan en 1, y no en 0 como se hab\'ia definido inicialmente, quedando sus posibles valores definidos entre 1 y la cantidad de respuestasPosibles.  } \newline			
+	
+			\item \emph{AGREGAR ARCHIVO}
+		%	\begin{description}
+				Este WS recibe un xml con la MetaData del archivo, y un byte array que contiene al archivo a agregar:
+				El xml debe cumplir la siguiente especificaci\'on:
+				
+		%	\end{description}
+			\lstinputlisting{Agregar/archivo.xml}	
+			
+			\item \emph{AGREGAR RECURSO} Aclaraci\'on: este WS no es compatible con la parte de archivos. VER AGREGAR ARCHIVO.
 			\begin{description}
-				\item[INPUT] ID-AMBIENTE, ID-RECURSO
-				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \\
+				La utilidad es la adicci\'on de LINKS y ENCUESTAS.
+				Para ello recibe los siguientes parametros:
+				
+				 LINKS:
+				 
+				 \lstinputlisting{Agregar/link.xml}	
+				 
+				 ENCUESTA:
+				 
+				 \lstinputlisting{Agregar/encuesta.xml}	
 			\end{description}
+			
+			\item \emph{AGREGAR ENCUESTA RESPONDIDA}
+			Este WS recibe como par\'ametro un xml con la encuesta respondida a agregar. A continuaci\'on se muestra un ejemplo de encuesta Respondida:
+			
+			\lstinputlisting{encuestaRespondidaParametro.xml}
+			
+			Para la utilizaci\'on de este WS no existe diferencia en los par\'ametros si es encuesta respondida evaluada o si es no evaluada.\newline			
+			
+%			\item \emph{AGREGAR ENCUESTA}
+%			\begin{description}
+%				\item[INPUT] ID-AMBIENTE, DESCRIPCI\'ON, ENCUESTA 
+%				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON\\
+%			\end{description}
+%			\item \emph{GUARDAR ENCUESTA RESPONDIDA}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{OBTENER LISTA RECURSOS}.
+%			\begin{description}
+%				\item[INPUT] ID-ENCUESTA, ID-USUARIO, LISTA-RESPUESTAS
+%				\item[OUTPUT] MENSAJE DE CONFIRMACI\'ON \\
+%			\end{description}
+
+			
+			\item \emph{BORRAR RECURSO}:  Es requisito tener el ID de recurso a consultar por lo que primero deben obtenerse con \emph{GET RECURSOS}.
+
+Como par\'ametro se necesitan los siguientes items detallados de la siguiente forma:
+				
+\begin{lstlisting}
+<parametro>
+  <recurso>
+    <recursoId>INT idDelRecurso</recursoId>
+    <usuarioId>INT idDelUsuario</usuarioId>
+  </recurso>
+</parametro>
+\end{lstlisting}
 		
 				
 		\end{itemize}
+		
+\textbf{IMPORTANTE: Todos los WS en donde no se detalla la respuesta devolver\'an:}
+\newline
+\newline
+Si la ejecuci\'on fue exitosa:
+
+\begin{lstlisting}
+<response>
+  <success>true</success>
+</response>
+\end{lstlisting}
+
+Si la ejecuci\'on fue fallida:
+
+\begin{lstlisting}
+<response>
+  <reason>"La causa de fallo"</reason>
+  <success>false</success>
+</response>
+\end{lstlisting}
+		
 %		\renewcommand{\labelitemi}{\ding{118}} 
 %		\item[Requeridas a la capa de Integraci\'on \emph{( incompleto)}] \
 %		\\Nota:
