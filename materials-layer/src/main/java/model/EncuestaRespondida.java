@@ -107,7 +107,7 @@ public class EncuestaRespondida implements Serializable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o.getClass().equals(this.getClass())) {
+		if (o instanceof EncuestaRespondida) {
 			EncuestaRespondida r = (EncuestaRespondida) o;
 			return r.getIdRecurso().equals(getIdRecurso())
 					&& r.getIdUsuario().equals(getIdUsuario());
@@ -122,7 +122,6 @@ public class EncuestaRespondida implements Serializable {
 
 	@Override
 	public void updateFields(Serializable s) {
-//		EncuestaRespondida er = (EncuestaRespondida)s;
 		
 	}
 

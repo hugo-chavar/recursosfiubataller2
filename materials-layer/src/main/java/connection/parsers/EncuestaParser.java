@@ -19,32 +19,6 @@ public class EncuestaParser extends Parser {
 		baseTag = ENCUESTA_TAG;
 	}
 	
-//	public String serialize(Serializable serializable) {
-//		
-//		Encuesta encuesta = (Encuesta) serializable;
-//		Document document = buildXMLDocument();
-//		Element rootElement = document.createElement(Parser.INITIAL_TAG);
-//		document.appendChild(rootElement);
-//		
-//		Element baseNode = document.createElement(EncuestaParser.ENCUESTA_TAG);
-//		rootElement.appendChild(baseNode);
-//		
-//		Element IDRecurso = document.createElement(Parser.ID_TAG);
-//		IDRecurso.appendChild(document.createTextNode(String.valueOf(encuesta.getRecursoId())));
-//		baseNode.appendChild(IDRecurso);
-//		
-//		Element evaluada = document.createElement(EncuestaParser.EVALUADA_TAG);
-//		evaluada.appendChild(document.createTextNode(String.valueOf(encuesta.isEvaluada())));
-//		baseNode.appendChild(evaluada);
-//		
-//		String preguntas_str = encuesta.marshallPreguntas();
-//		Element preguntas = document.createElement(EncuestaParser.PREGUNTAS_TAG);
-//		preguntas.appendChild(document.createTextNode(preguntas_str));
-//		baseNode.appendChild(preguntas);
-//		
-//		return convertDocumentToXml(document);
-//	}
-	
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		Boolean evaluada = Boolean.parseBoolean(fields.get(EVALUADA_TAG));

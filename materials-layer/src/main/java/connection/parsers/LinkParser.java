@@ -18,26 +18,6 @@ public class LinkParser extends Parser {
 		baseTag = LINK_TAG;
 	}
 	
-//	public String serialize(Serializable serializable) {
-//
-//		Document doc = buildXMLDocument();
-//		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-//		doc.appendChild(rootElement);
-//
-//		Element baseNode = doc.createElement(baseTag);
-//		rootElement.appendChild(baseNode);
-//
-//		Element recursoId = doc.createElement(Parser.ID_TAG);
-//		recursoId.appendChild(doc.createTextNode(String.valueOf(((Link) serializable).getRecursoId())));
-//		baseNode.appendChild(recursoId);
-//		Element nombre = doc.createElement(LinkParser.NOMBRE_TAG);
-//		nombre.appendChild(doc.createTextNode(String.valueOf(((Link) serializable).getNombre())));
-//		baseNode.appendChild(nombre);
-//
-//		return convertDocumentToXml(doc);
-//
-//	}
-	
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		Link link = new Link(0, 0, "");

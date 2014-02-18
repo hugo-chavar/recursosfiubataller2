@@ -41,13 +41,6 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 		return 0;
 	}
 
-//	@Override
-//	public void completarDatosVisibles(Pregunta pregunta) {
-//		if (this.respuestas.isEmpty()) {
-//			respuestas.add(this.getRespuesta());
-//		}
-//	}
-	
 	@Override
 	public String marshall() {
 		return super.marshall() + StringEscapeUtils.escapeSpecialCharacters(respuesta);
@@ -55,8 +48,6 @@ public class PreguntaRespuestaACompletarRespondida extends PreguntaRespondida {
 
 	public void unmarshall(String s) {
 		super.unmarshall(s);
-//		String[] splited = s.split(";");
-//		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
 		String[] splited = StringEscapeUtils.splitIgnoringEscaped(s, ';');
 		if (splited.length==4)
 			respuesta = StringEscapeUtils.removeEscapers(splited[3]);

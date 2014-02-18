@@ -39,8 +39,6 @@ public class PreguntaRespuestaACompletar extends Pregunta {
 
 	public void unmarshall(String s) {
 		super.unmarshall(s);
-//		String[] splited = s.split(";");
-//		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
 		String[] splited = StringEscapeUtils.splitIgnoringEscaped(s, ';');
 		respuesta = StringEscapeUtils.removeEscapers(splited[3]);
 	}

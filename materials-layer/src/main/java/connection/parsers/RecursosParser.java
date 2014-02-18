@@ -38,57 +38,6 @@ public class RecursosParser extends Parser {
 		
 	}
 	
-//	public String serializeRecursoQuery(int recursoId) {
-//		
-//		Document doc = this.buildXMLDocument();
-//		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-//		doc.appendChild(rootElement);
-//
-//		Element recursoNode = doc.createElement(Parser.RECURSO_TAG);
-//		rootElement.appendChild(recursoNode);
-//		
-//		Element recursoID = doc.createElement(Parser.ID_TAG);
-//		recursoID.appendChild(doc.createTextNode(String.valueOf(recursoId)));
-//		recursoNode.appendChild(recursoID);
-//		
-//		return convertDocumentToXml(doc);
-//		
-//	}
-//	
-//	public String serializeRecursosQuery(int IDAmbito) {
-//		
-//		Document doc = this.buildXMLDocument();
-//		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-//		doc.appendChild(rootElement);
-//		
-//		Element nodeElement = doc.createElement(Parser.RECURSO_TAG);
-//		rootElement.appendChild(nodeElement);
-//		
-//		Element IDAmbito_el = doc.createElement(Parser.AMBITOID_TAG);
-//		IDAmbito_el.appendChild(doc.createTextNode(String.valueOf(IDAmbito)));
-//		nodeElement.appendChild(IDAmbito_el);
-//		
-//		return convertDocumentToXml(doc);
-//		
-//	}
-//	
-//	public String serializeDeleteQuery(int IDRecurso) {
-//		
-//		Document doc = this.buildXMLDocument();
-//		Element rootElement = doc.createElement(Parser.INITIAL_TAG);
-//		doc.appendChild(rootElement);
-//		
-//		Element nodeElement = doc.createElement(EncuestaParser.RECURSO_TAG);
-//		rootElement.appendChild(nodeElement);
-//		
-//		Element IDRecurso_el = doc.createElement(EncuestaParser.ID_TAG);
-//		IDRecurso_el.appendChild(doc.createTextNode(String.valueOf(IDRecurso)));
-//		nodeElement.appendChild(IDRecurso_el);
-//		
-//		return convertDocumentToXml(doc);
-//		
-//	}
-	
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		int IDRecurso = Integer.parseInt(fields.get(Parser.ID_TAG));
@@ -98,36 +47,6 @@ public class RecursosParser extends Parser {
 
 		return new Recurso(IDRecurso, IDAmbito, descripcion, tipo);
 	}
-	
-//	public String serialize(Serializable serializable) {
-//
-//		Recurso recurso = (Recurso) serializable;
-//		Document document = this.buildXMLDocument();
-//		Element rootElement = document.createElement(Parser.INITIAL_TAG);
-//		document.appendChild(rootElement);
-//
-//		Element baseNode = document.createElement(Parser.RECURSO_TAG);
-//		rootElement.appendChild(baseNode);
-//
-////		Element recursoId = doc.createElement(Parser.ID_TAG);
-////		recursoId.appendChild(doc.createTextNode(String.valueOf(recurso.getRecursoId())));
-////		recursoNode.appendChild(recursoId);
-//
-//		Element ambitoId = document.createElement(Parser.AMBITOID_TAG);
-//		ambitoId.appendChild(document.createTextNode(String.valueOf(recurso.getAmbitoId())));
-//		baseNode.appendChild(ambitoId);
-//
-//		Element descripcion = document.createElement(Parser.DESCRIPCION_TAG);
-//		descripcion.appendChild(document.createTextNode(recurso.getDescripcion()));
-//		baseNode.appendChild(descripcion);
-//
-//		Element tipo = document.createElement(Parser.TIPO_TAG);
-//		tipo.appendChild(document.createTextNode(recurso.getTipo()));
-//		baseNode.appendChild(tipo);
-//
-//		return convertDocumentToXml(document);
-//
-//	}
 	
 	@Override
 	protected void addElements(Serializable serializable, Element baseNode) {

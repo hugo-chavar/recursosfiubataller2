@@ -28,8 +28,6 @@ public class PreguntaRespuestaFijaRespondida extends PreguntaRespondida {
 
 	public void unmarshall(String s) {
 		super.unmarshall(s);
-//		String[] splited = s.split(";");
-//		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, ";");
 		String[] splited = StringEscapeUtils.splitIgnoringEscaped(s, ';');
 		if(splited.length==4)
 			unmarshallRespuestas(splited[3]);

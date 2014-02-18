@@ -16,22 +16,6 @@ import connection.responses.OperationResponse;
 
 public class EncuestaRequesterTest {
 
-	//      @Test
-	//      public void saveEncuestaWithPreguntaRespuestaACompletarEvaluada() {
-	//              Encuesta encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);
-	//              
-	//              PreguntaRespuestaACompletar pregunta1 = new PreguntaRespuestaACompletar();
-	//              pregunta1.setEnunciado("De que color es el caballo blanco de San Martin?");
-	//              pregunta1.addRespuestaCorrecta("blanco");
-	//              encuesta.addPregunta(pregunta1);
-	//              PreguntaRespuestaACompletar pregunta2 = new PreguntaRespuestaACompletar();
-	//              pregunta2.setEnunciado("cuantas patas tiene un gato?");
-	//              pregunta2.addRespuestaCorrecta("4");
-	//              encuesta.addPregunta(pregunta2);
-	//              
-	//              Requester.INSTANCE.saveEncuesta(encuesta);
-	//      }
-
 	@Test
 	public void getEncuestaWithPreguntaRespuestaACompletar() throws GetException {
 		Encuesta encuesta = new Encuesta(15, 2, "Encuesta con preguntas a completar", true);

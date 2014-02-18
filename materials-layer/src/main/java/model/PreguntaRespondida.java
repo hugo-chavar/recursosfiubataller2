@@ -46,8 +46,6 @@ public class PreguntaRespondida {
 	}
 
 	public static List<PreguntaRespondida> unmarshallAll(String field) {
-//		String[] splited = field.split("\\|");
-//		splited = StringEscapeUtils.ignoreSpecialCharactersInSplit(splited, "|");
 		String[] splited = StringEscapeUtils.splitIgnoringEscaped(field, '|');
 		List<PreguntaRespondida> result = new ArrayList<PreguntaRespondida>();
 
@@ -75,8 +73,6 @@ public class PreguntaRespondida {
 	public Integer getIdPregunta() {
 		return idPregunta;
 	}
-
-	// --------------------- metodos "abstractos" -------------
 
 	public Integer evaluar(Pregunta pregunta) {
 		return null;
