@@ -17,22 +17,24 @@ public class ClientePruebaContraIntegracion {
 //		seleccionar("<WS><Usuario><username>javier</username></Usuario></WS>");
 //
 //		seleccionar("<WS><Usuario><id>117</id></Usuario></WS>");
-//
-//		seleccionar("<WS><Link><id>1002</id></Link></WS>");
-//
+
+//		seleccionar("<WS><Link><id>997</id></Link></WS>");
+
 //		seleccionar("<WS><Recurso><id>997</id></Recurso></WS>");
 //
 //		seleccionar("<WS><Recurso><ambitoId>1</ambitoId></Recurso></WS>");
 //
-		seleccionar("<WS><Link><recursoId>997</recursoId></Link></WS>");
+//		seleccionar("<WS><Link><recursoId>997</recursoId></Link></WS>");
 //
 //		seleccionar("<WS><Encuesta><id>1003</id></Encuesta></WS>");
-
-//		seleccionar("<WS><EncuestaRespondida><id>1003</id></EncuestaRespondida></WS>");
+//
+		seleccionar("<WS><EncuestaRespondida><recursoId>1003</recursoId><usuarioId>19</usuarioId></EncuestaRespondida></WS>");
+		
+//		guardar("<WS><EncuestaRespondida><recursoId>1003</recursoId><usuarioId>19</usuarioId><preguntasRespondidas>a,b,c</preguntasRespondidas></EncuestaRespondida></WS>");
 //
 //		seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
 //
-//		guardar("<WS><Link><recursoId>1017</recursoId><nombre>www.hola.com</nombre></Link></WS>");
+//		guardar("<WS><Link><recursoId>1014</recursoId><nombre>www.hola.com</nombre></Link></WS>");
 //
 //		guardar("<WS><Recurso><descripcion>prueba Dami</descripcion><tipo>L</tipo></Recurso></WS>");
 //
@@ -55,40 +57,40 @@ public class ClientePruebaContraIntegracion {
 		
 	}
 
-	private static void PruebasDeArchivo(){
-		String path, nombre, extension;
-		
-		System.out.println("COMIENZA TESTEO DE ARCHIVOS");
-		nombre = "teofilo";
-		extension = "jpg";
-		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
-		path = path.substring(0, path.lastIndexOf("classes") + 8);
-		path = path + nombre + "." + extension;
-		
-//		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo2</nombre><tamanio>1</tamanio><tipo>jpg</tipo><recursoId>1012</recursoId></ArchivoMetadata></WS>";
-		xml = "<WS><ArchivoMetadata><recursoId>1012</recursoId></ArchivoMetadata></WS>";
-//		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
-//		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1012</id></ArchivoMetadata></WS>";
-//		System.out.println("Va a guardar un archivo");
-		System.out.println("TEST 1 TRAER ARCHIVO EXISTENTE");
-		try {
-//			xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><recursoId>1012</recursoId></ArchivoMetadata></WS>";
-			com.ws.services.IntegracionStub.ReturnedObject[] objects = ip.seleccionarArchivo(xml);
-			if(objects==null){
-				System.out.println("La consulta no trajo resultados");
-				
-			}else{
-				System.out.println("Algo Trajo");
-				System.out.println("Cantidad: " + objects.length);
-				com.ws.services.IntegracionStub.ReturnedObject supuestoArchivo = objects[0];
-//				System.out.println(supuestoArchivo.getId());
-			}
-		} catch (ConnectionException e) {
-			System.out.println("No lo pudo traer al archivo");
-			//e.printStackTrace();
-		}
-		
-	}
+//	private static void PruebasDeArchivo(){
+//		String path, nombre, extension;
+//		
+//		System.out.println("COMIENZA TESTEO DE ARCHIVOS");
+//		nombre = "teofilo";
+//		extension = "jpg";
+//		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+//		path = path.substring(0, path.lastIndexOf("classes") + 8);
+//		path = path + nombre + "." + extension;
+//		
+////		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo2</nombre><tamanio>1</tamanio><tipo>jpg</tipo><recursoId>1012</recursoId></ArchivoMetadata></WS>";
+//		xml = "<WS><ArchivoMetadata><recursoId>1012</recursoId></ArchivoMetadata></WS>";
+////		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
+////		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1012</id></ArchivoMetadata></WS>";
+////		System.out.println("Va a guardar un archivo");
+//		System.out.println("TEST 1 TRAER ARCHIVO EXISTENTE");
+//		try {
+////			xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><recursoId>1012</recursoId></ArchivoMetadata></WS>";
+//			com.ws.services.IntegracionStub.ReturnedObject[] objects = ip.seleccionarArchivo(xml);
+//			if(objects==null){
+//				System.out.println("La consulta no trajo resultados");
+//				
+//			}else{
+//				System.out.println("Algo Trajo");
+//				System.out.println("Cantidad: " + objects.length);
+//				com.ws.services.IntegracionStub.ReturnedObject supuestoArchivo = objects[0];
+////				System.out.println(supuestoArchivo.getId());
+//			}
+//		} catch (ConnectionException e) {
+//			System.out.println("No lo pudo traer al archivo");
+//			//e.printStackTrace();
+//		}
+//	}
+	
 	private static void eliminar(String xmlInput) {
 		System.out.println("Eliminando " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
 		try {
