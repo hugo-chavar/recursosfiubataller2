@@ -16,6 +16,7 @@ import model.StringEscapeUtils;
 import connection.EncuestaRequester;
 import connection.LinkRequester;
 import connection.Parameter;
+import connection.parsers.EncuestaParser;
 import connection.parsers.Parser;
 import connection.responses.OperationResponse;
 
@@ -52,6 +53,7 @@ public class PruebasParserParameter {
 		
 
 		Parser parser = new Parser();
+		EncuestaParser encuestaParser = new EncuestaParser();
 		Recurso r = new Recurso();
 		OperationResponse or;
 		String xml;
@@ -90,6 +92,9 @@ public class PruebasParserParameter {
 //		
 		xml = parser.convertToXml(encuesta, Encuesta.class);
 		
+		System.out.println(xml);
+		
+		xml = encuestaParser.serialize(encuesta);
 		System.out.println(xml);
 		
 		Encuesta enc2 = (Encuesta)parser.unmarshal(xml, Encuesta.class);
