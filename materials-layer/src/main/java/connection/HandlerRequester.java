@@ -1,5 +1,13 @@
 package connection;
 
+import javax.activation.DataHandler;
+
+import model.Archivo;
+
+import com.ws.services.IntegracionStub;
+import com.ws.services.IntegracionStub.ArchivoMetadata;
+import com.ws.services.IntegracionStub.Recurso;
+
 import connection.cache.Cache;
 import connection.exceptions.ConnectionException;
 import connection.exceptions.GetException;
@@ -67,13 +75,30 @@ public abstract class HandlerRequester {
 
 	public OperationResponse getFile(String xml) throws GetException, ParseException {
 		try {
-			String xml_resp_e = proxy.seleccionar(xml);
+			IntegracionStub.ArchivoMetadata[] listOfFIles = proxy.seleccionarArchivo(xml);
 //			System.out.println("Integracion me esta contestando : " + xml_resp_e);
-			if (validateTwoWayOperation(xml_resp_e)) {
-				createCurrentObject(xml_resp_e);
-				updateCache();
+			for (ArchivoMetadata archivoMetadata : listOfFIles) {
+				DataHandler contenido =  archivoMetadata.getContenido();
+				String tipo = archivoMetadata.getTipo();
+				String nombre = archivoMetadata.getNombre();
+				Recurso unRecurso =  archivoMetadata.getRecurso();
+				String descripcion = unRecurso.getDescripcion();
+				int idAmbito = (int) unRecurso.getAmbitoId();
+				Archivo unArchivo = new Archivo();
+				unArchivo.setAmbitoId(idAmbito);
+				unArchivo.setRawFile(contenido);
+				unArchivo.setNombreArchivo(nombre);
+				unArchivo.setTipoArchivo(tipo);
+				unArchivo.setDescripcion(descripcion);
+				current = unArchivo;
 				return currentObjetToResponse();
+				
 			}
+//			if (validateTwoWayOperation(xml_resp_e)) {
+//				createCurrentObject(xml_resp_e);
+//				updateCache();
+//				
+//			}
 			return OperationResponse.createFailed("Respuesta inesperada: " + notification.getMessage()); 
 			
 		} catch (ConnectionException e) {
@@ -174,7 +199,7 @@ public abstract class HandlerRequester {
 		current.updateFields(aux);
 		
 	}
-
+	
 	protected void verifyCurrentObject() throws GetException {
 		if (currentIsInvalid()) {	
 			String message = "Error desconocido: current is null ";

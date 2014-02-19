@@ -160,17 +160,17 @@ public class IntegracionProxy {
 		}
 	}
 
-//	public IntegracionStub.ReturnedObject[] seleccionarArchivo(String xml) throws ConnectionException {
-//		IntegracionStub.SeleccionarArchivo fileSelected = new IntegracionStub.SeleccionarArchivo();
-//		IntegracionStub.SeleccionarArchivoResponse responseArchivo;
-//		try {
-//			fileSelected.setXml(xml);
-//			responseArchivo = stub.seleccionarArchivo(fileSelected);
-//			return responseArchivo.get_return();
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new ConnectionException("No se pudo obtener el  archivo. ");
-//		}
-//	}
+	public IntegracionStub.ArchivoMetadata[] seleccionarArchivo(String xml) throws ConnectionException {
+		IntegracionStub.SeleccionarArchivo fileSelected = new IntegracionStub.SeleccionarArchivo();
+		IntegracionStub.SeleccionarArchivoResponse responseArchivo;
+		try {
+			fileSelected.setXml(xml);
+			responseArchivo = stub.seleccionarArchivo(fileSelected);
+			return responseArchivo.get_return();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ConnectionException("No se pudo obtener el  archivo. ");
+		}
+	}
 }
