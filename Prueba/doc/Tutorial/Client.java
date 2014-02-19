@@ -194,13 +194,28 @@ public class Client {
 	}
 
 	private static void pruebaGuardarArchivo() {
+		System.out.println("Se prueba Guardar el archivo "
+				+xml);
 		addTagParametros();
 		try {
 			DataHandler dataHandler = new DataHandler(new URL(path));
 			String response = port.agregarArchivo(xml, dataHandler);
 			System.out.println(response);
 		} catch (Exception e) {
-			System.out.println("Error al traer encuesta respondida: " + xml);
+			System.out.println("Error al guardar Archivo: " + xml);
+			System.out.println(e.toString());
+		}
+		
+		xml="<recurso><tipo>Archivo</tipo><recursoId>1012</recursoId></recurso><usuarioId>5</usuarioId>";
+		System.out.println("Se prueba Obtener el archivo "
+				+xml);
+		addTagParametros();
+		try{
+			String response = port.getRecurso(xml);
+			
+			System.out.println(response);
+		} catch (Exception e) {
+			System.out.println("Error al guardar Archivo: " + xml);
 			System.out.println(e.toString());
 		}
 	}
