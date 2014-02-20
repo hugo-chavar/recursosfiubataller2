@@ -26,7 +26,7 @@ public enum Requester {
 	}
 
 	public OperationResponse saveEncuestaRespondida(EncuestaRespondida respondida) {
-		return respondidaRequester.save(respondida);
+		return respondidaRequester.save(respondida,"E");
 	}
 	
 	public OperationResponse agregarRecurso(Recurso target) {
@@ -126,9 +126,9 @@ public enum Requester {
 		OperationResponse response;
 		
 		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
-			response = encuestaRequester.save(recurso);
+			response = encuestaRequester.save(recurso,"E");
 		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
-			response = linkRequester.save(recurso);
+			response = linkRequester.save(recurso,"L");
 		} else {
 			response = archivoRequester.save((Archivo)recurso);
 		//	response = OperationResponse.createFailed("Tipo de recurso inexistente");
@@ -183,6 +183,7 @@ public enum Requester {
 
 	public OperationResponse saveArchivo(Archivo file) {
 		OperationResponse response;
+		
 		response = archivoRequester.save(file);
 		return response;
 	}

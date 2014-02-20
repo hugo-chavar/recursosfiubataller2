@@ -15,6 +15,9 @@ public class Notification /*implements Serializable*/ {
 	@XmlElement(name = "mensaje")
 	private String message;
 
+	@XmlElement(name = "datos")
+	private Integer datos;
+	
 	public Integer getNumber() {
 		return number;
 	}
@@ -26,7 +29,13 @@ public class Notification /*implements Serializable*/ {
 	public String getMessage() {
 		return number + ": " + message;
 	}
-
+	
+	public Integer getDatos(){
+		return this.datos;
+	}
+	public void setDatos(Integer datos){
+		this.datos = datos;
+	} 
 	public void setMessage(String message) {
 		this.message = message;
 	}

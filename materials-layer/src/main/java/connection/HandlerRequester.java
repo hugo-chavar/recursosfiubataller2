@@ -7,7 +7,6 @@ import model.Archivo;
 import com.ws.services.IntegracionStub;
 import com.ws.services.IntegracionStub.ArchivoMetadata;
 import com.ws.services.IntegracionStub.Recurso;
-
 import connection.cache.Cache;
 import connection.exceptions.ConnectionException;
 import connection.exceptions.GetException;
@@ -28,10 +27,29 @@ public abstract class HandlerRequester {
 	protected Serializable getCurrent() {
 		return current;
 	}
-
-	protected OperationResponse save(Serializable serializable) {
+	protected int createRecurso(String descripcion,String tipo, int id){
+		
+		try {
+			String aGuardar  = "<WS><Recurso><descripcion>"+descripcion+"</descripcion><tipo>"+tipo+"</tipo><ambitoId>"+id+"</ambitoId></Recurso></WS>";
+			System.out.println("aGuardar "+aGuardar);
+			String xml_recurso = proxy.guardar(aGuardar);
+			System.out.println(xml_recurso);
+			notification = (Notification) getParser().unmarshal(xml_recurso, Notification.class);
+			if(notification.success())
+				return notification.getDatos();
+			return -1;
+		} catch (ConnectionException e) {
+			return -1;
+		}
+	}
+	protected OperationResponse save(Serializable serializable, String tipo) {
 //		protected OperationResponse save(String xml) {
 		current = serializable;
+		int id = createRecurso(((model.Recurso)current).getDescripcion(), tipo, (int) ((model.Recurso)current).getAmbitoId());
+		if(id==-1)
+			return OperationResponse.createFailed("MATERIALS: No se ha podido crear un Nuevo Recurso");
+		((model.Recurso)serializable).setRecursoId(id); //TODO: SI ACA MANDO EL ID A ESE RECURSO PODEMOS GUARDAR CUALQUIER COSA
+		
 		String xml = getParser().serialize(serializable);
 
 		try {

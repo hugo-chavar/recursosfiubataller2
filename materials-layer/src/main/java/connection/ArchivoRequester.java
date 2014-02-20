@@ -78,9 +78,12 @@ public class ArchivoRequester extends HandlerRequester {
 	}
 
 	public OperationResponse save(Archivo archivo) {
-		current = archivo; 
+		current = archivo; 		
+		int id = createRecurso(archivo.getDescripcion(), "A", archivo.getAmbitoId());
+		if(id==-1)
+			return OperationResponse.createFailed("MATERIALS: No se ha podido crear un Nuevo Recurso");
+		archivo.setRecursoId(id);
 		String archivo_str = parser.serialize(archivo);
-//		System.out.println("a Integracion se le envia: "+archivo_str);
 		try {
 			return saveFile(archivo_str, archivo.getRawFile());
 		} catch (GetException e) {
@@ -198,7 +201,7 @@ public class ArchivoRequester extends HandlerRequester {
 	private OperationResponse saveFile(String xml, DataHandler dataHandler) throws GetException {
 //		DataHandler archivo = ((Archivo) current).getRawFile();
 		try {
-
+//			Integer id =  createRecurso("ARCHIVO", "A", 5);
 			String xml_resp_e = proxy.guardarArchivo(xml, dataHandler);
 			return validateOneWayOperation(xml_resp_e);
 //			updateCache(); al guardar no se actualiza el cache ?

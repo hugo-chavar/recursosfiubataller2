@@ -48,7 +48,8 @@ public class ClientePruebaContraIntegracion {
 		String path, nombre, extension;
 		nombre = "hola";
 		extension = "txt";
-		guardar("<WS><Recurso><descripcion>Archivo chico Prueba </descripcion><tipo>A</tipo></Recurso></WS>");
+		guardar("<WS><Recurso><ambitoId>12</ambitoId><descripcion>Una clase java</descripcion><tipo>A</tipo></Recurso></WS>");
+//		guardar("<WS><Recurso><ambitoId>5</ambitoId><descripcion>Archivo chico Prueba </descripcion><tipo>A</tipo></Recurso></WS>");
 		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
 		path = path.substring(0, path.lastIndexOf("classes") + 8);
 		path = path + nombre + "." + extension;
@@ -58,7 +59,7 @@ public class ClientePruebaContraIntegracion {
 		xml = "<WS><ArchivoMetadata><nombre>hola</nombre><tamanio>14</tamanio><tipo>txt</tipo><recursoId>1036</recursoId></ArchivoMetadata></WS>";
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1018</id></ArchivoMetadata></WS>";
-		guardarArchivo(xml, path);
+//		guardarArchivo(xml, path);
 //		
 //		PruebasDeArchivo();
 		
@@ -76,13 +77,13 @@ public class ClientePruebaContraIntegracion {
 	
 		path = "/home/damian/hola.txt";
 //		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo2</nombre><tamanio>1</tamanio><tipo>jpg</tipo><recursoId>1012</recursoId></ArchivoMetadata></WS>";
-		xml = "<WS><ArchivoMetadata><recursoId>1034</recursoId></ArchivoMetadata></WS>";
+		xml = "<WS><ArchivoMetadata><recursoId>1035</recursoId></ArchivoMetadata></WS>";
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1012</id></ArchivoMetadata></WS>";
 //		System.out.println("Va a guardar un archivo");
 		System.out.println("TEST 1 TRAER ARCHIVO EXISTENTE");
 		try {
-			xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><recursoId>1034</recursoId></ArchivoMetadata></WS>";
+			xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><recursoId>1035</recursoId></ArchivoMetadata></WS>";
 			com.ws.services.IntegracionStub.ArchivoMetadata[] objects = ip.seleccionarArchivo(xml);
 			if(objects==null){
 				System.out.println("La consulta no trajo resultados");
