@@ -7,8 +7,7 @@ import javax.activation.DataHandler;
 
 import org.apache.axis2.AxisFault;
 
-
-import com.ws.services.IntegracionStub;
+import com.ws.services.integracion.IntegracionStub;
 
 import connection.exceptions.ConnectionException;
 

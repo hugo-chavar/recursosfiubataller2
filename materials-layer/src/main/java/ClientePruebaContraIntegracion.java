@@ -84,14 +84,14 @@ public class ClientePruebaContraIntegracion {
 		System.out.println("TEST 1 TRAER ARCHIVO EXISTENTE");
 		try {
 			xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><recursoId>1035</recursoId></ArchivoMetadata></WS>";
-			com.ws.services.IntegracionStub.ArchivoMetadata[] objects = ip.seleccionarArchivo(xml);
+			com.ws.services.integracion.IntegracionStub.ArchivoMetadata[] objects = ip.seleccionarArchivo(xml);
 			if(objects==null){
 				System.out.println("La consulta no trajo resultados");
 				
 			}else{
 				System.out.println("Algo Trajo");
 				System.out.println("Cantidad: " + objects.length);
-				com.ws.services.IntegracionStub.ArchivoMetadata supuestoArchivo = objects[0];
+				com.ws.services.integracion.IntegracionStub.ArchivoMetadata supuestoArchivo = objects[0];
 				
 				System.out.println("Nombre de lo que trajo: "+supuestoArchivo.getNombre());
 			}
