@@ -3,7 +3,6 @@ package connection;
 import model.Archivo;
 import model.EncuestaRespondida;
 import model.Recurso;
-import connection.exceptions.ConnectionException;
 import connection.responses.OperationResponse;
 
 
