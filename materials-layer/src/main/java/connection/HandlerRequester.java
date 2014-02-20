@@ -54,6 +54,7 @@ public abstract class HandlerRequester {
 		String xml = getParser().serialize(serializable);
 
 		try {
+			System.out.println("DAMI: Se va a mandar a integracion: "+xml);
 			String xml_resp_e = proxy.guardar(xml);
 			return validateOneWayOperation(xml_resp_e);
 //			updateCache(); al guardar no se actualiza el cache?

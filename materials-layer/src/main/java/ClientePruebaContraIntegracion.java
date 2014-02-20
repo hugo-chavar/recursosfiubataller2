@@ -26,7 +26,7 @@ public class ClientePruebaContraIntegracion {
 //
 //		seleccionar("<WS><Link><recursoId>997</recursoId></Link></WS>");
 //
-//		seleccionar("<WS><Encuesta><recursoId>1003</recursoId></Encuesta></WS>");
+		seleccionar("<WS><Encuesta><recursoId>1003</recursoId></Encuesta></WS>");
 //
 //		seleccionar("<WS><EncuestaRespondida><recursoId>1003</recursoId><usuarioId>19</usuarioId></EncuestaRespondida></WS>");
 		
@@ -45,23 +45,23 @@ public class ClientePruebaContraIntegracion {
 //		guardar("<WS><Encuesta><recursoId>1030</recursoId><evaluada>false</evaluada><preguntas>F;1;de que color es el caballo blanco de san martin?;rojo,verde,azul,blanco;4|F;2;a que equipo del futbol argentino le denominan Millo;velez,River Plate,crucero del norte,estudiantes;2|F;3;cual es un patron de diseno creacional;command,mediator,builder,facade;3|F;4;Un test unitario debe presentar las siguientes características;Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente,Automatizable;1,8,11,12,13,7|C;5;cuantas patas tiene un gato?;4</preguntas></Encuesta></WS>");
 		
 //		guardar("<WS><Encuesta><recursoId>1031</recursoId><evaluada>false</evaluada><preguntas>abc</preguntas></Encuesta></WS>");
-		String path, nombre, extension;
-		nombre = "hola";
-		extension = "txt";
-		guardar("<WS><Recurso><ambitoId>12</ambitoId><descripcion>Una clase java</descripcion><tipo>A</tipo></Recurso></WS>");
-//		guardar("<WS><Recurso><ambitoId>5</ambitoId><descripcion>Archivo chico Prueba </descripcion><tipo>A</tipo></Recurso></WS>");
-		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
-		path = path.substring(0, path.lastIndexOf("classes") + 8);
-		path = path + nombre + "." + extension;
-		
-		System.out.println(path);
-		path = "file:/home/damian/hola.txt";
-		xml = "<WS><ArchivoMetadata><nombre>hola</nombre><tamanio>14</tamanio><tipo>txt</tipo><recursoId>1036</recursoId></ArchivoMetadata></WS>";
-//		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
-//		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1018</id></ArchivoMetadata></WS>";
-//		guardarArchivo(xml, path);
+//		String path, nombre, extension;
+//		nombre = "hola";
+//		extension = "txt";
+//		guardar("<WS><Recurso><ambitoId>12</ambitoId><descripcion>Una clase java</descripcion><tipo>A</tipo></Recurso></WS>");
+////		guardar("<WS><Recurso><ambitoId>5</ambitoId><descripcion>Archivo chico Prueba </descripcion><tipo>A</tipo></Recurso></WS>");
+//		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+//		path = path.substring(0, path.lastIndexOf("classes") + 8);
+//		path = path + nombre + "." + extension;
 //		
-//		PruebasDeArchivo();
+//		System.out.println(path);
+//		path = "file:/home/damian/hola.txt";
+//		xml = "<WS><ArchivoMetadata><nombre>hola</nombre><tamanio>14</tamanio><tipo>txt</tipo><recursoId>1036</recursoId></ArchivoMetadata></WS>";
+////		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
+////		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1018</id></ArchivoMetadata></WS>";
+////		guardarArchivo(xml, path);
+////		
+////		PruebasDeArchivo();
 		
 	}
 
