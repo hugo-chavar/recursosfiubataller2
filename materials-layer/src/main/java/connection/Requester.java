@@ -3,6 +3,7 @@ package connection;
 import model.Archivo;
 import model.EncuestaRespondida;
 import model.Recurso;
+import connection.exceptions.ConnectionException;
 import connection.responses.OperationResponse;
 
 
@@ -101,6 +102,12 @@ public enum Requester {
 	}
 
 	public boolean getPermisoUsuario(Integer ambitoId, Integer usuarioId,String action) {
+//		ParticipacionProxy proxy = new ParticipacionProxy();
+//		try {
+//			return proxy.puedeEditar(ambitoId, usuarioId);
+//		} catch (ConnectionException exception) { // TODO: Manejar excepcion
+//			return false;
+//		}
 		return true;
 	}
 	
