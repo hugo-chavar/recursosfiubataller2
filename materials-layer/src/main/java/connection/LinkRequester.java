@@ -35,6 +35,7 @@ public class LinkRequester extends HandlerRequester {
 	public OperationResponse get(Serializable serializable) {
 		current = serializable;
 		String xml = parser.serialize(new Link(((Recurso) serializable).getRecursoId()));
+		System.out.println("Ahora va a querer:"+xml);
 		return get(xml);
 	}
 

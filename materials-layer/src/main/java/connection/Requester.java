@@ -147,10 +147,10 @@ public enum Requester {
 	private OperationResponse makeQueryGetRecurso(Recurso recurso) {
 		
 		OperationResponse response;
-		
+		System.out.println("Entra a buscar el query con "+recurso.getTipo());
 		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
 			response = encuestaRequester.get(recurso);
-		} else if (recurso.getTipo().equalsIgnoreCase("Link")) {
+		} else if (recurso.getTipo().equalsIgnoreCase("Link") || recurso.getTipo().equalsIgnoreCase("L")   ) {
 			response = linkRequester.get(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Archivo")) {
 			//System.out.println("Entra a makeQuery de archivo");

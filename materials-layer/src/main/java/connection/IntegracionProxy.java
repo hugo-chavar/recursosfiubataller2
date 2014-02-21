@@ -9,6 +9,7 @@ import org.apache.axis2.AxisFault;
 
 
 import com.ws.services.IntegracionStub;
+import com.ws.services.IntegracionStub.SeleccionarArchivoMetadata;
 
 import connection.exceptions.ConnectionException;
 
@@ -160,12 +161,12 @@ public class IntegracionProxy {
 		}
 	}
 
-	public IntegracionStub.ArchivoMetadata[] seleccionarArchivo(String xml) throws ConnectionException {
-		IntegracionStub.SeleccionarArchivo fileSelected = new IntegracionStub.SeleccionarArchivo();
-		IntegracionStub.SeleccionarArchivoResponse responseArchivo;
+	public String seleccionarArchivo(String xml) throws ConnectionException {
+		SeleccionarArchivoMetadata fileSelected = new SeleccionarArchivoMetadata();
+		IntegracionStub.SeleccionarArchivoMetadataResponse responseArchivo;
 		try {
 			fileSelected.setXml(xml);
-			responseArchivo = stub.seleccionarArchivo(fileSelected);
+			responseArchivo = stub.seleccionarArchivoMetadata(fileSelected);
 			return responseArchivo.get_return();
 
 		} catch (Exception e) {

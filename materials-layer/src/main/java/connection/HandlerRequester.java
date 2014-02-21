@@ -5,8 +5,7 @@ import javax.activation.DataHandler;
 import model.Archivo;
 
 import com.ws.services.IntegracionStub;
-import com.ws.services.IntegracionStub.ArchivoMetadata;
-import com.ws.services.IntegracionStub.Recurso;
+import com.ws.services.IntegracionStub.SeleccionarArchivoMetadata;
 
 import connection.cache.Cache;
 import connection.exceptions.ConnectionException;
@@ -95,31 +94,9 @@ public abstract class HandlerRequester {
 
 	public OperationResponse getFile(String xml) throws GetException, ParseException {
 		try {
-			IntegracionStub.ArchivoMetadata[] listOfFIles = proxy.seleccionarArchivo(xml);
-//			System.out.println("Integracion me esta contestando : " + xml_resp_e);
-			for (ArchivoMetadata archivoMetadata : listOfFIles) {
-				DataHandler contenido =  archivoMetadata.getContenido();
-				String tipo = archivoMetadata.getTipo();
-				String nombre = archivoMetadata.getNombre();
-				Recurso unRecurso =  archivoMetadata.getRecurso();
-				String descripcion = unRecurso.getDescripcion();
-				int idAmbito = (int) unRecurso.getAmbitoId();
-				Archivo unArchivo = new Archivo();
-				unArchivo.setAmbitoId(idAmbito);
-				unArchivo.setRawFile(contenido);
-				unArchivo.setNombreArchivo(nombre);
-				unArchivo.setTipoArchivo(tipo);
-				unArchivo.setDescripcion(descripcion);
-				current = unArchivo;
-				return currentObjetToResponse();
-				
-			}
-//			if (validateTwoWayOperation(xml_resp_e)) {
-//				createCurrentObject(xml_resp_e);
-//				updateCache();
-//				
-//			}
-			return OperationResponse.createFailed("Respuesta inesperada: " + notification.getMessage()); 
+			String file = proxy.seleccionarArchivo(xml);
+//	
+				return currentObjetToResponse(); 
 			
 		} catch (ConnectionException e) {
 			String reason = "Intentando guardar " +  getInfo() +". ";
@@ -134,7 +111,6 @@ public abstract class HandlerRequester {
 
 		try {
 			String xml_resp_e =  proxy.seleccionar(xml);
-			
 			if (validateTwoWayOperation(xml_resp_e)) {
 				createCurrentObject(xml_resp_e);
 				updateCache();
@@ -213,7 +189,6 @@ public abstract class HandlerRequester {
 	
 	protected void createCurrentObject(String xml_resp_e) throws ParseException, GetException {
 		Serializable aux = current;
-		
 		deserialize(xml_resp_e);
 		verifyCurrentObject();
 		current.updateFields(aux);

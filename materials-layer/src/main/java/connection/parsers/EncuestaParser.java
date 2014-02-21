@@ -23,6 +23,7 @@ public class EncuestaParser extends Parser {
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		Boolean evaluada = Boolean.parseBoolean(fields.get(EVALUADA_TAG));
 		Encuesta encuesta = new Encuesta(0, 0, "", evaluada);
+		//System.out.println("PREGUNTAS: "+fields.get(PREGUNTAS_TAG));
 		encuesta.unmarshallPreguntas(fields.get(PREGUNTAS_TAG));
 		return encuesta;
 	}
@@ -31,7 +32,7 @@ public class EncuestaParser extends Parser {
 	protected void addElements(Serializable serializable, Element baseNode) {
 		Encuesta encuesta = (Encuesta) serializable;
 		
-		addTextElement(baseNode, Parser.ID_TAG, String.valueOf(encuesta.getRecursoId()));
+		addTextElement(baseNode, Parser.RECURSOID_TAG, String.valueOf(encuesta.getRecursoId()));
 		addTextElement(baseNode, EVALUADA_TAG, String.valueOf(encuesta.isEvaluada()));
 		addTextElement(baseNode, PREGUNTAS_TAG, encuesta.marshallPreguntas());
 

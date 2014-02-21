@@ -34,7 +34,7 @@ public class ClientePruebaContraIntegracion {
 		
 //		guardar("<WS><EncuestaRespondida><recursoId>1003</recursoId><usuarioId>19</usuarioId><preguntasRespondidas>a,b,c</preguntasRespondidas></EncuestaRespondida></WS>");
 //
-//		seleccionar("<WS><Recurso><descripcion>prueba</descripcion></Recurso></WS>");
+		seleccionar("<WS><Recurso><id>1095</id></Recurso></WS>");
 //
 //		guardar("<WS><Link><recursoId>1030</recursoId><nombre>www.hola.com</nombre></Link></WS>");
 //
@@ -93,23 +93,23 @@ public class ClientePruebaContraIntegracion {
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1012</id></ArchivoMetadata></WS>";
 //		System.out.println("Va a guardar un archivo");
 		System.out.println("TEST 1 TRAER ARCHIVO EXISTENTE");
-		try {
-			xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><recursoId>1035</recursoId></ArchivoMetadata></WS>";
-			com.ws.services.IntegracionStub.ArchivoMetadata[] objects = ip.seleccionarArchivo(xml);
-			if(objects==null){
-				System.out.println("La consulta no trajo resultados");
-				
-			}else{
-				System.out.println("Algo Trajo");
-				System.out.println("Cantidad: " + objects.length);
-				com.ws.services.IntegracionStub.ArchivoMetadata supuestoArchivo = objects[0];
-				
-				System.out.println("Nombre de lo que trajo: "+supuestoArchivo.getNombre());
-			}
-		} catch (ConnectionException e) {
-			System.out.println("No lo pudo traer al archivo");
-			//e.printStackTrace();
-		}
+//		try {
+//			xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><recursoId>1035</recursoId></ArchivoMetadata></WS>";
+//			com.ws.services.IntegracionStub.ArchivoMetadata[] objects = ip.seleccionarArchivo(xml);
+//			if(objects==null){
+//				System.out.println("La consulta no trajo resultados");
+//				
+//			}else{
+//				System.out.println("Algo Trajo");
+//				System.out.println("Cantidad: " + objects.length);
+//				com.ws.services.IntegracionStub.ArchivoMetadata supuestoArchivo = objects[0];
+//				
+//				System.out.println("Nombre de lo que trajo: "+supuestoArchivo.getNombre());
+//			}
+//		} catch (ConnectionException e) {
+//			System.out.println("No lo pudo traer al archivo");
+//			//e.printStackTrace();
+//		}
 	}
 	
 	private static void eliminar(String xmlInput) {
