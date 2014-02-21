@@ -3,6 +3,7 @@ package connection;
 import model.Archivo;
 import model.EncuestaRespondida;
 import model.Recurso;
+import model.Usuario;
 import connection.exceptions.ConnectionException;
 import connection.responses.OperationResponse;
 
@@ -79,8 +80,8 @@ public enum Requester {
 		return recursosRequester.getAll(ambitoId);
 	}
 	
-	public OperationResponse getEncuestaRespondida(int idEncuesta, String username) {
-		return respondidaRequester.get(idEncuesta, username);
+	public OperationResponse getEncuestaRespondida(int idEncuesta, Usuario usuario) {
+		return respondidaRequester.get(idEncuesta, usuario);
 	}
 	
 	public OperationResponse deleteRecurso(Recurso recurso) {

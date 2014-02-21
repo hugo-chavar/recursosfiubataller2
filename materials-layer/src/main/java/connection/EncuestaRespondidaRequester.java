@@ -7,6 +7,7 @@ import model.EncuestaRespondida;
 import model.PreguntaRespondida;
 import model.PreguntaRespuestaACompletarRespondida;
 import model.PreguntaRespuestaFijaRespondida;
+import model.Usuario;
 import connection.cache.Cache;
 import connection.parsers.EncuestaRespondidaParser;
 import connection.parsers.Parser;
@@ -49,15 +50,15 @@ public class EncuestaRespondidaRequester extends HandlerRequester {
 //		return save(xml);
 //	}
 
-	public OperationResponse get(int IDEncuesta, String username) {
+	public OperationResponse get(int IDEncuesta, Usuario usuario) {
 		OperationResponse response;
 		
 		// Consulto el ID del usuario
-		int usuarioId = getUsuarioId(username);
+		int usuarioId = getUsuarioId(usuario);
 		if (usuarioId < 0) {
 			response = new OperationResponse();
 			response.setSuccess(false);
-			response.setReason("No existe el usuario con username: " + username);
+			response.setReason("No existe el usuario con username: " + usuario);
 			return response;
 		}
 		

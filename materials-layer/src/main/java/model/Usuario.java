@@ -44,7 +44,7 @@ public class Usuario implements Serializable {
 	private Boolean habilitado;
 	
 	
-	public int getId() {
+	public Integer getId() {
 		return Integer.parseInt(id);
 	}
 	

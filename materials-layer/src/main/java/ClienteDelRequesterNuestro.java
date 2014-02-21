@@ -4,9 +4,11 @@ import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
+import model.Usuario;
 import connection.Parameter;
 import connection.RecursosRequester;
 import connection.Requester;
+import connection.parsers.Parser;
 import connection.responses.OperationResponse;
 import connection.responses.RecursosResponse;
 
@@ -42,7 +44,10 @@ public class ClienteDelRequesterNuestro {
 
 	private static void getRespondidaInexistente() {
 		System.out.println("prueba encuesta respondida que no existe");
-		response = Requester.INSTANCE.getEncuestaRespondida(20, "4");
+		String xml = "<Usuario><username>4</username></Usuario>";
+		Parser p = new Parser();
+		Usuario u = (Usuario) p.unmarshal(xml, Usuario.class);
+		response = Requester.INSTANCE.getEncuestaRespondida(20, u);
 		if (response.getSuccess()) {
 			encuesta_rtn = (EncuestaRespondida) response.getSerializable();
 			System.out.println(encuesta_rtn.getInfo());
@@ -59,7 +64,10 @@ public class ClienteDelRequesterNuestro {
 		// EncuestaRespondida encuesta_rtn = (EncuestaRespondida)
 		// Requester.INSTANCE.getEncuestaRespondida(15, 4);
 		System.out.println("prueba encuesta respondida");
-		response = Requester.INSTANCE.getEncuestaRespondida(10, "5");
+		String xml = "<Usuario><username>5</username></Usuario>";
+		Parser p = new Parser();
+		Usuario u = (Usuario) p.unmarshal(xml, Usuario.class);
+		response = Requester.INSTANCE.getEncuestaRespondida(10, u);
 		if (response.getSuccess()) {
 			encuesta_rtn = (EncuestaRespondida) response.getSerializable();
 			System.out.println(encuesta_rtn.getInfo());

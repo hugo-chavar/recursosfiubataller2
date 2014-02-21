@@ -41,19 +41,32 @@ public abstract class HandlerRequester {
 		}
 	}
 	
-	protected int getUsuarioId(String username){
+	protected int getUsuarioId(Usuario usuario){
 		
-		Usuario usuario = new Usuario();
-		usuario.setUsername(username);
-		current = usuario;
-		Parser parser = new Parser();
-		String xml = "<WS>" + parser.convertToXml(usuario, Usuario.class) + "</WS>";
-		OperationResponse response = this.get(xml);
-		if (response.getSuccess()) {
-			usuario = (Usuario)response.getSerializable();
-			return usuario.getId();
+//		Usuario usuario = new Usuario();
+//		usuario.setUsername(usuario);
+//		current = usuario;
+//		Parser parser = new Parser();
+		String xml = "<WS>" + getParser().convertToXml(usuario, Usuario.class) + "</WS>";
+		
+		try {
+			String xml_recurso = proxy.seleccionar(xml);
+			System.out.println(xml_recurso);
+			xml_recurso = xml_recurso.replace("<WS>" , "");
+			xml_recurso = xml_recurso.replace("</WS>" , "");
+			usuario = (Usuario) getParser().unmarshal(xml_recurso, Usuario.class);
+			if(usuario != null && usuario.getId()!= null)
+				return usuario.getId();
+			return -1;
+		} catch (ConnectionException e) {
+			return -1;
 		}
-		return -1;
+//		OperationResponse response = this.get(xml);
+//		if (response.getSuccess()) {
+//			usuario = (Usuario)response.getSerializable();
+//			return usuario.getId();
+//		}
+//		return -1;
 		
 	}
 	

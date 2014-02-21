@@ -80,10 +80,10 @@ public class MaterialsImpl implements Materials {
 
 	}
 	
-	private String getEncuestaRespondida(Recurso recurso, String username) { // Cambio de usuarioId a username
-		OperationResponse response = Requester.INSTANCE.getEncuestaRespondida( recurso.getRecursoId(), username);
-		return toXml(response);
-	}
+//	private String getEncuestaRespondida(Recurso recurso, Usia username) { // Cambio de usuarioId a username
+//		OperationResponse response = Requester.INSTANCE.getEncuestaRespondida( recurso.getRecursoId(), username);
+//		return toXml(response);
+//	}
 	
 	private String getRecursos(int ambitoId, String username) { // Cambio de usuarioId a username
 		OperationResponse recursosPermitidos;
@@ -110,7 +110,10 @@ public class MaterialsImpl implements Materials {
 		if (parameter.getUsuario() == null || parameter.getRecurso() == null){
 			return createFailedResponse("Parametros invalidos");
 		}
-		return getEncuestaRespondida(parameter.getRecurso(), parameter.getUsuario().getUsername());
+		
+		OperationResponse response = Requester.INSTANCE.getEncuestaRespondida( parameter.getRecurso().getRecursoId(), parameter.getUsuario());
+		return toXml(response);
+//		return getEncuestaRespondida(parameter.getRecurso(), parameter.getUsuario());
 	}
 
 	@Override

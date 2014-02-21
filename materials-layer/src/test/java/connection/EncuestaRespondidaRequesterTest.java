@@ -6,6 +6,7 @@ import model.EncuestaRespondida;
 import model.PreguntaRespondida;
 import model.PreguntaRespuestaACompletarRespondida;
 import model.PreguntaRespuestaFijaRespondida;
+import model.Usuario;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,8 +17,11 @@ public class EncuestaRespondidaRequesterTest {
 
 	@Test
 	public void getEncuestaRespondidaWithPreguntaRespuestaACompletarRespondida() throws GetException {
+		
+		Usuario u = new Usuario();
+		u.setUsername("4");
 
-		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(15, "4").getSerializable();      
+		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(15, u).getSerializable();      
 		
 		Assert.assertEquals(new Integer(50), encuesta_rtn.getEvaluacion());
 
@@ -30,7 +34,9 @@ public class EncuestaRespondidaRequesterTest {
 
 	@Test
 	public void getEncuestaRespondidaNoEvaluadaWithPreguntaRespuestaFijaRespondida() throws GetException {
-		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(10, "5").getSerializable();
+		Usuario u = new Usuario();
+		u.setUsername("5");
+		EncuestaRespondida encuesta_rtn = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(10, u).getSerializable();
 
 		Assert.assertEquals(null, encuesta_rtn.getEvaluacion());
 
@@ -46,7 +52,9 @@ public class EncuestaRespondidaRequesterTest {
 	@Test
 	public void getEncuestaRespondidaFromCache() throws GetException {
 
-		EncuestaRespondida respondida = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(2, "15").getSerializable();     
+		Usuario u = new Usuario();
+		u.setUsername("15");
+		EncuestaRespondida respondida = (EncuestaRespondida) Requester.INSTANCE.getEncuestaRespondida(2, u).getSerializable();     
 
 		Assert.assertEquals(new Integer(50), respondida.getEvaluacion());
 		List<PreguntaRespondida> respondidas = respondida.getPreguntasRespondidas();
