@@ -43,7 +43,7 @@ public abstract class HandlerRequester {
 		}
 	}
 	protected OperationResponse save(Serializable serializable, String tipo) {
-//		protected OperationResponse save(String xml) {
+		getParser().setSaveMode();
 		current = serializable;
 		int id = createRecurso(((model.Recurso)current).getDescripcion(), tipo, (int) ((model.Recurso)current).getAmbitoId());
 		if(id==-1)

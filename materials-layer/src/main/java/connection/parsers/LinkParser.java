@@ -28,7 +28,7 @@ public class LinkParser extends Parser {
 	@Override
 	protected void addElements(Serializable serializable, Element baseNode) {
 		Link link = (Link) serializable;
-		addTextElement(baseNode, Parser.RECURSOID_TAG, String.valueOf(link.getRecursoId()));
+		addTextElement(baseNode, isSaveMode?RECURSOID_TAG:ID_TAG, String.valueOf(link.getRecursoId()));
 		addTextElement(baseNode, NOMBRE_TAG, link.getNombre());
 		
 	}

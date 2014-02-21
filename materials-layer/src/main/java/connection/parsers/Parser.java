@@ -44,6 +44,7 @@ public class Parser {
 
 	protected String baseTag;
 	protected Document document;
+	protected boolean isSaveMode;
 
 	public Document buildXMLDocument() {
 		try {
@@ -192,6 +193,14 @@ public class Parser {
 
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		return null;
+	}
+	
+	public void  setSaveMode() {
+		isSaveMode = true;
+	}
+	
+	public void  setGetMode() {
+		isSaveMode = false;
 	}
 
 }

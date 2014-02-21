@@ -32,7 +32,7 @@ public class EncuestaParser extends Parser {
 	protected void addElements(Serializable serializable, Element baseNode) {
 		Encuesta encuesta = (Encuesta) serializable;
 		
-		addTextElement(baseNode, Parser.RECURSOID_TAG, String.valueOf(encuesta.getRecursoId()));
+		addTextElement(baseNode,isSaveMode?RECURSOID_TAG:ID_TAG, String.valueOf(encuesta.getRecursoId()));
 		addTextElement(baseNode, EVALUADA_TAG, String.valueOf(encuesta.isEvaluada()));
 		addTextElement(baseNode, PREGUNTAS_TAG, encuesta.marshallPreguntas());
 

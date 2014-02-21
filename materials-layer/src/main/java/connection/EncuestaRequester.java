@@ -138,6 +138,7 @@ public class EncuestaRequester extends HandlerRequester {
 //	}
 
 	public OperationResponse get(Serializable serializable) {
+		getParser().setGetMode();
 		current = serializable;
 		String xml = parser.serialize(new Encuesta(((Recurso) serializable).getRecursoId()));
 		return get(xml);
