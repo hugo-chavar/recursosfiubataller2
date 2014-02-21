@@ -29,9 +29,9 @@ public abstract class HandlerRequester {
 		
 		try {
 			String aGuardar  = "<WS><Recurso><descripcion>"+descripcion+"</descripcion><tipo>"+tipo+"</tipo><ambitoId>"+id+"</ambitoId></Recurso></WS>";
-			System.out.println("aGuardar "+aGuardar);
+			//System.out.println("aGuardar "+aGuardar);
 			String xml_recurso = proxy.guardar(aGuardar);
-			System.out.println(xml_recurso);
+			//System.out.println(xml_recurso);
 			notification = (Notification) getParser().unmarshal(xml_recurso, Notification.class);
 			if(notification.success())
 				return notification.getDatos();
@@ -51,7 +51,7 @@ public abstract class HandlerRequester {
 		
 		try {
 			String xml_recurso = proxy.seleccionar(xml);
-			System.out.println(xml_recurso);
+			//System.out.println(xml_recurso);
 			xml_recurso = xml_recurso.replace("<WS>" , "");
 			xml_recurso = xml_recurso.replace("</WS>" , "");
 			usuario = (Usuario) getParser().unmarshal(xml_recurso, Usuario.class);
@@ -81,7 +81,7 @@ public abstract class HandlerRequester {
 		String xml = getParser().serialize(serializable);
 
 		try {
-			System.out.println("DAMI: Se va a mandar a integracion: "+xml);
+			//System.out.println("DAMI: Se va a mandar a integracion: "+xml);
 			String xml_resp_e = proxy.guardar(xml);
 			return validateOneWayOperation(xml_resp_e);
 //			updateCache(); al guardar no se actualiza el cache?
@@ -122,9 +122,9 @@ public abstract class HandlerRequester {
 
 	public OperationResponse getFile(String xml) throws GetException, ParseException {
 		try {
-//			System.out.println("se intenta traer"+xml);
+//			//System.out.println("se intenta traer"+xml);
 			String file = proxy.seleccionarArchivoMetadata(xml);
-//			System.out.println("Eso me devuelve"+file);
+//			//System.out.println("Eso me devuelve"+file);
 			DataHandler contenido  = proxy.seleccionarArchivo(xml);
 //		
 			createCurrentObject(file);

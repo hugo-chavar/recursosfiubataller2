@@ -15,21 +15,21 @@ public class WSPublisher {
 
 		binding.setMTOMEnabled(true);
 
-		System.out.println("Capa de Negocio --- Materiales--- Web Services ");
+		//System.out.println("Capa de Negocio --- Materiales--- Web Services ");
 
-		System.out.println("Enter para salir : ");
+		//System.out.println("Enter para salir : ");
 
 		try {
 			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 			bufferRead.readLine();
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 
 		ep.stop();
 
 
-		System.out.println("Programa terminado. ");
+		//System.out.println("Programa terminado. ");
 	}
 
 }

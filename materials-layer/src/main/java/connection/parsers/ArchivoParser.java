@@ -49,8 +49,8 @@ public class ArchivoParser extends Parser {
 //		try {
 //			file.appendChild(doc.createTextNode(String.valueOf(archivo.getStringFile())));
 //		} catch (DOMException e) {
-//			System.out.println(e.getMessage());
-//			System.out.println("error al agregar file tag");
+//			//System.out.println(e.getMessage());
+//			//System.out.println("error al agregar file tag");
 //		}
 //		nodeElement.appendChild(file);*/
 //		

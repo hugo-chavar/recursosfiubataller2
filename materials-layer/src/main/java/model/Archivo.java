@@ -81,16 +81,16 @@ public class Archivo extends Recurso {
 		try {
 			this.rawFile.writeTo(output);
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
-			System.out.println("error al setear el DataHandler");
+			//System.out.println(e.getMessage());
+			//System.out.println("error al setear el DataHandler");
 		}
 		this.setContentType(this.rawFile.getContentType());
 		this.fileBinary = output.toByteArray();
 		try {
 			this.stringFile = new String(this.fileBinary, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			System.out.println(e.getMessage());
-			System.out.println("codificacion no valida");
+			//System.out.println(e.getMessage());
+			//System.out.println("codificacion no valida");
 		}
 	}
 
@@ -104,8 +104,8 @@ public class Archivo extends Recurso {
 		try {
 			return new String(this.fileBinary, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			System.out.println("Codificacion de archivo erronea");
-			System.out.println(e.getMessage());
+			//System.out.println("Codificacion de archivo erronea");
+			//System.out.println(e.getMessage());
 			return "ERROR";
 		}
 	}

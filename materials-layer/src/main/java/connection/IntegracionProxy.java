@@ -23,7 +23,7 @@ public class IntegracionProxy {
 		try {
 			stub = new IntegracionStub();
 		} catch (AxisFault e) {
-			System.out.println("Error al intentar contectarse con Integracion");
+			//System.out.println("Error al intentar contectarse con Integracion");
 		}
 		generateTestData();
 	}

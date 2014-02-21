@@ -33,7 +33,7 @@ public class ArchivoRequester extends HandlerRequester {
 		int idRec;
 		path = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();
 		path = path.substring(0, path.lastIndexOf("classes") + 8);
-//		System.out.println("Se trae de "+path);
+//		//System.out.println("Se trae de "+path);
 		nombre = "teofilo";
 		desc = "la foto del siglo";
 		extension = "jpg";
@@ -72,8 +72,8 @@ public class ArchivoRequester extends HandlerRequester {
 			current = archivo;
 			updateCache();
 		} catch (MalformedURLException e) {
-			System.out.println("no existe el URL: " + path);
-			System.out.println(e.getMessage());
+			//System.out.println("no existe el URL: " + path);
+			//System.out.println(e.getMessage());
 		}
 	}
 
@@ -126,8 +126,8 @@ public class ArchivoRequester extends HandlerRequester {
 ////			DataHandler arch = new DataHandler(new URL(path));
 ////			archivo.setRawFile(arch);
 ////		} catch (MalformedURLException e) {
-////			System.out.println("no existe el URL asigando");
-////			System.out.println(e.getMessage());
+////			//System.out.println("no existe el URL asigando");
+////			//System.out.println(e.getMessage());
 ////		}
 //		path = "file:/opt/apache-tomcat-7.0.47/webapps/axis2/WEB-INF/services/";
 //		nombre = "integracion";
@@ -147,8 +147,8 @@ public class ArchivoRequester extends HandlerRequester {
 //			current = archivo;
 //			updateCache();
 //		} catch (MalformedURLException e) {
-//			System.out.println("no existe el URL: " + path);
-//			System.out.println(e.getMessage());
+//			//System.out.println("no existe el URL: " + path);
+//			//System.out.println(e.getMessage());
 //		}
 //		response = OperationResponse.createSuccess();
 //		response.setRecurso(archivo);
@@ -169,11 +169,11 @@ public class ArchivoRequester extends HandlerRequester {
 	@Override
 	protected void updateCache() {
 		if (currentHasValidSize()) {
-//			System.out.println("Se va a cachear");
+//			//System.out.println("Se va a cachear");
 			super.updateCache();
 		}
 //		else{
-//			System.out.println("No se cachea");
+//			//System.out.println("No se cachea");
 //		}
 	}
 
@@ -191,11 +191,11 @@ public class ArchivoRequester extends HandlerRequester {
 //		String xml = parser.serializeXmlQuery(aux.getRecursoId());
 //		try {
 //			String xml_resp_e = proxy.eliminarArchivo(xml);
-//			System.out.println(xml_resp_e);
+//			//System.out.println(xml_resp_e);
 //		} catch (ConnectionException e) {
 //			String message = "Intentando eliminar archivo id: " + aux.getRecursoId();
 //			message = e.getMessage() + message;
-//			System.out.println(message);
+//			//System.out.println(message);
 //		}
 //		
 //	}

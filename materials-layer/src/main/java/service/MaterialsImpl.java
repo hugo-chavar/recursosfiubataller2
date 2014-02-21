@@ -127,7 +127,7 @@ public class MaterialsImpl implements Materials {
 	
 	@Override
 	public String getRecurso(String parametros) {
-		System.out.println(parametros);
+		//System.out.println(parametros);
 		Parameter parameter = Parameter.createParameter(parametros);
 		OperationResponse response = Requester.INSTANCE.getRecurso(parameter.getRecurso());
 		return toXml(response);
@@ -136,7 +136,7 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String borrarRecurso(String parametros) {
 		OperationResponse response;
-		System.out.println(parametros);
+		//System.out.println(parametros);
 		Parameter parameter = Parameter.createParameter(parametros);
 		if (Requester.INSTANCE.getPermisoUsuario(parameter.getRecurso().getAmbitoId(), parameter.getUsuario().getUsername(),"borrarRecurso")) {
 			response = Requester.INSTANCE.deleteRecurso(parameter.getRecurso());

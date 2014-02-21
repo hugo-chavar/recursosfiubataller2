@@ -52,7 +52,7 @@ public class Parser {
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			return docBuilder.newDocument();
 		} catch (ParserConfigurationException pce) {
-			System.out.println(pce.getMessage());
+			//System.out.println(pce.getMessage());
 		}
 		return null;
 	}
@@ -112,15 +112,15 @@ public class Parser {
 			return unmarshaller.unmarshal(reader);
 		} catch (UnmarshalException e) {
 			// do nothing
-//			System.out.println(" Object unmarshal 1");
+//			//System.out.println(" Object unmarshal 1");
 //			
-//			System.out.println(e.getMessage());
+//			//System.out.println(e.getMessage());
 		} catch (JAXBException e) {
-//			System.out.println(" Object unmarshal 2");
-//			System.out.println(e.getMessage());
+//			//System.out.println(" Object unmarshal 2");
+//			//System.out.println(e.getMessage());
 		}
-//		System.out.println(xml);
-//		System.out.println(type.getClass().getName());
+//		//System.out.println(xml);
+//		//System.out.println(type.getClass().getName());
 		return null;
 	}
 

@@ -29,7 +29,7 @@ public class ImageClient {
 		// Image imgUpload = ImageIO.read(new File("/home/damian/multa2.pdf"));
 
 		try {
-			System.out.println("ingrese el path de su archivo");
+			//System.out.println("ingrese el path de su archivo");
 			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 			String path = bufferRead.readLine();
 
@@ -41,10 +41,10 @@ public class ImageClient {
 			binding.setMTOMEnabled(true);
 
 			String status = imageServer.agregarArchivo("aca iria su nombre", file);
-			System.out.println("imageServer.uploadImage() : " + status);
+			//System.out.println("imageServer.uploadImage() : " + status);
 
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 
 		/************ test download ***************/
@@ -55,7 +55,7 @@ public class ImageClient {
 		 * 300); JLabel label = new JLabel(new ImageIcon(image));
 		 * frame.add(label); frame.setVisible(true);
 		 * 
-		 * System.out.println("imageServer.downloadImage() : Download Successful!"
+		 * //System.out.println("imageServer.downloadImage() : Download Successful!"
 		 * );
 		 */
 	}

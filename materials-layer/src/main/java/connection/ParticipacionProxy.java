@@ -16,7 +16,7 @@ public class ParticipacionProxy {
 		try {
 			stub = new MaterialesImplServiceStub();
 		} catch (AxisFault e) {
-			System.out.println("Error al intentar contectarse con Participacion");
+			//System.out.println("Error al intentar contectarse con Participacion");
 		}
 	}
 	

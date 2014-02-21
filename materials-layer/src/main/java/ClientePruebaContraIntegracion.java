@@ -60,7 +60,7 @@ public class ClientePruebaContraIntegracion {
 //		path = path.substring(0, path.lastIndexOf("classes") + 8);
 //		path = path + nombre + "." + extension;
 //		
-//		System.out.println(path);
+//		//System.out.println(path);
 //		path = "file:/home/damian/hola.txt";
 //		xml = "<WS><ArchivoMetadata><nombre>hola</nombre><tamanio>14</tamanio><tipo>txt</tipo><recursoId>1036</recursoId></ArchivoMetadata></WS>";
 ////		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
@@ -82,7 +82,7 @@ public class ClientePruebaContraIntegracion {
 	private static void PruebasDeArchivo(){
 		String path, nombre, extension;
 		
-		System.out.println("COMIENZA TESTEO DE ARCHIVOS");
+		//System.out.println("COMIENZA TESTEO DE ARCHIVOS");
 //		nombre = "teofilo";
 //		extension = "jpg";
 //		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
@@ -95,14 +95,14 @@ public class ClientePruebaContraIntegracion {
 	
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1012</id></ArchivoMetadata></WS>";
-//		System.out.println("Va a guardar un archivo");
+//		//System.out.println("Va a guardar un archivo");
 		xml = "<WS><ArchivoMetadata><id>1072</id></ArchivoMetadata></WS>";
-		System.out.println("TEST 1 TRAER ARCHIVO EXISTENTE");
+		//System.out.println("TEST 1 TRAER ARCHIVO EXISTENTE");
 		try {
-			System.out.println("Voy a probar traer: " + xml);
+			//System.out.println("Voy a probar traer: " + xml);
 			String metadata = ip.seleccionarArchivoMetadata(xml);
 			DataHandler dh = ip.seleccionarArchivo(xml);
-			System.out.println("Me trajo : " + metadata);
+			//System.out.println("Me trajo : " + metadata);
 			try {
 				InputStream is = dh.getInputStream();
 
@@ -123,58 +123,58 @@ public class ClientePruebaContraIntegracion {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//							System.out.println("Algo Trajo");
-//				System.out.println("Cantidad: " + objects.length);
+//							//System.out.println("Algo Trajo");
+//				//System.out.println("Cantidad: " + objects.length);
 //				com.ws.services.IntegracionStub.ArchivoMetadata supuestoArchivo = objects[0];
 //				
-//				System.out.println("Nombre de lo que trajo: "+supuestoArchivo.getNombre());
+//				//System.out.println("Nombre de lo que trajo: "+supuestoArchivo.getNombre());
 //			
 //		} catch (ConnectionException e) {
-//			System.out.println("No lo pudo traer al archivo");
+//			//System.out.println("No lo pudo traer al archivo");
 //			//e.printStackTrace();
 //		}
 	}
 	
 	private static void eliminar(String xmlInput) {
-		System.out.println("Eliminando " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
+		//System.out.println("Eliminando " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
 		try {
 			xml = ip.eliminar(xmlInput);
-			System.out.println(xml);
+			//System.out.println(xml);
 		} catch (ConnectionException e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 	}
 
 	private static void guardar(String xmlInput) {
-		System.out.println("Guardando " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
+		//System.out.println("Guardando " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
 		try {
 			xml = ip.guardar(xmlInput);
-			System.out.println(xml);
+			//System.out.println(xml);
 		} catch (ConnectionException e1) {
-			System.out.println(e1.getMessage());
+			//System.out.println(e1.getMessage());
 		}
 	}
 
 	private static void seleccionar(String xmlInput) {
-		System.out.println("Seleccionando " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
+		//System.out.println("Seleccionando " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
 		try {
 			xml = ip.seleccionar(xmlInput);
-			System.out.println(xml);
+			//System.out.println(xml);
 		} catch (ConnectionException e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 	}
 	
 	private static void guardarArchivo(String xmlInput, String path) {
-		System.out.println("Guardando archivo " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
+		//System.out.println("Guardando archivo " + xmlInput.substring(0, Math.min(xmlInput.length(), 45)) + "..");
 		try {
 			DataHandler file = new DataHandler(new URL(path));
 			xml = ip.guardarArchivo(xmlInput, file);
-			System.out.println(xml);
+			//System.out.println(xml);
 		} catch (ConnectionException e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		} catch (MalformedURLException e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 	}
 

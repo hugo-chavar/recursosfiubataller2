@@ -28,27 +28,27 @@ public class PruebasParserParameter {
 		
 		String prueba = "informacion sobre| el; equipo,, mas grande del universo,:,||";
 		prueba = StringEscapeUtils.escapeSpecialCharacters(prueba);
-		System.out.println(prueba);
+		//System.out.println(prueba);
 		String prueba2 = StringEscapeUtils.removeEscapers(prueba);
-		System.out.println(prueba2);
+		//System.out.println(prueba2);
 		prueba += "," + StringEscapeUtils.escapeSpecialCharacters("ho|la");
 		prueba += "," + StringEscapeUtils.escapeSpecialCharacters("xx;tt;");
 		prueba += "," + StringEscapeUtils.escapeSpecialCharacters("mi,sio;nes|");
-		System.out.println(prueba);
+		//System.out.println(prueba);
 		String[] splited = StringEscapeUtils.splitIgnoringEscaped(prueba, ',');
 		for (String s : splited){
-			System.out.println(s);
+			//System.out.println(s);
 		}
 		
 		splited = StringEscapeUtils.splitIgnoringEscaped("hola mundo xxxx", ',');
 		for (String s : splited){
-			System.out.println(s);
+			//System.out.println(s);
 		}
 		
 		prueba  = "C;1;De que color es el caballo blanco de San Martin?;blanco|C;2;Cuantas patas tiene un gato?;4";
 		splited = StringEscapeUtils.splitIgnoringEscaped(prueba, '|');
 		for (String s : splited){
-			System.out.println(s);
+			//System.out.println(s);
 		}
 
 		
@@ -59,35 +59,35 @@ public class PruebasParserParameter {
 		OperationResponse or;
 		String xml;
 		Parameter p = new Parameter();
-		System.out.println("Prueba marshal de parametros: ");
+		//System.out.println("Prueba marshal de parametros: ");
 		p.setRecurso(r);
 		r.setAmbitoId(15);
 		Usuario usuario = new Usuario();
 		usuario.setId(23);
 		p.setUsuario(usuario);
 		xml = parser.convertToXml(p, p.getClass());
-		System.out.println(xml);
+		//System.out.println(xml);
 		xml = "hola munco: " + xml;
 
 		Parameter p2 = (Parameter) parser.unmarshal(xml, Parameter.class);
 		if (p2 == null) {
-			System.out.println("p2 null ");
+			//System.out.println("p2 null ");
 		} else {
-			System.out.println("Ambito: " + p2.getRecurso().getAmbitoId());
-			System.out.println("Usuario: " + p2.getUsuario().getId());
-			System.out.println("Recurso: " + p2.getRecurso().getRecursoId());
+			//System.out.println("Ambito: " + p2.getRecurso().getAmbitoId());
+			//System.out.println("Usuario: " + p2.getUsuario().getId());
+			//System.out.println("Recurso: " + p2.getRecurso().getRecursoId());
 		}
 
 		xml = "<parametro><recurso><ambitoId>15</ambitoId></recurso><usuario><id>23</id></usuario></parametro>";
 		p2 = (Parameter) parser.unmarshal(xml, Parameter.class);
-		System.out.println("Ambito: " + p2.getRecurso().getAmbitoId());
-		System.out.println("Usuario: " + p2.getUsuario().getId());
-		System.out.println("Recurso: " + p2.getRecurso().getRecursoId());
+		//System.out.println("Ambito: " + p2.getRecurso().getAmbitoId());
+		//System.out.println("Usuario: " + p2.getUsuario().getId());
+		//System.out.println("Recurso: " + p2.getRecurso().getRecursoId());
 		
 		Parameter p3 = (Parameter) parser.unmarshal("hola", Parameter.class);
-		System.out.println("Parameter: " + p3);
+		//System.out.println("Parameter: " + p3);
 		
-		System.out.println("Prueba marshal de encuesta: ");	
+		//System.out.println("Prueba marshal de encuesta: ");	
 //		or = (new EncuestaRequester()).getFromCache(11004);
 		or = (new EncuestaRequester()).getFromCache(new Encuesta(11004, null, null, false));
 
@@ -95,11 +95,11 @@ public class PruebasParserParameter {
 //		
 		xml = parser.convertToXml(encuesta, Encuesta.class);
 		
-		System.out.println(xml);
+		//System.out.println(xml);
 		Encuesta enc1 = (Encuesta)parser.unmarshal(xml, Encuesta.class);
 		
 		xml = encuestaParser.serialize(encuesta);
-		System.out.println(xml);
+		//System.out.println(xml);
 		
 		Encuesta enc2 = (Encuesta)parser.unmarshal(xml, Encuesta.class);
 		
@@ -109,11 +109,11 @@ public class PruebasParserParameter {
 		
 		xml = parser.convertToXml(link, Link.class);
 		
-		System.out.println(xml);
+		//System.out.println(xml);
 		
 		
 		
-		System.out.println(enc2.getDescripcion());
+		//System.out.println(enc2.getDescripcion());
 		
 		Parameter ep1 = new Parameter();
 		Usuario usuario1 = new Usuario();
@@ -121,18 +121,18 @@ public class PruebasParserParameter {
 		ep1.setUsuario(usuario1);
 		ep1.setRecurso(encuesta);
 		xml = parser.convertToXml(ep1, ep1.getClass());
-		System.out.println(xml);
+		//System.out.println(xml);
 		Parameter ep2 = (Parameter) parser.unmarshal(xml, Parameter.class);
 		
 		enc2 = (Encuesta)ep2.getRecurso();
-		System.out.println(enc2.getDescripcion());
+		//System.out.println(enc2.getDescripcion());
 		
 		xml = parser.convertToXml(enc2, Encuesta.class);
-		System.out.println(xml);
+		//System.out.println(xml);
 		
 		xml = "<parametro><recurso><recursoId>11003</recursoId></recurso></parametro>";
 		ep2 = (Parameter) parser.unmarshal(xml, Parameter.class);
-		System.out.println(ep2.getRecurso().getRecursoId());
+		//System.out.println(ep2.getRecurso().getRecursoId());
 		
 		/*********Pruebas**************/
 		Archivo archivo = new Archivo();
@@ -149,9 +149,9 @@ public class PruebasParserParameter {
 			DataHandler arch = new DataHandler(new URL(path));
 			archivo.setRawFile(arch);
 			String xml2 = parser.convertToXml(archivo, archivo.getClass());
-			System.out.println("El archivo: ");
-			System.out.println(xml2);
-			System.out.println("Genero archivo a partir de xml: ");
+			//System.out.println("El archivo: ");
+			//System.out.println(xml2);
+			//System.out.println("Genero archivo a partir de xml: ");
 			Archivo arch2 = (Archivo) parser.unmarshal(xml2, Archivo.class);
 			if (arch2 == null){
 				return;
@@ -165,14 +165,14 @@ public class PruebasParserParameter {
 				handler.writeTo(os);
 				os.close();
 			} catch (FileNotFoundException e) {
-				System.out.println(e.getMessage());
+				//System.out.println(e.getMessage());
 			} catch (IOException e) {
-				System.out.println(e.getMessage());
+				//System.out.println(e.getMessage());
 			}
 
 		} catch (MalformedURLException e) {
-			System.out.println("no existe el URL asigando");
-			System.out.println(e.getMessage());
+			//System.out.println("no existe el URL asigando");
+			//System.out.println(e.getMessage());
 			return;
 		}
 		

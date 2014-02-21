@@ -9,17 +9,17 @@ public class ClientePruebaContraParticipacion {
 		ParticipacionProxy ip = new ParticipacionProxy();
 		boolean puede  =  true;
 		
-		System.out.println("Error");
+		//System.out.println("Error");
 
 		try {
 			puede = ip.puedeEditar(0, "0");
 			if (puede) {
-				System.out.println("si puede");
+				//System.out.println("si puede");
 			} else {
-				System.out.println("no puede");
+				//System.out.println("no puede");
 			}
 		} catch (ConnectionException e) {
-			System.out.println("Error");
+			//System.out.println("Error");
 		}
 	}
 

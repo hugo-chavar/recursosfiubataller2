@@ -23,7 +23,7 @@ public class EncuestaParser extends Parser {
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		Boolean evaluada = Boolean.parseBoolean(fields.get(EVALUADA_TAG));
 		Encuesta encuesta = new Encuesta(0, 0, "", evaluada);
-		//System.out.println("PREGUNTAS: "+fields.get(PREGUNTAS_TAG));
+		////System.out.println("PREGUNTAS: "+fields.get(PREGUNTAS_TAG));
 		encuesta.unmarshallPreguntas(fields.get(PREGUNTAS_TAG));
 		return encuesta;
 	}
