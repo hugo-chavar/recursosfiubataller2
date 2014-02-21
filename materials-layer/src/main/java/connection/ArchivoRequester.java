@@ -79,6 +79,7 @@ public class ArchivoRequester extends HandlerRequester {
 
 	public OperationResponse save(Archivo archivo) {
 		current = archivo; 		
+		getParser().setSaveMode();
 		int id = createRecurso(archivo.getDescripcion(), "A", archivo.getAmbitoId());
 		if(id==-1)
 			return OperationResponse.createFailed("MATERIALS: No se ha podido crear un Nuevo Recurso");
@@ -94,6 +95,7 @@ public class ArchivoRequester extends HandlerRequester {
 	// Este metodo es el que consulta a integración y trae el archivo necesario.
 	public OperationResponse get(Serializable serializable) {
 		OperationResponse response;
+		getParser().setGetMode();
 		String xml = parser.serialize(new Archivo(((Recurso) serializable).getRecursoId()));
 		try {
 			response = getFile(xml);
