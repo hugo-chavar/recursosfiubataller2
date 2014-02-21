@@ -78,7 +78,7 @@ public class PruebasParserParameter {
 			System.out.println("Recurso: " + p2.getRecurso().getRecursoId());
 		}
 
-		xml = "<parametro><recurso><ambitoId>15</ambitoId></recurso><usuarioId>23</usuarioId></parametro>";
+		xml = "<parametro><recurso><ambitoId>15</ambitoId></recurso><usuario><id>23</id></usuario></parametro>";
 		p2 = (Parameter) parser.unmarshal(xml, Parameter.class);
 		System.out.println("Ambito: " + p2.getRecurso().getAmbitoId());
 		System.out.println("Usuario: " + p2.getUsuario().getId());
