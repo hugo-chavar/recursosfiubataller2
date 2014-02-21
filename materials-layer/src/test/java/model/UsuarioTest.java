@@ -46,7 +46,7 @@ public class UsuarioTest {
 		Usuario usuario = (Usuario)parser.unmarshal(xml, Usuario.class);
 		
 		Assert.assertEquals("a", usuario.getApellido());
-		Assert.assertEquals("117", usuario.getId());
+		Assert.assertEquals(117, usuario.getId());
 		
 	}
 	
