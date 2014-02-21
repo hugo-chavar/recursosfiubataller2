@@ -61,7 +61,7 @@ public class ArchivoParser extends Parser {
 	@Override
 	protected Serializable createSerializable(HashMap<String, String> fields) {
 		
-		int idAmbito = Integer.parseInt(fields.get(AMBITOID_TAG));
+//		int idAmbito = Integer.parseInt(fields.get(AMBITOID_TAG));
 		int IDArchivo = Integer.parseInt(fields.get(Parser.ID_TAG));
 		String descripcion = fields.get(DESCRIPCION_TAG);
 		String nombre = fields.get(NOMBRE_TAG);		
@@ -69,7 +69,7 @@ public class ArchivoParser extends Parser {
 //		String file = fields.get(FILE_TAG);
 		
 		Archivo archivo = new Archivo();
-		archivo.setAmbitoId(idAmbito);
+//		archivo.setAmbitoId(idAmbito);
 		archivo.setDescripcion(descripcion);
 		archivo.setRecursoId(IDArchivo);
 		archivo.setNombreArchivo(nombre);
@@ -86,7 +86,7 @@ public class ArchivoParser extends Parser {
 		addTextElement(baseNode, NOMBRE_TAG, archivo.getNombreArchivo());
 		addTextElement(baseNode, Parser.TAMANIO, String.valueOf(archivo.getSize()));
 		addTextElement(baseNode, EXTENSION_TAG, archivo.getTipoArchivo());
-		addTextElement(baseNode, Parser.RECURSOID_TAG, String.valueOf(archivo.getRecursoId()));
+		addTextElement(baseNode, Parser.ID_TAG, String.valueOf(archivo.getRecursoId()));
 		
 	}
 

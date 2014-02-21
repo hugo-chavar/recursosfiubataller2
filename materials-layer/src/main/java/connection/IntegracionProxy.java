@@ -10,6 +10,8 @@ import org.apache.axis2.AxisFault;
 
 import com.ws.services.IntegracionStub;
 import com.ws.services.IntegracionStub.SeleccionarArchivoMetadata;
+import com.ws.services.IntegracionStub.SeleccionarBytesArchivo;
+import com.ws.services.IntegracionStub.SeleccionarBytesArchivoResponse;
 
 import connection.exceptions.ConnectionException;
 
@@ -161,7 +163,7 @@ public class IntegracionProxy {
 		}
 	}
 
-	public String seleccionarArchivo(String xml) throws ConnectionException {
+	public String seleccionarArchivoMetadata(String xml) throws ConnectionException {
 		SeleccionarArchivoMetadata fileSelected = new SeleccionarArchivoMetadata();
 		IntegracionStub.SeleccionarArchivoMetadataResponse responseArchivo;
 		try {
@@ -171,7 +173,19 @@ public class IntegracionProxy {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ConnectionException("No se pudo obtener el  archivo. ");
+			throw new ConnectionException("No se pudo obtener la metadata  archivo. ");
 		}
+	}
+	public DataHandler seleccionarArchivo(String xml) throws ConnectionException{
+		SeleccionarBytesArchivo fileBytes = new SeleccionarBytesArchivo();
+		SeleccionarBytesArchivoResponse response;
+		fileBytes.setXml(xml);
+		try {
+			response = stub.seleccionarBytesArchivo(fileBytes);
+			return response.get_return();
+		} catch (RemoteException e) {
+			throw new ConnectionException("No se pudo obtener el  Byte Array del archivo. ");
+		}
+		
 	}
 }

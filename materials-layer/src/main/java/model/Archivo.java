@@ -117,6 +117,8 @@ public class Archivo extends Recurso {
 	}
 
 	public Integer getSize() {
+		if(fileBinary==null)
+			return null;
 		return this.fileBinary.length;
 	}
 

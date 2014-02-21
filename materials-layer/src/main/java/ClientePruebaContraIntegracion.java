@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -28,13 +32,13 @@ public class ClientePruebaContraIntegracion {
 //
 //		seleccionar("<WS><Link><recursoId>997</recursoId></Link></WS>");
 //
-		seleccionar("<WS><Encuesta><id>1030</id></Encuesta></WS>");
+//		seleccionar("<WS><Encuesta><id>1030</id></Encuesta></WS>");
 //
 //		seleccionar("<WS><EncuestaRespondida><recursoId>1003</recursoId><usuarioId>19</usuarioId></EncuestaRespondida></WS>");
 		
 //		guardar("<WS><EncuestaRespondida><recursoId>1003</recursoId><usuarioId>19</usuarioId><preguntasRespondidas>a,b,c</preguntasRespondidas></EncuestaRespondida></WS>");
 //
-		seleccionar("<WS><Recurso><id>1095</id></Recurso></WS>");
+//		seleccionar("<WS><Recurso><id>1095</id></Recurso></WS>");
 //
 //		guardar("<WS><Link><recursoId>1030</recursoId><nombre>www.hola.com</nombre></Link></WS>");
 //
@@ -63,7 +67,7 @@ public class ClientePruebaContraIntegracion {
 ////		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1018</id></ArchivoMetadata></WS>";
 ////		guardarArchivo(xml, path);
 ////		
-////		PruebasDeArchivo();
+		PruebasDeArchivo();
 		
 //		xml = "<WS><Archivo><recursoId>1037</recursoId></Archivo></WS>";
 //		try {
@@ -79,33 +83,50 @@ public class ClientePruebaContraIntegracion {
 		String path, nombre, extension;
 		
 		System.out.println("COMIENZA TESTEO DE ARCHIVOS");
-		nombre = "teofilo";
-		extension = "jpg";
-		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
-		path = path.substring(0, path.lastIndexOf("classes") + 8);
-		path = path + nombre + "." + extension;
+//		nombre = "teofilo";
+//		extension = "jpg";
+//		path = ClientePruebaContraIntegracion.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+//		path = path.substring(0, path.lastIndexOf("classes") + 8);
+//		path = path + nombre + "." + extension;
 	
 //		path = "/home/damian/hola.txt";
-		path = "C:\\Users\\HugoW7\\Desktop\\proxyfacu2.txt";
+//		path = "C:\\Users\\HugoW7\\Desktop\\proxyfacu2.txt";
 //		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo2</nombre><tamanio>1</tamanio><tipo>jpg</tipo><recursoId>1012</recursoId></ArchivoMetadata></WS>";
-		xml = "<WS><ArchivoMetadata><recursoId>1035</recursoId></ArchivoMetadata></WS>";
+	
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><id>1012</id></ArchivoMetadata></WS>";
 //		System.out.println("Va a guardar un archivo");
+		xml = "<WS><ArchivoMetadata><id>1072</id></ArchivoMetadata></WS>";
 		System.out.println("TEST 1 TRAER ARCHIVO EXISTENTE");
-//		try {
-//			xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><recursoId>1035</recursoId></ArchivoMetadata></WS>";
-//			com.ws.services.IntegracionStub.ArchivoMetadata[] objects = ip.seleccionarArchivo(xml);
-//			if(objects==null){
-//				System.out.println("La consulta no trajo resultados");
-//				
-//			}else{
-//				System.out.println("Algo Trajo");
+			try {
+				System.out.println("Voy a probar traer: " +xml);
+				String  metadata = ip.seleccionarArchivoMetadata(xml);
+				DataHandler dh = ip.seleccionarArchivo(xml);
+				System.out.println("Me trajo : " + metadata);
+				try{InputStream is = dh.getInputStream();
+
+				OutputStream os = new FileOutputStream(new File("/home/damian/hola.txt"));
+
+
+				byte[] buffer = new byte[20045];
+				int bytesRead = 0;
+				while ((bytesRead = is.read(buffer)) != -1) {
+				os.write(buffer,0,bytesRead);
+				     }
+				}catch(Exception e){
+					
+				}
+				
+			} catch (ConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//							System.out.println("Algo Trajo");
 //				System.out.println("Cantidad: " + objects.length);
 //				com.ws.services.IntegracionStub.ArchivoMetadata supuestoArchivo = objects[0];
 //				
 //				System.out.println("Nombre de lo que trajo: "+supuestoArchivo.getNombre());
-//			}
+//			
 //		} catch (ConnectionException e) {
 //			System.out.println("No lo pudo traer al archivo");
 //			//e.printStackTrace();

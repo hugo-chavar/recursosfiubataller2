@@ -148,11 +148,11 @@ public enum Requester {
 		
 		OperationResponse response;
 		System.out.println("Entra a buscar el query con "+recurso.getTipo());
-		if (recurso.getTipo().equalsIgnoreCase("Encuesta")) {
+		if (recurso.getTipo().equalsIgnoreCase("Encuesta") || recurso.getTipo().equalsIgnoreCase("E")) {
 			response = encuestaRequester.get(recurso);
 		} else if (recurso.getTipo().equalsIgnoreCase("Link") || recurso.getTipo().equalsIgnoreCase("L")   ) {
 			response = linkRequester.get(recurso);
-		} else if (recurso.getTipo().equalsIgnoreCase("Archivo")) {
+		} else if (recurso.getTipo().equalsIgnoreCase("Archivo") || recurso.getTipo().equalsIgnoreCase("A")) {
 			//System.out.println("Entra a makeQuery de archivo");
 			response = archivoRequester.get(recurso);
 		} else {
