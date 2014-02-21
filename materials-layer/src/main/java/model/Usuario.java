@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
-@XmlRootElement(name = "WS/Usuario")
+@XmlRootElement(name = "Usuario")
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class Usuario {
@@ -42,12 +42,12 @@ public class Usuario {
 	private Boolean habilitado;
 	
 	
-	public String getId() {
-		return id;
+	public int getId() {
+		return Integer.parseInt(id);
 	}
 	
-	public void setId(String id) {
-		this.id = id;
+	public void setId(int id) {
+		this.id = String.valueOf(id);
 	}
 	
 	public String getUsername() {

@@ -23,7 +23,7 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String agregarRecurso(String encuestaParam) {
 		Parameter parameter = Parameter.createParameter(encuestaParam);
-		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null) {
+		if (parameter.getRecurso() == null || parameter.getUsuario() == null) {
 			return createFailedResponse("Parametros invalidos");
 		}
 		if (parameter.getRecurso().getClass() == Archivo.class) {
@@ -31,7 +31,7 @@ public class MaterialsImpl implements Materials {
 		}
 		OperationResponse response;	
 		Recurso recurso = parameter.getRecurso();
-		if (Requester.INSTANCE.getPermisoUsuario(recurso.getAmbitoId(), parameter.getUsuarioId(),"agregarEncuesta")) {
+		if (Requester.INSTANCE.getPermisoUsuario(recurso.getAmbitoId(), parameter.getUsuario().getUsername(),"agregarEncuesta")) {
 			response = Requester.INSTANCE.agregarRecurso(recurso);
 		}
 		else{
@@ -80,15 +80,15 @@ public class MaterialsImpl implements Materials {
 
 	}
 	
-	private String getEncuestaRespondida(Recurso recurso, int usuarioId) {
-		OperationResponse response = Requester.INSTANCE.getEncuestaRespondida( recurso.getRecursoId(), usuarioId);
+	private String getEncuestaRespondida(Recurso recurso, String username) { // Cambio de usuarioId a username
+		OperationResponse response = Requester.INSTANCE.getEncuestaRespondida( recurso.getRecursoId(), username);
 		return toXml(response);
 	}
 	
-	private String getRecursos(int ambitoId, int usuarioId) {
+	private String getRecursos(int ambitoId, String username) { // Cambio de usuarioId a username
 		OperationResponse recursosPermitidos;
-		if (!Requester.INSTANCE.getPermisoUsuario(ambitoId, usuarioId, "getRecursos")){
-			return createFailedResponse("El usuario " + usuarioId + " no tiene los permisos necesarios");
+		if (!Requester.INSTANCE.getPermisoUsuario(ambitoId, username, "getRecursos")){
+			return createFailedResponse("El usuario " + username + " no tiene los permisos necesarios");
 		}
 		recursosPermitidos = Requester.INSTANCE.getRecursosAmbito(ambitoId);
 		return toXml(recursosPermitidos);
@@ -107,19 +107,19 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String getEncuestaRespondida(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
-		if (parameter.getUsuarioId() == null || parameter.getRecurso() == null){
+		if (parameter.getUsuario() == null || parameter.getRecurso() == null){
 			return createFailedResponse("Parametros invalidos");
 		}
-		return getEncuestaRespondida(parameter.getRecurso(), parameter.getUsuarioId());
+		return getEncuestaRespondida(parameter.getRecurso(), parameter.getUsuario().getUsername());
 	}
 
 	@Override
 	public String getRecursos(String parametros) {
 		Parameter parameter = Parameter.createParameter(parametros);
-		if (parameter.getRecurso() == null || parameter.getUsuarioId() == null) {
+		if (parameter.getRecurso() == null || parameter.getUsuario() == null) {
 			return createFailedResponse("Parametros invalidos");
 		}
-		return getRecursos(parameter.getRecurso().getAmbitoId(), parameter.getUsuarioId());
+		return getRecursos(parameter.getRecurso().getAmbitoId(), parameter.getUsuario().getUsername());
 	}
 	
 	@Override
@@ -135,7 +135,7 @@ public class MaterialsImpl implements Materials {
 		OperationResponse response;
 		System.out.println(parametros);
 		Parameter parameter = Parameter.createParameter(parametros);
-		if (Requester.INSTANCE.getPermisoUsuario(parameter.getRecurso().getAmbitoId(), parameter.getUsuarioId(),"borrarRecurso")) {
+		if (Requester.INSTANCE.getPermisoUsuario(parameter.getRecurso().getAmbitoId(), parameter.getUsuario().getUsername(),"borrarRecurso")) {
 			response = Requester.INSTANCE.deleteRecurso(parameter.getRecurso());
 		} else {
 			return createFailedResponse("Permisos insuficientes");

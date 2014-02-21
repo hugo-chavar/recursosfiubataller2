@@ -3,6 +3,7 @@ package connection;
 import model.Archivo;
 import model.EncuestaRespondida;
 import model.Recurso;
+import connection.exceptions.ConnectionException;
 import connection.responses.OperationResponse;
 
 
@@ -78,8 +79,8 @@ public enum Requester {
 		return recursosRequester.getAll(ambitoId);
 	}
 	
-	public OperationResponse getEncuestaRespondida(int idEncuesta, int idUsuario) {
-		return respondidaRequester.get(idEncuesta, idUsuario);
+	public OperationResponse getEncuestaRespondida(int idEncuesta, String username) {
+		return respondidaRequester.get(idEncuesta, username);
 	}
 	
 	public OperationResponse deleteRecurso(Recurso recurso) {
@@ -100,14 +101,13 @@ public enum Requester {
 
 	}
 
-	public boolean getPermisoUsuario(Integer ambitoId, Integer usuarioId,String action) {
-//		ParticipacionProxy proxy = new ParticipacionProxy();
-//		try {
-//			return proxy.puedeEditar(ambitoId, usuarioId);
-//		} catch (ConnectionException exception) { // TODO: Manejar excepcion
-//			return false;
-//		}
-		return true;
+	public boolean getPermisoUsuario(Integer ambitoId, String username,String action) {
+		ParticipacionProxy proxy = new ParticipacionProxy();
+		try {
+			return proxy.puedeEditar(ambitoId, username);
+		} catch (ConnectionException exception) { // TODO: Manejar excepcion
+			return false;
+		}
 	}
 	
 	private OperationResponse getRecursoFromCache(Recurso recurso) {

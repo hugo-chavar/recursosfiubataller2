@@ -42,7 +42,7 @@ public class ClienteDelRequesterNuestro {
 
 	private static void getRespondidaInexistente() {
 		System.out.println("prueba encuesta respondida que no existe");
-		response = Requester.INSTANCE.getEncuestaRespondida(20, 4);
+		response = Requester.INSTANCE.getEncuestaRespondida(20, "4");
 		if (response.getSuccess()) {
 			encuesta_rtn = (EncuestaRespondida) response.getSerializable();
 			System.out.println(encuesta_rtn.getInfo());
@@ -59,7 +59,7 @@ public class ClienteDelRequesterNuestro {
 		// EncuestaRespondida encuesta_rtn = (EncuestaRespondida)
 		// Requester.INSTANCE.getEncuestaRespondida(15, 4);
 		System.out.println("prueba encuesta respondida");
-		response = Requester.INSTANCE.getEncuestaRespondida(10, 5);
+		response = Requester.INSTANCE.getEncuestaRespondida(10, "5");
 		if (response.getSuccess()) {
 			encuesta_rtn = (EncuestaRespondida) response.getSerializable();
 			System.out.println(encuesta_rtn.getInfo());

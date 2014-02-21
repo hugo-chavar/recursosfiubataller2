@@ -12,7 +12,7 @@ public class ClientePruebaContraParticipacion {
 		System.out.println("Error");
 
 		try {
-			puede = ip.puedeEditar(0, 0);
+			puede = ip.puedeEditar(0, "0");
 			if (puede) {
 				System.out.println("si puede");
 			} else {

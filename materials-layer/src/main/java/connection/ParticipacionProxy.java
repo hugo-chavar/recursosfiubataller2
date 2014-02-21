@@ -20,10 +20,10 @@ public class ParticipacionProxy {
 		}
 	}
 	
-	public boolean puedeEditar(int ambitoId, int usuarioId) throws ConnectionException {
+	public boolean puedeEditar(int ambitoId, String usuarioId) throws ConnectionException {
 		MaterialesImplServiceStub.PuedeEditar editar = new MaterialesImplServiceStub.PuedeEditar();
 		editar.setAmbitoId(ambitoId);
-		editar.setUsuarioId(Integer.toString(usuarioId)); // UsuarioId String??
+		editar.setUsuarioId(usuarioId);
 		MaterialesImplServiceStub.PuedeEditarE editar_e = new MaterialesImplServiceStub.PuedeEditarE();
 		editar_e.setPuedeEditar(editar);
 		MaterialesImplServiceStub.PuedeEditarResponseE p_resp_e;

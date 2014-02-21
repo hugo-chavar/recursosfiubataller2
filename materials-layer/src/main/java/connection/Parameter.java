@@ -13,6 +13,7 @@ import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
+import model.Usuario;
 
 @XmlRootElement(name = "parametro")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -32,7 +33,7 @@ public class Parameter {
 	}
 
 	@XmlElement
-	private Integer usuarioId;
+	private Usuario usuario;
 
 	@XmlElement
 	private EncuestaRespondida respondida;
@@ -45,12 +46,12 @@ public class Parameter {
 		})
 	private Recurso recurso;
 
-	public Integer getUsuarioId() {
-		return usuarioId;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setUsuarioId(Integer usuarioId) {
-		this.usuarioId = usuarioId;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Recurso getRecurso() {

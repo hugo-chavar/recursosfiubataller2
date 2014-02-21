@@ -13,6 +13,7 @@ import model.Encuesta;
 import model.Link;
 import model.Recurso;
 import model.StringEscapeUtils;
+import model.Usuario;
 import connection.EncuestaRequester;
 import connection.LinkRequester;
 import connection.Parameter;
@@ -61,7 +62,9 @@ public class PruebasParserParameter {
 		System.out.println("Prueba marshal de parametros: ");
 		p.setRecurso(r);
 		r.setAmbitoId(15);
-		p.setUsuarioId(23);
+		Usuario usuario = new Usuario();
+		usuario.setId(23);
+		p.setUsuario(usuario);
 		xml = parser.convertToXml(p, p.getClass());
 		System.out.println(xml);
 		xml = "hola munco: " + xml;
@@ -71,14 +74,14 @@ public class PruebasParserParameter {
 			System.out.println("p2 null ");
 		} else {
 			System.out.println("Ambito: " + p2.getRecurso().getAmbitoId());
-			System.out.println("Usuario: " + p2.getUsuarioId());
+			System.out.println("Usuario: " + p2.getUsuario().getId());
 			System.out.println("Recurso: " + p2.getRecurso().getRecursoId());
 		}
 
 		xml = "<parametro><recurso><ambitoId>15</ambitoId></recurso><usuarioId>23</usuarioId></parametro>";
 		p2 = (Parameter) parser.unmarshal(xml, Parameter.class);
 		System.out.println("Ambito: " + p2.getRecurso().getAmbitoId());
-		System.out.println("Usuario: " + p2.getUsuarioId());
+		System.out.println("Usuario: " + p2.getUsuario().getId());
 		System.out.println("Recurso: " + p2.getRecurso().getRecursoId());
 		
 		Parameter p3 = (Parameter) parser.unmarshal("hola", Parameter.class);
@@ -113,7 +116,9 @@ public class PruebasParserParameter {
 		System.out.println(enc2.getDescripcion());
 		
 		Parameter ep1 = new Parameter();
-		ep1.setUsuarioId(23);
+		Usuario usuario1 = new Usuario();
+		usuario1.setId(23);
+		ep1.setUsuario(usuario1);
 		ep1.setRecurso(encuesta);
 		xml = parser.convertToXml(ep1, ep1.getClass());
 		System.out.println(xml);

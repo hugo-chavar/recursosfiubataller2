@@ -7,6 +7,7 @@ import model.EncuestaRespondida;
 import model.PreguntaRespondida;
 import model.PreguntaRespuestaACompletarRespondida;
 import model.PreguntaRespuestaFijaRespondida;
+import model.Usuario;
 import connection.cache.Cache;
 import connection.parsers.EncuestaRespondidaParser;
 import connection.parsers.Parser;
@@ -49,15 +50,22 @@ public class EncuestaRespondidaRequester extends HandlerRequester {
 //		return save(xml);
 //	}
 
-	public OperationResponse get(int IDEncuesta, int IDUsuario) {
+	public OperationResponse get(int IDEncuesta, String username) {
+		// Consulto el ID del usuario
+		Usuario usuario = new Usuario();
+		usuario.setUsername(username);
+		String xml = parser.convertToXml(usuario, Usuario.class);
+		OperationResponse response = get(xml);
+		usuario = (Usuario)response.getSerializable();
+		
 		// Busco en el cache de encuestas respondidas
-		current = new EncuestaRespondida(IDEncuesta, IDUsuario);
-		OperationResponse response = getFromCache();
+		current = new EncuestaRespondida(IDEncuesta, usuario.getId());
+		response = getFromCache();
 
 		if (response.getSuccess()) {
 			return response;
 		}
-		String xml = parser.serialize(current);
+		xml = parser.serialize(current);
 		return get(xml);
 
 	}
