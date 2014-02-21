@@ -80,6 +80,9 @@ public class IntegracionProxy {
 		el1 = "<WS><Usuario><username>5</username></Usuario></WS>";
 		el2 = "<WS><Usuario><id>5</id></Usuario></WS>";
 		harcodeos.put(el1, el2);
+		el1 = "<WS><Usuario><username>4</username></Usuario></WS>";
+		el2 = "<WS><Usuario><id>4</id></Usuario></WS>";
+		harcodeos.put(el1, el2);
 		
 	}
 	

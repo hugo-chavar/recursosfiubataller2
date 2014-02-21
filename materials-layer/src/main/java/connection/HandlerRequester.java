@@ -45,6 +45,7 @@ public abstract class HandlerRequester {
 		
 		Usuario usuario = new Usuario();
 		usuario.setUsername(username);
+		current = usuario;
 		Parser parser = new Parser();
 		String xml = "<WS>" + parser.convertToXml(usuario, Usuario.class) + "</WS>";
 		OperationResponse response = this.get(xml);
