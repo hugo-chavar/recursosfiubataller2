@@ -7,8 +7,6 @@ import org.apache.axis2.AxisFault;
 import com.ws.services.MaterialesImplServiceStub;
 
 import connection.exceptions.ConnectionException;
-
-
 public class ParticipacionProxy {
 	
 	private MaterialesImplServiceStub stub;

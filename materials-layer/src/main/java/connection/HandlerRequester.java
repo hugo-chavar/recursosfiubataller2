@@ -3,10 +3,6 @@ package connection;
 import javax.activation.DataHandler;
 
 import model.Archivo;
-
-import com.ws.services.IntegracionStub;
-import com.ws.services.IntegracionStub.SeleccionarArchivoMetadata;
-
 import connection.cache.Cache;
 import connection.exceptions.ConnectionException;
 import connection.exceptions.GetException;

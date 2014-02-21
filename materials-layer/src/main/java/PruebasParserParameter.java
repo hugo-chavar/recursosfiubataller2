@@ -20,7 +20,7 @@ import connection.parsers.EncuestaParser;
 import connection.parsers.Parser;
 import connection.responses.OperationResponse;
 
-
+@SuppressWarnings("unused")
 public class PruebasParserParameter {
 
 	public static void main(String[] args) {

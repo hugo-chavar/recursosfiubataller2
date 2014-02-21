@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "notificacion")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Notification /*implements Serializable*/ {
+public class Notification {
 	
 	@XmlElement(name = "numero")
 	private Integer number;
@@ -43,15 +43,5 @@ public class Notification /*implements Serializable*/ {
 	public boolean success() {
 		return number.equals(2);
 	}
-
-	/*@Override
-	public String getInfo() {
-		return getMessage();
-	}
-
-	@Override
-	public void updateFields(Serializable s) {
-		
-	}*/
 
 }

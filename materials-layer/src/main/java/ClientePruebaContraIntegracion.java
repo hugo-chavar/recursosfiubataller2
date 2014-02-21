@@ -22,7 +22,7 @@ public class ClientePruebaContraIntegracion {
 		
 //		seleccionar("<WS><Usuario><username>javier</username></Usuario></WS>");
 //
-//		seleccionar("<WS><Usuario><id>117</id></Usuario></WS>");
+		seleccionar("<WS><Usuario><id>117</id></Usuario></WS>");
 //
 //		seleccionar("<WS><Link><id>997</id></Link></WS>");
 //
@@ -98,29 +98,31 @@ public class ClientePruebaContraIntegracion {
 //		System.out.println("Va a guardar un archivo");
 		xml = "<WS><ArchivoMetadata><id>1072</id></ArchivoMetadata></WS>";
 		System.out.println("TEST 1 TRAER ARCHIVO EXISTENTE");
+		try {
+			System.out.println("Voy a probar traer: " + xml);
+			String metadata = ip.seleccionarArchivoMetadata(xml);
+			DataHandler dh = ip.seleccionarArchivo(xml);
+			System.out.println("Me trajo : " + metadata);
 			try {
-				System.out.println("Voy a probar traer: " +xml);
-				String  metadata = ip.seleccionarArchivoMetadata(xml);
-				DataHandler dh = ip.seleccionarArchivo(xml);
-				System.out.println("Me trajo : " + metadata);
-				try{InputStream is = dh.getInputStream();
+				InputStream is = dh.getInputStream();
 
-				OutputStream os = new FileOutputStream(new File("/home/damian/hola.txt"));
-
+				OutputStream os = new FileOutputStream(new File(
+						"/home/damian/hola.txt"));
 
 				byte[] buffer = new byte[20045];
 				int bytesRead = 0;
 				while ((bytesRead = is.read(buffer)) != -1) {
-				os.write(buffer,0,bytesRead);
-				     }
-				}catch(Exception e){
-					
+					os.write(buffer, 0, bytesRead);
 				}
-				
-			} catch (ConnectionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				os.close();
+			} catch (Exception e) {
+
 			}
+
+		} catch (ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //							System.out.println("Algo Trajo");
 //				System.out.println("Cantidad: " + objects.length);
 //				com.ws.services.IntegracionStub.ArchivoMetadata supuestoArchivo = objects[0];
