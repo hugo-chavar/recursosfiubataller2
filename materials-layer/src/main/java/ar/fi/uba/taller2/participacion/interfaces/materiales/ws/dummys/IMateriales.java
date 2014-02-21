@@ -1,5 +1,5 @@
 
-package com.ws.services.participacion.dummys;
+package ar.fi.uba.taller2.participacion.interfaces.materiales.ws.dummys;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -9,8 +9,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.ws.Action;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
-
-import com.ws.services.participacion.ObjectFactory;
+import ar.fi.uba.taller2.participacion.interfaces.materiales.ws.ObjectFactory;
 
 
 /**

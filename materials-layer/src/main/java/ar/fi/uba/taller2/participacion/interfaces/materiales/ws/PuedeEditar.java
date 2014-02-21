@@ -1,5 +1,5 @@
 
-package com.ws.services.participacion;
+package ar.fi.uba.taller2.participacion.interfaces.materiales.ws;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

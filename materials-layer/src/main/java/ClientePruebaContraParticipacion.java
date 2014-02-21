@@ -5,20 +5,22 @@ import connection.exceptions.ConnectionException;
 
 public class ClientePruebaContraParticipacion {
 	
-	private static ParticipacionProxy ip = new ParticipacionProxy();
-
 	public static void main(String[] args) {
+		ParticipacionProxy ip = new ParticipacionProxy();
+		boolean puede  =  true;
+		
+		System.out.println("Error");
 
-		try {
-			boolean puede = ip.puedeEditar(0, 0);
+//		try {
+//			puede = ip.puedeEditar(0, 0);
 			if (puede) {
 				System.out.println("si puede");
 			} else {
 				System.out.println("no puede");
 			}
-		} catch (ConnectionException e) {
-			System.out.println("Error");
-		}
+//		} catch (ConnectionException e) {
+//			System.out.println("Error");
+//		}
 	}
 
 }

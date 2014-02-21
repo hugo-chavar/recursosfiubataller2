@@ -3,6 +3,8 @@ import java.net.URL;
 
 import javax.activation.DataHandler;
 
+import com.ws.services.integracion.IntegracionStub;
+
 import connection.IntegracionProxy;
 import connection.exceptions.ConnectionException;
 
@@ -26,7 +28,7 @@ public class ClientePruebaContraIntegracion {
 //
 //		seleccionar("<WS><Link><recursoId>997</recursoId></Link></WS>");
 //
-		seleccionar("<WS><Encuesta><recursoId>1003</recursoId></Encuesta></WS>");
+		seleccionar("<WS><Encuesta><id>1030</id></Encuesta></WS>");
 //
 //		seleccionar("<WS><EncuestaRespondida><recursoId>1003</recursoId><usuarioId>19</usuarioId></EncuestaRespondida></WS>");
 		
@@ -42,7 +44,7 @@ public class ClientePruebaContraIntegracion {
 //
 //		eliminar("<WS><Recurso><id>1016</id></Recurso></WS>");
 		
-//		guardar("<WS><Encuesta><recursoId>1030</recursoId><evaluada>false</evaluada><preguntas>F;1;de que color es el caballo blanco de san martin?;rojo,verde,azul,blanco;4|F;2;a que equipo del futbol argentino le denominan Millo;velez,River Plate,crucero del norte,estudiantes;2|F;3;cual es un patron de diseno creacional;command,mediator,builder,facade;3|F;4;Un test unitario debe presentar las siguientes características;Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente,Automatizable;1,8,11,12,13,7|C;5;cuantas patas tiene un gato?;4</preguntas></Encuesta></WS>");
+//		guardar("<WS><Encuesta><recursoId>1011</recursoId><evaluada>false</evaluada><preguntas>jha</preguntas></Encuesta></WS>");
 		
 //		guardar("<WS><Encuesta><recursoId>1031</recursoId><evaluada>false</evaluada><preguntas>abc</preguntas></Encuesta></WS>");
 //		String path, nombre, extension;
@@ -63,6 +65,14 @@ public class ClientePruebaContraIntegracion {
 ////		
 ////		PruebasDeArchivo();
 		
+//		xml = "<WS><Archivo><recursoId>1037</recursoId></Archivo></WS>";
+//		try {
+//			IntegracionStub.ArchivoMetadata[] objects = ip.seleccionarArchivo(xml);
+//		} catch (ConnectionException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 	}
 
 	private static void PruebasDeArchivo(){
@@ -75,7 +85,8 @@ public class ClientePruebaContraIntegracion {
 		path = path.substring(0, path.lastIndexOf("classes") + 8);
 		path = path + nombre + "." + extension;
 	
-		path = "/home/damian/hola.txt";
+//		path = "/home/damian/hola.txt";
+		path = "C:\\Users\\HugoW7\\Desktop\\proxyfacu2.txt";
 //		xml = "<?xml version=\"1.0\"?><WS><ArchivoMetadata><nombre>teofilo2</nombre><tamanio>1</tamanio><tipo>jpg</tipo><recursoId>1012</recursoId></ArchivoMetadata></WS>";
 		xml = "<WS><ArchivoMetadata><recursoId>1035</recursoId></ArchivoMetadata></WS>";
 //		xml = "<WS><ArchivoMetadata><nombre>teofilo</nombre><recursoId>1012</recursoId></ArchivoMetadata></WS>";

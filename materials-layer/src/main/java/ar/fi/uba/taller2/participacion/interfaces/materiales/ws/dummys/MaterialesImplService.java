@@ -1,5 +1,5 @@
 
-package com.ws.services.participacion.dummys;
+package ar.fi.uba.taller2.participacion.interfaces.materiales.ws.dummys;
 
 import java.net.MalformedURLException;
 import java.net.URL;

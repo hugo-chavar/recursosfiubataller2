@@ -1,14 +1,14 @@
 package connection;
 
-import com.ws.services.participacion.dummys.IMateriales;
-import com.ws.services.participacion.dummys.MaterialesImplService;
 
+import ar.fi.uba.taller2.participacion.interfaces.materiales.ws.dummys.IMateriales;
+import ar.fi.uba.taller2.participacion.interfaces.materiales.ws.dummys.MaterialesImplService;
 import connection.exceptions.ConnectionException;
 
 
         
 public class ParticipacionProxy {
-	private static IMateriales port;
+	private IMateriales port;
 //	private MaterialesImplServiceStub stub;
 
 	

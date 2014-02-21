@@ -1,5 +1,5 @@
 
-package com.ws.services.participacion;
+package ar.fi.uba.taller2.participacion.interfaces.materiales.ws;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
