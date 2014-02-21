@@ -93,6 +93,7 @@ public class PruebasParserParameter {
 		xml = parser.convertToXml(encuesta, Encuesta.class);
 		
 		System.out.println(xml);
+		Encuesta enc1 = (Encuesta)parser.unmarshal(xml, Encuesta.class);
 		
 		xml = encuestaParser.serialize(encuesta);
 		System.out.println(xml);
