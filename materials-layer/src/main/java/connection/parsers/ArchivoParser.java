@@ -86,7 +86,7 @@ public class ArchivoParser extends Parser {
 		addTextElement(baseNode, NOMBRE_TAG, archivo.getNombreArchivo());
 		addTextElement(baseNode, Parser.TAMANIO, String.valueOf(archivo.getSize()));
 		addTextElement(baseNode, EXTENSION_TAG, archivo.getTipoArchivo());
-		addTextElement(baseNode, Parser.ID_TAG, String.valueOf(archivo.getRecursoId()));
+		addTextElement(baseNode,isSaveMode?RECURSOID_TAG:ID_TAG, String.valueOf(archivo.getRecursoId()));
 		
 	}
 

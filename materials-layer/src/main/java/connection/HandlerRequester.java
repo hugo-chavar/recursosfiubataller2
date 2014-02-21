@@ -94,9 +94,9 @@ public abstract class HandlerRequester {
 
 	public OperationResponse getFile(String xml) throws GetException, ParseException {
 		try {
-			System.out.println("se intenta traer"+xml);
+//			System.out.println("se intenta traer"+xml);
 			String file = proxy.seleccionarArchivoMetadata(xml);
-			System.out.println("Eso me devuelve"+file);
+//			System.out.println("Eso me devuelve"+file);
 			DataHandler contenido  = proxy.seleccionarArchivo(xml);
 //		
 			createCurrentObject(file);
