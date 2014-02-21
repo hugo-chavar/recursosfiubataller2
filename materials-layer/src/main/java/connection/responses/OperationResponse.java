@@ -13,6 +13,7 @@ import model.Encuesta;
 import model.EncuestaRespondida;
 import model.Link;
 import model.Recurso;
+import model.Usuario;
 
 @XmlRootElement(name = "response")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -44,7 +45,8 @@ public class OperationResponse {
 		@XmlElementRef(type = Encuesta.class), 
 		@XmlElementRef(type = Link.class),
 		@XmlElementRef(type = Archivo.class),
-		@XmlElementRef(type = EncuestaRespondida.class)
+		@XmlElementRef(type = EncuestaRespondida.class),
+		@XmlElementRef(type = Usuario.class)
 		})
 	private Serializable serializable;
 

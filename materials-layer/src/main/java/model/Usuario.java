@@ -5,11 +5,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import connection.Serializable;
+
 
 @XmlRootElement(name = "Usuario")
 @XmlAccessorType(XmlAccessType.FIELD)
 
-public class Usuario {
+public class Usuario implements Serializable {
 	
 	@XmlElement
 	private String id;
@@ -120,6 +122,21 @@ public class Usuario {
 	
 	public void setHabilitado(Boolean habilitado) {
 		this.habilitado = habilitado;
+	}
+	
+	@Override
+	public String getInfo() {
+		return "Usuario usuarioId: " + getId();
+	}
+
+	@Override
+	public void updateFields(Serializable s) {
+		
+	}
+
+	@Override
+	public Serializable cloneById() {
+		return new Usuario();
 	}
 	
 } 

@@ -3,6 +3,7 @@ package connection;
 import javax.activation.DataHandler;
 
 import model.Archivo;
+import model.Usuario;
 import connection.cache.Cache;
 import connection.exceptions.ConnectionException;
 import connection.exceptions.GetException;
@@ -23,6 +24,7 @@ public abstract class HandlerRequester {
 	protected Serializable getCurrent() {
 		return current;
 	}
+	
 	protected int createRecurso(String descripcion,String tipo, int id){
 		
 		try {
@@ -38,6 +40,19 @@ public abstract class HandlerRequester {
 			return -1;
 		}
 	}
+	
+	protected int getUsuarioId(String username){
+		
+		Usuario usuario = new Usuario();
+		usuario.setUsername(username);
+		Parser parser = new Parser();
+		String xml = "<WS>" + parser.convertToXml(usuario, Usuario.class) + "</WS>";
+		OperationResponse response = this.get(xml);
+		usuario = (Usuario)response.getSerializable();
+		return usuario.getId();
+		
+	}
+	
 	protected OperationResponse save(Serializable serializable, String tipo) {
 		getParser().setSaveMode();
 		current = serializable;
