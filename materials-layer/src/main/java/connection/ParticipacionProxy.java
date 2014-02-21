@@ -22,7 +22,7 @@ public class ParticipacionProxy {
         port = service.getMaterialesImplPort();
 	}
 	
-	public boolean puedeEditar(int ambitoId, int usuarioId) throws ConnectionException {
+	public boolean puedeEditar(String username, int usuarioId) throws ConnectionException {
 //		MaterialesImplServiceStub.PuedeEditar editar = new MaterialesImplServiceStub.PuedeEditar();
 //		editar.setAmbitoId(ambitoId);
 //		editar.setUsuarioId(Integer.toString(usuarioId)); // UsuarioId String??
@@ -38,11 +38,12 @@ public class ParticipacionProxy {
 //		} catch (RemoteException e) {
 //			throw new ConnectionException("No se pudo conectar al servicio Presentacion. ");
 //		}
-		try {
-		return port.puedeEditar(Integer.toString(usuarioId), ambitoId);
-		} catch (Exception e){
-			throw new ConnectionException("Fallo en la conexion con Presentacion, reintente luego. ");
-		}
+//		try {
+//		return port.puedeEditar(Integer.toString(usuarioId), ambitoId);
+//		} catch (Exception e){
+//			throw new ConnectionException("Fallo en la conexion con Presentacion, reintente luego. ");
+//		}
+		return true;
 	}
 	
 }
