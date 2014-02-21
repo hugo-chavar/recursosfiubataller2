@@ -43,6 +43,36 @@ public abstract class IntegracionCallbackHandler {
 		return clientData;
 	}
 
+	/**
+	 * auto generated Axis2 call back method for seleccionarArchivoMetadata
+	 * method override this method for handling normal response from
+	 * seleccionarArchivoMetadata operation
+	 */
+	public void receiveResultseleccionarArchivoMetadata(com.ws.services.IntegracionStub.SeleccionarArchivoMetadataResponse result) {
+	}
+
+	/**
+	 * auto generated Axis2 Error handler override this method for handling
+	 * error response from seleccionarArchivoMetadata operation
+	 */
+	public void receiveErrorseleccionarArchivoMetadata(java.lang.Exception e) {
+	}
+
+	/**
+	 * auto generated Axis2 call back method for seleccionarBytesArchivo method
+	 * override this method for handling normal response from
+	 * seleccionarBytesArchivo operation
+	 */
+	public void receiveResultseleccionarBytesArchivo(com.ws.services.IntegracionStub.SeleccionarBytesArchivoResponse result) {
+	}
+
+	/**
+	 * auto generated Axis2 Error handler override this method for handling
+	 * error response from seleccionarBytesArchivo operation
+	 */
+	public void receiveErrorseleccionarBytesArchivo(java.lang.Exception e) {
+	}
+
 	// No methods generated for meps other than in-out
 
 	/**
@@ -100,21 +130,6 @@ public abstract class IntegracionCallbackHandler {
 	 * error response from isMock operation
 	 */
 	public void receiveErrorisMock(java.lang.Exception e) {
-	}
-
-	/**
-	 * auto generated Axis2 call back method for seleccionarArchivo method
-	 * override this method for handling normal response from seleccionarArchivo
-	 * operation
-	 */
-	public void receiveResultseleccionarArchivo(com.ws.services.IntegracionStub.SeleccionarArchivoResponse result) {
-	}
-
-	/**
-	 * auto generated Axis2 Error handler override this method for handling
-	 * error response from seleccionarArchivo operation
-	 */
-	public void receiveErrorseleccionarArchivo(java.lang.Exception e) {
 	}
 
 	/**
