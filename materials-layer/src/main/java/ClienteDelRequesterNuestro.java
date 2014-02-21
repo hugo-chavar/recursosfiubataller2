@@ -31,9 +31,9 @@ public class ClienteDelRequesterNuestro {
 //		getEncuestaQNoExisteEnNingunNivel();
 //		getEncuesta11004();
 //		guardarLink();
-//		getRespondidaQueExiste();
+		getRespondidaQueExiste();
 //		getRespondidaInexistente();
-		agregarEncuesta();
+//		agregarEncuesta();
 
 		// String absolute =
 		// ClienteDelRequesterNuestro.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();

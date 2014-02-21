@@ -54,7 +54,7 @@ public class EncuestaRespondidaRequester extends HandlerRequester {
 		// Consulto el ID del usuario
 		Usuario usuario = new Usuario();
 		usuario.setUsername(username);
-		String xml = parser.convertToXml(usuario, Usuario.class);
+		String xml = "<WS>" + parser.convertToXml(usuario, Usuario.class) + "</WS>";
 		OperationResponse response = get(xml);
 		usuario = (Usuario)response.getSerializable();
 		
