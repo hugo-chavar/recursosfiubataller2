@@ -50,12 +50,20 @@ public class EncuestaRespondidaRequester extends HandlerRequester {
 //	}
 
 	public OperationResponse get(int IDEncuesta, String username) {
+		OperationResponse response;
+		
 		// Consulto el ID del usuario
 		int usuarioId = getUsuarioId(username);
+		if (usuarioId < 0) {
+			response = new OperationResponse();
+			response.setSuccess(false);
+			response.setReason("No existe el usuario con username: " + username);
+			return response;
+		}
 		
 		// Busco en el cache de encuestas respondidas
 		current = new EncuestaRespondida(IDEncuesta, usuarioId);
-		OperationResponse response = getFromCache();
+		response = getFromCache();
 
 		if (response.getSuccess()) {
 			return response;

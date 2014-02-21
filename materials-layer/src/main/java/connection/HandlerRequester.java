@@ -48,8 +48,11 @@ public abstract class HandlerRequester {
 		Parser parser = new Parser();
 		String xml = "<WS>" + parser.convertToXml(usuario, Usuario.class) + "</WS>";
 		OperationResponse response = this.get(xml);
-		usuario = (Usuario)response.getSerializable();
-		return usuario.getId();
+		if (response.getSuccess()) {
+			usuario = (Usuario)response.getSerializable();
+			return usuario.getId();
+		}
+		return -1;
 		
 	}
 	
