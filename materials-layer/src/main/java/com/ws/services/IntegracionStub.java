@@ -4,7 +4,7 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST)
  */
-package com.ws.services.integracion;
+package com.ws.services;
 
 /*
  *  IntegracionStub java implementation
@@ -180,7 +180,7 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 * Auto generated method signature
 	 * 
 	 */
-	public void setMockService(com.ws.services.integracion.IntegracionStub.SetMockService setMockService0
+	public void setMockService(com.ws.services.IntegracionStub.SetMockService setMockService0
 
 	) throws java.rmi.RemoteException
 
@@ -226,9 +226,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 * @param eliminarDatos1
 	 */
 
-	public com.ws.services.integracion.IntegracionStub.EliminarDatosResponse eliminarDatos(
+	public com.ws.services.IntegracionStub.EliminarDatosResponse eliminarDatos(
 
-	com.ws.services.integracion.IntegracionStub.EliminarDatos eliminarDatos1)
+	com.ws.services.IntegracionStub.EliminarDatos eliminarDatos1)
 
 	throws java.rmi.RemoteException
 
@@ -265,10 +265,10 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 					.getMessageContext(org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
-			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.EliminarDatosResponse.class,
+			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.EliminarDatosResponse.class,
 					getEnvelopeNamespaces(_returnEnv));
 
-			return (com.ws.services.integracion.IntegracionStub.EliminarDatosResponse) object;
+			return (com.ws.services.IntegracionStub.EliminarDatosResponse) object;
 
 		} catch (org.apache.axis2.AxisFault f) {
 
@@ -337,9 +337,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 */
 	public void starteliminarDatos(
 
-	com.ws.services.integracion.IntegracionStub.EliminarDatos eliminarDatos1,
+	com.ws.services.IntegracionStub.EliminarDatos eliminarDatos1,
 
-	final com.ws.services.integracion.IntegracionCallbackHandler callback)
+	final com.ws.services.IntegracionCallbackHandler callback)
 
 	throws java.rmi.RemoteException {
 
@@ -371,9 +371,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 				try {
 					org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
 
-					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.EliminarDatosResponse.class,
+					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.EliminarDatosResponse.class,
 							getEnvelopeNamespaces(resultEnv));
-					callback.receiveResulteliminarDatos((com.ws.services.integracion.IntegracionStub.EliminarDatosResponse) object);
+					callback.receiveResulteliminarDatos((com.ws.services.IntegracionStub.EliminarDatosResponse) object);
 
 				} catch (org.apache.axis2.AxisFault e) {
 					callback.receiveErroreliminarDatos(e);
@@ -474,9 +474,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 * @param actualizarArchivo3
 	 */
 
-	public com.ws.services.integracion.IntegracionStub.ActualizarArchivoResponse actualizarArchivo(
+	public com.ws.services.IntegracionStub.ActualizarArchivoResponse actualizarArchivo(
 
-	com.ws.services.integracion.IntegracionStub.ActualizarArchivo actualizarArchivo3)
+	com.ws.services.IntegracionStub.ActualizarArchivo actualizarArchivo3)
 
 	throws java.rmi.RemoteException
 
@@ -513,10 +513,10 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 					.getMessageContext(org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
-			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.ActualizarArchivoResponse.class,
+			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.ActualizarArchivoResponse.class,
 					getEnvelopeNamespaces(_returnEnv));
 
-			return (com.ws.services.integracion.IntegracionStub.ActualizarArchivoResponse) object;
+			return (com.ws.services.IntegracionStub.ActualizarArchivoResponse) object;
 
 		} catch (org.apache.axis2.AxisFault f) {
 
@@ -585,9 +585,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 */
 	public void startactualizarArchivo(
 
-	com.ws.services.integracion.IntegracionStub.ActualizarArchivo actualizarArchivo3,
+	com.ws.services.IntegracionStub.ActualizarArchivo actualizarArchivo3,
 
-	final com.ws.services.integracion.IntegracionCallbackHandler callback)
+	final com.ws.services.IntegracionCallbackHandler callback)
 
 	throws java.rmi.RemoteException {
 
@@ -619,9 +619,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 				try {
 					org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
 
-					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.ActualizarArchivoResponse.class,
+					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.ActualizarArchivoResponse.class,
 							getEnvelopeNamespaces(resultEnv));
-					callback.receiveResultactualizarArchivo((com.ws.services.integracion.IntegracionStub.ActualizarArchivoResponse) object);
+					callback.receiveResultactualizarArchivo((com.ws.services.IntegracionStub.ActualizarArchivoResponse) object);
 
 				} catch (org.apache.axis2.AxisFault e) {
 					callback.receiveErroractualizarArchivo(e);
@@ -722,9 +722,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 * @param guardarArchivo5
 	 */
 
-	public com.ws.services.integracion.IntegracionStub.GuardarArchivoResponse guardarArchivo(
+	public com.ws.services.IntegracionStub.GuardarArchivoResponse guardarArchivo(
 
-	com.ws.services.integracion.IntegracionStub.GuardarArchivo guardarArchivo5)
+	com.ws.services.IntegracionStub.GuardarArchivo guardarArchivo5)
 
 	throws java.rmi.RemoteException
 
@@ -761,10 +761,10 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 					.getMessageContext(org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
-			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.GuardarArchivoResponse.class,
+			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.GuardarArchivoResponse.class,
 					getEnvelopeNamespaces(_returnEnv));
 
-			return (com.ws.services.integracion.IntegracionStub.GuardarArchivoResponse) object;
+			return (com.ws.services.IntegracionStub.GuardarArchivoResponse) object;
 
 		} catch (org.apache.axis2.AxisFault f) {
 
@@ -833,9 +833,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 */
 	public void startguardarArchivo(
 
-	com.ws.services.integracion.IntegracionStub.GuardarArchivo guardarArchivo5,
+	com.ws.services.IntegracionStub.GuardarArchivo guardarArchivo5,
 
-	final com.ws.services.integracion.IntegracionCallbackHandler callback)
+	final com.ws.services.IntegracionCallbackHandler callback)
 
 	throws java.rmi.RemoteException {
 
@@ -867,9 +867,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 				try {
 					org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
 
-					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.GuardarArchivoResponse.class,
+					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.GuardarArchivoResponse.class,
 							getEnvelopeNamespaces(resultEnv));
-					callback.receiveResultguardarArchivo((com.ws.services.integracion.IntegracionStub.GuardarArchivoResponse) object);
+					callback.receiveResultguardarArchivo((com.ws.services.IntegracionStub.GuardarArchivoResponse) object);
 
 				} catch (org.apache.axis2.AxisFault e) {
 					callback.receiveErrorguardarArchivo(e);
@@ -970,9 +970,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 * @param isMock7
 	 */
 
-	public com.ws.services.integracion.IntegracionStub.IsMockResponse isMock(
+	public com.ws.services.IntegracionStub.IsMockResponse isMock(
 
-	com.ws.services.integracion.IntegracionStub.IsMock isMock7)
+	com.ws.services.IntegracionStub.IsMock isMock7)
 
 	throws java.rmi.RemoteException
 
@@ -1009,10 +1009,10 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 					.getMessageContext(org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
-			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.IsMockResponse.class,
+			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.IsMockResponse.class,
 					getEnvelopeNamespaces(_returnEnv));
 
-			return (com.ws.services.integracion.IntegracionStub.IsMockResponse) object;
+			return (com.ws.services.IntegracionStub.IsMockResponse) object;
 
 		} catch (org.apache.axis2.AxisFault f) {
 
@@ -1081,9 +1081,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 */
 	public void startisMock(
 
-	com.ws.services.integracion.IntegracionStub.IsMock isMock7,
+	com.ws.services.IntegracionStub.IsMock isMock7,
 
-	final com.ws.services.integracion.IntegracionCallbackHandler callback)
+	final com.ws.services.IntegracionCallbackHandler callback)
 
 	throws java.rmi.RemoteException {
 
@@ -1115,9 +1115,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 				try {
 					org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
 
-					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.IsMockResponse.class,
+					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.IsMockResponse.class,
 							getEnvelopeNamespaces(resultEnv));
-					callback.receiveResultisMock((com.ws.services.integracion.IntegracionStub.IsMockResponse) object);
+					callback.receiveResultisMock((com.ws.services.IntegracionStub.IsMockResponse) object);
 
 				} catch (org.apache.axis2.AxisFault e) {
 					callback.receiveErrorisMock(e);
@@ -1218,9 +1218,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 * @param seleccionarArchivo9
 	 */
 
-	public com.ws.services.integracion.IntegracionStub.SeleccionarArchivoResponse seleccionarArchivo(
+	public com.ws.services.IntegracionStub.SeleccionarArchivoResponse seleccionarArchivo(
 
-	com.ws.services.integracion.IntegracionStub.SeleccionarArchivo seleccionarArchivo9)
+	com.ws.services.IntegracionStub.SeleccionarArchivo seleccionarArchivo9)
 
 	throws java.rmi.RemoteException
 
@@ -1257,10 +1257,10 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 					.getMessageContext(org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
-			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.SeleccionarArchivoResponse.class,
+			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.SeleccionarArchivoResponse.class,
 					getEnvelopeNamespaces(_returnEnv));
 
-			return (com.ws.services.integracion.IntegracionStub.SeleccionarArchivoResponse) object;
+			return (com.ws.services.IntegracionStub.SeleccionarArchivoResponse) object;
 
 		} catch (org.apache.axis2.AxisFault f) {
 
@@ -1329,9 +1329,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 */
 	public void startseleccionarArchivo(
 
-	com.ws.services.integracion.IntegracionStub.SeleccionarArchivo seleccionarArchivo9,
+	com.ws.services.IntegracionStub.SeleccionarArchivo seleccionarArchivo9,
 
-	final com.ws.services.integracion.IntegracionCallbackHandler callback)
+	final com.ws.services.IntegracionCallbackHandler callback)
 
 	throws java.rmi.RemoteException {
 
@@ -1363,9 +1363,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 				try {
 					org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
 
-					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.SeleccionarArchivoResponse.class,
+					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.SeleccionarArchivoResponse.class,
 							getEnvelopeNamespaces(resultEnv));
-					callback.receiveResultseleccionarArchivo((com.ws.services.integracion.IntegracionStub.SeleccionarArchivoResponse) object);
+					callback.receiveResultseleccionarArchivo((com.ws.services.IntegracionStub.SeleccionarArchivoResponse) object);
 
 				} catch (org.apache.axis2.AxisFault e) {
 					callback.receiveErrorseleccionarArchivo(e);
@@ -1466,9 +1466,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 * @param actualizarDatos11
 	 */
 
-	public com.ws.services.integracion.IntegracionStub.ActualizarDatosResponse actualizarDatos(
+	public com.ws.services.IntegracionStub.ActualizarDatosResponse actualizarDatos(
 
-	com.ws.services.integracion.IntegracionStub.ActualizarDatos actualizarDatos11)
+	com.ws.services.IntegracionStub.ActualizarDatos actualizarDatos11)
 
 	throws java.rmi.RemoteException
 
@@ -1505,10 +1505,10 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 					.getMessageContext(org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
-			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.ActualizarDatosResponse.class,
+			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.ActualizarDatosResponse.class,
 					getEnvelopeNamespaces(_returnEnv));
 
-			return (com.ws.services.integracion.IntegracionStub.ActualizarDatosResponse) object;
+			return (com.ws.services.IntegracionStub.ActualizarDatosResponse) object;
 
 		} catch (org.apache.axis2.AxisFault f) {
 
@@ -1577,9 +1577,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 */
 	public void startactualizarDatos(
 
-	com.ws.services.integracion.IntegracionStub.ActualizarDatos actualizarDatos11,
+	com.ws.services.IntegracionStub.ActualizarDatos actualizarDatos11,
 
-	final com.ws.services.integracion.IntegracionCallbackHandler callback)
+	final com.ws.services.IntegracionCallbackHandler callback)
 
 	throws java.rmi.RemoteException {
 
@@ -1611,9 +1611,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 				try {
 					org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
 
-					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.ActualizarDatosResponse.class,
+					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.ActualizarDatosResponse.class,
 							getEnvelopeNamespaces(resultEnv));
-					callback.receiveResultactualizarDatos((com.ws.services.integracion.IntegracionStub.ActualizarDatosResponse) object);
+					callback.receiveResultactualizarDatos((com.ws.services.IntegracionStub.ActualizarDatosResponse) object);
 
 				} catch (org.apache.axis2.AxisFault e) {
 					callback.receiveErroractualizarDatos(e);
@@ -1714,9 +1714,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 * @param seleccionarDatos13
 	 */
 
-	public com.ws.services.integracion.IntegracionStub.SeleccionarDatosResponse seleccionarDatos(
+	public com.ws.services.IntegracionStub.SeleccionarDatosResponse seleccionarDatos(
 
-	com.ws.services.integracion.IntegracionStub.SeleccionarDatos seleccionarDatos13)
+	com.ws.services.IntegracionStub.SeleccionarDatos seleccionarDatos13)
 
 	throws java.rmi.RemoteException
 
@@ -1753,10 +1753,10 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 					.getMessageContext(org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
-			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.SeleccionarDatosResponse.class,
+			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.SeleccionarDatosResponse.class,
 					getEnvelopeNamespaces(_returnEnv));
 
-			return (com.ws.services.integracion.IntegracionStub.SeleccionarDatosResponse) object;
+			return (com.ws.services.IntegracionStub.SeleccionarDatosResponse) object;
 
 		} catch (org.apache.axis2.AxisFault f) {
 
@@ -1825,9 +1825,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 */
 	public void startseleccionarDatos(
 
-	com.ws.services.integracion.IntegracionStub.SeleccionarDatos seleccionarDatos13,
+	com.ws.services.IntegracionStub.SeleccionarDatos seleccionarDatos13,
 
-	final com.ws.services.integracion.IntegracionCallbackHandler callback)
+	final com.ws.services.IntegracionCallbackHandler callback)
 
 	throws java.rmi.RemoteException {
 
@@ -1859,9 +1859,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 				try {
 					org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
 
-					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.SeleccionarDatosResponse.class,
+					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.SeleccionarDatosResponse.class,
 							getEnvelopeNamespaces(resultEnv));
-					callback.receiveResultseleccionarDatos((com.ws.services.integracion.IntegracionStub.SeleccionarDatosResponse) object);
+					callback.receiveResultseleccionarDatos((com.ws.services.IntegracionStub.SeleccionarDatosResponse) object);
 
 				} catch (org.apache.axis2.AxisFault e) {
 					callback.receiveErrorseleccionarDatos(e);
@@ -1962,9 +1962,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 * @param guardarDatos15
 	 */
 
-	public com.ws.services.integracion.IntegracionStub.GuardarDatosResponse guardarDatos(
+	public com.ws.services.IntegracionStub.GuardarDatosResponse guardarDatos(
 
-	com.ws.services.integracion.IntegracionStub.GuardarDatos guardarDatos15)
+	com.ws.services.IntegracionStub.GuardarDatos guardarDatos15)
 
 	throws java.rmi.RemoteException
 
@@ -2001,10 +2001,10 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 					.getMessageContext(org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
-			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.GuardarDatosResponse.class,
+			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.GuardarDatosResponse.class,
 					getEnvelopeNamespaces(_returnEnv));
 
-			return (com.ws.services.integracion.IntegracionStub.GuardarDatosResponse) object;
+			return (com.ws.services.IntegracionStub.GuardarDatosResponse) object;
 
 		} catch (org.apache.axis2.AxisFault f) {
 
@@ -2073,9 +2073,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 */
 	public void startguardarDatos(
 
-	com.ws.services.integracion.IntegracionStub.GuardarDatos guardarDatos15,
+	com.ws.services.IntegracionStub.GuardarDatos guardarDatos15,
 
-	final com.ws.services.integracion.IntegracionCallbackHandler callback)
+	final com.ws.services.IntegracionCallbackHandler callback)
 
 	throws java.rmi.RemoteException {
 
@@ -2107,9 +2107,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 				try {
 					org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
 
-					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.GuardarDatosResponse.class,
+					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.GuardarDatosResponse.class,
 							getEnvelopeNamespaces(resultEnv));
-					callback.receiveResultguardarDatos((com.ws.services.integracion.IntegracionStub.GuardarDatosResponse) object);
+					callback.receiveResultguardarDatos((com.ws.services.IntegracionStub.GuardarDatosResponse) object);
 
 				} catch (org.apache.axis2.AxisFault e) {
 					callback.receiveErrorguardarDatos(e);
@@ -2210,9 +2210,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 * @param eliminarArchivo17
 	 */
 
-	public com.ws.services.integracion.IntegracionStub.EliminarArchivoResponse eliminarArchivo(
+	public com.ws.services.IntegracionStub.EliminarArchivoResponse eliminarArchivo(
 
-	com.ws.services.integracion.IntegracionStub.EliminarArchivo eliminarArchivo17)
+	com.ws.services.IntegracionStub.EliminarArchivo eliminarArchivo17)
 
 	throws java.rmi.RemoteException
 
@@ -2249,10 +2249,10 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 					.getMessageContext(org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
-			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.EliminarArchivoResponse.class,
+			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.EliminarArchivoResponse.class,
 					getEnvelopeNamespaces(_returnEnv));
 
-			return (com.ws.services.integracion.IntegracionStub.EliminarArchivoResponse) object;
+			return (com.ws.services.IntegracionStub.EliminarArchivoResponse) object;
 
 		} catch (org.apache.axis2.AxisFault f) {
 
@@ -2321,9 +2321,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 	 */
 	public void starteliminarArchivo(
 
-	com.ws.services.integracion.IntegracionStub.EliminarArchivo eliminarArchivo17,
+	com.ws.services.IntegracionStub.EliminarArchivo eliminarArchivo17,
 
-	final com.ws.services.integracion.IntegracionCallbackHandler callback)
+	final com.ws.services.IntegracionCallbackHandler callback)
 
 	throws java.rmi.RemoteException {
 
@@ -2355,9 +2355,9 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 				try {
 					org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
 
-					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.integracion.IntegracionStub.EliminarArchivoResponse.class,
+					java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(), com.ws.services.IntegracionStub.EliminarArchivoResponse.class,
 							getEnvelopeNamespaces(resultEnv));
-					callback.receiveResulteliminarArchivo((com.ws.services.integracion.IntegracionStub.EliminarArchivoResponse) object);
+					callback.receiveResulteliminarArchivo((com.ws.services.IntegracionStub.EliminarArchivoResponse) object);
 
 				} catch (org.apache.axis2.AxisFault e) {
 					callback.receiveErroreliminarArchivo(e);
@@ -12202,217 +12202,217 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.SetMockService param, boolean optimizeContent) throws org.apache.axis2.AxisFault {
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.SetMockService param, boolean optimizeContent) throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.SetMockService.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.SetMockService.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.EliminarDatos param, boolean optimizeContent) throws org.apache.axis2.AxisFault {
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.EliminarDatos param, boolean optimizeContent) throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.EliminarDatos.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.EliminarDatos.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.EliminarDatosResponse param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.EliminarDatosResponse param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.EliminarDatosResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.EliminarDatosResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.ActualizarArchivo param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.ActualizarArchivo param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.ActualizarArchivo.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.ActualizarArchivo.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.ActualizarArchivoResponse param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.ActualizarArchivoResponse param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.ActualizarArchivoResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.ActualizarArchivoResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.GuardarArchivo param, boolean optimizeContent) throws org.apache.axis2.AxisFault {
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.GuardarArchivo param, boolean optimizeContent) throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.GuardarArchivo.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.GuardarArchivo.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.GuardarArchivoResponse param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.GuardarArchivoResponse param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.GuardarArchivoResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.GuardarArchivoResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.IsMock param, boolean optimizeContent) throws org.apache.axis2.AxisFault {
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.IsMock param, boolean optimizeContent) throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.IsMock.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.IsMock.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.IsMockResponse param, boolean optimizeContent) throws org.apache.axis2.AxisFault {
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.IsMockResponse param, boolean optimizeContent) throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.IsMockResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.IsMockResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.SeleccionarArchivo param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.SeleccionarArchivo param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.SeleccionarArchivo.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.SeleccionarArchivo.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.SeleccionarArchivoResponse param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.SeleccionarArchivoResponse param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
 			return param
-					.getOMElement(com.ws.services.integracion.IntegracionStub.SeleccionarArchivoResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+					.getOMElement(com.ws.services.IntegracionStub.SeleccionarArchivoResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.ActualizarDatos param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.ActualizarDatos param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.ActualizarDatos.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.ActualizarDatos.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.ActualizarDatosResponse param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.ActualizarDatosResponse param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.ActualizarDatosResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.ActualizarDatosResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.SeleccionarDatos param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.SeleccionarDatos param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.SeleccionarDatos.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.SeleccionarDatos.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.SeleccionarDatosResponse param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.SeleccionarDatosResponse param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.SeleccionarDatosResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.SeleccionarDatosResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.GuardarDatos param, boolean optimizeContent) throws org.apache.axis2.AxisFault {
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.GuardarDatos param, boolean optimizeContent) throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.GuardarDatos.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.GuardarDatos.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.GuardarDatosResponse param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.GuardarDatosResponse param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.GuardarDatosResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.GuardarDatosResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.EliminarArchivo param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.EliminarArchivo param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.EliminarArchivo.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.EliminarArchivo.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(com.ws.services.integracion.IntegracionStub.EliminarArchivoResponse param, boolean optimizeContent)
+	private org.apache.axiom.om.OMElement toOM(com.ws.services.IntegracionStub.EliminarArchivoResponse param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(com.ws.services.integracion.IntegracionStub.EliminarArchivoResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+			return param.getOMElement(com.ws.services.IntegracionStub.EliminarArchivoResponse.MY_QNAME, org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
 		}
 
 	}
 
-	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.integracion.IntegracionStub.SetMockService param,
+	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.IntegracionStub.SetMockService param,
 			boolean optimizeContent, javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.integracion.IntegracionStub.SetMockService.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.IntegracionStub.SetMockService.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12422,13 +12422,13 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 
 	/* methods to provide back word compatibility */
 
-	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.integracion.IntegracionStub.EliminarDatos param,
+	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.IntegracionStub.EliminarDatos param,
 			boolean optimizeContent, javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.integracion.IntegracionStub.EliminarDatos.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.IntegracionStub.EliminarDatos.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12438,13 +12438,13 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 
 	/* methods to provide back word compatibility */
 
-	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.integracion.IntegracionStub.ActualizarArchivo param,
+	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.IntegracionStub.ActualizarArchivo param,
 			boolean optimizeContent, javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.integracion.IntegracionStub.ActualizarArchivo.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.IntegracionStub.ActualizarArchivo.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12454,13 +12454,13 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 
 	/* methods to provide back word compatibility */
 
-	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.integracion.IntegracionStub.GuardarArchivo param,
+	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.IntegracionStub.GuardarArchivo param,
 			boolean optimizeContent, javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.integracion.IntegracionStub.GuardarArchivo.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.IntegracionStub.GuardarArchivo.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12470,13 +12470,13 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 
 	/* methods to provide back word compatibility */
 
-	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.integracion.IntegracionStub.IsMock param,
+	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.IntegracionStub.IsMock param,
 			boolean optimizeContent, javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.integracion.IntegracionStub.IsMock.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.IntegracionStub.IsMock.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12486,13 +12486,13 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 
 	/* methods to provide back word compatibility */
 
-	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.integracion.IntegracionStub.SeleccionarArchivo param,
+	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.IntegracionStub.SeleccionarArchivo param,
 			boolean optimizeContent, javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.integracion.IntegracionStub.SeleccionarArchivo.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.IntegracionStub.SeleccionarArchivo.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12502,13 +12502,13 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 
 	/* methods to provide back word compatibility */
 
-	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.integracion.IntegracionStub.ActualizarDatos param,
+	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.IntegracionStub.ActualizarDatos param,
 			boolean optimizeContent, javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.integracion.IntegracionStub.ActualizarDatos.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.IntegracionStub.ActualizarDatos.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12518,13 +12518,13 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 
 	/* methods to provide back word compatibility */
 
-	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.integracion.IntegracionStub.SeleccionarDatos param,
+	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.IntegracionStub.SeleccionarDatos param,
 			boolean optimizeContent, javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.integracion.IntegracionStub.SeleccionarDatos.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.IntegracionStub.SeleccionarDatos.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12534,13 +12534,13 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 
 	/* methods to provide back word compatibility */
 
-	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.integracion.IntegracionStub.GuardarDatos param,
+	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.IntegracionStub.GuardarDatos param,
 			boolean optimizeContent, javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.integracion.IntegracionStub.GuardarDatos.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.IntegracionStub.GuardarDatos.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12550,13 +12550,13 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 
 	/* methods to provide back word compatibility */
 
-	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.integracion.IntegracionStub.EliminarArchivo param,
+	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.ws.services.IntegracionStub.EliminarArchivo param,
 			boolean optimizeContent, javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.integracion.IntegracionStub.EliminarArchivo.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(param.getOMElement(com.ws.services.IntegracionStub.EliminarArchivo.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12577,117 +12577,117 @@ public class IntegracionStub extends org.apache.axis2.client.Stub {
 
 		try {
 
-			if (com.ws.services.integracion.IntegracionStub.SetMockService.class.equals(type)) {
+			if (com.ws.services.IntegracionStub.SetMockService.class.equals(type)) {
 
-				return com.ws.services.integracion.IntegracionStub.SetMockService.Factory.parse(param.getXMLStreamReaderWithoutCaching());
-
-			}
-
-			if (com.ws.services.integracion.IntegracionStub.EliminarDatos.class.equals(type)) {
-
-				return com.ws.services.integracion.IntegracionStub.EliminarDatos.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+				return com.ws.services.IntegracionStub.SetMockService.Factory.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
 
-			if (com.ws.services.integracion.IntegracionStub.EliminarDatosResponse.class.equals(type)) {
+			if (com.ws.services.IntegracionStub.EliminarDatos.class.equals(type)) {
 
-				return com.ws.services.integracion.IntegracionStub.EliminarDatosResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
-
-			}
-
-			if (com.ws.services.integracion.IntegracionStub.ActualizarArchivo.class.equals(type)) {
-
-				return com.ws.services.integracion.IntegracionStub.ActualizarArchivo.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+				return com.ws.services.IntegracionStub.EliminarDatos.Factory.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
 
-			if (com.ws.services.integracion.IntegracionStub.ActualizarArchivoResponse.class.equals(type)) {
+			if (com.ws.services.IntegracionStub.EliminarDatosResponse.class.equals(type)) {
 
-				return com.ws.services.integracion.IntegracionStub.ActualizarArchivoResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
-
-			}
-
-			if (com.ws.services.integracion.IntegracionStub.GuardarArchivo.class.equals(type)) {
-
-				return com.ws.services.integracion.IntegracionStub.GuardarArchivo.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+				return com.ws.services.IntegracionStub.EliminarDatosResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
 
-			if (com.ws.services.integracion.IntegracionStub.GuardarArchivoResponse.class.equals(type)) {
+			if (com.ws.services.IntegracionStub.ActualizarArchivo.class.equals(type)) {
 
-				return com.ws.services.integracion.IntegracionStub.GuardarArchivoResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
-
-			}
-
-			if (com.ws.services.integracion.IntegracionStub.IsMock.class.equals(type)) {
-
-				return com.ws.services.integracion.IntegracionStub.IsMock.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+				return com.ws.services.IntegracionStub.ActualizarArchivo.Factory.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
 
-			if (com.ws.services.integracion.IntegracionStub.IsMockResponse.class.equals(type)) {
+			if (com.ws.services.IntegracionStub.ActualizarArchivoResponse.class.equals(type)) {
 
-				return com.ws.services.integracion.IntegracionStub.IsMockResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
-
-			}
-
-			if (com.ws.services.integracion.IntegracionStub.SeleccionarArchivo.class.equals(type)) {
-
-				return com.ws.services.integracion.IntegracionStub.SeleccionarArchivo.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+				return com.ws.services.IntegracionStub.ActualizarArchivoResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
 
-			if (com.ws.services.integracion.IntegracionStub.SeleccionarArchivoResponse.class.equals(type)) {
+			if (com.ws.services.IntegracionStub.GuardarArchivo.class.equals(type)) {
 
-				return com.ws.services.integracion.IntegracionStub.SeleccionarArchivoResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
-
-			}
-
-			if (com.ws.services.integracion.IntegracionStub.ActualizarDatos.class.equals(type)) {
-
-				return com.ws.services.integracion.IntegracionStub.ActualizarDatos.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+				return com.ws.services.IntegracionStub.GuardarArchivo.Factory.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
 
-			if (com.ws.services.integracion.IntegracionStub.ActualizarDatosResponse.class.equals(type)) {
+			if (com.ws.services.IntegracionStub.GuardarArchivoResponse.class.equals(type)) {
 
-				return com.ws.services.integracion.IntegracionStub.ActualizarDatosResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
-
-			}
-
-			if (com.ws.services.integracion.IntegracionStub.SeleccionarDatos.class.equals(type)) {
-
-				return com.ws.services.integracion.IntegracionStub.SeleccionarDatos.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+				return com.ws.services.IntegracionStub.GuardarArchivoResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
 
-			if (com.ws.services.integracion.IntegracionStub.SeleccionarDatosResponse.class.equals(type)) {
+			if (com.ws.services.IntegracionStub.IsMock.class.equals(type)) {
 
-				return com.ws.services.integracion.IntegracionStub.SeleccionarDatosResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
-
-			}
-
-			if (com.ws.services.integracion.IntegracionStub.GuardarDatos.class.equals(type)) {
-
-				return com.ws.services.integracion.IntegracionStub.GuardarDatos.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+				return com.ws.services.IntegracionStub.IsMock.Factory.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
 
-			if (com.ws.services.integracion.IntegracionStub.GuardarDatosResponse.class.equals(type)) {
+			if (com.ws.services.IntegracionStub.IsMockResponse.class.equals(type)) {
 
-				return com.ws.services.integracion.IntegracionStub.GuardarDatosResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
-
-			}
-
-			if (com.ws.services.integracion.IntegracionStub.EliminarArchivo.class.equals(type)) {
-
-				return com.ws.services.integracion.IntegracionStub.EliminarArchivo.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+				return com.ws.services.IntegracionStub.IsMockResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
 
-			if (com.ws.services.integracion.IntegracionStub.EliminarArchivoResponse.class.equals(type)) {
+			if (com.ws.services.IntegracionStub.SeleccionarArchivo.class.equals(type)) {
 
-				return com.ws.services.integracion.IntegracionStub.EliminarArchivoResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+				return com.ws.services.IntegracionStub.SeleccionarArchivo.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+
+			}
+
+			if (com.ws.services.IntegracionStub.SeleccionarArchivoResponse.class.equals(type)) {
+
+				return com.ws.services.IntegracionStub.SeleccionarArchivoResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+
+			}
+
+			if (com.ws.services.IntegracionStub.ActualizarDatos.class.equals(type)) {
+
+				return com.ws.services.IntegracionStub.ActualizarDatos.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+
+			}
+
+			if (com.ws.services.IntegracionStub.ActualizarDatosResponse.class.equals(type)) {
+
+				return com.ws.services.IntegracionStub.ActualizarDatosResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+
+			}
+
+			if (com.ws.services.IntegracionStub.SeleccionarDatos.class.equals(type)) {
+
+				return com.ws.services.IntegracionStub.SeleccionarDatos.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+
+			}
+
+			if (com.ws.services.IntegracionStub.SeleccionarDatosResponse.class.equals(type)) {
+
+				return com.ws.services.IntegracionStub.SeleccionarDatosResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+
+			}
+
+			if (com.ws.services.IntegracionStub.GuardarDatos.class.equals(type)) {
+
+				return com.ws.services.IntegracionStub.GuardarDatos.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+
+			}
+
+			if (com.ws.services.IntegracionStub.GuardarDatosResponse.class.equals(type)) {
+
+				return com.ws.services.IntegracionStub.GuardarDatosResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+
+			}
+
+			if (com.ws.services.IntegracionStub.EliminarArchivo.class.equals(type)) {
+
+				return com.ws.services.IntegracionStub.EliminarArchivo.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+
+			}
+
+			if (com.ws.services.IntegracionStub.EliminarArchivoResponse.class.equals(type)) {
+
+				return com.ws.services.IntegracionStub.EliminarArchivoResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
 

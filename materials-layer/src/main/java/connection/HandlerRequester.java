@@ -4,9 +4,9 @@ import javax.activation.DataHandler;
 
 import model.Archivo;
 
-import com.ws.services.integracion.IntegracionStub;
-import com.ws.services.integracion.IntegracionStub.ArchivoMetadata;
-import com.ws.services.integracion.IntegracionStub.Recurso;
+import com.ws.services.IntegracionStub;
+import com.ws.services.IntegracionStub.ArchivoMetadata;
+import com.ws.services.IntegracionStub.Recurso;
 
 import connection.cache.Cache;
 import connection.exceptions.ConnectionException;

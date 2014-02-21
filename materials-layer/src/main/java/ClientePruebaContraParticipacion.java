@@ -11,16 +11,16 @@ public class ClientePruebaContraParticipacion {
 		
 		System.out.println("Error");
 
-//		try {
-//			puede = ip.puedeEditar(0, 0);
+		try {
+			puede = ip.puedeEditar(0, 0);
 			if (puede) {
 				System.out.println("si puede");
 			} else {
 				System.out.println("no puede");
 			}
-//		} catch (ConnectionException e) {
-//			System.out.println("Error");
-//		}
+		} catch (ConnectionException e) {
+			System.out.println("Error");
+		}
 	}
 
 }
