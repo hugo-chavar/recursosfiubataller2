@@ -27,6 +27,7 @@ public class EncuestaRespondida implements Serializable {
 
 	@XmlElementWrapper
 	@XmlElementRefs({
+		   @XmlElementRef(type=PreguntaRespondida.class),
 		   @XmlElementRef(type=PreguntaRespuestaFijaRespondida.class),
 		   @XmlElementRef(type=PreguntaRespuestaACompletarRespondida.class)
 		})

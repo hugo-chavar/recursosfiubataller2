@@ -33,7 +33,7 @@ public enum Requester {
 		
 		OperationResponse response;
 		
-		if (notValidInput(target)) {
+		if (notValidInputSave(target)) {
 			return informFailReason(target);
 		}
 		
@@ -50,7 +50,7 @@ public enum Requester {
 	public OperationResponse getRecurso(Recurso target) {
 		OperationResponse response;
 		
-		if (notValidInput(target)) {
+		if (notValidInputGet(target)) {
 			return informFailReason(target);
 		}
 	
@@ -84,7 +84,7 @@ public enum Requester {
 	
 	public OperationResponse deleteRecurso(Recurso recurso) {
 		
-		if (notValidInput(recurso)) {
+		if (notValidInputGet(recurso)) {
 			return informFailReason(recurso);
 		}
 		// Borro el recurso de todos los caches
@@ -179,8 +179,12 @@ public enum Requester {
 		return response;
 	}
 
-	private boolean notValidInput(Recurso target) {
+	private boolean notValidInputGet(Recurso target) {
 		return target == null || target.getRecursoId() == null || target.getTipo() == null || !isvalidType(target.getTipo());
+	}
+	
+	private boolean notValidInputSave(Recurso target) {
+		return target == null || target.getTipo() == null || !isvalidType(target.getTipo());
 	}
 	
 	private boolean isvalidType(String type) {

@@ -29,10 +29,11 @@ public class ClienteDelRequesterNuestro {
 //		getListaRecursos();
 //		getEncuestaHarcodeada();
 //		getEncuestaQNoExisteEnNingunNivel();
-		getEncuesta11004();
+//		getEncuesta11004();
 //		guardarLink();
 //		getRespondidaQueExiste();
 //		getRespondidaInexistente();
+		agregarEncuesta();
 
 		// String absolute =
 		// ClienteDelRequesterNuestro.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
@@ -188,6 +189,17 @@ public class ClienteDelRequesterNuestro {
 		xml = "<parametro><recurso><recursoId>997</recursoId><tipo>Link</tipo></recurso></parametro>";
 		p = Parameter.createParameter(xml);
 		or = Requester.INSTANCE.getRecurso(p.getRecurso());
+		if (!or.getSuccess()) {
+			System.out.println(or.getReason());
+		}
+	}
+	
+	protected static void agregarEncuesta() {
+		// prueba link q existe
+		System.out.println("agregarEncuesta");
+		xml = "<parametro><encuesta evaluada=\"true\"><tipo>Encuesta</tipo><ambitoId>-1</ambitoId><descripcion>una encuesta grande</descripcion><preguntas><pregunta correctas=\"4\" idPregunta=\"1\" enunciado=\"de que color es el caballo blanco de san martin?\"><respuestas>rojo,verde,azul,blanco</respuestas></pregunta><pregunta correctas=\"2\" idPregunta=\"2\" enunciado=\"a que equipo del futbol argentino le denominan Millo\"><respuestas>velez,River Plate,crucero del norte,estudiantes</respuestas></pregunta><pregunta correctas=\"3\" idPregunta=\"3\" enunciado=\"cual es un patron de diseno creacional\"><respuestas>command,mediator,builder,facade</respuestas></pregunta><pregunta correctas=\"1,8,11,12,13,7\" idPregunta=\"4\" enunciado=\"Untest unitario debe presentar las siguientes caractersticas\"><respuestas>Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente,Automatizable</respuestas></pregunta><pregunta correcta=\"4\" idPregunta=\"5\" enunciado=\"cuantas patas tiene un gato?\" /></preguntas></encuesta><usuarioId>5</usuarioId></parametro>";
+		p = Parameter.createParameter(xml);
+		or = Requester.INSTANCE.agregarRecurso(p.getRecurso());
 		if (!or.getSuccess()) {
 			System.out.println(or.getReason());
 		}

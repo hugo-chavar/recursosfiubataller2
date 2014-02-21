@@ -26,6 +26,7 @@ public class Encuesta extends Recurso {
 	
 	@XmlElementWrapper
 	@XmlElementRefs({
+		   @XmlElementRef(type=Pregunta.class),
 		   @XmlElementRef(type=PreguntaRespuestaFija.class),
 		   @XmlElementRef(type=PreguntaRespuestaACompletar.class)
 		})
