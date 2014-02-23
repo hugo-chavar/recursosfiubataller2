@@ -23,8 +23,10 @@ public class MaterialsImpl implements Materials {
 	@Override
 	public String agregarRecurso(String encuestaParam) {
 		Parameter parameter = Parameter.createParameter(encuestaParam);
-		if (parameter.getRecurso() == null || parameter.getUsuario() == null) {
+		if (parameter.getRecurso() == null )
 			return createFailedResponse("Parametros invalidos");
+		if(parameter.getUsuario() == null) {
+			return createFailedResponse("usuario no creado");
 		}
 		if (parameter.getRecurso().getClass() == Archivo.class) {
 			createFailedResponse("Para archivos utilice el WS agregarArchivo");

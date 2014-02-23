@@ -32,7 +32,7 @@ public class Parameter {
 	public Parameter() {
 	}
 
-	@XmlElement
+	@XmlElement (name="Usuario")//creo que con esto andaria
 	private Usuario usuario;
 
 	@XmlElement
