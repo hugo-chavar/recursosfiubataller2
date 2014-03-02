@@ -19,7 +19,7 @@ public class ClientePruebaContraParticipacion {
 				System.out.println("no puede");
 			}
 		} catch (ConnectionException e) {
-			//System.out.println("Error");
+			System.out.println("Error");
 		}
 	}
 

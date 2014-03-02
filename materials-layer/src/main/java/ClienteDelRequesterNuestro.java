@@ -64,16 +64,16 @@ public class ClienteDelRequesterNuestro {
 		// EncuestaRespondida encuesta_rtn = (EncuestaRespondida)
 		// Requester.INSTANCE.getEncuestaRespondida(15, 4);
 		//System.out.println("prueba encuesta respondida");
-		String xml = "<Usuario><username>5</username></Usuario>";
+		String xml = "<Usuario><username>damian</username></Usuario>";
 		Parser p = new Parser();
 		Usuario u = (Usuario) p.unmarshal(xml, Usuario.class);
 		response = Requester.INSTANCE.getEncuestaRespondida(10, u);
 		if (response.getSuccess()) {
 			encuesta_rtn = (EncuestaRespondida) response.getSerializable();
-			//System.out.println(encuesta_rtn.getInfo());
+			System.out.println(encuesta_rtn.getInfo());
 		} else {
-			//System.out.println();
-			//System.out.println(response.getReason());
+			System.out.println();
+			System.out.println(response.getReason());
 		}
 		
 	}
@@ -85,10 +85,10 @@ public class ClienteDelRequesterNuestro {
 		response = Requester.INSTANCE.agregarRecurso(link);
 		if (response.getSuccess()) {
 			Link link_rtn = (Link) response.getSerializable();
-			//System.out.println(link_rtn.getNombre());
+			System.out.println(link_rtn.getNombre());
 		} else {
-			//System.out.println();
-			//System.out.println(response.getReason());
+			System.out.println();
+			System.out.println(response.getReason());
 		}
 	}
 

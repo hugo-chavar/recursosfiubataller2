@@ -20,6 +20,9 @@ public class MaterialesImplServiceStub extends org.apache.axis2.client.Stub {
 	private java.util.HashMap faultMessageMap = new java.util.HashMap();
 
 	private static int counter = 0;
+	
+	private static String servicesServer = "http://200.68.65.249:58080/participacion/materiales";
+//	private static String servicesServer = "http://localhost:8080/participacion/materiales";
 
 	private static synchronized java.lang.String getUniqueSuffix() {
 		// reset the counter if it is greater than 99999
@@ -85,7 +88,7 @@ public class MaterialesImplServiceStub extends org.apache.axis2.client.Stub {
 	 */
 	public MaterialesImplServiceStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
 
-		this(configurationContext, "http://200.68.65.249:58080/participacion/materiales");
+		this(configurationContext, servicesServer);
 
 	}
 
@@ -94,7 +97,7 @@ public class MaterialesImplServiceStub extends org.apache.axis2.client.Stub {
 	 */
 	public MaterialesImplServiceStub() throws org.apache.axis2.AxisFault {
 
-		this("http://200.68.65.249:58080/participacion/materiales");
+		this(servicesServer);
 
 	}
 

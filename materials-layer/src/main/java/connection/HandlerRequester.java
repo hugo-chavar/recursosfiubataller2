@@ -51,9 +51,10 @@ public abstract class HandlerRequester {
 		
 		try {
 			String xml_recurso = proxy.seleccionar(xml);
-			//System.out.println(xml_recurso);
 			xml_recurso = xml_recurso.replace("<WS>" , "");
+			xml_recurso = xml_recurso.replace("<list>" , "");
 			xml_recurso = xml_recurso.replace("</WS>" , "");
+			xml_recurso = xml_recurso.replace("</list>" , "");
 			usuario = (Usuario) getParser().unmarshal(xml_recurso, Usuario.class);
 			if(usuario != null && usuario.getId()!= null)
 				return usuario.getId();
@@ -122,11 +123,8 @@ public abstract class HandlerRequester {
 
 	public OperationResponse getFile(String xml) throws GetException, ParseException {
 		try {
-//			//System.out.println("se intenta traer"+xml);
 			String file = proxy.seleccionarArchivoMetadata(xml);
-//			//System.out.println("Eso me devuelve"+file);
 			DataHandler contenido  = proxy.seleccionarArchivo(xml);
-//		
 			createCurrentObject(file);
 			((Archivo)current).setRawFile(contenido);
 			return currentObjetToResponse(); 

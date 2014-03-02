@@ -62,4 +62,22 @@ public class UsuarioTest {
 		
 	}
 	
+	
+	@Test
+	public void convertXmlToUsuarioWithFullDataAndReturnsTest() {
+		
+		String xml;
+		
+		xml = "\n  <Usuario>\n    <id>102547</id>\n    <activado>true</activado>\n    <habilitado>true</habilitado>\n    <username>damian</username>\n  </Usuario>\n";
+		
+		Parser parser = new Parser();
+		Usuario usuario = (Usuario)parser.unmarshal(xml, Usuario.class);
+		
+		Assert.assertEquals("damian", usuario.getUsername());
+		Assert.assertEquals(new Integer(102547), usuario.getId());
+		Assert.assertTrue(usuario.getActivado());
+		Assert.assertTrue(usuario.getHabilitado());
+		
+	}
+	
 }
